@@ -15,6 +15,8 @@
   example catalog with measured run times and scientific limitations.
 - Add plotting and notebook extras, recursive installed-wheel verification,
   and CI coverage for quick examples and notebook execution.
+- Reuse ideal circuit segments while constructing physical fault effects,
+  preserving fault order and detector/observable columns.
 
 ## 0.1.0.dev2 — development
 
