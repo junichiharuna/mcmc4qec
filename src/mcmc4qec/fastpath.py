@@ -15,7 +15,7 @@ def _probability_rows(noise, p):
         return np.tile((1 - rate, rate / 3, rate / 3, rate / 3), (noise.n, 1))
     if type(noise) is PhenomenologicalNoise:
         data, measurement = noise._parameters(p)
-        size = 2 if noise.model.data_noise == "bit_flip" else 4
+        size = 4 if noise.model.data_noise == "depolarizing" else 2
         data_row = [1 - data] + [data / (size - 1)] * (size - 1)
         rows = np.zeros((noise.n, 4), dtype=float)
         rows[:noise.model.n_data, :size] = data_row
