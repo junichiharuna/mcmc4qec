@@ -3,8 +3,8 @@
 ## 作成物
 
 `notebooks/01_quickstart.ipynb` は toric d=5 の直接 MC による絶対論理誤り率と Z+H の失敗条件付き重みを図で説明する。
-`notebooks/02_pl_curve_with_bar.ipynb` は toric d=3,5 の固定 MWPM デコーダー、ladder `[0.30, 0.26, 0.22]`、失敗観測数が正の直接 MC anchor を使った BAR 曲線を描く。
-`notebooks/03_conditional_sampling_and_diagnostics.ipynb` は非対称 toric (3,5) の異なる3初期状態、2 chain の重み trace、ESS、split R-hat、独立直接標本の条件付き分散を渡した4条件の収束スクリーンを示す。
+`notebooks/02_pl_curve_with_bar.ipynb` は toric d=3,5 の固定 MWPM デコーダー、ladder `[0.30, 0.26, 0.22]`、失敗観測数が正の直接 MC anchor を使った BAR 曲線と独立直接 MC 確認点を描く。
+`notebooks/03_conditional_sampling_and_diagnostics.ipynb` は非対称 toric (3,5) の異なる3初期状態、2 chain の重み trace、ESS、split R-hat、独立直接標本の条件付き分散を渡した4条件の収束スクリーンを最小群対ランダム群と最小群対最大群で示す。
 `notebooks/04_bring_your_own.ipynb` は3量子ビットの自作 CSS 符号、正規化を全列挙で検査する独自ノイズ、論理予測デコーダーを持ち込み、exact・direct MC・失敗条件付き chain を比較する。
 4冊は `examples/` を import せず、先頭パラメータセルで `MCMC4QEC_QUICK` と固定 root seed を扱い、全乱数 seed をそこから派生させる。
 英語の説明には条件付き chain と絶対 `P_L` の区別、正の MC anchor、observed overlap、p 依存デコーダーの近似 bias、診断の限界、独立直接分散、論文 in preparation、物理回路カーネル制限のうち該当事項を明記した。
@@ -24,18 +24,26 @@
 
 | notebook | 既定秒 | quick 秒 | 既定サイズ byte |
 | --- | ---: | ---: | ---: |
-| `01_quickstart.ipynb` | 2.16 | 1.84 | 25,250 |
-| `02_pl_curve_with_bar.ipynb` | 16.33 | 5.10 | 31,241 |
-| `03_conditional_sampling_and_diagnostics.ipynb` | 2.56 | 2.11 | 48,749 |
-| `04_bring_your_own.ipynb` | 1.69 | 1.50 | 21,789 |
+| `01_quickstart.ipynb` | 5.89 | 4.93 | 25,354 |
+| `02_pl_curve_with_bar.ipynb` | 37.68 | 6.53 | 39,999 |
+| `03_conditional_sampling_and_diagnostics.ipynb` | 7.56 | 4.12 | 49,242 |
+| `04_bring_your_own.ipynb` | 4.89 | 2.58 | 21,789 |
 
-`regenerate.py` のプロセス全体では既定23.22秒、quick 11.05秒だった。
+4冊の notebook 個別時間の合計は既定56.02秒、quick 18.16秒であり、kernel 起動等の全体 overhead は含まない。
+quick の `regenerate.py` プロセス全体は20.18秒だった。
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_notebooks.py -q` は source mode で4 passed、15.07秒だった。
-`C:/dev/mcmc4qec/.venv-dev3-optional/Scripts/python.exe -m pytest --override-ini pythonpath= tests/test_notebooks.py -q` は dev3 installed wheel mode で4 passed、10.64秒だった。
-source mode のテストは dev2 wheel 環境の試行と並列に実行したため、その時間には並列負荷が含まれる。
+`C:/dev/mcmc4qec/.venv-dev3-optional/Scripts/python.exe -m pytest --override-ini pythonpath= tests/test_notebooks.py -q` は最終版の dev3 installed wheel mode で4 passed、8.06秒だった。
+最終変更前の `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_notebooks.py -q` は source mode で4 passed、15.07秒だった。
+最終変更後の source mode はメインの統合 suite で確認する。
 4冊それぞれの実行済み出力に `image/png` が1個あることを確認した。
-非対称 toric (3,5) の固定 seed から派生した最小・ランダム論理セクター・最大の初期状態は全て異なり、重みは順に3、8、5だった。
+03 ではランダム論理セクター初期状態を固定 root seed から派生した最大64個の seed から選び、最小・最大状態と異なることを実行時に検査した。
+02 の quick では BAR と独立直接 MC の区間が交わらない点があり、出力に原因未特定の警告を残した。
+
+## 中断した試行
+
+旧設定の既定再生成と focused test は Windows のスリープ・復帰による長い停止をまたぎ、notebook セルの timeout で失敗した。
+Windows System イベントに16:02〜16:52と17:08〜17:36のスリープ・復帰記録があり、計算遅延の実測値として扱わない。
+旧テストでは02計算セルが設定上の25秒 timeout に達したため、最終テストのセル timeout を55秒へ変更し、ファイル全体8.06秒の成功を確認した。
 
 ## 未実施
 

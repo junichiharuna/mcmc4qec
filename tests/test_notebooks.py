@@ -46,7 +46,7 @@ def test_notebook_executes_quickly(name, tmp_path, monkeypatch):
     notebook = nbformat.read(ROOT / "notebooks" / name, as_version=4)
     start = time.perf_counter()
     executed = nbclient.NotebookClient(
-        notebook, timeout=25, kernel_name="mcmc4qec-test",
+        notebook, timeout=55, kernel_name="mcmc4qec-test",
         resources={"metadata": {"path": str(ROOT / "notebooks")}},
     ).execute()
     assert time.perf_counter() - start < 60
