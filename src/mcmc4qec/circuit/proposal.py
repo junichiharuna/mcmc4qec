@@ -9,8 +9,22 @@ from ..kernels import Proposal
 class PhysicalFaultProposal:
     """Select a location and a nonzero fault uniformly, then toggle or replace.
 
-    The proposal is symmetric for any categorical alphabets. General MH still
-    evaluates the complete physical noise density and the failure predicate.
+    ``propose(state, problem, p, rng)`` returns a standard Proposal with the
+    complete reverse/forward log probability ratio. ``probability`` returns
+    the forward probability of one ordered state transition. These proposals
+    are symmetric even when locations have different fault-alphabet sizes,
+    because forward and reverse moves use the same location and alphabet.
+    The sampler applies general MH to the complete physical log density and
+    the shared failure predicate; a rejected step remains in the chain.
+
+    Args:
+        state: One categorical physical fault placement.
+        problem: Problem with a CircuitFaultModel and CircuitFaultNoise.
+        p: Per-physical-location failure rate, or a channel-to-rate dict.
+        rng: NumPy random Generator.
+
+    Returns:
+        A Proposal for addition, deletion, or replacement at one location.
     """
 
     name = "physical_fault"

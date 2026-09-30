@@ -33,10 +33,24 @@ def _logical_qubits(circuit, basis):
 def surface_logical_idle_circuit(*, distance=3, p=.01, basis="Z"):
     """Make 2d noisy rounds with an ideal midpoint logical observable.
 
-    The midpoint MPP reads the encoded Pauli after the first d rounds. Later
-    detector measurements form a d-round noisy buffer for decoding that value.
+    Args:
+        distance: Odd rotated-surface distance, at least three.
+        p: Failure probability at each marked physical noise location in the
+            full 2d-round experiment. It is not a logical rate per round.
+        basis: Prepared and observed logical Pauli, ``"X"`` or ``"Z"``.
+
+    Returns:
+        Stim circuit with 2d noisy extraction rounds and one ideal midpoint
+        MPP observable. It represents the logical value after the first d
+        rounds. The later d noisy rounds provide decoder detector information;
+        the final data measurement supplies detector boundary information.
+
     The original final-time logical observable is removed. Record references
-    crossing the added measurement are shifted to preserve their meaning.
+    crossing the added MPP measurement are shifted to preserve their meaning.
+    The ideal MPP adds no physical fault location.
+
+    Raises:
+        ValueError: Distance, basis, rate, or generated record layout is invalid.
     """
     import stim
 
@@ -95,8 +109,23 @@ def surface_logical_idle_circuit(*, distance=3, p=.01, basis="Z"):
 def surface_logical_idle_problem(*, distance=3, decoder_p=.01, basis="Z"):
     """Build a physical-location Problem and a DEM-derived PyMatching decoder.
 
-    The DEM is used only to construct the decoder. Sampling and likelihoods
-    stay on exclusive physical gate-fault locations, not independent DEM bits.
+    Args:
+        distance: Odd rotated-surface distance, at least three.
+        decoder_p: Physical per-location failure rate used for the fixed
+            decoder's DEM prior, not an estimated logical rate per round.
+        basis: Midpoint logical Pauli, ``"X"`` or ``"Z"``.
+
+    Returns:
+        Problem with a CircuitFaultModel, uniform conditional Pauli noise,
+        and PyMatching observable prediction. ``Problem.is_faulty`` means a
+        midpoint logical failure in the full 2d-round experiment. The DEM is
+        used only to construct the decoder: sampling and likelihoods remain on
+        exclusive physical gate-fault locations. Use the same fixed decoder
+        when comparing rates or running a fixed-failure BAR ladder.
+
+    Raises:
+        ImportError: Stim or PyMatching is not installed.
+        ValueError: Circuit parameters or DEM decomposition are unsupported.
     """
     import pymatching
 

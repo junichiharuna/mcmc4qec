@@ -24,6 +24,9 @@ def small_circuit():
 def test_exclusive_alphabet_and_normalized_density():
     model = CircuitFaultModel.from_stim_circuit(small_circuit())
     assert model.alphabets == (2, 4)
+    original_signature = model.metadata()["sha256"]
+    model.circuit.append("X", 0)
+    assert model.metadata()["sha256"] == original_signature
     noise = CircuitFaultNoise(model, {"X_ERROR": [1], "DEPOLARIZE1": [.2, .3, .5]})
     states = itertools.product(range(2), range(4))
     assert sum(np.exp(noise.log_prob(s, .2)) for s in states) == pytest.approx(1)
@@ -44,6 +47,51 @@ def test_intrinsically_random_observable_is_rejected():
     """)
     with pytest.raises(ValueError, match="deterministic"):
         CircuitFaultModel.from_stim_circuit(circuit)
+
+
+def test_unsupported_noisy_stim_gate_is_rejected():
+    circuit = stim.Circuit("""
+        R 0
+        HERALDED_ERASE(0.1) 0
+        M 0
+    """)
+    with pytest.raises(ValueError, match="unsupported noise"):
+        CircuitFaultModel.from_stim_circuit(circuit)
+
+
+def test_explicit_location_rule_filters_physical_channels():
+    circuit = small_circuit()
+    model = CircuitFaultModel.from_stim_circuit(
+        circuit, location_rule=lambda source: [loc for loc in stim_noise_locations(source)
+                                               if loc.channel == "X_ERROR"])
+    assert model.n == 1
+    assert model.locations[0].targets == (0,)
+    with pytest.raises(ValueError):
+        CircuitFaultModel.from_stim_circuit(
+            circuit, locations=model.locations, location_rule=stim_noise_locations)
+
+
+def test_same_channel_locations_can_have_distinct_alphabets_and_rates():
+    circuit = stim.Circuit("""
+        R 0 1
+        DEPOLARIZE1(0.1) 0 1
+        M 0 1
+        DETECTOR rec[-2]
+        OBSERVABLE_INCLUDE(0) rec[-1]
+    """)
+    model = CircuitFaultModel.from_stim_circuit(circuit)
+    noise = CircuitFaultNoise(model, [[.2, .3, .5], [.5, .3, .2]])
+    p = {"location_rates": [.1, .2]}
+    assert np.exp(noise.log_prob([1, 3], p)) == pytest.approx(.1 * .2 * .2 * .2)
+    assert sum(np.exp(noise.log_prob(s, p)) for s in itertools.product(range(4), repeat=2)) == pytest.approx(1)
+    assert noise.metadata()["conditional_mode"] == "per_location"
+    draws = np.asarray([noise.sample(p, np.random.default_rng(seed)) for seed in range(600)])
+    assert np.mean(draws[:, 0] != 0) == pytest.approx(.1, abs=.035)
+    assert np.mean(draws[:, 1] != 0) == pytest.approx(.2, abs=.05)
+    with pytest.raises(ValueError):
+        noise.probabilities({"location_rates": [.1]})
+    with pytest.raises(ValueError):
+        CircuitFaultNoise(model, [[.2, .3, .5000000005], [.5, .3, .2]])
 
 
 def test_single_fault_xor_matches_direct_stim_random_placements():

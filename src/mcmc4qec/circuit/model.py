@@ -10,11 +10,21 @@ from ..core import categorical, identified
 
 _PAULI = ("I", "X", "Y", "Z")
 _NOISE = frozenset(("X_ERROR", "Y_ERROR", "Z_ERROR", "DEPOLARIZE1", "DEPOLARIZE2"))
+_IDEAL_MEASURE_RESET = frozenset(("M", "MX", "MY", "MR", "MRX", "MRY",
+                                  "MPP", "MXX", "MYY", "MZZ", "R", "RX", "RY"))
 
 
 @dataclass(frozen=True)
 class FaultLocation:
-    """One target group of a physical noise instruction in a flattened circuit."""
+    """One exclusive Pauli fault location in a flattened Stim circuit.
+
+    Attributes:
+        instruction_index: Index of the source noise instruction after flattening.
+        targets: One qubit, or an ordered qubit pair for DEPOLARIZE2.
+        channel: Supported Stim noise instruction name.
+        faults: Nonidentity Pauli strings, in categorical label order 1, 2, ... .
+            Label 0 always means no fault at this physical location.
+    """
 
     instruction_index: int
     targets: tuple[int, ...]
@@ -23,7 +33,20 @@ class FaultLocation:
 
 
 def stim_noise_locations(circuit):
-    """Enumerate supported single and two-qubit Pauli channels by target group."""
+    """Enumerate physical target groups of supported Stim Pauli channels.
+
+    Args:
+        circuit: A Stim circuit, possibly containing REPEAT blocks.
+
+    Returns:
+        A tuple of FaultLocation objects in flattened circuit order. Each
+        DEPOLARIZE2 target pair is one exclusive 15-fault location; X/Y/Z_ERROR
+        and DEPOLARIZE1 targets are single-qubit locations.
+
+    Raises:
+        TypeError: ``circuit`` is not a Stim circuit.
+        ValueError: A noise instruction or target structure is unsupported.
+    """
     import stim
 
     if not isinstance(circuit, stim.Circuit):
@@ -32,8 +55,7 @@ def stim_noise_locations(circuit):
     for index, instruction in enumerate(circuit.flattened()):
         channel = instruction.name
         if channel not in _NOISE:
-            if channel.endswith("_ERROR") or channel.startswith("DEPOLARIZE") or channel in (
-                    "PAULI_CHANNEL_1", "PAULI_CHANNEL_2", "CORRELATED_ERROR", "ELSE_CORRELATED_ERROR"):
+            if channel not in _IDEAL_MEASURE_RESET and stim.gate_data(channel).is_noisy_gate:
                 raise ValueError(f"unsupported noise instruction {channel}")
             continue
         targets = instruction.targets_copy()
@@ -55,9 +77,22 @@ def stim_noise_locations(circuit):
 class CircuitFaultModel:
     """Detector and observable effects of categorical physical Pauli faults.
 
-    The source circuit supplies physical noise positions, while its native noise
-    probabilities are ignored. Only deterministic Clifford detector circuits are
-    supported. A direct Stim insertion path is retained for independent checks.
+    Args:
+        circuit: Stim circuit with supported Pauli noise instructions marking
+            physical locations. Their written probabilities are ignored.
+        locations: Unique FaultLocation objects selected from the circuit.
+        identifier: Stable caller-facing model identifier for provenance.
+
+    The state has one categorical coordinate per location. ``syndrome`` and
+    ``observables`` return detector and logical flips for the whole circuit
+    experiment relative to the noiseless circuit. Single-fault Stim effects are
+    XOR-composed, and ``simulate_state`` independently injects a full placement.
+    The noiseless circuit must have deterministic detectors and observables.
+
+    Raises:
+        TypeError: The input is not a Stim circuit.
+        ValueError: Locations are invalid or the noiseless circuit has random
+            detector or observable outcomes.
     """
 
     def __init__(self, circuit, locations, *, identifier="circuit-physical-faults"):
@@ -65,11 +100,11 @@ class CircuitFaultModel:
 
         if not isinstance(circuit, stim.Circuit):
             raise TypeError("circuit must be stim.Circuit")
-        self.circuit = circuit.flattened()
+        self._circuit = circuit.flattened()
         self.locations = tuple(locations)
         if not self.locations:
             raise ValueError("at least one physical fault location is required")
-        available = set(stim_noise_locations(self.circuit))
+        available = set(stim_noise_locations(self._circuit))
         if len(set(self.locations)) != len(self.locations) or any(loc not in available for loc in self.locations):
             raise ValueError("locations must be unique supported source noise targets")
         self.n = len(self.locations)
@@ -112,9 +147,39 @@ class CircuitFaultModel:
         self.L.flags.writeable = False
 
     @classmethod
-    def from_stim_circuit(cls, circuit, *, locations=None, identifier="circuit-physical-faults"):
+    def from_stim_circuit(cls, circuit, *, locations=None, location_rule=None,
+                          identifier="circuit-physical-faults"):
+        """Build from all supported channels or a caller-supplied location rule.
+
+        Args:
+            circuit: Stim circuit whose Pauli noise channels mark locations.
+            locations: Optional explicit sequence of selected FaultLocation objects.
+            location_rule: Optional callable receiving ``circuit`` and returning
+                selected FaultLocation objects. Omitted locations have zero fault
+                probability because their source noise commands are stripped.
+            identifier: Stable model identifier for provenance.
+
+        Returns:
+            A CircuitFaultModel with precomputed detector and observable effects.
+
+        Raises:
+            TypeError: ``location_rule`` is not callable.
+            ValueError: Both location selectors are supplied, or the circuit
+                violates the supported deterministic Pauli-noise contract.
+        """
+        if locations is not None and location_rule is not None:
+            raise ValueError("choose explicit locations or a location_rule")
+        if location_rule is not None:
+            if not callable(location_rule):
+                raise TypeError("location_rule must be callable")
+            locations = location_rule(circuit)
         return cls(circuit, stim_noise_locations(circuit) if locations is None else locations,
                    identifier=identifier)
+
+    @property
+    def circuit(self):
+        """Return a copy of the source Stim circuit to protect cached effects."""
+        return self._circuit.copy()
 
     def validate_state(self, state):
         return categorical(state, self.alphabets)
@@ -127,7 +192,7 @@ class CircuitFaultModel:
             if label:
                 selected.setdefault(loc.instruction_index, []).append((loc, int(label)))
         output = stim.Circuit()
-        for index, instruction in enumerate(self.circuit):
+        for index, instruction in enumerate(self._circuit):
             if instruction.name in _NOISE:
                 for loc, label in selected.get(index, ()):
                     for pauli, target in zip(loc.faults[label-1], loc.targets):
@@ -162,7 +227,7 @@ class CircuitFaultModel:
 
     def metadata(self):
         return identified(dict(type="CircuitFaultModel", identifier=self.identifier,
-            source_circuit=str(self.circuit), stim_version=version("stim"),
+            source_circuit=str(self._circuit), stim_version=version("stim"),
             locations=[dict(instruction_index=x.instruction_index, targets=x.targets,
                             channel=x.channel, faults=x.faults) for x in self.locations],
             distribution="physical exclusive categorical locations",
@@ -170,39 +235,73 @@ class CircuitFaultModel:
 
 
 class CircuitFaultNoise:
-    """Independent physical locations with explicit conditional fault alphabets."""
+    """Normalized product distribution on exclusive physical fault locations.
+
+    Args:
+        model: CircuitFaultModel providing channel and fault label order.
+        conditional_probabilities: Either a dictionary from each used Stim
+            channel to its nonidentity fault probabilities, or a sequence with
+            one such probability vector per physical location. Each vector
+            must sum to one without implicit renormalization.
+
+    A scalar ``p`` gives every location that failure rate. A dictionary ``p``
+    can give one rate per channel, or ``{"location_rates": [...]}`` with one
+    rate per physical location. All rates lie in [0, 1]. The latter form is
+    accepted by exact/direct MC and by BAR ladder coordinates.
+
+    ``log_prob`` and ``sample`` concern one complete circuit experiment, whose
+    locations are independent but whose faults within a location are exclusive.
+    The distribution does not treat individual DEM mechanisms as independent.
+
+    Raises:
+        ValueError: A channel is missing, unused, malformed, or unnormalized.
+    """
 
     def __init__(self, model, conditional_probabilities):
         self.model = model
         self.n = model.n
         self.alphabets = model.alphabets
-        conditional = {}
-        for channel in {loc.channel for loc in model.locations}:
-            if channel not in conditional_probabilities:
-                raise ValueError(f"missing conditional probabilities for {channel}")
-            values = np.asarray(conditional_probabilities[channel], dtype=float)
-            size = len(next(loc for loc in model.locations if loc.channel == channel).faults)
+        channels = {loc.channel for loc in model.locations}
+        if isinstance(conditional_probabilities, dict):
+            if set(conditional_probabilities) != channels:
+                raise ValueError("conditional probabilities must specify exactly the used channels")
+            provided = [conditional_probabilities[loc.channel] for loc in model.locations]
+            self.conditional_mode = "per_channel"
+        else:
+            if len(conditional_probabilities) != self.n:
+                raise ValueError("one conditional probability vector per location is required")
+            provided = conditional_probabilities
+            self.conditional_mode = "per_location"
+        conditional = []
+        for loc, source in zip(model.locations, provided):
+            values = np.asarray(source, dtype=float)
+            size = len(loc.faults)
             if (values.shape != (size,) or not np.all(np.isfinite(values)) or
-                    np.any(values < 0) or not math.isclose(float(values.sum()), 1, abs_tol=1e-12)):
+                    np.any(values < 0) or not math.isclose(float(values.sum()), 1,
+                                                           rel_tol=0, abs_tol=1e-12)):
                 raise ValueError("each conditional fault alphabet must be finite, nonnegative, and sum to one")
-            conditional[channel] = values.copy()
-        if set(conditional_probabilities) != set(conditional):
-            raise ValueError("conditional probabilities include unused channels")
-        self.conditional_probabilities = conditional
+            values = values.copy()
+            values.flags.writeable = False
+            conditional.append(values)
+        self.conditional_probabilities = tuple(conditional)
 
     def probabilities(self, p):
         if isinstance(p, dict):
-            if set(p) != set(self.conditional_probabilities):
-                raise ValueError("p must give one rate per channel")
-            rates = p
+            if set(p) == {"location_rates"}:
+                rates = np.asarray(p["location_rates"])
+                if rates.shape != (self.n,):
+                    raise ValueError("p.location_rates must have one rate per location")
+            elif set(p) == {loc.channel for loc in self.model.locations}:
+                rates = [p[loc.channel] for loc in self.model.locations]
+            else:
+                raise ValueError("p must give one rate per channel or location_rates")
         else:
-            rates = dict.fromkeys(self.conditional_probabilities, p)
+            rates = [p] * self.n
         output = []
-        for loc in self.model.locations:
-            rate = rates[loc.channel]
+        for rate, conditional in zip(rates, self.conditional_probabilities):
             if isinstance(rate, (bool, np.bool_)) or not isinstance(rate, (int, float, np.number)) or not np.isfinite(rate) or not 0 <= rate <= 1:
                 raise ValueError("physical location rates must be finite in [0, 1]")
-            output.append(np.r_[1-float(rate), float(rate)*self.conditional_probabilities[loc.channel]])
+            output.append(np.r_[1-float(rate), float(rate)*conditional])
         return output
 
     def sample(self, p, rng):
@@ -215,13 +314,23 @@ class CircuitFaultNoise:
 
     def metadata(self):
         return identified(dict(type="CircuitFaultNoise", model_sha256=self.model.metadata()["sha256"],
-            conditional_probabilities={k: v.tolist() for k, v in self.conditional_probabilities.items()},
-            family="p per location or explicit p per channel", normalized=True,
+            conditional_probabilities=[v.tolist() for v in self.conditional_probabilities],
+            conditional_mode=self.conditional_mode,
+            family="scalar p, per-channel p, or explicit location_rates", normalized=True,
             independence="between physical locations, exclusive categories within each location"))
 
 
 def uniform_fault_noise(model):
-    """Use equal conditional probabilities for every Pauli fault label."""
+    """Assign equal conditional probabilities to each physical Pauli fault.
+
+    Args:
+        model: CircuitFaultModel with supported physical locations.
+
+    Returns:
+        CircuitFaultNoise with per-location failure rate supplied later as p.
+        Its probabilities refer to the complete circuit experiment, not a
+        logical rate per syndrome-extraction round.
+    """
     conditional = {loc.channel: [1 / len(loc.faults)] * len(loc.faults)
                    for loc in model.locations}
     return CircuitFaultNoise(model, conditional)

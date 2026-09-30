@@ -40,3 +40,32 @@ def test_add_delete_replace_proposals():
     assert kernel.probability([0, 0], [0, 1], problem, .1) == pytest.approx(1 / 6)
     assert kernel.probability([0, 1], [0, 0], problem, .1) == pytest.approx(1 / 6)
     assert kernel.probability([0, 1], [0, 2], problem, .1) == pytest.approx(1 / 6)
+
+
+def test_distinct_location_distributions_obey_detailed_balance():
+    import stim
+
+    circuit = stim.Circuit("""
+        R 0 1
+        DEPOLARIZE1(0.1) 0 1
+        M 0 1
+        DETECTOR rec[-2]
+        OBSERVABLE_INCLUDE(0) rec[-1]
+    """)
+    model = CircuitFaultModel.from_stim_circuit(circuit)
+    noise = CircuitFaultNoise(model, [[.2, .3, .5], [.5, .3, .2]])
+    problem = Problem(model, noise,
+        CallableDecoder(lambda s: np.zeros(1, dtype=np.uint8), identifier="zero"))
+    p = {"location_rates": [.1, .3]}
+    kernel = PhysicalFaultProposal()
+    states = [np.array(s) for s in itertools.product(range(4), repeat=2)]
+    for a in states:
+        for b in states:
+            qab = kernel.probability(a, b, problem, p)
+            qba = kernel.probability(b, a, problem, p)
+            if not qab or not problem.is_faulty(a) or not problem.is_faulty(b):
+                continue
+            pi_a, pi_b = np.exp(problem.log_prob(a, p)), np.exp(problem.log_prob(b, p))
+            flow_ab = pi_a * qab * min(1, pi_b * qba / (pi_a * qab))
+            flow_ba = pi_b * qba * min(1, pi_a * qab / (pi_b * qba))
+            assert flow_ab == pytest.approx(flow_ba)
