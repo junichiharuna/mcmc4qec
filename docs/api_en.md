@@ -1,6 +1,6 @@
 # Public API
 
-The names below cover the existing top-level API and the planned A/C/E exports. Import code factories from `mcmc4qec.codes`, decoder constructors from `mcmc4qec.decoders`, circuit tools from `mcmc4qec.circuit`, and initialization helpers from `mcmc4qec.initial_states` until the integration exposes them at the top level. The contracts require deterministic decoding and normalized noise probabilities on the entire stated state space. A probability is for the complete experiment represented by the model; a phenomenological result is not a per-round rate.
+The names below cover every top-level export in `mcmc4qec.__all__`. Code factories, decoder constructors, circuit tools, and initialization helpers are also available from their corresponding submodules. The contracts require deterministic decoding and normalized noise probabilities on the entire stated state space. A probability is for the complete experiment represented by the model; a phenomenological result is not a per-round rate.
 
 | Names | Purpose and main constraints |
 | --- | --- |
