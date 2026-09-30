@@ -25,7 +25,7 @@ BARと独立MCの区間が非交差となる例も記録しており、短い実
 - `benchmarks/bench_step.py` — 1 ステップの速度計測
 - `docs/` — `api_en.md`・`tutorial_en.md`（英語の公開文書）と日本語の設計・検証記録。`initial_library_ja.md`（設計と制約）、`stage1_ja.md`・`validation_stage1_ja.md`・`validation_initial_ja.md`（dev0 / dev1 時点）、`crossval_research_ja.md`・`performance_ja.md`・`convergence_ja.md`・`circuit_baseline_ja.md`（dev2 の各分野）、`dev_request_2026-09-30.md`と`dev_request_2026-09-30_examples.md`（開発依頼書）、`wp/`（WP-A〜Jの完了メモとレビュー、統合・検証記録、dev2の`final_report_ja.md`とdev3の`final_report_examples_ja.md`）
 - `docs/handoff/` — 2026-09-30 の Codex からの引き継ぎ。`HANDOFF.md`、`IMPLEMENTATION_PLAN.md`、`IMPLEMENTATION_STATUS.md`、`spec/RIMC_ライブラリ仕様書_v0.1.md`（ファイル名は v0.1、本文は v0.2。仕様の一次資料）
-- `.github/workflows/tests.yml` — installed wheel を Python 3.11 / 3.12 で試す CI（core のみ、optional 依存あり）。push で走り、2026-09-30 の run 36675225072 で全 4 job 成功
+- `.github/workflows/tests.yml` — installed wheelをPython 3.11 / 3.12で試すCI（coreと全optional、quick例とnotebookを含む）。dev3のrun 36694827034で全4 job成功し、coreは各231 passed / 61 skipped、optionalは各314 passed / 4 skipped
 - `pyproject.toml`、`CHANGELOG.md`、`CITATION.cff`（著者名 `junichi haruna` はユーザー指定で確定、所属・DOI・リリース情報は未確定）、`CONTRIBUTING.md`
 - `build/`、`dist/`、`output/`、`.venv*/`、`*.egg-info/` は gitignore
 

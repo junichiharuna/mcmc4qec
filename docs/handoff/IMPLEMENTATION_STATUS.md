@@ -127,3 +127,11 @@ PyMatchingのmatplotlib依存のため、描画層のImportError時のCSV保持�
 Python 23ファイルのsource一致、site-packagesからのimport、versionとmetadataのREADME一致、coreでのoptional依存不在も確認した。
 同じoptional wheel環境の既存テスト比較実行は271 passed / 4 skipped（140.96秒）で、最終全suiteとの差84.27秒も90秒の予算内だった。
 ローカル検証を完了し、この後mainのみpushして全4 CI jobを確認する。
+
+## 2026-09-30 18時台・dev3 remote CIと作業枝整理の完了
+
+main `7afd3ac3ef60ca62ec3c174516fe179054901ad7`をorigin/mainにpushし、[Actions run 36694827034](https://github.com/junichiharuna/mcmc4qec/actions/runs/36694827034)の全4 job成功を確認した。
+UbuntuのPython 3.11/3.12でcoreは各231 passed / 61 skipped、optionalは各314 passed / 4 skippedで、各jobの実行例・文書とoptionalのnotebook実行も成功した。
+各worktreeがcleanで、`git cherry main wp/<x>`が空かつmainに取り込み済みであることを確認し、解決したパスを検査してからf〜jのworktreeと`wp/f`〜`wp/j`を削除した。
+最終報告は`docs/wp/final_report_examples_ja.md`であり、実行時間表、ローカルとCIの結果、制約、所有者判断待ち事項を記録した。
+研究リポジトリの変更、公開化、LICENSE追加、publishは行わず、依頼された実装・レビュー・統合・検証・push・CI確認・作業枝整理を完了した。

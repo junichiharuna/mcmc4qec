@@ -5,7 +5,7 @@
 WP-F〜Jを独立レビュー後にH → F → G → I → Jの順でmainへ統合し、版番号を`0.1.0.dev3`に揃えた。
 既存6例を共通CLIに揃え、新規12例、実行済みnotebook4本、再生成スクリプト、英日READMEと実測付き一覧を追加した。
 source全suiteは314 passed / 4 skippedで、公開API65名とZ/Hの公開既定は維持した。
-core/optionalの別venvで全テスト・実行例・文書・notebookのwheel検証を完了し、remote CIの確認結果を第4節に記録する。
+core/optionalの別venvで全テスト・実行例・文書・notebookのwheel検証を完了し、mainへのpushとremote CI全4 jobの成功を確認した。
 短い例の数値を収束・研究精度・論文図の再現の保証として扱わず、区間不一致と依存関係の制約を明記した。
 
 ## 2. WPごとの成果とレビュー
@@ -99,7 +99,19 @@ sourceとwheelのPython 23ファイルのbytes一致、site-packagesからのimp
 coreの補足検証は7例と文書4ブロックが成功し、全体13.90秒だった。
 optionalの補足検証は全18例・notebook4本・文書6ブロックが成功し、全体71.02秒だった。
 全18例にprocess単位10秒の上限を適用し、notebookの再生成は21.73秒、各notebookは4.60・6.90・5.47・3.66秒だった。
-remote CIとworktree整理の結果はpush後に追記する。
+main `7afd3ac3ef60ca62ec3c174516fe179054901ad7`をorigin/mainだけにpushし、[Actions run 36694827034](https://github.com/junichiharuna/mcmc4qec/actions/runs/36694827034)の全4 jobが成功した。
+
+| Ubuntu CI job | 結果 | pytest秒 | 実行例・文書・notebook |
+| --- | --- | ---: | --- |
+| core / Python 3.11 | 231 passed / 61 skipped | 57.60 | 7例・文書4ブロック成功 |
+| core / Python 3.12 | 231 passed / 61 skipped | 35.79 | 7例・文書4ブロック成功 |
+| optional / Python 3.11 | 314 passed / 4 skipped | 79.11 | 18例・文書6ブロック・notebook4本成功 |
+| optional / Python 3.12 | 314 passed / 4 skipped | 77.61 | 18例・文書6ブロック・notebook4本成功 |
+
+CIでも23 Pythonファイルのsource一致を確認し、各例の10秒上限、notebook再生成、READMEとtutorialの実行まで成功した。
+`git cherry main wp/<x>`が空、mainの祖先であること、各worktreeのclean状態を確認してから、f〜jの絶対パスが`C:/dev/mcmc4qec-wt`配下であることを検査し、`git worktree remove`と`git branch -d`で整理した。
+削除前の枝HEADはF `3acc0c9`、G `5e3829c`、H `d8ffabf`、I `8081496`、J `e758e72`であり、成果とレビュー記録はmainの履歴に保持されている。
+リポジトリはprivateのままで、残るworktreeは`C:/dev/mcmc4qec`のmainだけである。
 
 ## 5. ライブラリの問題と扱い
 
