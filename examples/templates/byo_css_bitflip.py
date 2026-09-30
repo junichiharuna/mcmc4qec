@@ -148,6 +148,8 @@ def main():
     print(f"{anchor_note} anchor P_L={anchor.estimate:.6g}; direct MC P_L={mc.estimate:.6g}; BAR P_L={bar.estimates[-1]:.6g}")
     print(f"Conditional chain mean weight={np.count_nonzero(chain.states, axis=-1).mean():.6g}; it does not estimate absolute P_L.")
     print(f"Normalization {('enumerated at every rung' if code.n <= 12 else 'unchecked for n > 12')}. Decoder output means logical observables.")
+    if code.n > 12:
+        print("checks_passed=false means normalization was not checked; no preflight check failed.")
     print("Diagnostics do not prove convergence, ergodicity, or correctness; a full four-check verdict also needs independent direct-MC conditional variance.")
     print("SUMMARY " + json.dumps(payload, sort_keys=True))
 

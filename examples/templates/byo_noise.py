@@ -2,8 +2,9 @@
 
 Default: about 1 second; --quick: under 1 second. Exact and direct MC give
 absolute P_L. Correlated noise needs its true joint density, never a product
-of marginals. The decoder is fixed; no BAR ladder is used here. Diagnostics
-cannot prove convergence or correctness; the paper is in preparation.
+of marginals. The sample/log_prob distribution agreement is a user contract,
+not established by finite preflight checks. The decoder is fixed; no BAR ladder
+is used here. Diagnostics cannot prove correctness; the paper is in preparation.
 """
 
 import argparse
@@ -106,6 +107,10 @@ def check_components(code, problem, p, rng):
         state = np.asarray(bits, dtype=np.uint8)
         if problem.is_faulty(state) != problem.is_faulty(state):
             raise ValueError("failure predicate is not deterministic")
+    for _ in range(8):
+        state = problem.state(problem.noise.sample(p, rng))
+        if not math.isfinite(problem.log_prob(state, p)):
+            raise ValueError("noise.sample generated a state outside log_prob support")
     return normalization
 
 
@@ -123,6 +128,11 @@ def main():
     if offset:
         original = noise.log_prob
         noise.log_prob = lambda state, p: original(state, p) + offset
+    sample_width = int(os.environ.get("MCMC4QEC_TEMPLATE_SAMPLE_EXTRA_BITS", "0"))
+    if sample_width:
+        original_sample = noise.sample
+        noise.sample = lambda p, rng: np.concatenate((original_sample(p, rng),
+                                                        np.zeros(sample_width, dtype=np.uint8)))
     problem = Problem(code.bit_flip_model(), noise,
                       CallableDecoder(predict_observables, identifier="byo-noise-decoder-v1"))
     seed, check_seed = spawn_seeds(args.seed, 2)
@@ -139,6 +149,7 @@ def main():
     else:
         print(f"Direct MC P_L={pl:.6g}, Wilson interval={mc.interval}; exact enumeration unavailable.")
     print("Decoder output means logical observables; failure is their mismatch with truth.")
+    print("Sample shape/support checked; agreement between sample frequencies and log_prob is a user contract and remains unverified.")
     print("Diagnostics do not prove convergence or correctness; complete four-check screening needs independent direct-MC conditional variance.")
     print("SUMMARY " + json.dumps(payload, sort_keys=True))
 

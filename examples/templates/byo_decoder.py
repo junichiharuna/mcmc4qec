@@ -123,8 +123,13 @@ def main():
     payload = {"n": code.n, "output_kind": output_kind, "checks_passed": code.n <= 12, "pl": pl}
     (out / "result.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(f"Wrote {out / 'result.json'}")
-    print(f"Exact P_L={pl:.6g}; direct MC P_L={mc.estimate:.6g}, Wilson interval={mc.interval}")
+    if reference is not None:
+        print(f"Exact P_L={pl:.6g}; direct MC P_L={mc.estimate:.6g}, Wilson interval={mc.interval}")
+    else:
+        print(f"Direct MC P_L={pl:.6g}, Wilson interval={mc.interval}; exact enumeration unavailable.")
     print(f"Declared decoder output_kind={output_kind}; mapped predictions are logical observables.")
+    if code.n > 12:
+        print("checks_passed=false means normalization was not checked; no preflight check failed.")
     print("Diagnostics do not prove convergence, ergodicity, or correctness; complete four-check screening needs independent direct-MC conditional variance.")
     print("SUMMARY " + json.dumps(payload, sort_keys=True))
 

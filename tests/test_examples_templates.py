@@ -28,6 +28,7 @@ def run_template(name, out, extra_env=None):
     env.pop("MCMC4QEC_TEMPLATE_MATRICES", None)
     env.pop("MCMC4QEC_TEMPLATE_LOG_OFFSET", None)
     env.pop("MCMC4QEC_TEMPLATE_APPEND_BITS", None)
+    env.pop("MCMC4QEC_TEMPLATE_SAMPLE_EXTRA_BITS", None)
     if extra_env:
         env.update(extra_env)
     return subprocess.run(
@@ -53,6 +54,7 @@ def test_default_quick_run(name, tmp_path):
 @pytest.mark.parametrize("name,inject,expected", [
     ("byo_css_bitflip", {"MCMC4QEC_TEMPLATE_MATRICES": json.dumps({"hx": [[1, 0, 0]]})}, "commute"),
     ("byo_noise", {"MCMC4QEC_TEMPLATE_LOG_OFFSET": "0.1"}, "normalized"),
+    ("byo_noise", {"MCMC4QEC_TEMPLATE_SAMPLE_EXTRA_BITS": "1"}, "state"),
     ("byo_decoder", {"MCMC4QEC_TEMPLATE_APPEND_BITS": "1"}, "correction output"),
 ])
 def test_invalid_input_stops_before_sampling(name, inject, expected, tmp_path):
