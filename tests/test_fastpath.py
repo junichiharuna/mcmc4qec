@@ -56,10 +56,13 @@ def test_all_states_all_neighbors_match_reference(kind):
                 min(1, math.exp(lf) * rr / qr), abs=1e-12)
 
 
-def test_identical_seed_trajectory_and_acceptance():
-    problem, p = _problem("bit")
+@pytest.mark.parametrize("kind,initial", [
+    ("bit", [1, 0]), ("pauli", [1, 0]), ("phenom", [1, 0, 0]),
+])
+def test_identical_seed_trajectory_and_acceptance(kind, initial):
+    problem, p = _problem(kind)
     def run(enabled):
-        return sample_faulty(problem, p, initial_state=[1, 0], seed=811,
+        return sample_faulty(problem, p, initial_state=initial, seed=811,
             config=SamplingConfig(samples=200, burn_in=20, kernels=KernelConfig(
                 zanella_fastpath=enabled, lazy=0, cluster=0, zanella=1)))
     fast, reference = run(True), run(False)
@@ -78,10 +81,14 @@ def test_correlated_and_overridden_noise_never_take_fast_path():
         Zanella(use_fastpath=False)._distribution([1, 0], problem, p))
 
 
-def test_zero_support_matches_reference():
-    problem, _ = _problem("bit")
-    problem.noise = IndependentBitFlip(2)
-    for p, state in [(0, [0, 0]), (1, [1, 1])]:
+@pytest.mark.parametrize("kind", ["bit", "pauli", "phenom"])
+def test_zero_support_matches_reference(kind):
+    problem, _ = _problem(kind)
+    if kind == "bit":
+        problem.noise = IndependentBitFlip(2)
+    for edge in (0, 1):
+        p = {"data": edge, "measurement": edge} if kind == "phenom" else edge
+        state = [edge] * problem.model.n
         fast = Zanella()._distribution(state, problem, p)
         reference = Zanella(use_fastpath=False)._distribution(state, problem, p)
         assert (fast is None and reference is None) or np.allclose(fast, reference)

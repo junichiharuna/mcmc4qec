@@ -8,7 +8,7 @@
 高速経路の自動適用は組み込み `IndependentBitFlip`、`DepolarizingNoise`、`PhenomenologicalNoise` の厳密な型に限り、派生クラスや任意 noise は一般 `log_prob` 経路を使う。
 現在状態が support 外なら参照経路へ戻り、ゼロ確率の近傍は重みゼロとする。
 Z の近傍確率は全候補の局所対数比から算出し、逆向きの正規化定数も候補状態で同じ方法で算出する。
-cache は完全な syndrome の shape と bytes をキーに、decoder の論理予測をコピーして保存する。
+cache は完全な syndrome の shape、dtype、bytes をキーに、decoder の論理予測をコピーして保存する。
 `cache_policy="research_clear"` は研究 runner と同じく 10 ステップの区切りで `len(cache)>cache_cap` なら全消去する。
 依頼書にある LRU または凍結という `cache_cap` の前提は研究実装とは異なり、周期消去が実際の研究意味である。
 研究対応を明示するため `research_clear` を既定とし、追加で厳密な上限を守る `lru` と `freeze` を選べるようにした。
@@ -21,12 +21,12 @@ failure 評価では `BinaryLinearModel` と `DepolarizingModel` の単一座標
 
 ## 実行した検証
 
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_fastpath.py -q` はレビュー修正後に 9 件成功し、0.52 秒だった。
+`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_fastpath.py -q` はレビュー修正後に 13 件成功し、1.17 秒だった。
 小規模の bit-flip、depolarising、phenomenological の全状態・全近傍で高速経路と参照経路の提案確率と MH 受理確率を比較した。
-同じ seed の bit-flip chain 200 標本では状態軌道と受理統計が完全に一致した。
+同じ seed の bit-flip、depolarising、phenomenological の各 chain 200 標本では状態軌道と受理統計が完全に一致した。
 派生 noise の参照経路への戻り、ゼロ support、cache 方針、syndrome 差分と全面計算の一致も確認した。
 レビューで decoder の不正な小数出力が cache 格納時の先行 cast によって通る問題を発見し、格納前に厳密な binary 検証を行うよう修正して回帰テストを加えた。
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests -q` はレビュー修正後に 165 件成功し、32.67 秒だった。
+`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests -q` はレビュー修正後に 169 件成功し、30.46 秒だった。
 `$env:PYTHONDONTWRITEBYTECODE='1'; C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` は最終コードで 15.54 秒で完了した。
 ベンチマーク詳細と 2 倍未達の profile は [性能記録](../performance_ja.md) に記載した。
 `git -C C:\dev\RIMC status --short` は出力なしで、研究 repo は変更していない。
