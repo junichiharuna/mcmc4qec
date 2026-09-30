@@ -58,6 +58,8 @@ def main():
     assert Path(sys.prefix).resolve() in installed.parents
     release = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
     assert mcmc4qec.__version__ == importlib.metadata.version("mcmc4qec") == release
+    description = importlib.metadata.metadata("mcmc4qec").get_payload()
+    assert description.replace("\r\n", "\n").strip() == (root / "README.md").read_text(encoding="utf-8").strip(), "wheel README differs"
     source_files = {p.relative_to(source): p.read_bytes() for p in source.rglob("*.py")}
     wheel_files = {p.relative_to(installed): p.read_bytes() for p in installed.rglob("*.py")}
     assert source_files == wheel_files, "wheel/source Python files differ"
