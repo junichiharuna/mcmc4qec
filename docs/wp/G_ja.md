@@ -8,7 +8,7 @@
 toric の内点 `0<p<1` は full support なので、単に p の刻みを粗くしただけで厳密な zero support が生じたとは説明しない。
 `examples/workflows/conditional_weight.py` は toric d=5 の複数 p で独立 direct MC と Z+H 条件付き chain の `E[w|faulty]` を CSV と PNG に比較し、chain 頻度が絶対 `P_L` を与えない理由を出力する。
 `examples/workflows/convergence_check.py` は asymmetric toric (3,5) で最小・無作為論理セクター・最大の異なる初期状態を使い、各群 2 chain の trace と独立 direct MC の条件付き重み分散を使って 4 条件を表示する。
-この例は最小群と他の 2 群をそれぞれ比較し、診断が収束・エルゴード性・正しさの証明にならない警告を表示する。
+この例は最小群と他の 2 群をそれぞれ比較し、各群の ESS と split R-hat、および診断が収束・エルゴード性・正しさの証明にならない警告を表示する。
 `examples/workflows/p_dependent_decoder.py` は BB72 に固定 p の BP-OSD を 1 回だけ作る standard ladder と明示的な `p_dependent_decoder_approx` を並べ、後者の区間に decoder 変更の bias が含まれないことを表示する。
 4 例とも `--quick`、`--seed`、`--out`、tempfile 配下の既定出力、最後の `SUMMARY` JSON、seed から派生した RNG、出力先 resolve 後の `C:/dev/RIMC`、`A:/dev/RIMC`、`RIMC_RESEARCH_ROOT`、`RESEARCH_ROOT` 配下拒否を実装した。
 `tests/test_examples_workflows.py` は subprocess による quick 実行、SUMMARY キー、CSV/PNG、描画不能時の CSV、overlap 実演、研究リポジトリ出力拒否を確認する。
@@ -17,7 +17,7 @@ toric の内点 `0<p<1` は full support なので、単に p の刻みを粗く
 
 Python は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` を使用した。
 source 実行では `PYTHONPATH=src` を指定し、例の本体には source path 挿入を入れていない。
-`python -m pytest tests/test_examples_workflows.py -q` は 9 passed、17.30 秒だった。
+`python -m pytest tests/test_examples_workflows.py -q` は 9 passed、14.83 秒だった。
 各例を `python examples/workflows/<名前>.py --quick --seed 2026 --out output/wp_g_quick_<名前>` と既定設定の `python examples/workflows/<名前>.py --seed 2026 --out output/wp_g_default_<名前>` で個別実行し、終了コード 0 とした。
 
 | 例 | quick 実測 | 既定実測 |

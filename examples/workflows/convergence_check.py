@@ -78,6 +78,9 @@ def main():
     for label, state in initial.items():
         runs[label] = sample_faulty(problem, p, config=config, seed=next(seeds),
                                     initial_state=np.stack([state, state]))
+        diagnostics = runs[label].diagnostics
+        print(f'{label} trace diagnostics: ESS={diagnostics["ess"]}, '
+              f'split R-hat={diagnostics["rhat"]}')
     reports = {label: evaluate_convergence(runs['minimum'],
                                            other_initialization=runs[label],
                                            direct_variance=direct_variance)
@@ -96,6 +99,8 @@ def main():
         print(f'Four-check verdict: {current["converged"]}')
         for warning in current['warnings']:
             print(f'Warning: {warning}')
+    print('ESS, split R-hat, and four-check screens do not prove convergence, '
+          'ergodicity, unbiasedness, or correctness.')
     with (out / 'convergence_check.csv').open('w', newline='', encoding='utf-8') as stream:
         writer = csv.writer(stream)
         writer.writerow(['other_initialization', 'check', 'ok', 'description'])
