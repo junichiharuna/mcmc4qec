@@ -60,3 +60,17 @@ Zは一般log densityを全近傍で評価する参照実装で、大規模性�
 任意callableの実装・識別子を利用者が保持する。結果だけからcallableを再構成しない。
 新コードのsource_commitは未commitのためnull。package_source_sha256と研究参照commitは別保存。
 MCMCは条件付き分布であり、単独で絶対P_Lを求めない。BAR近似modeのbiasは区間に含まれない。
+
+## 2026-09-30 開発依頼書の実行開始後の追記
+
+上記は 2026-09-30 午前時点の引き継ぎ記録として保持する。
+現在は `C:/dev/mcmc4qec` の開発依頼書に従い、WP-A〜E を別 worktree で進めている。
+開始時の main と origin/main は `93ebb5932db99debe6f77c783510396402c23823` で一致し、既存 142 テストは 54.09 秒で成功した。
+Phase 0 の toric / surface ファクトリと受入試験を main に追加した。
+研究の非単位な論理交差行列を保つため、従来の paired 既定に加えて明示的な independent 基底指定を実装し、独立レビューの指摘を修正した。
+回路サブパッケージを含む再帰的ソース hash と公開契約の docstring を補った。
+main `f5323c1` の全 suite は 164 passed、40.40 秒だった。
+ユーザーが著者を `junichi haruna` と明示し、WP-D で CFF 検証成功の報告を受けた。
+各 WP の実装・独立レビュー・main 統合、dev2 wheel の別環境検証、version 更新、push、remote CI、最終報告は未完了である。
+研究リポジトリ `C:/dev/RIMC` は変更せず、直近の git status も clean だった。
+今回の検証と判断の詳細は `docs/wp/phase0_ja.md` と `docs/wp/integration_ja.md` に記録した。
