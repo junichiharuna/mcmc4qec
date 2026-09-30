@@ -20,11 +20,15 @@ class PhysicalFaultProposal:
     Args:
         state: One categorical physical fault placement.
         problem: Problem with a CircuitFaultModel and CircuitFaultNoise.
-        p: Per-physical-location failure rate, or a channel-to-rate dict.
+        p: Physical rates accepted by CircuitFaultNoise, including an explicit
+            location_rates dictionary; the proposal itself does not use p.
         rng: NumPy random Generator.
 
     Returns:
         A Proposal for addition, deletion, or replacement at one location.
+
+    Raises:
+        ValueError: A state has invalid dimensions or categorical labels.
     """
 
     name = "physical_fault"

@@ -336,6 +336,10 @@ def uniform_fault_noise(model):
         CircuitFaultNoise with per-location failure rate supplied later as p.
         Its probabilities refer to the complete circuit experiment, not a
         logical rate per syndrome-extraction round.
+
+    Raises:
+        AttributeError: model lacks the CircuitFaultModel location contract.
+        ValueError: The model's conditional fault probabilities are invalid.
     """
     conditional = {loc.channel: [1 / len(loc.faults)] * len(loc.faults)
                    for loc in model.locations}
