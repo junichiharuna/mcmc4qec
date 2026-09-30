@@ -22,3 +22,23 @@ toric d=7 でも `Problem.state` が 0.300 秒、`categorical` が 0.263 秒で�
 研究 runner はビット状態・syndrome・weight を保持し、専用ステップで更新する一方、ライブラリの汎用経路は候補や確率の各評価で状態全体を繰り返し検証する。
 次の改善は検証済み状態を内部で区別して再検証を省き、Z の順逆分布を同一の局所確率表から作り、線形 syndrome と observable を受理時に維持する専用経路を追加することである。
 その際も全状態・全近傍の提案比、詳細釣合い、独自 failure の再評価と同一 seed 軌道を受入条件として維持する。
+
+## WP-N 専用ステップの計測（2026-10-01）
+
+Windows の Python 3.11 で `$env:PYTHONDONTWRITEBYTECODE='1'; C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` を実行した。
+研究側 `A:/dev/RIMC/src` は読み取り専用で import し、開始状態、p=0.01、Z/H 比、cluster_k、decoder、cache 設定は上記と同じである。
+`bench_step.py` の時間は decoder 構築を除き、ライブラリ側には診断と Result 構築が入る。
+
+| 符号 | 専用経路 秒 | 研究 秒 | 専用経路 step/s | 研究 step/s | 時間比 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| toric d=5 | 1.546216 | 0.482388 | 6467.4 | 20730.2 | 3.21 |
+| toric d=7 | 1.869962 | 0.755353 | 5347.7 | 13238.9 | 2.48 |
+| BB72 | 2.867081 | 1.472265 | 3487.9 | 6792.3 | 1.95 |
+
+BB72 は目標の 2 倍以内に入ったが、toric d=5 と d=7 は未達である。
+前回の計測と PC 負荷や研究側時間が違うので、時間比の改善を厳密な速度倍率とは扱わない。
+`--steps 1000 --profile` の cProfile では、toric d=5 の専用経路 0.276 秒のうち `FastStepper.attempt` 累積 0.232 秒、`propose` 0.100 秒、`CachedDecoder.predict` 0.049 秒、Z の `_distribution` 0.029 秒だった。
+toric d=7 では同じ順に 0.245、0.100、0.066、0.028 秒であり、累積時間は呼び出し関係により重複する。
+BB72 では decoder adapter の `predict` が 0.176 秒を占め、全体 0.426 秒の主因だった。
+残る差は Python 側の候補処理と decoder adapter の出力検証、Z の局所分布正規化に集中し、次には確率表と検証済み decoder 出力を内部で一貫して保持する実装を、同 seed 軌道を維持する受入試験付きで検討する。
+専用経路は組み込みの線形モデルと対応する積ノイズ、標準 failure の実型組み合わせだけに適用し、独自 failure や派生型は参照経路に戻す。
