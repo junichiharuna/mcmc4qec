@@ -4,6 +4,15 @@ from .core import binary, positive_integer, identified
 
 
 class IndependentBitFlip:
+    """Independent Bernoulli faults with coordinate probabilities p * scales.
+
+    n is a positive integer; optional scales is a nonnegative finite length-n
+    vector (default ones). sample(p, rng) returns a uint8 binary state;
+    log_prob(state, p) returns its normalized natural log probability and -inf
+    outside support. p and every scaled probability must lie in [0, 1].
+    Invalid dimensions, states, or parameters raise ValueError. Probabilities
+    refer to latent coordinates, not logical failure or a derived round rate.
+    """
     def __init__(self, n, *, scales=None):
         self.n = positive_integer(n, "n")
         self.alphabets = (2,) * self.n

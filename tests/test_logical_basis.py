@@ -4,7 +4,8 @@ import itertools
 import numpy as np
 import pytest
 
-from mcmc4qec import CSSCode, DepolarizingModel
+from mcmc4qec import (CSSCode, DepolarizingModel, CallableDecoder,
+                     DecoderAdapter, IndependentBitFlip, Problem)
 
 
 def matrices():
@@ -52,3 +53,29 @@ def test_full_failure_observable_and_stabilizers(pauli):
         for stabilizer in model.stabilizers:
             np.testing.assert_array_equal(model.syndrome(state ^ stabilizer), model.syndrome(state))
             np.testing.assert_array_equal(model.observables(state ^ stabilizer), model.observables(state))
+
+
+def test_nonzero_correction_predictions_follow_logical_coordinates():
+    hx, hz, lx, lz = matrices()
+    paired = CSSCode(hx, hz, lx, lx)
+    independent = CSSCode(hx, hz, lx, lz, logical_basis="independent")
+
+    class Correction:
+        def decode(self, syndrome):
+            return np.array([syndrome[0], 0, 1, 0], dtype=np.uint8)
+
+    def problem(code, decoder):
+        return Problem(code.bit_flip_model(), IndependentBitFlip(code.n), decoder)
+
+    def mapped(code):
+        return problem(code, DecoderAdapter(Correction(), output_kind="correction",
+                       identifier="nonzero-correction", logical_map=code.lz))
+
+    old, new = mapped(paired), mapped(independent)
+    for state in itertools.product(range(2), repeat=4):
+        assert old.is_faulty(state) == new.is_faulty(state)
+    # Copying old logical predictions without transforming them is incorrect.
+    stale = problem(independent, CallableDecoder(lambda s: [1, 0], identifier="stale"))
+    assert old.is_faulty([0, 0, 1, 0]) is False
+    assert new.is_faulty([0, 0, 1, 0]) is False
+    assert stale.is_faulty([0, 0, 1, 0]) is True

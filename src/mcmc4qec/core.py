@@ -80,6 +80,14 @@ def gf2_rank(a):
 
 
 class Model(Protocol):
+    """Finite latent-state model supplied to Problem.
+
+    n is the number of coordinates and alphabets lists their category counts.
+    validate_state returns a validated array; syndrome and observables return
+    decoder input and binary logical truth for one whole experiment.
+    metadata returns JSON-compatible identity and settings. Implementations
+    should raise ValueError for invalid states; no per-round rate is implied.
+    """
     n: int
     alphabets: tuple[int, ...]
     def validate_state(self, state) -> np.ndarray: ...
@@ -89,6 +97,14 @@ class Model(Protocol):
 
 
 class Noise(Protocol):
+    """Normalized distribution on n coordinates for a Model's state space.
+
+    sample(p, rng) returns one state using the supplied NumPy generator.
+    log_prob(state, p) returns its natural log probability, including all
+    normalization constants, or -inf outside support. p may be a scalar or an
+    explicitly documented parameter object. metadata returns JSON-compatible
+    identity and settings. Invalid parameters should raise ValueError.
+    """
     n: int
     def sample(self, p, rng: np.random.Generator) -> np.ndarray: ...
     def log_prob(self, state, p) -> float: ...
@@ -96,12 +112,26 @@ class Noise(Protocol):
 
 
 class Decoder(Protocol):
+    """Deterministic logical prediction contract, independent of output size.
+
+    predict(syndrome) returns a binary vector matching Model.observables;
+    physical corrections must first be mapped to logical observables.
+    metadata returns JSON-compatible decoder identity and configuration.
+    Invalid inputs and decoder failures propagate to the caller.
+    """
     def predict(self, syndrome) -> np.ndarray: ...
     def metadata(self) -> dict: ...
 
 
 class BinaryLinearModel:
-    """Latent bits mapped to measured syndromes and logical observables."""
+    """Map latent bits to syndrome H @ state and observables L @ state mod 2.
+
+    H and L are binary matrices with the same positive number n of columns.
+    Optional stabilizers are binary rows preserving both maps; identifier is
+    recorded in metadata. Invalid shapes, entries, or stabilizers raise
+    ValueError. Arrays are copied and made read-only. Observable mismatch is
+    defined for the complete experiment described by the matrices.
+    """
     def __init__(self, H, L, *, stabilizers=None, identifier="binary-linear"):
         self.H = binary(H, ndim=2, name="H")
         self.L = binary(L, ndim=2, name="L")
@@ -179,7 +209,14 @@ class CSSCode:
 
 
 class CallableDecoder:
-    """Wrap a deterministic function returning *logical observables*."""
+    """Wrap a deterministic function returning *logical observables*.
+
+    function receives a copy of the syndrome and returns a one-dimensional
+    binary vector. identifier is a required nonempty provenance label;
+    settings is optional JSON-compatible metadata. Invalid arguments or
+    predictions raise ValueError; exceptions from the function propagate.
+    Physical corrections require DecoderAdapter with an explicit logical map.
+    """
     def __init__(self, function: Callable, *, identifier: str, settings=None):
         if not callable(function) or not identifier:
             raise ValueError("a callable and nonempty decoder identifier are required")
@@ -197,7 +234,14 @@ class CallableDecoder:
 
 
 class CallableFailure:
-    """A deterministic predicate shared by exact, direct MC, and MCMC."""
+    """A deterministic predicate shared by exact, direct MC, and MCMC.
+
+    function(state, predicted, truth) must return a boolean for one complete
+    experiment. identifier is required; settings is optional JSON-compatible
+    metadata. Invalid arguments or nonboolean answers raise ValueError.
+    Stabilizer invariance and invariance under a logical change of basis are
+    never inferred for user predicates.
+    """
     def __init__(self, function: Callable, *, identifier: str, settings=None):
         if not callable(function) or not identifier:
             raise ValueError("a callable and nonempty failure identifier are required")
@@ -217,6 +261,16 @@ class CallableFailure:
 
 @dataclass
 class Problem:
+    """Bind compatible model, normalized noise, decoder, and failure predicate.
+
+    model and noise must share dimension and alphabets. decoder.predict must
+    return binary logical observables. Optional failure(state, predicted,
+    truth) overrides the default any-observable-mismatch event; each component
+    supplies JSON-compatible metadata. Invalid dimensions, model-bound noise,
+    states, densities, or decoder outputs raise ValueError. is_faulty returns
+    one boolean for the whole experiment, without conversion to a per-round
+    event. No invariance of an arbitrary failure predicate is assumed.
+    """
     model: Model
     noise: Noise
     decoder: Decoder

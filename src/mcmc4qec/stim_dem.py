@@ -109,6 +109,18 @@ class StimDemNoise:
 
 def from_stim_dem(dem, *, probabilities=None, dem_factory=None,
                   identifier="stim-dem", family_identifier=None):
+    """Return (model, noise) for a Stim DetectorErrorModel distribution.
+
+    Each error instruction is one Bernoulli mechanism; separator pieces stay
+    correlated. With no callback, sampling requires p=None. Either
+    probabilities(p) supplies one probability per mechanism, or dem_factory(p)
+    supplies a DEM with unchanged mechanism ordering and H/L maps. A callback
+    requires family_identifier; identifier labels the model. Conflicting
+    callbacks, missing identity, empty DEMs, and invalid families raise
+    ValueError; a wrong DEM type raises TypeError. Stim is optional on import.
+    Failure rates describe the complete DEM experiment; physical-circuit
+    equivalence or per-round conversion is not inferred.
+    """
     model = StimDemModel(dem, identifier=identifier)
     return model, StimDemNoise(model, probabilities=probabilities, dem_factory=dem_factory,
                               family_identifier=family_identifier)
@@ -118,8 +130,14 @@ def from_stim_circuit(circuit, *, decompose_errors=False,
                      approximate_disjoint_errors=False, identifier="circuit-dem"):
     """Explicit conversion controls, recorded in model provenance.
 
+    circuit is a stim.Circuit; return (model, noise) for its fixed DEM using
+    p=None in sampling. decompose_errors and approximate_disjoint_errors are
+    passed to Stim, and identifier labels the resulting model. Stim conversion
+    errors propagate; invalid or empty DEMs are rejected by from_stim_dem.
     Default conversion fails if disjoint errors need an approximation. Choosing
     that approximation is an explicit caller decision, never an automatic retry.
+    The resulting failure rate concerns the complete DEM experiment, with no
+    automatic interpretation as a physical circuit rate or a per-round rate.
     """
     dem = circuit.detector_error_model(decompose_errors=decompose_errors,
                                        approximate_disjoint_errors=approximate_disjoint_errors)
@@ -131,6 +149,15 @@ def from_stim_circuit(circuit, *, decompose_errors=False,
 
 
 def matching_from_dem(dem, *, enable_correlations=False, identifier="dem-matching"):
+    """Return a PyMatchingAdapter predicting the DEM's logical observables.
+
+    dem is a stim.DetectorErrorModel. enable_correlations is used consistently
+    when building and decoding; identifier is retained in provenance. Each
+    decomposition piece must be graphlike, otherwise ValueError is raised
+    instead of silently dropping a hyperedge. Stim and PyMatching are required
+    on use; their construction and decoding errors propagate. The output is
+    a logical prediction vector, not a probability or a physical correction.
+    """
     import pymatching
     model = StimDemModel(dem)
     for mechanism in model.decomposition_detector_components:

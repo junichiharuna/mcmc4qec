@@ -13,6 +13,20 @@ REFERENCE_COMMIT = "69efcfcc86af3bf24ca977a098dab0f348601aff"
 
 @dataclass
 class Result:
+    """Sampling or exact-enumeration result with provenance and uncertainty.
+
+    kind identifies the method; metadata records model, parameters and config;
+    elapsed_seconds is wall time. estimate/log_estimate are the whole
+    experiment's failure probability/natural logarithm. interval is a 95%
+    fixed-trial Wilson interval for direct MC, not a per-round rate.
+    trials/failures count independent MC trials; conditional_weight is the
+    mean number of nonidentity coordinates conditional on failure.
+    states has shape (chains, saved samples, coordinates) for MCMC, including
+    repeated states. acceptance, diagnostics and warnings describe the run.
+    Unavailable optional quantities are None. to_json rejects nonfinite or
+    opaque metadata; from_json rejects unsupported schemas or invalid states
+    with ValueError. Neither method reconstructs executable user callables.
+    """
     kind: str
     metadata: dict
     elapsed_seconds: float
@@ -64,15 +78,16 @@ class Result:
 
 def metadata(problem, p, config, seed_sequence=None, children=()):
     fingerprint = hashlib.sha256()
-    for source in sorted(Path(__file__).parent.glob("*.py")):
-        fingerprint.update(source.name.encode())
+    package_root = Path(__file__).parent
+    for source in sorted(package_root.rglob("*.py")):
+        fingerprint.update(source.relative_to(package_root).as_posix().encode())
         fingerprint.update(b"\0")
         fingerprint.update(source.read_bytes())
     return json_value({**problem.metadata(), "sampling_p": p, "config": config,
         "state_space": {"alphabets": problem.alphabets, "identity_category": 0},
         "library_version": VERSION, "python_version": platform.python_version(),
         "numpy_version": np.__version__, "source_commit": None,
-        "source_commit_reason": "independent implementation has not been committed",
+        "source_commit_reason": "commit is not embedded in this package; use package_source_sha256",
         "research_reference_commit": REFERENCE_COMMIT,
         "package_source_sha256": fingerprint.hexdigest(),
         "decoder_prior": problem.decoder.metadata().get("settings", {}).get("decoder_prior"),
