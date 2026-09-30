@@ -63,6 +63,8 @@ def test_workflow_quick(script, keys, extra_name, tmp_path):
         with (directory / 'pl_curve.csv').open(newline='', encoding='utf-8') as stream:
             rows = list(csv.DictReader(stream))
         assert all(row['intervals_overlap'] in ('True', 'False') for row in rows)
+        assert all(row['mc_role'] == ('anchor_reuse' if row['p'] == '0.3'
+                                      else 'independent_direct_mc') for row in rows)
         if any(row['intervals_overlap'] == 'False' for row in rows):
             assert 'WARNING: d=' in output
 

@@ -3,7 +3,9 @@
 Requires mcmc4qec[matching,codes]; matplotlib via mcmc4qec[plot] is optional.
 Typical runtime: --quick under 10 s, default under 120 s.
 The unweighted MWPM decoder is fixed across each ladder. An MC anchor must
-observe failures. Neighboring rungs need sampled bidirectional overlap; a
+observe failures. The anchor point is reused in the check table; independent
+direct-MC validation is at the two non-anchor rungs. Neighboring rungs need
+sampled bidirectional overlap; a
 coarse ladder can have poor overlap, but finite full-support p values alone
 do not imply the strict zero-support condition that raises OverlapError.
 The --demo-overlap endpoint example uses p=0 and p=1, whose supports are
@@ -107,6 +109,7 @@ def main():
     args = parser.parse_args()
     out = output_dir(args.out)
     print(f'Output: {out}')
+    print('The anchor point reuses its MC anchor; independent direct-MC checks are at the two non-anchor rungs.')
     if args.quick:
         print('WARNING: --quick checks the workflow only; it does not guarantee research precision.')
     ladder = [0.30, 0.26, 0.22]
@@ -141,9 +144,11 @@ def main():
                              mc=mc.estimate if mc else None,
                              mc_low=mc.interval[0] if mc else None,
                              mc_high=mc.interval[1] if mc else None,
+                             mc_role='anchor_reuse' if index == 0 else 'independent_direct_mc',
                              intervals_overlap=intervals_overlap))
             checks[key][str(p)] = {'estimate': mc.estimate, 'interval': mc.interval,
                                     'failures': mc.failures, 'trials': mc.trials,
+                                    'mc_role': 'anchor_reuse' if index == 0 else 'independent_direct_mc',
                                     'intervals_overlap': intervals_overlap}
             print(f'd={distance} p={p:.2f} BAR={bar.estimates[index]:.5g} {interval}; '
                   f'direct MC={mc.estimate} {mc.interval}; '

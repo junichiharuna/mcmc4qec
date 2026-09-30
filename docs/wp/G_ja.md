@@ -2,7 +2,8 @@
 
 ## 作成したもの
 
-`examples/workflows/pl_curve.py` は固定 MWPM デコーダーで toric d=3,5 の BAR 曲線を作り、最大 p の独立 direct MC を anchor として観測失敗数を表示し、全 rung に独立 direct MC 確認点を置く。
+`examples/workflows/pl_curve.py` は固定 MWPM デコーダーで toric d=3,5 の BAR 曲線を作り、最大 p の direct MC を anchor として観測失敗数を表示し、残りの 2 rung に独立 direct MC 確認点を置く。
+表と図の anchor 点はその同じ MC anchor を再利用しており、独立な照合ではなく、CSV と SUMMARY の `mc_role` に `anchor_reuse` と記録する。
 両区間の交差真偽を各行の CSV、標準出力、SUMMARY の `checks` 内に残し、非交差では原因未特定として調査を促す警告を出す。
 `--quick` は実行経路の確認用であり、研究精度を保証しないことを表示する。
 通常の ladder は `[0.30, 0.26, 0.22]` で、CSV と matplotlib Agg の PNG に BAR と direct MC の両区間を保存する。
@@ -22,6 +23,7 @@ Python は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` �
 source 実行では `PYTHONPATH=src` を指定し、例の本体には source path 挿入を入れていない。
 `python -m pytest tests/test_examples_workflows.py -q` は 18 passed、26.71 秒だった。
 衝突が起きた seed `0,1,2,3,4,5,7,8,9` について、出力された 3 初期論理セクターが互いに異なることを性質として検査した。
+その後の `mc_role` 表示修正では、他作業の並列実行中に `pl_curve` subprocess がテスト側の 30 秒制限に達したため、最終差分の単独再検証はレビュー担当に委ねる。
 各例を `python examples/workflows/<名前>.py --quick --seed 2026 --out output/wp_g_quick_<名前>` と既定設定の `python examples/workflows/<名前>.py --seed 2026 --out output/wp_g_default_<名前>` で個別実行し、終了コード 0 とした。
 
 | 例 | quick 実測 | 既定実測 |
