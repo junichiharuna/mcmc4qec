@@ -110,6 +110,24 @@ def test_cache_cap_policies_and_safe_copies():
         assert cache.size == 1
 
 
+def test_cache_rejects_fractional_decoder_output_before_cast():
+    class BadDecoder:
+        def predict(self, syndrome):
+            return [0.5]
+
+        def metadata(self):
+            return {"identifier": "fractional-output"}
+
+    problem = Problem(BinaryLinearModel([[1]], [[1]]),
+                      IndependentBitFlip(1), BadDecoder())
+    with pytest.raises(ValueError, match="prediction must be binary"):
+        problem.is_faulty([1])
+    with pytest.raises(ValueError, match="prediction must be binary"):
+        sample_faulty(problem, .2, initial_state=[1], seed=3,
+            config=SamplingConfig(samples=1, burn_in=0,
+                kernels=KernelConfig(single=1, zanella=0, cluster=0, lazy=0)))
+
+
 def test_incremental_failure_matches_full_evaluation():
     for kind in ("bit", "pauli", "phenom"):
         problem, _ = _problem(kind)

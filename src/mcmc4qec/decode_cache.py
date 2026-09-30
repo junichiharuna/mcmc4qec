@@ -40,7 +40,8 @@ class CachedDecoder:
             if self.policy == "lru":
                 self.lookup.move_to_end(key)
             return self.lookup[key].copy()
-        prediction = np.asarray(self.decoder.predict(syndrome.copy()), dtype=np.uint8)
+        prediction = binary(self.decoder.predict(syndrome.copy()), ndim=1,
+                            name="prediction")
         if self.cap is None or self.policy == "research_clear" or self.size < self.cap:
             self.lookup[key] = prediction.copy()
         elif self.policy == "lru":
