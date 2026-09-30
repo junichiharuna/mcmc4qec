@@ -23,9 +23,10 @@ class KernelConfig:
     stabilizer: float = 0.0
     cluster_k: int = 2
     lazy: float = 0.05
+    circuit_single: float = 0.0
 
     def __post_init__(self):
-        weights = [self.single, self.zanella, self.cluster, self.stabilizer]
+        weights = [self.single, self.zanella, self.cluster, self.stabilizer, self.circuit_single]
         if any(not np.isfinite(w) or w < 0 for w in weights):
             raise ValueError("kernel probabilities must be finite and nonnegative")
         if not math.isclose(sum(weights), 1, rel_tol=0, abs_tol=1e-12):
@@ -135,10 +136,18 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
     if not isinstance(config, SamplingConfig):
         raise ValueError("config must be SamplingConfig")
     kc = config.kernels
-    kernels = [OBF(), Zanella(), ClusterExchange(kc.cluster_k), StabilizerFlip()]
-    probabilities = np.array([kc.single, kc.zanella, kc.cluster, kc.stabilizer])
+    from .circuit.model import CircuitFaultModel
+    from .circuit.proposal import PhysicalFaultProposal
+    is_circuit = isinstance(problem.model, CircuitFaultModel)
+    if is_circuit:
+        if kc.circuit_single != 1 or any((kc.single, kc.zanella, kc.cluster, kc.stabilizer)):
+            raise ValueError("CircuitFaultModel requires circuit_single=1 and all other kernel weights zero")
+    elif kc.circuit_single:
+        raise ValueError("circuit_single is only supported for CircuitFaultModel")
+    kernels = [OBF(), Zanella(), ClusterExchange(kc.cluster_k), StabilizerFlip(), PhysicalFaultProposal()]
+    probabilities = np.array([kc.single, kc.zanella, kc.cluster, kc.stabilizer, kc.circuit_single])
     if kc.stabilizer:
-        kernels[-1]._rows(problem)
+        kernels[3]._rows(problem)
     sequence = np.random.SeedSequence(seed)
     children = sequence.spawn(config.chains)
     saved = np.empty((config.chains, config.samples, problem.model.n), dtype=np.uint8)
