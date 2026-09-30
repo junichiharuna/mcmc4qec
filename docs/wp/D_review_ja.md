@@ -34,3 +34,26 @@ core job は optional 依存の不在を検査し、optional job は PyMatching�
 A/B/C/E と WP-D を main に統合した後、新しい公開名も含めて `__all__` と API 文書を再照合し、全公開 docstring の引数・返り値・例外・確率単位を確認する。
 統合後の wheel を新しい別 venv に入れて tests、README の2コードブロック、全 examples を再実行する。
 Python 3.12 の手元実行と remote CI の成功は未確認であり、remote CI は許可された push 後に結果を確認する。
+
+## 第2回最終レビュー：main 統合版
+
+対象は A→B→E→D→C を統合した main `4330c3f` と、文書・公開契約の補完を含む `5d2e793` までの変更である。
+当初の2件の README 実行不具合と docstring 補完漏れは統合版で解消し、WP-D の静的受入条件は満たしたと判定する。
+README 冒頭3行は用途を説明し、15行の toric d=5 例は direct MC の絶対 `P_L` とともに direct MC・Z+H の同じ条件付き平均重みを示す。
+README は続けて独立実行できる3-bit BAR ladder、対応表、診断と近似 BAR の制約を掲載し、確率をモデル化した実験全体の量として説明する。
+`docs/tutorial_en.md` の独自符号・ノイズ・物理補正 decoder の各例は独立実行でき、異なる qubit rate の説明も3種類の scales と一致する。
+公開名65件を実行時の `mcmc4qec.__all__` と `docs/api_en.md` で突き合わせ、漏れ0件を確認した。
+指定 Python 3.11 で `python -m pytest tests/test_public_api.py -q` を独立実行し、1 passed を確認した。
+公開 callable には docstring があり、引数・返り値・主要例外・確率または物理量の単位を読み合わせ、指摘した設定・sampling・回路 helper の契約記述は `dcffdf8`、`29900f3`、`5d2e793` で補完された。
+`CITATION.cff` はユーザー指定の `junichi haruna` と version `0.1.0.dev2` を記載し、中央実行の `cffconvert --validate` は schema 1.2.0 に成功した。
+`pyproject.toml` の version、Python 3.11/3.12 classifiers、keywords、既存 private repository に対応する URLs、`codes` extra を確認した。
+CI 定義は Python 3.11/3.12 と core/optional の4 job で installed wheel tests を実施し、`--override-ini pythonpath=` でソース指定を外す。
+core job は optional 4依存の不在を検査し、optional job は PyMatching、ldpc、bposd、Stim と全追加例を実行する。
+
+中央実行の最終 wheel `mcmc4qec-0.1.0.dev2-py3-none-any.whl` の SHA256 は `e4d443a860a182786d3377cc068f713428771630fde9615cf7efbdb493581664` である。
+最終 installed wheel tests は core venv が208 passed・43 skipped・41.23秒、optional venv が268 passed・4 skipped・81.52秒で、ログは `output/wheel_core_final.log` と `output/wheel_optional_final.log` にある。
+最終 `docs/wp/verify_wheel.py` 実行ログは両 venv で site-packages の import、version、23 Python ファイルの source との byte 一致、依存の有無を確認した。
+core は core 3例、README の BAR 1例、tutorial の独自符号・ノイズ・decoder 3例をそれぞれ exit 0 で実行した。
+optional は全6例、README 2例、tutorial 4例をそれぞれ exit 0 で実行し、toric の direct MC 条件付き平均7.068817と Z+H 6.73、回路例の500試行 `P_L=0.09` を表示した。
+例の実行ログは `output/examples_core_final.log` と `output/examples_optional_final.log` にあり、これは例の実行契約の検証であって混合や研究論文の数値再現の証明ではない。
+Python 3.12 の手元実行と remote CI の実結果は未確認であり、remote CI は push 後に対象 commit の4 job を確認する。
