@@ -7,6 +7,7 @@
 英日二つの Python ブロックは文字列として一致する。
 `examples/README.md` は依頼書の新規 16 本、既存 6 本、`notebooks/regenerate.py` を含む 23 ファイルを一覧にした。
 toric ファクトリの現行依存に合わせ、該当する例と notebook に `codes` extra を記載した。
+独立レビューの指摘を受け、英日 README の後半でも toric、surface、asymmetric toric を含む現行の `codes` 依存を明示した。
 実行時間の列は統合後の実測待ちで `not measured` とした。
 
 ## 科学的な確認

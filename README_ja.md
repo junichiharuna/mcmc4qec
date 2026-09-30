@@ -13,7 +13,7 @@ core の例には、ローカル checkout で `python -m pip install -e .` を�
 
 | extra | 用途 |
 | --- | --- |
-| `codes` | HGP・BB 符号ファクトリと、現在の toric ファクトリの依存 |
+| `codes` | toric、surface、asymmetric toric、Hamming HGP、BB の符号ファクトリ |
 | `matching` | PyMatching デコーダー |
 | `bposd` | BP-OSD デコーダーの依存 |
 | `stim` | Stim DEM と回路の例 |
@@ -96,7 +96,7 @@ MC anchor には 1 回以上の失敗観測が必要です。
 `sample_faulty` は失敗条件付き分布をサンプリングし、`estimate_logical_error` は anchor と隣接 rung の BAR 比を使います。
 
 符号ファクトリには toric、surface、asymmetric toric、Hamming HGP、BB72/108/144、Steane、連接 Steane があります。
-HGP 系ファクトリには `codes` extra を入れます。
+現行の toric、surface、asymmetric toric、Hamming HGP、BB のファクトリには `codes` extra が必要です。
 デコーダー構築関数は bit-flip の MWPM・BP-OSD と、depolarising ノイズに対する明示的な sector 復号を扱います。
 `SamplingConfig(cache_cap=..., cache_policy=...)` は決定的な復号結果の cache を制限し、`KernelConfig(zanella_fastpath=True)` は該当する product-noise の経路を使います。
 診断には複数 chain の要約、exact CSS coset 初期化補助、4 条件の `evaluate_convergence` があります。
