@@ -83,3 +83,15 @@ def test_exact_milp_branch_for_thirteen_stabilizers():
     logical = np.ones(14, dtype=np.uint8)
     representative = minimum_weight_coset_representative(logical, rows)
     assert np.array_equal(representative, np.r_[np.zeros(13, dtype=np.uint8), 1])
+
+
+def test_nontrivial_milp_matches_full_coset_enumeration():
+    rng = np.random.default_rng(40)
+    rows = np.hstack((np.eye(13, dtype=np.uint8),
+                      rng.integers(0, 2, size=(13, 3), dtype=np.uint8)))
+    logical = rng.integers(0, 2, size=16, dtype=np.uint8)
+    masks = ((np.arange(1 << 13)[:, None] >> np.arange(13)) & 1).astype(np.uint8)
+    coset = logical ^ (masks @ rows % 2)
+    representative = minimum_weight_coset_representative(logical, rows)
+    assert int(representative.sum()) == int(np.min(coset.sum(axis=1)))
+    assert np.any(np.all(coset == representative, axis=1))

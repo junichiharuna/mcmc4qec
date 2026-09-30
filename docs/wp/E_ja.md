@@ -7,7 +7,10 @@
 `diagnose` を一つまたは複数の `Result` に対応させ、chain 間標準誤差、各 chain の IAT と ESS、split R-hat、kernel ごとの採択数と採択率を追加した。
 既存の平均 IAT、合計 ESS、`rhat`、`acceptance` の名前は維持した。
 `evaluate_convergence` に論文 Setup と研究側 `compare/convergence_flags.py` の四条件を実装し、未判定を `None` として明示した。
-IAT と chain 間散らばりの比較には独立 direct MC の条件付き分散を渡せ、渡さない場合は chain 内分散を使う旨を warnings に残す。
+IAT と chain 間散らばりの第四条件には独立 direct MC の条件付き分散を要求し、未提供の場合は `None` として四条件全体を合格にしない。
+chain 内分散を使う研究論文の一次判定は、別の参考値 `within_chain_dispersion` に残した。
+分母がゼロで観測差が正なら明示的に fail とし、差もゼロなら識別不能の `None` とする。
+負の自己相関では IAT を 1 に切り上げず、正値であれば ESS が標本数を超えることも報告する。
 `minimum_weight_coset_representative` は小 rank を全列挙し、大 rank を SciPy MILP で厳密最適化する。
 `logical_representatives` は各論理基底行をそのスタビライザーコセット内だけで最小化する。
 最小重み初期化、最大重み初期化、非零ランダム論理セクター初期化、指定した観測セクターの初期化を追加した。
@@ -19,8 +22,16 @@ IAT と chain 間散らばりの比較には独立 direct MC の条件付き分�
 `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_initial_states.py tests/test_convergence.py -q` は 12 passed、2.09 秒だった。
 同じコマンドの再実行は 12 passed、0.51 秒だった。
 `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 168 passed、57.40 秒だった。
+第1回レビュー対応後の同じ全 suite は 177 passed、192.47 秒で、全 suite 5 分以内の制約を満たした。
+MILP の整数最適証明を強化した後の focused tests は 16 passed、1.29 秒だった。
 小 CSS 符号の各コセットを全列挙して最小重みとセクター保存を確認し、rank 13 の MILP 経路も検証した。
-既知の相関を持つ AR(1) では四条件がすべて pass し、持続的な chain 別オフセット、後半ドリフト、二盆地の異なる初期値、独立分散との不一致では対応する条件が fail した。
+rank 13 の非自明なランダム行列について 8192 個のコセット要素と MILP 解の重みを比較し、一致した。
+既知の相関を持つ AR(1) では四条件がすべて pass し、持続的な chain 別オフセット、後半ドリフト、独立分散との不一致では対応する条件が fail した。
+二盆地の玩具 Markov 連鎖は確率 `10^-6` で盆地を移り、異なる固定初期盆地から始めた群では他の三条件が pass しても multistart が fail することを確認した。
+負の自己相関を持つ AR(1) では IAT が 1 未満で ESS が標本数を超えることを確認した。
+`CSSCode(logical_basis="independent")` の実オブジェクトで非単位の交差行列と指定観測セクターの保存を確認した。
+第1回レビューのゼロ分母、独立分散未提供、負相関 IAT、二盆地、実 CSSCode の指摘には実装と回帰テストで対応した。
+MILP には相対 gap ゼロと整数目的の双対下界検査を追加し、近似解を最適解として返さないことを強化した。
 `sample_faulty` に最小および最大重みの `(chains,n)` 初期状態を渡して metadata への記録も確認した。
 
 ## 未実施

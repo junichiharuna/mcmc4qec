@@ -54,6 +54,18 @@ def evaluate_convergence(results, *, other_initialization=None, direct_variance=
     direct-MC mean. If omitted, dispersion is unresolved. A separate
     `within_chain_dispersion` field reports the paper's internal-variance
     comparison for reference but cannot make the four-check verdict pass.
+    `scale_factor` (default 1.5) bounds the N/4-to-N scatter ratio;
+    `sigma_cut` (default 3) bounds late drift and multistart differences in
+    standard errors; `dispersion_factor` (default 3) bounds observed over
+    predicted chain scatter. The return dict contains `checks` with four
+    per-condition `ok` values, `within_chain_dispersion`, pooled `mean`,
+    `cross_chain_se`, `warnings`, and `converged`. The latter is False if any
+    condition fails, None if none fails but data are missing or degenerate,
+    and True only if all four pass. Missing independent variance, absent
+    second initialization, or zero scatter with no difference can cause None.
+    Invalid traces, nonpositive direct variance, or invalid thresholds raise
+    ValueError. The observable unit is nonidentity coordinates for Results,
+    or the caller's trace unit for numeric arrays; variance is its square.
 
     Scaling detects persistent between-chain spread but may pass if all chains
     relax together. Stationarity detects late drift, not a frozen common bias.

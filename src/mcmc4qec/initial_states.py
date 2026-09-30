@@ -26,10 +26,15 @@ def _independent_rows(rows):
 def minimum_weight_coset_representative(logical, stabilizers, *, time_limit=30.0):
     """Return an exact minimum-Hamming-weight member of logical + span(stabilizers).
 
+    `logical` is a binary `(n,)` vector and `stabilizers` is a binary `(r,n)`
+    matrix. `time_limit` is the MILP solver limit in seconds for rank above 12.
+    The result is a binary `(n,)` vector; its weight counts physical bits.
     Enumeration handles small row ranks; larger ranks use SciPy MILP and require
     an optimal solver status. A solver timeout or unavailable SciPy raises rather
     than returning an unverified approximation. This finite binary algorithm is
     intended for static CSS bit-flip sectors, not categorical circuit faults.
+    Invalid binary data or time limits raise ValueError, missing SciPy raises
+    ImportError, and an unproven optimum raises RuntimeError.
     """
     logical = binary(logical, ndim=1, name="logical")
     rows = _independent_rows(_rows(stabilizers, len(logical)))
@@ -57,13 +62,20 @@ def minimum_weight_coset_representative(logical, stabilizers, *, time_limit=30.0
     answer = milp(objective, integrality=np.ones(len(objective)),
                   bounds=Bounds(lower, upper),
                   constraints=LinearConstraint(a, logical, logical),
-                  options={"time_limit": float(time_limit)})
+                  options={"time_limit": float(time_limit), "mip_rel_gap": 0.0})
     if answer.status != 0 or answer.x is None:
         raise RuntimeError("minimum-weight coset optimization did not prove optimality")
     representative = np.rint(answer.x[:n]).astype(np.uint8)
     coefficients = np.rint(answer.x[n:n + rank]).astype(np.uint8)
     if not np.array_equal(representative, logical ^ (coefficients @ rows % 2)):
         raise RuntimeError("minimum-weight coset optimization returned an invalid state")
+    # The objective is integer. A dual bound less than half a unit below the
+    # feasible weight excludes every smaller integer objective despite solver
+    # floating-point tolerances; a mere status=optimal is not enough.
+    lower_bound = answer.get("mip_dual_bound")
+    if (lower_bound is None or not np.isfinite(lower_bound) or
+            int(representative.sum()) - lower_bound >= 0.5):
+        raise RuntimeError("minimum-weight coset optimization lacks an integer optimum certificate")
     return representative
 
 
@@ -81,6 +93,10 @@ def logical_representatives(code, *, sector="x", time_limit=30.0):
     The row index denotes a basis element, not an observable bit. In an
     independent (non-paired) CSS basis these differ; use
     `observable_sector_initial_state` to request an observable bit pattern.
+    `code` is a CSSCode, `sector` is "x" or "z", and `time_limit` is seconds
+    per large-rank MILP. Returns a binary `(k,n)` matrix. An invalid sector or
+    zero-logical code raises ValueError; solver errors propagate as ImportError
+    or RuntimeError. No noise probability is used and faultiness is not tested.
     """
     logicals, stabilizers, _, _ = _basis(code, sector)
     if len(logicals) == 0:
@@ -94,6 +110,10 @@ def minimum_weight_initial_state(code, *, sector="x", time_limit=30.0):
 
     Output is a binary `(n,)` array accepted by `sample_faulty(initial_state=)`
     for the corresponding bit-flip sector when its decoder marks it faulty.
+    `code` is a CSSCode, `sector` is "x" or "z", and `time_limit` is seconds
+    per large-rank MILP. Invalid sectors and zero-logical codes raise ValueError;
+    ImportError or RuntimeError can arise from exact optimization. Noise
+    support and the caller's failure predicate are not evaluated here.
     """
     rows = logical_representatives(code, sector=sector, time_limit=time_limit)
     return rows[int(np.argmin(rows.sum(axis=1)))].copy()
@@ -104,6 +124,10 @@ def maximum_weight_initial_state(code, *, sector="x", time_limit=30.0):
 
     This is the paper's long initialization, not the maximum weight anywhere
     in the full fault space. The result is a binary `(n,)` array.
+    `code` is a CSSCode, `sector` is "x" or "z", and `time_limit` is seconds
+    per large-rank MILP. Invalid sectors and zero-logical codes raise ValueError;
+    ImportError or RuntimeError can arise from exact optimization. The result
+    is not guaranteed faulty for an arbitrary decoder or predicate.
     """
     rows = logical_representatives(code, sector=sector, time_limit=time_limit)
     return rows[int(np.argmax(rows.sum(axis=1)))].copy()
@@ -130,6 +154,11 @@ def observable_sector_initial_state(code, observable, *, sector="x", time_limit=
     The GF(2) crossing matrix maps logical-basis coefficients to observable
     bits, so non-paired independent CSS bases are supported. Zero is rejected
     because a zero logical sector is generally not a faulty initialization.
+    `observable` is a nonzero binary `(k,)` vector, `sector` is "x" or "z",
+    and `time_limit` is seconds per large-rank MILP. Returns a binary `(n,)`
+    representative. Invalid inputs or a singular crossing matrix raise
+    ValueError; exact solver failures raise ImportError or RuntimeError.
+    Noise support and a custom failure predicate still require validation.
     """
     logicals, stabilizers, observables, checks = _basis(code, sector)
     target = binary(observable, ndim=1, shape=(len(logicals),), name="observable")
@@ -153,6 +182,11 @@ def random_logical_sector_initial_state(code, *, sector="x", seed=None,
     Supply either `seed` or `rng`. The returned binary `(n,)` state can be used
     as `sample_faulty(initial_state=)` after the caller verifies failure and
     noise support for its own decoder, predicate, and probability.
+    `code` is a CSSCode, `sector` is "x" or "z", and `time_limit` is seconds
+    per large-rank MILP. `seed` initializes NumPy's generator; `rng` accepts
+    an existing generator. Both at once, invalid sectors, or a zero-logical
+    code raise ValueError. Exact solver failures raise ImportError or
+    RuntimeError. No physical error probability is chosen by this function.
     """
     if rng is not None and seed is not None:
         raise ValueError("supply either seed or rng")
