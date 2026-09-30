@@ -12,7 +12,7 @@ DEMの状態は独立なlatent mechanismのビットであり、物理回路faul
 4本とも`# >>> EDIT HERE`と`# <<< END EDIT`で編集箇所を示し、既定は動く小規模設定にした。
 検査は各テンプレート内に置き、ライブラリ本体と公開APIは変更していない。
 大きい入力のsyndromeと状態の部分検査は`--seed`から派生した乱数を使い、1回のGeneratorから異なる候補を引く。
-`checks_passed=false`は大きい入力の正規化が未検査であることを表し、実施した検査の失敗ではないと出力本文で説明する。
+`checks_passed=false`は大きい入力で正規化が未検査であり、syndromeや状態の検査も最大32入力の標本検査になる場合があることを表すと出力本文で説明する。
 出力先は既定で一時ディレクトリに置き、解決後の`C:/dev/RIMC`、`A:/dev/RIMC`、`RIMC_RESEARCH_ROOT`、`RESEARCH_ROOT`の配下を拒否する。
 
 ## 科学的注意とチュートリアルとの整合
@@ -39,7 +39,7 @@ BARで隣接rungのsupport overlapが観測できない場合は`OverlapError`�
 | `byo_decoder.py` | 0.184 | 0.310 |
 | `byo_stim_dem.py` | 0.596 | 0.780 |
 
-`python -m pytest tests/test_examples_templates.py -q`は13 passedで3.26秒だった。
+`python -m pytest tests/test_examples_templates.py -q`は13 passedで3.36秒だった。
 既定の4実行ではSUMMARYキー集合と`result.json`の存在を検査した。
 テスト環境変数で非可換な`hx,hz`、非正規化の`log_prob`、幅の違うdecoder出力、不正なノイズ試料幅を注入し、いずれも出力ディレクトリを作らずに1行の`CHECK FAILED`で止まった。
 4本の`C:/dev/RIMC`配下への出力拒否と、環境変数で指定した研究rootへの出力拒否も検査した。

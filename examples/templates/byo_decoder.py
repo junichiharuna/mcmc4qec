@@ -129,7 +129,7 @@ def main():
         print(f"Direct MC P_L={pl:.6g}, Wilson interval={mc.interval}; exact enumeration unavailable.")
     print(f"Declared decoder output_kind={output_kind}; mapped predictions are logical observables.")
     if code.n > 12:
-        print("checks_passed=false means normalization was not checked; no preflight check failed.")
+        print("checks_passed=false means partial preflight: normalization unchecked; syndrome/state checks may use 32 sampled inputs.")
     print("Diagnostics do not prove convergence, ergodicity, or correctness; complete four-check screening needs independent direct-MC conditional variance.")
     print("SUMMARY " + json.dumps(payload, sort_keys=True))
 
