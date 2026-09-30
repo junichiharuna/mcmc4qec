@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rimc"
+version = "0.1.0.dev1"
+description = "Reference rare-event MCMC primitives for quantum error correction"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.24,<3"]
+classifiers = ["Development Status :: 2 - Pre-Alpha", "Programming Language :: Python :: 3"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+matching = ["pymatching>=2.4,<3"]
+bposd = ["ldpc>=2.4,<3"]
+stim = ["stim>=1.16,<2"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

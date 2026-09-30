@@ -1,0 +1,15 @@
+# Provisional citation metadata. Complete and validate before public release.
+# Author names, release URL, license, DOI, and publication date are unconfirmed.
+# In particular, the required authors field is intentionally not fabricated;
+# this draft is not yet a complete schema-valid CFF citation.
+cff-version: 1.2.0
+message: >-
+  Citation metadata is provisional. Confirm authorship and publication details
+  with the project owner before citing a public software release.
+type: software
+title: "Trustworthy rare-event splitting for general quantum codes"
+version: "0.1.0.dev1"
+abstract: >-
+  Local development prototype of reusable rare-event MCMC primitives for
+  quantum error correction. The associated paper has not been assigned
+  publication metadata in this file.

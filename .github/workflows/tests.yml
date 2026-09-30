@@ -1,0 +1,59 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  core-wheel:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Build and install wheel
+        run: |
+          python -m pip install build pytest
+          python -m build --wheel
+          python -m pip install dist/*.whl
+      - name: Confirm installed package and absent optional dependencies
+        run: |
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          import rimc
+          assert Path.cwd() / "src" not in Path(rimc.__file__).resolve().parents
+          for module in ("pymatching", "ldpc", "stim"):
+              assert importlib.util.find_spec(module) is None, module
+          print(rimc.__file__)
+          PY
+      - name: Test installed wheel
+        run: python -m pytest --override-ini pythonpath= tests/ -q
+      - name: Run example against installed wheel
+        run: |
+          python examples/bit_flip.py
+          python examples/three_noise.py
+
+  optional-decoders-wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build and install wheel with optional decoders
+        run: |
+          python -m pip install build pytest
+          python -m build --wheel
+          python -m pip install dist/*.whl 'pymatching>=2.4,<3' 'ldpc>=2.4,<3' 'stim>=1.16,<2'
+      - name: Test installed wheel with optional decoders
+        run: python -m pytest --override-ini pythonpath= tests/ -q
+      - name: Run DEM example
+        run: python examples/stim_dem.py
