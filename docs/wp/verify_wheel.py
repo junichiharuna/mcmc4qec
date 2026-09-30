@@ -8,6 +8,7 @@ from __future__ import annotations
 import importlib.metadata
 import importlib.util
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -66,8 +67,13 @@ def main():
 
     def run(label, args, *, timeout=60, keys=None):
         start = time.perf_counter()
+        # Notebook kernels are grandchildren; keep source paths out of their
+        # environment as well as isolating this immediate Python subprocess.
+        environment = {key: value for key, value in os.environ.items()
+                       if key.upper() not in {"PYTHONPATH", "PYTHONHOME"}}
         result = subprocess.run([sys.executable, "-I", *args], cwd=root,
-                                text=True, capture_output=True, timeout=timeout)
+                                text=True, capture_output=True, timeout=timeout,
+                                env=environment)
         print(f"{label}: exit={result.returncode}, {time.perf_counter()-start:.2f}s", flush=True)
         print(result.stdout, end="", flush=True)
         if result.returncode:
