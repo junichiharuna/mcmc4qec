@@ -12,7 +12,15 @@ def _code_metadata(code):
 
 
 class DepolarizingModel:
-    """One categorical I/X/Y/Z variable per qubit; Y retains both sectors."""
+    """Map one I/X/Y/Z label per qubit to full CSS syndromes and observables.
+
+    ``code`` is a validated CSSCode. ``syndrome`` returns ``[hz @ X, hx @ Z]``;
+    ``observables`` returns ``[lz @ X, lx @ Z]``, all over GF(2). Y contributes
+    to both components. ``validate_state`` returns a copied categorical vector
+    and ``metadata`` a JSON-compatible description. A non-CSS code raises
+    ``TypeError``; invalid state labels raise ``ValueError``. This model has no
+    rate unit; a Problem's probability is for the full modeled experiment.
+    """
 
     def __init__(self, code: CSSCode):
         if not isinstance(code, CSSCode):
@@ -52,6 +60,13 @@ class PhenomenologicalModel:
     ``'noisy'`` keeps last-round measurement faults. History and difference
     outputs both have shape ``(rounds, n_checks)``. Difference uses the clean
     initial zero syndrome. Observables refer to final cumulative data errors.
+    ``code`` is a CSSCode and ``rounds`` is positive. ``initial_boundary``
+    must be ``'clean'``; ``representation`` is ``'history'`` or ``'difference'``;
+    ``data_noise`` is ``'bit_flip'`` or ``'depolarizing'``. ``validate_state``
+    returns the flattened categorical state, ``syndrome`` the selected binary
+    history, ``observables`` final logical bits, and ``metadata`` a JSON record.
+    Invalid options or states raise ``ValueError``; a non-CSS code raises
+    ``TypeError``. A logical failure probability spans all specified rounds.
     """
 
     def __init__(self, code: CSSCode, rounds, *, initial_boundary,

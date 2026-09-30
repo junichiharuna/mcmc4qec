@@ -28,7 +28,15 @@ def _sample(n, probability, alphabet, rng):
 
 
 class DepolarizingNoise:
-    """Independent qubit categories with probabilities (1-p, p/3, p/3, p/3)."""
+    """Independent joint Pauli categories with probabilities (1-p, p/3, p/3, p/3).
+
+    ``n`` is the positive qubit count; labels are I=0, X=1, Y=2, Z=3.
+    ``sample(p, rng)`` returns ``n`` labels and ``log_prob(state, p)`` returns
+    their normalized joint log probability, including ``-inf`` at zero mass.
+    ``metadata`` records the encoding. Invalid ``n``, ``p`` outside [0, 1],
+    or an invalid state raises ``ValueError``. ``p`` is per-qubit Pauli error
+    probability; a Problem's logical failure rate covers its whole experiment.
+    """
 
     def __init__(self, n):
         self.n = positive_integer(n, "n")
@@ -52,6 +60,12 @@ class PhenomenologicalNoise:
     ``p={'data': p_data, 'measurement': p_measurement}``. Even a perfect final
     boundary with no measurement coordinates requires both keys, keeping the
     experiment's parameter schema independent of its number of rounds.
+    ``model`` fixes the rounds, state alphabets, and boundaries. ``sample``
+    returns a flattened data/measurement fault state; ``log_prob`` returns its
+    normalized log probability and ``metadata`` records the model. An invalid
+    model raises ``TypeError``; missing keys, invalid rates, or states raise
+    ``ValueError``. Rates apply per corresponding fault location. A Problem
+    reports failure over the entire bounded experiment, not per round.
     """
 
     def __init__(self, model: PhenomenologicalModel):

@@ -46,6 +46,14 @@ class DecoderAdapter:
     ``settings`` is caller-supplied provenance, not configuration applied to the
     existing object. ``distribution`` names the installed distribution whose
     version is recorded; it does not import that package.
+
+    ``decoder`` exposes ``decode(syndrome, **decode_kwargs)`` and must be
+    deterministic for fixed settings. ``identifier`` is a nonempty provenance
+    label. ``predict`` returns a one-dimensional binary logical-observable
+    vector; ``metadata`` returns a JSON-compatible dictionary. Invalid output
+    kinds, maps, binary values, or correction widths raise ``ValueError``;
+    a missing decode method raises ``TypeError``. Predictions have no physical
+    rate unit; a surrounding Problem reports failure for its whole experiment.
     """
 
     def __init__(self, decoder, *, output_kind, identifier, logical_map=None,
@@ -110,6 +118,9 @@ class PyMatchingAdapter(DecoderAdapter):
     ``built_with_correlations`` is the caller's declaration; the original
     construction cannot be inspected reliably on an existing Matching object.
     Decode uses the same setting and rejects conflicting kwargs.
+    The remaining arguments and prediction/metadata returns follow
+    ``DecoderAdapter``. A missing or conflicting correlation flag raises
+    ``ValueError``. No graph-completeness guarantee is inferred.
     """
 
     def __init__(self, decoder, *, built_with_correlations, output_kind,
@@ -141,6 +152,13 @@ def matching_from_check_matrix(check_matrix, *, logical_map, identifier,
     inputs are accepted via ``toarray``. This small helper does not construct
     repeated-measurement graphs or DEMs; wrap those existing objects explicitly.
     Zero-degree columns have no syndrome signature and produce no graph edge.
+    ``check_matrix`` has shape (checks, bits), and ``logical_map`` has shape
+    (observables, bits). ``identifier`` records provenance; ``weights`` and
+    ``error_probabilities`` are forwarded to PyMatching construction. Returns
+    a ``PyMatchingAdapter`` predicting logical observables. Invalid shapes,
+    nonbinary inputs, or degree-above-two columns raise ``ValueError``;
+    unavailable PyMatching raises ``ImportError``. No probability per round is
+    inferred from this static graph.
     """
     if hasattr(check_matrix, "toarray"):
         check_matrix = check_matrix.toarray()

@@ -31,6 +31,12 @@ class SectorDecoder:
     syndromes. Each child already returns logical predictions. Independence is
     a decoder approximation; this composition never changes the noise model or
     removes its sampled Y correlations.
+    ``x_decoder`` and ``z_decoder`` each predict binary logical observables;
+    ``x_syndrome_size`` splits the input and ``identifier`` labels provenance.
+    ``predict`` returns their concatenated one-dimensional predictions, while
+    ``metadata`` records both children and the sector approximation. Invalid
+    decoders, identifiers, binary inputs, or split sizes raise ``TypeError`` or
+    ``ValueError``. This decoder does not define a probability unit.
     """
 
     def __init__(self, x_decoder, z_decoder, *, x_syndrome_size, identifier):
@@ -68,6 +74,12 @@ class HistoryDecoder:
     ``history`` retains (rounds, checks). This adapter does not convert history
     into difference syndromes: the model's representation must already match
     the decoder. No mode drops rounds or selects only the final syndrome.
+    ``decoder`` consumes the selected ``layout`` and returns binary logical
+    predictions; ``identifier`` labels provenance. ``predict`` accepts a
+    (rounds, checks) binary array and returns a one-dimensional prediction.
+    Invalid layouts, empty histories, or nonbinary data raise ``ValueError``;
+    a decoder without ``predict``/``metadata`` raises ``TypeError``. It does
+    not convert an experiment-wide failure probability to a per-round rate.
     """
 
     def __init__(self, decoder, *, layout, identifier):

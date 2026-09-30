@@ -15,7 +15,7 @@ from .sampling import SamplingConfig, sample_faulty
 
 
 class OverlapError(ValueError):
-    """The sampled states cannot identify a finite adjacent Bennett ratio."""
+    """Raised when adjacent samples lack observed bidirectional BAR overlap."""
 
 
 def _sigmoid(x):
@@ -29,6 +29,11 @@ def bennett_log_ratio(log_b_minus_a_at_a, log_b_minus_a_at_b):
     density restricted to one common failure set. Their lengths may differ.
     At a samples only -inf is allowed; at b samples only +inf is allowed.
     No finite-sample uncertainty or common-failure guarantee is inferred here.
+    Both inputs are nonempty arrays and may have different lengths. Returns a
+    dimensionless natural-log partition-mass ratio. NaNs or samples lacking
+    positive density in their own ensemble raise ``ValueError``; absent
+    observed bidirectional overlap raises ``OverlapError``. Converting this
+    ratio to a physical logical failure probability requires an anchor.
     """
     a = np.asarray(log_b_minus_a_at_a, dtype=float).ravel()
     b = np.asarray(log_b_minus_a_at_b, dtype=float).ravel()
@@ -60,7 +65,17 @@ def bennett_log_ratio(log_b_minus_a_at_a, log_b_minus_a_at_b):
 
 @dataclass
 class EstimationResult:
-    """Ladder estimates; uncertainty is approximate and conditional on mixing."""
+    """Absolute failure probabilities and diagnostic data for one BAR ladder.
+
+    ``estimates`` and ``intervals`` are experiment-wide probabilities by rung;
+    ``log_estimates`` and ``adjacent_log_ratios`` use natural logs.
+    ``log_standard_errors`` are dimensionless, and ``elapsed_seconds`` is wall
+    time. ``estimate`` and ``interval`` select the final rung. ``to_json``
+    returns schema-versioned text; ``from_json`` reconstructs it and raises
+    ``ValueError`` for incompatible schemas or invalid JSON-compatible values.
+    Intervals assume adequate chain mixing and block length; approximate BAR
+    bias is excluded.
+    """
     estimates: list[float]
     log_estimates: list[float]
     adjacent_log_ratios: list[float]
@@ -162,6 +177,19 @@ def estimate_logical_error(problem, ladder, *, anchor, config=None, seed=None,
     anchor's log variance. Mixing and sufficiently long blocks are assumptions,
     not consequences of diagnostics. Approximate-mode bias is not in the bars.
     Setting bootstrap_replicates=0 disables MCMC error bars explicitly.
+    ``problem`` supplies the fixed model/noise/failure contract; ``ladder`` is
+    an ordered list of at least two probability coordinates. ``anchor`` is a
+    matching positive ``exact`` or fixed-trial ``direct_mc`` Result at rung 0.
+    ``config`` and ``seed`` control conditional sampling; ``initial_states``
+    can supply one initial state per rung. ``mode`` selects fixed failure or
+    explicit decoder-dependent approximation with ``decoder_factory``,
+    ``decoder_priors``, and ``approximation_reason``. Bootstrap controls are
+    nonnegative replicate count and per-chain block length.
+    Returns ``EstimationResult`` with absolute failure probabilities for each
+    whole modeled experiment, natural-log ratios, intervals where available,
+    and warnings. Invalid inputs or anchor mismatch raise ``ValueError``;
+    failed initialization raises ``InitializationError`` and missing adjacent
+    observed overlap raises ``OverlapError``.
     """
     start = time.perf_counter()
     ladder = [_coordinate(p) for p in ladder]
