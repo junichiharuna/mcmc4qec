@@ -34,3 +34,5 @@ PEP 561 に従って `src/mcmc4qec/py.typed` を wheel に含めるなら、公�
 remote CI の実行、Python 3.12 の手元検証、publish は未実施である。
 この記録の wheel は A/B/C/E 統合前の作業枝を対象にしており、統合後はメインで再ビルドと再検証が必要である。
 レビュー指摘に基づき README の toric install 手順と BAR の独立実行例を修正し、別 venv の wheel で README の Python ブロック 2 件を個別実行してともに終了コード 0 を確認した。
+メインの `codes` extra 追加 commit を作業枝に取り込み、独立 `.venv-readme` で `pip install -e '.[codes,matching]'` が bposd、ldpc、pymatching を導入することを確認した。
+同環境で README の Python ブロック 2 件を個別実行し、両方とも終了コード 0 だった。
