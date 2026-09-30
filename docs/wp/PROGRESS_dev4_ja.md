@@ -6,7 +6,7 @@
 
 ## Phase 0
 
-- [ ] main と origin/main の一致、研究リポジトリの clean 状態、基準全 suite の件数・秒数を確認する。
+- [x] 2026-10-01 main と origin/main の一致、研究リポジトリの clean 状態、基準全 suite の件数・秒数を確認する。
 - [x] 2026-10-01 進捗表を作成する。
 - [x] 2026-10-01 共通制約と各 WP の担当・受入条件を含む指示文を保存する。
 - [ ] K〜O の独立 worktree を作成し、担当を起動する。
@@ -48,7 +48,20 @@
 2026-10-01、開始時の main と origin/main は `c6cff9232cff3046d4643d2adbb95baba02d9a9b` で一致した。
 依頼書のみ未追跡で、実装の既存変更はなかった。
 `A:/dev/RIMC` の `git status --short` は空だった。
-基準試験は指定 Python 3.11 の `-m pytest tests -q --junitxml=output/dev4-phase0.xml` で実行中。
+基準試験は指定 Python 3.11 の `-m pytest tests -q --junitxml=output/dev4-phase0.xml` で310 passed / 5 skipped、119.00秒だった。
 環境上の同時実行上限はメインを含め4体であり、依頼書の5担当同時起動は3担当ずつの段階起動に置き換える。
 サブエージェントの `gpt-sol` 指定は利用可能な `gpt-6-sol` を使用し、WP-K/L/M/N は high、WP-O は medium、L/N のレビューは xhigh とする。
 main のモデルはセッションで設定されたものを使用し、このツールからは変更できない。
+
+2026-10-01、準備を `b8fde01` にコミットし、`A:/dev/mcmc4qec-wt/k`〜`o` と `wp/k`〜`wp/o` を作成した。
+K、N、M を先行起動し、L、O は空き枠ができたら起動する。
+
+基準全 suite の件数差は notebook 依存不足による collection skip と確認した。
+分離した `.venv-dev4-source` に検証依存を導入し、notebookを含む追加基準試験は314 passed / 4 skipped、166.23秒で成功した。
+研究live照合4件は1.25秒で成功し、型検査の通常設定は23 source filesで成功、strictは533 errorsであった。
+詳細は `validation_dev4_ja.md` と `output/dev4-phase0*.xml` に記録する。
+
+2026-10-01 08:45 JST、K の受入失敗を確認後、main 管理の fastpath.py の phase flip 確率行選択を `23bd178` で修正した。
+K worktree に `3609478` として反映し、関連14テストは2.81秒で成功した。
+現在の担当IDは `/root/wp_k`、`/root/wp_n`、`/root/wp_m` で、いずれも作業中。
+LとOの起動、K〜Oの完了・レビュー・統合、Phase 2 は未完了であり、最終報告はまだ作成しない。
