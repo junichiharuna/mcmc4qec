@@ -1,5 +1,7 @@
 """Run the workflow examples against the package already imported by pytest."""
 
+import ast
+import csv
 import importlib.util
 import json
 import os
@@ -21,12 +23,12 @@ CASES = (
 )
 
 
-def run_example(script, out, *, extra=(), env_extra=None):
+def run_example(script, out, *, extra=(), env_extra=None, seed=2026):
     env = os.environ.copy()
     package_parent = Path(mcmc4qec.__file__).resolve().parent.parent
     env['PYTHONPATH'] = os.pathsep.join([*(env_extra or []), str(package_parent)])
     completed = subprocess.run(
-        [sys.executable, str(WORKFLOWS / script), '--quick', '--seed', '2026',
+        [sys.executable, str(WORKFLOWS / script), '--quick', '--seed', str(seed),
          '--out', str(out), *extra],
         cwd=ROOT, env=env, capture_output=True, text=True, timeout=30,
     )
@@ -58,6 +60,11 @@ def test_workflow_quick(script, keys, extra_name, tmp_path):
             assert 'matplotlib unavailable' in output
     if script == 'pl_curve.py':
         assert 'OverlapError from estimate_logical_error' in output
+        with (directory / 'pl_curve.csv').open(newline='', encoding='utf-8') as stream:
+            rows = list(csv.DictReader(stream))
+        assert all(row['intervals_overlap'] in ('True', 'False') for row in rows)
+        if any(row['intervals_overlap'] == 'False' for row in rows):
+            assert 'WARNING: d=' in output
 
 
 @pytest.mark.parametrize('script', ('pl_curve.py', 'conditional_weight.py'))
@@ -112,3 +119,17 @@ def test_configured_research_root_is_rejected(variable, tmp_path):
     assert completed.returncode != 0
     assert 'Refusing to write into the read-only RIMC repository' in completed.stderr
     assert not (tmp_path / 'research').exists()
+
+
+@pytest.mark.parametrize('seed', (0, 1, 2, 3, 4, 5, 7, 8, 9))
+def test_convergence_initial_populations_are_distinct(seed, tmp_path):
+    pytest.importorskip('pymatching')
+    pytest.importorskip('ldpc')
+    pytest.importorskip('bposd')
+    _, output = run_example('convergence_check.py', tmp_path / str(seed), seed=seed)
+    sectors = []
+    for line in output.splitlines():
+        if line.startswith(('minimum initial', 'random_sector initial', 'maximum initial')):
+            sectors.append(tuple(ast.literal_eval(line.split('observable sector=', 1)[1])))
+    assert len(sectors) == 3
+    assert len(set(sectors)) == 3

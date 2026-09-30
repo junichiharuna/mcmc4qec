@@ -19,8 +19,8 @@ import numpy as np
 from mcmc4qec import (IndependentBitFlip, Problem, SamplingConfig,
                       evaluate_convergence, maximum_weight_initial_state,
                       minimum_weight_initial_state,
-                      random_logical_sector_initial_state, sample_faulty,
-                      spawn_seeds)
+                      observable_sector_initial_state,
+                      random_logical_sector_initial_state, sample_faulty, spawn_seeds)
 from mcmc4qec.codes import make_asymmetric_toric_code
 from mcmc4qec.decoders import mwpm_decoder
 
@@ -44,13 +44,30 @@ def main():
     code = make_asymmetric_toric_code(3, 5)
     p = 0.2
     problem = Problem(code.bit_flip_model(), IndependentBitFlip(code.n), mwpm_decoder(code))
-    seeds = iter(spawn_seeds(args.seed, 5))
-    direct_seed = next(seeds)
+    seeds = spawn_seeds(args.seed, 68)
+    direct_seed = seeds[0]
+    chain_seeds = dict(zip(('minimum', 'random_sector', 'maximum'), seeds[1:4]))
     initial = {
         'minimum': minimum_weight_initial_state(code),
-        'random_sector': random_logical_sector_initial_state(code, seed=next(seeds)),
         'maximum': maximum_weight_initial_state(code),
     }
+    if np.array_equal(initial['minimum'], initial['maximum']):
+        raise RuntimeError('Minimum and maximum starts coincide; choose a code with distinct logical weights')
+    for attempt, candidate_seed in enumerate(seeds[4:], start=1):
+        candidate = random_logical_sector_initial_state(code, seed=candidate_seed)
+        if not any(np.array_equal(candidate, state) for state in initial.values()):
+            initial['random_sector'] = candidate
+            print(f'Distinct random logical sector selected after {attempt} seeded draw(s)')
+            break
+    else:
+        # The third nonzero two-bit sector is the XOR of the first two.
+        target = (code.lz @ initial['minimum'] % 2) ^ (code.lz @ initial['maximum'] % 2)
+        if not np.any(target):
+            raise RuntimeError('No distinct nonzero logical sector is available')
+        initial['random_sector'] = observable_sector_initial_state(code, target)
+        print('Distinct logical sector constructed after 64 seeded draws collided')
+    if len({tuple(state) for state in initial.values()}) != 3:
+        raise RuntimeError('Initial populations must have three distinct states')
     for label, state in initial.items():
         if not np.isfinite(problem.log_prob(state, p)) or not problem.is_faulty(state):
             raise RuntimeError(f'{label} start is outside noise support or not faulty')
@@ -76,7 +93,7 @@ def main():
                             burn_in=16 if args.quick else 60)
     runs = {}
     for label, state in initial.items():
-        runs[label] = sample_faulty(problem, p, config=config, seed=next(seeds),
+        runs[label] = sample_faulty(problem, p, config=config, seed=chain_seeds[label],
                                     initial_state=np.stack([state, state]))
         diagnostics = runs[label].diagnostics
         print(f'{label} trace diagnostics: ESS={diagnostics["ess"]}, '

@@ -9,6 +9,10 @@ do not imply the strict zero-support condition that raises OverlapError.
 The --demo-overlap endpoint example uses p=0 and p=1, whose supports are
 disjoint, to demonstrate that exact condition. Conditional chains alone do
 not estimate absolute P_L. BAR intervals assume mixing and adequate blocks.
+The quick budget only checks the workflow; it does not provide research-grade
+precision. Nonoverlapping BAR and independent direct-MC intervals require
+investigation, with inadequate mixing and finite-sample noise among possible
+causes; this example does not diagnose the cause.
 """
 
 import argparse
@@ -103,6 +107,8 @@ def main():
     args = parser.parse_args()
     out = output_dir(args.out)
     print(f'Output: {out}')
+    if args.quick:
+        print('WARNING: --quick checks the workflow only; it does not guarantee research precision.')
     ladder = [0.30, 0.26, 0.22]
     anchor_trials = 200 if args.quick else 1500
     check_trials = 180 if args.quick else 1200
@@ -126,17 +132,29 @@ def main():
             mc = anchor if index == 0 else direct_mc(problem, p, trials=check_trials,
                                                      seed=next(seeds))
             interval = bar.intervals[index]
+            intervals_overlap = (None if interval is None else
+                                 max(interval[0], mc.interval[0]) <=
+                                 min(interval[1], mc.interval[1]))
             rows.append(dict(distance=distance, p=p, bar=bar.estimates[index],
                              bar_low=interval[0] if interval else None,
                              bar_high=interval[1] if interval else None,
                              mc=mc.estimate if mc else None,
                              mc_low=mc.interval[0] if mc else None,
-                             mc_high=mc.interval[1] if mc else None))
-            if mc:
-                checks[key][str(p)] = {'estimate': mc.estimate, 'interval': mc.interval,
-                                        'failures': mc.failures, 'trials': mc.trials}
+                             mc_high=mc.interval[1] if mc else None,
+                             intervals_overlap=intervals_overlap))
+            checks[key][str(p)] = {'estimate': mc.estimate, 'interval': mc.interval,
+                                    'failures': mc.failures, 'trials': mc.trials,
+                                    'intervals_overlap': intervals_overlap}
             print(f'd={distance} p={p:.2f} BAR={bar.estimates[index]:.5g} {interval}; '
-                  f'direct MC={mc.estimate if mc else None} {mc.interval if mc else None}')
+                  f'direct MC={mc.estimate} {mc.interval}; '
+                  f'intervals_overlap={intervals_overlap}')
+            if intervals_overlap is False:
+                print(f'WARNING: d={distance} p={p:.2f} BAR and independent direct-MC '
+                      'intervals do not overlap; investigate mixing and finite-sample '
+                      'effects. Cause not diagnosed here.')
+            elif intervals_overlap is None:
+                print(f'WARNING: d={distance} p={p:.2f} BAR interval is unavailable; '
+                      'overlap check cannot be made.')
         print(f'd={distance} minimum observed BAR overlap: '
               f'{min(min(x["forward_mean"], x["reverse_mean"]) for x in bar.overlap):.3g}')
     with (out / 'pl_curve.csv').open('w', newline='', encoding='utf-8') as stream:
