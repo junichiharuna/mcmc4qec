@@ -208,6 +208,17 @@ class CSSCode:
     def bit_flip_model(self):
         return BinaryLinearModel(self.hz, self.lz, stabilizers=self.hx, identifier="css-bit-flip")
 
+    def phase_flip_model(self):
+        """Return the static CSS model for binary Z-error support.
+
+        X checks (``hx``) measure its syndrome, and ``lx`` reads logical
+        observables. Z stabilizer rows (``hz``) preserve both maps. Use the
+        existing ``IndependentBitFlip(n)`` noise: it supplies the same binary
+        product distribution for Z-error support as for X-error support.
+        """
+        return BinaryLinearModel(self.hx, self.lx, stabilizers=self.hz,
+                                 identifier="css-phase-flip")
+
 
 class CallableDecoder:
     """Wrap a deterministic function returning *logical observables*.

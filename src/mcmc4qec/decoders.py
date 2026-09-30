@@ -19,31 +19,43 @@ def _mwpm(checks, logical_map, identifier):
                                       identifier=identifier)
 
 
-def mwpm_decoder(code: CSSCode):
-    """Decode X errors with unweighted PyMatching and return logical predictions.
+def _error_sector(errors):
+    if errors not in ("X", "Z") or not isinstance(errors, str):
+        raise ValueError("errors must be 'X' or 'Z'")
+    return errors
+
+
+def mwpm_decoder(code: CSSCode, *, errors="X"):
+    """Decode X or Z errors with unweighted PyMatching and return logical predictions.
 
     Parameters
     ----------
     code : CSSCode
-        Static CSS code whose Z checks measure X-error syndrome.
+        Static CSS code. Z checks measure X errors; X checks measure Z errors.
+    errors : {"X", "Z"}
+        Error sector. The default is X for backward compatibility.
 
     Returns
     -------
     PyMatchingAdapter
-        A decoder returning ``code.lz @ correction % 2`` as logical bits,
-        not an error probability or per-round rate.
+        A decoder returning ``code.lz @ correction % 2`` for X or
+        ``code.lx @ correction % 2`` for Z as logical bits, not an error
+        probability or per-round rate.
 
     Raises
     ------
     TypeError
         If ``code`` is not a CSSCode.
     ValueError
-        If any check-matrix column has degree greater than two.
+        If ``errors`` is invalid or a check-matrix column has degree above two.
     ImportError
         If optional ``pymatching`` is unavailable.
     """
     code = _code(code)
-    return _mwpm(code.hz, code.lz, "mwpm-css-x")
+    errors = _error_sector(errors)
+    if errors == "X":
+        return _mwpm(code.hz, code.lz, "mwpm-css-x")
+    return _mwpm(code.hx, code.lx, "mwpm-css-z")
 
 
 _BPOSD_DEFAULTS = dict(max_iter=100, bp_method="min_sum",
@@ -75,21 +87,26 @@ def _bposd(checks, logical_map, p, identifier, kw):
                           distribution="ldpc")
 
 
-def bposd_decoder(code: CSSCode, p: float, **kw):
-    """Decode X errors with the RIMC BP-OSD defaults and return logical bits.
+def bposd_decoder(code: CSSCode, p: float, *, errors="X", **kw):
+    """Decode X or Z errors with the RIMC BP-OSD defaults and return logical bits.
 
     ``code`` is a static CSSCode. ``p`` is the fixed decoder channel prior in
     [0, 1], which need not equal a later sampling noise probability. ``kw``
-    overrides ldpc options; the defaults are max_iter=100, bp_method="min_sum",
+    overrides ldpc options; ``errors`` selects X (the default) or Z. The
+    defaults are max_iter=100, bp_method="min_sum",
     osd_method="osd_cs", and osd_order=10. Returns a DecoderAdapter mapping
-    the physical correction through ``code.lz``. Raises TypeError for a
-    non-CSS code, ValueError for invalid p, error_rate override, or OSD order
+    the physical correction through ``code.lz`` for X or ``code.lx`` for Z.
+    Raises TypeError for a non-CSS code, ValueError for invalid errors, p,
+    error_rate override, or OSD order
     exceeding check-matrix nullity, ImportError if ldpc is unavailable, and
     ldpc's own exception for its other invalid options. The prediction is a
     logical bit vector; no probability or per-round rate is returned.
     """
     code = _code(code)
-    return _bposd(code.hz, code.lz, p, "bposd-css-x", kw)
+    errors = _error_sector(errors)
+    if errors == "X":
+        return _bposd(code.hz, code.lz, p, "bposd-css-x", kw)
+    return _bposd(code.hx, code.lx, p, "bposd-css-z", kw)
 
 
 def depolarizing_mwpm_decoder(code: CSSCode):

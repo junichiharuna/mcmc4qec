@@ -150,6 +150,47 @@ def test_reproduction_script_requires_research_root_before_output(tmp_path):
     assert not output.exists()
 
 
+def test_live_research_phase_flip_mwpm_all_toric_d3_syndromes():
+    """Compare Z logical predictions against the read-only research decoder."""
+    root_value = os.environ.get("RIMC_RESEARCH_ROOT")
+    if not root_value:
+        pytest.skip("set RIMC_RESEARCH_ROOT for live research comparison")
+    source = Path(root_value).resolve() / "src" / "css_code.py"
+    if not source.is_file():
+        pytest.fail(f"research source does not exist: {source}")
+    pytest.importorskip("pymatching")
+    pytest.importorskip("bposd")
+    pytest.importorskip("ldpc")
+
+    original = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True
+    try:
+        spec = importlib.util.spec_from_file_location("research_css_code_wp_k", source)
+        research = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = research
+        spec.loader.exec_module(research)
+        from mcmc4qec.codes import make_toric_code
+        from mcmc4qec.decoders import mwpm_decoder
+
+        code = make_toric_code(3)
+        reference_code = research.make_toric_code(3)
+        for name in ("hx", "hz", "lx", "lz"):
+            np.testing.assert_array_equal(getattr(code, name), getattr(reference_code, name))
+        decoder = mwpm_decoder(code, errors="Z")
+        reference = research.make_depolarizing_mwpm_decoder(reference_code)
+        syndromes = {tuple(np.zeros(len(code.hx), dtype=np.uint8))}
+        for column in code.hx.T:
+            syndromes |= {tuple(np.asarray(s, dtype=np.uint8) ^ column) for s in syndromes}
+        assert len(syndromes) == 256
+        for bits in syndromes:
+            syndrome = np.asarray(bits, dtype=np.uint8)
+            expected = code.lx @ reference.decode_z(syndrome) % 2
+            np.testing.assert_array_equal(decoder.predict(syndrome), expected)
+    finally:
+        sys.modules.pop("research_css_code_wp_k", None)
+        sys.dont_write_bytecode = original
+
+
 def test_reproduction_script_rejects_output_within_research_root(tmp_path):
     """The requested output must not be inside the supplied checkout."""
     script = Path(__file__).resolve().parents[1] / "docs" / "wp" / "A_reproduce.py"
