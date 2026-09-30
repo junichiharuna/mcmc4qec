@@ -45,4 +45,5 @@ B の `SamplingConfig.cache_cap/cache_policy` と `KernelConfig.zanella_fastpath
 CI の optional job に `examples/circuit_baseline.py` を追加した。
 A/C/E の追加公開名の docstring に引数、返り値、例外、確率の単位が不足する箇所を各担当に連絡し、担当側の補完を待っている。
 追加した toric d=3 + `mwpm_decoder` の tutorial コードブロックは A 作業枝の `src` を import path に指定して実行し、終了コード 0、MC 推定値 `0.25` を確認した。
+A/C/E の公開予定 30 名がすべて `docs/api_en.md` に個別の inline-code 名で現れることを照合し、漏れは 0 件だった。
 この追加 API の installed wheel 実行、`__all__` の最終突合、統合後 Python 3.11/3.12 CI はまだ未実施である。
