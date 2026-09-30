@@ -2,7 +2,8 @@
 
 Requires the codes extra. Measured default/--quick: about 2.0s/0.7s on Windows.
 The decoder is built once at prior 0.08, equal to the evaluated p here.
-Conditional chain frequencies are not absolute P_L; diagnostics prove no mixing.
+Conditional chain frequencies are not absolute P_L. Diagnostics do not prove
+convergence or mixing.
 """
 import argparse
 import json
