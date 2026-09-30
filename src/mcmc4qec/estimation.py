@@ -184,7 +184,8 @@ def estimate_logical_error(problem, ladder, *, anchor, config=None, seed=None,
     can supply one initial state per rung. ``mode`` selects fixed failure or
     explicit decoder-dependent approximation with ``decoder_factory``,
     ``decoder_priors``, and ``approximation_reason``. Bootstrap controls are
-    nonnegative replicate count and per-chain block length.
+    bootstrap_replicates (nonnegative count) and bootstrap_block_length
+    (retained samples per chain per block; None chooses a diagnostic heuristic).
     Returns ``EstimationResult`` with absolute failure probabilities for each
     whole modeled experiment, natural-log ratios, intervals where available,
     and warnings. Invalid inputs or anchor mismatch raise ``ValueError``;

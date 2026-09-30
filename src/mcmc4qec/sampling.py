@@ -22,6 +22,7 @@ class KernelConfig:
     """Per-step kernel mixture and optional laziness.
 
     The five move probabilities must sum to one; lazy is applied separately.
+    single, zanella, cluster, stabilizer, and circuit_single are their weights.
     cluster_k counts occupied and empty coordinates exchanged by one H move.
     zanella_fastpath affects only exact built-in product noises. Invalid weights,
     cluster_k, or lazy probability raise ValueError. CircuitFaultModel requires
@@ -56,7 +57,9 @@ class SamplingConfig:
     samples counts retained states per chain; burn_in and thin count every
     transition, including rejected and lazy steps. chains is the number of
     independent RNG streams. cache_cap limits entries according to
-    cache_policy. research_clear checks for size > cap every ten steps, as in
+    cache_policy. max_initial_attempts bounds initialization draws per chain;
+    kernels supplies the KernelConfig. The cache's
+    research_clear policy checks for size > cap every ten steps, as in
     the research runner; it is a soft cap. lru and freeze are strict caps.
     Invalid counts, cache settings, or kernel configuration raise ValueError.
     """
@@ -95,6 +98,7 @@ def spawn_seeds(seed, count):
 def exact(problem, p, *, max_states=1_048_576):
     """Enumerate the full experiment state space and return an exact Result.
 
+    problem binds the model, noise, decoder, and shared failure definition.
     p is the noise parameter; max_states bounds the enumerated cardinality.
     estimate is the logical failure probability per complete experiment, and
     conditional_weight is the expected nonidentity coordinate count given
@@ -143,6 +147,7 @@ def _wilson(failures, n):
 def direct_mc(problem, p, *, trials, seed=None):
     """Return a direct Monte Carlo Result for a fixed number of experiments.
 
+    problem binds the model, noise, decoder, and shared failure definition.
     p is the noise parameter; trials is a positive fixed experiment count and
     seed controls its RNG. estimate and the Wilson interval describe logical
     failure probability per complete experiment. conditional_weight counts
@@ -174,6 +179,7 @@ def direct_mc(problem, p, *, trials, seed=None):
 def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
     """Sample normalized noise restricted to one fixed deterministic failure set.
 
+    problem binds the model, noise, decoder, and shared failure definition.
     p is the noise parameter; config defines per-chain budgets and kernels.
     seed initializes independent chain streams. initial_state may be one
     supported faulty state or one such state per chain. Returns a Result whose

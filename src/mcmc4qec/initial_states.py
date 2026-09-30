@@ -151,6 +151,7 @@ def _solve_gf2(matrix, target):
 def observable_sector_initial_state(code, observable, *, sector="x", time_limit=30.0):
     """Find the minimum-weight representative of a requested observable sector.
 
+    code is a CSSCode supplying the stabilizer and logical matrices.
     The GF(2) crossing matrix maps logical-basis coefficients to observable
     bits, so non-paired independent CSS bases are supported. Zero is rejected
     because a zero logical sector is generally not a faulty initialization.

@@ -169,6 +169,7 @@ class BinaryLinearModel:
 class CSSCode:
     """Validated complete logical bases for a static CSS code.
 
+    hx and hz contain X/Z stabilizer rows; lx and lz contain logical rows.
     The four binary matrices have n columns; lx and lz have k rows. By
     default ``logical_basis='paired'`` requires lx @ lz.T = I over GF(2).
     Explicit ``'independent'`` accepts any nonsingular logical commutation
