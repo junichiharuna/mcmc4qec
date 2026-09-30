@@ -4,6 +4,32 @@
 研究側を import するコマンドでは `PYTHONDONTWRITEBYTECODE=1` を設定し、研究側の `git status --porcelain=v1` は出力なしだった。
 以下の実測は Python 3.11.9、NumPy 2.4.6、PyMatching 2.4.0、ldpc 2.4.1、bposd 2.1 で行った。
 
+## 再実行手順と保存範囲
+
+`docs/wp/A_reproduce.py` に以下の Problem 構築、seed、試行数、初期状態、統計式を固定した。
+研究 decoder の直接比較は `RIMC_RESEARCH_ROOT` に読み取り専用 checkout のパスを指定した `tests/test_crossval_research.py` でも実行でき、環境変数がない通常 suite では skip する。
+次のコマンドはリポジトリ直下の PowerShell で指定 Python 3.11 を使う例である。
+
+```powershell
+$env:PYTHONDONTWRITEBYTECODE = '1'
+$env:RIMC_RESEARCH_ROOT = 'C:\dev\RIMC'
+& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' -m pytest tests/test_crossval_research.py -q
+& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py decoders --research-root C:\dev\RIMC
+& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py exact --research-root C:\dev\RIMC --output output/wp-a/exact.json
+& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py direct --code toric5 --output output/wp-a/direct-toric5.json
+& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py direct --code bb72 --output output/wp-a/direct-bb72.json
+& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py zh --code toric5 --output output/wp-a/zh-toric5.json
+& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py zh --code bb72 --output output/wp-a/zh-bb72.json
+```
+
+`--output` は指定時だけ全 `Result` JSON を保存し、研究 checkout 内への出力を拒否する。
+中断前の元実行では全 `Result` JSON を保存していないため、下記の数値表は実行ログの要約であり生結果の再読取値ではない。
+再現スクリプトの `decoders` と `direct --code bb72 --smoke`、`zh --code toric5 --smoke` は追加後に軽量動作確認したが、長い exact、100000 trial direct MC、3000標本 Z+H の再実行は行っていない。
+`exact` は `code.bit_flip_model()`、`IndependentBitFlip(code.n)`、`mwpm_decoder(code)` を `Problem` に組み込み、`p=0.01` の全状態を列挙する。
+`direct` は toric d=5 で MWPM、BB72 で prior `p=0.01` の研究既定 BP-OSD を使い、固定 seed 20260930 の100000試行を行う。
+`zh` は同じ Problem で Z 0.7、H 0.3、`cluster_k=2`、`lazy=0.05`、burn-in 500、保存3000、thin 1、1 chain とし、toric では `lx[0]`、BB72 では最小重みの `lx` 行を初期状態にする。
+`zh` の参考区間は保存状態の Hamming 重みの標本標準偏差を診断 ESS の平方根で割り、平均から ±1.96 倍した値である。
+
 ## 符号行列
 
 研究側の `css_code.py` と `subset_sampling.py` のファクトリを実行し、各 `hx/hz/lx/lz` の shape と連続した raw bytes を SHA-256 で固定した。

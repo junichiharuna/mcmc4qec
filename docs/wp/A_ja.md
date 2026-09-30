@@ -9,6 +9,7 @@
 PyMatching が扱えない列次数3以上の check matrix は明示的に拒否する。
 ldpc 2.4.1 は Windows で nullity より大きい OSD order により native heap crash を起こしたため、整数型の正規化と上限検証を C 拡張の呼出前に行う。
 符号、decoder、exact、direct MC、Z+H、研究テスト対応の詳細は `docs/crossval_research_ja.md` に記録した。
+長い数値照合を通常 pytest から分離して再現する `docs/wp/A_reproduce.py` を追加した。
 
 ## 実行した検証
 
@@ -29,6 +30,8 @@ toric d=3 の研究 syndrome table の256行でも MWPM 論理予測の不一致
 研究 `splitting_pl.py` と同じ合成 weight trace の BAR log ratio は研究 `-1.2130084485394683`、ライブラリ `-1.213008448539711` だった。
 指定された八つの研究テストファイルの102 test関数を意味論ごとに対応付け、WP-A 新規52 parameterized case、既存の等価試験、新 API 未対応を数値照合文書の表に記録した。
 研究リポジトリの `git status --porcelain=v1` は出力なしだった。
+研究 checkout を環境変数で指定する live decoder 比較は `tests/test_crossval_research.py` の17 case が 1.71秒で成功し、研究四 factory の256 syndrome 論理予測不一致は各0件だった。
+再現スクリプトの decoder 比較、direct MC と Z+H の smoke は実行して成功した。
 
 ## 未実施と制約
 
@@ -40,6 +43,7 @@ core-only NumPy でこれらの論理行順まで再現する実装は未実施�
 toric d=5 と BB72 の短い Z+H はそれぞれ1 chainのみであり、参考区間の被覆確率、混合、正しさを保証しない。
 toric d=5 のノイズからの初期化は上限10000回で失敗したため、事前に定めた `lx[0]` を指定して再実行した。
 最終変更後の全 suite、remote CI、installed wheel、公開 API の `__init__.py` 追加はメイン統合後の検証事項である。
+中断前の exact、direct MC、Z+H の全 `Result` JSON は保存しておらず、数値表は元実行ログの要約である。
 
 ## レビューとメインへの依頼
 

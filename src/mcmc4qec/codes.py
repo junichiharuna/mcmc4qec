@@ -65,12 +65,13 @@ def make_asymmetric_toric_code(d1: int, d2: int) -> CSSCode:
 
 
 def make_hgp_hamming() -> CSSCode:
-    """Return the [[58,16,3]] Hamming hypergraph-product code in RIMC order.
+    """Return the research-labeled [[58,16,3]] Hamming HGP code in RIMC order.
 
     Returns a CSSCode whose X/Z logical bases have an invertible, nonidentity
     intersection matrix and whose ``logical_basis`` is ``independent``.
-    Raises ImportError unless optional ldpc and bposd are installed. This is
-    a static code and defines no probability or round unit.
+    Raises ImportError unless optional ldpc and bposd are installed. The
+    distance label is inherited from RIMC; this factory does not prove its
+    lower bound. This static code defines no probability or round unit.
     """
     from ldpc.codes import hamming_code
     from bposd.hgp import hgp
@@ -180,31 +181,34 @@ _BB_B = ((0, 3), (1, 0), (2, 0))
 
 
 def make_bb_code_72() -> CSSCode:
-    """Return the static research BB [[72,12,6]] CSSCode.
+    """Return the static research-labeled BB [[72,12,6]] CSSCode.
 
     Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
     logical row order. Raises ValueError if the CSS matrices are invalid.
-    The factory defines no probability or round unit.
+    The distance lower bound is not checked here. The factory defines no
+    probability or round unit.
     """
     return make_bb_code(6, 6, _BB_A, _BB_B)
 
 
 def make_bb_code_108() -> CSSCode:
-    """Return the static research BB [[108,8,10]] CSSCode.
+    """Return the static research-labeled BB [[108,8,10]] CSSCode.
 
     Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
     logical row order. Raises ValueError if the CSS matrices are invalid.
-    The factory defines no probability or round unit.
+    The distance lower bound is not checked here. The factory defines no
+    probability or round unit.
     """
     return make_bb_code(9, 6, _BB_A, _BB_B)
 
 
 def make_bb_code_144() -> CSSCode:
-    """Return the static research BB [[144,12,12]] CSSCode.
+    """Return the static research-labeled BB [[144,12,12]] CSSCode.
 
     Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
     logical row order. Raises ValueError if the CSS matrices are invalid.
-    The factory defines no probability or round unit.
+    The distance lower bound is not checked here. The factory defines no
+    probability or round unit.
     """
     return make_bb_code(12, 6, _BB_A, _BB_B)
 
@@ -272,8 +276,9 @@ def make_concatenated_steane_code(levels: int) -> CSSCode:
     """Return level-``levels`` self-concatenated Steane in RIMC block order.
 
     ``levels`` must be a positive integer. Returns a static CSSCode with RIMC
-    block order; level two has parameters [[49,1,9]]. Raises ValueError for
-    invalid levels or matrices. No probability or round unit is implied.
+    block order; level two has research-labeled parameters [[49,1,9]]. The
+    distance lower bound is not checked here. Raises ValueError for invalid
+    levels or matrices. No probability or round unit is implied.
     """
     levels = positive_integer(levels, "levels")
     code = make_steane_code()
