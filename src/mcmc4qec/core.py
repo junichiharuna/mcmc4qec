@@ -137,8 +137,22 @@ class BinaryLinearModel:
 
 
 class CSSCode:
-    """Validated complete paired logical bases for a static CSS code."""
-    def __init__(self, hx, hz, lx, lz):
+    """Validated complete logical bases for a static CSS code.
+
+    The four binary matrices have n columns; lx and lz have k rows. By
+    default ``logical_basis='paired'`` requires lx @ lz.T = I over GF(2).
+    Explicit ``'independent'`` accepts any nonsingular logical commutation
+    matrix, preserving supplied row order without rebasing. In that mode,
+    row i of lx need not flip only observable i of lz. Observable coordinates
+    remain defined by the supplied matrices in both modes.
+
+    Raises ValueError for invalid matrices, incomplete logical bases, or an
+    unknown basis convention. Arrays are copied and made read-only.
+    """
+    def __init__(self, hx, hz, lx, lz, *, logical_basis="paired"):
+        if logical_basis not in ("paired", "independent"):
+            raise ValueError("logical_basis must be 'paired' or 'independent'")
+        self.logical_basis = logical_basis
         self.hx, self.hz, self.lx, self.lz = [binary(a, ndim=2, name=name)
             for a, name in zip((hx, hz, lx, lz), ("hx", "hz", "lx", "lz"))]
         self.n = self.hx.shape[1]
@@ -152,8 +166,11 @@ class CSSCode:
         if np.any(self.hz @ self.lx.T % 2) or np.any(self.hx @ self.lz.T % 2):
             raise ValueError("logical operators do not commute with stabilizers")
         k = self.n - gf2_rank(self.hx) - gf2_rank(self.hz)
-        if len(self.lx) != k or not np.array_equal(self.lx @ self.lz.T % 2, np.eye(k, dtype=int)):
-            raise ValueError("lx/lz must be complete anticommuting logical pairs")
+        commutation = self.lx @ self.lz.T % 2
+        if len(self.lx) != k or gf2_rank(commutation) != k:
+            raise ValueError("lx/lz must be complete independent logical bases")
+        if logical_basis == "paired" and not np.array_equal(commutation, np.eye(k, dtype=int)):
+            raise ValueError("paired lx/lz must be anticommuting logical pairs")
         for a in (self.hx, self.hz, self.lx, self.lz):
             a.flags.writeable = False
 
