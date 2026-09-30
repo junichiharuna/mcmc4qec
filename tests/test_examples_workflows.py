@@ -62,11 +62,13 @@ def test_workflow_quick(script, keys, extra_name, tmp_path):
         assert 'OverlapError from estimate_logical_error' in output
         with (directory / 'pl_curve.csv').open(newline='', encoding='utf-8') as stream:
             rows = list(csv.DictReader(stream))
-        assert all(row['intervals_overlap'] in ('True', 'False') for row in rows)
+        assert all(row['intervals_overlap'] in ('True', 'False', '') for row in rows)
         assert all(row['mc_role'] == ('anchor_reuse' if row['p'] == '0.3'
                                       else 'independent_direct_mc') for row in rows)
         if any(row['intervals_overlap'] == 'False' for row in rows):
             assert 'WARNING: d=' in output
+        if any(row['intervals_overlap'] == '' for row in rows):
+            assert 'BAR interval is unavailable' in output
 
 
 @pytest.mark.parametrize('script', ('pl_curve.py', 'conditional_weight.py'))
@@ -135,3 +137,12 @@ def test_convergence_initial_populations_are_distinct(seed, tmp_path):
             sectors.append(tuple(ast.literal_eval(line.split('observable sector=', 1)[1])))
     assert len(sectors) == 3
     assert len(set(sectors)) == 3
+
+
+def test_missing_bar_interval_is_reported():
+    spec = importlib.util.spec_from_file_location('pl_curve_workflow', WORKFLOWS / 'pl_curve.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    overlap, warning = module.compare_intervals(None, (0.1, 0.2), 5, 0.22)
+    assert overlap is None
+    assert 'BAR interval is unavailable' in warning

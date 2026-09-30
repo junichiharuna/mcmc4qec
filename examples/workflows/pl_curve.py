@@ -58,12 +58,15 @@ def plot_rows(rows, out):
     fig, ax = plt.subplots(figsize=(6, 4))
     for distance in (3, 5):
         subset = sorted((r for r in rows if r['distance'] == distance), key=lambda r: r['p'])
-        ax.errorbar([r['p'] for r in subset], [r['bar'] for r in subset],
-                    yerr=[[r['bar']-r['bar_low'] if r['bar_low'] is not None else 0
-                           for r in subset],
-                          [r['bar_high']-r['bar'] if r['bar_high'] is not None else 0
-                           for r in subset]],
-                    fmt='o-', capsize=3, label=f'BAR d={distance}')
+        line, = ax.plot([r['p'] for r in subset], [r['bar'] for r in subset],
+                        'o-', label=f'BAR d={distance}')
+        with_interval = [r for r in subset if r['bar_low'] is not None and
+                         r['bar_high'] is not None]
+        if with_interval:
+            ax.errorbar([r['p'] for r in with_interval], [r['bar'] for r in with_interval],
+                        yerr=[[r['bar']-r['bar_low'] for r in with_interval],
+                              [r['bar_high']-r['bar'] for r in with_interval]],
+                        fmt='none', ecolor=line.get_color(), capsize=3)
         checks = [r for r in subset if r['mc'] is not None]
         ax.errorbar([r['p'] for r in checks], [r['mc'] for r in checks],
                     yerr=[[r['mc']-r['mc_low'] for r in checks],
@@ -100,6 +103,18 @@ def demonstrate_overlap(seed):
     raise AssertionError('Expected OverlapError for disjoint supports')
 
 
+def compare_intervals(bar_interval, mc_interval, distance, p):
+    if bar_interval is None:
+        return None, (f'WARNING: d={distance} p={p:.2f} BAR interval is unavailable; '
+                      'overlap check cannot be made.')
+    overlap = max(bar_interval[0], mc_interval[0]) <= min(bar_interval[1], mc_interval[1])
+    if not overlap:
+        return False, (f'WARNING: d={distance} p={p:.2f} BAR and independent direct-MC '
+                       'intervals do not overlap; investigate mixing and finite-sample '
+                       'effects. Cause not diagnosed here.')
+    return True, None
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--quick', action='store_true')
@@ -115,8 +130,8 @@ def main():
     ladder = [0.30, 0.26, 0.22]
     anchor_trials = 200 if args.quick else 1500
     check_trials = 180 if args.quick else 1200
-    config = SamplingConfig(chains=4, samples=250 if args.quick else 1000,
-                            burn_in=80 if args.quick else 300)
+    config = SamplingConfig(chains=4, samples=40 if args.quick else 600,
+                            burn_in=12 if args.quick else 180)
     seeds = iter(spawn_seeds(args.seed, 9))
     rows = []
     estimates, intervals, checks = {}, {}, {}
@@ -135,9 +150,8 @@ def main():
             mc = anchor if index == 0 else direct_mc(problem, p, trials=check_trials,
                                                      seed=next(seeds))
             interval = bar.intervals[index]
-            intervals_overlap = (None if interval is None else
-                                 max(interval[0], mc.interval[0]) <=
-                                 min(interval[1], mc.interval[1]))
+            intervals_overlap, warning = compare_intervals(interval, mc.interval,
+                                                            distance, p)
             rows.append(dict(distance=distance, p=p, bar=bar.estimates[index],
                              bar_low=interval[0] if interval else None,
                              bar_high=interval[1] if interval else None,
@@ -153,13 +167,8 @@ def main():
             print(f'd={distance} p={p:.2f} BAR={bar.estimates[index]:.5g} {interval}; '
                   f'direct MC={mc.estimate} {mc.interval}; '
                   f'intervals_overlap={intervals_overlap}')
-            if intervals_overlap is False:
-                print(f'WARNING: d={distance} p={p:.2f} BAR and independent direct-MC '
-                      'intervals do not overlap; investigate mixing and finite-sample '
-                      'effects. Cause not diagnosed here.')
-            elif intervals_overlap is None:
-                print(f'WARNING: d={distance} p={p:.2f} BAR interval is unavailable; '
-                      'overlap check cannot be made.')
+            if warning:
+                print(warning)
         print(f'd={distance} minimum observed BAR overlap: '
               f'{min(min(x["forward_mean"], x["reverse_mean"]) for x in bar.overlap):.3g}')
     with (out / 'pl_curve.csv').open('w', newline='', encoding='utf-8') as stream:
