@@ -2,14 +2,14 @@
 # Release URL, license, DOI, and publication date are unconfirmed.
 cff-version: 1.2.0
 message: >-
-  Citation metadata is provisional. Confirm authorship and publication details
-  with the project owner before citing a public software release.
+  Authorship is confirmed by the project owner. Publication details remain
+  provisional; confirm them before citing a public software release.
 type: software
 title: "Trustworthy rare-event splitting for general quantum codes"
 authors:
   - given-names: junichi
     family-names: haruna
-version: "0.1.0.dev1"
+version: "0.1.0.dev2"
 abstract: >-
   Local development prototype of reusable rare-event MCMC primitives for
   quantum error correction. The associated paper has not been assigned

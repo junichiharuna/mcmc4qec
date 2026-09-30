@@ -46,3 +46,5 @@ JUnit のファイル別合計時間の最大は `tests/test_pipeline.py` の15.
 pytest 自体は終了コード0であり、ラッパーのファイル別集計は修正した。
 B を `6f38eda` で統合し、同じ全 suite は 231 passed / 4 skipped、39.15 秒で成功した。
 B 統合後のファイル別合計最大は `tests/test_pipeline.py` の8.07秒だった。
+E を `6b0b885` で統合し、全 suite は 247 passed / 4 skipped、39.23 秒で成功した。
+E 統合後のファイル別合計最大は `tests/test_acceptance.py` の7.48秒だった。
