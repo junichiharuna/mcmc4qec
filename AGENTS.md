@@ -14,6 +14,10 @@ dev2（2026-09-30 の開発依頼 WP-A〜E、全て main に統合済み）で�
 - `src/mcmc4qec/` — パッケージ本体（import 名 `mcmc4qec`）。`core.py`（Model / Noise / Decoder / FailurePredicate の契約、`CSSCode`、`Problem`）、`noise.py`・`noise_categorical.py`（bit-flip、Pauli カテゴリ、phenomenological のノイズ）、`models.py`（depolarising と spacetime モデル）、`kernels.py`（OBF / Z / H / stabilizer、一般 MH）、`sampling.py`（`exact`、`direct_mc`、`sample_faulty`、config と seed 系列）、`estimation.py`（BAR、`estimate_logical_error`、block bootstrap）、`diagnostics.py`（IAT / ESS / split R-hat）、`results.py`（JSON 往復する Result と provenance）、`adapters.py`・`adapter_composition.py`（PyMatching / BP-OSD の wrapper、sector と履歴の合成）、`stim_dem.py`（DEM からのモデル構成）、`codes.py`（符号ファクトリ）、`decoders.py`（MWPM / BP-OSD / sector 復号の構築）、`fastpath.py`・`decode_cache.py`（product-noise の Zanella 高速経路と decode キャッシュ）、`convergence.py`（複数 chain 診断と `evaluate_convergence`）、`initial_states.py`（exact coset 初期化）、`circuit/`（物理回路 fault の `model.py`・`proposal.py`・`baselines.py`）
 - `tests/` — pytest。optional 依存込みで 268 passed / 4 skipped、全 suite は約 45〜80 秒（2026-09-30 時点）。小規模列挙で正規化・提案比・詳細釣合い・失敗条件を検証するのが流儀
 - `examples/` — `bit_flip.py`、`three_noise.py`、`bar_ladder.py`（core のみで動く）、`toric_pymatching.py`、`stim_dem.py`、`circuit_baseline.py`（optional 依存が要る）
+- `examples/workflows/` — BAR 曲線、条件付き重み、複数 chain 診断、p 依存 decoder の研究ワークフロー
+- `examples/templates/` — 符号・ノイズ・decoder・Stim DEM の持ち込み用テンプレートと実行前検査
+- `notebooks/` — 実行済みの英語チュートリアル4本と `regenerate.py`（既定出力の再生成、CI用quick実行）
+- `README_ja.md` — 英語版READMEと同じ構成の日本語案内（英語版が一次版）、`examples/README.md` — 実行例・notebookの一覧と実測時間
 - `benchmarks/bench_step.py` — 1 ステップの速度計測
 - `docs/` — `api_en.md`・`tutorial_en.md`（英語の公開文書）と日本語の設計・検証記録。`initial_library_ja.md`（設計と制約）、`stage1_ja.md`・`validation_stage1_ja.md`・`validation_initial_ja.md`（dev0 / dev1 時点）、`crossval_research_ja.md`・`performance_ja.md`・`convergence_ja.md`・`circuit_baseline_ja.md`（dev2 の各分野）、`dev_request_2026-09-30.md`（開発依頼書）、`wp/`（WP-A〜E の完了メモとレビュー、`integration_ja.md`、`validation_dev2_ja.md`、`final_report_ja.md`）
 - `docs/handoff/` — 2026-09-30 の Codex からの引き継ぎ。`HANDOFF.md`、`IMPLEMENTATION_PLAN.md`、`IMPLEMENTATION_STATUS.md`、`spec/RIMC_ライブラリ仕様書_v0.1.md`（ファイル名は v0.1、本文は v0.2。仕様の一次資料）
