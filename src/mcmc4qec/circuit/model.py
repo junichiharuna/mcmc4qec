@@ -117,6 +117,18 @@ class CircuitFaultModel:
         self.identifier = str(identifier)
         if not self.identifier:
             raise ValueError("identifier must be nonempty")
+        # Reuse ideal stretches when injecting each single-fault placement.
+        # Noise instruction indices retain the physical ordering, including
+        # distinct target groups belonging to the same source instruction.
+        self._ideal_segments = []
+        segment = stim.Circuit()
+        for index, instruction in enumerate(self._circuit):
+            if instruction.name in _NOISE:
+                self._ideal_segments.append((index, segment))
+                segment = stim.Circuit()
+            else:
+                segment.append(instruction)
+        self._ideal_segments.append((len(self._circuit), segment))
         self._base = self._injected_circuit(np.zeros(self.n, dtype=np.uint8))
         try:
             self._base.detector_error_model()
@@ -197,14 +209,12 @@ class CircuitFaultModel:
             if label:
                 selected.setdefault(loc.instruction_index, []).append((loc, int(label)))
         output = stim.Circuit()
-        for index, instruction in enumerate(self._circuit):
-            if instruction.name in _NOISE:
-                for loc, label in selected.get(index, ()):
-                    for pauli, target in zip(loc.faults[label-1], loc.targets):
-                        if pauli != "I":
-                            output.append(pauli, target)
-            else:
-                output.append(instruction)
+        for index, segment in self._ideal_segments:
+            output += segment
+            for loc, label in selected.get(index, ()):
+                for pauli, target in zip(loc.faults[label-1], loc.targets):
+                    if pauli != "I":
+                        output.append(pauli, target)
         return output
 
     def simulate_state(self, state):

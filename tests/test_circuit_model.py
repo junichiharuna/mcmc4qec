@@ -90,6 +90,41 @@ def test_repeated_target_groups_remain_distinct_physical_locations():
     assert exact(problem, .1).estimate == pytest.approx(2 * .1 * .9)
 
 
+@pytest.mark.parametrize("selected_only", [False, True])
+def test_fault_injection_preserves_gate_order_and_selected_locations(selected_only):
+    circuit = stim.Circuit("""
+        R 0 1
+        X_ERROR(0.1) 0 0
+        H 0
+        DEPOLARIZE2(0.1) 0 1
+        H 0
+        M 0 1
+        DETECTOR rec[-2]
+        OBSERVABLE_INCLUDE(0) rec[-1]
+    """)
+    locations = stim_noise_locations(circuit)
+    model = CircuitFaultModel.from_stim_circuit(
+        circuit, locations=locations[-1:] if selected_only else locations)
+    for state in itertools.product(*(range(a) for a in model.alphabets)):
+        expected = stim.Circuit("R 0 1")
+        if not selected_only:
+            for label in state[:2]:
+                if label:
+                    expected.append("X", 0)
+        expected.append("H", 0)
+        if state[-1]:
+            for qubit, pauli in enumerate(locations[-1].faults[state[-1] - 1]):
+                if pauli != "I":
+                    expected.append(pauli, qubit)
+        expected += stim.Circuit("""
+            H 0
+            M 0 1
+            DETECTOR rec[-2]
+            OBSERVABLE_INCLUDE(0) rec[-1]
+        """)
+        assert model._injected_circuit(np.asarray(state)) == expected
+
+
 def test_explicit_location_rule_filters_physical_channels():
     circuit = small_circuit()
     model = CircuitFaultModel.from_stim_circuit(
