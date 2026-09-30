@@ -4,6 +4,7 @@
 
 `src/mcmc4qec/circuit/` に、物理 `(location, fault)` 配置の `CircuitFaultModel`、排他的カテゴリの `CircuitFaultNoise`、`PhysicalFaultProposal`、surface logical idle baseline を追加した。
 Stim 回路の `X_ERROR`、`Y_ERROR`、`Z_ERROR`、`DEPOLARIZE1`、`DEPOLARIZE2` の各 target group を物理 location として列挙する。
+同じ命令の重複 target group は `target_group_index` で別の独立 location として識別する。
 利用者が物理 location の列挙規則を渡す入口も追加した。
 各 location の fault alphabet と条件付き確率を明示し、location 間の積分布と正規化された `log_prob` を与える。
 同一チャネル内でも location 別の条件付き fault 確率と故障率を指定できる。
@@ -26,10 +27,11 @@ rotated surface d=3 の noisy 6 ラウンドの中点に理想 `MPP` を置き�
 
 | 検証 | コマンドと結果 |
 | --- | --- |
-| 回路モデル | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py -q`、7 passed、0.29 秒。 |
+| 回路モデル | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py -q`、10 passed、0.32 秒。 |
 | 回路 pipeline | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_pipeline.py -q`、5 passed、3.39 秒。 |
 | 回路提案 | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_proposal.py -q`、3 passed、0.25 秒。 |
 | surface baseline | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_surface.py -q`、2 passed、20.64 秒。 |
+| 回路4ファイル | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q`、20 passed、25.53 秒。 |
 | 全 suite | 第1回レビュー修正前は 168 passed、45.11 秒。修正後の全 suite は約 296 秒で 5 分の制約に近づいたため停止し、最終合否は未確認。 |
 | core venv | 修正前の全 suite は 140 passed、15 skipped、235.38 秒だが別 suite との CPU 競合があった。Stim/PyMatching を含まない状態で回路パッケージと sampling の import に成功。 |
 | example | `PYTHONPATH=src` で `examples/circuit_baseline.py` を実行し、500 試行、失敗率 0.0900、Wilson 95% 区間 `[0.067943, 0.118309]` を得た。 |
@@ -41,6 +43,8 @@ rotated surface d=3 の noisy 6 ラウンドの中点に理想 `MPP` を置き�
 
 小回路の全配置で正規化、support、提案確率の正規化と順逆比、失敗条件を含む詳細釣合いを検証した。
 同一チャネルの location 間に異なる確率を与えた小回路でも、正規化、sampling、失敗集合上の MH 詳細釣合いを検証した。
+重複 `X_ERROR` target group は二つの独立 location として列挙され、`p=0.1` の exact 失敗率 `0.18` を得た。
+確率付き `M(0.2)` と `MPP(0.2)` は決定的な単一 fault 効果を壊すため、回路構築時に拒否する回帰試験を追加した。
 条件付き確率の和 `1.0000000005` を拒否する回帰試験を追加し、許容を絶対差 `1e-12` のみにした。
 repetition の `sample_faulty` と `estimate_logical_error` への接続、保存標本の failure 条件、非回路での `circuit_single` 拒否、回路での未対応 kernel 混合の拒否を検証した。
 ランダムな複数 fault 配置について、単一 fault 効果の XOR と直接 Stim 挿入シミュレーションを照合した。
@@ -71,7 +75,8 @@ PyMatching DEM の graphlike 分解に伴う decoder 近似は物理配置分布
 
 `docs/wp/C_review_ja.md` の第1回レビューは、2 ラウンド repetition の列挙範囲、location 別の非一様分布、確率和の相対許容の三点を指摘した。
 2 ラウンド全 6 location の exact と PyMatching・独立 Stim 照合、location 別 `q_i,p_i` と正規化・sampling・詳細釣合い試験、絶対許容の修正で対応した。
-第2回レビューは未実施。
+第2回レビューは進行中で、確率付き測定と同一命令の重複 target group に関する反例を修正した。
+最終受入判定はレビュー担当の確認待ち。
 
 ## 作業履歴
 

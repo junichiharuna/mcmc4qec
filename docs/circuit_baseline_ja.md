@@ -3,10 +3,12 @@
 ## 状態と確率
 
 物理的な Stim ノイズ命令の各 target group を一つの location とする。
+同じ命令内に同一 qubit または qubit pair が繰り返されても、`target_group_index` で区別した独立 location とする。
 各 location は無故障 `0` または一つの Pauli fault ラベルを取り、同じ location に二つの fault は置けない。
 利用者は `CircuitFaultModel.from_stim_circuit(..., location_rule=...)` で物理 location の列挙規則を渡せる。
 列挙規則が選ばなかったノイズ命令は基準回路から除去され、その location の故障率はゼロとなる。
 初期対象のノイズ命令は `X_ERROR`、`Y_ERROR`、`Z_ERROR`、`DEPOLARIZE1`、`DEPOLARIZE2` とする。
+確率引数付きの `M`、`MR`、`MPP` などは測定結果を乱数で反転するため、決定的な効果行列の対象外として構築時に拒否する。
 二量子ビットの alphabet は `IX` から `ZZ` までの非恒等 Pauli 15 種を一つの排他的カテゴリとして扱う。
 入力回路に書かれたノイズ確率は location 列挙にだけ使い、計算する分布は明示した条件付き alphabet 確率と指定した `p` で決める。
 `CircuitFaultNoise` はチャネル名別の確率辞書のほか、各 location に対応する確率ベクトル列を受け付ける。
@@ -51,10 +53,11 @@ decoder は DEM の graphlike 分解を用いる近似を含み得るため、�
 
 ## 実行した検証
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py -q` は 7 passed、0.29 秒だった。
+`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py -q` は 10 passed、0.32 秒だった。
 `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_pipeline.py -q` は 5 passed、3.39 秒だった。
 `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_proposal.py -q` は 3 passed、0.25 秒だった。
 `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_surface.py -q` は 2 passed、20.64 秒だった。
+`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q` は 20 passed、25.53 秒だった。
 全 suite の旧版 168 passed、45.11 秒という結果は第1回レビューへの修正前のものである。
 修正後の全 suite は約 296 秒で 5 分の上限に近づいたため、完走前に停止した。
 全 suite の最終合否は未確認であり、B の高速経路を統合した main で再検証する。
@@ -62,6 +65,8 @@ repetition d=3 の 1 ラウンドではデータノイズ 3 location の `4^3=64
 repetition d=3 の 2 ラウンドではデータノイズ全 6 location の `4^6=4096` 配置を全列挙し、zero decoder の `p=0.1` の失敗率が解析値 `0.1244444444` と一致した。
 同じ 2 ラウンド問題で Stim DEM から PyMatching decoder を構築すると、exact の失敗率は `0.02515682853` となり、独立 Stim 直接 20,000 試行の `510/20000=0.0255` と照合した。
 同一 `DEPOLARIZE1` チャネルの二つの location に異なる条件付き確率と故障率を与え、全配置の正規化、sampling、詳細釣合いを検証した。
+同じ `X_ERROR` 命令内の重複 target `0 0` は二つの独立 location として区別し、両方が `X` の配置では効果が相殺され、`p=0.1` の exact 失敗率が `2p(1-p)=0.18` となることを検証した。
+確率付きの `M(0.2)` と `MPP(0.2)` を構築時に拒否する回帰試験を実施した。
 小回路の `2×4=8` 配置ではノイズ正規化、排他的 support、提案確率の正規化と対称性、失敗集合上の詳細釣合いを検証した。
 repetition d=3 の配置を既存 `sample_faulty` と `estimate_logical_error` に渡し、物理 `circuit_single` 提案が選択されること、全保存標本が同じ failure 定義を満たすことを確認した。
 rotated surface d=3 の 6 ラウンド回路は 368 個の物理 location、48 個の detector と一つの中点 observable を持った。

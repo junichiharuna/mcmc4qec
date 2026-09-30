@@ -59,6 +59,37 @@ def test_unsupported_noisy_stim_gate_is_rejected():
         CircuitFaultModel.from_stim_circuit(circuit)
 
 
+@pytest.mark.parametrize("measurement", ["M(0.2) 0", "MPP(0.2) Z0"])
+def test_noisy_measurement_is_rejected_before_effect_cache(measurement):
+    circuit = stim.Circuit(f"""
+        R 0
+        X_ERROR(0) 0
+        {measurement}
+        DETECTOR rec[-1]
+        OBSERVABLE_INCLUDE(0) rec[-1]
+    """)
+    with pytest.raises(ValueError, match="noisy measurement"):
+        CircuitFaultModel.from_stim_circuit(circuit)
+
+
+def test_repeated_target_groups_remain_distinct_physical_locations():
+    circuit = stim.Circuit("""
+        R 0
+        X_ERROR(0.1) 0 0
+        M 0
+        DETECTOR rec[-1]
+        OBSERVABLE_INCLUDE(0) rec[-1]
+    """)
+    model = CircuitFaultModel.from_stim_circuit(circuit)
+    assert model.n == 2
+    assert [loc.target_group_index for loc in model.locations] == [0, 1]
+    assert model.syndrome([1, 1]).tolist() == [0]
+    noise = CircuitFaultNoise(model, {"X_ERROR": [1]})
+    problem = Problem(model, noise,
+        CallableDecoder(lambda syndrome: np.zeros(1, dtype=np.uint8), identifier="zero"))
+    assert exact(problem, .1).estimate == pytest.approx(2 * .1 * .9)
+
+
 def test_explicit_location_rule_filters_physical_channels():
     circuit = small_circuit()
     model = CircuitFaultModel.from_stim_circuit(

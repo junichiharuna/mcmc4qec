@@ -20,6 +20,8 @@ class FaultLocation:
 
     Attributes:
         instruction_index: Index of the source noise instruction after flattening.
+        target_group_index: Index of this independent target group within the
+            instruction, distinguishing repeated groups on the same qubits.
         targets: One qubit, or an ordered qubit pair for DEPOLARIZE2.
         channel: Supported Stim noise instruction name.
         faults: Nonidentity Pauli strings, in categorical label order 1, 2, ... .
@@ -30,6 +32,7 @@ class FaultLocation:
     targets: tuple[int, ...]
     channel: str
     faults: tuple[str, ...]
+    target_group_index: int = 0
 
 
 def stim_noise_locations(circuit):
@@ -55,6 +58,8 @@ def stim_noise_locations(circuit):
     for index, instruction in enumerate(circuit.flattened()):
         channel = instruction.name
         if channel not in _NOISE:
+            if channel in _IDEAL_MEASURE_RESET and instruction.gate_args_copy():
+                raise ValueError(f"unsupported noisy measurement or reset {channel}")
             if channel not in _IDEAL_MEASURE_RESET and stim.gate_data(channel).is_noisy_gate:
                 raise ValueError(f"unsupported noise instruction {channel}")
             continue
@@ -70,7 +75,7 @@ def stim_noise_locations(circuit):
             if any(not target.is_qubit_target for target in group):
                 raise ValueError("noise targets must be qubits")
             locations.append(FaultLocation(index, tuple(target.value for target in group),
-                                           channel, faults))
+                                           channel, faults, offset // size))
     return tuple(locations)
 
 
@@ -228,7 +233,8 @@ class CircuitFaultModel:
     def metadata(self):
         return identified(dict(type="CircuitFaultModel", identifier=self.identifier,
             source_circuit=str(self._circuit), stim_version=version("stim"),
-            locations=[dict(instruction_index=x.instruction_index, targets=x.targets,
+            locations=[dict(instruction_index=x.instruction_index,
+                            target_group_index=x.target_group_index, targets=x.targets,
                             channel=x.channel, faults=x.faults) for x in self.locations],
             distribution="physical exclusive categorical locations",
             observable="detector and logical flips relative to noiseless circuit"))
