@@ -34,3 +34,20 @@ optional 依存なしの対象テストは担当実測で `40 passed, 26 skipped
 
 Python は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` を使い、AST による docstring 存在検査のみ実行した結果は `15 15 []` だった。
 全 suite と約40秒の担当テストは並列実行枠を避けるためこのレビューでは再実行しておらず、担当の `66 passed, 39.65 秒` および `40 passed, 26 skipped` を独立実測とは扱わない。
+
+## 第2回最終レビュー（2026-09-30）
+
+修正 commit `f14710b` と `eda1462` を確認した。
+第1回の中指摘だった研究 decoder 関数との直接照合は、`RIMC_RESEARCH_ROOT` を指定する `tests/test_crossval_research.py` の live テストで解消した。
+研究の四つの decoder factory を実際に呼び、toric d=3 の実現可能256 syndrome それぞれの論理予測を照合している。
+同じファイルを指定 Python 3.11 と研究 root 指定で独立実行した結果は `19 passed in 1.23s` だった。
+第1回の数値再現性の指摘は、`docs/wp/A_reproduce.py` に Problem、decoder prior、seed、試行数、初期状態、ESS を使う参考区間の式、全 Result JSON の出力方法が固定されたため解消した。
+元の長い exact、100000試行 direct MC、3000標本 Z+H は再実行しておらず、元実行の生 Result は保存されていないという限界が明記されている。
+このレビューでは `direct --code bb72 --smoke` と `zh --code toric5 --smoke` がそれぞれ正常終了することを独立確認したが、smoke の値を元の数値表の追試結果とは扱わない。
+第1回の低指摘だった大きい符号の距離は公開 docstring でも研究ラベルと下界未検証を区別するよう修正された。
+第2回で発見した `--output` の研究 checkout 内書込み可能性は、全出力で研究 root 指定を要求して実在と出力先を検査する `eda1462` で解消した。
+拒否試験二件は実際の研究 checkout に書き込まず一時ディレクトリを用いている。
+core-only 環境では同じテストファイルが独立実行で `8 passed, 11 skipped in 0.47s` となり、optional 依存のない環境で live 比較は skip された。
+研究 checkout の `git status --porcelain=v1` は最終確認でも出力なしだった。
+第2回の判定は WP-A の受入であり、長い数値照合は担当が報告した実測と再現手順を証拠とする。
+全 suite、installed wheel、remote CI は統合側の検証事項として残る。
