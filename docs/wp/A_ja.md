@@ -52,8 +52,10 @@ toric d=5 のノイズからの初期化は上限10000回で失敗したため�
 この契約は既定の paired 検証を維持し、研究行列を無変換で受け取る。
 メインの独立レビューはこの共通契約の実装に問題なしとし、予測座標同時変換の説明修正と非ゼロ補正の追加試験を main commit `f5323c1` に入れた。
 WP-A の第1回独立レビューは `docs/wp/A_review_ja.md` にあり、研究 decoder 直接比較、数値表の再現手順、大符号距離 docstring の計3件を指摘した。
-対応 commit `f14710b` で live 研究 decoder テスト、再現スクリプト、距離根拠の説明を追加し、第2回レビューは未完了である。
-第2回レビューで再現スクリプトの `--output` が研究root未指定時に研究 checkout 内へ書ける穴が見つかり、全出力でroot指定を必須にして拒否試験二件を追加した。
+対応 commit `f14710b` で live 研究 decoder テスト、再現スクリプト、距離根拠の説明を追加した。
+第2回レビューで再現スクリプトの `--output` が研究root未指定時に研究 checkout 内へ書ける穴が見つかり、commit `eda1462` で全出力時のroot指定を必須にして拒否試験二件を追加した。
+最終独立レビューは `docs/wp/A_review_ja.md` に受入と記録され、review commit は `a730d90` である。
+レビュー担当は live 比較19 passed、core-only 8 passed/11 skipped、および出力拒否を独立確認した。
 メインには `__init__.py` へ `make_asymmetric_toric_code`、`make_hgp_hamming`、`make_bb_code`、`make_bb_code_72`、`make_bb_code_108`、`make_bb_code_144`、`make_steane_code`、`concatenate_css`、`make_concatenated_steane_code` と四つの decoder factory の追加を依頼する。
 メイン commit `916612b` は `pyproject.toml` の `[codes]` optional extra に `ldpc>=2.4,<3` と `bposd>=2.1,<3` を追加済みである。
 toric を使う README の install command には codes 依存を含める必要がある。
