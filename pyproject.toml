@@ -9,12 +9,26 @@ description = "Reference rare-event MCMC primitives for quantum error correction
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = ["numpy>=1.24,<3"]
-classifiers = ["Development Status :: 2 - Pre-Alpha", "Programming Language :: Python :: 3"]
+keywords = ["quantum error correction", "rare-event sampling", "MCMC", "splitting"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Repository = "https://github.com/junichiharuna/mcmc4qec"
+Issues = "https://github.com/junichiharuna/mcmc4qec/issues"
+Documentation = "https://github.com/junichiharuna/mcmc4qec/blob/main/docs/api_en.md"
 
 [project.optional-dependencies]
 test = ["pytest>=8,<10"]
 matching = ["pymatching>=2.4,<3"]
 bposd = ["ldpc>=2.4,<3"]
+codes = ["ldpc>=2.4,<3", "bposd>=2.1,<3"]
 stim = ["stim>=1.16,<2"]
 
 [tool.setuptools.packages.find]
