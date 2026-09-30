@@ -35,3 +35,12 @@ WP-D の監査結果に基づき、core、noise、results、Stim 接続の公開
 最終統合に向けて pyproject と実行時 VERSION を `0.1.0.dev2` に更新したが、この更新だけで WP の受入完了とは扱わない。
 core と optional の別 venv は作成済みで、最終 wheel の導入と検証は未実施である。
 基準 Python に build は未導入のため、既存の D 作業用 `.venv-cff/Scripts/python.exe` の build 1.6.1 を最終 wheel の構築に使う。
+
+## WP の順次統合
+
+A の第2回独立レビュー受入後、`f3eec34` で統合し、完了メモの最終追記も `3308b2a` に取り込んだ。
+`python -m pytest tests -q --durations=10 --junitxml=output/merge_a.xml` は 218 passed / 4 skipped、68.77 秒で成功した。
+skip は研究 checkout を環境変数で指定した場合だけ実行する4種類の直接 decoder 照合であり、この照合は A の独立レビューで別途成功している。
+JUnit のファイル別合計時間の最大は `tests/test_pipeline.py` の15.68秒で、各ファイル60秒および全suite5分の上限内だった。
+検証ラッパーの最初の集計では classname の先頭 `tests` を使って全ファイルを一括計上したため予算超過と誤表示したが、JUnit の完全な classname で再集計し上記を確認した。
+pytest 自体は終了コード0であり、ラッパーのファイル別集計は修正した。
