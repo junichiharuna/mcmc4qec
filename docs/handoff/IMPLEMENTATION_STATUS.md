@@ -74,3 +74,11 @@ main `f5323c1` の全 suite は 164 passed、40.40 秒だった。
 各 WP の実装・独立レビュー・main 統合、dev2 wheel の別環境検証、version 更新、push、remote CI、最終報告は未完了である。
 研究リポジトリ `C:/dev/RIMC` は変更せず、直近の git status も clean だった。
 今回の検証と判断の詳細は `docs/wp/phase0_ja.md` と `docs/wp/integration_ja.md` に記録した。
+
+## 2026-09-30 12:05 JST ユーザー指定の中断
+
+ユーザーが一旦中断して後日再開できるようにすることを指示したため、実装と並列担当を停止した。
+未完了の A/C/E を各 worktree の checkpoint commit に保存し、B/D の既存成果とレビュー記録も保持した。
+再開の起点、各 HEAD、未完了レビュー、merge の注意点と残る達成条件は `docs/wp/RESUME_ja.md` に記録した。
+ユーザーの再開指示までは作業を再開しない。
+main への WP 統合、dev2 最終 wheel 検証、push、remote CI、最終報告は未完了である。
