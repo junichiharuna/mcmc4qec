@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mcmc4qec"
-version = "0.1.0.dev1"
+version = "0.1.0.dev2"
 description = "Reference rare-event MCMC primitives for quantum error correction"
 readme = "README.md"
 requires-python = ">=3.11"

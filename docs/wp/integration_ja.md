@@ -28,3 +28,10 @@ main `f5323c1` の全 suite は 164 passed、40.40 秒だった。
 実装が未 commit という古い理由は削除し、commit がパッケージに埋め込まれていないため hash を使うと明示する。
 ネストしたソースの内容変更およびファイル名変更が hash に反映される試験を実行した。
 WP-D の監査結果に基づき、core、noise、results、Stim 接続の公開 docstring に引数、返り値、例外と実験全体の単位を補った。
+
+## 再開後の統合準備
+
+2026-09-30 14:02 JST にユーザーの明示指示で再開した。
+最終統合に向けて pyproject と実行時 VERSION を `0.1.0.dev2` に更新したが、この更新だけで WP の受入完了とは扱わない。
+core と optional の別 venv は作成済みで、最終 wheel の導入と検証は未実施である。
+基準 Python に build は未導入のため、既存の D 作業用 `.venv-cff/Scripts/python.exe` の build 1.6.1 を最終 wheel の構築に使う。

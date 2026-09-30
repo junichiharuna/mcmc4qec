@@ -7,7 +7,7 @@ import hashlib
 import numpy as np
 from .core import json_value
 
-VERSION = "0.1.0.dev1"
+VERSION = "0.1.0.dev2"
 REFERENCE_COMMIT = "69efcfcc86af3bf24ca977a098dab0f348601aff"
 
 
