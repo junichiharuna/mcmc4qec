@@ -3,7 +3,22 @@ Estimate logical error probabilities for CSS quantum codes with exact enumeratio
 Sample failure-conditioned errors with configurable OBF, Zanella (Z), cluster exchange (H), and stabilizer kernels.
 Bring your own code, normalized noise distribution, deterministic decoder, and failure predicate.
 
-This pre-alpha package is under active validation. Install from a local checkout with `python -m pip install -e ".[codes,matching]"` for the following example:
+This pre-alpha package is under active validation. [日本語版](README_ja.md).
+
+## Install and first run
+
+Install a local checkout with `python -m pip install -e .` for core examples. The following toric example needs `python -m pip install -e ".[codes,matching]"`: `make_toric_code` currently needs the `codes` extra.
+
+| Extra | Use |
+| --- | --- |
+| `codes` | Toric, surface, asymmetric toric, Hamming HGP, and BB code factories |
+| `matching` | PyMatching decoders |
+| `bposd` | BP-OSD decoder dependency |
+| `stim` | Stim DEM and circuit examples |
+| `plot` | Optional PNG plots in workflow scripts; CSV remains available without it |
+| `notebooks` | Jupyter notebook execution and plotting |
+
+Install several at once with `python -m pip install -e ".[codes,matching,bposd,stim,plot,notebooks]"`. See the [full example index](examples/README.md) for the dependencies of each file.
 
 ```python
 import numpy as np
@@ -46,6 +61,17 @@ print(result.estimates, result.intervals)
 
 The complete runnable ladder, including its three-bit `Problem`, is in [examples/bar_ladder.py](examples/bar_ladder.py). Keep the same decoder and failure definition across a standard ladder. An MC anchor must observe positive failure mass. Missing observed support overlap raises `OverlapError`.
 
+## Choose a starting point
+
+| Goal | Start here |
+| --- | --- |
+| Estimate absolute `P_L` | [Steane exact/MC/BAR comparison](examples/steane_exact.py), [toric BAR curve](examples/workflows/pl_curve.py), or [BAR notebook](notebooks/02_pl_curve_with_bar.ipynb) |
+| Explore a failure-conditioned distribution | [Conditional weight comparison](examples/workflows/conditional_weight.py), [multiple-chain checks](examples/workflows/convergence_check.py), or [diagnostics notebook](notebooks/03_conditional_sampling_and_diagnostics.ipynb) |
+| Bring your own code, noise, or decoder | [CSS template](examples/templates/byo_css_bitflip.py), [noise template](examples/templates/byo_noise.py), [decoder template](examples/templates/byo_decoder.py), or [component notebook](notebooks/04_bring_your_own.ipynb) |
+| Work with detector or physical circuit faults | [Stim DEM template](examples/templates/byo_stim_dem.py), [DEM example](examples/stim_dem.py), or [physical circuit baseline](examples/circuit_baseline.py) |
+
+For a guided first run, open [the quickstart notebook](notebooks/01_quickstart.ipynb). The [example index](examples/README.md) lists every script and notebook, its required extras, and how to read its output. For component contracts, use the [API reference](docs/api_en.md) and [bring-your-own-components tutorial](docs/tutorial_en.md).
+
 | Noise and state | OBF / Z / H | Stabilizer flip | Decoder connection |
 | --- | --- | --- | --- |
 | Static CSS bit-flip | Supported | Optional | PyMatching or deterministic user decoder; BP-OSD through `DecoderAdapter` |
@@ -54,12 +80,12 @@ The complete runnable ladder, including its three-bit `Problem`, is in [examples
 | Stim detector error model | Supported on latent mechanism bits | Unavailable | Matching from a graphlike DEM, or a user decoder |
 | Physical Stim circuit locations | Explicit physical single-fault kernel only; Z/H unavailable | Unavailable | Midpoint surface logical-idle baseline with PyMatching |
 
-`exact` enumerates small categorical state spaces; `direct_mc` uses a fixed trial count; `sample_faulty` samples normalized noise conditioned on failure; `estimate_logical_error` uses adjacent BAR ratios and an anchor. See the [API reference](docs/api_en.md) and [bring-your-own-components tutorial](docs/tutorial_en.md). Optional connections use `pip install ".[codes]"`, `".[matching]"`, `".[bposd]"`, or `".[stim]"`.
+`exact` enumerates small categorical state spaces; `direct_mc` uses a fixed trial count; `sample_faulty` samples normalized noise conditioned on failure; `estimate_logical_error` uses adjacent BAR ratios and an anchor.
 
-Code factories include toric and surface codes, asymmetric toric, Hamming HGP, BB72/108/144, Steane, and concatenated Steane; install `".[codes]"` for HGP-based factories. Decoder constructors cover MWPM and BP-OSD for bit-flip and explicit sector decoding for depolarising noise. `SamplingConfig(cache_cap=..., cache_policy=...)` bounds deterministic decode caching, and `KernelConfig(zanella_fastpath=True)` uses the verified product-noise path when available. Diagnostics now include multiple-chain summaries, exact CSS coset initialization helpers, and a four-check `evaluate_convergence` screen that requires an independent direct-MC conditional variance for a complete verdict. These checks cannot prove mixing or correctness.
+Code factories include toric and surface codes, asymmetric toric, Hamming HGP, BB72/108/144, Steane, and concatenated Steane; the current toric, surface, asymmetric toric, Hamming HGP, and BB factories need `".[codes]"`. Decoder constructors cover MWPM and BP-OSD for bit-flip and explicit sector decoding for depolarising noise. `SamplingConfig(cache_cap=..., cache_policy=...)` bounds deterministic decode caching, and `KernelConfig(zanella_fastpath=True)` uses the verified product-noise path when available. Diagnostics now include multiple-chain summaries, exact CSS coset initialization helpers, and a four-check `evaluate_convergence` screen that requires an independent direct-MC conditional variance for a complete verdict. These checks cannot prove mixing or correctness.
 
 The physical circuit baseline samples mutually exclusive fault labels at supported Stim noise locations and has its own explicit `KernelConfig(circuit_single=1, single=0, zanella=0, cluster=0, stabilizer=0)` setting. The default Z+H kernel is unsupported for that state space. The surface logical-idle example evaluates a midpoint observable after the first d of 2d noisy rounds; its DEM is used for decoder construction, while sampling stays on physical locations. See [examples/circuit_baseline.py](examples/circuit_baseline.py).
 
 Diagnostics such as ESS and split R-hat do not prove convergence, ergodicity, or correctness. A chain can remain trapped even when its weight trace looks healthy. The `p_dependent_decoder_approx` BAR mode explicitly ignores changes in failure sets and its interval omits that bias. Model support and initialization limits, observed overlap, finite samples, and block length also limit estimates. DEM sampling does not establish equivalence to every physical circuit noise model. The circuit baseline does not establish reproduction of published figures.
 
-The associated paper is in preparation. The software citation names junichi haruna as instructed by the project owner; DOI, release date, license, and public release details remain pending. See [CITATION.cff](CITATION.cff) and [CONTRIBUTING.md](CONTRIBUTING.md). No license has been selected and this repository has not been published as a public package.
+The associated paper is in preparation. The software citation names junichi haruna as instructed by the project owner; affiliation, DOI, release date, license, and public release details remain pending. See [CITATION.cff](CITATION.cff) and [CONTRIBUTING.md](CONTRIBUTING.md). No license has been selected and this repository has not been published as a public package.
