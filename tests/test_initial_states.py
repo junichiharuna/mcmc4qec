@@ -1,5 +1,4 @@
 import itertools
-from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -65,10 +64,9 @@ def test_independent_crossing_matrix_and_sample_faulty_input():
     assert result.metadata["config"]["initial_states"] == starts.tolist()
 
     # The crossing matrix need only be invertible, not the identity.
-    unpaired = SimpleNamespace(
-        lx=np.array([[1, 0], [0, 1]], dtype=np.uint8),
-        lz=np.array([[1, 1], [0, 1]], dtype=np.uint8),
-        hx=np.zeros((0, 2), dtype=np.uint8), hz=np.zeros((0, 2), dtype=np.uint8))
+    unpaired = CSSCode(
+        hx=np.zeros((0, 2), dtype=np.uint8), hz=np.zeros((0, 2), dtype=np.uint8),
+        lx=[[1, 0], [0, 1]], lz=[[1, 1], [0, 1]], logical_basis="independent")
     x = observable_sector_initial_state(unpaired, [0, 1])
     assert np.array_equal(unpaired.lz @ x % 2, [0, 1])
 

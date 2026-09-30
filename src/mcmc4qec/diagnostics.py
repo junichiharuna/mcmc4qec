@@ -5,7 +5,11 @@ import numpy as np
 
 
 def _iat(x):
-    """Return Geyer initial-positive, monotone-pair IAT for a variable trace."""
+    """Return positive Geyer paired IAT, or None if the estimate is nonpositive.
+
+    Negative serial correlation can give IAT below one and ESS above the
+    recorded sample count. Clamping at one would lose that information.
+    """
     n = len(x)
     centered = x - x.mean()
     transform = np.fft.rfft(centered, n=2 * n)
@@ -16,7 +20,8 @@ def _iat(x):
     if len(nonpositive):
         pairs = pairs[:nonpositive[0]]
     pairs = np.minimum.accumulate(pairs) if len(pairs) else pairs
-    return max(1.0, float(-1 + 2 * pairs.sum()))
+    tau = float(-1 + 2 * pairs.sum())
+    return tau if np.isfinite(tau) and tau > 0 else None
 
 
 def weight_traces(results):
@@ -94,10 +99,12 @@ def diagnose(results):
             if np.var(trace) == 0:
                 continue
             tau = _iat(trace)
+            if tau is None:
+                continue
             report["chain_iat"][j] = tau
             report["chain_ess"][j] = float(n / tau)
         if any(tau is None for tau in report["chain_iat"]):
-            warnings.append("constant chain: IAT/ESS undefined")
+            warnings.append("constant chain or nonpositive IAT estimate: IAT/ESS undefined")
         else:
             report["iat"] = float(np.mean(report["chain_iat"]))
             report["ess"] = float(sum(report["chain_ess"]))
