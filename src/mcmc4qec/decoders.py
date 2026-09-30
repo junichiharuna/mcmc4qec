@@ -20,7 +20,7 @@ def _mwpm(checks, logical_map, identifier):
 
 
 def _error_sector(errors):
-    if errors not in ("X", "Z") or not isinstance(errors, str):
+    if not isinstance(errors, str) or errors not in ("X", "Z"):
         raise ValueError("errors must be 'X' or 'Z'")
     return errors
 

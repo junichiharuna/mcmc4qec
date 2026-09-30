@@ -8,12 +8,14 @@ import sys
 
 import numpy as np
 import pytest
+import mcmc4qec
 
 from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip, KernelConfig,
                        PhenomenologicalModel, PhenomenologicalNoise, Problem,
                        SamplingConfig, exact, sample_faulty)
 from mcmc4qec.codes import (make_bb_code_72, make_hgp_hamming,
-                            make_steane_code, make_toric_code)
+                            make_steane_code, make_toric_code,
+                            make_asymmetric_toric_code)
 from mcmc4qec.decoders import bposd_decoder, mwpm_decoder
 from mcmc4qec.fastpath import _probability_rows
 from mcmc4qec.initial_states import minimum_weight_initial_state
@@ -70,6 +72,8 @@ def test_binary_sector_all_states_and_exact_duality():
 
 def test_repetition_code_has_distinct_x_and_z_failure_rates():
     code = repetition3()
+    assert code.bit_flip_model().syndrome([1, 0, 0]).tolist() == [1, 0]
+    assert code.phase_flip_model().syndrome([1, 0, 0]).tolist() == []
     x_decoder = CallableDecoder(lambda syndrome: [int(tuple(syndrome) == (1, 0))],
                                 identifier="minimum-weight-x")
     z_decoder = CallableDecoder(lambda syndrome: [0], identifier="zero-z")
@@ -79,6 +83,21 @@ def test_repetition_code_has_distinct_x_and_z_failure_rates():
     assert x.estimate == pytest.approx(3 * p**2 - 2 * p**3)
     assert z.estimate == pytest.approx(3 * p * (1-p)**2 + p**3)
     assert x.estimate != pytest.approx(z.estimate)
+
+
+def test_asymmetric_toric_phase_exact_equals_dual_bit_exact():
+    pytest.importorskip("pymatching")
+    pytest.importorskip("bposd")
+    code = make_asymmetric_toric_code(2, 3)
+    dual_code = dual(code)
+    assert not np.array_equal(code.hx, code.hz)
+    phase = Problem(code.phase_flip_model(), IndependentBitFlip(code.n),
+                    mwpm_decoder(code, errors="Z"))
+    reference = Problem(dual_code.bit_flip_model(), IndependentBitFlip(code.n),
+                        mwpm_decoder(dual_code))
+    got, expected = exact(phase, .13), exact(reference, .13)
+    assert got.estimate == pytest.approx(expected.estimate, abs=1e-12)
+    assert got.conditional_weight == pytest.approx(expected.conditional_weight, abs=1e-12)
 
 
 def test_z_decoder_selection_validation_and_existing_identifier():
@@ -110,6 +129,19 @@ def test_z_bposd_identifier_and_default_unchanged():
     z = bposd_decoder(code, .1, errors="Z", osd_order=2)
     assert x.metadata()["identifier"] == "bposd-css-x"
     assert z.metadata()["identifier"] == "bposd-css-z"
+
+
+def test_z_bposd_predictions_use_x_checks_on_nonselfdual_code():
+    ldpc = pytest.importorskip("ldpc")
+    code = dual(repetition3())
+    reference = ldpc.BpOsdDecoder(code.hx, error_rate=.1, max_iter=100,
+                                  bp_method="min_sum", osd_method="osd_cs",
+                                  osd_order=1)
+    decoder = bposd_decoder(code, .1, errors="Z", osd_order=1)
+    for bits in product((0, 1), repeat=len(code.hx)):
+        syndrome = np.asarray(bits, dtype=np.uint8)
+        expected = code.lx @ reference.decode(syndrome) % 2
+        np.testing.assert_array_equal(decoder.predict(syndrome), expected)
 
 
 @pytest.mark.parametrize("representation", ["history", "difference"])
@@ -168,17 +200,21 @@ def test_phenomenological_phase_flip_check_history_and_fastpath():
 
 
 def test_z_coset_initializer_is_faulty_and_chain_targets_exact_weight():
-    code = repetition3()
+    code = dual(repetition3())
     state = minimum_weight_initial_state(code, sector="z")
-    decoder = CallableDecoder(lambda syndrome: [0], identifier="zero")
+    decoder = CallableDecoder(lambda syndrome: [int(tuple(syndrome) == (1, 0))],
+                              identifier="minimum-weight-z")
     problem = Problem(code.phase_flip_model(), IndependentBitFlip(3), decoder)
     assert problem.is_faulty(state)
     truth = exact(problem, .3)
     chain = sample_faulty(problem, .3, initial_state=state, seed=724,
         config=SamplingConfig(samples=3000, burn_in=200,
             kernels=KernelConfig(zanella=.7, cluster=.3, cluster_k=1, lazy=.05)))
-    observed = np.count_nonzero(chain.states, axis=-1).mean()
-    assert abs(observed - truth.conditional_weight) < .12
+    weights = np.count_nonzero(chain.states, axis=-1).ravel()
+    ess = chain.diagnostics["ess"]
+    assert ess is not None and ess > 100
+    half_width = 1.959963984540054 * np.std(weights, ddof=1) / np.sqrt(ess)
+    assert weights.mean() - half_width <= truth.conditional_weight <= weights.mean() + half_width
 
 
 def test_invalid_phenomenological_data_noise():
@@ -191,7 +227,7 @@ def test_example_quick_cli(tmp_path):
     pytest.importorskip("pymatching")
     pytest.importorskip("bposd")
     script = Path(__file__).resolve().parents[1] / "examples" / "phase_flip_asymmetric.py"
-    env = dict(os.environ, PYTHONPATH=str(script.parents[1] / "src"))
+    env = dict(os.environ, PYTHONPATH=str(Path(mcmc4qec.__file__).resolve().parent.parent))
     run = subprocess.run([sys.executable, str(script), "--quick", "--seed", "20261001",
                           "--out", str(tmp_path)], capture_output=True, text=True,
                          timeout=10, env=env)
