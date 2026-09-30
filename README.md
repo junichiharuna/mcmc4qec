@@ -19,6 +19,7 @@ p = 0.1
 mc = direct_mc(problem, p, trials=2_000, seed=11)
 chain = sample_faulty(problem, p, config=SamplingConfig(samples=100, burn_in=20), seed=12)
 print("Direct MC P_L and 95% Wilson interval:", mc.estimate, mc.interval)
+print("Direct MC E[weight | faulty]:", mc.conditional_weight)
 print("Z+H E[weight | faulty]:", np.count_nonzero(chain.states, axis=-1).mean())
 ```
 

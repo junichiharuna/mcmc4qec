@@ -17,6 +17,7 @@ def main():
     mc = direct_mc(problem, p, trials=2_000, seed=11)
     chain = sample_faulty(problem, p, config=SamplingConfig(samples=100, burn_in=20), seed=12)
     print(f"Toric d=5, p={p}: direct MC P_L={mc.estimate:.4f}, interval={mc.interval}")
+    print(f"Direct MC E[weight | faulty]={mc.conditional_weight:.3f}")
     print(f"Conditional MCMC E[weight | faulty]={np.count_nonzero(chain.states, axis=-1).mean():.3f}")
     print("Kernels:", chain.metadata["config"]["expanded_move_probabilities"])
 

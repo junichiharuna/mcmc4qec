@@ -23,7 +23,7 @@ print(exact(problem, 0.25).estimate)  # 0.15625
 
 ## Your normalized noise
 
-A custom noise object has `n`, matching `alphabets`, `sample(p, rng)`, `log_prob(state, p)`, and JSON-compatible `metadata()`. Its `log_prob` is the normalized log probability of the **full** state under parameter `p`. Return negative infinity for zero support. The sampler must draw from that same distribution. This example uses two different per-qubit rates while retaining a scalar ladder parameter:
+A custom noise object has `n`, matching `alphabets`, `sample(p, rng)`, `log_prob(state, p)`, and JSON-compatible `metadata()`. Its `log_prob` is the normalized log probability of the **full** state under parameter `p`. Return negative infinity for zero support. The sampler must draw from that same distribution. This example uses three different per-qubit rates while retaining a scalar ladder parameter:
 
 ```python
 import math
