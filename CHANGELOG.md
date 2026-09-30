@@ -5,6 +5,26 @@
 - Rename the package and repository from the provisional `rimc` to `mcmc4qec`
   (import name `mcmc4qec`). No API change.
 
+## 0.1.0.dev2 — development
+
+- Add real CSS code factories and MWPM/BP-OSD decoder constructors, with
+  reproducible matrix, decoder, exact, Monte Carlo, and BAR research comparisons.
+- Accept explicitly requested independent logical bases without changing the
+  default paired-basis contract or the supplied observable ordering.
+- Accelerate product-noise Zanella proposals and add configurable decoder
+  caching and syndrome updates, with enumerated transition-equivalence tests.
+  Research-runner speed parity remains unmet; profiling records the next steps.
+- Add multiple-chain diagnostics, four convergence consistency checks, and
+  exact coset-based initialization. Diagnostics do not prove convergence.
+- Add physical circuit-fault configurations, exclusive location alphabets,
+  single-fault MH proposals, and a midpoint surface-code baseline. Physical
+  circuit Z/H/stabilizer proposals remain unsupported.
+- Expand the README, API/tutorial, examples, optional-dependency packaging,
+  citation metadata, and installed-wheel CI on Python 3.11 and 3.12.
+- Include nested package sources in provenance fingerprints.
+
+This is a private development version, not a published release.
+
 ## 0.1.0.dev0 — unreleased
 
 - Establish an independent `src/mcmc4qec` package for finite binary states and
