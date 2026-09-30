@@ -79,6 +79,7 @@ def test_nonbinary_coset_and_invalid_sector_rejected():
 
 
 def test_exact_milp_branch_for_thirteen_stabilizers():
+    pytest.importorskip("scipy.optimize")
     rows = np.eye(13, 14, dtype=np.uint8)
     logical = np.ones(14, dtype=np.uint8)
     representative = minimum_weight_coset_representative(logical, rows)
@@ -86,6 +87,7 @@ def test_exact_milp_branch_for_thirteen_stabilizers():
 
 
 def test_nontrivial_milp_matches_full_coset_enumeration():
+    pytest.importorskip("scipy.optimize")
     rng = np.random.default_rng(40)
     rows = np.hstack((np.eye(13, dtype=np.uint8),
                       rng.integers(0, 2, size=(13, 3), dtype=np.uint8)))
