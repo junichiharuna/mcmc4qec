@@ -31,3 +31,9 @@ exact または失敗を観測した MC anchor、overlap 不足時の `OverlapEr
 `git diff --check main...HEAD` は成功した。
 `test_docs_manifest.py` は実在ファイルとの双方向の一覧照合、相対リンク、英日 Python ブロックの一致を検査しており、依頼書の指定に沿う。
 統合後の全リンクと一覧、実例の出力と説明の整合、英語 README ブロックの installed wheel 実行、時間の実測はこのレビュー時点では未実施である。
+
+## 再レビューと最終判断
+
+担当者の `1091a495` を確認し、英日 README の extras 表と符号ファクトリ段落が toric、surface、asymmetric toric、Hamming HGP、BB の現行 `codes` 依存を一致して示すよう修正された。
+初回指摘は解消したため、WP-J の文書と文書テストを統合可能と判断する。
+統合後の時間表、全リンク、全テスト、installed wheel の検証はメインの受入作業として残る。
