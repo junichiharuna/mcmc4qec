@@ -25,8 +25,10 @@ def _css_code(hx, hz, lx, lz, *, logical_basis="paired"):
 def make_toric_code(d: int) -> CSSCode:
     """Return the [[2*d*d, 2, d]] toric code in research HGP ordering.
 
-    Requires optional ldpc and bposd packages. Raises ValueError unless d is
-    an integer at least two. The result contains paired CSS logical matrices.
+    ``d`` is an integer at least two. Returns a CSSCode with paired X/Z
+    logical matrices in research row order. Raises ValueError for invalid d
+    and ImportError unless optional ldpc and bposd are installed. No noise
+    probability or time-round unit is implied by this static code.
     """
     d = _distance(d)
     from ldpc.codes import ring_code
@@ -37,8 +39,10 @@ def make_toric_code(d: int) -> CSSCode:
 def make_surface_code(d: int) -> CSSCode:
     """Return the [[2*d*d-2*d+1, 1, d]] unrotated surface code.
 
-    Requires optional ldpc and bposd packages. Raises ValueError unless d is
-    an integer at least two. The result uses research HGP matrix ordering.
+    ``d`` is an integer at least two. Returns a CSSCode with paired X/Z
+    logical matrices in research HGP order. Raises ValueError for invalid d
+    and ImportError unless optional ldpc and bposd are installed. This is a
+    static code and defines no probability or round unit.
     """
     d = _distance(d)
     from ldpc.codes import rep_code
@@ -49,8 +53,10 @@ def make_surface_code(d: int) -> CSSCode:
 def make_asymmetric_toric_code(d1: int, d2: int) -> CSSCode:
     """Return rectangular toric [[2*d1*d2, 2, min(d1,d2)]] in RIMC order.
 
-    Both distances must be integers at least two. Requires optional ldpc and
-    bposd packages.
+    ``d1`` and ``d2`` are integer side lengths at least two. Returns a CSSCode
+    with paired X/Z logical matrices in research HGP order. Raises ValueError
+    for invalid side lengths and ImportError without optional ldpc and bposd.
+    This is a static code and defines no probability or round unit.
     """
     d1, d2 = _distance(d1), _distance(d2)
     from ldpc.codes import ring_code
@@ -61,8 +67,10 @@ def make_asymmetric_toric_code(d1: int, d2: int) -> CSSCode:
 def make_hgp_hamming() -> CSSCode:
     """Return the [[58,16,3]] Hamming hypergraph-product code in RIMC order.
 
-    Requires optional ldpc and bposd packages. Its logical bases have an
-    invertible, nonidentity intersection matrix.
+    Returns a CSSCode whose X/Z logical bases have an invertible, nonidentity
+    intersection matrix and whose ``logical_basis`` is ``independent``.
+    Raises ImportError unless optional ldpc and bposd are installed. This is
+    a static code and defines no probability or round unit.
     """
     from ldpc.codes import hamming_code
     from bposd.hgp import hgp
@@ -127,9 +135,12 @@ def _css_logicals(hx, hz):
 def make_bb_code(l: int, m: int, a_terms, b_terms) -> CSSCode:
     """Return a bivariate bicycle code with RIMC shift and logical ordering.
 
-    ``a_terms`` and ``b_terms`` are sequences of integer exponent pairs over
-    Z_l x Z_m. Duplicate terms cancel over GF(2). Raises ValueError for
-    invalid dimensions or exponent pairs.
+    ``l`` and ``m`` are positive integer block dimensions. ``a_terms`` and
+    ``b_terms`` are nonempty sequences of integer exponent pairs over Z_l x
+    Z_m; duplicate terms cancel over GF(2). Returns a CSSCode with the RIMC
+    row order and an explicit independent logical basis when needed. Raises
+    ValueError for invalid dimensions, terms, or inconsistent CSS matrices.
+    This is a static code and defines no probability or round unit.
     """
     l = positive_integer(l, "l")
     m = positive_integer(m, "m")
@@ -169,22 +180,42 @@ _BB_B = ((0, 3), (1, 0), (2, 0))
 
 
 def make_bb_code_72() -> CSSCode:
-    """Return the research BB [[72,12,6]] code."""
+    """Return the static research BB [[72,12,6]] CSSCode.
+
+    Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
+    logical row order. Raises ValueError if the CSS matrices are invalid.
+    The factory defines no probability or round unit.
+    """
     return make_bb_code(6, 6, _BB_A, _BB_B)
 
 
 def make_bb_code_108() -> CSSCode:
-    """Return the research BB [[108,8,10]] code."""
+    """Return the static research BB [[108,8,10]] CSSCode.
+
+    Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
+    logical row order. Raises ValueError if the CSS matrices are invalid.
+    The factory defines no probability or round unit.
+    """
     return make_bb_code(9, 6, _BB_A, _BB_B)
 
 
 def make_bb_code_144() -> CSSCode:
-    """Return the research BB [[144,12,12]] code."""
+    """Return the static research BB [[144,12,12]] CSSCode.
+
+    Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
+    logical row order. Raises ValueError if the CSS matrices are invalid.
+    The factory defines no probability or round unit.
+    """
     return make_bb_code(12, 6, _BB_A, _BB_B)
 
 
 def make_steane_code() -> CSSCode:
-    """Return the self-dual [[7,1,3]] Steane code in RIMC column order."""
+    """Return the static self-dual [[7,1,3]] Steane CSSCode.
+
+    Takes no arguments. Retains the RIMC check-column and logical-row order.
+    Raises ValueError if the CSS matrices are invalid. The factory defines no
+    probability or round unit.
+    """
     h = np.array([[1, 0, 1, 0, 1, 0, 1],
                   [0, 1, 1, 0, 0, 1, 1],
                   [0, 0, 0, 1, 1, 1, 1]], dtype=np.uint8)
@@ -215,9 +246,14 @@ def _block_diag_copies(check, blocks):
 def concatenate_css(outer: CSSCode, inner: CSSCode) -> CSSCode:
     """Concatenate an outer CSS code with a single-logical-qubit inner code.
 
-    Inner checks are ordered block by block, followed by lifted outer checks.
-    Raises ValueError unless the inner code encodes exactly one qubit.
+    ``outer`` and ``inner`` are static CSSCode instances; ``inner`` must
+    encode one logical qubit. Returns a CSSCode with inner checks ordered
+    block by block before lifted outer checks. Raises TypeError for a non-CSS
+    input and ValueError unless the inner code encodes one qubit or the
+    concatenated matrices are invalid. No probability or round unit is added.
     """
+    if not isinstance(outer, CSSCode) or not isinstance(inner, CSSCode):
+        raise TypeError("outer and inner must be CSSCode instances")
     if len(inner.lx) != 1:
         raise ValueError("inner code must encode exactly one qubit")
     n_in, n_out = inner.n, outer.n
@@ -235,7 +271,9 @@ def concatenate_css(outer: CSSCode, inner: CSSCode) -> CSSCode:
 def make_concatenated_steane_code(levels: int) -> CSSCode:
     """Return level-``levels`` self-concatenated Steane in RIMC block order.
 
-    ``levels`` must be a positive integer. Level two has parameters [[49,1,9]].
+    ``levels`` must be a positive integer. Returns a static CSSCode with RIMC
+    block order; level two has parameters [[49,1,9]]. Raises ValueError for
+    invalid levels or matrices. No probability or round unit is implied.
     """
     levels = positive_integer(levels, "levels")
     code = make_steane_code()

@@ -100,3 +100,43 @@ def test_bposd_settings_are_explicit():
         bposd_decoder(code, 0.05, error_rate=0.1)
     with pytest.raises(ValueError, match="nullity"):
         bposd_decoder(code, 0.05)
+
+
+@pytest.mark.parametrize("order", [10, np.int64(10)])
+def test_bposd_unsafe_order_rejected_before_native_constructor(order, monkeypatch):
+    ldpc = pytest.importorskip("ldpc")
+    code = make_steane_code()
+    monkeypatch.setattr(ldpc, "BpOsdDecoder", lambda *args, **kwargs: pytest.fail("native constructor called"))
+    with pytest.raises(ValueError, match="nullity"):
+        bposd_decoder(code, 0.05, osd_order=order)
+
+
+def test_bposd_numpy_integer_order_is_normalized_before_native_constructor(monkeypatch):
+    ldpc = pytest.importorskip("ldpc")
+    seen = {}
+
+    class FakeDecoder:
+        def decode(self, syndrome):
+            return np.zeros(7, dtype=np.uint8)
+
+    def constructor(*args, **kwargs):
+        seen.update(kwargs)
+        return FakeDecoder()
+
+    monkeypatch.setattr(ldpc, "BpOsdDecoder", constructor)
+    decoder = bposd_decoder(make_steane_code(), np.float64(0.05),
+                            osd_order=np.int64(2))
+    assert type(seen["osd_order"]) is int
+    assert decoder.metadata()["settings"]["osd_order"] == 2
+
+
+@pytest.mark.parametrize("order", [True, 2.0, -1])
+def test_bposd_noninteger_order_rejected(order):
+    with pytest.raises(ValueError, match="osd_order"):
+        bposd_decoder(make_steane_code(), 0.05, osd_order=order)
+
+
+@pytest.mark.parametrize("prior", [True, np.bool_(False), -0.1, 1.1, np.nan, np.inf, [0.1]])
+def test_bposd_prior_validation(prior):
+    with pytest.raises(ValueError, match="decoder prior"):
+        bposd_decoder(make_steane_code(), prior, osd_order=2)

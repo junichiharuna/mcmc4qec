@@ -28,7 +28,8 @@ HGP Hamming と BB72/108/144 の交差行列は単位行列ではないため、
 ## Decoder の全 syndrome 照合
 
 toric d=3 で実現可能な 256 個の syndrome に対して研究側 `make_mwpm_decoder`、`make_bposd_decoder`、`make_depolarizing_mwpm_decoder`、`make_depolarizing_bposd_decoder` を直接呼んだ。
-物理補正を同じ `lz` または `lx` に掛けた論理予測とライブラリの返値を比べ、各四種の不一致は 0/256 件だった。
+depolarising 用二種の直接比較では同じ syndrome を X/Z 両 sector に与え、独立 sector のテストでは各 sector の全 syndrome を別々に照合した。
+物理補正を同じ `lz` または `lx` に掛けた論理予測とライブラリの返値を比べ、直接比較した各四種の不一致は 0/256 件だった。
 BP-OSD の prior は `p=0.05`、`max_iter=100`、`bp_method="min_sum"`、`osd_method="osd_cs"`、`osd_order=10` とした。
 toric d=3 の研究 syndrome table の 256 行との MWPM 論理予測不一致も 0 件だった。
 PyMatching は列次数が2を超える HGP/BB の check matrix をそのまま受け取れないため、MWPM wrapper は明示的に拒否する。
@@ -72,11 +73,12 @@ toric d=5 ではノイズからの初期化を 10000 回試みて失敗したた
 ## 研究テストの意味論対応
 
 指定された研究テスト八ファイルの `test_` 関数は合計 102 件である。
+WP-A の新規受入テストは 52 parameterized case であり、Phase 0 の14 case を加えた担当三ファイルの収集数は66件だった。
 研究 runner の旧既定、PT/hot replica、CSV 後処理と新 API の契約が異なるため、102 件を名前だけ置換して全移植したとは扱わない。
 
 | 研究ファイル | 元件数 | 新 API で検証した意味論 | 移植不能または残る範囲 |
 | --- | ---: | --- | --- |
-| `test_css_code.py` | 13 | `tests/test_codes.py` の形状・可換性・距離、`tests/test_decoders.py` の全 syndrome・sector 判定 | plain BP decoder は WP-A の公開範囲外 |
+| `test_css_code.py` | 13 | `tests/test_codes.py` の形状・可換性・距離、`tests/test_decoders.py` の全 syndrome・sector 判定 | 研究 `int8` とライブラリ `uint8` の dtype 同一試験は非移植、plain BP decoder は WP-A の公開範囲外 |
 | `test_balancing.py` | 4 | `tests/test_categorical_kernels.py` と `tests/test_acceptance.py` の sqrt 提案正規化・詳細釣合い | Barker balancing は新 API 未対応、30000 step 混合経験試験は非移植 |
 | `test_depolarizing_cluster.py` | 6 | `tests/test_categorical_kernels.py` の Pauli 提案確率・詳細釣合いと `tests/test_pipeline.py` の direct MC 対照 | 研究 runner の返値構造に依存する試験は非移植 |
 | `test_rimc_mixed.py` | 27 | `tests/test_acceptance.py` と `tests/test_independent.py` の混合確率、軌道、拒否保存、cluster 不変量 | 旧 Z+PT 既定、replica 交換、hot replica、返値構造は新 API の対象外 |
