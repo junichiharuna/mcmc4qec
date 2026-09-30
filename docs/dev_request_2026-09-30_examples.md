@@ -76,20 +76,20 @@ WP-J はこの表だけを頼りに README を並行して書くので、各 WP 
 | パス | WP | extras | 内容 | SUMMARY のキー |
 | --- | --- | --- | --- | --- |
 | `examples/bb72_bposd.py` | F | `codes` | BB72 bit-flip、固定 p で作った BP-OSD。direct MC の `P_L` と `E[w\|faulty]`、Z+H の `E[w\|faulty]` | `code, p, pl, pl_interval, ew_direct, ew_chain` |
-| `examples/toric_depolarizing.py` | F | `matching` | toric d=3/5 の depolarising、`depolarizing_mwpm_decoder`。direct MC と Z+H、X/Y/Z 重みの内訳 | `code, p, pl, pl_interval, ew_direct, ew_chain` |
-| `examples/phenomenological_toric.py` | F | `matching` | toric d=3 の phenomenological（データとmeasurement の誤り、T ラウンド）。`HistoryDecoder` と時空間 check 行列上の matching | `code, rounds, p, pl, pl_interval` |
+| `examples/toric_depolarizing.py` | F | `matching`, `codes` | toric d=3/5 の depolarising、`depolarizing_mwpm_decoder`。direct MC と Z+H、X/Y/Z 重みの内訳 | `code, p, pl, pl_interval, ew_direct, ew_chain` |
+| `examples/phenomenological_toric.py` | F | `matching`, `codes` | toric d=3 の phenomenological（データとmeasurement の誤り、T ラウンド）。`HistoryDecoder` と時空間 check 行列上の matching | `code, rounds, p, pl, pl_interval` |
 | `examples/steane_exact.py` | F | なし | Steane 符号。列挙で作った最小重み lookup デコーダー、exact・direct MC・BAR（exact anchor）を全 rung で exact と比較 | `code, ladder, exact, bar, bar_intervals` |
-| `examples/workflows/pl_curve.py` | G | `matching`（図は `plot`） | toric d=3,5 の `P_L(p)` を BAR で。MC anchor、確認用の direct MC 点、ladder 設計と `OverlapError` の説明。CSV と PNG | `codes, ladder, estimates, intervals, checks` |
-| `examples/workflows/conditional_weight.py` | G | `matching`（図は `plot`） | 複数の p で `E[w\|faulty]` を Z+H と direct MC で比較。chain 頻度が `P_L` でない理由を出力で示す | `code, ps, ew_direct, ew_chain` |
-| `examples/workflows/convergence_check.py` | G | `matching` | 最小重み・ランダム論理セクター・最大重みの初期状態から複数 chain、`evaluate_convergence` に direct MC の分散を渡し 4 条件と warnings を表示 | `code, p, checks, verdict, warnings` |
+| `examples/workflows/pl_curve.py` | G | `matching`, `codes`（図は `plot`） | toric d=3,5 の `P_L(p)` を BAR で。MC anchor、確認用の direct MC 点、ladder 設計と `OverlapError` の説明。CSV と PNG | `codes, ladder, estimates, intervals, checks` |
+| `examples/workflows/conditional_weight.py` | G | `matching`, `codes`（図は `plot`） | 複数の p で `E[w\|faulty]` を Z+H と direct MC で比較。chain 頻度が `P_L` でない理由を出力で示す | `code, ps, ew_direct, ew_chain` |
+| `examples/workflows/convergence_check.py` | G | `matching`, `codes` | 最小重み・ランダム論理セクター・最大重みの初期状態から複数 chain、`evaluate_convergence` に direct MC の分散を渡し 4 条件と warnings を表示 | `code, p, checks, verdict, warnings` |
 | `examples/workflows/p_dependent_decoder.py` | G | `codes` | BB72 + BP-OSD で、固定 p デコーダーの standard ladder と `p_dependent_decoder_approx` を並べ、違いと bias の注意を示す | `code, ladder, fixed, approx` |
 | `examples/templates/byo_css_bitflip.py` | H | なし | 利用者の `hx, hz, lx, lz` と自作デコーダーで exact / direct MC / 条件付き chain / BAR まで通す雛形 | `n, k, checks_passed, pl` |
 | `examples/templates/byo_noise.py` | H | なし | 自作の正規化ノイズ（`log_prob` の契約）。小さい n で全列挙による正規化チェックをしてから使う雛形 | `n, normalization, pl` |
 | `examples/templates/byo_decoder.py` | H | なし | 既存のデコーダーオブジェクトを `DecoderAdapter` / `CallableDecoder` で包む雛形。output の意味と論理写像を明示し、全 syndrome で整合チェック | `n, output_kind, checks_passed, pl` |
 | `examples/templates/byo_stim_dem.py` | H | `stim`, `matching` | 利用者の `stim.Circuit` から DEM、`from_stim_dem`、`matching_from_dem` で direct MC と条件付き chain まで通す雛形 | `detectors, mechanisms, pl` |
-| `notebooks/01_quickstart.ipynb` | I | `notebooks`, `matching` | インストールから toric d=5 の direct MC と Z+H まで | — |
-| `notebooks/02_pl_curve_with_bar.ipynb` | I | `notebooks`, `matching` | BAR ladder の考え方と `P_L(p)` 曲線、anchor と overlap | — |
-| `notebooks/03_conditional_sampling_and_diagnostics.ipynb` | I | `notebooks`, `matching` | 条件付き分布、カーネル設定、trace の読み方、複数 chain と `evaluate_convergence` | — |
+| `notebooks/01_quickstart.ipynb` | I | `notebooks`, `matching`, `codes` | インストールから toric d=5 の direct MC と Z+H まで | — |
+| `notebooks/02_pl_curve_with_bar.ipynb` | I | `notebooks`, `matching`, `codes` | BAR ladder の考え方と `P_L(p)` 曲線、anchor と overlap | — |
+| `notebooks/03_conditional_sampling_and_diagnostics.ipynb` | I | `notebooks`, `matching`, `codes` | 条件付き分布、カーネル設定、trace の読み方、複数 chain と `evaluate_convergence` | — |
 | `notebooks/04_bring_your_own.ipynb` | I | `notebooks` | 自作の符号・ノイズ・デコーダーの持ち込み（core のみで動く範囲） | — |
 
 既存の 6 本（`bit_flip.py`、`three_noise.py`、`bar_ladder.py`、`toric_pymatching.py`、`stim_dem.py`、`circuit_baseline.py`）は残す。第 3.1 節の CLI 規約に合わせる改修は WP-F が行う（出力内容と数値の意味は変えない）。

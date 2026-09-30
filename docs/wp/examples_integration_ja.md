@@ -22,6 +22,19 @@ make_toric_codeは既存実装でldpcとbposdをimportし、matching extraだけ
 ファイル名とSUMMARYキーは変更しない。
 この不足は依頼書のマニフェストとdev2公開契約の不整合であり、メイン判断として依頼書の該当extrasとWP-Jの一覧に同じ修正を適用する。
 
+## 既存6例のSUMMARYキー
+
+依頼書に指定のない既存6例については、Fの提案をメインが承認し次の集合を使う。
+
+| script | keys |
+| --- | --- |
+| bit_flip.py | exact, pl, pl_interval, ew_exact, ew_chain |
+| three_noise.py | cases |
+| bar_ladder.py | ladder, bar, intervals, exact |
+| toric_pymatching.py | code, p, pl, pl_interval, ew_direct, ew_chain |
+| stim_dem.py | mechanisms, exact, pl, pl_interval |
+| circuit_baseline.py | locations, detectors, pl, pl_interval |
+
 ## version更新の確認対象
 
 pyprojectの配布版番号はPhase 2で0.1.0.dev3へ更新する。
