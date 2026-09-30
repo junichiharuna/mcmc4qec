@@ -48,3 +48,12 @@ B を `6f38eda` で統合し、同じ全 suite は 231 passed / 4 skipped、39.1
 B 統合後のファイル別合計最大は `tests/test_pipeline.py` の8.07秒だった。
 E を `6b0b885` で統合し、全 suite は 247 passed / 4 skipped、39.23 秒で成功した。
 E 統合後のファイル別合計最大は `tests/test_acceptance.py` の7.48秒だった。
+D を `9b52061` で統合し、API突合試験追加前の全 suite は 247 passed / 4 skipped、47.43 秒で成功した。
+C を `ab4108b` で統合し、`sampling.py` の競合は B の高速経路・cache・syndrome 更新と C の5番目の物理 fault 提案を両方保って解消した。
+stabilizer の事前検証は5番目のkernel追加後も4番目の `StabilizerFlip` を参照する。
+`4330c3f` で公開名を65個に揃えた後、全 suite は 268 passed / 4 skipped、76.01 秒で成功した。
+最後の実行のファイル別合計最大は `test_circuit_surface.py` の21.33秒だった。
+初回 core-only wheel 試験は、SciPy がない場合の MILP 試験2件の skip 指定漏れにより 2 failed / 208 passed / 41 skipped だった。
+SciPy が必要な試験だけに `importorskip` を追加した後、同環境は 208 passed / 43 skipped、27.84 秒で成功した。
+ライブラリの SciPy 不在時に ImportError を返す契約は変更していない。
+D の第2回公開契約監査で指摘された回路 helper の例外 docstring を補完し、最終 wheel は再構築して両環境へ導入した。
