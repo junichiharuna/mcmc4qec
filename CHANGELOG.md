@@ -5,6 +5,17 @@
 - Rename the package and repository from the provisional `rimc` to `mcmc4qec`
   (import name `mcmc4qec`). No API change.
 
+## 0.1.0.dev3 — development
+
+- Add real-code examples, research workflows, editable component templates,
+  and four self-contained executed Jupyter tutorials.
+- Standardize example CLIs with quick runs, explicit seeds and output paths,
+  and machine-readable summaries.
+- Expand the English README and add a matching Japanese README and an
+  example catalog with measured run times and scientific limitations.
+- Add plotting and notebook extras, recursive installed-wheel verification,
+  and CI coverage for quick examples and notebook execution.
+
 ## 0.1.0.dev2 — development
 
 - Add real CSS code factories and MWPM/BP-OSD decoder constructors, with

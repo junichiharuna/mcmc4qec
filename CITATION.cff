@@ -9,7 +9,7 @@ title: "Trustworthy rare-event splitting for general quantum codes"
 authors:
   - given-names: junichi
     family-names: haruna
-version: "0.1.0.dev2"
+version: "0.1.0.dev3"
 abstract: >-
   Local development prototype of reusable rare-event MCMC primitives for
   quantum error correction. The associated paper has not been assigned
