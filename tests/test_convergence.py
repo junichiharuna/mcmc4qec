@@ -58,8 +58,10 @@ def test_stationary_ar1_passes_four_checks():
 def test_two_basins_are_rejected_by_multistart():
     a = _two_basin_chain(14, start=0)
     b = _two_basin_chain(15, start=1)
+    # Equal stationary basin masses: Bernoulli emission variance .25 plus
+    # between-basin variance (7 - 2)^2 / 4 = 6.25.
     report = evaluate_convergence(a, other_initialization=b,
-                                  direct_variance=.25)
+                                  direct_variance=6.5)
     assert all(report["checks"][name]["ok"] is True for name in
                ("scaling", "stationarity", "dispersion"))
     assert report["checks"]["multistart"]["ok"] is False

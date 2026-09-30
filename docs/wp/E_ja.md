@@ -24,6 +24,7 @@ chain 内分散を使う研究論文の一次判定は、別の参考値 `within
 `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 168 passed、57.40 秒だった。
 第1回レビュー対応後の同じ全 suite は 177 passed、192.47 秒で、全 suite 5 分以内の制約を満たした。
 MILP の整数最適証明を強化した後の focused tests は 16 passed、1.29 秒だった。
+二盆地テストの direct MC 参照分散を定常混合分布の理論値 6.5 に揃えた後の focused tests は 16 passed、1.92 秒だった。
 小 CSS 符号の各コセットを全列挙して最小重みとセクター保存を確認し、rank 13 の MILP 経路も検証した。
 rank 13 の非自明なランダム行列について 8192 個のコセット要素と MILP 解の重みを比較し、一致した。
 既知の相関を持つ AR(1) では四条件がすべて pass し、持続的な chain 別オフセット、後半ドリフト、独立分散との不一致では対応する条件が fail した。
