@@ -63,3 +63,4 @@ jobs:
         run: |
           python examples/stim_dem.py
           python examples/toric_pymatching.py
+          python examples/circuit_baseline.py

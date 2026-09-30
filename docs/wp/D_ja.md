@@ -36,3 +36,13 @@ remote CI の実行、Python 3.12 の手元検証、publish は未実施であ�
 レビュー指摘に基づき README の toric install 手順と BAR の独立実行例を修正し、別 venv の wheel で README の Python ブロック 2 件を個別実行してともに終了コード 0 を確認した。
 メインの `codes` extra 追加 commit を作業枝に取り込み、独立 `.venv-readme` で `pip install -e '.[codes,matching]'` が bposd、ldpc、pymatching を導入することを確認した。
 同環境で README の Python ブロック 2 件を個別実行し、両方とも終了コード 0 だった。
+
+## 再開後の公開 API 追随
+
+A の実符号 factory 11 名と decoder constructor 4 名、C の物理回路 8 名、E の診断・初期化 7 名を各作業枝の実装とメモに照らして README、API 文書、tutorial に追記した。
+B の `SamplingConfig.cache_cap/cache_policy` と `KernelConfig.zanella_fastpath`、C の明示 `circuit_single` 選択も記載した。
+回路では Z/H と stabilizer を使えないこと、DEMs は baseline decoder 構築用で物理配置の尤度と異なること、収束四条件の完全判定に独立 direct MC の条件付き分散が要ることを明記した。
+CI の optional job に `examples/circuit_baseline.py` を追加した。
+A/C/E の追加公開名の docstring に引数、返り値、例外、確率の単位が不足する箇所を各担当に連絡し、担当側の補完を待っている。
+追加した toric d=3 + `mwpm_decoder` の tutorial コードブロックは A 作業枝の `src` を import path に指定して実行し、終了コード 0、MC 推定値 `0.25` を確認した。
+この追加 API の installed wheel 実行、`__all__` の最終突合、統合後 Python 3.11/3.12 CI はまだ未実施である。

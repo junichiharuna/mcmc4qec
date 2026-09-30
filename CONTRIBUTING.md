@@ -33,7 +33,7 @@ compute jobs.
 
 With `pymatching`, `ldpc`, and `bposd` installed, run
 `python examples/toric_pymatching.py`. With Stim installed, run
-`python examples/stim_dem.py`. The CI workflow installs the built wheel and
+`python examples/stim_dem.py` and `python examples/circuit_baseline.py`. The CI workflow installs the built wheel and
 tests Python 3.11 and 3.12 with and without optional dependencies. A defined
 workflow is not evidence of a successful remote run; check its actual status
 after an authorized push.
