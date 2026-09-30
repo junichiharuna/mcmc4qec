@@ -3,7 +3,7 @@ Estimate logical error probabilities for CSS quantum codes with exact enumeratio
 Sample failure-conditioned errors with configurable OBF, Zanella (Z), cluster exchange (H), and stabilizer kernels.
 Bring your own code, normalized noise distribution, deterministic decoder, and failure predicate.
 
-This pre-alpha package is under active validation. Install from a local checkout with `python -m pip install -e ".[matching]"` for the following example:
+This pre-alpha package is under active validation. Install from a local checkout with `python -m pip install -e ".[codes,matching]"` for the following example:
 
 ```python
 import numpy as np
@@ -27,12 +27,19 @@ The conditional chain measures properties **within** the failure set; its state 
 An anchored BAR ladder estimates `P_L(p)` across probabilities. This compact example uses a small enumerable code so its first rung can be anchored exactly:
 
 ```python
-from mcmc4qec import SamplingConfig, estimate_logical_error, exact
+import numpy as np
+from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip, KernelConfig,
+                      Problem, SamplingConfig, estimate_logical_error, exact)
 
-# problem is a fixed-decoder Problem; see examples/bar_ladder.py.
+code = CSSCode(np.zeros((0, 3), dtype=int), [[1, 1, 0], [0, 1, 1]],
+               [[1, 1, 1]], [[1, 0, 0]])
+decoder = CallableDecoder(lambda s: [int(tuple(s) == (1, 0))],
+                          identifier="repetition3-minimum-weight-v1")
+problem = Problem(code.bit_flip_model(), IndependentBitFlip(3), decoder)
 ladder = [0.4, 0.25, 0.1]
 result = estimate_logical_error(problem, ladder, anchor=exact(problem, ladder[0]),
-                                config=SamplingConfig(samples=200, burn_in=30), seed=73)
+                                config=SamplingConfig(samples=200, burn_in=30,
+                                    kernels=KernelConfig(cluster_k=1)), seed=73)
 print(result.estimates, result.intervals)
 ```
 

@@ -1,0 +1,206 @@
+diff --git a/src/mcmc4qec/adapter_composition.py b/src/mcmc4qec/adapter_composition.py
+index 0d5256a..1776bc5 100644
+--- a/src/mcmc4qec/adapter_composition.py
++++ b/src/mcmc4qec/adapter_composition.py
+@@ -31,6 +31,12 @@ class SectorDecoder:
+     syndromes. Each child already returns logical predictions. Independence is
+     a decoder approximation; this composition never changes the noise model or
+     removes its sampled Y correlations.
++    ``x_decoder`` and ``z_decoder`` each predict binary logical observables;
++    ``x_syndrome_size`` splits the input and ``identifier`` labels provenance.
++    ``predict`` returns their concatenated one-dimensional predictions, while
++    ``metadata`` records both children and the sector approximation. Invalid
++    decoders, identifiers, binary inputs, or split sizes raise ``TypeError`` or
++    ``ValueError``. This decoder does not define a probability unit.
+     """
+ 
+     def __init__(self, x_decoder, z_decoder, *, x_syndrome_size, identifier):
+@@ -68,6 +74,12 @@ class HistoryDecoder:
+     ``history`` retains (rounds, checks). This adapter does not convert history
+     into difference syndromes: the model's representation must already match
+     the decoder. No mode drops rounds or selects only the final syndrome.
++    ``decoder`` consumes the selected ``layout`` and returns binary logical
++    predictions; ``identifier`` labels provenance. ``predict`` accepts a
++    (rounds, checks) binary array and returns a one-dimensional prediction.
++    Invalid layouts, empty histories, or nonbinary data raise ``ValueError``;
++    a decoder without ``predict``/``metadata`` raises ``TypeError``. It does
++    not convert an experiment-wide failure probability to a per-round rate.
+     """
+ 
+     def __init__(self, decoder, *, layout, identifier):
+diff --git a/src/mcmc4qec/adapters.py b/src/mcmc4qec/adapters.py
+index 59c0393..1da7611 100644
+--- a/src/mcmc4qec/adapters.py
++++ b/src/mcmc4qec/adapters.py
+@@ -46,6 +46,14 @@ class DecoderAdapter:
+     ``settings`` is caller-supplied provenance, not configuration applied to the
+     existing object. ``distribution`` names the installed distribution whose
+     version is recorded; it does not import that package.
++
++    ``decoder`` exposes ``decode(syndrome, **decode_kwargs)`` and must be
++    deterministic for fixed settings. ``identifier`` is a nonempty provenance
++    label. ``predict`` returns a one-dimensional binary logical-observable
++    vector; ``metadata`` returns a JSON-compatible dictionary. Invalid output
++    kinds, maps, binary values, or correction widths raise ``ValueError``;
++    a missing decode method raises ``TypeError``. Predictions have no physical
++    rate unit; a surrounding Problem reports failure for its whole experiment.
+     """
+ 
+     def __init__(self, decoder, *, output_kind, identifier, logical_map=None,
+@@ -110,6 +118,9 @@ class PyMatchingAdapter(DecoderAdapter):
+     ``built_with_correlations`` is the caller's declaration; the original
+     construction cannot be inspected reliably on an existing Matching object.
+     Decode uses the same setting and rejects conflicting kwargs.
++    The remaining arguments and prediction/metadata returns follow
++    ``DecoderAdapter``. A missing or conflicting correlation flag raises
++    ``ValueError``. No graph-completeness guarantee is inferred.
+     """
+ 
+     def __init__(self, decoder, *, built_with_correlations, output_kind,
+@@ -141,6 +152,13 @@ def matching_from_check_matrix(check_matrix, *, logical_map, identifier,
+     inputs are accepted via ``toarray``. This small helper does not construct
+     repeated-measurement graphs or DEMs; wrap those existing objects explicitly.
+     Zero-degree columns have no syndrome signature and produce no graph edge.
++    ``check_matrix`` has shape (checks, bits), and ``logical_map`` has shape
++    (observables, bits). ``identifier`` records provenance; ``weights`` and
++    ``error_probabilities`` are forwarded to PyMatching construction. Returns
++    a ``PyMatchingAdapter`` predicting logical observables. Invalid shapes,
++    nonbinary inputs, or degree-above-two columns raise ``ValueError``;
++    unavailable PyMatching raises ``ImportError``. No probability per round is
++    inferred from this static graph.
+     """
+     if hasattr(check_matrix, "toarray"):
+         check_matrix = check_matrix.toarray()
+diff --git a/src/mcmc4qec/estimation.py b/src/mcmc4qec/estimation.py
+index 55ad651..c695453 100644
+--- a/src/mcmc4qec/estimation.py
++++ b/src/mcmc4qec/estimation.py
+@@ -15,7 +15,7 @@ from .sampling import SamplingConfig, sample_faulty
+ 
+ 
+ class OverlapError(ValueError):
+-    """The sampled states cannot identify a finite adjacent Bennett ratio."""
++    """Raised when adjacent samples lack observed bidirectional BAR overlap."""
+ 
+ 
+ def _sigmoid(x):
+@@ -29,6 +29,11 @@ def bennett_log_ratio(log_b_minus_a_at_a, log_b_minus_a_at_b):
+     density restricted to one common failure set. Their lengths may differ.
+     At a samples only -inf is allowed; at b samples only +inf is allowed.
+     No finite-sample uncertainty or common-failure guarantee is inferred here.
++    Both inputs are nonempty arrays and may have different lengths. Returns a
++    dimensionless natural-log partition-mass ratio. NaNs or samples lacking
++    positive density in their own ensemble raise ``ValueError``; absent
++    observed bidirectional overlap raises ``OverlapError``. Converting this
++    ratio to a physical logical failure probability requires an anchor.
+     """
+     a = np.asarray(log_b_minus_a_at_a, dtype=float).ravel()
+     b = np.asarray(log_b_minus_a_at_b, dtype=float).ravel()
+@@ -60,7 +65,17 @@ def bennett_log_ratio(log_b_minus_a_at_a, log_b_minus_a_at_b):
+ 
+ @dataclass
+ class EstimationResult:
+-    """Ladder estimates; uncertainty is approximate and conditional on mixing."""
++    """Absolute failure probabilities and diagnostic data for one BAR ladder.
++
++    ``estimates`` and ``intervals`` are experiment-wide probabilities by rung;
++    ``log_estimates`` and ``adjacent_log_ratios`` use natural logs.
++    ``log_standard_errors`` are dimensionless, and ``elapsed_seconds`` is wall
++    time. ``estimate`` and ``interval`` select the final rung. ``to_json``
++    returns schema-versioned text; ``from_json`` reconstructs it and raises
++    ``ValueError`` for incompatible schemas or invalid JSON-compatible values.
++    Intervals assume adequate chain mixing and block length; approximate BAR
++    bias is excluded.
++    """
+     estimates: list[float]
+     log_estimates: list[float]
+     adjacent_log_ratios: list[float]
+@@ -162,6 +177,19 @@ def estimate_logical_error(problem, ladder, *, anchor, config=None, seed=None,
+     anchor's log variance. Mixing and sufficiently long blocks are assumptions,
+     not consequences of diagnostics. Approximate-mode bias is not in the bars.
+     Setting bootstrap_replicates=0 disables MCMC error bars explicitly.
++    ``problem`` supplies the fixed model/noise/failure contract; ``ladder`` is
++    an ordered list of at least two probability coordinates. ``anchor`` is a
++    matching positive ``exact`` or fixed-trial ``direct_mc`` Result at rung 0.
++    ``config`` and ``seed`` control conditional sampling; ``initial_states``
++    can supply one initial state per rung. ``mode`` selects fixed failure or
++    explicit decoder-dependent approximation with ``decoder_factory``,
++    ``decoder_priors``, and ``approximation_reason``. Bootstrap controls are
++    nonnegative replicate count and per-chain block length.
++    Returns ``EstimationResult`` with absolute failure probabilities for each
++    whole modeled experiment, natural-log ratios, intervals where available,
++    and warnings. Invalid inputs or anchor mismatch raise ``ValueError``;
++    failed initialization raises ``InitializationError`` and missing adjacent
++    observed overlap raises ``OverlapError``.
+     """
+     start = time.perf_counter()
+     ladder = [_coordinate(p) for p in ladder]
+diff --git a/src/mcmc4qec/models.py b/src/mcmc4qec/models.py
+index be356ec..780c578 100644
+--- a/src/mcmc4qec/models.py
++++ b/src/mcmc4qec/models.py
+@@ -12,7 +12,15 @@ def _code_metadata(code):
+ 
+ 
+ class DepolarizingModel:
+-    """One categorical I/X/Y/Z variable per qubit; Y retains both sectors."""
++    """Map one I/X/Y/Z label per qubit to full CSS syndromes and observables.
++
++    ``code`` is a validated CSSCode. ``syndrome`` returns ``[hz @ X, hx @ Z]``;
++    ``observables`` returns ``[lz @ X, lx @ Z]``, all over GF(2). Y contributes
++    to both components. ``validate_state`` returns a copied categorical vector
++    and ``metadata`` a JSON-compatible description. A non-CSS code raises
++    ``TypeError``; invalid state labels raise ``ValueError``. This model has no
++    rate unit; a Problem's probability is for the full modeled experiment.
++    """
+ 
+     def __init__(self, code: CSSCode):
+         if not isinstance(code, CSSCode):
+@@ -52,6 +60,13 @@ class PhenomenologicalModel:
+     ``'noisy'`` keeps last-round measurement faults. History and difference
+     outputs both have shape ``(rounds, n_checks)``. Difference uses the clean
+     initial zero syndrome. Observables refer to final cumulative data errors.
++    ``code`` is a CSSCode and ``rounds`` is positive. ``initial_boundary``
++    must be ``'clean'``; ``representation`` is ``'history'`` or ``'difference'``;
++    ``data_noise`` is ``'bit_flip'`` or ``'depolarizing'``. ``validate_state``
++    returns the flattened categorical state, ``syndrome`` the selected binary
++    history, ``observables`` final logical bits, and ``metadata`` a JSON record.
++    Invalid options or states raise ``ValueError``; a non-CSS code raises
++    ``TypeError``. A logical failure probability spans all specified rounds.
+     """
+ 
+     def __init__(self, code: CSSCode, rounds, *, initial_boundary,
+diff --git a/src/mcmc4qec/noise_categorical.py b/src/mcmc4qec/noise_categorical.py
+index 5f068bd..4ea1e4a 100644
+--- a/src/mcmc4qec/noise_categorical.py
++++ b/src/mcmc4qec/noise_categorical.py
+@@ -28,7 +28,15 @@ def _sample(n, probability, alphabet, rng):
+ 
+ 
+ class DepolarizingNoise:
+-    """Independent qubit categories with probabilities (1-p, p/3, p/3, p/3)."""
++    """Independent joint Pauli categories with probabilities (1-p, p/3, p/3, p/3).
++
++    ``n`` is the positive qubit count; labels are I=0, X=1, Y=2, Z=3.
++    ``sample(p, rng)`` returns ``n`` labels and ``log_prob(state, p)`` returns
++    their normalized joint log probability, including ``-inf`` at zero mass.
++    ``metadata`` records the encoding. Invalid ``n``, ``p`` outside [0, 1],
++    or an invalid state raises ``ValueError``. ``p`` is per-qubit Pauli error
++    probability; a Problem's logical failure rate covers its whole experiment.
++    """
+ 
+     def __init__(self, n):
+         self.n = positive_integer(n, "n")
+@@ -52,6 +60,12 @@ class PhenomenologicalNoise:
+     ``p={'data': p_data, 'measurement': p_measurement}``. Even a perfect final
+     boundary with no measurement coordinates requires both keys, keeping the
+     experiment's parameter schema independent of its number of rounds.
++    ``model`` fixes the rounds, state alphabets, and boundaries. ``sample``
++    returns a flattened data/measurement fault state; ``log_prob`` returns its
++    normalized log probability and ``metadata`` records the model. An invalid
++    model raises ``TypeError``; missing keys, invalid rates, or states raise
++    ``ValueError``. Rates apply per corresponding fault location. A Problem
++    reports failure over the entire bounded experiment, not per round.
+     """
+ 
+     def __init__(self, model: PhenomenologicalModel):
