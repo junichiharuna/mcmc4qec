@@ -96,3 +96,10 @@ coreは3実行例と4文書例、optionalは全6実行例と全6文書例が成�
 研究側との速度差は残り、profileに基づく代替受入条件を満たしたが、性能同等や収束の証明とはしない。
 研究リポジトリは読み取り専用で保持し、license追加、publish、public化、既定値の変更は行っていない。
 この追記時点ではremote CIの確認だけが残り、push後に結果を追記する。
+
+## 2026-09-30 午後・remote CI確認完了
+
+main `a47a141433fb97ccd9a44e597f8604352999df0a` を origin/mainへpushした。
+[Actions run 36675225072](https://github.com/junichiharuna/mcmc4qec/actions/runs/36675225072) は全4job成功で、Python3.11/3.12のcoreは各208 passed / 43 skipped、optionalは各268 passed / 4 skippedだった。
+各jobの実行例も成功し、開発依頼のローカル統合・wheel検証・versionと記録更新・pushとCI確認・最終報告の各条件を満たした。
+今後の所有者判断と未対応範囲は `docs/wp/final_report_ja.md` 第5・6節に明記した。

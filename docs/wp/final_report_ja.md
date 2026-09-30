@@ -17,7 +17,7 @@ WP-A〜E を指定順で main に統合し、65個の公開 API と version `0.1
 | --- | --- | --- | --- | --- |
 | A | 実符号ファクトリと MWPM/BP-OSD/sector wrapper、研究照合 | `pytest tests/test_crossval_research.py -q` を研究path指定で19 passed、4decoder各256症候群で不一致0；exact、MC、Z+H は第3節 | 大符号の距離下界の独立証明、元数値照合の生Result保存 | 直接研究import試験と数値表再現helper、研究への出力拒否を補い第2回受入；非単位交差行列は明示 independent 指定で保持 |
 | B | product ノイズの Z 高速経路、decoder cache、syndrome 差分 | `-m pytest tests -q` 169 passed、`tests/test_fastpath.py` 13 passed；列挙で q 最大差 1.11e-16、詳細釣合い差 0 | 研究速度の2倍以内 | cache の先行 uint8 cast を修正し、不正 decoder 出力の回帰試験を追加；profile による代替受入条件を確認 |
-| C | 物理 location の排他 fault、Stim 効果の XOR、専用 MH と中点 logical idle | `pytest tests/test_circuit_*.py -q` 相当の4ファイル20 passed、全6位置4096配置のexact、surface比較 | d>3の統計照合、論文図表再現、回路Z/H/stabilizer | 全位置列挙、location別分布、確率和、確率付きM/MPP拒否、重複target識別を修正し第2回受入 |
+| C | 物理 location の排他 fault、Stim 効果の XOR、専用 MH と中点 logical idle | `pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q` 20 passed、全6位置4096配置のexact、surface比較 | d>3の統計照合、論文図表再現、回路Z/H/stabilizer | 全位置列挙、location別分布、確率和、確率付きM/MPP拒否、重複target識別を修正し第2回受入 |
 | D | README、API/tutorial、CI、CFF、追加例 | `test_public_api.py` で65名突合、CFF validate成功、最終wheel208/268件、全6例・README2例・tutorial4例成功 | py.typedは提案のみで型監査後へ延期 | 導入依存、BAR状態数上限、同じ条件付き量の比較、全公開引数・例外を補完；最終レビュー記録参照 |
 | E | 複数 chain 診断、四条件、厳密な論理コセット最小化と初期化 | `pytest tests/test_convergence.py tests/test_initial_states.py -q` 16 passed、独立レビューでも16 passed | 実符号の長時間・多chain混合評価 | ゼロ分母、独立分散未指定、負相関IAT、二盆地、MILP最適性を修正し第2回受入；core統合試験でMILPのoptional skipを補完 |
 
@@ -75,7 +75,9 @@ surface d=3・6ラウンド・p=.01 の物理配置700試行は `74/700=.105714`
 coreのskipはoptional依存と研究checkoutの不在によるもので、MILP用SciPyのskip指定漏れ2件を統合時に修正した。
 最終 wheel は `mcmc4qec-0.1.0.dev2-py3-none-any.whl`、SHA256 `e4d443a860a182786d3377cc068f713428771630fde9615cf7efbdb493581664` である。
 二つの新規venvのsite-packagesからimportし、packageの23 Pythonファイルがsourceとbyte一致することを確認した。
-GitHub Actionsはmainのpush後に対象commit・run URL・4jobの結果を追記する。
+main の `a47a141433fb97ccd9a44e597f8604352999df0a` を origin/main へpushし、[GitHub Actions](https://github.com/junichiharuna/mcmc4qec/actions/runs/36675225072) の全4job成功を確認した。
+Python 3.11 / 3.12 のcoreは各208 passed / 43 skipped、optionalは各268 passed / 4 skippedで、CIの実行例もすべて成功した。
+このCI結果を記録する後続commitは文書のみの変更であり、package・tests・workflowは検証対象から変更していない。
 
 ## 5. 所有者の判断待ち事項
 

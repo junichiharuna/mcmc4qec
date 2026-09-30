@@ -55,4 +55,14 @@ toric の表示は direct MC の条件付き平均7.068817と Z+H の6.73、回�
 
 ## remote CI
 
-最終検証後に main を push し、Python 3.11 / 3.12 の core / optional 計4jobの結果を追記する。
+main の `a47a141433fb97ccd9a44e597f8604352999df0a` を origin/main へpushし、[Actions run 36675225072](https://github.com/junichiharuna/mcmc4qec/actions/runs/36675225072) の完了と全4job成功を確認した。
+`gh run view 36675225072 --json status,conclusion,headSha,jobs` と `--log` の両方で結果を確認した。
+
+| CI job | installed wheel pytest | 秒 | examples |
+| --- | --- | ---: | --- |
+| core-wheel 3.11 | 208 passed / 43 skipped | 32.28 | 3例成功 |
+| core-wheel 3.12 | 208 passed / 43 skipped | 40.16 | 3例成功 |
+| optional-decoders-wheel 3.11 | 268 passed / 4 skipped | 77.21 | optional3例成功 |
+| optional-decoders-wheel 3.12 | 268 passed / 4 skipped | 65.95 | optional3例成功 |
+
+公開化やpackage publishは実行していない。
