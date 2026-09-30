@@ -63,3 +63,15 @@ SteaneのBAR区間のexact被覆はCLI既定seedで既定2/3、quick1/3であり
 PyMatching 2.4はmatplotlib.cbookを読み込むため、toric workflowについてmatplotlib本体を欠く実行環境は成立しない。
 描画用pyplotのImportError時に同じ数値のCSVを残す経路を検証し、matplotlib本体なしの実行成功とは区別してREADMEと最終報告に記録する。
 この依存境界を隠すstubや依存packageの書き換えは行わない。
+
+## BAR例の時間予算とスリープ中断
+
+G/Iの曲線例は同じ4 chainを維持し、quickを40 samples / 12 burn-in、既定を600 samples / 180 burn-inへ揃えた。
+anchor試行数200/1500、独立確認点180/1200、bootstrap回数10/30は維持した。
+縮小前の単独profileは61.13秒で、条件付き標本生成39.13秒とBAR用密度差評価12.88秒が主な費用だった。
+profileには計測自体の費用が含まれるため、通常実行時間の代わりには用いない。
+Gの縮小後の単独実行はquick3.61秒、既定19.37秒だった。
+短いchainの結果が研究精度を保証するとは扱わず、BARと独立MCの区間が非交差なら警告し、anchor点のMC再利用は独立確認点と区別する。
+Iの長時間timeoutは、Windows Systemログで確認した16:02〜16:52および17:08〜17:36 JSTのスリープと一致した。
+これらの中断試行を合格や通常実測時間として扱わず、復帰後の成功した検証結果を別途記録する。
+通常実行にも時間変動は観測したが、すべての変動原因まで特定したわけではない。
