@@ -75,8 +75,10 @@ PyMatching DEM の graphlike 分解に伴う decoder 近似は物理配置分布
 
 `docs/wp/C_review_ja.md` の第1回レビューは、2 ラウンド repetition の列挙範囲、location 別の非一様分布、確率和の相対許容の三点を指摘した。
 2 ラウンド全 6 location の exact と PyMatching・独立 Stim 照合、location 別 `q_i,p_i` と正規化・sampling・詳細釣合い試験、絶対許容の修正で対応した。
-第2回レビューは進行中で、確率付き測定と同一命令の重複 target group に関する反例を修正した。
-最終受入判定はレビュー担当の確認待ち。
+第2回レビューでは確率付き測定の未列挙と同一命令の重複 target group の同一視を指摘され、それぞれ事前拒否と `target_group_index` による識別で修正した。
+レビュー担当の独立 probe は、2 ラウンド repetition の exact `0.0251568` と Stim 直接別 seed `0.0248`、location 別故障率の BAR 推定 `0.05067` と exact `0.05`、重複 `X_ERROR` の exact `0.18` と Stim DEM `0.18` を照合した。
+レビュー担当は focused model/proposal/pipeline 18 passed、surface 2 passed を再実行し、WP-C 固有の受入阻害事項なしと最終判定した。
+レビュー結果は `docs/wp/C_review_ja.md` に記録されている。
 
 ## 作業履歴
 
