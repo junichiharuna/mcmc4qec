@@ -36,3 +36,11 @@ Stim と PyMatching を import 不可能にした状態でも `mcmc4qec.circuit`
 [一次資料の第 III・IV 節](https://arxiv.org/html/2509.13678v2) は物理 gate と排他的 fault の配置、`2d` 回の noisy extraction と最初の `d` 回への訂正を記述している。
 一般 MH の置換受理 `min(1,q_new/q_old)` と論文の `q_new` の差は文書に説明されており、どちらも対称な順逆提案の下で詳細釣合いを満たす。
 中点 `MPP` の位置、追加された測定記録をまたぐ `rec` offset、最終測定を detector 境界に使う構成は、第 III・IV 節の目的と整合する範囲で確認した。
+
+## 追加の独立照合
+
+Stim が生成した通常の rotated surface d=3、6 noisy rounds 回路と中点 `MPP` を挿入した回路で、`CircuitFaultModel.from_stim_circuit` による全単一 fault 効果を比較した。
+両回路は物理 location が各 368 個、detector が各 48 個で、location の channel と target の順序は全件一致した。
+両モデルの detector 効果行列 `H` は 368 列すべて完全一致し、不一致列は 0 本だった。
+この独立実測は中点への測定追加と後続 `rec` offset 補正が元の detector 効果を保つことを確認するが、論理 observable の定義を独立に証明するものではない。
+実行時は指定の Python 3.11、`PYTHONDONTWRITEBYTECODE=1`、`PYTHONPATH=src` を使い、約 47 秒を要した。
