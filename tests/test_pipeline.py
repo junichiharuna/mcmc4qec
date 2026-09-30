@@ -3,7 +3,7 @@ import itertools
 import numpy as np
 import pytest
 
-from rimc import (
+from mcmc4qec import (
     CSSCode, CallableDecoder, DepolarizingModel, DepolarizingNoise,
     PhenomenologicalModel, PhenomenologicalNoise, Problem, Result,
     SamplingConfig, KernelConfig, exact, direct_mc, sample_faulty,

@@ -4,10 +4,10 @@ import math
 import numpy as np
 import pytest
 
-from rimc import (BinaryLinearModel, CallableDecoder, CallableFailure,
+from mcmc4qec import (BinaryLinearModel, CallableDecoder, CallableFailure,
                   IndependentBitFlip, KernelConfig, Problem, Result,
                   SamplingConfig, exact, direct_mc)
-from rimc.estimation import (EstimationResult, OverlapError, bennett_log_ratio,
+from mcmc4qec.estimation import (EstimationResult, OverlapError, bennett_log_ratio,
                              estimate_logical_error)
 
 

@@ -28,11 +28,11 @@ jobs:
           python - <<'PY'
           import importlib.util
           from pathlib import Path
-          import rimc
-          assert Path.cwd() / "src" not in Path(rimc.__file__).resolve().parents
+          import mcmc4qec
+          assert Path.cwd() / "src" not in Path(mcmc4qec.__file__).resolve().parents
           for module in ("pymatching", "ldpc", "stim"):
               assert importlib.util.find_spec(module) is None, module
-          print(rimc.__file__)
+          print(mcmc4qec.__file__)
           PY
       - name: Test installed wheel
         run: python -m pytest --override-ini pythonpath= tests/ -q

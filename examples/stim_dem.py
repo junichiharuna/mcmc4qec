@@ -7,7 +7,7 @@ from itertools import product
 import numpy as np
 import stim
 
-from rimc import CallableDecoder, Problem, from_stim_dem, exact, direct_mc
+from mcmc4qec import CallableDecoder, Problem, from_stim_dem, exact, direct_mc
 
 
 def main():

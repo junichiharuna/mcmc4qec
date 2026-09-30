@@ -5,8 +5,8 @@ import math
 import numpy as np
 import pytest
 
-from rimc import CallableDecoder, CallableFailure, Problem
-from rimc.kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
+from mcmc4qec import CallableDecoder, CallableFailure, Problem
+from mcmc4qec.kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
 
 
 class CategoryModel:

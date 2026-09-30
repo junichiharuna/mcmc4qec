@@ -4,12 +4,12 @@ import json
 import numpy as np
 import pytest
 
-from rimc.adapter_composition import HistoryDecoder, SectorDecoder
-from rimc.adapters import DecoderAdapter, PyMatchingAdapter
-from rimc.core import CSSCode, Problem
-from rimc.models import PhenomenologicalModel
-from rimc.noise_categorical import PhenomenologicalNoise
-from rimc.sampling import exact
+from mcmc4qec.adapter_composition import HistoryDecoder, SectorDecoder
+from mcmc4qec.adapters import DecoderAdapter, PyMatchingAdapter
+from mcmc4qec.core import CSSCode, Problem
+from mcmc4qec.models import PhenomenologicalModel
+from mcmc4qec.noise_categorical import PhenomenologicalNoise
+from mcmc4qec.sampling import exact
 
 
 class Record:

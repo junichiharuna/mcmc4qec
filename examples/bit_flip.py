@@ -1,8 +1,8 @@
-"""Small bit-flip example; run against an installed rimc package."""
+"""Small bit-flip example; run against an installed mcmc4qec package."""
 
 import numpy as np
 
-from rimc import (
+from mcmc4qec import (
     CSSCode,
     CallableDecoder,
     IndependentBitFlip,

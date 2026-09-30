@@ -1,4 +1,4 @@
-# RIMC
+# mcmc4qec
 
 An experimental Python library for rare-event Monte Carlo in quantum error
 correction. It provides inspectable finite-state CSS models for bit-flip,
@@ -6,7 +6,7 @@ depolarising, and phenomenological noise; exact enumeration, direct Monte
 Carlo, failure-conditioned MCMC, and splitting with Bennett acceptance ratios
 (BAR). Optional adapters connect existing decoders and Stim detector error models.
 
-**Development status:** local pre-alpha. `rimc` is a provisional package name.
+**Development status:** local pre-alpha. The package name is `mcmc4qec`.
 This is not a published release. Physical circuit-fault configurations, a
 research-runner compatibility wrapper, and public release preparation remain
 subsequent work. The research repository and its runner defaults are separate.
@@ -40,7 +40,7 @@ returns a **predicted logical observable**, not a physical correction.
 
 ```python
 import numpy as np
-from rimc import (
+from mcmc4qec import (
     CSSCode, CallableDecoder, IndependentBitFlip, Problem,
     SamplingConfig, KernelConfig, exact, direct_mc, sample_faulty, diagnose,
 )
@@ -150,12 +150,12 @@ alone do not guarantee that all failure states communicate.
 
 ## Optional decoder adapters
 
-`rimc.adapters.DecoderAdapter` wraps an existing deterministic object with a
+`mcmc4qec.adapters.DecoderAdapter` wraps an existing deterministic object with a
 `decode` method. The output meaning is a required argument. For a BP-OSD object
 that returns a physical correction, use:
 
 ```python
-from rimc.adapters import DecoderAdapter
+from mcmc4qec.adapters import DecoderAdapter
 
 # bp_osd is an existing ldpc.BpOsdDecoder configured by the caller.
 decoder = DecoderAdapter(
@@ -197,7 +197,7 @@ replacement of the joint Pauli noise by independent X/Z draws.
 `PhenomenologicalModel` requires explicit time boundaries and representation:
 
 ```python
-from rimc import PhenomenologicalModel, PhenomenologicalNoise
+from mcmc4qec import PhenomenologicalModel, PhenomenologicalNoise
 
 model = PhenomenologicalModel(
     code, rounds=2,
@@ -222,7 +222,7 @@ coordinates remain. Supply a decoder that understands the chosen full history.
 ## Splitting and BAR
 
 ```python
-from rimc import estimate_logical_error
+from mcmc4qec import estimate_logical_error
 
 # Here problem is the fixed bit-flip Problem from the quickstart.
 ladder = [0.4, 0.25, 0.1]

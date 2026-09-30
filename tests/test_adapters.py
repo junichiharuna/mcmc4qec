@@ -3,7 +3,7 @@ import json
 import numpy as np
 import pytest
 
-from rimc.adapters import DecoderAdapter, PyMatchingAdapter, matching_from_check_matrix
+from mcmc4qec.adapters import DecoderAdapter, PyMatchingAdapter, matching_from_check_matrix
 
 
 class RecordingDecoder:

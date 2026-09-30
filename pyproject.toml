@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rimc"
+name = "mcmc4qec"
 version = "0.1.0.dev1"
 description = "Reference rare-event MCMC primitives for quantum error correction"
 readme = "README.md"

@@ -6,13 +6,13 @@ The bit-flip-only static example is in bit_flip.py.
 """
 import numpy as np
 
-from rimc import (
+from mcmc4qec import (
     CSSCode, CallableDecoder, DepolarizingModel, DepolarizingNoise,
     PhenomenologicalModel, PhenomenologicalNoise, Problem,
     KernelConfig, SamplingConfig, exact, direct_mc, sample_faulty,
     estimate_logical_error,
 )
-from rimc.adapter_composition import HistoryDecoder, SectorDecoder
+from mcmc4qec.adapter_composition import HistoryDecoder, SectorDecoder
 
 
 def problems():

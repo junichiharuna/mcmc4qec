@@ -158,7 +158,7 @@ def matching_from_check_matrix(check_matrix, *, logical_map, identifier,
     try:
         import pymatching
     except ImportError as exc:
-        raise ImportError("install rimc[matching] to construct a Matching decoder") from exc
+        raise ImportError("install mcmc4qec[matching] to construct a Matching decoder") from exc
     decoder = pymatching.Matching.from_check_matrix(matrix, weights=weights,
                                                     error_probabilities=error_probabilities)
     # Ensure trailing zero columns remain represented in physical corrections.

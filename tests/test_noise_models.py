@@ -4,9 +4,9 @@ import json
 import numpy as np
 import pytest
 
-from rimc.core import CSSCode
-from rimc.models import DepolarizingModel, PhenomenologicalModel
-from rimc.noise_categorical import DepolarizingNoise, PhenomenologicalNoise
+from mcmc4qec.core import CSSCode
+from mcmc4qec.models import DepolarizingModel, PhenomenologicalModel
+from mcmc4qec.noise_categorical import DepolarizingNoise, PhenomenologicalNoise
 
 
 def repetition2():

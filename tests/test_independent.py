@@ -6,11 +6,11 @@ import math
 import numpy as np
 import pytest
 
-from rimc import (
+from mcmc4qec import (
     BinaryLinearModel, CallableDecoder, CallableFailure, IndependentBitFlip,
     KernelConfig, Problem, SamplingConfig, direct_mc, exact, sample_faulty,
 )
-from rimc.kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
+from mcmc4qec.kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
 
 
 ALL_STATES = np.asarray(list(itertools.product((0, 1), repeat=4)), dtype=np.uint8)

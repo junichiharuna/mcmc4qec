@@ -5,9 +5,9 @@ import json
 import numpy as np
 import pytest
 
-from rimc import BinaryLinearModel, CallableDecoder, CallableFailure, CSSCode, IndependentBitFlip, Problem, Result, exact
-from rimc.models import PhenomenologicalModel
-from rimc.noise_categorical import PhenomenologicalNoise
+from mcmc4qec import BinaryLinearModel, CallableDecoder, CallableFailure, CSSCode, IndependentBitFlip, Problem, Result, exact
+from mcmc4qec.models import PhenomenologicalModel
+from mcmc4qec.noise_categorical import PhenomenologicalNoise
 
 
 def test_exact_distinguishes_underflow_from_empty_failure_support():
@@ -50,7 +50,7 @@ def test_model_bound_noise_rejects_same_width_but_different_coordinate_meaning()
 
 def test_dem_bound_noise_rejects_different_detector_maps_of_equal_width():
     stim = pytest.importorskip("stim")
-    from rimc.stim_dem import from_stim_dem
+    from mcmc4qec.stim_dem import from_stim_dem
 
     first, noise = from_stim_dem(stim.DetectorErrorModel("error(0.1) D0 L0"))
     different, _ = from_stim_dem(stim.DetectorErrorModel("error(0.1) D1 L0"))

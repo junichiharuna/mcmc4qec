@@ -4,12 +4,12 @@ import math
 import numpy as np
 import pytest
 
-from rimc import (
+from mcmc4qec import (
     BinaryLinearModel, CSSCode, CallableDecoder, IndependentBitFlip,
     KernelConfig, SamplingConfig, Problem, exact, direct_mc, sample_faulty,
     diagnose, Result, InitializationError,
 )
-from rimc.kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
+from mcmc4qec.kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
 
 
 def repetition_problem(noise=None, failure=None):
@@ -64,7 +64,7 @@ def test_transition_detailed_balance_with_nonidentical_probabilities(kernel):
 
 
 def test_stabilizer_rechecks_custom_failure():
-    from rimc import CallableFailure
+    from mcmc4qec import CallableFailure
     code = CSSCode(hx=[[1, 1, 0]], hz=[[1, 1, 0]], lx=[[0, 0, 1]], lz=[[0, 0, 1]])
     model = code.bit_flip_model()
     problem = Problem(model, IndependentBitFlip(3),
@@ -158,6 +158,6 @@ def test_metadata_identifies_model_noise_decoder_and_source():
 
 
 def test_independent_seed_spawn():
-    from rimc import spawn_seeds
+    from mcmc4qec import spawn_seeds
     assert spawn_seeds(17, 3) == spawn_seeds(17, 3)
     assert len(set(spawn_seeds(17, 3))) == 3

@@ -3,7 +3,7 @@ import numpy as np
 import pytest
 
 stim = pytest.importorskip("stim")
-from rimc.stim_dem import from_stim_dem, matching_from_dem, from_stim_circuit
+from mcmc4qec.stim_dem import from_stim_dem, matching_from_dem, from_stim_circuit
 
 
 def test_separator_preserves_one_latent_mechanism_and_stim_replay():

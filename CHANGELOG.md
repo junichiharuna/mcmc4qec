@@ -1,8 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Rename the package and repository from the provisional `rimc` to `mcmc4qec`
+  (import name `mcmc4qec`). No API change.
+
 ## 0.1.0.dev0 — unreleased
 
-- Establish an independent `src/rimc` package for finite binary states and
+- Establish an independent `src/mcmc4qec` package for finite binary states and
   deterministic decoders, without importing the research checkout.
 - Add CSS bit-flip models, configurable failure predicates, exact enumeration,
   fixed-trial direct Monte Carlo, and failure-conditioned MCMC.
