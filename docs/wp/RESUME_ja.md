@@ -82,3 +82,9 @@ push はまだ一度も行っていない。
 main と五つの worktree の HEAD、完了メモ、レビュー記録、研究リポジトリの clean 状態を確認して再開した。
 A/C の完成確認、E の第1回レビュー修正を担当へ戻し、C の正式な第1回レビューと D の追加 API 文書整備を開始した。
 中断前の checkpoint を完成扱いにはせず、各受入条件を確認してから指定順に統合する。
+
+## 再開後の現在地
+
+上の中断時一覧は過去時点の記録である。
+再開後に全WPをmainへ統合し、dev2最終wheelのcore/optional試験と全実行例を確認した。
+以後の状態とCI結果は `final_report_ja.md` と `validation_dev2_ja.md` を参照する。

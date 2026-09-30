@@ -1,30 +1,32 @@
-# 開発依頼書の最終報告（統合前の作成中）
+# 開発依頼書の最終報告
 
 ## 1. 到達点
 
-この文書は作成中であり、開発依頼の達成宣言ではない。
-WP-A〜E の実装を作業枝で進め、B と E は担当範囲の独立レビューを通過した。
-main は共通基盤、明示的な独立論理基底、公開契約と provenance を整備し、統合準備として version を `0.1.0.dev2` に更新した。
-全 WP の main 統合、統合後の wheel 検証、push と remote CI は未完了である。
+WP-A〜E を指定順で main に統合し、65個の公開 API と version `0.1.0.dev2` を整えた。
+統合後の全 suite は268件成功、最終 installed wheel は core208件・optional268件成功し、実行例と文書例も検証した。
+研究照合、物理回路 baseline、複数 chain 診断を実装し、独立レビューでの指摘に対応した。
+研究速度の2倍以内は未達で、profile と改善案による代替受入条件を満たしたが、混合や収束の証明は主張しない。
 著者はユーザーが指定した `junichi haruna` で、公開化、publish、license の追加は行っていない。
 
 ## 2. WP ごとの実装・検証・レビュー
 
-以下は各作業枝の記録であり、統合後の検証結果は第4節に別記する。
+以下は各 WP の記録であり、統合後の最終検証結果は第4節に別記する。
 検証は指定 Python 3.11 を使用した。
 
 | WP | 実装 | 実行した検証（コマンドと結果） | 未実施 | レビューの指摘と対応 |
 | --- | --- | --- | --- | --- |
-| A | 実符号ファクトリと MWPM/BP-OSD/sector wrapper、研究照合 | 担当3ファイルの pytest 66 passed、core-only 40 passed / 26 skipped；exact、MC、Z+H は第3節 | 最終変更後の全 suite と独立レビューの完了 | 正式第1回レビュー中；研究の非単位交差行列は明示 independent 指定で保持 |
+| A | 実符号ファクトリと MWPM/BP-OSD/sector wrapper、研究照合 | `pytest tests/test_crossval_research.py -q` を研究path指定で19 passed、4decoder各256症候群で不一致0；exact、MC、Z+H は第3節 | 大符号の距離下界の独立証明、元数値照合の生Result保存 | 直接研究import試験と数値表再現helper、研究への出力拒否を補い第2回受入；非単位交差行列は明示 independent 指定で保持 |
 | B | product ノイズの Z 高速経路、decoder cache、syndrome 差分 | `-m pytest tests -q` 169 passed、`tests/test_fastpath.py` 13 passed；列挙で q 最大差 1.11e-16、詳細釣合い差 0 | 研究速度の2倍以内 | cache の先行 uint8 cast を修正し、不正 decoder 出力の回帰試験を追加；profile による代替受入条件を確認 |
-| C | 物理 location の排他 fault、Stim 効果の XOR、専用 MH と中点 logical idle | 初版の circuit 試験 13 passed、surface direct MC 比較を実施 | 第1回レビュー修正後の受入と第2回レビュー | 2ラウンド全 location の列挙、location 別分布、確率和検証を修正中 |
-| D | README、API/tutorial、CI、CFF、追加例 | 枝の installed wheel 162 passed、CFF validate 成功、README/tutorial の実行 | 新公開名を含む統合後の全監査 | README の導入依存と BAR の状態数上限違反を修正し、公開 docstring 補完を main へ反映 |
-| E | 複数 chain 診断、四条件、厳密な論理コセット最小化と初期化 | 第1修正後の全 suite 177 passed；最終 focused 16 passed、独立レビューでも16 passed | 統合後の全 suite と wheel | ゼロ分母、独立分散未指定、負相関 IAT、二盆地試験、MILP 最適性確認を修正し、第2回レビュー合格 |
+| C | 物理 location の排他 fault、Stim 効果の XOR、専用 MH と中点 logical idle | `pytest tests/test_circuit_*.py -q` 相当の4ファイル20 passed、全6位置4096配置のexact、surface比較 | d>3の統計照合、論文図表再現、回路Z/H/stabilizer | 全位置列挙、location別分布、確率和、確率付きM/MPP拒否、重複target識別を修正し第2回受入 |
+| D | README、API/tutorial、CI、CFF、追加例 | `test_public_api.py` で65名突合、CFF validate成功、最終wheel208/268件、全6例・README2例・tutorial4例成功 | py.typedは提案のみで型監査後へ延期 | 導入依存、BAR状態数上限、同じ条件付き量の比較、全公開引数・例外を補完；最終レビュー記録参照 |
+| E | 複数 chain 診断、四条件、厳密な論理コセット最小化と初期化 | `pytest tests/test_convergence.py tests/test_initial_states.py -q` 16 passed、独立レビューでも16 passed | 実符号の長時間・多chain混合評価 | ゼロ分母、独立分散未指定、負相関IAT、二盆地、MILP最適性を修正し第2回受入；core統合試験でMILPのoptional skipを補完 |
 
 ## 3. 数値照合と性能
 
 以下の値は WP-A/B の実測記録から転記したものであり、研究論文の図表再現や全領域の精度保証ではない。
 詳細な条件と制約は統合後の `docs/crossval_research_ja.md` と `docs/performance_ja.md` に残す。
+元の exact・10万MC・3000標本Z+H の生Resultは保存されておらず、担当の実測記録と再現helper `docs/wp/A_reproduce.py` を根拠とする。
+独立レビューではdecoder比較とhelperの短い実行を確認し、この長い数値表全体の再計算は行っていない。
 
 | WP-A 対象 | ライブラリ | 研究参照 | 比較と時間 |
 | --- | --- | --- | --- |
@@ -52,13 +54,28 @@ WP-B のコマンドは `benchmarks/bench_step.py --steps 10000` で、双方 p=
 主因は候補評価での `Problem.state` と `categorical` の反復検証であり、時間にはライブラリの全状態保存と Result/診断も含まれる。
 次は検証済み内部状態、受理時の syndrome/observable 更新、順逆局所確率表の再利用を検討する。
 
+回路baselineでは repetition d=3 の2ラウンド全4096配置と PyMatching の exact P_L は `0.02515682853`、Stim直接20,000試行では `0.0255` だった。
+surface d=3・6ラウンド・p=.01 の物理配置700試行は `74/700=.105714`、Wilson区間 `[.085049,.130683]` で、Stim直接5000試行の `.0884` を含んだ。
+これらは物理配置と中点observableの小規模検証であり、論文図表の再現や全回路への等価性を主張しない。
+
 ## 4. 統合後の tests、wheel、CI
 
-未完了である。
-main の直近の全 suite 実行は WP 統合前の `f5323c1` に対する164 passed、40.40秒であり、最終コードの成功とは扱わない。
-最終検証用の `.venv-dev2-core` と `.venv-dev2-optional` は準備済みで、統合後の wheel 導入は未実施である。
-全 WP merge 後の tests 件数と所要時間、wheel hash/import先、各例とREADME/tutorial、CFF、API監査、GitHub Actions の対象 commit と結果をここへ追記する。
-main の push は未実施である。
+再現コマンド、依存version、ファイル別時間、初回core失敗と修正の記録は [validation_dev2_ja.md](validation_dev2_ja.md) にまとめた。
+
+| 検証 | 結果 | 秒 |
+| --- | --- | ---: |
+| 全WP統合後 source `python -m pytest tests -q` | 268 passed / 4 skipped | 76.01 |
+| 最終 wheel、coreのみ、`python -I -m pytest --override-ini pythonpath= tests -q` | 208 passed / 43 skipped | 41.23 |
+| 最終 wheel、optionalあり、同コマンド | 268 passed / 4 skipped | 81.52 |
+| coreの実行例・文書例 | 3 examples、README1例、tutorial3例がexit 0 | 各60秒以内 |
+| optionalの実行例・文書例 | 全6 examples、README2例、tutorial4例がexit 0 | 各60秒以内 |
+| CFF / API | schema1.2.0 validate成功、65名掲載・import・docstringを確認 | — |
+
+4 skipは環境変数指定時だけ実行する研究decoder直接比較で、独立レビューでは別途成功している。
+coreのskipはoptional依存と研究checkoutの不在によるもので、MILP用SciPyのskip指定漏れ2件を統合時に修正した。
+最終 wheel は `mcmc4qec-0.1.0.dev2-py3-none-any.whl`、SHA256 `e4d443a860a182786d3377cc068f713428771630fde9615cf7efbdb493581664` である。
+二つの新規venvのsite-packagesからimportし、packageの23 Pythonファイルがsourceとbyte一致することを確認した。
+GitHub Actionsはmainのpush後に対象commit・run URL・4jobの結果を追記する。
 
 ## 5. 所有者の判断待ち事項
 

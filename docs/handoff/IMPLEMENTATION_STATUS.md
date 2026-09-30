@@ -82,3 +82,17 @@ main `f5323c1` の全 suite は 164 passed、40.40 秒だった。
 再開の起点、各 HEAD、未完了レビュー、merge の注意点と残る達成条件は `docs/wp/RESUME_ja.md` に記録した。
 ユーザーの再開指示までは作業を再開しない。
 main への WP 統合、dev2 最終 wheel 検証、push、remote CI、最終報告は未完了である。
+
+## 2026-09-30 午後・再開後の統合結果
+
+ユーザーの「再開して」で中断指定が解除され、A → B → E → D → C の順に全 WP を main に統合した。
+version は `0.1.0.dev2`、公開 API は65名であり、CHANGELOG、README、API/tutorial、CFF、CIを更新した。
+著者はユーザー指定の `junichi haruna`、CFF schema検証は成功した。
+各統合後の全 suite は成功し、全WPと公開API追加後は 268 passed / 4 skipped、76.01秒だった。
+最終wheelを新規のcore/optional別venvへ導入し、installed wheelの試験は core208 passed / 43 skipped（41.23秒）、optional268 passed / 4 skipped（81.52秒）だった。
+coreは3実行例と4文書例、optionalは全6実行例と全6文書例が成功し、23 Pythonファイルのsource一致とsite-packagesからのimportを確認した。
+初回core検証で発見したMILP試験2件のoptional依存skip漏れは修正した。
+詳細なコマンド、wheel SHA、検証範囲と制約は `docs/wp/validation_dev2_ja.md`、最終報告は `docs/wp/final_report_ja.md` に記録した。
+研究側との速度差は残り、profileに基づく代替受入条件を満たしたが、性能同等や収束の証明とはしない。
+研究リポジトリは読み取り専用で保持し、license追加、publish、public化、既定値の変更は行っていない。
+この追記時点ではremote CIの確認だけが残り、push後に結果を追記する。
