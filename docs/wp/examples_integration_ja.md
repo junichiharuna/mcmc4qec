@@ -40,4 +40,5 @@ make_toric_codeは既存実装でldpcとbposdをimportし、matching extraだけ
 pyprojectの配布版番号はPhase 2で0.1.0.dev3へ更新する。
 実行時 `mcmc4qec.__version__` は現在 src/mcmc4qec/results.py の `VERSION = "0.1.0.dev2"` に固定されている。
 実行時番号も揃える最小差分はこの1行を `VERSION = "0.1.0.dev3"` にすることであり、アルゴリズムや公開APIは変わらない。
-src変更禁止との整合をユーザーに確認し、回答までこの行は変更しない。
+当初はsrc変更禁止との整合を確認したが、依頼書全体の再実行指示を受けて第1節のメイン向け最小修正の例外と第7.2節のdev3指定を再確認し、この1行を同範囲として更新する。
+配布設定と実行時versionの一致テストを先に追加し、dev2対dev3で失敗することを確認してから修正した。

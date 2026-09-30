@@ -2,8 +2,15 @@
 import inspect
 from pathlib import Path
 import re
+import tomllib
 
 import mcmc4qec
+
+
+def test_runtime_version_matches_distribution_configuration():
+    configuration = Path(__file__).resolve().parents[1] / "pyproject.toml"
+    release = tomllib.loads(configuration.read_text(encoding="utf-8"))["project"]["version"]
+    assert mcmc4qec.__version__ == release
 
 
 def test_public_exports_are_documented_and_importable():
