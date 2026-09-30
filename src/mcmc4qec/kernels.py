@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from math import comb, log
 import numpy as np
 from .core import positive_integer
+from .fastpath import product_neighbor_distribution
 
 
 @dataclass(frozen=True)
@@ -65,7 +66,14 @@ class Zanella:
     """
     name = "zanella"
 
+    def __init__(self, *, use_fastpath=True):
+        self.use_fastpath = bool(use_fastpath)
+
     def _distribution(self, state, problem, p):
+        if self.use_fastpath:
+            local = product_neighbor_distribution(state, problem, p)
+            if local is not None:
+                return local
         # Only scalar weights are retained; each candidate is released before
         # the next one is evaluated. State-vector storage is O(n), not O(n^2).
         alphabets = _alphabets(problem)

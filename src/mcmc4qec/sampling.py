@@ -1,5 +1,6 @@
 """Exact enumeration, fixed-budget direct MC, and conditional MH sampling."""
 from dataclasses import asdict, dataclass, field
+from dataclasses import replace
 import itertools
 import math
 import time
@@ -9,6 +10,7 @@ from .core import positive_integer
 from .kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
 from .results import Result, metadata
 from .diagnostics import diagnose
+from .decode_cache import CachedDecoder, FailureEvaluator
 
 
 class InitializationError(RuntimeError):
@@ -17,12 +19,20 @@ class InitializationError(RuntimeError):
 
 @dataclass(frozen=True)
 class KernelConfig:
+    """Per-step kernel mixture and optional laziness.
+
+    The four move probabilities must sum to one; lazy is applied separately.
+    cluster_k counts occupied and empty coordinates exchanged by one H move.
+    zanella_fastpath affects only exact built-in product noises. Invalid weights,
+    cluster_k, or lazy probability raise ValueError.
+    """
     single: float = 0.0
     zanella: float = 0.7
     cluster: float = 0.3
     stabilizer: float = 0.0
     cluster_k: int = 2
     lazy: float = 0.05
+    zanella_fastpath: bool = True
 
     def __post_init__(self):
         weights = [self.single, self.zanella, self.cluster, self.stabilizer]
@@ -33,16 +43,29 @@ class KernelConfig:
         positive_integer(self.cluster_k, "cluster_k")
         if not np.isfinite(self.lazy) or not 0 <= self.lazy < 1:
             raise ValueError("lazy must be in [0, 1)")
+        if not isinstance(self.zanella_fastpath, bool):
+            raise ValueError("zanella_fastpath must be boolean")
 
 
 @dataclass(frozen=True)
 class SamplingConfig:
+    """Conditional MCMC budget, decoder cache, and kernel configuration.
+
+    samples counts retained states per chain; burn_in and thin count every
+    transition, including rejected and lazy steps. chains is the number of
+    independent RNG streams. cache_cap limits entries according to
+    cache_policy. research_clear checks for size > cap every ten steps, as in
+    the research runner; it is a soft cap. lru and freeze are strict caps.
+    Invalid counts, cache settings, or kernel configuration raise ValueError.
+    """
     samples: int = 1000
     burn_in: int = 100
     thin: int = 1
     chains: int = 1
     max_initial_attempts: int = 10000
     kernels: KernelConfig = field(default_factory=KernelConfig)
+    cache_cap: int | None = None
+    cache_policy: str = "research_clear"
 
     def __post_init__(self):
         for name in ("samples", "thin", "chains", "max_initial_attempts"):
@@ -50,16 +73,31 @@ class SamplingConfig:
         positive_integer(self.burn_in, "burn_in", zero=True)
         if not isinstance(self.kernels, KernelConfig):
             raise ValueError("kernels must be KernelConfig")
+        if self.cache_cap is not None:
+            positive_integer(self.cache_cap, "cache_cap")
+        if self.cache_policy not in ("research_clear", "lru", "freeze"):
+            raise ValueError("cache_policy must be research_clear, lru, or freeze")
 
 
 def spawn_seeds(seed, count):
-    """Deterministic independent child seeds for caller-managed workers."""
+    """Return count deterministic child seeds for caller-managed workers.
+
+    seed follows NumPy SeedSequence semantics. Raises ValueError unless count
+    is a positive integer.
+    """
     positive_integer(count, "count")
     return [int(s.generate_state(1, dtype=np.uint64)[0])
             for s in np.random.SeedSequence(seed).spawn(count)]
 
 
 def exact(problem, p, *, max_states=1_048_576):
+    """Enumerate the full experiment state space and return an exact Result.
+
+    p is the noise parameter; max_states bounds the enumerated cardinality.
+    estimate is the logical failure probability per complete experiment, and
+    conditional_weight is the expected nonidentity coordinate count given
+    failure. Raises ValueError on excessive state space or nonnormalized noise.
+    """
     start = time.perf_counter()
     positive_integer(max_states, "max_states")
     n = problem.model.n
@@ -101,7 +139,15 @@ def _wilson(failures, n):
 
 
 def direct_mc(problem, p, *, trials, seed=None):
-    """Fixed trial budget: Wilson interval is not an optional-stopping interval."""
+    """Return a direct Monte Carlo Result for a fixed number of experiments.
+
+    p is the noise parameter; trials is a positive fixed experiment count and
+    seed controls its RNG. estimate and the Wilson interval describe logical
+    failure probability per complete experiment. conditional_weight counts
+    nonidentity coordinates in failed experiments. Raises ValueError for an
+    invalid budget or noise sample outside support. The Wilson interval is
+    not an optional-stopping interval.
+    """
     start = time.perf_counter()
     positive_integer(trials, "trials")
     sequence = np.random.SeedSequence(seed)
@@ -126,16 +172,30 @@ def direct_mc(problem, p, *, trials, seed=None):
 def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
     """Sample normalized noise restricted to one fixed deterministic failure set.
 
+    p is the noise parameter; config defines per-chain budgets and kernels.
+    seed initializes independent chain streams. initial_state may be one
+    supported faulty state or one such state per chain. Returns a Result whose
+    states include every retained rejection and lazy self-loop. The samples
+    describe a conditional distribution, not an experiment failure rate.
+    Raises InitializationError if no faulty start is found within the budget,
+    and ValueError on an invalid supplied start, support, or proposal ratio.
+
     Each chain uses a separate SeedSequence child. Burn-in and thinning are step
     counts; a rejection/lazy step still counts and can be retained as a repeat.
-    Only the requested states are allocated; decoder results are never cached.
+    Only the requested states are allocated. Decoder predictions are cached by
+    complete syndrome; research_clear checks its soft cap every ten steps.
     """
     start = time.perf_counter()
     config = SamplingConfig() if config is None else config
     if not isinstance(config, SamplingConfig):
         raise ValueError("config must be SamplingConfig")
     kc = config.kernels
-    kernels = [OBF(), Zanella(), ClusterExchange(kc.cluster_k), StabilizerFlip()]
+    kernels = [OBF(), Zanella(use_fastpath=kc.zanella_fastpath),
+               ClusterExchange(kc.cluster_k), StabilizerFlip()]
+    cache = CachedDecoder(problem.decoder, cap=config.cache_cap,
+                          policy=config.cache_policy)
+    problem = replace(problem, decoder=cache)
+    evaluator = FailureEvaluator(problem)
     probabilities = np.array([kc.single, kc.zanella, kc.cluster, kc.stabilizer])
     if kc.stabilizer:
         kernels[-1]._rows(problem)
@@ -157,7 +217,8 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
             current = problem.state(initial[chain])
             if not math.isfinite(problem.log_prob(current, p)):
                 raise ValueError("initial_state is outside noise support")
-            if not problem.is_faulty(current):
+            faulty, current_syndrome = evaluator.evaluate(current)
+            if not faulty:
                 raise ValueError("initial_state must be faulty")
             attempts = 0
         else:
@@ -165,7 +226,8 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
                 current = problem.state(problem.noise.sample(p, rng))
                 if not math.isfinite(problem.log_prob(current, p)):
                     raise ValueError("noise.sample generated a state outside support")
-                if problem.is_faulty(current):
+                faulty, current_syndrome = evaluator.evaluate(current)
+                if faulty:
                     break
             else:
                 raise InitializationError("no faulty state found within max_initial_attempts; "
@@ -176,6 +238,8 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
         total_steps = config.burn_in + config.samples * config.thin
         index = 0
         for step in range(total_steps):
+            if step and step % 10 == 0:
+                cache.boundary()
             if rng.random() < kc.lazy:
                 acceptance["lazy"]["proposed"] += 1
                 acceptance["lazy"]["accepted"] += 1
@@ -192,12 +256,19 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
                 log_ratio = proposal.log_reverse_forward
                 if np.isnan(log_ratio) or log_ratio == np.inf:
                     raise ValueError("invalid proposal ratio")
-                if math.isfinite(lp) and problem.is_faulty(candidate):
+                if math.isfinite(lp):
+                    faulty, candidate_syndrome = evaluator.evaluate(
+                        candidate, previous=current,
+                        previous_syndrome=current_syndrome)
+                else:
+                    faulty = False
+                if faulty:
                     u = rng.random()
                     if (math.log(u) if u else -np.inf) < min(0, lp-current_log+log_ratio):
                         stats["accepted"] += 1
                         stats["moved"] += int(not np.array_equal(current, candidate))
                         current, current_log = candidate, lp
+                        current_syndrome = candidate_syndrome
             if step >= config.burn_in and (step-config.burn_in+1) % config.thin == 0:
                 saved[chain, index] = current
                 index += 1
@@ -207,6 +278,10 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
                   "initial_states": effective_initial_states,
                   "initialization": "provided" if initial_state is not None else "noise_sample",
                   "acceptance_scope": "all steps, including burn-in",
+                  "decode_cache": {"cap": config.cache_cap,
+                                   "policy": config.cache_policy,
+                                   "size_at_end": cache.size,
+                                   "research_clear_boundary_steps": 10},
                   "expanded_move_probabilities": {**{k.name: float((1-kc.lazy)*w)
                       for k, w in zip(kernels, probabilities)}, "lazy": kc.lazy}}
     for stats in acceptance.values():
