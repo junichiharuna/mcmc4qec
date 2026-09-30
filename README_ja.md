@@ -21,6 +21,9 @@ core の例には、ローカル checkout で `python -m pip install -e .` を�
 | `notebooks` | Jupyter notebook の実行と作図 |
 
 複数をまとめて入れる場合は `python -m pip install -e ".[codes,matching,bposd,stim,plot,notebooks]"` を使います。
+
+PyMatching 2.4 は matplotlib 本体に依存します。
+workflow の CSV 保存経路は描画用 pyplot が使えない場合に対応し、デコーダーの依存を取り除くものではありません。
 各ファイルの依存は [実行例一覧](examples/README.md) を参照してください。
 
 ```python

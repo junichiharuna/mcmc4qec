@@ -20,6 +20,8 @@ Install a local checkout with `python -m pip install -e .` for core examples. Th
 
 Install several at once with `python -m pip install -e ".[codes,matching,bposd,stim,plot,notebooks]"`. See the [full example index](examples/README.md) for the dependencies of each file.
 
+PyMatching 2.4 requires matplotlib itself. Workflow CSV fallback covers an unavailable pyplot drawing layer; it does not remove the decoder dependency.
+
 ```python
 import numpy as np
 from mcmc4qec import IndependentBitFlip, Problem, SamplingConfig, direct_mc, sample_faulty
