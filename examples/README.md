@@ -24,7 +24,7 @@ Times below are measured seconds on Windows with Python 3.11; they vary with mac
 | File | Purpose | Extras | Default time | Quick time | Read the output | Scientific notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | [workflows/pl_curve.py](workflows/pl_curve.py) | Toric d=3/5 BAR `P_L(p)` curve, direct-MC checks, CSV/PNG | `codes, matching` (`plot` for PNG) | 19.370 s | 3.610 s | `estimates`/`intervals` are anchored BAR values at `ladder`; `checks` are direct MC | 1, 3, 4, 5; MC anchor needs observed failures, `--demo-overlap` illustrates disjoint endpoint support |
-| [workflows/conditional_weight.py](workflows/conditional_weight.py) | Direct-MC versus Z+H conditional weight | `codes, matching` (`plot` for PNG) | 5.780 s | 1.800 s | `ew_direct`/`ew_chain` are `E[w\|faulty]` at `ps`, not `P_L` | 1, 5 |
+| [workflows/conditional_weight.py](workflows/conditional_weight.py) | Direct-MC versus Z+H conditional weight | `codes, matching` (`plot` for PNG) | 16.790 s | 3.926 s | `ew_direct`/`ew_chain` are `E[w\|faulty]` at `ps`, not `P_L` | 1, 5 |
 | [workflows/convergence_check.py](workflows/convergence_check.py) | Multiple initial populations and four convergence checks | `codes, matching` | 1.450 s | 1.010 s | `checks`, `verdict`, and `warnings` screen results; a complete screen needs independent direct-MC conditional variance | 1, 5; a good verdict proves neither convergence, ergodicity, nor correctness |
 | [workflows/p_dependent_decoder.py](workflows/p_dependent_decoder.py) | Fixed BP-OSD ladder versus explicit approximate mode | `codes` | 1.720 s | 0.780 s | `fixed` uses one decoder; `approx` changes it with p and omits that bias from intervals | 1, 2, 3, 4, 5 |
 

@@ -103,3 +103,27 @@ main `a47a141433fb97ccd9a44e597f8604352999df0a` を origin/mainへpushした。
 [Actions run 36675225072](https://github.com/junichiharuna/mcmc4qec/actions/runs/36675225072) は全4job成功で、Python3.11/3.12のcoreは各208 passed / 43 skipped、optionalは各268 passed / 4 skippedだった。
 各jobの実行例も成功し、開発依頼のローカル統合・wheel検証・versionと記録更新・pushとCI確認・最終報告の各条件を満たした。
 今後の所有者判断と未対応範囲は `docs/wp/final_report_ja.md` 第5・6節に明記した。
+
+## 2026-09-30 夕方・dev3実行例依頼の統合
+
+`docs/dev_request_2026-09-30_examples.md`に従いWP-F〜Jを個別worktreeで実装し、各WPの独立レビュー後にH → F → G → I → Jの順でmainへ統合した。
+既存6例のCLIを揃え、実符号・workflow・持ち込みテンプレート12例、実行済み英語notebook4本と再生成スクリプト、英日READMEと実測一覧を追加した。
+版番号を`0.1.0.dev3`に揃え、plot/notebooks extras、再帰的wheel検証、notebookを含むCIを整備した。
+公開APIは65名のままであり、公開既定のZ 0.7 / H 0.3 / cluster_k=2 / 1 chainは変えていない。
+メイン向け最小修正の例外として実行時version定数と回路fault構築の理想区間再利用を変更し、受入テストとsurface d=3のH/L全2588列一致を確認した。
+最終sourceは314 passed / 4 skipped（231.28秒）、新規core wheel環境は231 passed / 61 skipped（113.04秒）、optional wheel環境は314 passed / 4 skipped（225.23秒）だった。
+sourceの追加5ファイル合計は84.876秒、optional wheelでは83.405秒であり、ファイル別最大も60秒以内だった。
+J統合直後は321件成功したが追加テストの時間を超過したため、検証済みの重複seed 7件を整理し、条件付き重み例のquick標本数を縮小した。
+Steaneの全rung被覆やBAR曲線の独立MCとの区間一致は保証せず、実測した非交差、未特定の原因、診断の限界を出力と文書に残した。
+PyMatchingのmatplotlib依存のため、描画層のImportError時のCSV保持とmatplotlib本体なしでの実行は区別した。
+研究リポジトリは読み取り専用を維持し、著者名は指定された`junichi haruna`、所属・DOI・ライセンス・公開・publishは未確定のままとした。
+各WPの完了メモとレビュー、`docs/wp/examples_integration_ja.md`、`docs/wp/final_report_examples_ja.md`に根拠と未実施範囲を記録した。
+この追記時点ではwheelの実行例・文書の補足検証、push後のremote CI確認、作業worktreeと枝の整理を進めており、完了結果は追記する。
+
+## 2026-09-30 18時台・dev3 wheel補足検証完了
+
+`verify_wheel.py core`は7例・文書4ブロック、optionalは全18例・notebook4本・文書6ブロックが成功した。
+各例に10秒のprocess上限を適用し、補足検証全体はcore13.90秒、optional71.02秒だった。
+Python 23ファイルのsource一致、site-packagesからのimport、versionとmetadataのREADME一致、coreでのoptional依存不在も確認した。
+同じoptional wheel環境の既存テスト比較実行は271 passed / 4 skipped（140.96秒）で、最終全suiteとの差84.27秒も90秒の予算内だった。
+ローカル検証を完了し、この後mainのみpushして全4 CI jobを確認する。

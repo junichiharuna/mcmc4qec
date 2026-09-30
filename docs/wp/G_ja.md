@@ -56,3 +56,12 @@ toric ファクトリは現在 `ldpc` と `bposd` が必要なので、3 本の 
 
 前の 4 chain 設定は quick 250 samples と 80 burn-in、既定 1000 samples と 300 burn-in で、pl_curve の実測は quick 5.47 秒、既定 23.60 秒だった。
 他作業の並列実行中には quick subprocess がテスト側の 30 秒制限に達したが、同時負荷を除いた最終設定の単独実行は上記の 3.61 秒と 19.37 秒だった。
+
+## メイン統合後の最終調整
+
+全WP統合時に時間予算を超過したため、conditional_weightのquickだけを4 chain、40 samples、12 burn-inへ縮小し、実行確認用で精度を保証しない旨を表示した。
+既定600 samples、180 burn-inとdirect MCの試行数は維持した。
+回帰試験は9 seedの検証済み結果を保持しつつ、最小・最大セクター衝突を代表するseed 0と4へ整理し、最終全suiteのworkflow 12件は成功した。
+最終dev3 optional wheelから`python -I examples/workflows/conditional_weight.py --seed 2026 --out <一時ディレクトリ>`を実行し、既定16.790秒、`--quick`追加時3.926秒で両方成功した。
+上のWP時点の表とは計測時点の負荷が異なり、既定の計算量を増やした結果ではない。
+最終時間は一覧と最終報告に反映した。
