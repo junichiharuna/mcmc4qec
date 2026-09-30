@@ -14,8 +14,8 @@ ldpc 2.4.1 は Windows で nullity より大きい OSD order により native he
 ## 実行した検証
 
 以下の Python 実行は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` を使用し、研究側を import する場合は `PYTHONDONTWRITEBYTECODE=1` を設定した。
-`python -m pytest tests/test_codes.py tests/test_crossval_research.py tests/test_decoders.py -q` は optional 環境で 66 passed、39.65 秒だった。
-同じコマンドを `C:/dev/mcmc4qec/.venv-dev2-core/Scripts/python.exe` で実行すると 40 passed、26 skipped、0.57 秒だった。
+live研究decoder比較と出力先保護の追加前の `python -m pytest tests/test_codes.py tests/test_crossval_research.py tests/test_decoders.py -q` は optional 環境で 66 passed、39.65 秒だった。
+同じ追加前のコマンドを `C:/dev/mcmc4qec/.venv-dev2-core/Scripts/python.exe` で実行すると 40 passed、26 skipped、0.57 秒だった。
 BP-OSD guard の最終変更前に実行した `python -m pytest tests -q` は 201 passed、271.25 秒であり、この結果を最終変更後の全 suite 合格とは扱わない。
 12 構成の研究 `hx/hz/lx/lz` の shape と raw bytes をまとめた SHA-256 はすべて一致した。
 toric d=3 の実現可能 syndrome 256 個について、研究の MWPM、BP-OSD、depolarising MWPM、depolarising BP-OSD と直接照合した論理予測の不一致は各0件だった。
@@ -28,9 +28,10 @@ toric d=3 の研究 syndrome table の256行でも MWPM 論理予測の不一致
 同じ Z+H は BB72 で `E[w|F]=3.57433`、ESS 65.56、参考95%区間 `[3.38725,3.76142]`、18.74秒だった。
 研究 CSV の条件付き平均は両方の参考区間に含まれた。
 研究 `splitting_pl.py` と同じ合成 weight trace の BAR log ratio は研究 `-1.2130084485394683`、ライブラリ `-1.213008448539711` だった。
-指定された八つの研究テストファイルの102 test関数を意味論ごとに対応付け、WP-A 新規52 parameterized case、既存の等価試験、新 API 未対応を数値照合文書の表に記録した。
+指定された八つの研究テストファイルの102 test関数を意味論ごとに対応付け、WP-A 新規58 parameterized case、既存の等価試験、新 API 未対応を数値照合文書の表に記録した。
 研究リポジトリの `git status --porcelain=v1` は出力なしだった。
-研究 checkout を環境変数で指定する live decoder 比較は `tests/test_crossval_research.py` の17 case が 1.71秒で成功し、研究四 factory の256 syndrome 論理予測不一致は各0件だった。
+研究 checkout を環境変数で指定する live decoder 比較と出力先保護は `tests/test_crossval_research.py` の19 case が 1.14秒で成功し、研究四 factory の256 syndrome 論理予測不一致は各0件だった。
+同じファイルは core-only 環境で8 passed、11 skipped、0.52秒だった。
 再現スクリプトの decoder 比較、direct MC と Z+H の smoke は実行して成功した。
 
 ## 未実施と制約
@@ -50,7 +51,9 @@ toric d=5 のノイズからの初期化は上限10000回で失敗したため�
 研究 HGP/BB の交差行列が単位でない契約衝突はメインと協議し、メイン commit `e8a488b` の明示 `logical_basis="independent"` を担当 branch に cherry-pick した。
 この契約は既定の paired 検証を維持し、研究行列を無変換で受け取る。
 メインの独立レビューはこの共通契約の実装に問題なしとし、予測座標同時変換の説明修正と非ゼロ補正の追加試験を main commit `f5323c1` に入れた。
-WP-A 自体の独立レビューは未実施である。
+WP-A の第1回独立レビューは `docs/wp/A_review_ja.md` にあり、研究 decoder 直接比較、数値表の再現手順、大符号距離 docstring の計3件を指摘した。
+対応 commit `f14710b` で live 研究 decoder テスト、再現スクリプト、距離根拠の説明を追加し、第2回レビューは未完了である。
+第2回レビューで再現スクリプトの `--output` が研究root未指定時に研究 checkout 内へ書ける穴が見つかり、全出力でroot指定を必須にして拒否試験二件を追加した。
 メインには `__init__.py` へ `make_asymmetric_toric_code`、`make_hgp_hamming`、`make_bb_code`、`make_bb_code_72`、`make_bb_code_108`、`make_bb_code_144`、`make_steane_code`、`concatenate_css`、`make_concatenated_steane_code` と四つの decoder factory の追加を依頼する。
 メイン commit `916612b` は `pyproject.toml` の `[codes]` optional extra に `ldpc>=2.4,<3` と `bposd>=2.1,<3` を追加済みである。
 toric を使う README の install command には codes 依存を含める必要がある。

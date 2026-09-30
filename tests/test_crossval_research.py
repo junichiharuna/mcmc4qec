@@ -8,6 +8,7 @@ import importlib.util
 import math
 import os
 from pathlib import Path
+import subprocess
 import sys
 
 import numpy as np
@@ -133,3 +134,35 @@ def test_live_research_decoder_all_toric_d3_syndromes(kind):
     finally:
         sys.modules.pop("research_css_code_wp_a", None)
         sys.dont_write_bytecode = original
+
+
+def test_reproduction_script_requires_research_root_before_output(tmp_path):
+    """The direct path must reject output without knowing the protected root."""
+    script = Path(__file__).resolve().parents[1] / "docs" / "wp" / "A_reproduce.py"
+    output = tmp_path / "result.json"
+    env = dict(os.environ)
+    env.pop("RIMC_RESEARCH_ROOT", None)
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    run = subprocess.run([sys.executable, str(script), "direct", "--smoke",
+                          "--output", str(output)], env=env, capture_output=True, text=True)
+    assert run.returncode != 0
+    assert "--output requires" in run.stderr
+    assert not output.exists()
+
+
+def test_reproduction_script_rejects_output_within_research_root(tmp_path):
+    """The requested output must not be inside the supplied checkout."""
+    script = Path(__file__).resolve().parents[1] / "docs" / "wp" / "A_reproduce.py"
+    source = tmp_path / "src" / "css_code.py"
+    source.parent.mkdir()
+    source.write_text("# fixture\n", encoding="utf-8")
+    output = tmp_path / "result.json"
+    env = dict(os.environ)
+    env.pop("RIMC_RESEARCH_ROOT", None)
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    run = subprocess.run([sys.executable, str(script), "direct", "--smoke",
+                          "--research-root", str(tmp_path), "--output", str(output)],
+                         env=env, capture_output=True, text=True)
+    assert run.returncode != 0
+    assert "outside the read-only research checkout" in run.stderr
+    assert not output.exists()

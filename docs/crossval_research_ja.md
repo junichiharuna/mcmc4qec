@@ -22,7 +22,7 @@ $env:RIMC_RESEARCH_ROOT = 'C:\dev\RIMC'
 & 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py zh --code bb72 --output output/wp-a/zh-bb72.json
 ```
 
-`--output` は指定時だけ全 `Result` JSON を保存し、研究 checkout 内への出力を拒否する。
+`--output` は指定時だけ全 `Result` JSON を保存し、その際は実在する研究 checkout の指定を必須とし、その内部への出力を拒否する。
 中断前の元実行では全 `Result` JSON を保存していないため、下記の数値表は実行ログの要約であり生結果の再読取値ではない。
 再現スクリプトの `decoders` と `direct --code bb72 --smoke`、`zh --code toric5 --smoke` は追加後に軽量動作確認したが、長い exact、100000 trial direct MC、3000標本 Z+H の再実行は行っていない。
 `exact` は `code.bit_flip_model()`、`IndependentBitFlip(code.n)`、`mwpm_decoder(code)` を `Problem` に組み込み、`p=0.01` の全状態を列挙する。
@@ -99,7 +99,7 @@ toric d=5 ではノイズからの初期化を 10000 回試みて失敗したた
 ## 研究テストの意味論対応
 
 指定された研究テスト八ファイルの `test_` 関数は合計 102 件である。
-WP-A の新規受入テストは 52 parameterized case であり、Phase 0 の14 case を加えた担当三ファイルの収集数は66件だった。
+WP-A の新規受入テストは 58 parameterized case であり、Phase 0 の14 case を加えた担当三ファイルの収集数は72件だった。
 研究 runner の旧既定、PT/hot replica、CSV 後処理と新 API の契約が異なるため、102 件を名前だけ置換して全移植したとは扱わない。
 
 | 研究ファイル | 元件数 | 新 API で検証した意味論 | 移植不能または残る範囲 |

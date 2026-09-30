@@ -117,8 +117,13 @@ def main():
     parser.add_argument("--smoke", action="store_true", help="short direct/Z+H wiring check, not the recorded estimate")
     args = parser.parse_args()
     root = None if args.research_root is None else args.research_root.resolve()
-    if args.output is not None and root is not None and args.output.resolve().is_relative_to(root):
-        parser.error("--output must be outside the read-only research checkout")
+    if args.output is not None:
+        if root is None:
+            parser.error("--output requires --research-root or RIMC_RESEARCH_ROOT")
+        if not (root / "src" / "css_code.py").is_file():
+            parser.error("research root must contain src/css_code.py before --output is used")
+        if args.output.resolve().is_relative_to(root):
+            parser.error("--output must be outside the read-only research checkout")
     if args.case in ("exact", "decoders") and root is None:
         parser.error("--research-root or RIMC_RESEARCH_ROOT is required")
 
