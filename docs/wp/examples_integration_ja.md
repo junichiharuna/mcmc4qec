@@ -52,3 +52,14 @@ profileでは単一faultを2588回注入するたびに理想回路を1命令ず
 重複target・2qubit fault・選択locationについて、全80配置の注入回路を独立に組み立てた期待値と比較する受入テストを先に追加した。
 修正前のsurface d=3構築9.61秒で保存したH/L全2588列と修正後の列は完全一致し、修正後の構築は0.92秒だった。
 回路の4テストファイルは22 passed、9.83秒だった。
+
+## 統合時の検証と裁定
+
+Hを独立レビュー受入後にmergeし、全suiteは284 passed / 4 skipped、69.79秒だった。
+続いてFをmergeし、全suiteは295 passed / 4 skipped、98.44秒だった。
+両実行時には他WPのfocused検証・notebook再生成が並行していたため、最終的な時間予算は統合完了後にも確認する。
+SteaneのBAR区間のexact被覆はCLI既定seedで既定2/3、quick1/3であり、全rungの比較結果を出力とメモに残すことを受入とする。
+有限標本の区間被覆を全seedで保証するためのseed選別や区間の恣意的な拡大は行わない。
+PyMatching 2.4はmatplotlib.cbookを読み込むため、toric workflowについてmatplotlib本体を欠く実行環境は成立しない。
+描画用pyplotのImportError時に同じ数値のCSVを残す経路を検証し、matplotlib本体なしの実行成功とは区別してREADMEと最終報告に記録する。
+この依存境界を隠すstubや依存packageの書き換えは行わない。
