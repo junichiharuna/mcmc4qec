@@ -43,8 +43,10 @@ def main():
     problem = Problem(code.bit_flip_model(), IndependentBitFlip(code.n), mwpm_decoder(code))
     ps = [0.14, 0.20, 0.26]
     seeds = iter(spawn_seeds(args.seed, 2 * len(ps)))
-    config = SamplingConfig(chains=4, samples=150 if args.quick else 600,
-                            burn_in=50 if args.quick else 180)
+    config = SamplingConfig(chains=4, samples=40 if args.quick else 600,
+                            burn_in=12 if args.quick else 180)
+    if args.quick:
+        print('Quick mode checks execution only; these short chains do not establish precision.')
     rows = []
     for p in ps:
         direct = direct_mc(problem, p, trials=250 if args.quick else 2000,

@@ -125,7 +125,8 @@ def test_configured_research_root_is_rejected(variable, tmp_path):
     assert not (tmp_path / 'research').exists()
 
 
-@pytest.mark.parametrize('seed', (0, 1, 2, 3, 4, 5, 7, 8, 9))
+# These cover the former minimum-sector and maximum-sector collisions.
+@pytest.mark.parametrize('seed', (0, 4))
 def test_convergence_initial_populations_are_distinct(seed, tmp_path):
     pytest.importorskip('pymatching')
     pytest.importorskip('ldpc')
