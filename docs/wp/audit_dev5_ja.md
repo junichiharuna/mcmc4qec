@@ -26,8 +26,8 @@
 | Pの四収束規則 | scaling/late drift/multistart/dispersionの実判定と未判定処理 | P_reviewで適用traceを監査、正式M未判定と補助四条件を区別、数値はladder全rungのAND |
 | Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | data_dev5/lengthに全60行と対応差、exact換算、分散分解を保存、独立reviewerが全列と派生量を1e-12以内で再現 |
 | Pのbias/分散の識別 | 同一軌道の2誤差法、N依存、必要なburn-in/4・16・50 chain感度 | N依存で散らばり縮小、9600のexact換算偏差1.1SEで持続bias未確定、追加感度未発動の判断を独立reviewerが支持、同軌道2法比較は後続 |
-| Pの4構成×2領域 | 全構成20 seed以上、各CSVと被覆/Wilson/平均幅/平均偏差/収束合格数 | 未確認 |
-| Pの低p exact/MC anchor | 同じ軌道に対する両anchor、独立seedとanchor分散の記録 | 未確認 |
+| Pの4構成×2領域 | 全構成20 seed以上、各CSVと被覆/Wilson/平均幅/平均偏差/収束合格数 | 10cohort・200行をdata_dev5に保存、低p paper50両anchorの2群が実行中、全体監査は未完 |
+| Pの低p exact/MC anchor | 同じ軌道に対する両anchor、独立seedとanchor分散の記録 | 低p default_blockの20組は比・cut・診断が全て一致、他群と全体の独立監査は進行中 |
 | Pの論文整合表 | chain数、burn-in、誤差棒、kernel、初期化、収束、ladder、p領域、BAR、anchorを論文行番号付きで対応 | paper_consistencyに全項目あり、P_reviewで式・cut・四規則・kernel等を照合、最終数値の反映は後続 |
 | Pの利用者向け指針 | 測定範囲と限界、短いchainの警告、既定変更は所有者判断として提案 | 未確認 |
 | Pの独立レビューと対応 | 別agentのP_review、seed選択なし、論文手順一致、統計主張の反証確認 | 未確認 |
