@@ -209,3 +209,15 @@ defaultの2法は全20seedの点推定・BAR比・cut・各診断列が一致し
 長さ比較の独立監査はP branchの `2edaa85` に保存され、追加感度未発動の判断を支持しつつbias原因の除外ではないことを記録した。
 mainの検証記録と監査表へ監査結果を反映し、P worktreeの予備出力39ファイルも `output/dev5/p_pilots/` に保持した。
 担当はdev4 paper50を継続し、その後に事前固定した低pの4構成・両anchorを測定する。
+
+## 2026-10-01 21:36 の更新
+
+前turnは長さ比較の独立監査と3cohortの確認を `0988c5c` へコミットし、今回は同じdev4 paper50のプロセスが稼働中であることをCIMで確認して継続した。
+dev4 paper50はbenchmark内271.11秒で完了し、被覆19/20、平均偏差+0.006660、平均幅0.06555だった。
+paper16とpaper50はそれぞれ全20seedで少なくとも1chainが半trace capに達し、正式四条件の合格0、未判定11/18、補助四条件合格11/18だった。
+これでdev4の4cohort・80行が揃い、`docs/wp/data_dev5/protocol/raw/` に保存した。
+低pのdefault_block両anchorは外側125.03秒で完了し、MC anchorの被覆18/20・平均幅0.004355、exact anchorは14/20・平均幅0.001848だった。
+この2cohort・40行も保存し、全20組のBAR比・cut・各診断列がanchor間で一致することを確認した。
+MC anchorの追加分散が区間幅に寄与するため、MCでの被覆数だけでBAR側の不確かさ評価が十分とは判断しない。
+最初の未完了は残り6cohortであり、低p default_cross両anchorを21:35:14開始の同一プロセスで計測中である。
+最終の12cohort集計と独立科学レビュー、P文書の統合、remote CI以降のgateは引き続き未完了である。
