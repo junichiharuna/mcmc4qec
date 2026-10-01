@@ -17,9 +17,14 @@
 既定例の単発比較では真値を含むのは独立 MC の区間であり、BAR 区間は外れる。
 `python benchmarks/bar_sensitivity.py --scenario baseline --seeds 20 --out <一時ディレクトリ>` は 349.11 秒で、BAR exact 被覆 13/20、独立 MC 20/20、区間非交差 2/20、平均 BAR 幅 0.06257 だった。
 `--scenario` を `samples_short`、`samples_long`、`burn_zero`、`burn_long`、`block_tenth_iat`、`block_one_iat`、`block_four_iat`、`ladder_fine`、`ladder_coarse`、`initial_min`、`initial_random`、`initial_max`、`anchor_exact` にして各 `--seeds 8` を実行し、元の `baseline_summary.csv` の exact 値を `--truth-file` で再利用した。
+最初の samples 200/1200 の計測は自動 block 長も 6/11 に変わる交絡があったため、元 CSV を一時出力先の `samples_short_default_cube_*` と `samples_long_default_cube_*` に保全し、最終コードで block 8 を固定した同じ先頭 8 seed を再実行した。
+制御した短い保存数の実コマンドは `$env:PYTHONPATH='src'; & 'C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe' benchmarks/bar_sensitivity.py --scenario samples_short --seeds 8 --truth-file "$env:TEMP/mcmc4qec/bar_sensitivity_wp_m/baseline_summary.csv" --trust-truth-file --out "$env:TEMP/mcmc4qec/bar_sensitivity_wp_m"` で、長い保存数は `--scenario samples_long` にだけ置換した。
+最終コードの `samples_short_auto` と `samples_long_auto` は旧立方根 block 規則の再現用であり、制御した二条件の block 長はともに 8 である。
 `low_p` は `--seeds 8` で p=0.10 を改めて exact 列挙した。
 既定 20 seed の実行が最長の 349.11 秒で、感度 8 seed の各 invocation は全て 186 秒以下だった。
 `python -m pytest tests/test_bar_coverage.py -q` は 1 passed、5.97 秒だった。
+交絡修正後の `python -m pytest tests/test_bar_coverage.py tests/test_estimation.py -q` は 12 passed、11.90 秒だった。
+最終 CLI の `samples_short_auto --seeds 1 --truth-file <baseline_summary.csv> --trust-truth-file` は 4.84 秒で動き、block 6 の旧 seed 2026 の幅 0.070297 を再現した。
 `--out A:/dev/RIMC/wp_m_forbidden` はディレクトリ作成前に `ValueError: Refusing to write into the read-only RIMC repository` で停止した。
 一時出力先の `baseline_summary.csv` を再利用した各数値は、初回 exact p=0.22 の 0.6026625647 と一致した。
 現在の CLI は異なる問題の真値 CSV を自動識別しないため、再利用には `--trust-truth-file` の明示が必要である。
@@ -29,7 +34,8 @@
 | --- | ---: | ---: | ---: |
 | 基準 20 seed | 13/20 | 0.06257 | 2/20 |
 | 基準の先頭 8 seed | 4/8 | 0.06321 | 2/8 |
-| 保存 200 / 1200 | 6/8 / 8/8 | 0.07677 / 0.05419 | 2/8 / 0/8 |
+| 保存 200 / 1200、block 8 固定 | 6/8 / 7/8 | 0.08113 / 0.05299 | 2/8 / 0/8 |
+| 参考：保存 200 / 1200、自動 block 6 / 11 | 6/8 / 8/8 | 0.07677 / 0.05419 | 2/8 / 0/8 |
 | burn-in 0 / 600 | 7/8 / 7/8 | 0.06140 / 0.06542 | 0/8 / 0/8 |
 | block 3 / 27 / 107 | 4/8 / 7/8 / 7/8 | 0.04817 / 0.07616 / 0.08562 | 2/8 / 1/8 / 1/8 |
 | ladder coarse / fine | 6/8 / 7/8 | 0.07103 / 0.05371 | 0/8 / 1/8 |
@@ -37,14 +43,19 @@
 | exact anchor | 4/8 | 0.04991 | 2/8 |
 | p=0.10 の低 p ladder | 8/8 | 0.02922 | 0/8 |
 
+保存数だけの比較の参考 95% Wilson 区間は block 8 固定で 200 が 6/8 [0.409, 0.929]、1200 が 7/8 [0.529, 0.978] で、基準の先頭 8 seed は 4/8 [0.215, 0.785] だった。
+旧自動 block 11 の 8/8 の Wilson 区間は [0.676, 1.000] であり、これらの幅から設定の優劣は確定しない。
+block 8 固定の実行時間は保存 200 が 39.40 秒、保存 1200 が 131.43 秒で、旧自動 block 6/11 の 44.21/148.40 秒とは別に記録した。
 基準の block 8 は最大 chain 重み IAT の seed 間中央値 35.69 より短い。
 同じ chain に対する block 3/27/107 の変更で区間は広がるが、非交差だった seed 2026 は block 107 でも exact 真値を含まなかった。
 exact anchor に替えても先頭 8 seed の BAR 被覆と非交差数は変わらず、今回の MC anchor 誤差を主因とする根拠はない。
 既定 20 seed の交差 support 有限率は全て 1、最小 BAR overlap は 0.4661–0.4898 で、観測 support 欠落はない。
 seed 2026 は保存 1200 または burn-in 600 で点推定が真値に近づき、短い chain の分布差に感度があった。
+保存 1200 の seed 2026 は block 8 区間 [0.552007, 0.602027] では真値 0.602663 をわずかに外し、自動 block 11 区間 [0.550761, 0.603388] では含むため、旧 8/8 被覆を保存数だけの効果とは扱わない。
 ただし 8 seed の Wilson 区間は広く、block 不足と混合不足の寄与を確定的に分離できない。
 minimum と maximum の初期状態は同じ配列で、8 seed の CSV は scenario 名以外完全一致したため、異なる初期重みの効果はこの符号では検証できなかった。
 重み trace の IAT、区間被覆、初期状態比較はいずれも収束、エルゴード性、正しさの証明ではない。
+今回の固定 p の独立 bit-flip 対では log-density difference が重みの一次関数なので、非定数 trace の IAT は重み IAT と一致するが、BAR の非線形 score や一般ノイズにその等価性を拡張しない。
 
 ## ライブラリの誤りの判定と残る作業
 

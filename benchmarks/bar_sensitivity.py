@@ -27,7 +27,8 @@ from mcmc4qec.initial_states import (maximum_weight_initial_state,
 
 
 SCENARIOS = (
-    "baseline", "samples_short", "samples_long", "burn_zero", "burn_long",
+    "baseline", "samples_short", "samples_long", "samples_short_auto",
+    "samples_long_auto", "burn_zero", "burn_long",
     "block_tenth_iat", "block_one_iat", "block_four_iat",
     "ladder_fine", "ladder_coarse",
     "initial_min", "initial_random", "initial_max", "anchor_exact", "low_p",
@@ -89,16 +90,18 @@ def run(args):
     elif args.scenario == "low_p":
         ladder = [0.18, 0.14, 0.10]
     config_kwargs = dict(chains=4, samples=600, burn_in=180)
-    if args.scenario == "samples_short":
+    if args.scenario in ("samples_short", "samples_short_auto"):
         config_kwargs["samples"] = 200
-    elif args.scenario == "samples_long":
+    elif args.scenario in ("samples_long", "samples_long_auto"):
         config_kwargs["samples"] = 1200
     elif args.scenario == "burn_zero":
         config_kwargs["burn_in"] = 0
     elif args.scenario == "burn_long":
         config_kwargs["burn_in"] = 600
     config = SamplingConfig(**config_kwargs)
-    block = None
+    # Hold the baseline's eight-step block fixed in the controlled sample-count
+    # comparisons. The *_auto scenarios retain the library's cube-root rule.
+    block = 8 if args.scenario in ("samples_short", "samples_long") else None
     pilot_tau = None
     if args.scenario.startswith("block_"):
         pilot_tau = pilot_iat(problem, ladder[-1])

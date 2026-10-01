@@ -69,8 +69,10 @@ BAR 区間の平均幅は 0.06257、最小の隣接 BAR overlap の平均は 0.4
 | 変えた要因 | 設定 | BAR exact 被覆 [95% Wilson] | 平均 BAR 幅 | 平均最小 overlap | MC と非交差 |
 | --- | --- | --- | ---: | ---: | ---: |
 | 基準の先頭 8 seed | 保存 600、burn 180、block 8 | 4/8 [0.215, 0.785] | 0.06321 | 約 0.484 | 2/8 |
-| 保存数 | 200 / chain | 6/8 [0.409, 0.929] | 0.07677 | 0.4821 | 2/8 |
-| 保存数 | 1200 / chain | 8/8 [0.676, 1.000] | 0.05419 | 0.4857 | 0/8 |
+| 保存数だけ | 200 / chain、block 8 固定 | 6/8 [0.409, 0.929] | 0.08113 | 0.4821 | 2/8 |
+| 保存数だけ | 1200 / chain、block 8 固定 | 7/8 [0.529, 0.978] | 0.05299 | 0.4857 | 0/8 |
+| 参考：保存数と自動 block が連動 | 200 / chain、block 6 | 6/8 [0.409, 0.929] | 0.07677 | 0.4821 | 2/8 |
+| 参考：保存数と自動 block が連動 | 1200 / chain、block 11 | 8/8 [0.676, 1.000] | 0.05419 | 0.4857 | 0/8 |
 | burn-in | 0 | 7/8 [0.529, 0.978] | 0.06140 | 0.4836 | 0/8 |
 | burn-in | 600 | 7/8 [0.529, 0.978] | 0.06542 | 0.4833 | 0/8 |
 | block 長 | pilot IAT の 0.1 倍、3 | 4/8 [0.215, 0.785] | 0.04817 | 0.4838 | 2/8 |
@@ -85,10 +87,15 @@ BAR 区間の平均幅は 0.06257、最小の隣接 BAR overlap の平均は 0.4
 | p 範囲 | `[0.18, 0.14, 0.10]` | 8/8 [0.676, 1.000] | 0.02922 | 0.4808 | 0/8 |
 
 block の pilot は p=0.22、4 chain、保存 600、burn-in 180、seed 1984 の重み trace で、最大 IAT は 26.5995 だった。
-各 seed の実際の最大 chain IAT は変動し、重み IAT は BAR の密度比 score の IAT を保証しない。
+保存数だけの二行は基準と同じ block 8 を明示指定し、旧計測の二行は `bootstrap_block_length=None` の立方根規則が保存数とともに block 6/11 へ変わった参考値である。
+旧計測の seed ごとの点推定は block 8 固定の再計測と同一で、区間だけが変わった。
+block 8 固定の保存 200/1200 の実行時間は 39.40/131.43 秒で、旧自動 block 6/11 の 44.21/148.40 秒とは別の計測である。
+各 seed の実際の最大 chain IAT は変動する。
+この固定 p の独立 bit-flip 対では `log rho_b/rho_a = n log((1-b)/(1-a)) + w log(b(1-a)/(a(1-b)))` なので、非定数の log-density difference trace の自己相関と IAT は重みと一致する。
+BAR の非線形な sigmoid score の IAT まで一致するとは限らず、一般の相関ノイズでは log-density difference を重み IAT で代用できない。
 block 比較は同じ chain 軌道を bootstrap だけ変えており、点推定は同一である。
 seed 2026 では block 3、27、107 の BAR 区間上限は順に 0.5579、0.5700、0.5703 で、全て exact 0.6027 を外した。
-同 seed では保存数 1200 で BAR 0.5765、区間 [0.5508, 0.6034]、burn-in 600 で BAR 0.6107、区間 [0.5807, 0.6421] となった。
+同 seed では保存数 1200・block 8 固定で BAR 0.5765、区間 [0.5520, 0.6020]、旧自動 block 11 では同じ点推定で [0.5508, 0.6034]、burn-in 600 では BAR 0.6107、区間 [0.5807, 0.6421] となった。
 これらの値は短い chain の点推定が動くことを示すが、どの操作が一般に bias を除くかは確定しない。
 
 | 仮説 | 変更・検査 | 観測と判断 |
@@ -106,9 +113,9 @@ random logical sector は seed 2026 で重み 6 になり、minimum と異なる
 
 ## 利用者向けの設定指針
 
-まず各 rung の独立 chain で重みと BAR の log-density difference の自己相関、chain 間差、初期状態差を調べ、block 長を少なくとも観測 IAT 程度から試し、数倍へ動かして区間幅の安定性を確認する。
+まず各 rung の独立 chain で重み、BAR の密度比 score、chain 間差、初期状態差を調べ、block 長を少なくとも観測 IAT 程度から試し、数倍へ動かして区間幅の安定性を確認する。
 今回の 600 標本と既定 block 8 は観測した重み IAT より短く、区間の過小評価を疑う理由があるが、長い block だけで点推定の偏りは直らない。
-保存数はこの d=3 条件で 1200 / chain が 600 より良い結果を示したため、研究用評価では少なくともこの規模を pilot の出発点とし、独立 seed と長さを増やして安定性を再確認する。
+保存数を block 8 固定で 600 から 1200 / chain に増やした 8 seed 比較では被覆が 4/8 から 7/8、平均区間幅が 0.06321 から 0.05299 となったため、研究用評価ではこの規模を pilot の出発点とし、独立 seed と長さを増やして安定性を再確認する。
 ladder は有限の交差 support と双方向 overlap を各隣接組で確認し、overlap が低い箇所は刻みを細かくする。
 今回の 0.30–0.22 範囲では粗い ladder でも平均最小 overlap が 0.451 であり、刻み不足を主因とは判断しない。
 MC anchor と確認用 direct MC の seed は分離し、非 anchor 点の独立 MC 区間や列挙できる問題の exact 真値を確認する。
@@ -118,6 +125,9 @@ MC anchor と確認用 direct MC の seed は分離し、非 anchor 点の独立
 
 基準は `PYTHONPATH=src` で `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bar_sensitivity.py --scenario baseline --seeds 20 --out <一時ディレクトリ>` を実行した。
 感度は同じ script の `--scenario` に表の名前を与え、`--seeds 8 --truth-file <baseline_summary.csv> --trust-truth-file` で先行 exact 真値を再利用した。
+保存数だけの比較は `--scenario samples_short` と `--scenario samples_long` を使い、benchmark が `bootstrap_block_length=8` を明示する。
+最初の参考計測は最終修正前の同名 scenario を `bootstrap_block_length=None` で実行し、元 CSV を一時出力先に `samples_short_default_cube_*` と `samples_long_default_cube_*` として保全した。
+最終 script の `samples_short_auto` と `samples_long_auto` は、この参考計測の自動 block 設定を再現する。
 `low_p` は p=0.10 を新たに exact 列挙したため `--truth-file` を付けなかった。
 真値 CSV の再利用は利用者が同じ toric d=3、同じ MWPM、同じ failure 定義を使ったことを確認する明示的な操作であり、異なる問題の CSV を自動識別する機能ではない。
 benchmark の CSV は一時ディレクトリに書かれるため、上の per-seed 表と感度要約をこの文書に残した。
