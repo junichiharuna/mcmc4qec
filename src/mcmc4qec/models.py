@@ -1,7 +1,9 @@
 """Pauli and explicitly bounded repeated-measurement CSS state spaces."""
+from __future__ import annotations
+from typing import Any
 import numpy as np
 
-from .core import CSSCode, categorical, identified, positive_integer
+from .core import BinaryLinearModel, CSSCode, categorical, identified, positive_integer
 
 _X_COMPONENT = np.array([0, 1, 1, 0], dtype=np.uint8)
 _Z_COMPONENT = np.array([0, 0, 1, 1], dtype=np.uint8)
@@ -22,7 +24,7 @@ class DepolarizingModel:
     rate unit; a Problem's probability is for the full modeled experiment.
     """
 
-    def __init__(self, code: CSSCode):
+    def __init__(self, code: CSSCode) -> None:
         if not isinstance(code, CSSCode):
             raise TypeError("code must be a CSSCode")
         self.code = code
@@ -31,20 +33,20 @@ class DepolarizingModel:
         self.stabilizers = np.concatenate((code.hx, code.hz * 3), axis=0)
         self.stabilizers.flags.writeable = False
 
-    def validate_state(self, state):
+    def validate_state(self, state: np.ndarray) -> np.ndarray:
         return categorical(state, self.alphabets)
 
-    def syndrome(self, state):
+    def syndrome(self, state: np.ndarray) -> np.ndarray:
         state = self.validate_state(state)
         return np.concatenate((self.code.hz @ _X_COMPONENT[state] % 2,
                                self.code.hx @ _Z_COMPONENT[state] % 2))
 
-    def observables(self, state):
+    def observables(self, state: np.ndarray) -> np.ndarray:
         state = self.validate_state(state)
         return np.concatenate((self.code.lz @ _X_COMPONENT[state] % 2,
                                self.code.lx @ _Z_COMPONENT[state] % 2))
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="DepolarizingModel", code=_code_metadata(self.code),
                                n=self.n, alphabets=self.alphabets,
                                pauli_encoding=["I", "X", "Y", "Z"],
@@ -70,8 +72,8 @@ class PhenomenologicalModel:
     ``TypeError``. A logical failure probability spans all specified rounds.
     """
 
-    def __init__(self, code: CSSCode, rounds, *, initial_boundary,
-                 final_boundary, representation, data_noise="bit_flip"):
+    def __init__(self, code: CSSCode, rounds: int, *, initial_boundary: Any,
+                 final_boundary: Any, representation: str, data_noise: str="bit_flip") -> None:
         if not isinstance(code, CSSCode):
             raise TypeError("code must be a CSSCode")
         if initial_boundary != "clean":
@@ -88,6 +90,7 @@ class PhenomenologicalModel:
         self.final_boundary = final_boundary
         self.representation = representation
         self.data_noise = data_noise
+        self.data_model: BinaryLinearModel | DepolarizingModel
         if data_noise == "bit_flip":
             self.data_model = code.bit_flip_model()
             self.n_checks = len(code.hz)
@@ -103,14 +106,14 @@ class PhenomenologicalModel:
         self.n = self.n_data + self.n_measurement
         self.alphabets = (4 if data_noise == "depolarizing" else 2,) * self.n_data + (2,) * self.n_measurement
 
-    def validate_state(self, state):
+    def validate_state(self, state: np.ndarray) -> np.ndarray:
         return categorical(state, self.alphabets)
 
     def _cumulative_data(self, state):
         data = state[:self.n_data].reshape(self.rounds, self.code.n)
         return np.bitwise_xor.accumulate(data, axis=0)
 
-    def syndrome(self, state):
+    def syndrome(self, state: np.ndarray) -> np.ndarray:
         state = self.validate_state(state)
         cumulative = self._cumulative_data(state)
         history = np.array([self.data_model.syndrome(row) for row in cumulative], dtype=np.uint8)
@@ -120,11 +123,11 @@ class PhenomenologicalModel:
             return history ^ previous
         return history
 
-    def observables(self, state):
+    def observables(self, state: np.ndarray) -> np.ndarray:
         state = self.validate_state(state)
         return self.data_model.observables(self._cumulative_data(state)[-1])
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="PhenomenologicalModel", code=_code_metadata(self.code),
                                n=self.n, alphabets=self.alphabets, rounds=self.rounds,
                                data_noise=self.data_noise, initial_boundary=self.initial_boundary,

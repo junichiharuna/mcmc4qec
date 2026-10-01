@@ -1,4 +1,6 @@
 """Physical, mutually exclusive Pauli faults at Stim circuit locations."""
+from __future__ import annotations
+from typing import Any, Callable, Iterable, Sequence
 from dataclasses import dataclass
 from importlib.metadata import version
 import math
@@ -35,7 +37,7 @@ class FaultLocation:
     target_group_index: int = 0
 
 
-def stim_noise_locations(circuit):
+def stim_noise_locations(circuit: Any) -> tuple[FaultLocation, ...]:
     """Enumerate physical target groups of supported Stim Pauli channels.
 
     Args:
@@ -100,7 +102,7 @@ class CircuitFaultModel:
             detector or observable outcomes.
     """
 
-    def __init__(self, circuit, locations, *, identifier="circuit-physical-faults"):
+    def __init__(self, circuit: Any, locations: Iterable[FaultLocation], *, identifier: str="circuit-physical-faults") -> None:
         import stim
 
         if not isinstance(circuit, stim.Circuit):
@@ -164,8 +166,8 @@ class CircuitFaultModel:
         self.L.flags.writeable = False
 
     @classmethod
-    def from_stim_circuit(cls, circuit, *, locations=None, location_rule=None,
-                          identifier="circuit-physical-faults"):
+    def from_stim_circuit(cls, circuit: Any, *, locations: Iterable[FaultLocation] | None=None, location_rule: Callable[[Any], Iterable[FaultLocation]] | None=None,
+                          identifier: str="circuit-physical-faults") -> CircuitFaultModel:
         """Build from all supported channels or a caller-supplied location rule.
 
         Args:
@@ -194,11 +196,11 @@ class CircuitFaultModel:
                    identifier=identifier)
 
     @property
-    def circuit(self):
+    def circuit(self) -> Any:
         """Return a copy of the source Stim circuit to protect cached effects."""
         return self._circuit.copy()
 
-    def validate_state(self, state):
+    def validate_state(self, state: np.ndarray) -> np.ndarray:
         return categorical(state, self.alphabets)
 
     def _injected_circuit(self, state):
@@ -217,7 +219,7 @@ class CircuitFaultModel:
                         output.append(pauli, target)
         return output
 
-    def simulate_state(self, state):
+    def simulate_state(self, state: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
         """Directly run a deterministic fault placement through Stim."""
         state = self.validate_state(state)
         circuit = self._injected_circuit(state)
@@ -226,21 +228,21 @@ class CircuitFaultModel:
         return (d[0].astype(np.uint8) ^ self._baseline_d,
                 o[0].astype(np.uint8) ^ self._baseline_o)
 
-    def syndrome(self, state):
+    def syndrome(self, state: np.ndarray) -> np.ndarray:
         state = self.validate_state(state)
         value = np.zeros(self.H.shape[0], dtype=np.uint8)
         for label, effects in zip(state, self._effects_d):
             value ^= effects[label]
         return value
 
-    def observables(self, state):
+    def observables(self, state: np.ndarray) -> np.ndarray:
         state = self.validate_state(state)
         value = np.zeros(self.L.shape[0], dtype=np.uint8)
         for label, effects in zip(state, self._effects_o):
             value ^= effects[label]
         return value
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="CircuitFaultModel", identifier=self.identifier,
             source_circuit=str(self._circuit), stim_version=version("stim"),
             locations=[dict(instruction_index=x.instruction_index,
@@ -273,11 +275,12 @@ class CircuitFaultNoise:
         ValueError: A channel is missing, unused, malformed, or unnormalized.
     """
 
-    def __init__(self, model, conditional_probabilities):
+    def __init__(self, model: CircuitFaultModel, conditional_probabilities: dict[str, Sequence[float]] | Sequence[Sequence[float]]) -> None:
         self.model = model
         self.n = model.n
         self.alphabets = model.alphabets
         channels = {loc.channel for loc in model.locations}
+        provided: Sequence[Sequence[float]]
         if isinstance(conditional_probabilities, dict):
             if set(conditional_probabilities) != channels:
                 raise ValueError("conditional probabilities must specify exactly the used channels")
@@ -301,7 +304,8 @@ class CircuitFaultNoise:
             conditional.append(values)
         self.conditional_probabilities = tuple(conditional)
 
-    def probabilities(self, p):
+    def probabilities(self, p: float | dict[str, Any] | None) -> list[np.ndarray]:
+        rates: Any
         if isinstance(p, dict):
             if set(p) == {"location_rates"}:
                 rates = np.asarray(p["location_rates"])
@@ -320,15 +324,15 @@ class CircuitFaultNoise:
             output.append(np.r_[1-float(rate), float(rate)*conditional])
         return output
 
-    def sample(self, p, rng):
+    def sample(self, p: float | dict[str, Any] | None, rng: np.random.Generator) -> np.ndarray:
         return np.asarray([rng.choice(len(q), p=q) for q in self.probabilities(p)], dtype=np.uint8)
 
-    def log_prob(self, state, p):
+    def log_prob(self, state: np.ndarray, p: float | dict[str, Any] | None) -> float:
         state = self.model.validate_state(state)
         values = [q[label] for q, label in zip(self.probabilities(p), state)]
         return -np.inf if any(x == 0 for x in values) else float(np.log(values).sum())
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="CircuitFaultNoise", model_sha256=self.model.metadata()["sha256"],
             conditional_probabilities=[v.tolist() for v in self.conditional_probabilities],
             conditional_mode=self.conditional_mode,
@@ -336,7 +340,7 @@ class CircuitFaultNoise:
             independence="between physical locations, exclusive categories within each location"))
 
 
-def uniform_fault_noise(model):
+def uniform_fault_noise(model: CircuitFaultModel) -> CircuitFaultNoise:
     """Assign equal conditional probabilities to each physical Pauli fault.
 
     Args:
@@ -351,6 +355,6 @@ def uniform_fault_noise(model):
         AttributeError: model lacks the CircuitFaultModel location contract.
         ValueError: The model's conditional fault probabilities are invalid.
     """
-    conditional = {loc.channel: [1 / len(loc.faults)] * len(loc.faults)
+    conditional: dict[str, Sequence[float]] = {loc.channel: [1 / len(loc.faults)] * len(loc.faults)
                    for loc in model.locations}
     return CircuitFaultNoise(model, conditional)

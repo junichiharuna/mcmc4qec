@@ -2,6 +2,9 @@
 英語版の [README.md](README.md) が一次版であり、食い違う場合は英語版に従ってください。
 CSS 量子符号の論理誤り率を exact 列挙、直接モンテカルロ法、anchor 付き BAR splitting で推定します。
 OBF、Zanella（Z）、cluster exchange（H）、stabilizer のカーネルを設定して、失敗条件付きの誤りをサンプリングします。
+
+公開APIにはIDEと型検査器向けの型注釈と`py.typed`を含みます。
+対応する入力と独自部品の契約は[API文書](docs/api_en.md)を参照してください。
 自作の符号、正規化されたノイズ分布、決定的なデコーダー、失敗条件を持ち込めます。
 
 この pre-alpha パッケージは検証中です。

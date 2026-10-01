@@ -8,6 +8,21 @@ permissions:
   contents: read
 
 jobs:
+  typing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install type-check dependencies
+        run: python -m pip install . mypy pytest
+      - name: Check package and consumer typing
+        timeout-minutes: 2
+        run: |
+          python -m mypy src/mcmc4qec
+          python -m pytest tests/test_typing.py -q
+
   core-wheel:
     runs-on: ubuntu-latest
     strategy:

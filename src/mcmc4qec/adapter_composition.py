@@ -1,10 +1,13 @@
 """Explicit sector and full-history transformations for logical decoders."""
+from __future__ import annotations
+from typing import Any
 import numpy as np
+from numpy.typing import ArrayLike
 
-from .core import binary, identified, json_value, positive_integer
+from .core import Decoder, binary, identified, json_value, positive_integer
 
 
-def _binary(value, ndim, name):
+def _binary(value: ArrayLike, ndim: int, name: str) -> np.ndarray:
     if np.asarray(value).dtype.kind not in "buif":
         raise ValueError(f"{name} must contain binary numeric values")
     return binary(value, ndim=ndim, name=name)
@@ -39,7 +42,7 @@ class SectorDecoder:
     ``ValueError``. This decoder does not define a probability unit.
     """
 
-    def __init__(self, x_decoder, z_decoder, *, x_syndrome_size, identifier):
+    def __init__(self, x_decoder: Decoder, z_decoder: Decoder, *, x_syndrome_size: int, identifier: str) -> None:
         _decoder(x_decoder)
         _decoder(z_decoder)
         self.x_decoder = x_decoder
@@ -47,7 +50,7 @@ class SectorDecoder:
         self.x_syndrome_size = positive_integer(x_syndrome_size, "x_syndrome_size", zero=True)
         self.identifier = _identifier(identifier)
 
-    def predict(self, syndrome):
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         syndrome = _binary(syndrome, 1, "syndrome")
         if len(syndrome) < self.x_syndrome_size:
             raise ValueError("syndrome is shorter than x_syndrome_size")
@@ -55,7 +58,7 @@ class SectorDecoder:
         z = _binary(self.z_decoder.predict(syndrome[self.x_syndrome_size:].copy()), 1, "Z prediction")
         return np.concatenate((x, z))
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="SectorDecoder", identifier=self.identifier,
                                x_syndrome_size=self.x_syndrome_size,
                                sector_order=["X", "Z"],
@@ -82,7 +85,7 @@ class HistoryDecoder:
     not convert an experiment-wide failure probability to a per-round rate.
     """
 
-    def __init__(self, decoder, *, layout, identifier):
+    def __init__(self, decoder: Decoder, *, layout: str, identifier: str) -> None:
         _decoder(decoder)
         if layout not in ("round_major_flat", "check_major_history", "history"):
             raise ValueError("layout must be round_major_flat, check_major_history, or history")
@@ -90,7 +93,7 @@ class HistoryDecoder:
         self.layout = layout
         self.identifier = _identifier(identifier)
 
-    def predict(self, syndrome):
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         history = _binary(syndrome, 2, "syndrome history")
         if history.shape[0] == 0:
             raise ValueError("syndrome history must contain at least one round")
@@ -102,7 +105,7 @@ class HistoryDecoder:
             transformed = history
         return _binary(self.decoder.predict(transformed), 1, "prediction")
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="HistoryDecoder", identifier=self.identifier,
                                decoder=self.decoder.metadata(),
                                input_transformation=dict(input_layout="round_major_history",

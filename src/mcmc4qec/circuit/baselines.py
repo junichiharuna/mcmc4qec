@@ -1,4 +1,6 @@
 """Small repetition and midpoint logical-idle circuit baselines."""
+from __future__ import annotations
+from typing import Any
 import numpy as np
 
 from ..adapters import PyMatchingAdapter
@@ -30,7 +32,7 @@ def _logical_qubits(circuit, basis):
     return tuple(qubits)
 
 
-def surface_logical_idle_circuit(*, distance=3, p=.01, basis="Z"):
+def surface_logical_idle_circuit(*, distance: int=3, p: float=.01, basis: str="Z") -> Any:
     """Make 2d noisy rounds with an ideal midpoint logical observable.
 
     Args:
@@ -94,7 +96,7 @@ def surface_logical_idle_circuit(*, distance=3, p=.01, basis="Z"):
         original_measure_count += _measurement_count(instruction)
         if index == midpoint_tick:
             pauli_target = stim.target_x if basis == "X" else stim.target_z
-            product = []
+            product: list[Any] = []
             for qubit in logical_qubits:
                 if product:
                     product.append(stim.target_combiner())
@@ -106,7 +108,7 @@ def surface_logical_idle_circuit(*, distance=3, p=.01, basis="Z"):
     return output
 
 
-def surface_logical_idle_problem(*, distance=3, decoder_p=.01, basis="Z"):
+def surface_logical_idle_problem(*, distance: int=3, decoder_p: float=.01, basis: str="Z") -> Problem:
     """Build a physical-location Problem and a DEM-derived PyMatching decoder.
 
     Args:

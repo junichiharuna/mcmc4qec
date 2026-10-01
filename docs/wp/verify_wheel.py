@@ -65,6 +65,7 @@ def main():
     source_files = {p.relative_to(source): p.read_bytes() for p in source.rglob("*.py")}
     wheel_files = {p.relative_to(installed): p.read_bytes() for p in installed.rglob("*.py")}
     assert source_files == wheel_files, "wheel/source Python files differ"
+    assert (source / "py.typed").read_bytes() == (installed / "py.typed").read_bytes() == b"", "missing or nonempty PEP 561 marker"
     for name in ("pymatching", "ldpc", "bposd", "stim", "matplotlib", "nbclient", "nbformat", "ipykernel"):
         assert (importlib.util.find_spec(name) is not None) == (mode == "optional"), name
     print(f"{mode}: {installed}; {len(source_files)} Python files match source", flush=True)

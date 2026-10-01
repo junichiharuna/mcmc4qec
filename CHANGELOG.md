@@ -5,6 +5,23 @@
 - Rename the package and repository from the provisional `rimc` to `mcmc4qec`
   (import name `mcmc4qec`). No API change.
 
+## 0.1.0.dev4 — development
+
+- Add static CSS phase-flip models, Z-sector MWPM/BP-OSD construction,
+  phenomenological phase-flip data, and a rectangular-toric X/Z example.
+- Support OBF, Zanella, and physical single-fault mixtures on exclusive
+  circuit locations, with variable alphabets and enumerated transition checks.
+  Circuit cluster and stabilizer moves remain unavailable.
+- Add a dedicated product-noise sampling path with the same proposal,
+  acceptance, random-number consumption, and saved trajectories as reference
+  sampling; record remaining research-runner performance gaps.
+- Investigate toric BAR interval coverage against exact truth over repeated
+  seeds, document controlled sensitivity checks, and update workflow guidance.
+  Short runs and diagnostic checks do not guarantee research precision.
+- Annotate public APIs and returned public methods, ship a PEP 561 marker,
+  and check both package and consumer typing in CI.
+- Extend installed-wheel checks to the two new examples and the type marker.
+
 ## 0.1.0.dev3 — development
 
 - Add real-code examples, research workflows, editable component templates,

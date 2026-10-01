@@ -1,13 +1,15 @@
 """Named results with strict, portable JSON and explicit provenance."""
+from __future__ import annotations
+from typing import Any
 from dataclasses import asdict, dataclass, field
 import json
 import platform
 from pathlib import Path
 import hashlib
 import numpy as np
-from .core import json_value
+from .core import Problem, json_value
 
-VERSION = "0.1.0.dev3"
+VERSION = "0.1.0.dev4"
 REFERENCE_COMMIT = "69efcfcc86af3bf24ca977a098dab0f348601aff"
 
 
@@ -28,7 +30,7 @@ class Result:
     with ValueError. Neither method reconstructs executable user callables.
     """
     kind: str
-    metadata: dict
+    metadata: dict[str, Any]
     elapsed_seconds: float
     estimate: float | None = None
     log_estimate: float | None = None
@@ -37,11 +39,11 @@ class Result:
     failures: int | None = None
     conditional_weight: float | None = None
     states: np.ndarray | None = None
-    acceptance: dict = field(default_factory=dict)
-    diagnostics: dict = field(default_factory=dict)
+    acceptance: dict[str, Any] = field(default_factory=dict)
+    diagnostics: dict[str, Any] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
 
-    def to_json(self, *, indent=2):
+    def to_json(self, *, indent: int=2) -> str:
         data = asdict(self)
         data["schema_version"] = 1
         if self.states is not None:
@@ -50,7 +52,7 @@ class Result:
         return json.dumps(json_value(data), indent=indent, allow_nan=False)
 
     @classmethod
-    def from_json(cls, payload):
+    def from_json(cls, payload: str) -> Result:
         data = json.loads(payload)
         if data.pop("schema_version", None) != 1:
             raise ValueError("unsupported result schema")
@@ -76,7 +78,7 @@ class Result:
         return cls(**data)
 
 
-def metadata(problem, p, config, seed_sequence=None, children=()):
+def metadata(problem: Problem, p: Any, config: Any, seed_sequence: Any=None, children: Any=()) -> dict[str, Any]:
     fingerprint = hashlib.sha256()
     package_root = Path(__file__).parent
     for source in sorted(package_root.rglob("*.py")):

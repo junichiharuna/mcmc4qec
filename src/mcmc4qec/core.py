@@ -2,14 +2,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Callable, Protocol
+from typing import Any, Callable, Generic, Protocol, TypeVar
 import hashlib
 import json
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 
-def binary(value, *, ndim=None, shape=None, name="array"):
+def binary(value: Any, *, ndim: int | None=None, shape: tuple[int, ...] | None=None, name: str="array") -> np.ndarray:
     if hasattr(value, "toarray"):
         value = value.toarray()
     a = np.asarray(value)
@@ -22,7 +23,7 @@ def binary(value, *, ndim=None, shape=None, name="array"):
     return a.astype(np.uint8, copy=True)
 
 
-def positive_integer(value, name, *, zero=False):
+def positive_integer(value: Any, name: str, *, zero: bool=False) -> int:
     if isinstance(value, (bool, np.bool_)) or not isinstance(value, (int, np.integer)):
         raise ValueError(f"{name} must be an integer")
     if value < (0 if zero else 1):
@@ -30,7 +31,7 @@ def positive_integer(value, name, *, zero=False):
     return int(value)
 
 
-def categorical(value, alphabets, *, name="state"):
+def categorical(value: Any, alphabets: Any, *, name: str="state") -> np.ndarray:
     """Validate one finite categorical vector; zero is the identity category."""
     alphabets = np.asarray(alphabets)
     if (alphabets.ndim != 1 or alphabets.dtype.kind not in "iu" or
@@ -44,7 +45,7 @@ def categorical(value, alphabets, *, name="state"):
     return a.astype(np.uint8, copy=True)
 
 
-def json_value(value):
+def json_value(value: Any) -> Any:
     """Copy JSON-compatible metadata, rejecting opaque or nonfinite values."""
     def encode(x):
         if isinstance(x, np.ndarray):
@@ -55,13 +56,13 @@ def json_value(value):
     return json.loads(json.dumps(value, default=encode, allow_nan=False))
 
 
-def identified(data):
+def identified(data: dict[str, Any]) -> dict[str, Any]:
     data = json_value(data)
     payload = json.dumps(data, sort_keys=True, separators=(",", ":")).encode()
     return {**data, "sha256": hashlib.sha256(payload).hexdigest()}
 
 
-def gf2_rank(a):
+def gf2_rank(a: Any) -> int:
     a = a.copy()
     r = 0
     for c in range(a.shape[1]):
@@ -82,21 +83,25 @@ def gf2_rank(a):
 class Model(Protocol):
     """Finite latent-state model supplied to Problem.
 
-    n is the number of coordinates and alphabets lists their category counts.
-    validate_state returns a validated array; syndrome and observables return
-    decoder input and binary logical truth for one whole experiment.
+    n is the number of coordinates. Implementations may provide alphabets;
+    Problem defaults to binary categories when it is absent.
+    validate_state returns a validated array-like state; syndrome and observables
+    return decoder input and binary logical truth for one whole experiment.
     metadata returns JSON-compatible identity and settings. Implementations
     should raise ValueError for invalid states; no per-round rate is implied.
     """
     n: int
-    alphabets: tuple[int, ...]
-    def validate_state(self, state) -> np.ndarray: ...
-    def syndrome(self, state) -> np.ndarray: ...
-    def observables(self, state) -> np.ndarray: ...
-    def metadata(self) -> dict: ...
+    def validate_state(self, state: np.ndarray) -> ArrayLike: ...
+    def syndrome(self, state: np.ndarray) -> ArrayLike: ...
+    def observables(self, state: np.ndarray) -> ArrayLike: ...
+    def metadata(self) -> dict[str, Any]: ...
 
 
-class Noise(Protocol):
+NoiseParameter = TypeVar("NoiseParameter", contravariant=True)
+ProblemParameter = TypeVar("ProblemParameter")
+
+
+class Noise(Protocol[NoiseParameter]):
     """Normalized distribution on n coordinates for a Model's state space.
 
     sample(p, rng) returns one state using the supplied NumPy generator.
@@ -106,9 +111,9 @@ class Noise(Protocol):
     identity and settings. Invalid parameters should raise ValueError.
     """
     n: int
-    def sample(self, p, rng: np.random.Generator) -> np.ndarray: ...
-    def log_prob(self, state, p) -> float: ...
-    def metadata(self) -> dict: ...
+    def sample(self, p: NoiseParameter, rng: np.random.Generator) -> ArrayLike: ...
+    def log_prob(self, state: np.ndarray, p: NoiseParameter) -> float: ...
+    def metadata(self) -> dict[str, Any]: ...
 
 
 class Decoder(Protocol):
@@ -119,8 +124,15 @@ class Decoder(Protocol):
     metadata returns JSON-compatible decoder identity and configuration.
     Invalid inputs and decoder failures propagate to the caller.
     """
-    def predict(self, syndrome) -> np.ndarray: ...
-    def metadata(self) -> dict: ...
+    def predict(self, syndrome: ArrayLike) -> ArrayLike: ...
+    def metadata(self) -> dict[str, Any]: ...
+
+
+class FailurePredicate(Protocol):
+    """Custom failure event evaluated on validated copies of one experiment."""
+    def __call__(self, state: np.ndarray, predicted: np.ndarray,
+                 truth: np.ndarray) -> bool | np.bool_: ...
+    def metadata(self) -> dict[str, Any]: ...
 
 
 class BinaryLinearModel:
@@ -132,7 +144,7 @@ class BinaryLinearModel:
     ValueError. Arrays are copied and made read-only. Observable mismatch is
     defined for the complete experiment described by the matrices.
     """
-    def __init__(self, H, L, *, stabilizers=None, identifier="binary-linear"):
+    def __init__(self, H: ArrayLike, L: ArrayLike, *, stabilizers: ArrayLike | None=None, identifier: str="binary-linear") -> None:
         self.H = binary(H, ndim=2, name="H")
         self.L = binary(L, ndim=2, name="L")
         self.n = self.H.shape[1]
@@ -151,16 +163,16 @@ class BinaryLinearModel:
         for a in (self.H, self.L, self.stabilizers):
             a.flags.writeable = False
 
-    def validate_state(self, state):
+    def validate_state(self, state: ArrayLike) -> np.ndarray:
         return binary(state, shape=(self.n,), name="state")
 
-    def syndrome(self, state):
+    def syndrome(self, state: ArrayLike) -> np.ndarray:
         return self.H @ self.validate_state(state) % 2
 
-    def observables(self, state):
+    def observables(self, state: ArrayLike) -> np.ndarray:
         return self.L @ self.validate_state(state) % 2
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type=type(self).__name__, identifier=self.identifier,
                                H=self.H, L=self.L, stabilizers=self.stabilizers,
                                state_space="binary", n=self.n))
@@ -180,7 +192,7 @@ class CSSCode:
     Raises ValueError for invalid matrices, incomplete logical bases, or an
     unknown basis convention. Arrays are copied and made read-only.
     """
-    def __init__(self, hx, hz, lx, lz, *, logical_basis="paired"):
+    def __init__(self, hx: ArrayLike, hz: ArrayLike, lx: ArrayLike, lz: ArrayLike, *, logical_basis: str="paired") -> None:
         if logical_basis not in ("paired", "independent"):
             raise ValueError("logical_basis must be 'paired' or 'independent'")
         self.logical_basis = logical_basis
@@ -205,10 +217,10 @@ class CSSCode:
         for a in (self.hx, self.hz, self.lx, self.lz):
             a.flags.writeable = False
 
-    def bit_flip_model(self):
+    def bit_flip_model(self) -> BinaryLinearModel:
         return BinaryLinearModel(self.hz, self.lz, stabilizers=self.hx, identifier="css-bit-flip")
 
-    def phase_flip_model(self):
+    def phase_flip_model(self) -> BinaryLinearModel:
         """Return the static CSS model for binary Z-error support.
 
         X checks (``hx``) measure its syndrome, and ``lx`` reads logical
@@ -229,17 +241,17 @@ class CallableDecoder:
     predictions raise ValueError; exceptions from the function propagate.
     Physical corrections require DecoderAdapter with an explicit logical map.
     """
-    def __init__(self, function: Callable, *, identifier: str, settings=None):
+    def __init__(self, function: Callable[[np.ndarray], ArrayLike], *, identifier: str, settings: dict[str, Any] | None=None) -> None:
         if not callable(function) or not identifier:
             raise ValueError("a callable and nonempty decoder identifier are required")
         self.function = function
         self.identifier = identifier
         self.settings = json_value({} if settings is None else settings)
 
-    def predict(self, syndrome):
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         return binary(self.function(np.array(syndrome, copy=True)), ndim=1, name="prediction")
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return dict(type="CallableDecoder", identifier=self.identifier,
                     settings=self.settings, deterministic=True,
                     version=None, provenance="user-supplied identifier and settings")
@@ -254,25 +266,25 @@ class CallableFailure:
     Stabilizer invariance and invariance under a logical change of basis are
     never inferred for user predicates.
     """
-    def __init__(self, function: Callable, *, identifier: str, settings=None):
+    def __init__(self, function: Callable[[np.ndarray, np.ndarray, np.ndarray], bool | np.bool_], *, identifier: str, settings: dict[str, Any] | None=None) -> None:
         if not callable(function) or not identifier:
             raise ValueError("a callable and nonempty failure identifier are required")
         self.function = function
         self.identifier = identifier
         self.settings = json_value({} if settings is None else settings)
 
-    def __call__(self, state, predicted, truth):
+    def __call__(self, state: np.ndarray, predicted: np.ndarray, truth: np.ndarray) -> bool:
         answer = self.function(state, predicted, truth)
         if not isinstance(answer, (bool, np.bool_)):
             raise ValueError("failure predicate must return a boolean")
         return bool(answer)
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return dict(type="CallableFailure", identifier=self.identifier, settings=self.settings)
 
 
 @dataclass
-class Problem:
+class Problem(Generic[ProblemParameter]):
     """Bind compatible model, normalized noise, decoder, and failure predicate.
 
     model and noise must share dimension and alphabets. decoder.predict must
@@ -284,11 +296,11 @@ class Problem:
     event. No invariance of an arbitrary failure predicate is assumed.
     """
     model: Model
-    noise: Noise
+    noise: Noise[ProblemParameter]
     decoder: Decoder
-    failure: Any = None
+    failure: FailurePredicate | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         positive_integer(self.model.n, "model.n")
         self.alphabets = tuple(getattr(self.model, "alphabets", (2,) * self.model.n))
         categorical(np.zeros(self.model.n, dtype=int), self.alphabets)
@@ -304,17 +316,17 @@ class Problem:
         if self.failure is not None:
             json_value(self.failure.metadata())
 
-    def state(self, state):
+    def state(self, state: ArrayLike) -> np.ndarray:
         state = categorical(state, self.alphabets)
         return categorical(self.model.validate_state(state), self.alphabets)
 
-    def log_prob(self, state, p):
+    def log_prob(self, state: ArrayLike, p: ProblemParameter) -> float:
         lp = float(self.noise.log_prob(self.state(state), p))
         if np.isnan(lp) or lp == np.inf or lp > 1e-12:
             raise ValueError("noise.log_prob must be a normalized log probability or -inf")
         return lp
 
-    def is_faulty(self, state):
+    def is_faulty(self, state: ArrayLike) -> bool:
         state = self.state(state)
         predicted = binary(self.decoder.predict(self.model.syndrome(state.copy())), ndim=1,
                            name="prediction")
@@ -328,7 +340,7 @@ class Problem:
             raise ValueError("failure predicate must return a boolean")
         return bool(answer)
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return json_value(dict(model=self.model.metadata(), noise=self.noise.metadata(),
             decoder=self.decoder.metadata(), failure=(self.failure.metadata() if self.failure
                 is not None else dict(identifier="logical-observable-mismatch-v1"))))

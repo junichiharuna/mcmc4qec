@@ -1,7 +1,10 @@
 """Local density ratios for exact built-in product noise types."""
+from __future__ import annotations
+from typing import Any
 import numpy as np
 
 from .noise import IndependentBitFlip
+from .core import Problem
 from .noise_categorical import DepolarizingNoise, PhenomenologicalNoise, _probability
 
 
@@ -34,7 +37,7 @@ def _probability_rows(noise, p):
     return None
 
 
-def product_neighbor_distribution(state, problem, p):
+def product_neighbor_distribution(state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> np.ndarray | None:
     """Return Zanella probabilities in flat-neighbor order, or None.
 
     None means the built-in product path is unavailable or the current state is

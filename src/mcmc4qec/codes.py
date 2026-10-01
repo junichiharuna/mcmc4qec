@@ -1,4 +1,6 @@
 """CSS factories preserving the reference research matrix ordering."""
+from __future__ import annotations
+from typing import Any
 import numpy as np
 
 from .core import CSSCode, positive_integer
@@ -133,7 +135,7 @@ def _css_logicals(hx, hz):
     return logicals_for(hz, hx), logicals_for(hx, hz)
 
 
-def make_bb_code(l: int, m: int, a_terms, b_terms) -> CSSCode:
+def make_bb_code(l: int, m: int, a_terms: tuple[tuple[int, int], ...] | list[tuple[int, int]], b_terms: tuple[tuple[int, int], ...] | list[tuple[int, int]]) -> CSSCode:
     """Return a bivariate bicycle code with RIMC shift and logical ordering.
 
     ``l`` and ``m`` are positive integer block dimensions. ``a_terms`` and

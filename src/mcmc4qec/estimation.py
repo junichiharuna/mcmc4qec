@@ -2,6 +2,8 @@
 
 No weight-only density formula or independent-sample MCMC error bar is used.
 """
+from __future__ import annotations
+from typing import Any, Callable, cast
 from dataclasses import asdict, dataclass, field
 import json
 import math
@@ -9,7 +11,7 @@ import time
 
 import numpy as np
 
-from .core import Problem, json_value, positive_integer
+from .core import Decoder, Problem, json_value, positive_integer
 from .results import Result, metadata
 from .sampling import SamplingConfig, sample_faulty
 
@@ -22,7 +24,7 @@ def _sigmoid(x):
     return np.exp(-np.logaddexp(0.0, -np.asarray(x)))
 
 
-def bennett_log_ratio(log_b_minus_a_at_a, log_b_minus_a_at_b):
+def bennett_log_ratio(log_b_minus_a_at_a: Any, log_b_minus_a_at_b: Any) -> float:
     """Estimate log(Z_b/Z_a) from cross log densities sampled at a and b.
 
     Arrays contain log(rho_b/rho_a), with rho the normalized original noise
@@ -81,28 +83,28 @@ class EstimationResult:
     adjacent_log_ratios: list[float]
     log_standard_errors: list[float | None]
     intervals: list[tuple[float, float] | None]
-    metadata: dict
+    metadata: dict[str, Any]
     elapsed_seconds: float
     warnings: list[str] = field(default_factory=list)
-    diagnostics: list[dict] = field(default_factory=list)
-    overlap: list[dict] = field(default_factory=list)
+    diagnostics: list[dict[str, Any]] = field(default_factory=list)
+    overlap: list[dict[str, Any]] = field(default_factory=list)
     bootstrap_log_ratio_covariance: list[list[float]] | None = None
     kind: str = "splitting_bar"
 
     @property
-    def estimate(self):
+    def estimate(self) -> float:
         return self.estimates[-1]
 
     @property
-    def interval(self):
+    def interval(self) -> tuple[float, float] | None:
         return self.intervals[-1]
 
-    def to_json(self, *, indent=2):
+    def to_json(self, *, indent: int=2) -> str:
         return json.dumps(json_value({**asdict(self), "schema_version": 1}),
                           indent=indent, allow_nan=False)
 
     @classmethod
-    def from_json(cls, payload):
+    def from_json(cls, payload: str) -> EstimationResult:
         data = json.loads(payload)
         if data.pop("schema_version", None) != 1 or data.get("kind") != "splitting_bar":
             raise ValueError("unsupported estimation result schema")
@@ -160,10 +162,10 @@ def _block_indices(shape, length, rng):
     return indices.reshape(chains, -1)[:, :samples]
 
 
-def estimate_logical_error(problem, ladder, *, anchor, config=None, seed=None,
-                           initial_states=None, mode="fixed_failure", decoder_factory=None,
-                           decoder_priors=None, approximation_reason=None,
-                           bootstrap_replicates=100, bootstrap_block_length=None):
+def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]], *, anchor: Result, config: SamplingConfig | None=None, seed: int | None=None,
+                           initial_states: list[np.ndarray | None] | None=None, mode: str="fixed_failure", decoder_factory: Callable[[Any], Decoder] | None=None,
+                           decoder_priors: list[Any] | None=None, approximation_reason: str | None=None,
+                           bootstrap_replicates: int=100, bootstrap_block_length: int | None=None) -> EstimationResult:
     """Sample a ladder, estimate adjacent BAR ratios, and multiply an anchor.
 
     The first ladder coordinate is the anchor. Each subsequent coordinate is
@@ -243,8 +245,8 @@ def estimate_logical_error(problem, ladder, *, anchor, config=None, seed=None,
         differences = []
         for run in (runs[i], runs[i+1]):
             values = [problem.log_prob(state, ladder[i+1]) - problem.log_prob(state, ladder[i])
-                      for state in run.states.reshape(-1, problem.model.n)]
-            differences.append(np.asarray(values).reshape(run.states.shape[:2]))
+                      for state in cast(np.ndarray, run.states).reshape(-1, problem.model.n)]
+            differences.append(np.asarray(values).reshape(cast(np.ndarray, run.states).shape[:2]))
         a, b = differences
         ratio = bennett_log_ratio(a, b)
         edges.append((a, b))
@@ -263,14 +265,14 @@ def estimate_logical_error(problem, ladder, *, anchor, config=None, seed=None,
         warnings.append("Anchor log variance uses a binomial delta approximation, unreliable with few observed failures.")
     if any(min(x["forward_mean"], x["reverse_mean"]) < .01 for x in overlap):
         warnings.append("Very low observed adjacent overlap; ratios and their uncertainty may be unreliable.")
-    covariance = None
+    covariance: Any = None
     ses = [math.sqrt(variance_anchor)] + [None] * (len(ladder)-1)
     bootstrap_successes = 0
     if bootstrap_replicates:
         rng = np.random.default_rng(children[-1])
         draws = []
         for _ in range(bootstrap_replicates):
-            indices = [_block_indices(run.states.shape[:2], length, rng) for run in runs]
+            indices = [_block_indices(cast(np.ndarray, run.states).shape[:2], length, rng) for run in runs]
             try:
                 draws.append([bennett_log_ratio(np.take_along_axis(a, indices[i], axis=1),
                                                 np.take_along_axis(b, indices[i+1], axis=1))

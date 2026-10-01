@@ -1,6 +1,8 @@
 # mcmc4qec
 Estimate logical error probabilities for CSS quantum codes with exact enumeration, direct Monte Carlo, and anchored BAR splitting.
 Sample failure-conditioned errors with configurable OBF, Zanella (Z), cluster exchange (H), and stabilizer kernels.
+
+Public APIs include type annotations and a `py.typed` marker for IDEs and type checkers. See the [API contracts](docs/api_en.md) for supported inputs and custom components.
 Bring your own code, normalized noise distribution, deterministic decoder, and failure predicate.
 
 This pre-alpha package is under active validation. [日本語版](README_ja.md).

@@ -1,8 +1,10 @@
 """Reversible finite-category proposals using the complete noise density."""
+from __future__ import annotations
+from typing import Any
 from dataclasses import dataclass
 from math import comb, log
 import numpy as np
-from .core import positive_integer
+from .core import Problem, positive_integer
 from .fastpath import product_neighbor_distribution
 
 
@@ -46,13 +48,13 @@ class OBF:
     """Uniform single-coordinate category replacement; binary OBF is unchanged."""
     name = "single"
 
-    def propose(self, state, problem, p, rng):
+    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         alphabets = _alphabets(problem)
         index = rng.integers(sum(size-1 for size in alphabets))
         return Proposal(_neighbor_at(state, alphabets, index))
 
-    def probability(self, state, candidate, problem, p):
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         degree = sum(size - 1 for size in _alphabets(problem))
         return 1 / degree if np.count_nonzero(state != candidate) == 1 else 0.0
@@ -66,7 +68,7 @@ class Zanella:
     """
     name = "zanella"
 
-    def __init__(self, *, use_fastpath=True):
+    def __init__(self, *, use_fastpath: bool=True) -> None:
         self.use_fastpath = bool(use_fastpath)
 
     def _distribution(self, state, problem, p):
@@ -86,7 +88,7 @@ class Zanella:
         weights = np.exp(logs - maximum)
         return weights / weights.sum()
 
-    def propose(self, state, problem, p, rng):
+    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         q = self._distribution(state, problem, p)
         if q is None:
@@ -96,7 +98,7 @@ class Zanella:
         qr = self.probability(candidate, state, problem, p)
         return Proposal(candidate, -np.inf if qr == 0 else float(log(qr) - log(q[i])))
 
-    def probability(self, state, candidate, problem, p):
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         q = self._distribution(state, problem, p)
         if q is None:
@@ -125,14 +127,14 @@ class ClusterExchange:
     """
     name = "cluster"
 
-    def __init__(self, k=2):
+    def __init__(self, k: int=2) -> None:
         self.k = positive_integer(k, "cluster_k")
 
     def _groups(self, problem):
         alphabets = np.array(_alphabets(problem))
         return [(int(size), np.flatnonzero(alphabets == size)) for size in np.unique(alphabets)]
 
-    def propose(self, state, problem, p, rng):
+    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         groups = self._groups(problem)
         size, positions = groups[rng.integers(len(groups))]
@@ -181,7 +183,7 @@ class ClusterExchange:
                     comb(w, self.k) * (size-1)**self.k)
         return .5 * (relocation + relabeling)
 
-    def probability(self, state, candidate, problem, p):
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         groups = self._groups(problem)
         probability = 0.0
@@ -209,12 +211,12 @@ class StabilizerFlip:
             raise ValueError("stabilizer kernel requires static model stabilizers")
         return np.array([problem.state(row) for row in rows])
 
-    def propose(self, state, problem, p, rng):
+    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         rows = self._rows(problem)
         return Proposal(state ^ rows[rng.integers(len(rows))])
 
-    def probability(self, state, candidate, problem, p):
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         rows = self._rows(problem)
         return float(np.mean(np.all(rows == (state ^ candidate), axis=1)))

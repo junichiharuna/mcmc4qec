@@ -1,9 +1,12 @@
 """Bounded deterministic decoder cache and safe syndrome delta evaluation."""
+from __future__ import annotations
+from typing import Any
 from collections import OrderedDict
 
 import numpy as np
+from numpy.typing import ArrayLike
 
-from .core import BinaryLinearModel, binary, positive_integer
+from .core import BinaryLinearModel, Decoder, Problem, binary, positive_integer
 from .models import DepolarizingModel
 
 
@@ -15,7 +18,7 @@ class CachedDecoder:
     retains the first cap entries and decodes later misses without insertion.
     """
 
-    def __init__(self, decoder, *, cap=None, policy="research_clear"):
+    def __init__(self, decoder: Decoder, *, cap: int | None=None, policy: str="research_clear") -> None:
         if cap is not None:
             cap = positive_integer(cap, "cache_cap")
         if policy not in ("research_clear", "lru", "freeze"):
@@ -23,17 +26,17 @@ class CachedDecoder:
         self.decoder = decoder
         self.cap = cap
         self.policy = policy
-        self.lookup = OrderedDict()
+        self.lookup: OrderedDict[tuple[tuple[int, ...], str, bytes], np.ndarray] = OrderedDict()
 
     @property
-    def size(self):
+    def size(self) -> int:
         return len(self.lookup)
 
-    def boundary(self):
+    def boundary(self) -> None:
         if self.policy == "research_clear" and self.cap is not None and self.size > self.cap:
             self.lookup.clear()
 
-    def predict(self, syndrome):
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         syndrome = np.asarray(syndrome)
         key = (syndrome.shape, syndrome.dtype.str, syndrome.tobytes())
         if key in self.lookup:
@@ -49,17 +52,17 @@ class CachedDecoder:
             self.lookup[key] = prediction.copy()
         return prediction.copy()
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return self.decoder.metadata()
 
 
 class FailureEvaluator:
     """Evaluate the same failure predicate with exact single-site syndrome deltas."""
 
-    def __init__(self, problem):
+    def __init__(self, problem: Problem) -> None:
         self.problem = problem
 
-    def syndrome(self, state, *, previous=None, previous_syndrome=None):
+    def syndrome(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: ArrayLike | None=None) -> ArrayLike:
         model = self.problem.model
         if previous is not None and previous_syndrome is not None:
             differences = np.flatnonzero(np.asarray(state) != np.asarray(previous))
@@ -78,7 +81,7 @@ class FailureEvaluator:
                     return np.asarray(previous_syndrome, dtype=np.uint8) ^ delta
         return model.syndrome(state)
 
-    def evaluate(self, state, *, previous=None, previous_syndrome=None):
+    def evaluate(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: ArrayLike | None=None) -> tuple[bool, ArrayLike]:
         problem = self.problem
         state = problem.state(state)
         syndrome = self.syndrome(state, previous=previous,
@@ -87,6 +90,7 @@ class FailureEvaluator:
         truth = binary(problem.model.observables(state.copy()), ndim=1, name="observables")
         if predicted.shape != truth.shape:
             raise ValueError("decoder prediction and observable dimensions differ")
+        faulty: bool | np.bool_
         if problem.failure is None:
             faulty = bool(np.any(predicted != truth))
         else:
@@ -95,6 +99,6 @@ class FailureEvaluator:
                 raise ValueError("failure predicate must return a boolean")
         return bool(faulty), syndrome
 
-    def is_faulty(self, state, *, previous=None, previous_syndrome=None):
+    def is_faulty(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: ArrayLike | None=None) -> bool:
         return self.evaluate(state, previous=previous,
                              previous_syndrome=previous_syndrome)[0]

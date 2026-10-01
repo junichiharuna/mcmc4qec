@@ -1,4 +1,6 @@
 """Normalized categorical Pauli and data/measurement fault distributions."""
+from __future__ import annotations
+from typing import Any
 import numpy as np
 
 from .core import categorical, identified, positive_integer
@@ -38,17 +40,17 @@ class DepolarizingNoise:
     probability; a Problem's logical failure rate covers its whole experiment.
     """
 
-    def __init__(self, n):
+    def __init__(self, n: int) -> None:
         self.n = positive_integer(n, "n")
         self.alphabets = (4,) * self.n
 
-    def sample(self, p, rng):
+    def sample(self, p: float | dict[str, Any] | None, rng: np.random.Generator) -> np.ndarray:
         return _sample(self.n, _probability(p, "p"), 4, rng)
 
-    def log_prob(self, state, p):
+    def log_prob(self, state: np.ndarray, p: float | dict[str, Any] | None) -> float:
         return _log_selected(categorical(state, self.alphabets), _probability(p, "p"), 4)
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="DepolarizingNoise", n=self.n, alphabets=self.alphabets,
                                normalized=True, parameterization="P(I)=1-p; P(X)=P(Y)=P(Z)=p/3",
                                pauli_encoding=["I", "X", "Y", "Z"]))
@@ -68,7 +70,7 @@ class PhenomenologicalNoise:
     reports failure over the entire bounded experiment, not per round.
     """
 
-    def __init__(self, model: PhenomenologicalModel):
+    def __init__(self, model: PhenomenologicalModel) -> None:
         if not isinstance(model, PhenomenologicalModel):
             raise TypeError("model must be a PhenomenologicalModel")
         self.model = model
@@ -80,20 +82,20 @@ class PhenomenologicalNoise:
             raise ValueError("p must specify exactly 'data' and 'measurement'")
         return _probability(p["data"], "data"), _probability(p["measurement"], "measurement")
 
-    def sample(self, p, rng):
+    def sample(self, p: float | dict[str, Any] | None, rng: np.random.Generator) -> np.ndarray:
         data_p, measurement_p = self._parameters(p)
         alphabet = 4 if self.model.data_noise == "depolarizing" else 2
         return np.concatenate((_sample(self.model.n_data, data_p, alphabet, rng),
                                _sample(self.model.n_measurement, measurement_p, 2, rng)))
 
-    def log_prob(self, state, p):
+    def log_prob(self, state: np.ndarray, p: float | dict[str, Any] | None) -> float:
         data_p, measurement_p = self._parameters(p)
         state = self.model.validate_state(state)
         alphabet = 4 if self.model.data_noise == "depolarizing" else 2
         return (_log_selected(state[:self.model.n_data], data_p, alphabet)
                 + _log_selected(state[self.model.n_data:], measurement_p, 2))
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="PhenomenologicalNoise", n=self.n, alphabets=self.alphabets,
                                model=self.model.metadata(), normalized=True,
                                parameters=["data", "measurement"],
