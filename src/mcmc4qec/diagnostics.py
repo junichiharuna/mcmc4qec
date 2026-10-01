@@ -27,6 +27,47 @@ def _iat(x):
     return tau if np.isfinite(tau) and tau > 0 else None
 
 
+def _first_negative_iat(x):
+    """Return the first-negative-lag Geyer IAT used by the research runner."""
+    x = np.asarray(x, dtype=float)
+    x = x - x.mean()
+    n = len(x)
+    if n < 8:
+        return float(n)
+    transform = np.fft.rfft(x, n=2*n)
+    acf = np.fft.irfft(transform*transform.conj(), n=2*n)[:n]
+    if acf[0] == 0:
+        return float(n)
+    acf /= acf[0]
+    negative = np.flatnonzero(acf[1:n//2] < 0)
+    stop = int(negative[0]+1) if len(negative) else n//2
+    return float(1+2*acf[1:stop].sum())
+
+
+def paper_burn_in_cut(trace):
+    """Return the research runner's per-chain iterated 5-IAT cut and cap flag.
+
+    Five fixed-point passes start at zero. Failure to converge or a cut at half
+    the trace uses the half-trace fallback. This utility does not change the
+    library's usual Geyer-paired IAT diagnostics or SamplingConfig burn-in.
+    """
+    x = np.asarray(trace, dtype=float)
+    if x.ndim != 1 or len(x) < 8 or not np.all(np.isfinite(x)):
+        raise ValueError("paper burn cut requires one chain with at least eight finite values")
+    cap = len(x)//2
+    cut, converged = 0, False
+    for _ in range(5):
+        tau = max(_first_negative_iat(x[cut:]), 1.0)
+        new = min(math.ceil(5*tau), cap)
+        if new == cut:
+            converged = True
+            break
+        cut = new
+    if not converged:
+        cut = cap
+    return int(cut), bool(cut >= cap or not converged)
+
+
 def weight_traces(results: Result | Iterable[Result]) -> tuple[np.ndarray, list[Result]]:
     """Extract [chain, sample] nonidentity counts from one or more Results.
 

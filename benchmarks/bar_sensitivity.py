@@ -97,10 +97,18 @@ def run(args):
         config_kwargs["burn_in"] = 0
     elif args.scenario == "burn_long":
         config_kwargs["burn_in"] = 600
+    if args.samples is not None:
+        config_kwargs["samples"] = args.samples
+    if args.chains is not None:
+        config_kwargs["chains"] = args.chains
+    if args.burn_in is not None:
+        config_kwargs["burn_in"] = args.burn_in
     config = SamplingConfig(**config_kwargs)
     # Hold the baseline's eight-step block fixed in the controlled sample-count
     # comparisons. The *_auto scenarios retain the library's cube-root rule.
     block = 8 if args.scenario in ("samples_short", "samples_long") else None
+    if args.block is not None:
+        block = args.block
     pilot_tau = None
     if args.scenario.startswith("block_"):
         pilot_tau = pilot_iat(problem, ladder[-1])
@@ -134,7 +142,7 @@ def run(args):
             initial_states=initial_states(code, problem, args.scenario, seed,
                                           len(ladder)),
             bootstrap_replicates=args.bootstrap_replicates,
-            bootstrap_block_length=block)
+            bootstrap_block_length=block, uncertainty=args.uncertainty)
         mc = direct_mc(problem, ladder[-1], trials=1200, seed=check_seed)
         taus = [value for report in bar.diagnostics for value in report["chain_iat"]
                 if value is not None]
@@ -143,6 +151,7 @@ def run(args):
             interval[1], mc.interval[1])
         records.append(dict(
             scenario=args.scenario, seed=seed, target_p=ladder[-1],
+            uncertainty=args.uncertainty,
             ladder="/".join(map(str, ladder)), samples=config.samples,
             burn_in=config.burn_in, chains=config.chains,
             block_length=bar.metadata["config"]["bootstrap_block_length"],
@@ -177,6 +186,7 @@ def run(args):
         ))
     widths = [float(row["bar_width"]) for row in records if row["bar_width"] != ""]
     summary = dict(scenario=args.scenario, seeds=args.seeds,
+                   uncertainty=args.uncertainty,
                    seed_start=args.seed_start, target_p=ladder[-1],
                    exact_estimate=truth.estimate,
                    exact_conditional_weight=truth.conditional_weight,
@@ -193,8 +203,9 @@ def run(args):
                                                    for row in records
                                                    if row["max_chain_iat"] != ""])),
                    elapsed_seconds=time.perf_counter()-start)
-    write_csv(out / f"{args.scenario}_runs.csv", records)
-    write_csv(out / f"{args.scenario}_summary.csv", [summary])
+    label = args.label or args.scenario
+    write_csv(out / f"{label}_runs.csv", records)
+    write_csv(out / f"{label}_summary.csv", [summary])
     print(summary)
     print(f"CSV: {out}")
 
@@ -205,12 +216,25 @@ def main():
     parser.add_argument("--seeds", type=int, default=20)
     parser.add_argument("--seed-start", type=int, default=2026)
     parser.add_argument("--bootstrap-replicates", type=int, default=30)
+    parser.add_argument("--samples", type=int, help="Override retained samples for fixed-cohort length comparisons")
+    parser.add_argument("--chains", type=int, help="Override independent chain count")
+    parser.add_argument("--burn-in", type=int, help="Override fixed burn-in steps")
+    parser.add_argument("--block", type=int, help="Override block length for controlled length comparisons")
+    parser.add_argument("--uncertainty", choices=("block_bootstrap", "cross_chain"),
+                        default="block_bootstrap")
+    parser.add_argument("--label", help="Distinct CSV stem when several settings share one output directory")
+    parser.add_argument("--quick", action="store_true", help="One seed and a short trace for CLI smoke checks")
+    parser.add_argument("--seed", type=int, help="Run exactly this seed instead of --seed-start/--seeds")
     parser.add_argument("--truth-file", help="Reuse exact value from an earlier summary CSV")
     parser.add_argument("--trust-truth-file", action="store_true",
                         help="Assert the truth CSV came from this same toric d=3/MWPM problem")
     parser.add_argument("--out", default=str(Path(tempfile.gettempdir()) /
                         "mcmc4qec" / "bar_sensitivity"))
     args = parser.parse_args()
+    if args.seed is not None:
+        args.seed_start, args.seeds = args.seed, 1
+    if args.quick:
+        args.seeds, args.samples, args.bootstrap_replicates = 1, 80, 4
     if args.seeds < 1:
         parser.error("--seeds must be positive")
     run(args)

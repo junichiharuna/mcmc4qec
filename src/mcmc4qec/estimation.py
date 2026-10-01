@@ -75,8 +75,8 @@ class EstimationResult:
     time. ``estimate`` and ``interval`` select the final rung. ``to_json``
     returns schema-versioned text; ``from_json`` reconstructs it and raises
     ``ValueError`` for incompatible schemas or invalid JSON-compatible values.
-    Intervals assume adequate chain mixing and block length; approximate BAR
-    bias is excluded.
+    Intervals assume adequate chain mixing and the selected uncertainty
+    method's conditions; approximate BAR bias is excluded.
     """
     estimates: list[float]
     log_estimates: list[float]
@@ -162,10 +162,25 @@ def _block_indices(shape, length, rng):
     return indices.reshape(chains, -1)[:, :samples]
 
 
+def _cross_chain_covariance(edges):
+    """Covariance of paired BAR edge estimates from independent chain labels.
+
+    Pairing edge estimates by chain label retains covariance through a shared
+    rung. The point estimator itself remains the BAR solution on pooled traces.
+    """
+    chains = edges[0][0].shape[0]
+    if chains < 2:
+        raise ValueError("cross-chain uncertainty requires at least two chains")
+    draws = np.asarray([[bennett_log_ratio(a[j], b[j]) for a, b in edges]
+                        for j in range(chains)])
+    return np.atleast_2d(np.cov(draws, rowvar=False, ddof=1)) / chains
+
+
 def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]], *, anchor: Result, config: SamplingConfig | None=None, seed: int | None=None,
                            initial_states: list[np.ndarray | None] | None=None, mode: str="fixed_failure", decoder_factory: Callable[[Any], Decoder] | None=None,
                            decoder_priors: list[Any] | None=None, approximation_reason: str | None=None,
-                           bootstrap_replicates: int=100, bootstrap_block_length: int | None=None) -> EstimationResult:
+                           bootstrap_replicates: int=100, bootstrap_block_length: int | None=None,
+                           uncertainty: str="block_bootstrap") -> EstimationResult:
     """Sample a ladder, estimate adjacent BAR ratios, and multiply an anchor.
 
     The first ladder coordinate is the anchor. Each subsequent coordinate is
@@ -175,10 +190,12 @@ def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]
     Approximate mode calls ``decoder_factory(decoder_prior)`` at each rung;
     density-only BAR then ignores changes in failure sets, intentionally.
 
-    Error bars combine a circular-block bootstrap with the *independent*
-    anchor's log variance. Mixing and sufficiently long blocks are assumptions,
-    not consequences of diagnostics. Approximate-mode bias is not in the bars.
-    Setting bootstrap_replicates=0 disables MCMC error bars explicitly.
+    ``uncertainty`` selects circular-block bootstrap (the default) or the
+    sample covariance of paired per-chain BAR ratios divided by the number of
+    independent chains. Both add the independent anchor's log variance.
+    Mixing and independent chains are assumptions, not consequences of
+    diagnostics. Approximate-mode bias is not in the bars. In bootstrap mode,
+    setting bootstrap_replicates=0 disables MCMC error bars explicitly.
     ``problem`` supplies the fixed model/noise/failure contract; ``ladder`` is
     an ordered list of at least two probability coordinates. ``anchor`` is a
     matching positive ``exact`` or fixed-trial ``direct_mc`` Result at rung 0.
@@ -204,6 +221,10 @@ def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]
     config = SamplingConfig() if config is None else config
     if not isinstance(config, SamplingConfig):
         raise ValueError("config must be SamplingConfig")
+    if uncertainty not in ("block_bootstrap", "cross_chain"):
+        raise ValueError("uncertainty must be block_bootstrap or cross_chain")
+    if uncertainty == "cross_chain" and config.chains < 2:
+        raise ValueError("cross-chain uncertainty requires at least two chains")
     positive_integer(bootstrap_replicates, "bootstrap_replicates", zero=True)
     if bootstrap_replicates == 1:
         raise ValueError("bootstrap_replicates must be zero or at least two")
@@ -211,7 +232,7 @@ def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]
         bootstrap_block_length, "bootstrap_block_length")
     if length > config.samples:
         raise ValueError("bootstrap block length exceeds retained samples per chain")
-    if bootstrap_replicates and (config.samples < 8 or length < 2):
+    if uncertainty == "block_bootstrap" and bootstrap_replicates and (config.samples < 8 or length < 2):
         raise ValueError("block uncertainty requires at least eight samples and block length >= 2")
     if mode == "fixed_failure":
         if decoder_factory is not None or decoder_priors is not None or approximation_reason is not None:
@@ -257,8 +278,11 @@ def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]
                             finite_cross_fraction_a=float(np.isfinite(a).mean()),
                             finite_cross_fraction_b=float(np.isfinite(b).mean())))
     warnings = ["BAR error bars assume each chain mixed within the intended failure distribution; diagnostics do not prove this.",
-                "Anchor and rung sampling are assumed independent; metadata cannot establish this independence.",
-                "Circular block bootstrap uses a finite chosen block length; longer correlations and systematic bias may be missed."]
+                "Anchor and rung sampling are assumed independent; metadata cannot establish this independence."]
+    if uncertainty == "block_bootstrap":
+        warnings.append("Circular block bootstrap uses a finite chosen block length; longer correlations and systematic bias may be missed.")
+    else:
+        warnings.append("Cross-chain error bars assume independent stationary chains; they do not include finite-chain bias or prove convergence.")
     if mode != "fixed_failure":
         warnings.append("p-dependent decoder approximate BAR ignores changing failure sets; its bias is not included in uncertainty.")
     if anchor.kind == "direct_mc":
@@ -266,9 +290,18 @@ def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]
     if any(min(x["forward_mean"], x["reverse_mean"]) < .01 for x in overlap):
         warnings.append("Very low observed adjacent overlap; ratios and their uncertainty may be unreliable.")
     covariance: Any = None
+    cross_covariance: Any = None
     ses = [math.sqrt(variance_anchor)] + [None] * (len(ladder)-1)
     bootstrap_successes = 0
-    if bootstrap_replicates:
+    if uncertainty == "cross_chain":
+        try:
+            cross_covariance = _cross_chain_covariance(edges)
+        except OverlapError:
+            warnings.append("A chain lacked bidirectional overlap; cross-chain MCMC error bars are unavailable.")
+        else:
+            for i in range(1, len(ladder)):
+                ses[i] = math.sqrt(max(0, variance_anchor + float(cross_covariance[:i, :i].sum())))
+    elif bootstrap_replicates:
         rng = np.random.default_rng(children[-1])
         draws = []
         for _ in range(bootstrap_replicates):
@@ -303,13 +336,19 @@ def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]
     run_metadata = metadata(problem, ladder[-1], dict(sampling=asdict(config), mode=mode,
         bootstrap_replicates=bootstrap_replicates, bootstrap_block_length=length,
         bootstrap_successes=bootstrap_successes), sequence, children)
-    run_metadata.update(json_value(dict(ladder=ladder, mode=mode,
+    uncertainty_metadata = dict(ladder=ladder, mode=mode,
         approximation_reason=approximation_reason, anchor=dict(kind=anchor.kind, estimate=anchor.estimate,
             log_estimate=_anchor_log(anchor),
             interval=anchor.interval, trials=anchor.trials, failures=anchor.failures,
             log_variance=variance_anchor, metadata=anchor.metadata),
         rungs=[dict(sampling_p=p, decoder_prior=prior, seed=s, metadata=run.metadata)
                for p, prior, s, run in zip(ladder, priors, rung_seeds, runs)],
-        uncertainty_method="shared-rung circular block bootstrap plus independent anchor log-delta variance")))
+        uncertainty_method=("shared-rung circular block bootstrap plus independent anchor log-delta variance"
+                            if uncertainty == "block_bootstrap" else
+                            "cross-chain paired BAR covariance plus independent anchor log-delta variance"))
+    if uncertainty == "cross_chain":
+        uncertainty_metadata["cross_chain_log_ratio_covariance"] = (
+            cross_covariance.tolist() if cross_covariance is not None else None)
+    run_metadata.update(json_value(uncertainty_metadata))
     return EstimationResult(estimates, logs, ratios, ses, intervals, run_metadata,
         time.perf_counter()-start, warnings, [run.diagnostics for run in runs], overlap, covariance)
