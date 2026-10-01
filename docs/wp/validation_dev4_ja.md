@@ -43,6 +43,7 @@ K の実装全体と独立レビューは後述の統合時点で完了した。
 | 統合 | source venv コマンド | 結果 | 秒 |
 | --- | --- | --- | ---: |
 | K、main `c550cdf` | `python -m pytest tests -q --junitxml=output/dev4-after-k.xml` | 330 passed / 5 skipped | 149.98 |
+| N | `python -m pytest tests -q --junitxml=output/dev4-after-n.xml` | 345 passed / 5 skipped | 122.42 |
 
 K後のskipは研究checkout未指定の照合5件で、Windows ZeroMQの補助selector警告1件が出た。
 installed wheelとremote CIは未実施。
