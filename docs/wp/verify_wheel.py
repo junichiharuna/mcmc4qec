@@ -29,6 +29,7 @@ EXAMPLES = {
     "phase_flip_asymmetric.py": (True, "code p pl_bit_flip pl_phase_flip interval_bit_flip interval_phase_flip exact_available"),
     "stim_dem.py": (True, "mechanisms exact pl pl_interval"),
     "circuit_baseline.py": (True, "locations detectors pl pl_interval"),
+    "circuit_zanella.py": (True, "distance p kernels conditional_weight acceptance iat direct_mc_conditional_weight"),
     "bb72_bposd.py": (True, "code p pl pl_interval ew_direct ew_chain"),
     "toric_depolarizing.py": (True, "code p pl pl_interval ew_direct ew_chain"),
     "phenomenological_toric.py": (True, "code rounds p pl pl_interval"),

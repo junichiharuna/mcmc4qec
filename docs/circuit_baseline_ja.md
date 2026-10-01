@@ -78,8 +78,40 @@ rotated surface d=3 の 6 ラウンド回路は 368 個の物理 location、48 �
 
 ## 対応範囲
 
-物理配置上の単一 location 提案と一般 MH を対象とする。
-Z-OBF、cluster exchange、stabilizer flip は対象外。
+物理配置上の単一 location 提案、OBF、Zanella とそれらの任意の混合を一般 MH で扱う。
+OBF は全 location の非零ラベル候補から一様に選び、`circuit_single` は location を一様に選んでからその非零ラベルを選ぶため、alphabet 長が異なると提案分布が異なる。
+Zanella の product-noise fastpath は `CircuitFaultNoise.probabilities(p)` の実験全体に対する location 別確率行を使い、最大 alphabet 長までゼロ埋めするが、埋めたラベルは近傍に含まれない。
+回路での `cluster exchange` は物理的な location 群の定義と異なる alphabet 長の扱いが未設計のため対象外とする。
+回路の `stabilizer flip` も静的な stabilizer XOR 表現がないため対象外とする。
 任意の非 Clifford 回路、相関する location 間ノイズ、排他的でない同一 location の複数 fault、`PAULI_CHANNEL_1/2` と `CORRELATED_ERROR` の入力回路は未対応。
 Stim と PyMatching がない環境では回路テストを skip する。
 optional 依存を入れていない core venv では Stim と PyMatching が見つからない状態で `mcmc4qec.circuit` と `sampling.KernelConfig` の import が成功した。
+
+## WP-L の検証と短い速度測定
+
+repetition d=3 の 1 ラウンドで `4^3=64` 配置を列挙し、OBF、Zanella、両者の混合について全配置の提案正規化と失敗集合上の詳細釣合いを確認した。
+同じ配置で Zanella fastpath と参照経路の近傍分布を照合し、混合 sampler の同一 seed の保存状態列と受理集計が一致した。
+異なる alphabet 長と location ごとの条件付き確率・故障率を持つ小回路でも全配置の fastpath と参照経路を照合した。
+これらの確認は失敗集合上の既約性や周期性を証明しない。
+surface d=3、`p=0.03`、独立 300 試行では 108 個の失敗から `E[w|faulty]=12.093±0.556` の通常近似区間を得た。
+Z 0.7 / OBF 0.3 の 300 標本、burn-in 100 の chain では `E[w|faulty]=9.440±1.555`、診断 ESS は 7.674 で、二つの区間は重ならなかった。
+この通常近似区間は厳密な被覆保証ではなく、低い ESS と非交差のため混合不足などを疑う必要があり、推定精度を主張しない。
+
+| surface d=3、`p=0.02`、150 step、各 kernel で初期状態を探索 | step/s | 受理率 |
+| --- | ---: | ---: |
+| `circuit_single` | 173.50 | 0.0333 |
+| Zanella | 55.67 | 0.7533 |
+| Z 0.7 / OBF 0.3 | 62.56 | 0.5333 |
+
+上の表は最初の実測であり、回路構築時間を除く一方、各 kernel ごとの失敗初期状態の探索時間を `sample_faulty` に含んでいた。
+
+| surface d=3、`p=0.02`、150 step、共通の失敗初期状態 | step/s | 受理率 |
+| --- | ---: | ---: |
+| `circuit_single` | 176.95 | 0.0067 |
+| Zanella | 52.63 | 0.6600 |
+| Z 0.7 / OBF 0.3 | 63.23 | 0.6467 |
+
+`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bench_circuit_step.py --steps 150` を WP-N 統合後に再実行した値である。
+共通の supported faulty 初期状態は 6 試行、0.056 秒で得られ、その探索時間を表の step/s から除いた。
+各 kernel の `sample_faulty` 呼び出し時間には構成、provenance、診断を含むため、純粋な一ステップ計算量だけの比較ではない。
+受理率と step/s は異なる seed と短い chain の観測値であり、混合品質や論理誤り率の優劣を示さない。

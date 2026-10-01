@@ -76,7 +76,7 @@ def test_repetition_d3_two_rounds_all_locations_exact_with_pymatching():
 def test_circuit_rejects_unsupported_kernel_mixes():
     problem = repetition_problem(1)
     unsupported = SamplingConfig(samples=4, burn_in=0,
-        kernels=KernelConfig(circuit_single=.5, single=.5, zanella=0, cluster=0))
+        kernels=KernelConfig(circuit_single=.5, single=0, zanella=0, cluster=.5))
     with pytest.raises(ValueError):
         sample_faulty(problem, .1, config=unsupported, initial_state=[0, 0, 1])
     with pytest.raises(ValueError):

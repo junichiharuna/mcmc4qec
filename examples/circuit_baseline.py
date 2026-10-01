@@ -3,8 +3,9 @@
 Requires stim,matching extras. Measured default/--quick: about 3.9s/1.4s
 on Windows with the dev3 circuit construction path.
 The decoder prior is fixed at p=0.01, the evaluated physical fault rate.
-Only a physical single-fault kernel applies to conditional circuit MCMC;
-Z/H/stabilizer proposals do not apply. Direct MC estimates whole-circuit P_L.
+This example selects the physical single-fault kernel for conditional MCMC.
+OBF and Z are also supported; H/stabilizer remain unavailable.
+Direct MC estimates whole-circuit P_L; conditional samples do not.
 """
 import argparse
 import json

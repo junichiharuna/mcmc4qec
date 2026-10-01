@@ -25,8 +25,10 @@ class KernelConfig:
     single, zanella, cluster, stabilizer, and circuit_single are their weights.
     cluster_k counts occupied and empty coordinates exchanged by one H move.
     zanella_fastpath affects only exact built-in product noises. Invalid weights,
-    cluster_k, or lazy probability raise ValueError. CircuitFaultModel requires
-    circuit_single=1 and all other move weights zero.
+    cluster_k, or lazy probability raise ValueError. CircuitFaultModel permits
+    mixtures of single, zanella, and circuit_single. Cluster exchange has no
+    physical-location grouping contract and stabilizer XOR has no circuit
+    stabilizer representation, so both remain unsupported for circuit models.
     """
     single: float = 0.0
     zanella: float = 0.7
@@ -202,8 +204,8 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
     from .circuit.proposal import PhysicalFaultProposal
     is_circuit = isinstance(problem.model, CircuitFaultModel)
     if is_circuit:
-        if kc.circuit_single != 1 or any((kc.single, kc.zanella, kc.cluster, kc.stabilizer)):
-            raise ValueError("CircuitFaultModel requires circuit_single=1 and all other kernel weights zero")
+        if kc.cluster or kc.stabilizer:
+            raise ValueError("CircuitFaultModel does not support cluster or stabilizer kernels")
     elif kc.circuit_single:
         raise ValueError("circuit_single is only supported for CircuitFaultModel")
     kernels = [OBF(), Zanella(use_fastpath=kc.zanella_fastpath),
