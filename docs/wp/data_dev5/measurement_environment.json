@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-01T21:38:00+09:00",
+  "purpose": "Environment of the final WP-P fixed-cohort measurements",
+  "runtime_source_commit": "05c70056e3cac6e9a92592daa6b186d86ceed773",
+  "package_source_sha256": "50f47ab86aadb8ddc25142c696ce6cfbce631a8cf8357cbbca8ca33d397f56d5",
+  "package_version": "0.1.0.dev5",
+  "research_read_only_commit": "69efcfcc86af3bf24ca977a098dab0f348601aff",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr 2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "executable": "A:/dev/mcmc4qec/.venv-dev5-source/Scripts/python.exe",
+  "operating_system": "Microsoft Windows 11 Pro",
+  "os_version": "10.0.22631",
+  "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "pymatching": "2.4.0",
+    "ldpc": "2.4.1",
+    "stim": "1.16.0",
+    "pymbar": "4.0.3"
+  },
+  "timing_policy": "One scientific benchmark invocation at a time; no concurrent test suite or other heavy numerical task. Timings are machine and load dependent."
+}

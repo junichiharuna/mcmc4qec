@@ -221,3 +221,13 @@ paper16とpaper50はそれぞれ全20seedで少なくとも1chainが半trace cap
 MC anchorの追加分散が区間幅に寄与するため、MCでの被覆数だけでBAR側の不確かさ評価が十分とは判断しない。
 最初の未完了は残り6cohortであり、低p default_cross両anchorを21:35:14開始の同一プロセスで計測中である。
 最終の12cohort集計と独立科学レビュー、P文書の統合、remote CI以降のgateは引き続き未完了である。
+
+## 2026-10-01 21:39 の更新
+
+前turnは6cohort・120行を `254514a` に保存した実進捗であり、今回は同じ低p default_crossの稼働を確認して再開した。
+低p default_crossの両anchorはbenchmark内111.20秒で完了し、MC anchorは18/20・平均幅0.004714、exact anchorは15/20・平均幅0.002422だった。
+この2cohortもtracked dataへ保存し、全8cohort・160行まで完了した。
+同じ低pのblock法はMC18/20・exact14/20であり、4chainの誤差法切替だけで十分な被覆改善が得られたとは結論しない。
+`docs/api_en.md` に2chainは計算下限で精度推奨ではなく、少数chainでの分散推定とlog尺度1.96 SEの正規近似の限界を追記した。
+最終科学計測のPython・主要依存版・CPU/OS・source/研究commitを `docs/wp/data_dev5/measurement_environment.json` に記録した。
+最初の未完了は低p paper16/50の両anchor計4cohortで、担当がpaper16を継続している。
