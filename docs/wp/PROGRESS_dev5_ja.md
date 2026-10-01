@@ -169,3 +169,12 @@ MC anchor1500試行は全長さで固定されるため、SDが1/sqrt(N)で下�
 主表はMC anchorを維持し、同じ全20seedの `bar_estimate/anchor_estimate` とcacheのp=0.30 exact値から作るexact-anchor換算点推定およびlog比SDを、再samplingなしの補助派生量として評価する。
 以後のsource変更は予定せず、科学表が揃ったら `/root/p_review` をfollowupして全seed・設定・Wilson・paired差・結論を監査する。
 Pの実験はmainで行うが、担当の文書とレビューの編集・commitは `A:/dev/mcmc4qec-wt/p` に限定する。
+
+## 2026-10-01 21:11 の更新
+
+前turnではQ/P統合、sourceと両wheel・例・notebookの検証を完了しており、単なる状態再掲ではなく実装と検証の進捗があった。
+本turnは最初の未完了項目の長さ比較から再開し、9600前半の同じ実行が稼働中であることを確認した。
+担当のsession12374はroot側から参照できないため再起動せず、CIMで21:05:02開始の該当benchmarkのPID2448/18612を確認した。
+21:10:54にもPID18612は存在し、担当側の同sessionのpollも継続中だった。
+最終truth cacheを `docs/wp/data_dev5/truth_cache.json` に複写し、実行用cacheとのSHA-256一致 `e23c43c9022bb5dbbe5820009165f81ff30b73ff32018c62cc5b08d028c92f63` を確認した。
+監査表に残っていたPの全suite待ち表記を実行済みのsource/両wheel結果へ更新し、未完の長さ・被覆表とは区別した。

@@ -1,0 +1,28 @@
+{
+  "code": "toric_d3",
+  "n": 18,
+  "problem_sha256": "16d53d251117bb3f52c9e7cff4aa63514d16409364f7d7b7e773977db84f974d",
+  "package_source_sha256": "50f47ab86aadb8ddc25142c696ce6cfbce631a8cf8357cbbca8ca33d397f56d5",
+  "failure_weight_counts": [
+    0,
+    0,
+    18,
+    570,
+    2403,
+    6102,
+    14301,
+    23562,
+    34083,
+    35846,
+    33345,
+    22590,
+    14049,
+    6354,
+    2511,
+    702,
+    153,
+    18,
+    1
+  ],
+  "counts_sha256": "909d867052c997ee5d0445df5701dd6b8ff1295d61d497af64a36438195056af"
+}

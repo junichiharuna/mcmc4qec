@@ -2,4 +2,6 @@
 
 `q_step.csv` contains all six final WP-Q timing runs, from implementation commit `638932f`: seed 731, 10,000 steps, p=0.01, Z/H=0.7/0.3, cluster size 2, lazy=0, one chain. The two repetitions use the same seed and measure timing variability, not independent scientific trials. See [Q memo](../Q_ja.md), [independent review](../Q_review_ja.md), and [performance record](../../performance_ja.md) for environment, initialization, profiling, and timing boundaries. The research checkout remained read-only at `69efcfcc86af3bf24ca977a098dab0f348601aff`.
 
-WP-P final coverage and length-comparison data have not yet been measured or added here.
+`truth_cache.json` is the final WP-P failure-weight enumeration for toric d=3 with fixed unweighted MWPM. It counts 196,608 failing states among all 262,144 states. Its problem and count digests match the independently checked pilot enumeration; only the package source digest changed after the dev5 version update. Direct `exact()` comparisons at p=0.22 and p=0.03 differed from the histogram result by 1.01e-14 and 6.27e-14, respectively. The cache deliberately rejects a different package source digest, including a byte-level source change; regenerate it for another checkout rather than bypassing validation.
+
+The complete WP-P coverage and length-comparison tables are still being measured. Their seed cohort and settings were fixed in [the measurement plan](../measurement_plan_dev5_ja.md) before the final outcomes.

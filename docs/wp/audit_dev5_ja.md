@@ -18,17 +18,17 @@
 | Qの利用者向け説明 | Qメモの英日README案、計測時点の明示、研究なしCLIの実行 | 両READMEへ反映、研究なしCLI成功、例6本の既定/quick計測を一覧に反映 |
 | Qの独立レビューと指摘対応 | 別agentのQ_review、指摘ごとの修正差分と再検証 | `/root/q_review` が `ac48cd9` で承認、高・中の要修正指摘なし |
 | Q merge後の全suite | mainのmerge commitとJUnit件数・時間 | `8d00cf8`、`q_merged.xml`、366 passed / 153.24秒（基準+2.02秒） |
-| Pのcross_chain API | keyword追加、2 chain未満/不正値の拒否、method記録、独立anchor分散 | Pレビューと受入6件4.87秒、JSON往復を含む、統合後の全suite待ち |
+| Pのcross_chain API | keyword追加、2 chain未満/不正値の拒否、method記録、独立anchor分散 | Pレビューと受入6件4.87秒、JSON往復を含む、統合後source372件と両wheel全suite成功 |
 | Pの標準誤差の理論値 | 合成独立chainに対する既知の分散と共有rung共分散の受入試験 | 合成0.5/sqrt(3)と負の共分散を独立テストで確認 |
-| Pの点推定と既定互換性 | 同seedで誤差法間の点推定一致、既定結果とRNG系列の互換試験 | 同seed点推定一致、Pレビューで既定経路/seed生成順の保持、統合後の全suite待ち |
+| Pの点推定と既定互換性 | 同seedで誤差法間の点推定一致、既定結果とRNG系列の互換試験 | 同seed点推定一致、Pレビューで既定経路/seed生成順の保持、統合後source/両wheel全suite成功 |
 | Pの小問題反復被覆 | 列挙可能な問題、事前固定した約10 seed、緩い閾値のテスト | seed0–9、2bit exact問題、10件中5件以上の回帰が成功 |
 | Pの反復Geyer burn-in | 反復停止則、半trace fallback、研究コードと論文との差の明示 | P_reviewが研究1D個別cutと照合、合成cut6と半traceの受入成功、最終数値は後続 |
 | Pの四収束規則 | scaling/late drift/multistart/dispersionの実判定と未判定処理 | P_reviewで適用traceを監査、正式M未判定と補助四条件を区別、数値はladder全rungのAND |
-| Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | 未確認 |
+| Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | 600/2400の全20seedと設定を確認、9600は固定10+10の前半実行中、全体は未完 |
 | Pのbias/分散の識別 | 同一軌道の2誤差法、N依存、必要なburn-in/4・16・50 chain感度 | 未確認 |
 | Pの4構成×2領域 | 全構成20 seed以上、各CSVと被覆/Wilson/平均幅/平均偏差/収束合格数 | 未確認 |
 | Pの低p exact/MC anchor | 同じ軌道に対する両anchor、独立seedとanchor分散の記録 | 未確認 |
-| Pの論文整合表 | chain数、burn-in、誤差棒、kernel、初期化、収束、ladder、p領域、BAR、anchorを論文行番号付きで対応 | 未確認 |
+| Pの論文整合表 | chain数、burn-in、誤差棒、kernel、初期化、収束、ladder、p領域、BAR、anchorを論文行番号付きで対応 | paper_consistencyに全項目あり、P_reviewで式・cut・四規則・kernel等を照合、最終数値の反映は後続 |
 | Pの利用者向け指針 | 測定範囲と限界、短いchainの警告、既定変更は所有者判断として提案 | 未確認 |
 | Pの独立レビューと対応 | 別agentのP_review、seed選択なし、論文手順一致、統計主張の反証確認 | 未確認 |
 | P merge後の全suite | Q→Pの順のmain履歴とJUnit | P merge `82c003a`、版更新後 `05c7005`、`p_merged.xml` 372 passed /156.56秒 |
