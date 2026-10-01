@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Callable, Protocol
+from typing import Any, Callable, Generic, Protocol, TypeVar
 import hashlib
 import json
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 
 def binary(value: Any, *, ndim: int | None=None, shape: tuple[int, ...] | None=None, name: str="array") -> np.ndarray:
@@ -96,7 +97,11 @@ class Model(Protocol):
     def metadata(self) -> dict[str, Any]: ...
 
 
-class Noise(Protocol):
+NoiseParameter = TypeVar("NoiseParameter", contravariant=True)
+ProblemParameter = TypeVar("ProblemParameter")
+
+
+class Noise(Protocol[NoiseParameter]):
     """Normalized distribution on n coordinates for a Model's state space.
 
     sample(p, rng) returns one state using the supplied NumPy generator.
@@ -106,8 +111,8 @@ class Noise(Protocol):
     identity and settings. Invalid parameters should raise ValueError.
     """
     n: int
-    def sample(self, p: float | dict[str, Any] | None, rng: np.random.Generator) -> np.ndarray: ...
-    def log_prob(self, state: np.ndarray, p: float | dict[str, Any] | None) -> float: ...
+    def sample(self, p: NoiseParameter, rng: np.random.Generator) -> np.ndarray: ...
+    def log_prob(self, state: np.ndarray, p: NoiseParameter) -> float: ...
     def metadata(self) -> dict[str, Any]: ...
 
 
@@ -123,6 +128,13 @@ class Decoder(Protocol):
     def metadata(self) -> dict[str, Any]: ...
 
 
+class FailurePredicate(Protocol):
+    """Custom failure event evaluated on validated copies of one experiment."""
+    def __call__(self, state: np.ndarray, predicted: np.ndarray,
+                 truth: np.ndarray) -> bool: ...
+    def metadata(self) -> dict[str, Any]: ...
+
+
 class BinaryLinearModel:
     """Map latent bits to syndrome H @ state and observables L @ state mod 2.
 
@@ -132,7 +144,7 @@ class BinaryLinearModel:
     ValueError. Arrays are copied and made read-only. Observable mismatch is
     defined for the complete experiment described by the matrices.
     """
-    def __init__(self, H: np.ndarray, L: np.ndarray, *, stabilizers: np.ndarray | None=None, identifier: str="binary-linear") -> None:
+    def __init__(self, H: ArrayLike, L: ArrayLike, *, stabilizers: ArrayLike | None=None, identifier: str="binary-linear") -> None:
         self.H = binary(H, ndim=2, name="H")
         self.L = binary(L, ndim=2, name="L")
         self.n = self.H.shape[1]
@@ -151,13 +163,13 @@ class BinaryLinearModel:
         for a in (self.H, self.L, self.stabilizers):
             a.flags.writeable = False
 
-    def validate_state(self, state: np.ndarray) -> np.ndarray:
+    def validate_state(self, state: ArrayLike) -> np.ndarray:
         return binary(state, shape=(self.n,), name="state")
 
-    def syndrome(self, state: np.ndarray) -> np.ndarray:
+    def syndrome(self, state: ArrayLike) -> np.ndarray:
         return self.H @ self.validate_state(state) % 2
 
-    def observables(self, state: np.ndarray) -> np.ndarray:
+    def observables(self, state: ArrayLike) -> np.ndarray:
         return self.L @ self.validate_state(state) % 2
 
     def metadata(self) -> dict[str, Any]:
@@ -180,7 +192,7 @@ class CSSCode:
     Raises ValueError for invalid matrices, incomplete logical bases, or an
     unknown basis convention. Arrays are copied and made read-only.
     """
-    def __init__(self, hx: np.ndarray, hz: np.ndarray, lx: np.ndarray, lz: np.ndarray, *, logical_basis: str="paired") -> None:
+    def __init__(self, hx: ArrayLike, hz: ArrayLike, lx: ArrayLike, lz: ArrayLike, *, logical_basis: str="paired") -> None:
         if logical_basis not in ("paired", "independent"):
             raise ValueError("logical_basis must be 'paired' or 'independent'")
         self.logical_basis = logical_basis
@@ -229,14 +241,14 @@ class CallableDecoder:
     predictions raise ValueError; exceptions from the function propagate.
     Physical corrections require DecoderAdapter with an explicit logical map.
     """
-    def __init__(self, function: Callable[[np.ndarray], np.ndarray], *, identifier: str, settings: dict[str, Any] | None=None) -> None:
+    def __init__(self, function: Callable[[np.ndarray], ArrayLike], *, identifier: str, settings: dict[str, Any] | None=None) -> None:
         if not callable(function) or not identifier:
             raise ValueError("a callable and nonempty decoder identifier are required")
         self.function = function
         self.identifier = identifier
         self.settings = json_value({} if settings is None else settings)
 
-    def predict(self, syndrome: np.ndarray) -> np.ndarray:
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         return binary(self.function(np.array(syndrome, copy=True)), ndim=1, name="prediction")
 
     def metadata(self) -> dict[str, Any]:
@@ -272,7 +284,7 @@ class CallableFailure:
 
 
 @dataclass
-class Problem:
+class Problem(Generic[ProblemParameter]):
     """Bind compatible model, normalized noise, decoder, and failure predicate.
 
     model and noise must share dimension and alphabets. decoder.predict must
@@ -284,9 +296,9 @@ class Problem:
     event. No invariance of an arbitrary failure predicate is assumed.
     """
     model: Model
-    noise: Noise
+    noise: Noise[ProblemParameter]
     decoder: Decoder
-    failure: Any = None
+    failure: FailurePredicate | None = None
 
     def __post_init__(self) -> None:
         positive_integer(self.model.n, "model.n")
@@ -304,17 +316,17 @@ class Problem:
         if self.failure is not None:
             json_value(self.failure.metadata())
 
-    def state(self, state: Any) -> np.ndarray:
+    def state(self, state: ArrayLike) -> np.ndarray:
         state = categorical(state, self.alphabets)
         return categorical(self.model.validate_state(state), self.alphabets)
 
-    def log_prob(self, state: np.ndarray, p: float | dict[str, Any] | None) -> float:
+    def log_prob(self, state: ArrayLike, p: ProblemParameter) -> float:
         lp = float(self.noise.log_prob(self.state(state), p))
         if np.isnan(lp) or lp == np.inf or lp > 1e-12:
             raise ValueError("noise.log_prob must be a normalized log probability or -inf")
         return lp
 
-    def is_faulty(self, state: np.ndarray) -> bool:
+    def is_faulty(self, state: ArrayLike) -> bool:
         state = self.state(state)
         predicted = binary(self.decoder.predict(self.model.syndrome(state.copy())), ndim=1,
                            name="prediction")

@@ -2,6 +2,7 @@
 from __future__ import annotations
 from typing import Any
 import numpy as np
+from numpy.typing import ArrayLike
 from .core import binary, positive_integer, identified
 
 
@@ -15,7 +16,7 @@ class IndependentBitFlip:
     Invalid dimensions, states, or parameters raise ValueError. Probabilities
     refer to latent coordinates, not logical failure or a derived round rate.
     """
-    def __init__(self, n: int, *, scales: Any=None) -> None:
+    def __init__(self, n: int, *, scales: ArrayLike | None=None) -> None:
         self.n = positive_integer(n, "n")
         self.alphabets = (2,) * self.n
         self.scales = np.ones(n) if scales is None else np.asarray(scales, dtype=float).copy()

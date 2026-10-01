@@ -4,6 +4,7 @@ from typing import Any
 import itertools
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 from .core import CSSCode, binary, gf2_rank
 
@@ -25,7 +26,7 @@ def _independent_rows(rows):
     return basis
 
 
-def minimum_weight_coset_representative(logical: np.ndarray, stabilizers: np.ndarray | None, *, time_limit: float=30.0) -> np.ndarray:
+def minimum_weight_coset_representative(logical: ArrayLike, stabilizers: ArrayLike | None, *, time_limit: float=30.0) -> np.ndarray:
     """Return an exact minimum-Hamming-weight member of logical + span(stabilizers).
 
     `logical` is a binary `(n,)` vector and `stabilizers` is a binary `(r,n)`
@@ -150,7 +151,7 @@ def _solve_gf2(matrix, target):
     return aug[:, -1]
 
 
-def observable_sector_initial_state(code: CSSCode, observable: np.ndarray, *, sector: str="x", time_limit: float=30.0) -> np.ndarray:
+def observable_sector_initial_state(code: CSSCode, observable: ArrayLike, *, sector: str="x", time_limit: float=30.0) -> np.ndarray:
     """Find the minimum-weight representative of a requested observable sector.
 
     code is a CSSCode supplying the stabilizer and logical matrices.

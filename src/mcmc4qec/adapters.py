@@ -13,6 +13,7 @@ from importlib.metadata import PackageNotFoundError, version
 import json
 
 import numpy as np
+from numpy.typing import ArrayLike
 from .core import Decoder
 
 
@@ -59,7 +60,7 @@ class DecoderAdapter:
     rate unit; a surrounding Problem reports failure for its whole experiment.
     """
 
-    def __init__(self, decoder: Any, *, output_kind: str, identifier: str, logical_map: np.ndarray | None=None,
+    def __init__(self, decoder: Any, *, output_kind: str, identifier: str, logical_map: ArrayLike | None=None,
                  settings: dict[str, Any] | None=None, distribution: str | None=None, decode_kwargs: dict[str, Any] | None=None) -> None:
         if not callable(getattr(decoder, "decode", None)):
             raise TypeError("decoder must expose a callable decode method")
@@ -127,7 +128,7 @@ class PyMatchingAdapter(DecoderAdapter):
     """
 
     def __init__(self, decoder: Any, *, built_with_correlations: bool, output_kind: str,
-                 identifier: str, logical_map: np.ndarray | None=None, settings: dict[str, Any] | None=None, decode_kwargs: dict[str, Any] | None=None) -> None:
+                 identifier: str, logical_map: ArrayLike | None=None, settings: dict[str, Any] | None=None, decode_kwargs: dict[str, Any] | None=None) -> None:
         if not isinstance(built_with_correlations, bool):
             raise ValueError("built_with_correlations must be a bool")
         kwargs = _json_copy(decode_kwargs if decode_kwargs is not None else {}, "decode_kwargs")
@@ -146,8 +147,8 @@ class PyMatchingAdapter(DecoderAdapter):
         return result
 
 
-def matching_from_check_matrix(check_matrix: np.ndarray, *, logical_map: np.ndarray | None, identifier: str,
-                               weights: np.ndarray | None=None, error_probabilities: np.ndarray | None=None) -> PyMatchingAdapter:
+def matching_from_check_matrix(check_matrix: ArrayLike, *, logical_map: ArrayLike, identifier: str,
+                               weights: ArrayLike | None=None, error_probabilities: ArrayLike | None=None) -> PyMatchingAdapter:
     """Construct a static, uncorrelated correction-output Matching adapter.
 
     All binary columns are validated before constructing the graph; columns of
