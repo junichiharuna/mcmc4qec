@@ -126,3 +126,14 @@ exact-anchor換算の平均偏差は600で-1.93 SE、2400で+0.11 SE、9600で-1
 
 P worktreeの予備計測・両anchor照合・reviewプローブの出力39ファイルをmainの `output/dev5/p_pilots/` に複写した。
 これらは最終60行や12cohortへ混ぜず、worktree削除後も動作・時間の検証記録として保持する。
+
+## 最終科学文書の統合とsource再確認
+
+全12cohort・240行、全派生値、最終科学文書は独立P reviewerの `2abc353` で承認され、mainの `0e4fcab` に統合した。
+CSV再読込時の未判定数の誤集計はbenchmarkのみの修正 `850fa0f` で解消し、直接summaryとCSV再読込summaryの一致、全240行の最終aggregateと派生統計を確認した。
+サンプリングsourceと `src/mcmc4qec` は `05c7005` 以後変えていない。
+要求されたmerge後の全検証として、研究envと `PYTHONDONTWRITEBYTECODE=1` を指定し、`.venv-dev5-source/Scripts/python.exe -m pytest tests -q --junitxml=output/dev5/final_merged.xml` を再実行した。
+結果は372 passed /148.48秒、skipなし、既知のWindows zmq警告1件で、JUnitのerrors/failures/skippedは全て0だった。
+開始時151.22秒との差は-2.74秒、file別最大は `tests.test_circuit_kernels` の24.90秒で、全時間制限内だった。
+wheelに含まれるsourceと英語READMEは先のwheel検証以後変更しておらず、文書・集計修正の後もwheel検証の対象と同じpackage本体である。
+この時点でlocal gateと科学監査は完了し、remote CIと最終整理は後続である。

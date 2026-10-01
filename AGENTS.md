@@ -20,7 +20,7 @@ dev5のlocal wheel検証はcore 269 passed /69 skipped /64.00秒、optional 367 
 dev5の科学計測は長さ比較60行と12cohort各20seedの240行を完了し、生CSV・派生量・事前計画・環境・実行ログを `docs/wp/data_dev5/` に保存した。
 dev4領域の4chainではblock/crossの被覆が13/20・18/20、低pのexact anchorでは14/20・15/20で、誤差法の変更だけで名目被覆を保証しない。
 低pのpaper16/50はexact anchorで各19/20だったが、全250step・不等長cut・半trace上限が頻発する短い探索であり、論文の2,000,000stepの精度再現とは扱わない。
-最終文書レビューとremote CIは進行中で、状態は `docs/wp/PROGRESS_dev5_ja.md`、測定前の設定は `docs/wp/measurement_plan_dev5_ja.md` に記録する。
+最終文書レビューは完了し、remote CIは未実施で、状態は `docs/wp/PROGRESS_dev5_ja.md`、測定前の設定は `docs/wp/measurement_plan_dev5_ja.md` に記録する。
 残る課題はtoricで研究runner比2倍以内という速度目標、実符号の混合と被覆の校正、回路専用の効果差分更新とH提案の設計、非公開ヘルパーを含むstrict型検査である。
 BARと独立MCの区間が非交差となる例も記録しており、短い実行例を研究精度の保証として扱わない。
 所有者判断待ちの事項と次の依頼候補は `docs/wp/final_report_dev4_ja.md` 第6節、経緯は `docs/handoff/IMPLEMENTATION_STATUS.md` の追記にある。
@@ -29,8 +29,8 @@ BARと独立MCの区間が非交差となる例も記録しており、短い実
 
 - `src/mcmc4qec/` — パッケージ本体（import 名 `mcmc4qec`）。`core.py`（Model / Noise / Decoder / FailurePredicate の契約、`CSSCode`、`Problem`）、`noise.py`・`noise_categorical.py`（bit-flip、Pauli カテゴリ、phenomenological のノイズ）、`models.py`（depolarising と spacetime モデル）、`kernels.py`（OBF / Z / H / stabilizer、一般 MH）、`sampling.py`（`exact`、`direct_mc`、`sample_faulty`、config と seed 系列）、`estimation.py`（BAR、`estimate_logical_error`、block bootstrap）、`diagnostics.py`（IAT / ESS / split R-hat）、`results.py`（JSON 往復する Result と provenance）、`adapters.py`・`adapter_composition.py`（PyMatching / BP-OSD の wrapper、sector と履歴の合成）、`stim_dem.py`（DEM からのモデル構成）、`codes.py`（符号ファクトリ）、`decoders.py`（MWPM / BP-OSD / sector 復号の構築）、`fastpath.py`・`faststep.py`・`decode_cache.py`（product-noise の Zanella 分布、組み込み線形モデルの専用step、decode cache）、`convergence.py`（複数 chain 診断と `evaluate_convergence`）、`initial_states.py`（exact coset 初期化）、`circuit/`（物理回路 fault の `model.py`・`proposal.py`・`baselines.py`）
 - `tests/` — pytest。
-  dev5統合後のsource全suiteは372 passed、156.56秒、skipなし（2026-10-01、Windows Python 3.11、研究照合envありの実測）。
-  dev5開始時362 passed /151.22秒からの増分は5.34秒で、時間は環境負荷で変動する。
+  dev5最終文書統合後のsource全suiteは372 passed、148.48秒、skipなし（2026-10-01、Windows Python 3.11、研究照合envありの実測）。
+  dev5開始時362 passed /151.22秒との差は-2.74秒、file別最大24.90秒で、時間は環境負荷で変動する。
   小規模列挙で正規化・提案比・詳細釣合い・失敗条件を検証するのが流儀。
 - `examples/` — `bit_flip.py`、`three_noise.py`、`bar_ladder.py`、`steane_exact.py`（coreのみで動く）、`toric_pymatching.py`、`phase_flip_asymmetric.py`、`stim_dem.py`、`circuit_baseline.py`、`circuit_zanella.py`、`bb72_bposd.py`、`toric_depolarizing.py`、`phenomenological_toric.py`（optional依存が要る）
 - `examples/workflows/` — BAR 曲線、条件付き重み、複数 chain 診断、p 依存 decoder の研究ワークフロー
