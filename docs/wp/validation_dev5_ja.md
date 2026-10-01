@@ -74,3 +74,14 @@ P担当へ各chain別cutと四条件の修正を依頼し、修正版の最終�
 警告1件は既知のWindows zmq event-loop対応である。
 Qの独立レビューは `Q_review_ja.md` にあり、136近傍の逆向き分布全再計算との一致、詳細釣合い、関連45件、CSV6行の数値を確認済みである。
 JUnitのfile別合計最大は `tests.test_circuit_kernels` の25.583秒で、各file60秒以内だった。
+
+## P統合とdev5 source凍結
+
+Pの実装レビューは `0804e4a` で確定し、最終科学CSVの監査は後続として残した。
+mainへ `82c003a` でmergeし、`05c7005` でpyprojectとResultの版を0.1.0.dev5へ揃えた。
+研究envと `PYTHONDONTWRITEBYTECODE=1` を設定した `.venv-dev5-source/Scripts/python.exe -m pytest tests -q --junitxml=output/dev5/p_merged.xml` は372 passed /156.56秒、skipなしだった。
+基準から10件増え、時間増分は5.34秒で、file別最大はcircuit kernelsの26.652秒だった。
+警告1件は既知のWindows zmq対応であり、全suite300秒・増分60秒・各file60秒の制限を満たした。
+このsourceを最終科学計測の実装として固定し、版変更により失効する旧truth cacheは使い回さず、mainで新規列挙する。
+`python -m build --wheel` は成功し、`dist/mcmc4qec-0.1.0.dev5-py3-none-any.whl` を新規core/optional venvの両方へinstallした。
+installed wheelの全pytestとverify_wheelは、この時点ではまだ未実施である。
