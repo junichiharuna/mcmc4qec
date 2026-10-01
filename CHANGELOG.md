@@ -5,6 +5,19 @@
 - Rename the package and repository from the provisional `rimc` to `mcmc4qec`
   (import name `mcmc4qec`). No API change.
 
+## 0.1.0.dev5 — development
+
+- Add optional cross-chain BAR uncertainty with paired adjacent-rung covariance
+  and independent anchor variance; retain pooled point estimates and the default
+  block-bootstrap behavior. Document finite-chain bias and coverage assumptions.
+- Add fixed-seed BAR protocol and length-comparison benchmarks, per-chain
+  iterated burn cuts, checked exact-truth caching, and explicit distinctions
+  between paper observable-mean experiments and BAR uncertainty estimates.
+- Reuse Zanella proposal distributions across steps and avoid duplicate decoder
+  validation on cache hits, preserving reference trajectories and RNG use.
+- Publish two-run performance measurements for toric d=5/d=7 and BB72, including
+  the remaining toric gap, and refresh affected example timings.
+
 ## 0.1.0.dev4 — development
 
 - Add static CSS phase-flip models, Z-sector MWPM/BP-OSD construction,
