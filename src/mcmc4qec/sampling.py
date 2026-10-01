@@ -212,9 +212,13 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
                           policy=config.cache_policy)
     problem = replace(problem, decoder=cache)
     evaluator = FailureEvaluator(problem)
+    from .faststep import make_faststep
+    faststep = make_faststep(problem, p, enabled=kc.zanella_fastpath)
     probabilities = np.array([kc.single, kc.zanella, kc.cluster, kc.stabilizer, kc.circuit_single])
     if kc.stabilizer:
         kernels[3]._rows(problem)
+        if faststep is not None:
+            faststep.stabilizers = np.asarray(problem.model.stabilizers)
     sequence = np.random.SeedSequence(seed)
     children = sequence.spawn(config.chains)
     saved = np.empty((config.chains, config.samples, problem.model.n), dtype=np.uint8)
@@ -251,6 +255,8 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
         initial_attempts.append(attempts)
         effective_initial_states.append(current.tolist())
         current_log = problem.log_prob(current, p)
+        if faststep is not None:
+            faststep.start(current)
         total_steps = config.burn_in + config.samples * config.thin
         index = 0
         for step in range(total_steps):
@@ -266,25 +272,29 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
                 kernel = kernels[chosen]
                 stats = acceptance[kernel.name]
                 stats["proposed"] += 1
-                proposal = kernel.propose(current, problem, p, rng)
-                candidate = problem.state(proposal.state)
-                lp = problem.log_prob(candidate, p)
-                log_ratio = proposal.log_reverse_forward
-                if np.isnan(log_ratio) or log_ratio == np.inf:
-                    raise ValueError("invalid proposal ratio")
-                if math.isfinite(lp):
-                    faulty, candidate_syndrome = evaluator.evaluate(
-                        candidate, previous=current,
-                        previous_syndrome=current_syndrome)
+                if faststep is not None:
+                    current, current_log, current_syndrome = faststep.attempt(
+                        current, current_log, current_syndrome, kernel, rng, stats)
                 else:
-                    faulty = False
-                if faulty:
-                    u = rng.random()
-                    if (math.log(u) if u else -np.inf) < min(0, lp-current_log+log_ratio):
-                        stats["accepted"] += 1
-                        stats["moved"] += int(not np.array_equal(current, candidate))
-                        current, current_log = candidate, lp
-                        current_syndrome = candidate_syndrome
+                    proposal = kernel.propose(current, problem, p, rng)
+                    candidate = problem.state(proposal.state)
+                    lp = problem.log_prob(candidate, p)
+                    log_ratio = proposal.log_reverse_forward
+                    if np.isnan(log_ratio) or log_ratio == np.inf:
+                        raise ValueError("invalid proposal ratio")
+                    if math.isfinite(lp):
+                        faulty, candidate_syndrome = evaluator.evaluate(
+                            candidate, previous=current,
+                            previous_syndrome=current_syndrome)
+                    else:
+                        faulty = False
+                    if faulty:
+                        u = rng.random()
+                        if (math.log(u) if u else -np.inf) < min(0, lp-current_log+log_ratio):
+                            stats["accepted"] += 1
+                            stats["moved"] += int(not np.array_equal(current, candidate))
+                            current, current_log = candidate, lp
+                            current_syndrome = candidate_syndrome
             if step >= config.burn_in and (step-config.burn_in+1) % config.thin == 0:
                 saved[chain, index] = current
                 index += 1
