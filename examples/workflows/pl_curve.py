@@ -20,6 +20,10 @@ Exploratory seeds 2026..2045 gave BAR coverage 13/20 and MC coverage 20/20.
 Default block 8 was shorter than the median maximum weight IAT (35.69);
 larger blocks widened intervals but did not fix seed 2026's estimate.
 See docs/bar_sensitivity_ja.md for controlled block, sample, and ladder checks.
+The optional cross_chain uncertainty method leaves pooled BAR point estimates
+unchanged and assumes independent, stationary chains; it cannot remove a bias
+shared by their starts. The paper's observable-mean study does not validate BAR
+coverage. This workflow keeps its block-bootstrap settings for compatibility.
 """
 
 import argparse
@@ -183,6 +187,8 @@ def main():
     if args.demo_overlap:
         demonstrate_overlap(next(seeds))
     print('BAR intervals assume adequate mixing and block length; inspect overlap and diagnostics.')
+    print('Neither diagnostic checks nor switching to cross_chain uncertainty establishes 95% coverage; '
+          'see docs/bar_sensitivity_ja.md for fixed-seed comparisons and finite-chain bias.')
     print('Recorded default d=3, p=0.22 study: exact P_L=0.6026625647; '
           'seed 2026 BAR missed truth, independent MC covered it. '
           'Over 20 seeds: BAR coverage 13/20, MC 20/20. '

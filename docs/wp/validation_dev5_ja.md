@@ -73,3 +73,4 @@ P担当へ各chain別cutと四条件の修正を依頼し、修正版の最終�
 基準362 passed /151.22秒から4件増え、時間増分は2.02秒だった。
 警告1件は既知のWindows zmq event-loop対応である。
 Qの独立レビューは `Q_review_ja.md` にあり、136近傍の逆向き分布全再計算との一致、詳細釣合い、関連45件、CSV6行の数値を確認済みである。
+JUnitのfile別合計最大は `tests.test_circuit_kernels` の25.583秒で、各file60秒以内だった。
