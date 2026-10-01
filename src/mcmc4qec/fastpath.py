@@ -7,6 +7,8 @@ from .noise_categorical import DepolarizingNoise, PhenomenologicalNoise, _probab
 
 def _probability_rows(noise, p):
     """Return categorical probabilities or None for unrecognized noise."""
+    # A local import avoids the circuit proposal -> kernels import cycle.
+    from .circuit.model import CircuitFaultNoise
     if type(noise) is IndependentBitFlip:
         rates = noise.probabilities(p)
         return np.column_stack((1 - rates, rates))
@@ -20,6 +22,14 @@ def _probability_rows(noise, p):
         rows = np.zeros((noise.n, 4), dtype=float)
         rows[:noise.model.n_data, :size] = data_row
         rows[noise.model.n_data:, :2] = [1 - measurement, measurement]
+        return rows
+    if type(noise) is CircuitFaultNoise:
+        # probabilities(p) holds one complete-experiment categorical row per
+        # physical location; it is not a vector of logical failure rates.
+        probabilities = noise.probabilities(p)
+        rows = np.zeros((noise.n, max(noise.alphabets)), dtype=float)
+        for index, row in enumerate(probabilities):
+            rows[index, :len(row)] = row
         return rows
     return None
 
