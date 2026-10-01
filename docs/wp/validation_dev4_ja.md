@@ -77,3 +77,14 @@ installed wheelとremote CIの進行結果は以下へ追記する。
 新規`.venv-dev4-core`へcore wheel、新規`.venv-dev4-optional`へ`[matching,bposd,codes,stim,plot,notebooks]`付きwheelを導入した。
 coreの`python -I docs/wp/verify_wheel.py core`は7.28秒で成功し、24 Python fileのsource一致、空py.typed、版とREADMEの一致、実行例と文書コードを確認した。
 optional venvからsourceを探索しない`python -I -m mypy --ignore-missing-imports output/dev4-typing-client.py`も成功し、初回7件失敗した利用例がinstalled wheelで通った。
+
+| installed wheel環境 | コマンド | 結果 | 秒 |
+| --- | --- | --- | ---: |
+| `.venv-dev4-core` | `python -m pytest --override-ini pythonpath= tests -q --junitxml=output/dev4-wheel-core.xml` | 258 passed / 71 skipped | 56.23 |
+
+optionalの`python -I docs/wp/verify_wheel.py optional`も成功し、20例のSUMMARYキー、24 Python fileとpy.typedの一致、notebook4本、README/tutorialの7ブロックを確認した。
+quickの最長例は新しいcircuit_zanellaの4.38秒で、phase_flip_asymmetricは2.34秒、いずれもprocess上限10秒以内だった。
+quick notebook再生成のprocess全体は11.29秒で、各notebookは順に2.52/3.39/2.86/1.84秒だった。
+同じoptional wheelの`python -I notebooks/regenerate.py`で既定出力を再生成し、4本は順に3.04/12.05/3.53/2.49秒、実行時間の合計21.11秒だった。
+この合計は個別notebook実行の和であり、Python起動などを含むprocess全体の実測値ではない。
+実行済みcode cellは順に3/3/3/4件で、Mの説明を含めたnotebookと一覧の時間を更新した。

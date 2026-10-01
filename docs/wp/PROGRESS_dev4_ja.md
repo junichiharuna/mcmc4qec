@@ -32,10 +32,10 @@
 ## Phase 2
 
 - [x] 2026-10-01 09:43 JST 公開API・英日README・API文書・例一覧・pyproject・CIを統合し版をdev4にする。
-- [ ] M の指針を pl_curve と notebook 02 の説明へ反映し notebook を再生成する。
+- [x] 2026-10-01 09:48 JST Mの指針をpl_curveとnotebook02へ反映し、installed wheelで4notebookの既定出力を再生成する。
 - [x] 2026-10-01 09:43 JST verify_wheel.pyを新例・型情報に対応させる（20例、24 Python file、空py.typed）。
 - [x] 2026-10-01 09:43 JST 統合後全suiteと時間予算を確認する（146.28秒、追加5file37.117秒、最大file25.186秒）。
-- [ ] 新規 core venv に wheel を導入し全 suite と verify_wheel.py core を実行する。
+- [x] 2026-10-01 09:48 JST 新規core venvへwheel導入・全suite（258 passed / 71 skipped、56.23秒）・verify_wheel core成功。
 - [ ] 新規 optional venv に wheel を導入し全 suite と verify_wheel.py optional を実行する。
 - [ ] CHANGELOG・AGENTS を更新し IMPLEMENTATION_STATUS に追記する。
 - [ ] 検証済み main を origin/main へ push し remote CI 全 job の成功を確認する。

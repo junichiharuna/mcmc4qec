@@ -2,7 +2,7 @@
 
 Run scripts from the repository root with `python examples/<name>.py --quick --seed 7 --out <directory>` (adjust the relative path for `workflows/` or `templates/`). Every example script accepts `--quick`, `--seed`, and `--out`. Its default output directory is the system temporary directory under `mcmc4qec/<script-stem>`; it does not write to the research repository. Each script ends with a `SUMMARY` JSON line. The tables below describe the meaning of that line. `--quick` uses the same computation path with smaller settings.
 
-Times below are measured seconds on Windows with Python 3.11; they vary with machine load. Per-file measurements are recorded in the [WP memos](../docs/wp/); the full default regeneration was timed separately after integration. `plot` supplies workflow PNG support. If the pyplot drawing layer cannot import, the scripts keep the same numeric CSV output. PyMatching 2.4 itself requires matplotlib, so a matching workflow cannot be promised to run without the entire matplotlib package. `codes` is required for the current toric factory as well as HGP and BB factories. See [installation](../README.md#install-and-first-run).
+Times below are measured seconds on Windows with Python 3.11; they vary with machine load. Per-file measurements are recorded in the [WP memos](../docs/wp/). Notebook rows were retimed with the dev4 installed wheel; the regeneration row labels the sum of default notebook execution times separately from the total quick-process time. `plot` supplies workflow PNG support. If the pyplot drawing layer cannot import, the scripts keep the same numeric CSV output. PyMatching 2.4 itself requires matplotlib, so a matching workflow cannot be promised to run without the entire matplotlib package. `codes` is required for the current toric factory as well as HGP and BB factories. See [installation](../README.md#install-and-first-run).
 
 ## Estimation and real codes
 
@@ -49,11 +49,11 @@ Set `MCMC4QEC_QUICK=1` for smaller notebook runs. Notebook cells are self-contai
 
 | File | Purpose | Extras | Default time | Quick time | Read the output | Scientific notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| [01_quickstart.ipynb](../notebooks/01_quickstart.ipynb) | Toric d=5 direct MC and Z+H | `notebooks, codes, matching` | 5.890 s | 4.930 s | Compare absolute direct-MC `P_L` with conditional chain observables | 1, 5 |
-| [02_pl_curve_with_bar.ipynb](../notebooks/02_pl_curve_with_bar.ipynb) | BAR anchor, overlap, and `P_L(p)` curve | `notebooks, codes, matching` | 37.680 s | 6.530 s | Curve is anchor plus BAR ratios; inspect overlap and uncertainty | 1, 3, 4, 5 |
-| [03_conditional_sampling_and_diagnostics.ipynb](../notebooks/03_conditional_sampling_and_diagnostics.ipynb) | Conditional chain, trace, and multiple-chain diagnostics | `notebooks, codes, matching` | 7.560 s | 4.120 s | Trace and diagnostics describe a failure-conditioned run | 1, 5; diagnostics are not proofs |
-| [04_bring_your_own.ipynb](../notebooks/04_bring_your_own.ipynb) | Core-only custom code, noise, and decoder | `notebooks` | 4.890 s | 2.580 s | Check component contracts before interpreting probability outputs | 1, 5 |
-| [regenerate.py](../notebooks/regenerate.py) | Regenerate committed notebook outputs | `notebooks, codes, matching` | 34.989 s | 20.180 s | Re-executes the four notebooks; no `SUMMARY` contract | 1–5 as applicable to the notebooks |
+| [01_quickstart.ipynb](../notebooks/01_quickstart.ipynb) | Toric d=5 direct MC and Z+H | `notebooks, codes, matching` | 3.04 s | 2.52 s | Compare absolute direct-MC `P_L` with conditional chain observables | 1, 5 |
+| [02_pl_curve_with_bar.ipynb](../notebooks/02_pl_curve_with_bar.ipynb) | BAR anchor, overlap, and `P_L(p)` curve | `notebooks, codes, matching` | 12.05 s | 3.39 s | Curve is anchor plus BAR ratios; inspect overlap, exact coverage, and block/chain sensitivity | 1, 3, 4, 5 |
+| [03_conditional_sampling_and_diagnostics.ipynb](../notebooks/03_conditional_sampling_and_diagnostics.ipynb) | Conditional chain, trace, and multiple-chain diagnostics | `notebooks, codes, matching` | 3.53 s | 2.86 s | Trace and diagnostics describe a failure-conditioned run | 1, 5; diagnostics are not proofs |
+| [04_bring_your_own.ipynb](../notebooks/04_bring_your_own.ipynb) | Core-only custom code, noise, and decoder | `notebooks` | 2.49 s | 1.84 s | Check component contracts before interpreting probability outputs | 1, 5 |
+| [regenerate.py](../notebooks/regenerate.py) | Regenerate committed notebook outputs | `notebooks, codes, matching` | 21.11 s (execution sum) | 11.29 s (total) | Re-executes the four notebooks; no `SUMMARY` contract | 1–5 as applicable to the notebooks |
 
 ESS, split R-hat, and the four `evaluate_convergence` checks do not prove mixing, ergodicity, or correctness. The associated paper is in preparation; these examples do not claim to reproduce its figures.
 
