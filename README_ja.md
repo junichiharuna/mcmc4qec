@@ -77,6 +77,29 @@ standard ladder では同じデコーダーと failure 定義を全 rung で使�
 MC anchor には 1 回以上の失敗観測が必要です。
 観測された support の重なりがない場合は `OverlapError` が発生します。
 
+## 性能
+
+専用stepは、組み込みの線形モデルと積ノイズの実型の組み合わせで、標準の論理failureを使う場合に適用されます。
+独自派生型やfailure predicateでは汎用経路を使います。
+
+2026-10-01にWindows 11 Pro、Python 3.11.9、AMD Ryzen 5 3600で、p=0.01、10000 step、Z/H=0.7/0.3、`cluster_k=2`、1 chain、`lazy=0`を2回測定しました。
+
+| 符号 | ライブラリ step/s | 研究runner step/s | ライブラリ/研究の時間比 |
+| --- | ---: | ---: | ---: |
+| Toric d=5 | 8,386–8,553 | 22,825–23,202 | 2.71–2.72倍 |
+| Toric d=7 | 7,322–7,605 | 19,149–19,629 | 2.58–2.62倍 |
+| BB72 | 4,826–4,932 | 7,742–7,962 | 1.57–1.65倍 |
+
+この参照実装は、今回の処理では研究runnerより時間がかかります。
+ライブラリ側は結果と診断の作成を含み、両者ともdecoder構築時間を除きます。
+2回ともseed 731を使い、時間のばらつきを測ったもので、独立標本による精度評価ではありません。
+decoderの設定と残る処理時間の内訳は[性能記録](docs/performance_ja.md)を参照してください。
+
+`python benchmarks/bench_step.py --steps 10000 --repeats 2 --seed 731`で実行できます。
+比較する場合は`RIMC_RESEARCH_ROOT`（または`MCMC4QEC_RESEARCH`）に読み取り専用の研究checkoutを設定し、どちらも設定しなければライブラリ側だけを測ります。
+`codes`と`matching` extrasが必要で、`--quick`と`--out`を指定でき、既定では一時ディレクトリにCSVを書きます。
+速度は機器と負荷で変動し、混合や推定精度を保証しません。
+
 ## 目的別の入口
 
 | 目的 | 最初の資料 |

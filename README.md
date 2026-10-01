@@ -65,6 +65,22 @@ print(result.estimates, result.intervals)
 
 The complete runnable ladder, including its three-bit `Problem`, is in [examples/bar_ladder.py](examples/bar_ladder.py). Keep the same decoder and failure definition across a standard ladder. An MC anchor must observe positive failure mass. Missing observed support overlap raises `OverlapError`.
 
+## Performance
+
+The dedicated step path applies to exact built-in linear model/product-noise pairs with the standard logical failure predicate. Custom subclasses or failure predicates use the general path.
+
+Two local runs on Windows 11 Pro, Python 3.11.9, and an AMD Ryzen 5 3600 measured the following rates at p=0.01, with 10,000 steps, Z/H weights 0.7/0.3, `cluster_k=2`, one chain, and `lazy=0` (2026-10-01).
+
+| Code | Library steps/s | Research runner steps/s | Library/research time |
+| --- | ---: | ---: | ---: |
+| Toric d=5 | 8,386–8,553 | 22,825–23,202 | 2.71–2.72× |
+| Toric d=7 | 7,322–7,605 | 19,149–19,629 | 2.58–2.62× |
+| BB72 | 4,826–4,932 | 7,742–7,962 | 1.57–1.65× |
+
+This reference implementation remains slower than the research runner on this workload. Library timings include result construction and diagnostics; both timings exclude decoder construction. The two runs share seed 731 and measure timing variation, not independent sampling accuracy. See the [measurement record](docs/performance_ja.md) for decoder settings and remaining costs.
+
+Run `python benchmarks/bench_step.py --steps 10000 --repeats 2 --seed 731`. Set `RIMC_RESEARCH_ROOT` (or `MCMC4QEC_RESEARCH`) to a read-only research checkout for comparison; without either variable, the script measures the library only. It needs the `codes` and `matching` extras, supports `--quick` and `--out`, and writes CSV to a temporary directory by default. Rates vary with hardware and load and do not establish mixing or estimation accuracy.
+
 ## Choose a starting point
 
 | Goal | Start here |
