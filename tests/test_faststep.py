@@ -13,6 +13,7 @@ from mcmc4qec.faststep import make_faststep
 from mcmc4qec.kernels import OBF, Zanella, ClusterExchange, _neighbors
 from mcmc4qec.kernels import StabilizerFlip
 from mcmc4qec.decode_cache import CachedDecoder, FailureEvaluator
+from mcmc4qec.adapters import DecoderAdapter
 
 
 def case(kind):
@@ -36,6 +37,16 @@ def test_z_distribution_and_mh_probability_for_every_neighbor(kind):
     stepper = make_faststep(problem, p)
     reference = Zanella(use_fastpath=False)
     assert stepper is not None
+
+    class ForcedChoice:
+        def __init__(self, index):
+            self.index = index
+
+        def choice(self, count, *, p):
+            assert count == len(p)
+            assert p.sum() == pytest.approx(1)
+            return self.index
+
     for labels in itertools.product(*(range(a) for a in problem.alphabets)):
         state = np.array(labels, dtype=np.uint8)
         stepper.start(state)
@@ -57,6 +68,15 @@ def test_z_distribution_and_mh_probability_for_every_neighbor(kind):
             fast_alpha = min(1, math.exp(delta) * fast_backward / fast_forward)
             ref_alpha = min(1, math.exp(delta) * backward / forward)
             assert fast_alpha == pytest.approx(ref_alpha)
+            forced_candidate, forced_ratio = stepper.propose(
+                state, Zanella(), ForcedChoice(index))
+            assert np.array_equal(forced_candidate, neighbor)
+            assert forced_ratio == pytest.approx(math.log(backward) - math.log(forward),
+                                                 abs=1e-13)
+            forward_flux = math.exp(problem.log_prob(state, p)) * fast_forward * fast_alpha
+            reverse_alpha = min(1, math.exp(-delta) * fast_forward / fast_backward)
+            reverse_flux = math.exp(problem.log_prob(neighbor, p)) * fast_backward * reverse_alpha
+            assert forward_flux == pytest.approx(reverse_flux, abs=1e-14)
         for seed in range(6):
             left, right = np.random.default_rng(seed), np.random.default_rng(seed)
             candidate, ratio = stepper.propose(state, Zanella(), left)
@@ -217,3 +237,169 @@ def test_phenomenological_depolarizing_two_round_history_trajectory():
     fast, reference = run(True), run(False)
     assert np.array_equal(fast.states, reference.states)
     assert fast.acceptance == reference.acceptance
+
+
+def test_toric_d3_seeded_trajectory_and_rng_calls(monkeypatch):
+    pytest.importorskip("pymatching")
+    from mcmc4qec.codes import make_toric_code
+    from mcmc4qec.decoders import mwpm_decoder
+
+    code = make_toric_code(3)
+    problem = Problem(code.bit_flip_model(), IndependentBitFlip(code.n),
+                      mwpm_decoder(code))
+    original_rng = np.random.default_rng
+
+    class TracedRng:
+        def __init__(self, generator, trace):
+            self.generator, self.trace = generator, trace
+
+        @staticmethod
+        def value(arg):
+            if isinstance(arg, np.ndarray):
+                return (arg.shape, arg.dtype.str, arg.tobytes())
+            return (type(arg).__name__, repr(arg))
+
+        def record(self, method, value, args, kwargs):
+            self.trace.append((method, self.value(value),
+                               tuple(self.value(arg) for arg in args),
+                               tuple((key, self.value(arg)) for key, arg in sorted(kwargs.items()))))
+
+        def random(self, *args, **kwargs):
+            value = self.generator.random(*args, **kwargs)
+            self.record("random", value, args, kwargs)
+            return value
+
+        def integers(self, *args, **kwargs):
+            value = self.generator.integers(*args, **kwargs)
+            self.record("integers", value, args, kwargs)
+            return value
+
+        def choice(self, *args, **kwargs):
+            value = self.generator.choice(*args, **kwargs)
+            self.record("choice", value, args, kwargs)
+            return value
+
+    def run(enabled, samples=24):
+        trace = []
+        with monkeypatch.context() as patch:
+            patch.setattr(np.random, "default_rng",
+                          lambda seed: TracedRng(original_rng(seed), trace))
+            result = sample_faulty(problem, .1, initial_state=code.lx[0], seed=3201,
+                config=SamplingConfig(samples=samples, burn_in=0, kernels=KernelConfig(
+                    zanella=.7, cluster=.3, cluster_k=2, lazy=.05,
+                    zanella_fastpath=enabled)))
+        return result, trace
+
+    def assert_trace_equal(left, right):
+        assert len(left) == len(right)
+        for a, b in zip(left, right):
+            assert a[:3] == b[:3]
+            assert len(a[3]) == len(b[3])
+            for (name_a, value_a), (name_b, value_b) in zip(a[3], b[3]):
+                assert name_a == name_b
+                if name_a == "p":
+                    assert value_a[:2] == value_b[:2]
+                    pa = np.frombuffer(value_a[2], dtype=np.dtype(value_a[1]))
+                    pb = np.frombuffer(value_b[2], dtype=np.dtype(value_b[1]))
+                    assert np.allclose(pa, pb, rtol=0, atol=1e-14)
+                else:
+                    assert value_a == value_b
+
+    fast, fast_trace = run(True)
+    reference, reference_trace = run(False)
+    assert np.array_equal(fast.states, reference.states)
+    assert fast.acceptance == reference.acceptance
+    assert_trace_equal(fast_trace, reference_trace)
+    # Prefix runs expose each transition's kernel, lazy event and acceptance.
+    previous_fast = previous_reference = None
+    for length in range(1, 25):
+        fast_prefix, fast_calls = run(True, length)
+        reference_prefix, reference_calls = run(False, length)
+        assert np.array_equal(fast_prefix.states, reference_prefix.states)
+        assert_trace_equal(fast_calls, reference_calls)
+        if previous_fast is not None:
+            def delta(result, previous):
+                return {name: tuple(result.acceptance[name][field] -
+                                    previous.acceptance[name][field]
+                                    for field in ("proposed", "accepted", "moved"))
+                        for name in result.acceptance}
+            assert delta(fast_prefix, previous_fast) == delta(reference_prefix, previous_reference)
+        previous_fast, previous_reference = fast_prefix, reference_prefix
+
+
+def test_faststep_cache_hit_still_checks_prediction_shape():
+    problem, p = case("bit")
+    decoder = CachedDecoder(problem.decoder)
+    problem.decoder = decoder
+    stepper = make_faststep(problem, p)
+    state = np.array([1, 0], dtype=np.uint8)
+    stepper.start(state)
+    syndrome = problem.model.syndrome(state)
+    decoder.predict(syndrome)
+    key = next(iter(decoder.lookup))
+    decoder.lookup[key] = np.zeros(2, dtype=np.uint8)
+    with pytest.raises(ValueError, match="dimensions differ"):
+        stepper.attempt(state, problem.log_prob(state, p), syndrome,
+                        ClusterExchange(2), np.random.default_rng(19),
+                        {"accepted": 0, "moved": 0})
+
+
+def test_cached_decoder_copy_and_miss_validation():
+    problem, _ = case("bit")
+    cache = CachedDecoder(problem.decoder)
+    syndrome = np.zeros(1, dtype=np.uint8)
+    first = cache.predict(syndrome)
+    first[:] = 1
+    assert np.array_equal(cache.predict(syndrome), np.zeros(1, dtype=np.uint8))
+    class RawDecoder:
+        def __init__(self, output):
+            self.output = output
+
+        def predict(self, syndrome):
+            return self.output
+
+        def metadata(self):
+            return {"identifier": "raw"}
+
+    problem.decoder = RawDecoder([2])
+    with pytest.raises(ValueError, match="binary"):
+        CachedDecoder(problem.decoder).predict(syndrome)
+    problem.decoder = RawDecoder([[0]])
+    with pytest.raises(ValueError, match="dimension"):
+        CachedDecoder(problem.decoder).predict(syndrome)
+
+    class RawEngine:
+        def decode(self, syndrome):
+            return [2]
+
+    adapter = DecoderAdapter(RawEngine(), output_kind="observable", identifier="bad")
+    with pytest.raises(ValueError, match="binary"):
+        CachedDecoder(adapter).predict(syndrome)
+
+
+def test_at_most_one_distribution_normalization_per_step():
+    problem, p = case("bit")
+    state = np.array([1, 0], dtype=np.uint8)
+    for kernel in (OBF(), Zanella(), ClusterExchange(1), StabilizerFlip()):
+        stepper = make_faststep(problem, p)
+        if kernel.name == "stabilizer":
+            stepper.stabilizers = kernel._rows(problem)
+        calls = []
+        original = stepper._normalize
+
+        def traced(logs):
+            calls.append(1)
+            return original(logs)
+
+        stepper._normalize = traced
+        stepper.start(state)
+        assert len(calls) == 1
+        current = state.copy()
+        current_log = problem.log_prob(current, p)
+        syndrome = problem.model.syndrome(current)
+        for seed in range(12):
+            before = len(calls)
+            current, current_log, syndrome = stepper.attempt(
+                current, current_log, syndrome, kernel,
+                np.random.default_rng(seed), {"accepted": 0, "moved": 0})
+            assert len(calls) - before <= 1
