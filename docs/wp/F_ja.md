@@ -42,7 +42,7 @@ BARの区間は混合とblock長を仮定し、診断が収束、エルゴード
 Steaneの被覆は有限標本とseedに依存するので全seedの保証ではなく、各rungの真偽と合計を例が表示する。
 探索時の `--seed 2` ではSteaneのBAR区間は既定・quickとも3/3でexactを含んだが、この結果を主記録の代わりにはしない。
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_examples_real.py -q` は11 passed、15.27秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_examples_real.py -q` は11 passed、15.27秒だった。
 このテストは10例を `sys.executable` の子processでquick実行し、pytestがimportした同じ `mcmc4qec` の親ディレクトリを子processの `PYTHONPATH` に設定して、終了値、最終SUMMARY key集合、保存JSONを確認する。
 追加の拒否試験は環境指定の研究root配下を `--out` にした場合に失敗し、出力先が作られないことを確認する。
 全suite、installed wheel、CIはこのWPで未実施であり、統合担当が検証する。

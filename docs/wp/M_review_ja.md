@@ -34,6 +34,6 @@ toric d=3 では `minimum_weight_initial_state` と `maximum_weight_initial_stat
 
 ## 実行した確認
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_bar_coverage.py tests/test_estimation.py -q` は 12 passed、14.24 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_bar_coverage.py tests/test_estimation.py -q` は 12 passed、14.24 秒だった。
 最終 script の `samples_short --seeds 1 --truth-file <baseline_summary.csv> --trust-truth-file` は 5.02 秒で終了し、block 8 と既存 CSV と同じ seed 2026 の区間幅 0.06468969173676575 を出した。
 元の baseline 20 seed や全 suite はこのレビューでは再実行しておらず、既存 CSV と WP 完了メモを照合した。

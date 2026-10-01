@@ -13,7 +13,7 @@ ldpc 2.4.1 は Windows で nullity より大きい OSD order により native he
 
 ## 実行した検証
 
-以下の Python 実行は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` を使用し、研究側を import する場合は `PYTHONDONTWRITEBYTECODE=1` を設定した。
+以下の Python 実行は `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe` を使用し、研究側を import する場合は `PYTHONDONTWRITEBYTECODE=1` を設定した。
 live研究decoder比較と出力先保護の追加前の `python -m pytest tests/test_codes.py tests/test_crossval_research.py tests/test_decoders.py -q` は optional 環境で 66 passed、39.65 秒だった。
 同じ追加前のコマンドを `C:/dev/mcmc4qec/.venv-dev2-core/Scripts/python.exe` で実行すると 40 passed、26 skipped、0.57 秒だった。
 BP-OSD guard の最終変更前に実行した `python -m pytest tests -q` は 201 passed、271.25 秒であり、この結果を最終変更後の全 suite 合格とは扱わない。

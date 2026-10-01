@@ -21,13 +21,13 @@ failure 評価では `BinaryLinearModel` と `DepolarizingModel` の単一座標
 
 ## 実行した検証
 
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_fastpath.py -q` はレビュー修正後に 13 件成功し、1.17 秒だった。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_fastpath.py -q` はレビュー修正後に 13 件成功し、1.17 秒だった。
 小規模の bit-flip、depolarising、phenomenological の全状態・全近傍で高速経路と参照経路の提案確率と MH 受理確率を比較した。
 同じ seed の bit-flip、depolarising、phenomenological の各 chain 200 標本では状態軌道と受理統計が完全に一致した。
 派生 noise の参照経路への戻り、ゼロ support、cache 方針、syndrome 差分と全面計算の一致も確認した。
 レビューで decoder の不正な小数出力が cache 格納時の先行 cast によって通る問題を発見し、格納前に厳密な binary 検証を行うよう修正して回帰テストを加えた。
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests -q` はレビュー修正後に 169 件成功し、30.46 秒だった。
-`$env:PYTHONDONTWRITEBYTECODE='1'; C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` は最終コードで 15.54 秒で完了した。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests -q` はレビュー修正後に 169 件成功し、30.46 秒だった。
+`$env:PYTHONDONTWRITEBYTECODE='1'; %USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` は最終コードで 15.54 秒で完了した。
 ベンチマーク詳細と 2 倍未達の profile は [性能記録](../performance_ja.md) に記載した。
 `git -C C:\dev\RIMC status --short` は出力なしで、研究 repo は変更していない。
 

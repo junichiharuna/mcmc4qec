@@ -18,7 +18,7 @@
 
 ## 独立に確認した結果
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py tests/test_circuit_pipeline.py tests/test_fastpath.py -q` は 24 passed、37.08 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py tests/test_circuit_pipeline.py tests/test_fastpath.py -q` は 24 passed、37.08 秒だった。
 repetition 64 状態では OBF、参照 Zanella、`PhysicalFaultProposal` の提案行和の最大誤差はそれぞれ 0、`2.22e-16`、0 だった。
 同じ 64 状態の全分岐で `propose` の候補に対する `probability` は正で、返された対数提案比との最大誤差は OBF 0、参照 Zanella `4.44e-16`、fastpath Zanella `4.44e-16`、`circuit_single` 0 だった。
 OBF 0.3 と Zanella 0.7 を成分ごとに MH 受理した失敗集合の遷移行列では、行和の最大誤差は `2.22e-16`、詳細釣合い流量の最大差は `1.09e-19` だった。

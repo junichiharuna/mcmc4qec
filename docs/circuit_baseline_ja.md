@@ -53,11 +53,11 @@ decoder は DEM の graphlike 分解を用いる近似を含み得るため、�
 
 ## 実行した検証
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py -q` は 10 passed、0.32 秒だった。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_pipeline.py -q` は 5 passed、3.39 秒だった。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_proposal.py -q` は 3 passed、0.25 秒だった。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_surface.py -q` は 2 passed、20.64 秒だった。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q` は 20 passed、25.53 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py -q` は 10 passed、0.32 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_pipeline.py -q` は 5 passed、3.39 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_proposal.py -q` は 3 passed、0.25 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_surface.py -q` は 2 passed、20.64 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q` は 20 passed、25.53 秒だった。
 全 suite の旧版 168 passed、45.11 秒という結果は第1回レビューへの修正前のものである。
 修正後の全 suite は約 296 秒で 5 分の上限に近づいたため、完走前に停止した。
 全 suite の最終合否は未確認であり、B の高速経路を統合した main で再検証する。
@@ -111,7 +111,7 @@ Z 0.7 / OBF 0.3 の 300 標本、burn-in 100 の chain では `E[w|faulty]=9.440
 | Zanella | 52.63 | 0.6600 |
 | Z 0.7 / OBF 0.3 | 63.23 | 0.6467 |
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bench_circuit_step.py --steps 150` を WP-N 統合後に再実行した値である。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bench_circuit_step.py --steps 150` を WP-N 統合後に再実行した値である。
 共通の supported faulty 初期状態は 6 試行、0.056 秒で得られ、その探索時間を表の step/s から除いた。
 各 kernel の `sample_faulty` 呼び出し時間には構成、provenance、診断を含むため、純粋な一ステップ計算量だけの比較ではない。
 受理率と step/s は異なる seed と短い chain の観測値であり、混合品質や論理誤り率の優劣を示さない。

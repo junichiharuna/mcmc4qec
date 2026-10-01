@@ -13,8 +13,8 @@
 
 ## 独立検証
 
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_fastpath.py -q` は最終修正後 13 件成功した。
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests -q` は最終修正後 169 件成功した。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_fastpath.py -q` は最終修正後 13 件成功した。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests -q` は最終修正後 169 件成功した。
 `output/wp_b_review_probe.py` は bit-flip の 4 状態、depolarising の 16 状態、phenomenological の 8 状態を、ゼロ support を含む複数の確率で全列挙した。
 提案分布の高速経路と参照経路の最大絶対差は `1.11e-16`、各分布の正規化誤差は `1e-14` 未満、failure 集合内の詳細釣合いの最大絶対差は `0` だった。
 独自 failure predicate `bool(state[0])` を使い、OBF 0.2 / Z 0.5 / H 0.3、`cluster_k=1`、`cache_cap=1`、100 標本、同一 seed で fastpath 有無と cache 有無の 4 構成を比較したところ、3 種のノイズすべてで状態軌道と受理統計が一致した。

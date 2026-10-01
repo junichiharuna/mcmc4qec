@@ -69,11 +69,14 @@ def test_invalid_input_stops_before_sampling(name, inject, expected, tmp_path):
 
 
 @pytest.mark.parametrize("name", KEYS)
-def test_research_output_is_rejected(name):
+def test_research_output_is_rejected(name, tmp_path):
     if name == "byo_stim_dem":
         pytest.importorskip("stim")
         pytest.importorskip("pymatching")
-    result = run_template(name, Path("C:/dev/RIMC/template-output"))
+    research = tmp_path / "read-only-research"
+    research.mkdir()
+    result = run_template(name, research / "template-output",
+                          {"RESEARCH_ROOT": str(research)})
     assert result.returncode != 0
     assert "read-only research repository" in result.stderr
     assert "SUMMARY " not in result.stdout

@@ -33,7 +33,7 @@
 quick の `regenerate.py` プロセス全体は20.18秒だった。
 
 `C:/dev/mcmc4qec/.venv-dev3-optional/Scripts/python.exe -m pytest --override-ini pythonpath= tests/test_notebooks.py -q` は最終版の dev3 installed wheel mode で4 passed、8.06秒だった。
-最終変更前の `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_notebooks.py -q` は source mode で4 passed、15.07秒だった。
+最終変更前の `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_notebooks.py -q` は source mode で4 passed、15.07秒だった。
 最終変更後の source mode はメインの統合 suite で確認する。
 4冊それぞれの実行済み出力に `image/png` が1個あることを確認した。
 03 ではランダム論理セクター初期状態を固定 root seed から派生した最大64個の seed から選び、最小・最大状態と異なることを実行時に検査した。

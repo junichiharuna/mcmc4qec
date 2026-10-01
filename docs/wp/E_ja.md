@@ -19,9 +19,9 @@ chain 内分散を使う研究論文の一次判定は、別の参考値 `within
 
 ## 実行した検証
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_initial_states.py tests/test_convergence.py -q` は 12 passed、2.09 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_initial_states.py tests/test_convergence.py -q` は 12 passed、2.09 秒だった。
 同じコマンドの再実行は 12 passed、0.51 秒だった。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 168 passed、57.40 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 168 passed、57.40 秒だった。
 第1回レビュー対応後の同じ全 suite は 177 passed、192.47 秒で、全 suite 5 分以内の制約を満たした。
 MILP の整数最適証明を強化した後の focused tests は 16 passed、1.29 秒だった。
 二盆地テストの direct MC 参照分散を定常混合分布の理論値 6.5 に揃えた後の focused tests は 16 passed、1.92 秒だった。

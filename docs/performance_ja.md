@@ -1,7 +1,7 @@
 # WP-B 性能比較
 
 2026-09-30 に Windows、Python 3.11.9、NumPy 2.4.6、PyMatching 2.4.0、ldpc 2.4.1 で実測した。
-コマンドは `$env:PYTHONDONTWRITEBYTECODE='1'; C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` である。
+コマンドは `$env:PYTHONDONTWRITEBYTECODE='1'; %USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` である。
 研究側は `C:\dev\RIMC\src` を `sys.path` に加えて読み取り専用 import し、`run_rimc_mixed` を `p_zanella=0.7, p_cluster=0.3, cluster_k=2, n_replicas=1, steps_per_swap=10` で実行した。
 ライブラリ側は `KernelConfig(zanella=0.7, cluster=0.3, cluster_k=2, lazy=0)` とし、両者とも p=0.01、開始状態 `lx[0]`、10000 ステップとした。
 toric では双方 PyMatching を、BB72 では双方同じ引数の BP-OSD を使用した。
@@ -25,7 +25,7 @@ toric d=7 でも `Problem.state` が 0.300 秒、`categorical` が 0.263 秒で�
 
 ## WP-N 専用ステップの計測（2026-10-01）
 
-Windows の Python 3.11 で `$env:PYTHONDONTWRITEBYTECODE='1'; C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` を実行した。
+Windows の Python 3.11 で `$env:PYTHONDONTWRITEBYTECODE='1'; %USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` を実行した。
 研究側 `A:/dev/RIMC/src` は読み取り専用で import し、開始状態、p=0.01、Z/H 比、cluster_k、decoder、cache 設定は上記と同じである。
 `bench_step.py` の時間は decoder 構築を除き、ライブラリ側には診断と Result 構築が入る。
 

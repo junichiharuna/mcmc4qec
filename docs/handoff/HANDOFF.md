@@ -11,8 +11,8 @@
 ## パスと取得済み成果物
 
 - ホスト: `JH-HOMEPC`、シェル: PowerShell 7。
-- 作業ルート: `C:\Users\user\Documents\Codex\2026-09-30\task`
-- 参照用独立 clone: `C:\Users\user\Documents\Codex\2026-09-30\task\research-source`
+- 作業ルート: `%USERPROFILE%\Documents\Codex\2026-09-30\task`
+- 参照用独立 clone: `%USERPROFILE%\Documents\Codex\2026-09-30\task\research-source`
 - 仕様書: `spec/RIMC_ライブラリ仕様書_v0.1.md`。**ファイル名は v0.1 だが本文は 2026年9月29日版 v0.2**。全文を読み取り済み。30,646 bytes。
 - 仕様書 SHA256: `E94731DFCC25AFB44DC5F9E3A30080B5618E52459DBDE37AB4917F8418EFE66B`
 - Library 識別情報: `spec/library-identity.json`。Library ID `libfile_3d013a24a82c8191b018b5ddc0e61c52`、backing file ID `file_000000005cf48230a3bd5f335e953cec`、取得時 version `1`。メタデータは JSON に保存。OS 拡張属性の適用は未確認。
@@ -28,7 +28,7 @@
 - 中断時 `git status --porcelain=v1` の変更出力なし。既存研究チェックアウトや未コミット変更には触れていない。この作業で作った独立 clone も未変更。
 - 作業ルート自体は Git リポジトリとして初期化していない。次の実装は参照 clone と別のパッケージディレクトリで行う。
 - `research-source/AGENTS.md` を読了。軽量ローカル計算のみ、日本語応答、ユーザー指示なしの commit/push 禁止。文書内の研究上の主張は独立検証結果とは扱わない。必要に応じて再読する。
-- 別の `.agents/skills` は発見していない。ユーザーホーム全体の列挙はアクセス拒否、`C:\Users\user\.agents` は存在しなかった。
+- 別の `.agents/skills` は発見していない。ユーザーホーム全体の列挙はアクセス拒否、`%USERPROFILE%\.agents` は存在しなかった。
 - ローカルメモリは読んでおらず変更もしていない。
 - 元リポジトリに LICENSE がないとの仕様記載がある。ユーザー自身のローカル実装として進める依頼だが、ライセンスを代理で選ばない。第三者コードの権利は公開前に確認する。
 
@@ -37,7 +37,7 @@
 Python の絶対パス:
 
 ```text
-C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe
+%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe
 ```
 
 Python 3.11.9。中断時に installed metadata を読み取った結果:
@@ -61,7 +61,7 @@ Git: `C:\Program Files\Git\cmd\git.exe`、2.53.0.windows.2。clone を所有す�
 
 ```powershell
 & 'C:\Program Files\Git\cmd\git.exe' `
-  -c safe.directory=C:/Users/user/Documents/Codex/2026-09-30/task/research-source `
+  -c safe.directory=%USERPROFILE%/Documents/Codex/2026-09-30/task/research-source `
   -C research-source status --porcelain=v1
 ```
 

@@ -27,7 +27,7 @@ K・N・L・M 統合後の rebase を行い、`A:\dev\mcmc4qec\.venv-dev4-source
 不正なスカラー確率引数が `Problem.log_prob` と三つのサンプリング関数で検出されることも確認した。
 型検査用のカスタムノイズ例は Bernoulli の `sample` と正規化された `log_prob` を組にし、NumPy の真偽値を返す wrapper と直接実装した failure predicate も利用者側 mypy で確認した。
 `PhysicalFaultProposal.propose` の戻り値 `Proposal`、Stim DEM ファクトリの戻り値クラス、新しい `FastStepper` も公開署名検査の対象に加えた。
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_typing.py -q` は mypy 不在時に 1 passed / 2 skipped であり、公開署名を常に検査できた。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_typing.py -q` は mypy 不在時に 1 passed / 2 skipped であり、公開署名を常に検査できた。
 同じ Python 3.11 の `-m pytest tests -q` は初回注釈後に 311 passed / 6 skipped、117.31 秒だった。
 利用者コード検査を追加した後の `-m pytest tests/test_public_api.py tests/test_independent.py tests/test_pipeline.py tests/test_typing.py -q` は 20 passed / 2 skipped、24.57 秒だった。
 最終 rebase 後の `-m pytest tests/test_phase_flip.py tests/test_faststep.py tests/test_circuit_kernels.py tests/test_typing.py -q` は 41 passed / 2 skipped、33.75 秒だった。

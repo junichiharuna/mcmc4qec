@@ -23,8 +23,8 @@ Hamming HGP の `2^58` 状態と asymmetric 3×5 の `2^30` 状態の exact は�
 
 ## 実行した検証
 
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_phase_flip.py tests/test_decoders.py tests/test_noise_models.py tests/test_fastpath.py tests/test_initial_states.py tests/test_public_api.py -q --tb=short` は `96 passed in 20.78s` だった。
-`RIMC_RESEARCH_ROOT=A:\dev\RIMC` と `PYTHONDONTWRITEBYTECODE=1` を設定した `C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_crossval_research.py -q --tb=short` は `20 passed in 1.72s` だった。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_phase_flip.py tests/test_decoders.py tests/test_noise_models.py tests/test_fastpath.py tests/test_initial_states.py tests/test_public_api.py -q --tb=short` は `96 passed in 20.78s` だった。
+`RIMC_RESEARCH_ROOT=A:\dev\RIMC` と `PYTHONDONTWRITEBYTECODE=1` を設定した `%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_crossval_research.py -q --tb=short` は `20 passed in 1.72s` だった。
 研究リポジトリの `git status --short` は空だった。
 `PYTHONPATH=src` で `examples/phase_flip_asymmetric.py --quick --seed 20261001` を実行すると X `0.312`、Z `0.364`、`exact_available=false`、所要1.87秒だった。
 同じ例を既定試行数と同じ seed で実行すると X `0.364`、Z `0.37566666666666665`、`exact_available=false`、所要3.80秒だった。

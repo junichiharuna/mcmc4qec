@@ -49,8 +49,7 @@ ladder = (0.35, 0.25)
 def output_directory(raw):
     path = Path(raw).expanduser().resolve()
     windows = PureWindowsPath(str(raw))
-    roots = ["C:/dev/RIMC", "A:/dev/RIMC"]
-    roots += [os.environ[key] for key in ("RIMC_RESEARCH_ROOT", "RESEARCH_ROOT")
+    roots = [os.environ[key] for key in ("RIMC_RESEARCH_ROOT", "RESEARCH_ROOT")
               if os.environ.get(key)]
     for raw_root in roots:
         root = PureWindowsPath(raw_root)

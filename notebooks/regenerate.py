@@ -49,7 +49,9 @@ def main() -> None:
         parser.error("--clear cannot be combined with --quick or --out")
     directory = Path(__file__).resolve().parent
     output_directory = args.out.resolve() if args.out else directory
-    research_roots = (Path("C:/dev/RIMC").resolve(), Path("A:/dev/RIMC").resolve())
+    research_roots = tuple(Path(os.environ[name]).resolve()
+                           for name in ("RIMC_RESEARCH_ROOT", "RESEARCH_ROOT")
+                           if os.environ.get(name))
     if any(output_directory == root or output_directory.is_relative_to(root)
            for root in research_roots):
         parser.error("output directory must not be inside the read-only research repository")

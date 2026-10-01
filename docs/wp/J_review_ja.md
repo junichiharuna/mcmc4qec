@@ -26,7 +26,7 @@ exact または失敗を観測した MC anchor、overlap 不足時の `OverlapEr
 
 ## 検証と残件
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_docs_manifest.py -q` は 1 passed、2 failed だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_docs_manifest.py -q` は 1 passed、2 failed だった。
 二つの失敗は他 WP の未統合ファイル 17 個がこの worktree に存在しないためで、存在確認を緩めていないことを確認した。
 `git diff --check main...HEAD` は成功した。
 `test_docs_manifest.py` は実在ファイルとの双方向の一覧照合、相対リンク、英日 Python ブロックの一致を検査しており、依頼書の指定に沿う。

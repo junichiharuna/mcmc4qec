@@ -60,7 +60,7 @@ C の補助調査では中点 MPP と rec 参照補正、全 2d ラウンドか�
 
 ## 検証環境と残る達成条件
 
-指定 Python は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` である。
+指定 Python は `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe` である。
 main に `.venv-dev2-core` と `.venv-dev2-optional` を新設し、前者に NumPy/pytest、後者にそれらと PyMatching/ldpc/bposd/Stim を導入済みである。
 この 2 環境には最終 wheel はまだ install しておらず、Phase 2 の検証は未実施である。
 統合後に dev2 へ version を上げ、wheel を build/install し、`-I -m pytest --override-ini pythonpath= tests -q` と依存に適した examples を両環境で実行する。

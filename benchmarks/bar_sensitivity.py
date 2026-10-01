@@ -44,13 +44,12 @@ def write_csv(path, rows):
 
 def output_dir(value):
     path = Path(value).expanduser().resolve()
-    roots = [Path("C:/dev/RIMC"), Path("A:/dev/RIMC")]
-    roots += [Path(os.environ[name]) for name in ("RIMC_RESEARCH_ROOT", "RESEARCH_ROOT")
+    roots = [Path(os.environ[name]) for name in ("RIMC_RESEARCH_ROOT", "RESEARCH_ROOT")
               if os.environ.get(name)]
     for forbidden in roots:
         root = forbidden.resolve()
         if path == root or root in path.parents:
-            raise ValueError("Refusing to write into the read-only RIMC repository")
+            raise ValueError("Refusing to write into the read-only research repository")
     path.mkdir(parents=True, exist_ok=True)
     return path
 

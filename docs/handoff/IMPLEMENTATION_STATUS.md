@@ -26,14 +26,14 @@ BAR、Stim DEMへ段階的に拡張。現在版は 0.1.0.dev1。全仕様・公�
 
 ## パスと実行
 
-- package: C:/Users/user/Documents/Codex/2026-09-30/task/rimc-library
+- package: %USERPROFILE%/Documents/Codex/2026-09-30/task/rimc-library
 - source: rimc-library/src/rimc/、tests: rimc-library/tests/
 - current wheel: rimc-library/dist/rimc-0.1.0.dev1-py3-none-any.whl
 - 最初の到達点のwheel: rimc-library/dist/rimc-0.1.0.dev0-py3-none-any.whl
 - core-only installed environment: rimc-library/.venv-core/
 - optional-decoder installed environment: rimc-library/.venv-decoders/
 - spec: 既存 spec/RIMC_ライブラリ仕様書_v0.1.md（本文v0.2）
-- Python: C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe
+- Python: %USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe
 
 source test: python -m pytest tests/ -q
 installed-wheel test: .venv-core/Scripts/python.exe -I -m pytest --override-ini pythonpath= tests/ -q

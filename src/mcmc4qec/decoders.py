@@ -90,7 +90,7 @@ def _bposd(checks, logical_map, p, identifier, kw):
 
 
 def bposd_decoder(code: CSSCode, p: float, *, errors: str="X", **kw: Any) -> DecoderAdapter:
-    """Decode X or Z errors with the RIMC BP-OSD defaults and return logical bits.
+    """Decode X or Z errors with the reference BP-OSD defaults and return logical bits.
 
     ``code`` is a static CSSCode. ``p`` is the fixed decoder channel prior in
     [0, 1], which need not equal a later sampling noise probability. ``kw``

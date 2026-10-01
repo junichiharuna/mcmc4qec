@@ -12,7 +12,7 @@ toric d=5/7 で研究 runner の 2 倍以内という速度目標は未達であ
 
 ## 独立した数値確認
 
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_faststep.py -q` は 15 passed、2.97 秒だった。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_faststep.py -q` は 15 passed、2.97 秒だった。
 一時的な独立検査スクリプトを worktree に置いて実行し、終了後に削除した。
 bit flip、depolarizing、phenomenological の 18 構成で、支持内の局所 Z 分布を参照の全密度評価と比較し、p=0/1 を含む 153 件の分布・複数 chain 軌道・受理統計・decode cache 末尾サイズの検査が通った。
 phenomenological は 1/2 round、history/difference、noisy/perfect final boundary、bit flip/depolarizing data noise を組み合わせた。
@@ -22,7 +22,7 @@ phenomenological は 1/2 round、history/difference、noisy/perfect final bounda
 支持が一点になる p=0/1 では、Z の self-loop と lazy を含む 2 chain の保存状態と受理統計が参照経路と一致した。
 既存の `test_faststep.py` は全 faulty 状態の実 step、同 seed の乱数呼び出し列、Z/H/OBF の混合、custom failure fallback、2 round の depolarizing history を検査しており、上記の追加検査と整合した。
 
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` の再計測は d5 がライブラリ 1.293109 秒・研究 0.415972 秒・3.11 倍、d7 が 1.422528 秒・0.480258 秒・2.96 倍、BB72 が 2.093885 秒・1.168210 秒・1.79 倍だった。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe benchmarks/bench_step.py --steps 10000` の再計測は d5 がライブラリ 1.293109 秒・研究 0.415972 秒・3.11 倍、d7 が 1.422528 秒・0.480258 秒・2.96 倍、BB72 が 2.093885 秒・1.168210 秒・1.79 倍だった。
 比較コードは開始状態 `lx[0]`、p=0.01、Z/H=0.7/0.3、cluster_k=2、1 chain、lazy=0、同じ符号行列と decoder 設定、cache 上限なし、decoder 構築を除く計時で揃えている。
 研究 runner とライブラリは同じ整数 seed でも RNG の初期化経路と実装が異なるので軌道そのものを対にした速度比較ではなく、短時間計測の比は負荷と軌道で変わる。
 文書の 10000 step 表は別の実測値であり、今回の再計測も toric の目標未達と BB72 の目標達成という判断に一致する。

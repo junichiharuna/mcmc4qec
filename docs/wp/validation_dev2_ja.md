@@ -8,7 +8,7 @@
 ## ソース統合
 
 各段階で `python -m pytest tests -q --durations=10 --junitxml=output/<stage>.xml` を実行した。
-Python の絶対パスは `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` である。
+Python の絶対パスは `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe` である。
 
 | 統合段階 | 対象 | 結果 | 秒 | 最長ファイル合計秒 |
 | --- | --- | --- | ---: | ---: |

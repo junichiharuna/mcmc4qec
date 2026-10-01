@@ -29,7 +29,7 @@ seed 724、p=0.3、3000 retained states では exact `E[w|faulty]=2.125`、chain
 | `python examples/phase_flip_asymmetric.py --quick --seed 20261001` | 成功、CSV・PNG・summary.json・SUMMARY出力 | 1.76秒 |
 | `python examples/phase_flip_asymmetric.py --seed 20261001` | 成功、CSV・PNG・summary.json・SUMMARY出力 | 5.01秒 |
 
-ここで `python` はすべて `C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe` の絶対パスを使用し、研究比較の2コマンドには PowerShell の `$env:RIMC_RESEARCH_ROOT='A:\dev\RIMC'` と `$env:PYTHONDONTWRITEBYTECODE='1'` を設定し、例の source 実行時は `PYTHONPATH=src` を設定した。
+ここで `python` はすべて `%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe` の絶対パスを使用し、研究比較の2コマンドには PowerShell の `$env:RIMC_RESEARCH_ROOT='A:\dev\RIMC'` と `$env:PYTHONDONTWRITEBYTECODE='1'` を設定し、例の source 実行時は `PYTHONPATH=src` を設定した。
 例の quick は250 independent trials、既定は3000 independent trials を各 sector で実施する。
 quick の `P_L(X)=0.312` と `P_L(Z)=0.364`、既定の `P_L(X)=0.364` と `P_L(Z)=0.37566666666666665` は有限標本値で、両方とも95% Wilson区間が重なる。
 3×5の状態数は `2^30=1,073,741,824` なので例では exact を実行せず、`exact_available=false` と記録する。

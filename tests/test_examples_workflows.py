@@ -93,22 +93,6 @@ def test_plot_fallback_keeps_csv(script, tmp_path):
     assert 'matplotlib unavailable; PNG omitted' in output
 
 
-def test_research_repository_is_rejected():
-    pytest.importorskip('pymatching')
-    pytest.importorskip('ldpc')
-    pytest.importorskip('bposd')
-    package_parent = Path(mcmc4qec.__file__).resolve().parent.parent
-    env = os.environ.copy()
-    env['PYTHONPATH'] = str(package_parent)
-    completed = subprocess.run(
-        [sys.executable, str(WORKFLOWS / 'pl_curve.py'), '--quick',
-         '--out', 'C:/dev/RIMC/mcmc4qec_example_forbidden'],
-        cwd=ROOT, env=env, capture_output=True, text=True, timeout=10,
-    )
-    assert completed.returncode != 0
-    assert 'Refusing to write into the read-only RIMC repository' in completed.stderr
-
-
 @pytest.mark.parametrize('variable', ('RIMC_RESEARCH_ROOT', 'RESEARCH_ROOT'))
 def test_configured_research_root_is_rejected(variable, tmp_path):
     package_parent = Path(mcmc4qec.__file__).resolve().parent.parent
@@ -121,7 +105,7 @@ def test_configured_research_root_is_rejected(variable, tmp_path):
         cwd=ROOT, env=env, capture_output=True, text=True, timeout=10,
     )
     assert completed.returncode != 0
-    assert 'Refusing to write into the read-only RIMC repository' in completed.stderr
+    assert 'Refusing to write into the read-only research repository' in completed.stderr
     assert not (tmp_path / 'research').exists()
 
 

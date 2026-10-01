@@ -1,7 +1,8 @@
 # Contributing
 
-This package is a pre-alpha development prototype. The license, public
-repository, and release process have not been finalized.
+This package is a pre-alpha development prototype released under the MIT
+License (see `LICENSE`). The public repository and release process have not
+been finalized.
 
 ## Local checks
 
@@ -59,8 +60,8 @@ planned experiments as successful.
 
 - Confirm the final distribution destination and inspect the completed
   three-noise acceptance evidence, including Y correlations and time boundaries.
-- Have the project owner select a license and review third-party rights and
-  dependency compatibility. No license is selected by this prototype.
+- Review third-party rights and dependency compatibility with the MIT License
+  (pymatching and stim are Apache-2.0, ldpc is MIT).
 - Review `CITATION.cff`, whose author was supplied by the project owner and
   whose DOI and release metadata remain unconfirmed.
 - Review package contents, documentation, optional dependency versions, and

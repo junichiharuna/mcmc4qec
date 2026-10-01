@@ -24,7 +24,7 @@ location ごとの明示値を受ける API と、同一 channel で異なる `q
 
 ## 確認した範囲
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_proposal.py tests/test_circuit_surface.py tests/test_circuit_pipeline.py -q` は `13 passed in 90.97s` だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_proposal.py tests/test_circuit_surface.py tests/test_circuit_pipeline.py -q` は `13 passed in 90.97s` だった。
 実行時は `PYTHONDONTWRITEBYTECODE=1` と `PYTHONPATH=src` を指定した。
 4 ファイルの合計時間のみ測定し、各ファイルが 60 秒以内かは未測定である。
 小回路では非一様 `q` の追加、削除、置換の順逆提案確率と失敗集合内の詳細釣合いをテストが確認している。

@@ -124,6 +124,6 @@ DEM サンプリングはすべての物理回路ノイズモデルとの同等�
 回路 baseline は公開図表の再現を示すものではありません。
 
 関連論文は in preparation です。
-ソフトウェア引用情報の著者名 `junichi haruna` は所有者の指定で確定していますが、所属、DOI、公開日、ライセンス、公開の詳細は未確定です。
+ソフトウェア引用情報の著者名 `junichi haruna` は所有者の指定で確定していますが、所属、DOI、公開日、公開の詳細は未確定です。
 [CITATION.cff](CITATION.cff) と [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
-ライセンスは未選択で、このリポジトリは公開パッケージとして publish されていません。
+コードは [MIT License](LICENSE) で配布しますが、このリポジトリは公開パッケージとして publish されていません。

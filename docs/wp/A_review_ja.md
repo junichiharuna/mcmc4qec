@@ -32,7 +32,7 @@ optional 依存なしの対象テストは担当実測で `40 passed, 26 skipped
 
 ## このレビューでの実行
 
-Python は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` を使い、AST による docstring 存在検査のみ実行した結果は `15 15 []` だった。
+Python は `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe` を使い、AST による docstring 存在検査のみ実行した結果は `15 15 []` だった。
 全 suite と約40秒の担当テストは並列実行枠を避けるためこのレビューでは再実行しておらず、担当の `66 passed, 39.65 秒` および `40 passed, 26 skipped` を独立実測とは扱わない。
 
 ## 第2回最終レビュー（2026-09-30）

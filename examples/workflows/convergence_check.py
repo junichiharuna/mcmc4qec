@@ -32,13 +32,12 @@ def main():
     parser.add_argument('--out', default=str(Path(tempfile.gettempdir()) / 'mcmc4qec' / 'convergence_check'))
     args = parser.parse_args()
     out = Path(args.out).expanduser().resolve()
-    roots = [Path('C:/dev/RIMC'), Path('A:/dev/RIMC')]
-    roots += [Path(os.environ[name]) for name in ('RIMC_RESEARCH_ROOT', 'RESEARCH_ROOT')
+    roots = [Path(os.environ[name]) for name in ('RIMC_RESEARCH_ROOT', 'RESEARCH_ROOT')
               if os.environ.get(name)]
     for forbidden in roots:
         root = forbidden.resolve()
         if out == root or root in out.parents:
-            raise ValueError('Refusing to write into the read-only RIMC repository')
+            raise ValueError('Refusing to write into the read-only research repository')
     out.mkdir(parents=True, exist_ok=True)
     print(f'Output: {out}')
     code = make_asymmetric_toric_code(3, 5)

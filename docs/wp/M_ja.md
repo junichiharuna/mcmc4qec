@@ -11,14 +11,14 @@
 
 ## 実行した検証
 
-全て `A:/dev/mcmc4qec-wt/m` で、`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` を使用した。
+全て `A:/dev/mcmc4qec-wt/m` で、`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe` を使用した。
 `PYTHONPATH=src` を設定して `python examples/workflows/pl_curve.py --out <一時ディレクトリ>` を既定 seed 2026 で実行し、d=3、p=0.22 の BAR 0.5344713861、区間 [0.5055163266, 0.5650849390] と独立 MC 0.5991666667、区間 [0.5711650330, 0.6265354185] の非交差を再現した。
 同じ問題の `exact` 全列挙は p=0.30、0.26、0.22、0.10 で順に 0.7076851365、0.6676781708、0.6026625647、0.2261084104 を返し、別の p=0.50 の全列挙は 0.75 を返した。
 既定例の単発比較では真値を含むのは独立 MC の区間であり、BAR 区間は外れる。
 `python benchmarks/bar_sensitivity.py --scenario baseline --seeds 20 --out <一時ディレクトリ>` は 349.11 秒で、BAR exact 被覆 13/20、独立 MC 20/20、区間非交差 2/20、平均 BAR 幅 0.06257 だった。
 `--scenario` を `samples_short`、`samples_long`、`burn_zero`、`burn_long`、`block_tenth_iat`、`block_one_iat`、`block_four_iat`、`ladder_fine`、`ladder_coarse`、`initial_min`、`initial_random`、`initial_max`、`anchor_exact` にして各 `--seeds 8` を実行し、元の `baseline_summary.csv` の exact 値を `--truth-file` で再利用した。
 最初の samples 200/1200 の計測は自動 block 長も 6/11 に変わる交絡があったため、元 CSV を一時出力先の `samples_short_default_cube_*` と `samples_long_default_cube_*` に保全し、最終コードで block 8 を固定した同じ先頭 8 seed を再実行した。
-制御した短い保存数の実コマンドは `$env:PYTHONPATH='src'; & 'C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe' benchmarks/bar_sensitivity.py --scenario samples_short --seeds 8 --truth-file "$env:TEMP/mcmc4qec/bar_sensitivity_wp_m/baseline_summary.csv" --trust-truth-file --out "$env:TEMP/mcmc4qec/bar_sensitivity_wp_m"` で、長い保存数は `--scenario samples_long` にだけ置換した。
+制御した短い保存数の実コマンドは `$env:PYTHONPATH='src'; & '%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe' benchmarks/bar_sensitivity.py --scenario samples_short --seeds 8 --truth-file "$env:TEMP/mcmc4qec/bar_sensitivity_wp_m/baseline_summary.csv" --trust-truth-file --out "$env:TEMP/mcmc4qec/bar_sensitivity_wp_m"` で、長い保存数は `--scenario samples_long` にだけ置換した。
 最終コードの `samples_short_auto` と `samples_long_auto` は旧立方根 block 規則の再現用であり、制御した二条件の block 長はともに 8 である。
 `low_p` は `--seeds 8` で p=0.10 を改めて exact 列挙した。
 既定 20 seed の実行が最長の 349.11 秒で、感度 8 seed の各 invocation は全て 186 秒以下だった。

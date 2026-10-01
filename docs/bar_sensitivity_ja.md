@@ -123,7 +123,7 @@ MC anchor と確認用 direct MC の seed は分離し、非 anchor 点の独立
 
 ## 再実行と限界
 
-基準は `PYTHONPATH=src` で `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bar_sensitivity.py --scenario baseline --seeds 20 --out <一時ディレクトリ>` を実行した。
+基準は `PYTHONPATH=src` で `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bar_sensitivity.py --scenario baseline --seeds 20 --out <一時ディレクトリ>` を実行した。
 感度は同じ script の `--scenario` に表の名前を与え、`--seeds 8 --truth-file <baseline_summary.csv> --trust-truth-file` で先行 exact 真値を再利用した。
 保存数だけの比較は `--scenario samples_short` と `--scenario samples_long` を使い、benchmark が `bootstrap_block_length=8` を明示する。
 最初の参考計測は最終修正前の同名 scenario を `bootstrap_block_length=None` で実行し、元 CSV を一時出力先に `samples_short_default_cube_*` と `samples_long_default_cube_*` として保全した。

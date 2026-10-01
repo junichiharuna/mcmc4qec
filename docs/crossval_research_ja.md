@@ -13,13 +13,13 @@
 ```powershell
 $env:PYTHONDONTWRITEBYTECODE = '1'
 $env:RIMC_RESEARCH_ROOT = 'C:\dev\RIMC'
-& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' -m pytest tests/test_crossval_research.py -q
-& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py decoders --research-root C:\dev\RIMC
-& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py exact --research-root C:\dev\RIMC --output output/wp-a/exact.json
-& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py direct --code toric5 --output output/wp-a/direct-toric5.json
-& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py direct --code bb72 --output output/wp-a/direct-bb72.json
-& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py zh --code toric5 --output output/wp-a/zh-toric5.json
-& 'C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py zh --code bb72 --output output/wp-a/zh-bb72.json
+& '%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe' -m pytest tests/test_crossval_research.py -q
+& '%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py decoders --research-root C:\dev\RIMC
+& '%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py exact --research-root C:\dev\RIMC --output output/wp-a/exact.json
+& '%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py direct --code toric5 --output output/wp-a/direct-toric5.json
+& '%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py direct --code bb72 --output output/wp-a/direct-bb72.json
+& '%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py zh --code toric5 --output output/wp-a/zh-toric5.json
+& '%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe' docs/wp/A_reproduce.py zh --code bb72 --output output/wp-a/zh-bb72.json
 ```
 
 `--output` は指定時だけ全 `Result` JSON を保存し、その際は実在する研究 checkout の指定を必須とし、その内部への出力を拒否する。

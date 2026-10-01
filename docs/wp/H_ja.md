@@ -29,7 +29,7 @@ BARで隣接rungのsupport overlapが観測できない場合は`OverlapError`�
 
 ## 実行した検証
 
-指定の`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe`を使い、`PYTHONPATH`をこのworktreeの`src`に指定して各ファイルを`--seed 7 --out <一時ディレクトリ>`で実行した。
+指定の`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe`を使い、`PYTHONPATH`をこのworktreeの`src`に指定して各ファイルを`--seed 7 --out <一時ディレクトリ>`で実行した。
 下表は外部プロセスの壁時計時間で、全実行のexit codeは0だった。
 
 | テンプレート | `--quick`秒 | 既定秒 |

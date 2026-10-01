@@ -12,7 +12,7 @@
 | 指定 Python 3.11 | `python -m pytest tests -q --junitxml=output/dev4-phase0.xml` | 310 passed / 5 skipped | 119.00 |
 | Python 3.11 source venv（notebook込み） | `python -m pytest tests -q --junitxml=output/dev4-phase0-full.xml` | 314 passed / 4 skipped | 166.23 |
 
-上の Python は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` の絶対パスで実行した。
+上の Python は `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe` の絶対パスで実行した。
 skip は研究 checkout を明示指定していない照合4件と、nbformat/nbclient がないための notebook モジュール全体1件だった。
 前回の314 passed / 4 skippedとの差は notebook4件が収集されなかったためであり、今回の310件だけでは notebook の成功を主張しない。
 指定 Python 3.11 から `--system-site-packages` で `.venv-dev4-source` を作り、nbclient 0.11.0、nbformat 5.11.1、build 1.6.1、mypy 2.3.1 をその隔離環境へ導入した。

@@ -21,7 +21,7 @@
 
 - ライブラリのリポジトリは `C:\dev\mcmc4qec`（研究室 PC）または `A:\dev\mcmc4qec`（自宅 PC、未 clone なら `git clone git@github.com:junichiharuna/mcmc4qec.git`）。以下 `LIB` と書く。
 - 研究リポジトリ RIMC は `C:\dev\RIMC` または `A:\dev\RIMC` にある。以下 `RESEARCH` と書く。**読み取り専用**で、1 ファイルも変更しない。`git status` が clean のまま終わること。
-- Python は 3.11 の絶対パスを使う（`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe`）。`python3` は使わない。
+- Python は 3.11 の絶対パスを使う（`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe`）。`python3` は使わない。
 - 計算は軽いものだけ。1 テストファイルは 60 秒以内、全 suite は 5 分以内、ベンチマークは 1 本 10 分以内。クラスタ投入、巨大 sweep、長時間ジョブはしない。
 - ライセンスの選択と追加、PyPI 等への publish、リポジトリの公開化、著者情報の確定は**しない**。これらは所有者が決める。
 - 日本語文書は 1 文 1 行で書く（文の途中で改行しない）。README と docstring は英語。

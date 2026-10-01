@@ -18,8 +18,8 @@ OBF、H、stabilizer の乱数呼び出しも同じ順序と引数を維持し�
 `sampling.py` は kernel 選択後の専用経路呼び出しを追加し、lazy、kernel 混合、保存 trace、Result の構築は既存経路を使う。
 decode cache は従来の `CachedDecoder` を同じ境界タイミングで通す。
 `test_faststep.py` は全小状態・全近傍の Z 提案と MH 確率、全 faulty 状態での実 attempt と参照 attempt の受理・状態・RNG 状態、同 seed の全 RNG 呼び出し列と Result、支持境界と派生型の fallback、2 round depolarizing phenomenological history を検査した。
-`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_faststep.py -q` は最後の fallback テスト追加後に 15 passed、2.98 秒だった。
-実装差分に対する `C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests -q` は 325 passed / 5 skipped、124.52 秒だった。
+`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_faststep.py -q` は最後の fallback テスト追加後に 15 passed、2.98 秒だった。
+実装差分に対する `%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests -q` は 325 passed / 5 skipped、124.52 秒だった。
 全 suite 後に fallback の受入テストだけを追加し、そのファイル単独の再実行で成功した。
 研究 runner 比較のコマンドと数値、cProfile と残る原因は `docs/performance_ja.md` の WP-N 節に記録した。
 

@@ -27,11 +27,11 @@ rotated surface d=3 の noisy 6 ラウンドの中点に理想 `MPP` を置き�
 
 | 検証 | コマンドと結果 |
 | --- | --- |
-| 回路モデル | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py -q`、10 passed、0.32 秒。 |
-| 回路 pipeline | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_pipeline.py -q`、5 passed、3.39 秒。 |
-| 回路提案 | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_proposal.py -q`、3 passed、0.25 秒。 |
-| surface baseline | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_surface.py -q`、2 passed、20.64 秒。 |
-| 回路4ファイル | `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q`、20 passed、25.53 秒。 |
+| 回路モデル | `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py -q`、10 passed、0.32 秒。 |
+| 回路 pipeline | `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_pipeline.py -q`、5 passed、3.39 秒。 |
+| 回路提案 | `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_proposal.py -q`、3 passed、0.25 秒。 |
+| surface baseline | `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_surface.py -q`、2 passed、20.64 秒。 |
+| 回路4ファイル | `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q`、20 passed、25.53 秒。 |
 | 全 suite | 第1回レビュー修正前は 168 passed、45.11 秒。修正後の全 suite は約 296 秒で 5 分の制約に近づいたため停止し、最終合否は未確認。 |
 | core venv | 修正前の全 suite は 140 passed、15 skipped、235.38 秒だが別 suite との CPU 競合があった。Stim/PyMatching を含まない状態で回路パッケージと sampling の import に成功。 |
 | example | `PYTHONPATH=src` で `examples/circuit_baseline.py` を実行し、500 試行、失敗率 0.0900、Wilson 95% 区間 `[0.067943, 0.118309]` を得た。 |

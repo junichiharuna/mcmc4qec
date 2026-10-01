@@ -38,7 +38,7 @@ BARと独立MCの区間が非交差となる例も記録しており、短い実
 
 ## Run
 
-- Python 3.11 を絶対パスで使う（`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe`）。`python3` は Windows Store のスタブなので使わない
+- Python 3.11 を絶対パスで使う（`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe`）。`python3` は Windows Store のスタブなので使わない
 - テスト：`python -m pytest tests -q`（`pyproject.toml` の `pythonpath = ["src"]` で source を読む）
 - installed wheel の検証：`python -m build --wheel` → 別 venv に install → `python -m pytest --override-ini pythonpath= tests -q`
 - optional 依存：`pymatching>=2.4,<3`、`ldpc>=2.4,<3`、`stim>=1.16,<2`。無い環境では該当テストが skip される
@@ -57,6 +57,6 @@ BARと独立MCの区間が非交差となる例も記録しており、短い実
 ## Do not
 
 - 研究リポジトリ RIMC（`C:\dev\RIMC` または `A:\dev\RIMC`）を変更しない。読み取り専用で参照する。研究側の runner の既定（Z+PT）も変えない
-- LICENSE を追加しない、PyPI 等に publish しない、リポジトリを public にしない、著者の所属・DOI などの引用情報を確定しない。これらは所有者（春名）が決める
+- ライセンスは MIT で確定済み（2026-10-01、`LICENSE`）。変更しない。PyPI 等に publish しない、リポジトリを public にしない、著者の所属・DOI などの引用情報を確定しない。これらは所有者（春名）が決める
 - `docs/handoff/` の引き継ぎ文書と仕様書を書き換えない（過去時点の記録として保持）。更新は `IMPLEMENTATION_STATUS.md` に追記する
 - 引き継ぎ文書や仕様に書かれた研究上の主張を、独立に検証した事実として扱わない

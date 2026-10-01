@@ -28,7 +28,7 @@
 - ライブラリのリポジトリは `C:\dev\mcmc4qec`（研究室 PC）または `A:\dev\mcmc4qec`（自宅 PC）。以下 `LIB` と書く。
 - 研究リポジトリ RIMC は `C:\dev\RIMC` または `A:\dev\RIMC`。以下 `RESEARCH` と書く。**読み取り専用**で、1 ファイルも変更しない。例・notebook・テストが `RESEARCH` に書き込まないこと。
 - 出発点は main `e00738e` 以降（0.1.0.dev2）。全 suite は optional 依存込みで 268 passed / 4 skipped（約 45〜80 秒）、installed wheel の core 環境は 208 passed / 43 skipped。
-- Python は 3.11 の絶対パスを使う（`C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe`）。`python3` は使わない。
+- Python は 3.11 の絶対パスを使う（`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe`）。`python3` は使わない。
 - **`src/mcmc4qec/` は変更しない。** 公開 API も増やさない。例を書く途中でライブラリの不具合や足りない API を見つけたら、再現手順と最小 diff の案を完了メモに書いてメインに委ねる。メインは、テスト付きの小さい修正で済む場合に限りこの依頼の中で直してよく、そうでなければ未対応として最終報告に回す。
 - ライセンスの選択と追加、PyPI 等への publish、リポジトリの公開化、著者の所属・DOI などの引用情報の確定は**しない**。
 - 日本語文書（`README_ja.md` を含む）は 1 文 1 行で書く（文の途中で改行しない）。README（英語）、`examples/README.md`、コード中のコメントと docstring、notebook の説明文は英語。

@@ -19,7 +19,7 @@ Steane例は全128状態から8 syndromeの最小重み訂正を決定的な順�
 
 ## 実行と境界
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_examples_real.py -q` は11 passed、18.70秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_examples_real.py -q` は11 passed、18.70秒だった。
 テストは全10例をquickで子process実行し、最終SUMMARYのkey集合と保存JSONを確認するが、統計的な数値の固定値はassertしない。
 installed dev3 wheelの `steane_exact.py --quick --seed 20260930` を `-I` で再実行し、BAR区間のexact被覆は1/3で、3 rungそれぞれの真偽が表示されることを確認した。
 完了メモの既定2/3、quick1/3と探索seed2での3/3は区別されており、全seedでの被覆保証として書かれていない。
@@ -32,5 +32,5 @@ toric系例に必要なextrasは `matching` と `codes` であり、mainの依�
 `src/mcmc4qec/circuit/model.py` の差分は理想命令の連続区間をprivate属性に保持し、各fault配置の注入時に元のnoise命令位置へfaultを足す変更である。
 公開関数の引数、location列挙、カテゴリ雑音の確率、decoderとfailureの定義は差分で変更されていない。
 重複target、2量子ビットfault、locationの選択を含む80配置の注入順序テストを確認した。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q` は22 passed、9.44秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_model.py tests/test_circuit_pipeline.py tests/test_circuit_proposal.py tests/test_circuit_surface.py -q` は22 passed、9.44秒だった。
 全2588列のH/L一致とquickの12.431秒から1.441秒への短縮はmainの実測記録にあるが、このレビューで独立再計測は未実施である。

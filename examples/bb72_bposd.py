@@ -20,8 +20,7 @@ from mcmc4qec.decoders import bposd_decoder
 
 def output_dir(value):
     path = Path(value).expanduser().resolve()
-    roots = [Path('C:/dev/RIMC'), Path('A:/dev/RIMC')]
-    roots += [Path(os.environ[name]) for name in ('RIMC_RESEARCH_ROOT', 'RESEARCH_ROOT') if os.environ.get(name)]
+    roots = [Path(os.environ[name]) for name in ('RIMC_RESEARCH_ROOT', 'RESEARCH_ROOT') if os.environ.get(name)]
     for root in roots:
         if path == root.resolve() or root.resolve() in path.parents:
             raise ValueError('output directory cannot be inside the research repository')

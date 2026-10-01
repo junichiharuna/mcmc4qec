@@ -14,8 +14,8 @@
 
 ## 受入検証
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py -q -s --durations=10` は 6 passed、26.14 秒で、最長テストは 17.50 秒だった。
-PNG と区間記録の修正後、`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py tests/test_circuit_pipeline.py tests/test_fastpath.py -q` は 24 passed、37.83 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py -q -s --durations=10` は 6 passed、26.14 秒で、最長テストは 17.50 秒だった。
+PNG と区間記録の修正後、`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py tests/test_circuit_pipeline.py tests/test_fastpath.py -q` は 24 passed、37.83 秒だった。
 repetition d=3 の 1 ラウンドの `4^3=64` 配置を使い、OBF、Zanella 参照経路、Z 0.7 / OBF 0.3 の全状態について提案正規化を検査した。
 同じ配置の失敗集合上の全一座標近傍で順向きと逆向きの提案確率および MH 受理を計算し、詳細釣合いを照合した。
 同じ問題の全配置で Zanella fastpath と参照経路の提案分布を `1e-14` の絶対許容差で照合し、同じ seed の混合 sampler の状態列と kernel 別受理集計が完全一致した。
@@ -27,7 +27,7 @@ Z 0.7 / OBF 0.3 の 300 標本と burn-in 100 の chain は `9.440±1.555`、診
 通常近似区間と短い chain の比較に被覆保証はなく、非交差と低い ESS は混合不足などを疑う根拠となるが、どちらの推定値が正しいかは決められない。
 診断は収束・エルゴード性・正しさの証明ではない。
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe examples/circuit_zanella.py --quick` は `PYTHONPATH=src` で成功し、PNG 追加後の再実行で 3.89 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe examples/circuit_zanella.py --quick` は `PYTHONPATH=src` で成功し、PNG 追加後の再実行で 3.89 秒だった。
 同じ既定実行は `PYTHONPATH=src` で成功し、PNG 追加後の再実行で 13.79 秒だった。
 どちらも CSV と Agg backend の PNG および所定キーの `SUMMARY` を出力し、条件付き chain から絶対 `P_L` を推定していない。
 `pymatching` import 後に `sys.modules["matplotlib"]=None` として `runpy` で quick を実行した場合も 3.50 秒で成功し、PNG を省略して CSV と同じキーの `SUMMARY` を出力した。
@@ -52,7 +52,7 @@ WP-N 統合後の同じコマンドは全体 7.92 秒で、共通初期状態の
 受理率は異なる seed の短い chain の観測値である。
 物理 location の提案間で受理率が異なっても、混合品質の優劣を示さない。
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 315 passed、5 skipped、1 failed、153.32 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 315 passed、5 skipped、1 failed、153.32 秒だった。
 唯一の失敗は `tests/test_docs_manifest.py::test_example_index_matches_every_python_file_and_notebook` が新しい `examples/circuit_zanella.py` の `examples/README.md` 行を要求したためである。
 共有 README の更新後の全 suite と installed wheel 検証は未実施であり、メインの統合検証を要する。
 研究リポジトリ `A:/dev/RIMC` の `git status --short` は空で、読み取り専用を保った。
@@ -81,7 +81,7 @@ WP-N の main 統合後の rebase と同一 seed の等価性テストは下記�
 64 状態の全 flat 近傍で OBF と Zanella の `propose` と `probability` の候補・逆順比を照合し、`circuit_single` の全 location・非零ラベル分岐も照合した。
 固定乱数列で実サンプラーに OBF の failure 棄却、Zanella の受理、物理提案の棄却と受理、lazy を通し、保存状態列と kernel 別受理集計を検査した。
 確率 0 のラベル、故障率 0 と 1、zero padding を同時に含む異種 alphabet 小回路では、支持内状態と支持外近傍の fastpath と参照経路を照合した。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py -q -s --durations=10` は rebase 後の補強テストで 9 passed、28.48 秒だった。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_fastpath.py tests/test_faststep.py tests/test_circuit_model.py tests/test_circuit_proposal.py tests/test_circuit_pipeline.py tests/test_circuit_surface.py tests/test_circuit_kernels.py -q` は 59 passed、47.27 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py -q -s --durations=10` は rebase 後の補強テストで 9 passed、28.48 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_fastpath.py tests/test_faststep.py tests/test_circuit_model.py tests/test_circuit_proposal.py tests/test_circuit_pipeline.py tests/test_circuit_surface.py tests/test_circuit_kernels.py -q` は 59 passed、47.27 秒だった。
 対角遷移を failure 棄却量と lazy の和から直接構成する最終修正後の同じコマンドも 59 passed、46.06 秒だった。
 補強後の full suite と installed wheel 検証は未実施であり、メインの共有 manifest 更新後に検証する。

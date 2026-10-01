@@ -16,9 +16,10 @@ import pymatching
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-RESEARCH_ROOT = os.environ.get("MCMC4QEC_RESEARCH")
-RESEARCH = (Path(RESEARCH_ROOT) if RESEARCH_ROOT else
-            next(path for path in (Path("A:/dev/RIMC"), Path("C:/dev/RIMC")) if path.exists())) / "src"
+RESEARCH_ROOT = os.environ.get("MCMC4QEC_RESEARCH") or os.environ.get("RIMC_RESEARCH_ROOT")
+if not RESEARCH_ROOT:
+    sys.exit("set MCMC4QEC_RESEARCH or RIMC_RESEARCH_ROOT to the read-only research checkout")
+RESEARCH = Path(RESEARCH_ROOT) / "src"
 sys.path.insert(0, str(RESEARCH))
 
 from css_code import make_toric_code as research_toric, make_bb_code_72 as research_bb

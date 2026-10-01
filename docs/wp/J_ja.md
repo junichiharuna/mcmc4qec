@@ -22,8 +22,8 @@ ESS、split R-hat、`evaluate_convergence` が証明ではなく、完全な判�
 
 ## 実行した検証
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_docs_manifest.py::test_japanese_python_blocks_match_english_exactly -q` は 1 passed だった。
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_docs_manifest.py -q` は最終実行で 1 passed、2 failed だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_docs_manifest.py::test_japanese_python_blocks_match_english_exactly -q` は 1 passed だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_docs_manifest.py -q` は最終実行で 1 passed、2 failed だった。
 二つの失敗は F/G/H/I の 17 ファイルがこの worktree にまだ存在しないことによる。
 失敗を skip したり、存在検査を緩めたりはしていない。
 `git diff --check` は通過した。

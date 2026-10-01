@@ -12,7 +12,7 @@ CI の core/optional wheel test を Python 3.11 と 3.12 の行列にし、bar �
 
 ## 実行した検証
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 162 passed、33.70 秒だった。
+`%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 162 passed、33.70 秒だった。
 `.venv-cff/Scripts/python.exe -m build --wheel` は `mcmc4qec-0.1.0.dev1-py3-none-any.whl` を作成した。
 別 venv に wheel、pytest、pymatching、ldpc、bposd、stim を install し、`.venv-wheel/Scripts/python.exe -I -m pytest --override-ini pythonpath= tests -q` は 162 passed、42.84 秒だった。
 同じ wheel 環境の `examples/toric_pymatching.py` は toric d=5、p=0.1、direct MC 2000 trials で `P_L=0.2325`、95% Wilson 区間 `(0.2145101595, 0.2515154608)`、条件付き MCMC の平均重み `6.730` と出力した。

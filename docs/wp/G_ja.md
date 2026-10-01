@@ -20,7 +20,7 @@ toric の内点 `0<p<1` は full support なので、単に p の刻みを粗く
 
 ## 実行した検証
 
-Python は `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe` を使用した。
+Python は `%USERPROFILE%/AppData/Local/Programs/Python/Python311/python.exe` を使用した。
 source 実行では `PYTHONPATH=src` を指定し、例の本体には source path 挿入を入れていない。
 `python -m pytest tests/test_examples_workflows.py -q` は 18 passed、38.91 秒だった。
 衝突が起きた seed `0,1,2,3,4,5,7,8,9` について、出力された 3 初期論理セクターが互いに異なることを性質として検査した。

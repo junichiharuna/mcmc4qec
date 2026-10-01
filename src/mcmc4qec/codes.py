@@ -53,7 +53,7 @@ def make_surface_code(d: int) -> CSSCode:
 
 
 def make_asymmetric_toric_code(d1: int, d2: int) -> CSSCode:
-    """Return rectangular toric [[2*d1*d2, 2, min(d1,d2)]] in RIMC order.
+    """Return rectangular toric [[2*d1*d2, 2, min(d1,d2)]] in reference-implementation order.
 
     ``d1`` and ``d2`` are integer side lengths at least two. Returns a CSSCode
     with paired X/Z logical matrices in research HGP order. Raises ValueError
@@ -67,12 +67,12 @@ def make_asymmetric_toric_code(d1: int, d2: int) -> CSSCode:
 
 
 def make_hgp_hamming() -> CSSCode:
-    """Return the research-labeled [[58,16,3]] Hamming HGP code in RIMC order.
+    """Return the research-labeled [[58,16,3]] Hamming HGP code in reference-implementation order.
 
     Returns a CSSCode whose X/Z logical bases have an invertible, nonidentity
     intersection matrix and whose ``logical_basis`` is ``independent``.
     Raises ImportError unless optional ldpc and bposd are installed. The
-    distance label is inherited from RIMC; this factory does not prove its
+    distance label is inherited from the reference implementation; this factory does not prove its
     lower bound. This static code defines no probability or round unit.
     """
     from ldpc.codes import hamming_code
@@ -82,7 +82,7 @@ def make_hgp_hamming() -> CSSCode:
 
 
 def _gf2_row_reduce(matrix):
-    """Return RREF and pivot columns over GF(2), retaining RIMC row order."""
+    """Return RREF and pivot columns over GF(2), retaining reference-implementation row order."""
     a = np.asarray(matrix, dtype=np.uint8).copy()
     rows, cols = a.shape
     pivots = []
@@ -103,7 +103,7 @@ def _gf2_row_reduce(matrix):
 
 
 def _gf2_nullspace(matrix):
-    """Return the RIMC-ordered basis for the GF(2) nullspace."""
+    """Return the reference-ordered basis for the GF(2) nullspace."""
     n = matrix.shape[1]
     rref, pivots = _gf2_row_reduce(matrix)
     free_cols = [col for col in range(n) if col not in set(pivots)]
@@ -116,7 +116,7 @@ def _gf2_nullspace(matrix):
 
 
 def _css_logicals(hx, hz):
-    """Construct the same independent quotient bases as RIMC."""
+    """Construct the same independent quotient bases as the reference implementation."""
     n = hx.shape[1]
     k = n - len(_gf2_row_reduce(hx)[1]) - len(_gf2_row_reduce(hz)[1])
 
@@ -136,11 +136,11 @@ def _css_logicals(hx, hz):
 
 
 def make_bb_code(l: int, m: int, a_terms: tuple[tuple[int, int], ...] | list[tuple[int, int]], b_terms: tuple[tuple[int, int], ...] | list[tuple[int, int]]) -> CSSCode:
-    """Return a bivariate bicycle code with RIMC shift and logical ordering.
+    """Return a bivariate bicycle code with reference-implementation shift and logical ordering.
 
     ``l`` and ``m`` are positive integer block dimensions. ``a_terms`` and
     ``b_terms`` are nonempty sequences of integer exponent pairs over Z_l x
-    Z_m; duplicate terms cancel over GF(2). Returns a CSSCode with the RIMC
+    Z_m; duplicate terms cancel over GF(2). Returns a CSSCode with the reference-implementation
     row order and an explicit independent logical basis when needed. Raises
     ValueError for invalid dimensions, terms, or inconsistent CSS matrices.
     This is a static code and defines no probability or round unit.
@@ -185,7 +185,7 @@ _BB_B = ((0, 3), (1, 0), (2, 0))
 def make_bb_code_72() -> CSSCode:
     """Return the static research-labeled BB [[72,12,6]] CSSCode.
 
-    Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
+    Takes no arguments. Uses the reference polynomial terms and retains its X/Z
     logical row order. Raises ValueError if the CSS matrices are invalid.
     The distance lower bound is not checked here. The factory defines no
     probability or round unit.
@@ -196,7 +196,7 @@ def make_bb_code_72() -> CSSCode:
 def make_bb_code_108() -> CSSCode:
     """Return the static research-labeled BB [[108,8,10]] CSSCode.
 
-    Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
+    Takes no arguments. Uses the reference polynomial terms and retains its X/Z
     logical row order. Raises ValueError if the CSS matrices are invalid.
     The distance lower bound is not checked here. The factory defines no
     probability or round unit.
@@ -207,7 +207,7 @@ def make_bb_code_108() -> CSSCode:
 def make_bb_code_144() -> CSSCode:
     """Return the static research-labeled BB [[144,12,12]] CSSCode.
 
-    Takes no arguments. Uses the RIMC polynomial terms and retains its X/Z
+    Takes no arguments. Uses the reference polynomial terms and retains its X/Z
     logical row order. Raises ValueError if the CSS matrices are invalid.
     The distance lower bound is not checked here. The factory defines no
     probability or round unit.
@@ -218,7 +218,7 @@ def make_bb_code_144() -> CSSCode:
 def make_steane_code() -> CSSCode:
     """Return the static self-dual [[7,1,3]] Steane CSSCode.
 
-    Takes no arguments. Retains the RIMC check-column and logical-row order.
+    Takes no arguments. Retains the reference-implementation check-column and logical-row order.
     Raises ValueError if the CSS matrices are invalid. The factory defines no
     probability or round unit.
     """
@@ -275,9 +275,9 @@ def concatenate_css(outer: CSSCode, inner: CSSCode) -> CSSCode:
 
 
 def make_concatenated_steane_code(levels: int) -> CSSCode:
-    """Return level-``levels`` self-concatenated Steane in RIMC block order.
+    """Return level-``levels`` self-concatenated Steane in reference-implementation block order.
 
-    ``levels`` must be a positive integer. Returns a static CSSCode with RIMC
+    ``levels`` must be a positive integer. Returns a static CSSCode with reference-implementation
     block order; level two has research-labeled parameters [[49,1,9]]. The
     distance lower bound is not checked here. Raises ValueError for invalid
     levels or matrices. No probability or round unit is implied.
