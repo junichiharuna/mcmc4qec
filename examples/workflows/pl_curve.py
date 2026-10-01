@@ -14,7 +14,12 @@ not estimate absolute P_L. BAR intervals assume mixing and adequate blocks.
 The quick budget only checks the workflow; it does not provide research-grade
 precision. Nonoverlapping BAR and independent direct-MC intervals require
 investigation, with inadequate mixing and finite-sample noise among possible
-causes; this example does not diagnose the cause.
+causes. For the default d=3, p=0.22 problem, exact P_L=0.6026625647:
+seed 2026's BAR interval misses it while the independent MC interval covers it.
+Exploratory seeds 2026..2045 gave BAR coverage 13/20 and MC coverage 20/20.
+Default block 8 was shorter than the median maximum weight IAT (35.69);
+larger blocks widened intervals but did not fix seed 2026's estimate.
+See docs/bar_sensitivity_ja.md for controlled block, sample, and ladder checks.
 """
 
 import argparse
@@ -179,6 +184,11 @@ def main():
     if args.demo_overlap:
         demonstrate_overlap(next(seeds))
     print('BAR intervals assume adequate mixing and block length; inspect overlap and diagnostics.')
+    print('Recorded default d=3, p=0.22 study: exact P_L=0.6026625647; '
+          'seed 2026 BAR missed truth, independent MC covered it. '
+          'Over 20 seeds: BAR coverage 13/20, MC 20/20. '
+          'Block 8 was shorter than median maximum weight IAT 35.69; '
+          'larger blocks alone did not fix that seed. See docs/bar_sensitivity_ja.md.')
     print('SUMMARY ' + json.dumps(dict(codes=['toric_d3', 'toric_d5'], ladder=ladder,
                                        estimates=estimates, intervals=intervals, checks=checks),
                                   allow_nan=False))

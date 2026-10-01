@@ -58,3 +58,5 @@ Set `MCMC4QEC_QUICK=1` for smaller notebook runs. Notebook cells are self-contai
 ESS, split R-hat, and the four `evaluate_convergence` checks do not prove mixing, ergodicity, or correctness. The associated paper is in preparation; these examples do not claim to reproduce its figures.
 
 These are short demonstrations. Some recorded BAR intervals fail to overlap independent direct-MC intervals even in default mode; the scripts and notebooks print warnings. Neither interval agreement nor diagnostic checks prove sufficient mixing or research precision. The Steane example prints exact coverage at every rung rather than selecting a seed to force coverage.
+
+The [BAR sensitivity study](../docs/bar_sensitivity_ja.md) compares the default toric d=3 case with exact truth: exploratory coverage was 13/20 for BAR and 20/20 for independent MC. Run [bar_sensitivity.py](../benchmarks/bar_sensitivity.py) with `codes,matching` for CSV tables of coverage, widths, IAT, and overlap. The baseline 20-seed run took 349.11 s; each eight-seed sensitivity run took at most 186 s. These benchmarks are separate from quick examples and tests.
