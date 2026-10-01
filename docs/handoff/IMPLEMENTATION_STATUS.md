@@ -135,3 +135,21 @@ UbuntuのPython 3.11/3.12でcoreは各231 passed / 61 skipped、optionalは各31
 各worktreeがcleanで、`git cherry main wp/<x>`が空かつmainに取り込み済みであることを確認し、解決したパスを検査してからf〜jのworktreeと`wp/f`〜`wp/j`を削除した。
 最終報告は`docs/wp/final_report_examples_ja.md`であり、実行時間表、ローカルとCIの結果、制約、所有者判断待ち事項を記録した。
 研究リポジトリの変更、公開化、LICENSE追加、publishは行わず、依頼された実装・レビュー・統合・検証・push・CI確認・作業枝整理を完了した。
+
+## 2026-10-01 09時台・dev4実装とローカル検証
+
+WP-K/N/L/M/Oの順に独立レビュー済みの実装をmainへ統合し、版を`0.1.0.dev4`とした。
+phase flip、物理回路locationのOBF/Z/physical単一提案混合、同seed軌道を維持する専用step、BARのexact被覆・感度評価、公開65名と返り値の公開メソッドの型注釈・`py.typed`を追加した。
+LはN統合後、OはK/N/L/M統合後にrebaseし、対応する等価性検査と型検査を再実行した。
+各merge後のsource全suiteは順に330/345/354/355/358 passedで、最終は5 skipped、146.28秒だった。
+新規core wheel環境は258 passed / 71 skipped、56.23秒、新規optional wheel環境は358 passed / 5 skipped、142.24秒で成功した。
+研究checkoutを明示したinstalled wheel照合5件も1.00秒で成功し、読み取り専用を維持した。
+通常mypyは24 source filesで成功し、strictの252 errorsは非公開helper等の残件として記録した。
+20本の実行例、notebook4本、英語文書コードのwheel実行、24 Python fileと空py.typed・版・READMEのsource一致を確認した。
+notebook4本はinstalled optional wheelで既定出力も再生成し、各3.04/12.05/3.53/2.49秒だった。
+追加5test fileの合計37.117秒、全fileの最大25.186秒で、各file60秒・増分60秒・全suite300秒の制約を満たした。
+KのX/Z等号・不等号には現行decoderで反例があり、事実に反する受入条件を固定せず双対性と実測を記録した。
+Lでは集約提案MHだけのテストを実成分別MHと固定乱数samplerへ補強し、Mではsample数と自動block長の交絡をblock8固定で再測定した。
+toricの速度比2倍目標、BARの名目95%被覆、回路H・stabilizer対応、非公開helperまでのstrict解消は達成を主張しない。
+公開既定、ライセンス、著者の所属・DOI、公開先は変更していない。
+この追記時点ではmain push、remote CI、統合済みworktree整理、最終報告の確定が残っており、結果は続けて追記する。

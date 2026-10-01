@@ -81,6 +81,7 @@ optional venvからsourceを探索しない`python -I -m mypy --ignore-missing-i
 | installed wheel環境 | コマンド | 結果 | 秒 |
 | --- | --- | --- | ---: |
 | `.venv-dev4-core` | `python -m pytest --override-ini pythonpath= tests -q --junitxml=output/dev4-wheel-core.xml` | 258 passed / 71 skipped | 56.23 |
+| `.venv-dev4-optional` | `python -m pytest --override-ini pythonpath= tests -q --junitxml=output/dev4-wheel-optional.xml` | 358 passed / 5 skipped | 142.24 |
 
 optionalの`python -I docs/wp/verify_wheel.py optional`も成功し、20例のSUMMARYキー、24 Python fileとpy.typedの一致、notebook4本、README/tutorialの7ブロックを確認した。
 quickの最長例は新しいcircuit_zanellaの4.38秒で、phase_flip_asymmetricは2.34秒、いずれもprocess上限10秒以内だった。
@@ -88,3 +89,8 @@ quick notebook再生成のprocess全体は11.29秒で、各notebookは順に2.52
 同じoptional wheelの`python -I notebooks/regenerate.py`で既定出力を再生成し、4本は順に3.04/12.05/3.53/2.49秒、実行時間の合計21.11秒だった。
 この合計は個別notebook実行の和であり、Python起動などを含むprocess全体の実測値ではない。
 実行済みcode cellは順に3/3/3/4件で、Mの説明を含めたnotebookと一覧の時間を更新した。
+
+optional wheelの最大test fileは24.675秒、追加5file合計35.413秒で、sourceの場合と同様に時間制約を満たした。
+同環境で`RIMC_RESEARCH_ROOT=A:/dev/RIMC`と`PYTHONDONTWRITEBYTECODE=1`を設定した`pytest --override-ini pythonpath= tests/test_crossval_research.py -q -k live_research`は5 passed / 15 deselected、1.00秒だった。
+mainの`python -m mypy src/mcmc4qec`は24files成功、`--strict --ignore-missing-imports`は20filesで252errorsとなり、独立レビューと一致した。
+この時点でローカル検証は完了し、remote CIはpush後に確認する。

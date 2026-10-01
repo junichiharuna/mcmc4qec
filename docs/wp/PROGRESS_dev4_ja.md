@@ -36,8 +36,8 @@
 - [x] 2026-10-01 09:43 JST verify_wheel.pyを新例・型情報に対応させる（20例、24 Python file、空py.typed）。
 - [x] 2026-10-01 09:43 JST 統合後全suiteと時間予算を確認する（146.28秒、追加5file37.117秒、最大file25.186秒）。
 - [x] 2026-10-01 09:48 JST 新規core venvへwheel導入・全suite（258 passed / 71 skipped、56.23秒）・verify_wheel core成功。
-- [ ] 新規 optional venv に wheel を導入し全 suite と verify_wheel.py optional を実行する。
-- [ ] CHANGELOG・AGENTS を更新し IMPLEMENTATION_STATUS に追記する。
+- [x] 2026-10-01 09:50 JST 新規optional venvへwheel導入・全suite（358 passed / 5 skipped、142.24秒）・verify_wheel optional成功。
+- [x] 2026-10-01 09:50 JST CHANGELOG・AGENTSを更新しIMPLEMENTATION_STATUSへ追記する。
 - [ ] 検証済み main を origin/main へ push し remote CI 全 job の成功を確認する。
 - [ ] git cherry と clean 状態を確認して統合済み worktree と wp/k〜wp/o を削除する。
 - [ ] 研究リポジトリの clean 状態と依頼全項目の完了証拠を監査する。
@@ -136,3 +136,8 @@ O統合とdev4版情報、型検査CI、wheelのpy.typed検証をb7eac06へ保�
 新規core/optional venvへdev4 wheelを導入し、coreのverify_wheelは7.28秒で成功した。
 optionalのinstalled packageに対する利用者コードのmypy検査も成功した。
 両wheel環境の全suite、optional quick検証、既定notebook再生成、remote CI、後片付けと最終報告は継続中である。
+
+2026-10-01 09:50 JST、ローカルのsourceと両wheel環境の全suite、quick例、文書コード、notebook再生成が全て成功した。
+optional wheelの研究live照合は5 passed / 15 deselected、1.00秒だった。
+mainの通常mypyも24file成功、strict252errors/20fileを再確認した。
+push直前にorigin/mainが開始時c6cff92のままであることを確認し、mainだけをpushしてCIを確認する。
