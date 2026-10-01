@@ -21,9 +21,9 @@
 - [x] 2026-10-01 09:20 JST N 指摘への対応・main 統合・全 suite（345 passed / 5 skipped、122.42秒）。
 - [x] 2026-10-01 09:08 JST L 実装・詳細釣合い検証・実測・完了メモ（606fc7b、共有manifest失敗はmain統合時に対応）。
 - [x] 2026-10-01 09:20 JST L 独立レビュー記録（80d9c9b、混合の実遷移テスト追加を要する）。
-- [ ] L 指摘への対応・N 統合後への rebase・等価性再検証・main 統合・全 suite。
+- [x] 2026-10-01 09:28 JST L 指摘への対応（f8a407d）・N後rebase・等価性再検証・main統合（a7fc5e6）・全suite（354 passed / 5 skipped、144.72秒）。
 - [x] 2026-10-01 09:13 JST M 真値比較・20 seed 以上・各仮説と感度・被覆試験・指針・完了メモ（81a5591、8e221a4、独立レビュー待ち）。
-- [ ] M 独立レビュー記録。
+- [x] 2026-10-01 09:28 JST M 独立レビュー記録（a1fc8e8、停止級指摘なし）。
 - [ ] M 指摘への対応・main 統合・全 suite。
 - [ ] O 公開 API と公開メソッドの注釈・py.typed・型検査・完了メモ。
 - [ ] O 独立レビュー記録。
@@ -119,3 +119,11 @@ O担当へ修正と利用者側mypy受入試験を依頼し、最終rebase前の
 2026-10-01 09:20 JST、Nを統合し全suite345 passed / 5 skipped、122.42秒で成功した。
 L担当は統合済みmainへrebaseし、独立レビューで必要とされた実遷移テストと高速経路の再検証を進めている。
 M独立レビューは `/root/review_m`（gpt-6-sol/high）で開始した。
+
+2026-10-01 09:28 JST、Lは実成分別MH・固定乱数sampler・全提案分岐・支持境界の永続テストを追加し、対象59件46.06秒、新規file9件28.48秒で成功した。
+main共有文書と例manifestを反映してLを統合し、全suite354 passed / 5 skipped、144.72秒で成功した。
+M独立レビューはCSV照合と追加seedの被覆試験を含めて統合可と判断し、5825af4で統合した。
+pl_curveとnotebook02の説明を改めたが、既定notebook出力の再生成は最終wheelで行う。
+M後の全suiteを実行中である。
+O独立レビュー `/root/review_o`（gpt-6-sol/high）は、診断の配列・sequence入力、alphabetを省略する独自binary model、独自parameter型、list出力decoderの注釈の不整合を指摘した。
+O担当はこれらを修正し、K/N/L/M統合済み5825af4へrebaseして新規APIとmoduleの型検査を行う。
