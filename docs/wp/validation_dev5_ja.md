@@ -85,3 +85,13 @@ mainへ `82c003a` でmergeし、`05c7005` でpyprojectとResultの版を0.1.0.de
 このsourceを最終科学計測の実装として固定し、版変更により失効する旧truth cacheは使い回さず、mainで新規列挙する。
 `python -m build --wheel` は成功し、`dist/mcmc4qec-0.1.0.dev5-py3-none-any.whl` を新規core/optional venvの両方へinstallした。
 installed wheelの全pytestとverify_wheelは、この時点ではまだ未実施である。
+
+## installed wheelの例・文書・notebook
+
+同じdev5 wheelを導入したoptional venvの `python -I notebooks/regenerate.py` は4本とも成功し、既定実行の時間は順に5.19、12.60、4.88、2.50秒、合計25.17秒だった。
+保存された出力はmainのnotebookへ反映し、既定を短いquick結果で置き換えなかった。
+`python -I docs/wp/verify_wheel.py core` はexit0、7.31秒で、coreの例と文書コードが成功し、optional依存の不在、24 Pythonファイルとwheel READMEの一致を確認した。
+`python -I docs/wp/verify_wheel.py optional` はexit0、42.76秒で、全20例、全4quick notebook、英語READMEとtutorialの全コードを検証した。
+optionalログは `output/dev5/verify_optional.log` に保持し、quick notebookは順に2.56、3.51、3.02、1.87秒、regenerateプロセス全体は11.55秒だった。
+新APIの受入は既存CIが実行する全pytestに含まれ、verify_wheelはversionをpyprojectから読み、例のSUMMARY key集合も変わらないため、スクリプトとworkflowへの変更は不要と判断した。
+installed wheelの全pytestは後続のgateとして未完了である。

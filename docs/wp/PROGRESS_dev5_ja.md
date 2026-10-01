@@ -38,8 +38,8 @@
 
 - [ ] Q/P 統合後 main で P の最終計測を再実行し、CSV・表と整合文書を確定する。
 - [ ] API文書、README両言語、examples一覧、pl_curveとnotebook02の説明を反映する。
-- [ ] versionを0.1.0.dev5にし、notebooks/regenerate.pyでnotebookを再生成する。
-- [ ] verify_wheel.pyとCI設定の新内容への対応を確認する。
+- [x] 2026-10-01 20:55 versionを0.1.0.dev5へ更新し、installed optional wheelの `notebooks/regenerate.py` で4本を再生成する（実行時間合計25.17秒）。
+- [x] 2026-10-01 20:55 既存verify_wheelとCIの自動version/全pytest/全例経路が新APIを扱うことを確認し、local core/optionalのverify_wheelが成功する（remote CI実行は後続）。
 - [ ] 新規core venvにwheelをinstallし、全pytestとverify_wheel.py coreを通す。
 - [ ] 新規optional venvにwheelをinstallし、全pytestとverify_wheel.py optionalを通す。
 - [ ] 全suite5分以内・増分60秒以内・各file60秒以内を確認する。
