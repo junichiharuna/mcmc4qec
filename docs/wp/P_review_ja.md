@@ -42,6 +42,17 @@ MC anchor の点推定は0.0205095980、exact anchor の点推定は0.0216027606
 最初の CLI 試行は `PYTHONPATH` がなく import 前に停止し、上記の環境を設定した再実行で解消した。
 研究コードの live BAR 照合、全 suite、重い benchmark はこのレビュー担当では再実行していない。
 
+## 条件付き初期化と bias の解釈
+
+default 群の `initial_state=None` は各 chain の独立な bit-flip ノイズ標本を、固定された決定的 MWPM の failure が成立するまで繰り返して初期状態を作る。
+ノイズの標本が正しい独立標本である限り、採用された初期状態は `ρ_p(x) 1_F(x) / P_p(F)` に従い、最大試行数以内で成功したことを条件としてもこの分布は変わらない。
+カーネルがこの条件付き分布を不変に保つなら default 群は初期時点から分布上は定常であり、有限 seed の平均差を初期 burn-in 不足による過渡 bias と断定できない。
+定常でも chain 内相関は有効標本数を減らして seed 間散らばりを大きくし、非線形 BAR 解と確率への変換には有限標本 bias が残り得る。
+4 chain の cross-chain 分散推定や短い block bootstrap も不安定または過小になり得るため、点推定の偏りと区間幅の不足を別に評価する。
+同じ seed の burn-in を変えて点推定が動くことは、定常 chain の異なる区間を見た場合にも起こる。
+paper 群は決定的な論理基底状態から開始するため、default 群と異なり初期過渡が起こり得る。
+保存長ごとの全 seed の平均と散らばりが揃うまで、default 群の偏差の原因は確定しない。
+
 ## 最終科学 CSV の再監査項目
 
 Q と P の統合および版番号更新後の main の source digest に合う truth cache を使い、各構成の固定 seed 2026–2045 が重複も欠落もなく、真値・anchor 種別・chain 数・burn・lazy・長さ・誤差法・bootstrap反復数が計画と一致することを検査する。
