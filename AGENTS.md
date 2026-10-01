@@ -17,7 +17,10 @@ dev5ではWP-P/Qとして、pooled BAR点推定を保つ追加keyword `uncertain
 block bootstrapと公開sampling設定の既定は維持し、論文の観測量平均の実験をBAR被覆の保証とは扱わない。
 Qの最終2回の時間比はtoric d5で2.71–2.72、d7で2.58–2.62、BB72で1.57–1.65で、toricの2倍以内は未達である。
 dev5のlocal wheel検証はcore 269 passed /69 skipped /64.00秒、optional 367 passed /5 skipped /155.69秒で、両verify_wheelも成功した。
-最終科学計測とremote CIは進行中で、状態は `docs/wp/PROGRESS_dev5_ja.md`、測定前の設定は `docs/wp/measurement_plan_dev5_ja.md` に記録する。
+dev5の科学計測は長さ比較60行と12cohort各20seedの240行を完了し、生CSV・派生量・事前計画・環境・実行ログを `docs/wp/data_dev5/` に保存した。
+dev4領域の4chainではblock/crossの被覆が13/20・18/20、低pのexact anchorでは14/20・15/20で、誤差法の変更だけで名目被覆を保証しない。
+低pのpaper16/50はexact anchorで各19/20だったが、全250step・不等長cut・半trace上限が頻発する短い探索であり、論文の2,000,000stepの精度再現とは扱わない。
+最終文書レビューとremote CIは進行中で、状態は `docs/wp/PROGRESS_dev5_ja.md`、測定前の設定は `docs/wp/measurement_plan_dev5_ja.md` に記録する。
 残る課題はtoricで研究runner比2倍以内という速度目標、実符号の混合と被覆の校正、回路専用の効果差分更新とH提案の設計、非公開ヘルパーを含むstrict型検査である。
 BARと独立MCの区間が非交差となる例も記録しており、短い実行例を研究精度の保証として扱わない。
 所有者判断待ちの事項と次の依頼候補は `docs/wp/final_report_dev4_ja.md` 第6節、経緯は `docs/handoff/IMPLEMENTATION_STATUS.md` の追記にある。

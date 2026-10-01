@@ -13,6 +13,9 @@
 - Add fixed-seed BAR protocol and length-comparison benchmarks, per-chain
   iterated burn cuts, checked exact-truth caching, and explicit distinctions
   between paper observable-mean experiments and BAR uncertainty estimates.
+- Archive all 60 length-comparison runs and 240 protocol/anchor runs, with
+  paired comparisons, Wilson intervals, finite-chain limitations, and an
+  independently reviewed correction to unresolved diagnostic counts on CSV reload.
 - Reuse Zanella proposal distributions across steps and avoid duplicate decoder
   validation on cache hits, preserving reference trajectories and RNG use.
 - Publish two-run performance measurements for toric d=5/d=7 and BB72, including

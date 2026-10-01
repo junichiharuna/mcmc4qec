@@ -29,7 +29,7 @@
 - [x] 2026-10-01 20:47 反復Geyer burn-in・四規則・checked cache・固定cohort集計を `259cd6b` までに実装し、両anchorの公開API照合とpaper50の単独実行一致を確認する。
 - [x] 2026-10-01 21:24 600/2400/9600の全60行とseed2026、対応差、exact-anchor換算と分散分解を記録する（長いchainの持続biasは未確定、追加burn/chain感度は実施せず、独立監査は後続）。
 - [x] 2026-10-01 21:50 4構成×2領域・低p両anchorの全12cohort各20seed、計240行を保存し、修正版aggregateで真値・設定・固定seedを確認する（最終独立監査は後続）。
-- [ ] 論文の行番号付き整合表、利用者指針、例/notebook案、P完了メモを作成する。
+- [x] 2026-10-01 21:54 論文整合表・利用者指針・P完了メモをP branchの `5d14d5d` に保存し、全数値表と制約を確認する（最終reviewとmain文書統合は後続）。
 - [ ] 別担当が敵対的レビューを実施し `P_review_ja.md` を作成する。
 - [ ] レビュー指摘へ対応し、担当試験を完了する。
 - [x] 2026-10-01 20:52 Pを `82c003a` でmainにmergeし、版更新 `05c7005` 後の全source suite 372 passed /156.56秒を確認する（最終科学CSVのレビューは後続）。
@@ -37,7 +37,7 @@
 ## Phase 2
 
 - [ ] Q/P 統合後 main で P の最終計測を再実行し、CSV・表と整合文書を確定する。
-- [ ] API文書、README両言語、examples一覧、pl_curveとnotebook02の説明を反映する。
+- [x] 2026-10-01 21:54 P最終メモの依頼と照合し、API・英日README・例一覧・pl_curve・notebook02へ契約、性能、短いchainと少数chainの限界を反映したことを確認する。
 - [x] 2026-10-01 20:55 versionを0.1.0.dev5へ更新し、installed optional wheelの `notebooks/regenerate.py` で4本を再生成する（実行時間合計25.17秒）。
 - [x] 2026-10-01 20:55 既存verify_wheelとCIの自動version/全pytest/全例経路が新APIを扱うことを確認し、local core/optionalのverify_wheelが成功する（remote CI実行は後続）。
 - [x] 2026-10-01 20:56 新規core venvのinstalled wheelで全pytest 269 passed /69 skipped /64.00秒とverify_wheel coreの成功を確認する。
@@ -256,3 +256,12 @@ P担当のbenchmark集計だけの1行修正を `d4631c3` からmainの `850fa0f
 8回の被覆invocationの最大は410.15秒で、すべて各構成20seedを600秒以内で終えた。
 16/50 chainの先頭16cut列が全seed/rungで一致することを確認したが、CSVには保存state列がないためstate全要素の実測比較とは区別する。
 最初の未完了はP完了メモ・論文整合表・利用者指針の確定であり、同時に独立reviewerが最後40行と全240行の最終監査を進める。
+
+## 2026-10-01 21:54 の更新
+
+前turnは全240行と集計修正を `458199b` へ保存した実進捗であり、今回は最初の未完了のP文書確定から再開した。
+P authorは3文書を `5d14d5d` に保存し、全12cohort表、長さ表、cut分布、正式未判定と補助四条件、所有者判断、未実施範囲を確定した。
+独立reviewerは全240行のraw/aggregate全列と、全集計・派生フィールドを再計算し一致を確認し、現在はcommit後の文書を最終確認している。
+rootは共有API説明とPメモの反映依頼を照合し、英日README・例・notebookの要求が満たされることを確認した。
+AGENTSとCHANGELOGに科学計測完了を反映し、handoffは既存本文を保った22行の追記のみで実装・科学測定・local検証と残件を記録した。
+最初の未完了はPの最終独立レビューの確定であり、そのcommitを含めたP文書統合後に全source suiteを再確認し、main pushとCIへ進む。

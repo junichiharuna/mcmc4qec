@@ -162,3 +162,25 @@ remote optionalの2件の追加skipはmypy不在によるもので、型検査�
 各worktreeのclean状態、git cherryが空、mainへの祖先関係を確認し、解決済み対象パスを検査した上でk〜oのworktreeと枝を削除した。
 研究repoは開始時HEADのままcleanであり、既存handoff本文、CITATION、ライセンス・公開状態は変更していない。
 最終報告`docs/wp/final_report_dev4_ja.md`と`docs/wp/PROGRESS_dev4_ja.md`に完了根拠、未達の性能目標、未実施の研究精度検証、所有者判断待ち事項を記録した。
+
+## 2026-10-01 21時台・dev5実装と科学計測・ローカル検証
+
+開始時のMIT・研究パス除去等の未コミット変更は、所有者の承認を受けて前提コミット `22a8e9c` に保存した。
+Qを `8d00cf8`、Pを `82c003a` の順にmainへ統合し、`05c7005` で版を0.1.0.dev5へ揃えた。
+QはZの局所確率表を保持し、decoder cache hitの重複検証を削減し、専用経路の適用条件・軌道・乱数消費・公開既定を維持した。
+独立136近傍のsupport/詳細釣合い確認と同seed等価性試験を通したが、研究runnerとの最終時間比はtoric d5で2.71–2.72、d7で2.58–2.62、BB72で1.57–1.65で、toricの2倍以内は未達である。
+Pは追加keyword `uncertainty="cross_chain"` を実装し、pooled点推定を維持したままchain別BAR log比の共有rung共分散/Kと独立anchor分散を伝播する。
+既定のblock bootstrapと1chainを維持し、cross-chainの2chain下限は精度推奨ではないこと、少数chainの分散推定・log尺度1.96SE近似・有限長biasの限界を記録した。
+研究論文のcross-chain SEは観測量平均の実験であり、BAR被覆の保証ではないことを論文行番号付きで区別した。
+研究env付きsource全suiteはQ後366 passed /153.24秒、Pと版更新後372 passed /156.56秒で、後者はskipなし、開始時362 passed /151.22秒からの増分5.34秒、file最大26.652秒だった。
+新規core wheel環境は269 passed /69 skipped /64.00秒、optional wheel環境は367 passed /5 skipped /155.69秒で、verify_wheelの両構成・全20例・4quick notebook・文書コードも成功した。
+installed optional wheelで4notebookの既定出力を再生成し、実行時間合計は25.17秒だった。
+sampling sourceを `05c7005`、package SHA-256を `50f47ab86aadb8ddc25142c696ce6cfbce631a8cf8357cbbca8ca33d397f56d5` に固定し、全262144状態のchecked truth cacheを再列挙した。
+保存600/2400/9600・同20seedの長さ比較60行と、2領域・4構成・低p両anchorの全12cohort各20seed・240行を測定し、事前計画・生CSV・派生量・環境・実行ログを `docs/wp/data_dev5/` に保存した。
+長さ比較の被覆は13/20・20/20・20/20で、9600のexact-anchor換算平均偏差は約1.1SEとなり、持続biasの有無を確定せず追加burn/chain感度は未発動とした。
+dev4領域のblock/cross/paper16/paper50の被覆は13/18/17/19（各20seed）、低pのMCは18/18/20/19、exactは14/15/19/19だった。
+全250stepのpaper構成は全seedで半trace cut上限が生じ、toric d3の論文式short/long初期化は同一なので正式multistartは実質未検査であり、異なるfaulty startによる補助診断を分けて記録した。
+独立レビューでCSV再読込時の正式四条件未判定数の誤集計を検出し、benchmark集計のみを `850fa0f` で修正して全表を再生成した。
+独立算術監査は全60行・240行、source/cache、seed、設定、区間式、Wilson、bias/SD/SE、対応差、cut分布と修正後未判定数を再計算し一致を確認した。
+科学的な誤差評価の校正や論文2,000,000stepの精度再現は主張せず、公開既定の変更は所有者判断に残す。
+この追記時点では最終文書レビューと統合、main push・remote CI、worktree/branch整理、最終報告の確定が残っており、結果を続けて追記する。
