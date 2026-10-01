@@ -1,7 +1,7 @@
 # 論文の手順とライブラリの BAR の整合
 
-この表は読み取り専用の `RIMC/paper/main.tex` の 2026-10-01 時点の記述と dev4 の公開既定を比較したものであり、論文の図表を再現したという意味ではない。
-WP-P の計測値は Q 統合後の main で確定する。
+この表は読み取り専用の `RIMC/paper/main.tex` の 2026-10-01 時点の記述とライブラリの公開既定を比較したものであり、論文の図表を再現したという意味ではない。
+WP-P の被覆比較は Q 統合後の dev5 main で固定20 seedを計測し、詳細を [BAR感度の最終表](bar_sensitivity_ja.md) に記録した。
 
 | 項目 | 論文の根拠行 | ライブラリの状態 | 判定 |
 | --- | --- | --- | --- |
@@ -25,3 +25,10 @@ WP-P の計測値は Q 統合後の main で確定する。
 
 `cross_chain` は独立で定常な chain の有限標本散らばりを用いる不確かさの近似であり、点推定の bias と混合不足を含まない。
 20 seed の被覆数と Wilson 区間だけで名目 95% 被覆を確証したり、設定を最適化したりしない。
+WP-P の論文寄せ16/50 chainは各chain raw250で、研究の2,000,000 stepとは大きく違う。
+全ての16/50 chain構成で20/20 seedに半trace cut上限のchainがあり、cut後の保存数はchainごとに違った。
+正式な論文multistartはtoric d=3の同一basisで実質未検査なので、異なるfaulty startの補助四条件と分けて報告した。
+default4とpaper16/50はchain数、開始、lazy、burn、長さが同時に違い、paper16対paper50だけが同じraw250のchain追加比較となる。
+低pでMC/exact anchorを同じBAR軌道に適用すると点推定と区間の双方が変化し、有限20 seedの被覆差をどちらかの一般的優劣とは扱わない。
+`cross_chain`の2chainは計算可能な下限であり、少数chainの分散推定とlog尺度の正規近似の精度を保証しない。
+実行条件、全seedのCSVと派生解析は [dev5データ](wp/data_dev5/README.md) に保存した。
