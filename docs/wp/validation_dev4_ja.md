@@ -40,3 +40,19 @@ K の実装全体、独立レビュー、main への統合は未完了である�
 
 未実施。
 各 WP のレビュー後に K → N → L → M → O の順に統合し、各段階の全 suite と時間をここへ追記する。
+
+## 基準のファイル別時間
+
+基準全 suite の JUnit testcase 時間を classname ごとに加算した上位は次のとおり。
+
+| ファイル相当の classname | 秒 |
+| --- | ---: |
+| `tests.test_examples_workflows` | 29.469 |
+| `tests.test_independent` | 17.770 |
+| `tests.test_notebooks` | 17.076 |
+| `tests.test_pipeline` | 14.543 |
+| `tests.test_decoders` | 14.362 |
+| `tests.test_acceptance` | 13.963 |
+
+これは各テストのsetup/call/teardown時間の合計であり、pytest全体の収集・起動費用を含む経過時間とは区別する。
+統合後の増分は同じ依存環境と同時期の比較実行も用いて判定する。
