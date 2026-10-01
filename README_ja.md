@@ -90,6 +90,7 @@ MC anchor には 1 回以上の失敗観測が必要です。
 | ノイズと状態 | OBF / Z / H | stabilizer flip | デコーダー接続 |
 | --- | --- | --- | --- |
 | 静的 CSS bit-flip | 対応 | 任意 | PyMatching または決定的な自作デコーダー、`DecoderAdapter` 経由の BP-OSD |
+| 静的 CSS phase-flip | 対応 | 任意 | `errors="Z"` の PyMatching・BP-OSD が `hx`/`lx` を使用 |
 | 静的 CSS depolarising | 結合した I/X/Y/Z ラベルで対応 | 任意 | 完全な論理予測が必要で、sector 合成はデコーダー側の選択 |
 | データと測定の phenomenological fault | 対応 | 非対応 | 選択した syndrome history または difference 表現を受け取るデコーダー |
 | Stim detector error model | 潜在 mechanism bit 上で対応 | 非対応 | graphlike DEM に対する matching、または自作デコーダー |
@@ -100,7 +101,7 @@ MC anchor には 1 回以上の失敗観測が必要です。
 
 符号ファクトリには toric、surface、asymmetric toric、Hamming HGP、BB72/108/144、Steane、連接 Steane があります。
 現行の toric、surface、asymmetric toric、Hamming HGP、BB のファクトリには `codes` extra が必要です。
-デコーダー構築関数は bit-flip の MWPM・BP-OSD と、depolarising ノイズに対する明示的な sector 復号を扱います。
+デコーダー構築関数は bit-flip と phase-flip（`errors="Z"`）の MWPM・BP-OSD、および depolarising ノイズに対する明示的な sector 復号を扱います。
 `SamplingConfig(cache_cap=..., cache_policy=...)` は決定的な復号結果の cache を制限し、`KernelConfig(zanella_fastpath=True)` は該当する product-noise の経路を使います。
 診断には複数 chain の要約、exact CSS coset 初期化補助、4 条件の `evaluate_convergence` があります。
 完全な判定には独立な直接 MC による条件付き分散が必要で、判定が良くても混合や正しさは証明されません。

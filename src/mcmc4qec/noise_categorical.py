@@ -82,14 +82,14 @@ class PhenomenologicalNoise:
 
     def sample(self, p, rng):
         data_p, measurement_p = self._parameters(p)
-        alphabet = 2 if self.model.data_noise == "bit_flip" else 4
+        alphabet = 4 if self.model.data_noise == "depolarizing" else 2
         return np.concatenate((_sample(self.model.n_data, data_p, alphabet, rng),
                                _sample(self.model.n_measurement, measurement_p, 2, rng)))
 
     def log_prob(self, state, p):
         data_p, measurement_p = self._parameters(p)
         state = self.model.validate_state(state)
-        alphabet = 2 if self.model.data_noise == "bit_flip" else 4
+        alphabet = 4 if self.model.data_noise == "depolarizing" else 2
         return (_log_selected(state[:self.model.n_data], data_p, alphabet)
                 + _log_selected(state[self.model.n_data:], measurement_p, 2))
 
@@ -98,4 +98,4 @@ class PhenomenologicalNoise:
                                model=self.model.metadata(), normalized=True,
                                parameters=["data", "measurement"],
                                measurement_distribution="independent Bernoulli",
-                               data_distribution="independent Bernoulli" if self.model.data_noise == "bit_flip" else "independent I/X/Y/Z categories"))
+                               data_distribution="independent I/X/Y/Z categories" if self.model.data_noise == "depolarizing" else "independent Bernoulli"))

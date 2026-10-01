@@ -26,6 +26,7 @@ EXAMPLES = {
     "three_noise.py": (False, "cases"),
     "bar_ladder.py": (False, "ladder bar intervals exact"),
     "toric_pymatching.py": (True, "code p pl pl_interval ew_direct ew_chain"),
+    "phase_flip_asymmetric.py": (True, "code p pl_bit_flip pl_phase_flip interval_bit_flip interval_phase_flip exact_available"),
     "stim_dem.py": (True, "mechanisms exact pl pl_interval"),
     "circuit_baseline.py": (True, "locations detectors pl pl_interval"),
     "bb72_bposd.py": (True, "code p pl pl_interval ew_direct ew_chain"),

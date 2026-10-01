@@ -77,6 +77,7 @@ For a guided first run, open [the quickstart notebook](notebooks/01_quickstart.i
 | Noise and state | OBF / Z / H | Stabilizer flip | Decoder connection |
 | --- | --- | --- | --- |
 | Static CSS bit-flip | Supported | Optional | PyMatching or deterministic user decoder; BP-OSD through `DecoderAdapter` |
+| Static CSS phase-flip | Supported | Optional | PyMatching or BP-OSD with `errors="Z"`, using `hx`/`lx` |
 | Static CSS depolarising | Supported with joint I/X/Y/Z labels | Optional | Full logical prediction; sector composition is a decoder choice |
 | Phenomenological data and measurement faults | Supported | Unavailable | Decoder must consume the selected syndrome history or difference representation |
 | Stim detector error model | Supported on latent mechanism bits | Unavailable | Matching from a graphlike DEM, or a user decoder |
@@ -84,7 +85,7 @@ For a guided first run, open [the quickstart notebook](notebooks/01_quickstart.i
 
 `exact` enumerates small categorical state spaces; `direct_mc` uses a fixed trial count; `sample_faulty` samples normalized noise conditioned on failure; `estimate_logical_error` uses adjacent BAR ratios and an anchor.
 
-Code factories include toric and surface codes, asymmetric toric, Hamming HGP, BB72/108/144, Steane, and concatenated Steane; the current toric, surface, asymmetric toric, Hamming HGP, and BB factories need `".[codes]"`. Decoder constructors cover MWPM and BP-OSD for bit-flip and explicit sector decoding for depolarising noise. `SamplingConfig(cache_cap=..., cache_policy=...)` bounds deterministic decode caching, and `KernelConfig(zanella_fastpath=True)` uses the verified product-noise path when available. Diagnostics now include multiple-chain summaries, exact CSS coset initialization helpers, and a four-check `evaluate_convergence` screen that requires an independent direct-MC conditional variance for a complete verdict. These checks cannot prove mixing or correctness.
+Code factories include toric and surface codes, asymmetric toric, Hamming HGP, BB72/108/144, Steane, and concatenated Steane; the current toric, surface, asymmetric toric, Hamming HGP, and BB factories need `".[codes]"`. Decoder constructors cover MWPM and BP-OSD for bit-flip and phase-flip (`errors="Z"`), plus explicit sector decoding for depolarising noise. `SamplingConfig(cache_cap=..., cache_policy=...)` bounds deterministic decode caching, and `KernelConfig(zanella_fastpath=True)` uses the verified product-noise path when available. Diagnostics now include multiple-chain summaries, exact CSS coset initialization helpers, and a four-check `evaluate_convergence` screen that requires an independent direct-MC conditional variance for a complete verdict. These checks cannot prove mixing or correctness.
 
 The physical circuit baseline samples mutually exclusive fault labels at supported Stim noise locations and has its own explicit `KernelConfig(circuit_single=1, single=0, zanella=0, cluster=0, stabilizer=0)` setting. The default Z+H kernel is unsupported for that state space. The surface logical-idle example evaluates a midpoint observable after the first d of 2d noisy rounds; its DEM is used for decoder construction, while sampling stays on physical locations. See [examples/circuit_baseline.py](examples/circuit_baseline.py).
 

@@ -62,7 +62,8 @@ class PhenomenologicalModel:
     initial zero syndrome. Observables refer to final cumulative data errors.
     ``code`` is a CSSCode and ``rounds`` is positive. ``initial_boundary``
     must be ``'clean'``; ``representation`` is ``'history'`` or ``'difference'``;
-    ``data_noise`` is ``'bit_flip'`` or ``'depolarizing'``. ``validate_state``
+    ``data_noise`` is ``'bit_flip'``, ``'phase_flip'``, or ``'depolarizing'``.
+    Binary phase flips use X checks and Z logical observables. ``validate_state``
     returns the flattened categorical state, ``syndrome`` the selected binary
     history, ``observables`` final logical bits, and ``metadata`` a JSON record.
     Invalid options or states raise ``ValueError``; a non-CSS code raises
@@ -79,21 +80,28 @@ class PhenomenologicalModel:
             raise ValueError("final_boundary must be 'perfect' or 'noisy'")
         if representation not in ("history", "difference"):
             raise ValueError("representation must be 'history' or 'difference'")
-        if data_noise not in ("bit_flip", "depolarizing"):
-            raise ValueError("data_noise must be 'bit_flip' or 'depolarizing'")
+        if data_noise not in ("bit_flip", "phase_flip", "depolarizing"):
+            raise ValueError("data_noise must be 'bit_flip', 'phase_flip', or 'depolarizing'")
         self.code = code
         self.rounds = positive_integer(rounds, "rounds")
         self.initial_boundary = initial_boundary
         self.final_boundary = final_boundary
         self.representation = representation
         self.data_noise = data_noise
-        self.data_model = code.bit_flip_model() if data_noise == "bit_flip" else DepolarizingModel(code)
-        self.n_checks = len(code.hz) + (len(code.hx) if data_noise == "depolarizing" else 0)
+        if data_noise == "bit_flip":
+            self.data_model = code.bit_flip_model()
+            self.n_checks = len(code.hz)
+        elif data_noise == "phase_flip":
+            self.data_model = code.phase_flip_model()
+            self.n_checks = len(code.hx)
+        else:
+            self.data_model = DepolarizingModel(code)
+            self.n_checks = len(code.hz) + len(code.hx)
         self.measurement_rounds = self.rounds - (final_boundary == "perfect")
         self.n_data = self.rounds * code.n
         self.n_measurement = self.measurement_rounds * self.n_checks
         self.n = self.n_data + self.n_measurement
-        self.alphabets = (2 if data_noise == "bit_flip" else 4,) * self.n_data + (2,) * self.n_measurement
+        self.alphabets = (4 if data_noise == "depolarizing" else 2,) * self.n_data + (2,) * self.n_measurement
 
     def validate_state(self, state):
         return categorical(state, self.alphabets)

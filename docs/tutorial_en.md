@@ -21,6 +21,23 @@ print(exact(problem, 0.25).estimate)  # 0.15625
 
 `CallableDecoder` returns predicted **logical observables**, not physical corrections. Keep the same decoder and failure predicate for standard BAR ladders.
 
+## Static CSS phase flips
+
+For binary Z-error support, `code.phase_flip_model()` measures syndrome with X checks (`hx`), reads logical observables with `lx`, and uses Z stabilizer rows (`hz`). The same `IndependentBitFlip(code.n)` represents the Bernoulli product distribution on Z-error support. For example, this three-qubit CSS code protects X errors but has no X checks to detect Z errors:
+
+```python
+import numpy as np
+from mcmc4qec import CSSCode, CallableDecoder, IndependentBitFlip, Problem, exact
+
+code = CSSCode(np.zeros((0, 3), dtype=int), [[1, 1, 0], [0, 1, 1]],
+               [[1, 1, 1]], [[1, 0, 0]])
+z_decoder = CallableDecoder(lambda syndrome: [0], identifier="zero-z-v1")
+problem = Problem(code.phase_flip_model(), IndependentBitFlip(code.n), z_decoder)
+print(exact(problem, 0.25).estimate)  # 0.4375
+```
+
+With optional PyMatching, `mwpm_decoder(code, errors="Z")` builds from `hx` and maps its physical correction through `lx`; `bposd_decoder(code, p, errors="Z", **kw)` does the same with a fixed BP-OSD prior. Both default to `errors="X"`, preserving the existing `hz`/`lz` decoder. A rectangular toric geometry alone does not establish unequal aggregate X/Z failure rates: compare them with exact enumeration when feasible or report Monte Carlo uncertainty. For bounded repeated measurements, `PhenomenologicalModel(..., data_noise="phase_flip")` uses binary Z data faults and noisy X checks. Its `PhenomenologicalNoise` still needs explicit `{"data": ..., "measurement": ...}` probabilities for the complete experiment.
+
 ## Your normalized noise
 
 A custom noise object has `n`, matching `alphabets`, `sample(p, rng)`, `log_prob(state, p)`, and JSON-compatible `metadata()`. Its `log_prob` is the normalized log probability of the **full** state under parameter `p`. Return negative infinity for zero support. The sampler must draw from that same distribution. This example uses three different per-qubit rates while retaining a scalar ladder parameter:
