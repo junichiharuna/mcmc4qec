@@ -24,6 +24,7 @@ from mcmc4qec.decoders import mwpm_decoder
 from mcmc4qec.initial_states import (maximum_weight_initial_state,
                                      minimum_weight_initial_state,
                                      random_logical_sector_initial_state)
+from bar_paper_protocol import cached_exact, load_truth_cache, wilson, _problem_digest
 
 
 SCENARIOS = (
@@ -52,6 +53,65 @@ def output_dir(value):
             raise ValueError("Refusing to write into the read-only research repository")
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def aggregate(directory, out, truth_cache_path):
+    """Validate a full fixed seed cohort and checked truth before summarizing."""
+    if not truth_cache_path:
+        raise ValueError("--aggregate requires --truth-cache")
+    code = make_toric_code(3)
+    problem = Problem(code.bit_flip_model(), IndependentBitFlip(code.n), mwpm_decoder(code))
+    truth_cache = load_truth_cache(truth_cache_path, code, problem)
+    problem_sha = _problem_digest(code, problem)
+    groups = {}
+    for path in sorted(Path(directory).glob("*_runs.csv")):
+        if path.name == "cohort_runs.csv":
+            continue
+        with path.open(newline="", encoding="utf-8") as stream:
+            for row in csv.DictReader(stream):
+                key = (row["scenario"], row["uncertainty"], row["ladder"],
+                       row["samples"], row["burn_in"], row["chains"],
+                       row["block_length"], row["bootstrap_replicates"],
+                       row["anchor_kind"],
+                       row["problem_sha256"], row["truth_cache_source_sha256"])
+                groups.setdefault(key, []).append(row)
+    if not groups:
+        raise ValueError("no per-seed CSV files found")
+    all_rows, summaries = [], []
+    for key, rows in sorted(groups.items()):
+        seeds = sorted(int(row["seed"]) for row in rows)
+        if seeds != list(range(2026, 2046)):
+            raise ValueError(f"{key}: require each seed 2026..2045 exactly once")
+        target_p = float(key[2].split("/")[-1])
+        truth = cached_exact(problem, target_p, truth_cache)
+        if any(row["truth_source"] != "checked_weight_cache" or
+               row["problem_sha256"] != problem_sha or
+               row["truth_cache_source_sha256"] != truth_cache["package_source_sha256"] or
+               not math.isclose(float(row["exact_estimate"]), truth.estimate, rel_tol=0, abs_tol=1e-12) or
+               not math.isclose(float(row["exact_conditional_weight"]), truth.conditional_weight,
+                                rel_tol=0, abs_tol=1e-10) for row in rows):
+            raise ValueError(f"{key}: truth or provenance differs from checked cache")
+        ordered = sorted(rows, key=lambda row: int(row["seed"]))
+        all_rows.extend(ordered)
+        covered = sum(row["bar_covers_exact"] == "True" for row in ordered)
+        widths = [float(row["bar_width"]) for row in ordered if row["bar_width"] != ""]
+        estimates = np.asarray([float(row["bar_estimate"]) for row in ordered])
+        lo, hi = wilson(covered, 20)
+        summaries.append(dict(scenario=key[0], uncertainty=key[1], ladder=key[2],
+                              samples=key[3], burn_in=key[4], chains=key[5],
+                              block_length=key[6], bootstrap_replicates=key[7],
+                              anchor_kind=key[8], seeds=20,
+                              exact=truth.estimate, covered=covered,
+                              wilson_low=lo, wilson_high=hi, valid_intervals=len(widths),
+                              mean_estimate=float(np.mean(estimates)),
+                              mean_bias=float(np.mean(estimates)-truth.estimate),
+                              sd_estimate=float(np.std(estimates, ddof=1)),
+                              se_mean_bias=float(np.std(estimates, ddof=1)/math.sqrt(len(estimates))),
+                              mean_width=float(np.mean(widths)) if widths else ""))
+    target = output_dir(out)
+    write_csv(target / "cohort_runs.csv", all_rows)
+    write_csv(target / "cohort_summary.csv", summaries)
+    print(f"Validated {len(groups)} settings with 20/20 fixed seeds each: {target}")
 
 
 def pilot_iat(problem, p):
@@ -117,7 +177,12 @@ def run(args):
         multiplier = {"block_tenth_iat": 0.1, "block_one_iat": 1.0,
                       "block_four_iat": 4.0}[args.scenario]
         block = min(config.samples, max(2, math.ceil(multiplier * pilot_tau)))
-    if args.truth_file:
+    if args.truth_cache and args.truth_file:
+        raise ValueError("--truth-cache and --truth-file are mutually exclusive")
+    truth_cache = load_truth_cache(args.truth_cache, code, problem) if args.truth_cache else None
+    if truth_cache:
+        truth = cached_exact(problem, ladder[-1], truth_cache)
+    elif args.truth_file:
         if not args.trust_truth_file:
             raise ValueError("--truth-file requires --trust-truth-file; verify same toric d=3 problem")
         with Path(args.truth_file).open(newline="", encoding="utf-8") as stream:
@@ -128,7 +193,9 @@ def run(args):
                                 conditional_weight=float(rows[0]["exact_conditional_weight"]))
     else:
         truth = exact(problem, ladder[-1])
-    exact_anchor = exact(problem, ladder[0]) if args.scenario == "anchor_exact" else None
+    exact_anchor = (cached_exact(problem, ladder[0], truth_cache) if truth_cache and
+                    args.scenario == "anchor_exact" else
+                    exact(problem, ladder[0]) if args.scenario == "anchor_exact" else None)
     records = []
     for number in range(args.seeds):
         seed = args.seed_start + number
@@ -152,6 +219,7 @@ def run(args):
         records.append(dict(
             scenario=args.scenario, seed=seed, target_p=ladder[-1],
             uncertainty=args.uncertainty,
+            bootstrap_replicates=args.bootstrap_replicates,
             ladder="/".join(map(str, ladder)), samples=config.samples,
             burn_in=config.burn_in, chains=config.chains,
             block_length=bar.metadata["config"]["bootstrap_block_length"],
@@ -181,22 +249,34 @@ def run(args):
                                        min(bar.diagnostics[-1]["chain_means"])),
             exact_estimate=truth.estimate,
             exact_conditional_weight=truth.conditional_weight,
-            truth_source=str(Path(args.truth_file).resolve()) if args.truth_file else "exact",
+            truth_source="checked_weight_cache" if truth_cache else
+                         str(Path(args.truth_file).resolve()) if args.truth_file else "exact",
+            problem_sha256=_problem_digest(code, problem),
+            truth_cache_source_sha256=truth_cache["package_source_sha256"] if truth_cache else "",
             bootstrap_successes=bar.metadata["config"]["bootstrap_successes"],
         ))
     widths = [float(row["bar_width"]) for row in records if row["bar_width"] != ""]
+    estimates = np.asarray([float(row["bar_estimate"]) for row in records])
     summary = dict(scenario=args.scenario, seeds=args.seeds,
                    uncertainty=args.uncertainty,
+                   bootstrap_replicates=args.bootstrap_replicates,
                    seed_start=args.seed_start, target_p=ladder[-1],
                    exact_estimate=truth.estimate,
                    exact_conditional_weight=truth.conditional_weight,
-                   truth_source=str(Path(args.truth_file).resolve()) if args.truth_file else "exact",
+                   truth_source="checked_weight_cache" if truth_cache else
+                                str(Path(args.truth_file).resolve()) if args.truth_file else "exact",
+                   problem_sha256=_problem_digest(code, problem),
+                   truth_cache_source_sha256=truth_cache["package_source_sha256"] if truth_cache else "",
                    bar_covered=sum(row["bar_covers_exact"] is True for row in records),
                    bar_intervals=len(widths),
                    mc_covered=sum(row["mc_covers_exact"] for row in records),
                    interval_nonintersection=sum(row["intervals_overlap"] is False
                                                 for row in records),
                    mean_bar_width=float(np.mean(widths)) if widths else "",
+                   mean_estimate=float(np.mean(estimates)),
+                   mean_bias=float(np.mean(estimates)-truth.estimate),
+                   sd_estimate=float(np.std(estimates, ddof=1)) if len(estimates) >= 2 else "",
+                   se_mean_bias=float(np.std(estimates, ddof=1)/math.sqrt(len(estimates))) if len(estimates) >= 2 else "",
                    mean_min_overlap=float(np.mean([row["min_bar_overlap"]
                                                   for row in records])),
                    median_max_iat=float(np.median([row["max_chain_iat"]
@@ -226,11 +306,16 @@ def main():
     parser.add_argument("--quick", action="store_true", help="One seed and a short trace for CLI smoke checks")
     parser.add_argument("--seed", type=int, help="Run exactly this seed instead of --seed-start/--seeds")
     parser.add_argument("--truth-file", help="Reuse exact value from an earlier summary CSV")
+    parser.add_argument("--truth-cache", help="Checked failure-weight cache for exact truth and exact anchor")
+    parser.add_argument("--aggregate", help="Directory of split *_runs.csv files; require a full fixed cohort")
     parser.add_argument("--trust-truth-file", action="store_true",
                         help="Assert the truth CSV came from this same toric d=3/MWPM problem")
     parser.add_argument("--out", default=str(Path(tempfile.gettempdir()) /
                         "mcmc4qec" / "bar_sensitivity"))
     args = parser.parse_args()
+    if args.aggregate:
+        aggregate(args.aggregate, args.out, args.truth_cache)
+        return
     if args.seed is not None:
         args.seed_start, args.seeds = args.seed, 1
     if args.quick:

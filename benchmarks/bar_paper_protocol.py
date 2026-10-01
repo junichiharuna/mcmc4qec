@@ -35,6 +35,10 @@ PROTOCOLS = {"default_block": (4, "fixed", "block_bootstrap"),
              "paper16": (16, "iat5", "cross_chain")}
 COHORT = tuple(range(2026, 2046))
 Z = 1.959963984540054
+WARNINGS = ("Diagnostics do not prove convergence, ergodicity, or correctness. "
+            "Finite-chain BAR bias is excluded from intervals. "
+            "Toric d=3 min/max logical basis starts coincide, so the paper multistart check is unresolved. "
+            "Adaptive cuts can leave unequal chain lengths; BAR cross-chain covariance/K is an asymptotic approximation.")
 
 
 def output_dir(value):
@@ -108,10 +112,13 @@ def load_truth_cache(path, code, problem):
 def cached_exact(problem, p, payload):
     counts = payload["failure_weight_counts"]
     n = payload["n"]
-    value = math.fsum(count*(p**w)*((1-p)**(n-w)) for w, count in enumerate(counts))
+    masses = [count*(p**w)*((1-p)**(n-w)) for w, count in enumerate(counts)]
+    value = math.fsum(masses)
+    conditional_weight = math.fsum(w*mass for w, mass in enumerate(masses))/value
     return Result("exact", metadata(problem, p, dict(max_states=1_048_576,
                   truth_cache_sha256=payload["problem_sha256"])), 0.0,
-                  estimate=value, log_estimate=math.log(value))
+                  estimate=value, log_estimate=math.log(value),
+                  conditional_weight=conditional_weight)
 
 
 def _summary(rows, elapsed):
@@ -136,6 +143,7 @@ def _summary(rows, elapsed):
                 paper_vacuous_pass=sum(row["paper_vacuous_pass"] == "True" for row in rows),
                 auxiliary_four_rule_pass=sum(row["auxiliary_four_rule_pass"] == "True" for row in rows),
                 burn_capped=sum(row["burn_capped"] == "True" for row in rows),
+                warnings=WARNINGS,
                 elapsed_seconds=elapsed)
 
 
@@ -184,7 +192,7 @@ def aggregate(directory, out, truth_cache):
     print(f"Validated {len(groups)} configurations with 20/20 fixed seeds each: {target}")
 
 
-def _estimate_from_traces(problem, ladder, states, cuts, anchor, method, bootstrap_replicates, block, bootstrap_seed):
+def _bar_from_traces(problem, ladder, states, cuts, method, bootstrap_replicates, block, bootstrap_seed):
     k = states[0].shape[0]
     differences = []
     for i, trace in enumerate(states):
@@ -219,14 +227,18 @@ def _estimate_from_traces(problem, ladder, states, cuts, anchor, method, bootstr
                                             np.take_along_axis(b, indices[i+1], axis=1))
                           for i, (a, b) in enumerate(rectangular)])
         covariance = np.atleast_2d(np.cov(draws, rowvar=False, ddof=1))
+    return ratios, float(covariance.sum())
+
+
+def _anchored_estimate(anchor, ratios, mcmc_log_variance):
     log_var_anchor = (0.0 if anchor.kind == "exact" else
                       (1-anchor.estimate)/(anchor.trials*anchor.estimate))
     log_estimate = math.log(anchor.estimate) + sum(ratios)
-    se = math.sqrt(max(0.0, log_var_anchor + float(covariance.sum())))
+    se = math.sqrt(max(0.0, log_var_anchor + mcmc_log_variance))
     estimate = math.exp(log_estimate)
     interval = (math.exp(min(0.0, log_estimate-Z*se)),
                 math.exp(min(0.0, log_estimate+Z*se))) if log_estimate <= 0 else None
-    return estimate, interval, ratios, se
+    return estimate, interval, se
 
 
 def _se(means):
@@ -307,14 +319,19 @@ def run(args):
         truth = cached_exact(problem, ladder[-1], cache).estimate
     else:
         truth = exact(problem, ladder[-1]).estimate
-    exact_anchor = (cached_exact(problem, ladder[0], cache) if cache is not None and args.anchor == "exact"
-                    else exact(problem, ladder[0]) if args.anchor == "exact" else None)
+    exact_anchor = (cached_exact(problem, ladder[0], cache) if cache is not None and args.anchor in ("exact", "both")
+                    else exact(problem, ladder[0]) if args.anchor in ("exact", "both") else None)
     rows = []
     for seed in range(args.seed_start, args.seed_start+args.seeds):
         anchor_seed, bar_seed, _, _, auxiliary_seed = spawn_seeds(seed, 5)
-        anchor = exact_anchor or direct_mc(problem, ladder[0], trials=args.anchor_trials, seed=anchor_seed)
-        if anchor.estimate <= 0 or anchor.estimate >= 1:
-            raise RuntimeError(f"seed {seed}: MC anchor lacks failures or successes")
+        anchors = []
+        if args.anchor in ("mc", "both"):
+            mc_anchor = direct_mc(problem, ladder[0], trials=args.anchor_trials, seed=anchor_seed)
+            if mc_anchor.estimate <= 0 or mc_anchor.estimate >= 1:
+                raise RuntimeError(f"seed {seed}: MC anchor lacks failures or successes")
+            anchors.append(("mc", mc_anchor))
+        if exact_anchor is not None:
+            anchors.append(("exact", exact_anchor))
         sequence = np.random.SeedSequence(bar_seed)
         children = sequence.spawn(len(ladder)+1)
         rung_seeds = [int(child.generate_state(1, dtype=np.uint64)[0])
@@ -334,23 +351,6 @@ def run(args):
                         for trace in states]
             cuts = [[v[0] for v in rung] for rung in cut_info]
             capped = [[v[1] for v in rung] for rung in cut_info]
-        estimate, interval, ratios, se = _estimate_from_traces(
-            problem, ladder, states, cuts, anchor, method, args.bootstrap_replicates,
-            args.block, children[-1])
-        if args.verify_api:
-            if burn_mode != "fixed":
-                raise ValueError("--verify-api applies only to fixed-burn protocols")
-            api = estimate_logical_error(problem, ladder, anchor=anchor,
-                config=SamplingConfig(chains=chains, samples=args.samples, burn_in=180,
-                                      kernels=kernels),
-                seed=bar_seed, uncertainty=method,
-                bootstrap_replicates=args.bootstrap_replicates,
-                bootstrap_block_length=args.block)
-            if not (np.isclose(api.estimate, estimate, rtol=0, atol=1e-12) and
-                    np.isclose(api.log_standard_errors[-1], se, rtol=0, atol=1e-12) and
-                    np.allclose(api.adjacent_log_ratios, ratios, rtol=0, atol=1e-12) and
-                    np.allclose(api.interval, interval, rtol=0, atol=1e-12)):
-                raise AssertionError(f"seed {seed}: benchmark and API differ")
         other_states, other_cuts = None, None
         if args.aux_multistart:
             other_children = np.random.SeedSequence(auxiliary_seed).spawn(len(ladder))
@@ -361,34 +361,58 @@ def run(args):
                           [[paper_burn_cut(row)[0] for row in np.count_nonzero(trace, axis=-1)]
                            for trace in other_states])
         full, vacuous, auxiliary_full, rule_details = _convergence(states, cuts, other_states, other_cuts)
-        rows.append(dict(region=args.region, protocol=args.protocol, anchor_kind=args.anchor,
-                         seed=seed, samples=args.samples, total_steps=total,
-                         chains=chains, ladder="/".join(map(str, ladder)),
-                         problem_sha256=_problem_digest(code, problem),
-                         truth_cache_source_sha256=cache["package_source_sha256"] if cache is not None else "",
-                         truth_source="checked_weight_cache" if cache is not None else "fresh_exact",
-                         bootstrap_replicates=args.bootstrap_replicates, block=args.block,
-                         anchor_trials=args.anchor_trials, lazy=kernels.lazy,
-                         cuts="/".join(",".join(map(str, rung)) for rung in cuts),
-                         burn_capped=any(any(rung) for rung in capped),
-                         estimate=estimate, low=interval[0] if interval else "",
-                         high=interval[1] if interval else "", exact=truth,
-                         covered=interval is not None and interval[0] <= truth <= interval[1],
-                         log_se=se, ratios="/".join(map(str, ratios)),
-                         four_rule_pass=full, paper_vacuous_pass=vacuous,
-                         auxiliary_four_rule_pass=auxiliary_full,
-                         scaling="/".join(str(r[2][0]) for r in rule_details),
-                         drift="/".join(str(r[2][1]) for r in rule_details),
-                         multistart=("/".join(str(r[3]) for r in rule_details) if args.aux_multistart
-                                     else "unresolved_same_basis" if not distinct_start else "unmeasured"),
-                         auxiliary_start=args.aux_multistart,
-                         dispersion="/".join(str(r[2][2]) for r in rule_details)))
-    name = f"{args.region}_{args.protocol}_{args.anchor}_{args.seed_start}_{args.seeds}"
-    write_csv(out / f"{name}_runs.csv", rows)
-    summary = _summary([{key: str(value) for key, value in row.items()} for row in rows],
-                       time.perf_counter()-start)
-    write_csv(out / f"{name}_summary.csv", [summary])
-    print(summary)
+        ratios, mcmc_log_variance = _bar_from_traces(
+            problem, ladder, states, cuts, method, args.bootstrap_replicates,
+            args.block, children[-1])
+        for anchor_kind, anchor in anchors:
+            estimate, interval, se = _anchored_estimate(anchor, ratios, mcmc_log_variance)
+            if args.verify_api:
+                if burn_mode != "fixed":
+                    raise ValueError("--verify-api applies only to fixed-burn protocols")
+                api = estimate_logical_error(problem, ladder, anchor=anchor,
+                    config=SamplingConfig(chains=chains, samples=args.samples, burn_in=180,
+                                          kernels=kernels),
+                    seed=bar_seed, uncertainty=method,
+                    bootstrap_replicates=args.bootstrap_replicates,
+                    bootstrap_block_length=args.block)
+                if not (np.isclose(api.estimate, estimate, rtol=0, atol=1e-12) and
+                        np.isclose(api.log_standard_errors[-1], se, rtol=0, atol=1e-12) and
+                        np.allclose(api.adjacent_log_ratios, ratios, rtol=0, atol=1e-12) and
+                        np.allclose(api.interval, interval, rtol=0, atol=1e-12)):
+                    raise AssertionError(f"seed {seed}: benchmark and API differ")
+            rows.append(dict(region=args.region, protocol=args.protocol, anchor_kind=anchor_kind,
+                             seed=seed, samples=args.samples, total_steps=total,
+                             chains=chains, ladder="/".join(map(str, ladder)),
+                             problem_sha256=_problem_digest(code, problem),
+                             truth_cache_source_sha256=cache["package_source_sha256"] if cache is not None else "",
+                             truth_source="checked_weight_cache" if cache is not None else "fresh_exact",
+                             bootstrap_replicates=args.bootstrap_replicates, block=args.block,
+                             anchor_trials=args.anchor_trials, lazy=kernels.lazy,
+                             cuts="/".join(",".join(map(str, rung)) for rung in cuts),
+                             burn_capped=any(any(rung) for rung in capped),
+                             estimate=estimate, low=interval[0] if interval else "",
+                             high=interval[1] if interval else "", exact=truth,
+                             covered=interval is not None and interval[0] <= truth <= interval[1],
+                             log_se=se, ratios="/".join(map(str, ratios)),
+                             four_rule_pass=full, paper_vacuous_pass=vacuous,
+                             auxiliary_four_rule_pass=auxiliary_full,
+                             scaling="/".join(str(r[2][0]) for r in rule_details),
+                             drift="/".join(str(r[2][1]) for r in rule_details),
+                             multistart=("/".join(str(r[3]) for r in rule_details) if args.aux_multistart
+                                         else "unresolved_same_basis" if not distinct_start else "unmeasured"),
+                             auxiliary_start=args.aux_multistart,
+                             dispersion="/".join(str(r[2][2]) for r in rule_details),
+                             warnings=WARNINGS))
+    for anchor_kind in ("mc", "exact"):
+        selected = [row for row in rows if row["anchor_kind"] == anchor_kind]
+        if not selected:
+            continue
+        name = f"{args.region}_{args.protocol}_{anchor_kind}_{args.seed_start}_{args.seeds}"
+        write_csv(out / f"{name}_runs.csv", selected)
+        summary = _summary([{key: str(value) for key, value in row.items()} for row in selected],
+                           time.perf_counter()-start)
+        write_csv(out / f"{name}_summary.csv", [summary])
+        print(summary)
     print(f"CSV: {out}")
 
 
@@ -400,7 +424,8 @@ def main():
     parser.add_argument("--seeds", type=int, default=20)
     parser.add_argument("--region", choices=LADDERS, default="dev4")
     parser.add_argument("--protocol", choices=PROTOCOLS, default="default_block")
-    parser.add_argument("--anchor", choices=("mc", "exact"), default="mc")
+    parser.add_argument("--anchor", choices=("mc", "exact", "both"), default="mc",
+                        help="Both reuses the same rung and auxiliary trajectories for MC and exact anchors")
     parser.add_argument("--samples", type=int, default=600,
                         help="Retained steps for fixed-cut protocols; full trace steps before IAT cut for paper protocols")
     parser.add_argument("--anchor-trials", type=int, default=1500)
