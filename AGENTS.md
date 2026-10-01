@@ -16,7 +16,8 @@ BARのtoric d=3、p=0.22では20seedのexact被覆が13/20で、独立MCは20/20
 dev5ではWP-P/Qとして、pooled BAR点推定を保つ追加keyword `uncertainty="cross_chain"`、共有rung共分散と独立anchor分散、各chainの反復5 IAT cutを備えた論文手順benchmark、checked exact cacheと固定20seed集計、Z分布保持とdecode cache hitの重複検証削減を統合した。
 block bootstrapと公開sampling設定の既定は維持し、論文の観測量平均の実験をBAR被覆の保証とは扱わない。
 Qの最終2回の時間比はtoric d5で2.71–2.72、d7で2.58–2.62、BB72で1.57–1.65で、toricの2倍以内は未達である。
-dev5の最終科学計測とwheel/remote CIは進行中で、状態は `docs/wp/PROGRESS_dev5_ja.md`、測定前の設定は `docs/wp/measurement_plan_dev5_ja.md` に記録する。
+dev5のlocal wheel検証はcore 269 passed /69 skipped /64.00秒、optional 367 passed /5 skipped /155.69秒で、両verify_wheelも成功した。
+最終科学計測とremote CIは進行中で、状態は `docs/wp/PROGRESS_dev5_ja.md`、測定前の設定は `docs/wp/measurement_plan_dev5_ja.md` に記録する。
 残る課題はtoricで研究runner比2倍以内という速度目標、実符号の混合と被覆の校正、回路専用の効果差分更新とH提案の設計、非公開ヘルパーを含むstrict型検査である。
 BARと独立MCの区間が非交差となる例も記録しており、短い実行例を研究精度の保証として扱わない。
 所有者判断待ちの事項と次の依頼候補は `docs/wp/final_report_dev4_ja.md` 第6節、経緯は `docs/handoff/IMPLEMENTATION_STATUS.md` の追記にある。

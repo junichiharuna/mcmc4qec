@@ -24,7 +24,7 @@
 | Pの小問題反復被覆 | 列挙可能な問題、事前固定した約10 seed、緩い閾値のテスト | seed0–9、2bit exact問題、10件中5件以上の回帰が成功 |
 | Pの反復Geyer burn-in | 反復停止則、半trace fallback、研究コードと論文との差の明示 | P_reviewが研究1D個別cutと照合、合成cut6と半traceの受入成功、最終数値は後続 |
 | Pの四収束規則 | scaling/late drift/multistart/dispersionの実判定と未判定処理 | P_reviewで適用traceを監査、正式M未判定と補助四条件を区別、数値はladder全rungのAND |
-| Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | 600/2400の全20seedと設定を確認、9600は固定10+10の前半実行中、全体は未完 |
+| Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | 600/2400の全20seedと設定を確認、9600前半10seedは483.03秒で完了、固定後半10seedを実行中、全体は未完 |
 | Pのbias/分散の識別 | 同一軌道の2誤差法、N依存、必要なburn-in/4・16・50 chain感度 | 未確認 |
 | Pの4構成×2領域 | 全構成20 seed以上、各CSVと被覆/Wilson/平均幅/平均偏差/収束合格数 | 未確認 |
 | Pの低p exact/MC anchor | 同じ軌道に対する両anchor、独立seedとanchor分散の記録 | 未確認 |
@@ -42,8 +42,8 @@
 | CHANGELOG/AGENTS/handoff追記 | 0.1.0.dev5の実装/実測を反映、handoff既存本文のprefix一致 | 未確認 |
 | main pushと全remote CI | origin/mainの対象SHA、Actionsの全5job成功、jobログ | 未確認 |
 | worktree/branch cleanup | git cherryの未統合差分なし、削除対象の安全確認、削除後inventory | 未確認 |
-| 研究repo不変 | 開始時HEAD `69efcfc` と一致、git status空、意図しない生成物なし | Phase 0終了時確認済み、終了時は未確認 |
-| 公開既定・ライセンス・引用制約 | KernelConfig/SamplingConfig/API既定の差分、LICENSE不変、未承認引用項目の非変更 | 未確認 |
+| 研究repo不変 | 開始時HEAD `69efcfc` と一致、git status空、意図しない生成物なし | 21:15再確認でHEAD一致・status空、終了時再確認は後続 |
+| 公開既定・ライセンス・引用制約 | KernelConfig/SamplingConfig/API既定の差分、LICENSE不変、未承認引用項目の非変更 | 21:15時点でsampling/kernels/LICENSE/CITATIONは22a8e9c以降差分なし、BARはkeyword追加のみで既定維持、終了時再確認は後続 |
 | 最終報告・進捗・コミット | 指定6節、実測表、未実施/所有者判断、全チェックの根拠、clean main | 未確認 |
 
 最終報告を書く前に、未確認の行を実証済みの証拠へ更新する。

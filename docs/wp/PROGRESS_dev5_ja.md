@@ -178,3 +178,12 @@ Pの実験はmainで行うが、担当の文書とレビューの編集・commit
 21:10:54にもPID18612は存在し、担当側の同sessionのpollも継続中だった。
 最終truth cacheを `docs/wp/data_dev5/truth_cache.json` に複写し、実行用cacheとのSHA-256一致 `e23c43c9022bb5dbbe5820009165f81ff30b73ff32018c62cc5b08d028c92f63` を確認した。
 監査表に残っていたPの全suite待ち表記を実行済みのsource/両wheel結果へ更新し、未完の長さ・被覆表とは区別した。
+
+## 2026-10-01 21:17 の更新
+
+保存9600の前半2026–2035はexit0、benchmark内483.03秒・外側483.39秒で完了し、事前固定した後半2036–2045へ進んだ。
+中間10seedの被覆数から結論を作らず、全20seedの集計を待つ。
+21:15の読み取り監査では研究HEADとclean状態が維持され、承認済み前提22a8e9c以降のsampling、kernels、LICENSE、CITATION、handoff本文に差分はなかった。
+AGENTSのlocal wheel検証を実施済みの状態へ更新し、科学計測とremote CIの未完と区別した。
+同じ独立P reviewerへ、最終数値前の統計的解釈の確認を依頼した。
+最初の未完了項目は長さ比較60行の完成とbias/分散の解釈であり、12cohortの正式計測はその後に続ける。
