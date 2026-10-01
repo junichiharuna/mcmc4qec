@@ -184,3 +184,15 @@ dev4領域のblock/cross/paper16/paper50の被覆は13/18/17/19（各20seed）�
 独立算術監査は全60行・240行、source/cache、seed、設定、区間式、Wilson、bias/SD/SE、対応差、cut分布と修正後未判定数を再計算し一致を確認した。
 科学的な誤差評価の校正や論文2,000,000stepの精度再現は主張せず、公開既定の変更は所有者判断に残す。
 この追記時点では最終文書レビューと統合、main push・remote CI、worktree/branch整理、最終報告の確定が残っており、結果を続けて追記する。
+
+## 2026-10-01 22時台・dev5最終統合とremote CI・作業枝整理
+
+P最終文書と独立レビューを `0e4fcab` に統合し、研究env付きsource全suiteを再実行して372 passed /148.48秒、skipなし、file最大24.90秒を確認した。
+検証記録を含むmain `9d25acc9330533582460976714d961c2bb71e61a` をpushし、[Actions run36865462463](https://github.com/junichiharuna/mcmc4qec/actions/runs/36865462463)の全5job成功を確認した。
+UbuntuのPython3.11/3.12でcoreは各267 passed /71 skipped（51.88/49.93秒）、optionalは各365 passed /7 skipped（83.70/64.49秒）だった。
+各wheel jobの例・文書とoptionalの4quick notebookも成功し、型検査jobはmypy24filesと型テスト3件（0.78秒）が成功した。
+wheel jobでのmypy不在による2skipは専用typing jobで検査し、研究checkoutを持たないoptionalの5live skipはlocal sourceで実行済みである。
+`git cherry main wp/p` と `git cherry main wp/q` が空、両worktreeのtracked状態がclean、全出力P40/Q33ファイルがmain側の保存先とSHA一致であることを確認した。
+削除対象の解決済み絶対パスが `A:/dev/mcmc4qec-wt/` 配下であることを検査し、P/Qのworktreeとbranchを削除した。
+研究repoは開始時HEAD `69efcfcc86af3bf24ca977a098dab0f348601aff` のままcleanで、handoffの承認済み前提本文はprefix一致、LICENSE・CITATION・公開sampling/kernel既定は `22a8e9c` 以後不変だった。
+最終報告は `docs/wp/final_report_dev5_ja.md` とし、名目被覆・収束・論文精度・toric速度2倍以内を達成したという主張と、要求された実装・計測・検証の完了を区別する。

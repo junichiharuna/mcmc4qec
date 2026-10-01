@@ -20,10 +20,10 @@ dev5のlocal wheel検証はcore 269 passed /69 skipped /64.00秒、optional 367 
 dev5の科学計測は長さ比較60行と12cohort各20seedの240行を完了し、生CSV・派生量・事前計画・環境・実行ログを `docs/wp/data_dev5/` に保存した。
 dev4領域の4chainではblock/crossの被覆が13/20・18/20、低pのexact anchorでは14/20・15/20で、誤差法の変更だけで名目被覆を保証しない。
 低pのpaper16/50はexact anchorで各19/20だったが、全250step・不等長cut・半trace上限が頻発する短い探索であり、論文の2,000,000stepの精度再現とは扱わない。
-最終文書レビューは完了し、remote CIは未実施で、状態は `docs/wp/PROGRESS_dev5_ja.md`、測定前の設定は `docs/wp/measurement_plan_dev5_ja.md` に記録する。
+最終文書レビューとremote CI（run36865462463の全5job）は完了し、検証済みheadは `9d25acc`、状態は `docs/wp/PROGRESS_dev5_ja.md`、測定前の設定は `docs/wp/measurement_plan_dev5_ja.md` に記録する。
 残る課題はtoricで研究runner比2倍以内という速度目標、実符号の混合と被覆の校正、回路専用の効果差分更新とH提案の設計、非公開ヘルパーを含むstrict型検査である。
 BARと独立MCの区間が非交差となる例も記録しており、短い実行例を研究精度の保証として扱わない。
-所有者判断待ちの事項と次の依頼候補は `docs/wp/final_report_dev4_ja.md` 第6節、経緯は `docs/handoff/IMPLEMENTATION_STATUS.md` の追記にある。
+所有者判断待ちの事項と次の依頼候補は `docs/wp/final_report_dev5_ja.md` 第6節、経緯は `docs/handoff/IMPLEMENTATION_STATUS.md` の追記にある。
 
 ## File layout
 
@@ -41,7 +41,7 @@ BARと独立MCの区間が非交差となる例も記録しており、短い実
 - `docs/paper_consistency_ja.md` — 論文の行番号付き整合表、`docs/wp/data_dev5/` — 公開文書の表に対応する生CSV、`docs/wp/P_ja.md`・`Q_ja.md` と独立レビュー — dev5の実装・検証記録
 - `docs/` — `api_en.md`・`tutorial_en.md`（英語の公開文書）と日本語の設計・検証記録。`initial_library_ja.md`（設計と制約）、`stage1_ja.md`・`validation_stage1_ja.md`・`validation_initial_ja.md`（dev0 / dev1 時点）、`crossval_research_ja.md`・`performance_ja.md`・`convergence_ja.md`・`circuit_baseline_ja.md`（dev2 の各分野）、`dev_request_2026-09-30.md`と`dev_request_2026-09-30_examples.md`（開発依頼書）、`bar_sensitivity_ja.md`（dev4のBAR exact被覆と感度）、`wp/`（WP-A〜Oの完了メモとレビュー、統合・検証記録、dev2の`final_report_ja.md`とdev3の`final_report_examples_ja.md`）
 - `docs/handoff/` — 2026-09-30 の Codex からの引き継ぎ。`HANDOFF.md`、`IMPLEMENTATION_PLAN.md`、`IMPLEMENTATION_STATUS.md`、`spec/RIMC_ライブラリ仕様書_v0.1.md`（ファイル名は v0.1、本文は v0.2。仕様の一次資料）
-- `.github/workflows/tests.yml` — installed wheelをPython 3.11 / 3.12で試すCI（coreと全optional、quick例とnotebookを含む）とPython 3.11の型検査job。dev4のrun 36798208073で全5job成功し、coreは各258 passed / 71 skipped、optionalは各356 passed / 7 skipped、型テストは3 passed
+- `.github/workflows/tests.yml` — installed wheelをPython 3.11 / 3.12で試すCI（coreと全optional、quick例とnotebookを含む）とPython 3.11の型検査job。dev5のrun36865462463で全5job成功し、coreは各267 passed /71 skipped、optionalは各365 passed /7 skipped、型テストは3 passed
 - `pyproject.toml`、`CHANGELOG.md`、`CITATION.cff`（著者名 `junichi haruna` はユーザー指定で確定、所属・DOI・リリース情報は未確定）、`CONTRIBUTING.md`
 - `build/`、`dist/`、`output/`、`.venv*/`、`*.egg-info/` は gitignore
 

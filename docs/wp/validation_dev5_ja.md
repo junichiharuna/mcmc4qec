@@ -137,3 +137,15 @@ CSV再読込時の未判定数の誤集計はbenchmarkのみの修正 `850fa0f` 
 開始時151.22秒との差は-2.74秒、file別最大は `tests.test_circuit_kernels` の24.90秒で、全時間制限内だった。
 wheelに含まれるsourceと英語READMEは先のwheel検証以後変更しておらず、文書・集計修正の後もwheel検証の対象と同じpackage本体である。
 この時点でlocal gateと科学監査は完了し、remote CIと最終整理は後続である。
+
+## dev5 remote CIとworktree整理
+
+検証済みmain `9d25acc9330533582460976714d961c2bb71e61a` をorigin/mainへpushし、[Actions run36865462463](https://github.com/junichiharuna/mcmc4qec/actions/runs/36865462463)のcompleted/successと全5job成功を確認した。
+coreのPython3.11/3.12は各267 passed /71 skipped、51.88/49.93秒、optionalは各365 passed /7 skipped、83.70/64.49秒だった。
+通常mypyは24 source filesで成功し、型テストは3 passed /0.78秒だった。
+wheel jobの2件の追加skipはmypy不在による `tests/test_typing.py` の2テストで、専用typing jobで両方を実行した。
+各jobのverify_wheelも成功し、optionalの全20例・4quick notebook・英語文書コードを含めて確認した。
+全jobのJSONとlogは `output/dev5/ci_dev5.json` と `ci_dev5.log` に保存した。
+P/Qの出力はmainの `output/dev5/p_pilots/` と `output/dev5/q/` に保存し、P40/Q33ファイルのSHA-256一致を確認した。
+`git cherry main wp/p` と `git cherry main wp/q` が空、各worktreeがcleanであることを確認し、解決済み絶対パスの範囲を検査した上で両worktreeとbranchを削除した。
+研究HEADは開始時の69efcfcのままstatus空、handoff既存本文のprefix一致、LICENSE/CITATION/sampling/kernelsの承認済み前提22a8e9c以後差分なしを確認した。

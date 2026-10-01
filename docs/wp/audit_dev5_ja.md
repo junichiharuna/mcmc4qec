@@ -22,7 +22,7 @@
 | Pの標準誤差の理論値 | 合成独立chainに対する既知の分散と共有rung共分散の受入試験 | 合成0.5/sqrt(3)と負の共分散を独立テストで確認 |
 | Pの点推定と既定互換性 | 同seedで誤差法間の点推定一致、既定結果とRNG系列の互換試験 | 同seed点推定一致、Pレビューで既定経路/seed生成順の保持、統合後source/両wheel全suite成功 |
 | Pの小問題反復被覆 | 列挙可能な問題、事前固定した約10 seed、緩い閾値のテスト | seed0–9、2bit exact問題、10件中5件以上の回帰が成功 |
-| Pの反復Geyer burn-in | 反復停止則、半trace fallback、研究コードと論文との差の明示 | P_reviewが研究1D個別cutと照合、合成cut6と半traceの受入成功、最終数値は後続 |
+| Pの反復Geyer burn-in | 反復停止則、半trace fallback、研究コードと論文との差の明示 | P_reviewが研究1D個別cutと照合、合成cut6と半traceの受入成功、最終全240行のcut/残存長/上限頻度も再計算一致 |
 | Pの四収束規則 | scaling/late drift/multistart/dispersionの実判定と未判定処理 | P_reviewで適用traceを監査、正式M未判定と補助四条件を区別、数値はladder全rungのAND |
 | Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | data_dev5/lengthに全60行と対応差、exact換算、分散分解を保存、独立reviewerが全列と派生量を1e-12以内で再現 |
 | Pのbias/分散の識別 | 同一軌道の2誤差法、N依存、必要なburn-in/4・16・50 chain感度 | N依存で散らばり縮小、9600のexact換算偏差1.1SEで持続bias未確定、追加感度未発動を独立reviewerが支持、同軌道2法とanchorの対応比較・MC分散分解も確認 |
@@ -31,20 +31,20 @@
 | Pの論文整合表 | chain数、burn-in、誤差棒、kernel、初期化、収束、ladder、p領域、BAR、anchorを論文行番号付きで対応 | 最終paper_consistencyに全項目と結果の限界、P_review2abc353で式・cut・四規則・kernel・文書結論を確認 |
 | Pの利用者向け指針 | 測定範囲と限界、短いchainの警告、既定変更は所有者判断として提案 | P文書5d14d5dに全表と指針、有限cohort/不等長cut/少数chainの限界、既定維持と所有者判断を記録、2abc353で承認 |
 | Pの独立レビューと対応 | 別agentのP_review、seed選択なし、論文手順一致、統計主張の反証確認 | 2abc353で全60/240行・全派生・最終3文書を確認、None/CSV空欄誤集計は850fa0fで修正し全件再集計、算術上の未解決指摘なし |
-| P merge後の全suite | Q→Pの順のmain履歴とJUnit | P merge `82c003a`、版更新後 `05c7005`、`p_merged.xml` 372 passed /156.56秒 |
+| P merge後の全suite | Q→Pの順のmain履歴とJUnit | P merge `82c003a`後372 passed /156.56秒、最終文書merge `0e4fcab`後 `final_merged.xml` 372 passed /148.48秒、skipなし |
 | Q統合後mainでP最終計測 | コミットと設定を記録した最終CSV、Q前の数値を明確に区別 | sampling05c7005・source SHA・全run_logを保存し独立監査、最終P文書/reviewを0e4fcabでmerge |
 | benchmarkの共通CLI | --quick/--seed/--out、temp既定、envで指定した研究root保護 | Q_reviewで研究なしCLI/出力拒否、Pのquick/seed実行成功、mainのBAR2本×env2種は全てmkdir前拒否 |
 | 共有文書と例の反映 | API、README両言語、examples一覧、pl_curve、notebook02の実差分 | 最終Pメモと照合し方法の仮定・性能・小標本近似・既定維持を反映、例/notebook実行成功、科学表と指針も統合済み |
 | version・notebook再生成 | pyproject 0.1.0.dev5、import/metadata一致、regenerate.pyの実行結果 | dev5 wheelで4本既定regen成功、25.17秒実行合計、verify_wheelのversion/source一致成功 |
 | wheel core | 新規隔離venv、installed import、全pytest、verify_wheel.py core | 269 passed /69 skipped /64.00秒、verify_wheel core成功、24source fileとREADME一致 |
 | wheel optional | 新規隔離venv、installed import、全pytest、verify_wheel.py optional | 367 passed /5 skipped /155.69秒、verify_wheel optional成功、全20例/4quick notebook/文書コード成功 |
-| 実行時間制約 | suite<300秒・基準151.22秒からの増分<60秒・各file<60秒、各benchmark<600秒 | source156.56秒・増分5.34秒・core64.00秒・optional155.69秒・全file最大26.652秒、被覆8invocation最大410.15秒、長さ9600は事前固定2分割483.39/469.81秒（合計953.19秒） |
-| CHANGELOG/AGENTS/handoff追記 | 0.1.0.dev5の実装/実測を反映、handoff既存本文のprefix一致 | f62e36aで実装・科学測定・local結果を更新、handoffは22行追加/削除0、remote CI結果追記は後続 |
-| main pushと全remote CI | origin/mainの対象SHA、Actionsの全5job成功、jobログ | 未確認 |
-| worktree/branch cleanup | git cherryの未統合差分なし、削除対象の安全確認、削除後inventory | 未確認 |
-| 研究repo不変 | 開始時HEAD `69efcfc` と一致、git status空、意図しない生成物なし | 21:15再確認でHEAD一致・status空、終了時再確認は後続 |
-| 公開既定・ライセンス・引用制約 | KernelConfig/SamplingConfig/API既定の差分、LICENSE不変、未承認引用項目の非変更 | 21:15時点でsampling/kernels/LICENSE/CITATIONは22a8e9c以降差分なし、BARはkeyword追加のみで既定維持、終了時再確認は後続 |
-| 最終報告・進捗・コミット | 指定6節、実測表、未実施/所有者判断、全チェックの根拠、clean main | 未確認 |
+| 実行時間制約 | suite<300秒・基準151.22秒からの増分<60秒・各file<60秒、各benchmark<600秒 | 最終source148.48秒・差-2.74秒・file最大24.90秒、core64.00秒・optional155.69秒、被覆8invocation最大410.15秒、長さ9600は事前固定2分割483.39/469.81秒（合計953.19秒） |
+| CHANGELOG/AGENTS/handoff追記 | 0.1.0.dev5の実装/実測を反映、handoff既存本文のprefix一致 | 実装・科学測定・local/remote結果を更新、既存handoff prefix一致を検証し追記のみ |
+| main pushと全remote CI | origin/mainの対象SHA、Actionsの全5job成功、jobログ | 9d25accをpush、run36865462463全5job成功、JSONと全logをoutput/dev5/ci_dev5.*へ保存 |
+| worktree/branch cleanup | git cherryの未統合差分なし、削除対象の安全確認、削除後inventory | P/Qのgit cherry空とclean、出力40/33ファイルのSHA保存一致、絶対パス範囲を確認後削除、inventoryはmainのみ |
+| 研究repo不変 | 開始時HEAD `69efcfc` と一致、git status空、意図しない生成物なし | 22時台再確認でHEAD一致・status空、source実行のPYTHONDONTWRITEBYTECODEと出力保護も維持 |
+| 公開既定・ライセンス・引用制約 | KernelConfig/SamplingConfig/API既定の差分、LICENSE不変、未承認引用項目の非変更 | 22時台にsampling/kernels/LICENSE/CITATIONの22a8e9c以後差分なしを再確認、BARはkeyword追加のみで既定維持 |
+| 最終報告・進捗・コミット | 指定6節、実測表、未実施/所有者判断、全チェックの根拠、clean main | final_reportの6節・全CSV由来表・1文1行・ローカルリンクを検査、進捗全項目完了、最終文書コミットへ保存 |
 
-最終報告を書く前に、未確認の行を実証済みの証拠へ更新する。
+未確認だった各行を実物と実行記録、独立レビューに基づく証拠へ更新した。
 達成を保証できない科学的目標は実測結果と限界として記録し、要求された実験や検証そのものの欠落と区別する。

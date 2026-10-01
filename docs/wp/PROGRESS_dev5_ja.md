@@ -44,10 +44,10 @@
 - [x] 2026-10-01 21:00 新規optional venvのinstalled wheelで全pytest 367 passed /5 skipped /155.69秒とverify_wheel optionalの成功を確認する。
 - [x] 2026-10-01 21:00 source156.56秒・増分5.34秒、core64.00秒、optional155.69秒、file別最大26.652秒で全制限内を確認する。
 - [x] 2026-10-01 21:56 CHANGELOG/AGENTSへ実装・最終科学値・local検証を反映し、handoffは既存本文を保持して追記する（remote CI結果は次のgateで追加）。
-- [ ] 最終検証済みmainをpushし、remote CI全job成功を確認する。
-- [ ] git cherryで統合を確認し、P/Q worktreeとbranchを削除する。
-- [ ] 研究repoの不変・clean、既存handoff本文保持、公開既定とライセンスの保持を確認する。
-- [ ] 全要件を実物と実行記録で監査し、final_report_dev5_ja.mdを書き、進捗全項目を完了にしてコミットする。
+- [x] 2026-10-01 22:02 検証済み9d25accをpushし、run36865462463の全5job・全wheel/例/notebook・型検査成功を確認する。
+- [x] 2026-10-01 22:03 P/Qのgit cherry空とclean、出力P40/Q33ファイルのSHA保存一致、絶対パス範囲を確認し、両worktreeとbranchを削除する。
+- [x] 2026-10-01 22:03 研究HEAD一致/status空、handoff既存本文prefix一致、LICENSE/CITATION/sampling/kernelsの承認済み前提以後不変を再確認する。
+- [x] 2026-10-01 22:14 全要件を実物・実行記録・独立レビューで監査し、指定6節のfinal_report_dev5_ja.mdと全表・リンク・保護条件を確認して最終コミットへ保存する。
 
 ## 開始記録と再開情報
 
@@ -274,3 +274,12 @@ source packageと英語READMEはwheel検証以後変更しておらず、local w
 `git cherry main wp/p` と `git cherry main wp/q` は空で、両branchの内容が統合済みであることを確認したが、削除はremote CI後に行う。
 remoteはprivateの `junichiharuna/mcmc4qec`、mainは開始時の `9e1b28c` のままで、他のremote変更はなかった。
 最初の未完了は検証済みmainのpushとremote CIであり、このlocal検証記録をコミットして進む。
+
+## 2026-10-01 22:14 の完了監査
+
+main9d25accのpushとrun36865462463の全5job成功を確認し、各jobのpytest件数/時間、型検査、verify_wheel、例・notebookの成功をログで照合した。
+P/Qはgit cherry空、clean、出力全P40/Q33ファイルの保存先とのSHA一致を確認し、解決済み削除先の範囲確認後にworktreeとbranchを削除した。
+研究repoのHEAD/status、既存handoff本文prefix、LICENSE/CITATION/sampling/kernelsの承認済み前提以後不変を再確認した。
+最終報告は指定6節・155行で、長さ3群と12cohort・Qの6回計測を保存CSVから表へ反映し、1文1行と全ローカルリンクを検査した。
+要求された実装・計測・検証・文書・push/CI・整理と、保証できない名目被覆・収束・研究精度・未達のtoric速度目標を明確に区別した。
+package本体と英語READMEを変えず、CI結果・監査記録・最終報告の文書だけを最終コミットへ保存する。
