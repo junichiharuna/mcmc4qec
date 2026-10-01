@@ -9,7 +9,7 @@
 符号はtoric d=3、固定unweighted MWPM、bit-flip、Z/H=0.7/0.3、cluster_k=2とする。
 全群のseedは2026–2045の連続した20個で、欠落・重複を拒否する。
 dev4領域のladderは `[0.30,0.26,0.22]`、低p領域は `[0.10,0.07,0.05,0.03]` とする。
-dev4領域はMC anchor、低p領域はMCとexact anchorの両方とし、4構成×3領域/anchorの計12 cohortを得る。
+dev4領域はMC anchor、低p領域はMCとexact anchorの両方とし、4構成と領域/anchorの3通りを組み合わせた計12 cohortを得る。
 MC anchorは独立1500試行で、block bootstrapはblock長8・30反復とする。
 全群で異なるfaulty初期状態の補助比較を有効にし、toricの論文式short/longが同じbasisであることによる正式multistart未判定と区別する。
 sourceの最終変更とversion更新後のmainで失敗重みcacheを新規に作り、問題・source・countのdigestを記録して検証する。
@@ -51,4 +51,7 @@ dev4領域について4 chain、固定burn180、block8、bootstrap30反復、MC 
 各長さの全seedの点推定、区間、被覆数、平均signed偏差、seed間SD、平均偏差のSE、seed2026の推移を残す。
 対応seed間の差も確認し、単一seedの推移や1/sqrt(N)に似た変化だけでbiasと分散を一意に区別しない。
 有限長biasが残る候補があれば、固定180・反復5 IAT・半trace、および4/16/50 chainの感度を追加仕様として測定前に固定する。
-長さ比較の実行時間pilotはこの文書作成時には未完了である。
+2026-10-01 20:41に、保存9600のseed2026のpilotは46.50秒と確認した。
+全20seedの単純見積は930秒になるため、依頼の同じ20seedを保持し、2026–2035と2036–2045の固定2分割を各約465秒のinvocationとして実行する。
+この長さ比較は合計600秒以内ではなく、各benchmark invocationを600秒以内に保つ運用である。
+§5の4構成の被覆実験は別で、各cohort全20seedを600秒以内へ収める250stepの短縮設定を維持する。

@@ -115,3 +115,13 @@ P担当は未検証のtruth-file経路を撤去し、集計時にchecked cache�
 Pの独立受入6件は4.87秒で成功し、最終数値の前にtruth cacheと直接exactの照合、および実行時間pilotを行う。
 mainのAPIとREADMEにはcross-chainの仮定と限界を反映したが、正式被覆表と結論はまだ未実施である。
 メインの次の未完了項目はPのBAR式・小仕様の記録確認である。
+
+## 2026-10-01 20:41 の更新
+
+Pの最終被覆設定を `measurement_plan_dev5_ja.md` に保存し、既定2法は保存600・固定burn180、paper16/50は全250step・個別5 IAT、全群で補助初期値比較あり、全2026–2045とした。
+paper群の長さは最悪の予備実行24.03秒/seedから選び、正式な20seed被覆結果はまだ得ていない。
+9600保存の長さ比較は予備46.50秒/seedのため、同じ20seedを前半10・後半10に固定分割する。
+長さ比較の合計見積930秒と各invocation約465秒を区別し、全20seed合計が600秒以内とは扱わない。
+Pは低pのMC/exact anchorを同じ保存軌道から出力する拡張を検証中で、benchmarkレビューの確定後にmainへ統合する。
+Qの生CSVは `docs/wp/data_dev5/q_step.csv` にもコミットし、第三者がREADME表を再計算できるようにした。
+メインの次の未完了項目はPのbenchmark実装の確定である。
