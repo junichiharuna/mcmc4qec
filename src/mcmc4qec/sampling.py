@@ -232,7 +232,7 @@ def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=
     if kc.stabilizer:
         cast(StabilizerFlip, kernels[3])._rows(problem)
         if faststep is not None:
-            faststep.stabilizers = np.asarray(problem.model.stabilizers)
+            faststep.stabilizers = np.asarray(getattr(problem.model, "stabilizers"))
     sequence = np.random.SeedSequence(seed)
     children = sequence.spawn(config.chains)
     saved = np.empty((config.chains, config.samples, problem.model.n), dtype=np.uint8)
@@ -288,7 +288,7 @@ def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=
                 stats["proposed"] += 1
                 if faststep is not None:
                     current, current_log, current_syndrome = faststep.attempt(
-                        current, current_log, current_syndrome, kernel, rng, stats)
+                        current, current_log, cast(np.ndarray, current_syndrome), kernel, rng, stats)
                 else:
                     proposal = kernel.propose(current, problem, p, rng)
                     candidate = problem.state(proposal.state)

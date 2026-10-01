@@ -220,7 +220,7 @@ class CSSCode:
     def bit_flip_model(self) -> BinaryLinearModel:
         return BinaryLinearModel(self.hz, self.lz, stabilizers=self.hx, identifier="css-bit-flip")
 
-    def phase_flip_model(self):
+    def phase_flip_model(self) -> BinaryLinearModel:
         """Return the static CSS model for binary Z-error support.
 
         X checks (``hx``) measure its syndrome, and ``lx`` reads logical

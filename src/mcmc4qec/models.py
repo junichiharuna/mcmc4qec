@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 import numpy as np
 
-from .core import CSSCode, categorical, identified, positive_integer
+from .core import BinaryLinearModel, CSSCode, categorical, identified, positive_integer
 
 _X_COMPONENT = np.array([0, 1, 1, 0], dtype=np.uint8)
 _Z_COMPONENT = np.array([0, 0, 1, 1], dtype=np.uint8)
@@ -90,6 +90,7 @@ class PhenomenologicalModel:
         self.final_boundary = final_boundary
         self.representation = representation
         self.data_noise = data_noise
+        self.data_model: BinaryLinearModel | DepolarizingModel
         if data_noise == "bit_flip":
             self.data_model = code.bit_flip_model()
             self.n_checks = len(code.hz)

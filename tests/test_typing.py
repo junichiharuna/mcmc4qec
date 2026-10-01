@@ -9,6 +9,7 @@ import sys
 
 import mcmc4qec
 from mcmc4qec.kernels import Proposal
+from mcmc4qec.faststep import FastStepper, make_faststep
 from mcmc4qec.stim_dem import StimDemModel, StimDemNoise
 import pytest
 
@@ -26,7 +27,7 @@ def test_public_signatures_are_annotated():
     """Check every exported callable and methods reachable on exported classes."""
     public_values = [getattr(mcmc4qec, name) for name in mcmc4qec.__all__]
     # These classes are returned by exported factories or proposal methods.
-    public_values.extend((Proposal, StimDemModel, StimDemNoise))
+    public_values.extend((Proposal, StimDemModel, StimDemNoise, FastStepper, make_faststep))
     for value in public_values:
         if inspect.isfunction(value):
             _assert_complete_signature(value)
@@ -68,12 +69,15 @@ def test_mypy_consumer_contract(tmp_path):
         "import numpy as np\n"
         "from numpy.typing import ArrayLike\n"
         "from mcmc4qec import CSSCode, CallableDecoder, IndependentBitFlip, Problem, Result, exact, direct_mc, sample_faulty, diagnose, evaluate_convergence\n"
-        "from mcmc4qec import BinaryLinearModel, minimum_weight_coset_representative\n"
+        "from mcmc4qec import BinaryLinearModel, minimum_weight_coset_representative, mwpm_decoder, bposd_decoder\n"
         "code = CSSCode([[0,0,0]], [[1,1,0],[0,1,1]], [[1,1,1]], [[1,0,0]])\n"
         "decoder = CallableDecoder(lambda s: [int(tuple(s)==(1,0))], identifier='example')\n"
         "noise = IndependentBitFlip(3, scales=[1.0, 1.0, 1.0])\n"
         "problem = Problem(code.bit_flip_model(), noise, decoder)\n"
         "result = exact(problem, 0.25)\n"
+        "phase_model = code.phase_flip_model()\n"
+        "phase_mwpm = mwpm_decoder(code, errors='Z')\n"
+        "phase_bposd = bposd_decoder(code, 0.25, errors='Z')\n"
         "model = BinaryLinearModel([[1, 0]], [[0, 1]])\n"
         "representative = minimum_weight_coset_representative([1, 0], [[0, 1]])\n"
         "class CustomModel:\n"
