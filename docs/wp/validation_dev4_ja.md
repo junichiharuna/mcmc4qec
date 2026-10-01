@@ -46,9 +46,10 @@ K の実装全体と独立レビューは後述の統合時点で完了した。
 | N | `python -m pytest tests -q --junitxml=output/dev4-after-n.xml` | 345 passed / 5 skipped | 122.42 |
 | L、main `a7fc5e6` | `python -m pytest tests -q --junitxml=output/dev4-after-l.xml` | 354 passed / 5 skipped | 144.72 |
 | M、main `5825af4` | `python -m pytest tests -q --junitxml=output/dev4-after-m.xml` | 355 passed / 5 skipped | 148.14 |
+| Oとdev4版情報、main `b7eac06` | `python -m pytest tests -q --junitxml=output/dev4-final-source.xml` | 358 passed / 5 skipped | 146.28 |
 
 K後のskipは研究checkout未指定の照合5件で、Windows ZeroMQの補助selector警告1件が出た。
-installed wheelとremote CIは未実施。
+installed wheelとremote CIの進行結果は以下へ追記する。
 
 ## 基準のファイル別時間
 
@@ -65,3 +66,14 @@ installed wheelとremote CIは未実施。
 
 これは各テストのsetup/call/teardown時間の合計であり、pytest全体の収集・起動費用を含む経過時間とは区別する。
 統合後の増分は同じ依存環境と同時期の比較実行も用いて判定する。
+
+## dev4の時間予算と配布物
+
+最終source全suite146.28秒は基準166.23秒より19.95秒短く、増分60秒と全体300秒の制約を満たした。
+追加のphase_flip/circuit_kernels/bar_coverage/faststep/typingのJUnit時間合計は37.117秒だった。
+全fileの最大はtest_circuit_kernelsの25.186秒で、各file60秒以内だった。
+同一source環境での実測比較であり、別負荷・別マシンでの実行時間の保証とは扱わない。
+`python -m build --wheel`はsetuptools84.0.0の分離buildで成功し、`dist/mcmc4qec-0.1.0.dev4-py3-none-any.whl`を作成した。
+新規`.venv-dev4-core`へcore wheel、新規`.venv-dev4-optional`へ`[matching,bposd,codes,stim,plot,notebooks]`付きwheelを導入した。
+coreの`python -I docs/wp/verify_wheel.py core`は7.28秒で成功し、24 Python fileのsource一致、空py.typed、版とREADMEの一致、実行例と文書コードを確認した。
+optional venvからsourceを探索しない`python -I -m mypy --ignore-missing-imports output/dev4-typing-client.py`も成功し、初回7件失敗した利用例がinstalled wheelで通った。

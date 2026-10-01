@@ -25,16 +25,16 @@
 - [x] 2026-10-01 09:13 JST M 真値比較・20 seed 以上・各仮説と感度・被覆試験・指針・完了メモ（81a5591、8e221a4、独立レビュー待ち）。
 - [x] 2026-10-01 09:28 JST M 独立レビュー記録（a1fc8e8、停止級指摘なし）。
 - [x] 2026-10-01 09:30 JST M 指摘への対応・main統合（5825af4）・全suite（355 passed / 5 skipped、148.14秒）。
-- [ ] O 公開 API と公開メソッドの注釈・py.typed・型検査・完了メモ。
-- [ ] O 独立レビュー記録。
-- [ ] O 指摘への対応・統合済み main への rebase・型検査・main 統合・全 suite。
+- [x] 2026-10-01 09:43 JST O 公開APIと公開メソッドの注釈・py.typed・型検査・完了メモ（93171ec、通常24file成功、strict252件を記録）。
+- [x] 2026-10-01 09:43 JST O 独立レビュー記録（f238866、指摘修正後に承認）。
+- [x] 2026-10-01 09:43 JST O 指摘への対応・統合済みmainへのrebase・型検査・main統合（b7eac06）・全suite（358 passed / 5 skipped、146.28秒）。
 
 ## Phase 2
 
-- [ ] 公開 API・英日 README・API 文書・例一覧・pyproject・CI を統合し版を dev4 にする。
+- [x] 2026-10-01 09:43 JST 公開API・英日README・API文書・例一覧・pyproject・CIを統合し版をdev4にする。
 - [ ] M の指針を pl_curve と notebook 02 の説明へ反映し notebook を再生成する。
-- [ ] verify_wheel.py を新例・型情報に対応させる。
-- [ ] 統合後全 suite と時間予算（各ファイル60秒、増分60秒、全体300秒）を確認する。
+- [x] 2026-10-01 09:43 JST verify_wheel.pyを新例・型情報に対応させる（20例、24 Python file、空py.typed）。
+- [x] 2026-10-01 09:43 JST 統合後全suiteと時間予算を確認する（146.28秒、追加5file37.117秒、最大file25.186秒）。
 - [ ] 新規 core venv に wheel を導入し全 suite と verify_wheel.py core を実行する。
 - [ ] 新規 optional venv に wheel を導入し全 suite と verify_wheel.py optional を実行する。
 - [ ] CHANGELOG・AGENTS を更新し IMPLEMENTATION_STATUS に追記する。
@@ -130,3 +130,9 @@ O担当はこれらを修正し、K/N/L/M統合済み5825af4へrebaseして新�
 
 2026-10-01 09:30 JST、M後の全suiteは355 passed / 5 skipped、148.14秒で成功した。
 最初の未完了項目はOの公開注釈と最終rebaseであり、独立レビューと担当修正を継続している。
+
+2026-10-01 09:43 JST、Oの最終指摘であるNumPy booleanのfailure戻り値も修正し、独立レビューで承認された。
+O統合とdev4版情報、型検査CI、wheelのpy.typed検証をb7eac06へ保存し、source全suite358 passed / 5 skipped、146.28秒で成功した。
+新規core/optional venvへdev4 wheelを導入し、coreのverify_wheelは7.28秒で成功した。
+optionalのinstalled packageに対する利用者コードのmypy検査も成功した。
+両wheel環境の全suite、optional quick検証、既定notebook再生成、remote CI、後片付けと最終報告は継続中である。
