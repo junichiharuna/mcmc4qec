@@ -95,3 +95,13 @@ installed wheelの全pytestとverify_wheelは、この時点ではまだ未実�
 optionalログは `output/dev5/verify_optional.log` に保持し、quick notebookは順に2.56、3.51、3.02、1.87秒、regenerateプロセス全体は11.55秒だった。
 新APIの受入は既存CIが実行する全pytestに含まれ、verify_wheelはversionをpyprojectから読み、例のSUMMARY key集合も変わらないため、スクリプトとworkflowへの変更は不要と判断した。
 installed wheelの全pytestは後続のgateとして未完了である。
+
+新規core venvの `python -m pytest --override-ini pythonpath= tests -q --junitxml=output/dev5/wheel_core.xml` は269 passed /69 skipped /64.00秒だった。
+研究rootとPYTHONPATHを子プロセス環境から外し、optionalがない環境として検証した。
+coreのfile別最大は `test_independent` の10.976秒だった。
+
+## benchmark出力保護の確認
+
+mainの2本のBAR benchmarkで、`RIMC_RESEARCH_ROOT` と `RESEARCH_ROOT` をそれぞれ作業領域内の模擬保護rootに設定し、`--quick --out <その子>` の4通りを実行した。
+すべてexit1でread-only保護エラーになり、対象ディレクトリが作られていないことを確認した。
+この試験は実研究repoを書込先にせずに保護分岐を検証したもので、実研究repoの不変確認とは別に扱う。

@@ -33,10 +33,10 @@
 | Pの独立レビューと対応 | 別agentのP_review、seed選択なし、論文手順一致、統計主張の反証確認 | 未確認 |
 | P merge後の全suite | Q→Pの順のmain履歴とJUnit | P merge `82c003a`、版更新後 `05c7005`、`p_merged.xml` 372 passed /156.56秒 |
 | Q統合後mainでP最終計測 | コミットと設定を記録した最終CSV、Q前の数値を明確に区別 | 未確認 |
-| benchmarkの共通CLI | --quick/--seed/--out、temp既定、envで指定した研究root保護 | 未確認 |
+| benchmarkの共通CLI | --quick/--seed/--out、temp既定、envで指定した研究root保護 | Q_reviewで研究なしCLI/出力拒否、Pのquick/seed実行成功、mainのBAR2本×env2種は全てmkdir前拒否 |
 | 共有文書と例の反映 | API、README両言語、examples一覧、pl_curve、notebook02の実差分 | 未確認 |
 | version・notebook再生成 | pyproject 0.1.0.dev5、import/metadata一致、regenerate.pyの実行結果 | 未確認 |
-| wheel core | 新規隔離venv、installed import、全pytest、verify_wheel.py core | 未確認 |
+| wheel core | 新規隔離venv、installed import、全pytest、verify_wheel.py core | 269 passed /69 skipped /64.00秒、verify_wheel core成功、24source fileとREADME一致 |
 | wheel optional | 新規隔離venv、installed import、全pytest、verify_wheel.py optional | 未確認 |
 | 実行時間制約 | suite<300秒・基準151.22秒からの増分<60秒・各file<60秒、各benchmark<600秒 | source156.56秒・増分5.34秒・file最大26.652秒、wheelと最終benchmarkは未確認 |
 | CHANGELOG/AGENTS/handoff追記 | 0.1.0.dev5の実装/実測を反映、handoff既存本文のprefix一致 | 未確認 |
