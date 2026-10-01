@@ -14,12 +14,12 @@
 ## WP と統合（K → N → L → M → O）
 
 - [x] 2026-10-01 08:59 JST K 実装・受入検証・完了メモ（f9b7b93、依頼のX/Z等号・不等号の反例とexact状態数制約を明記）。
-- [ ] K 独立レビュー記録。
+- [x] 2026-10-01 09:08 JST K 独立レビュー記録（f30ef57、停止級指摘なし）。
 - [ ] K 指摘への対応・main 統合・全 suite。
 - [x] 2026-10-01 08:54 JST N 実装・等価性検証・実測・完了メモ（db1f88c、独立レビューは未完了）。
 - [ ] N 独立レビュー記録。
 - [ ] N 指摘への対応・main 統合・全 suite。
-- [ ] L 実装・詳細釣合い検証・実測・完了メモ。
+- [x] 2026-10-01 09:08 JST L 実装・詳細釣合い検証・実測・完了メモ（606fc7b、共有manifest失敗はmain統合時に対応）。
 - [ ] L 独立レビュー記録。
 - [ ] L 指摘への対応・N 統合後への rebase・等価性再検証・main 統合・全 suite。
 - [ ] M 真値比較・20 seed 以上・各仮説と感度・被覆試験・指針・完了メモ。
@@ -91,3 +91,18 @@ KとNの独立レビューはまだ行っておらず、mainへも未統合で�
 次の最初の未完了項目はK独立レビューであり、空き枠ができたら別担当をhighで起動する。
 Nレビューはxhighで行い、LはN統合後、OはK/N/L/M統合後にrebaseと再検証を行う。
 optional wheel用venvへの依存導入も成功したが、mcmc4qec本体のwheelはまだ導入していない。
+
+## 2026-10-01 09:05 JST 継続時の監査
+
+前ターンはK/N完了確認、L/O起動、記録コミットがありprogressと判定した。
+再開時main `7e1dba6` はclean、L/M/Oはツールでrunningと確認した。
+Mは `81a5591` に成果を保存して完了返却したため、その枠で `/root/review_k`（gpt-6-sol/high）を起動した。
+K共有文書・例manifest用のpatchを `output/dev4-k-integration.patch` に準備し、git apply --checkが成功した。
+Lは `db1db3c` に保存したが、mainの監査で新例のPNG/CSVfallbackが未実装と分かり担当へ追加を依頼した。
+Mのsamples_short/longはbootstrap block長も自動で6/11へ変化しており、基準8を固定した一要因比較を追加する必要がある。
+Mへのidle送信はagent thread limitで拒否されたため、空き枠後にこの指摘を担当へfollowupし、benchmarkと根拠表を修正する。
+K独立review、Lの図追加、O注釈は進行中で、N/M/L/Oの独立reviewは未実施。
+
+2026-10-01 09:08 JST、K独立レビューは `f30ef57` に保存され停止級指摘なし。
+LのPNG/CSVfallback対応は `606fc7b` で完了し、空いた枠で `/root/review_n`（gpt-6-sol/xhigh）を起動した。
+Kレビュー担当の完了後、M担当をfollowup起動し、block8固定のsample数感度を追加する。
