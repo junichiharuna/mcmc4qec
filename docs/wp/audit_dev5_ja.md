@@ -26,7 +26,7 @@
 | Pの四収束規則 | scaling/late drift/multistart/dispersionの実判定と未判定処理 | P_reviewで適用traceを監査、正式M未判定と補助四条件を区別、数値はladder全rungのAND |
 | Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | data_dev5/lengthに全60行と対応差、exact換算、分散分解を保存、独立reviewerが全列と派生量を1e-12以内で再現 |
 | Pのbias/分散の識別 | 同一軌道の2誤差法、N依存、必要なburn-in/4・16・50 chain感度 | N依存で散らばり縮小、9600のexact換算偏差1.1SEで持続bias未確定、追加感度未発動の判断を独立reviewerが支持、同軌道2法比較は後続 |
-| Pの4構成×2領域 | 全構成20 seed以上、各CSVと被覆/Wilson/平均幅/平均偏差/収束合格数 | 10cohort・200行をdata_dev5に保存、低p paper50両anchorの2群が実行中、全体監査は未完 |
+| Pの4構成×2領域 | 全構成20 seed以上、各CSVと被覆/Wilson/平均幅/平均偏差/収束合格数 | 全12cohort・240行と修正版集計/派生をdata_dev5に保存、最終独立監査中 |
 | Pの低p exact/MC anchor | 同じ軌道に対する両anchor、独立seedとanchor分散の記録 | 低p default_blockの20組は比・cut・診断が全て一致、他群と全体の独立監査は進行中 |
 | Pの論文整合表 | chain数、burn-in、誤差棒、kernel、初期化、収束、ladder、p領域、BAR、anchorを論文行番号付きで対応 | paper_consistencyに全項目あり、P_reviewで式・cut・四規則・kernel等を照合、最終数値の反映は後続 |
 | Pの利用者向け指針 | 測定範囲と限界、短いchainの警告、既定変更は所有者判断として提案 | 未確認 |
@@ -38,7 +38,7 @@
 | version・notebook再生成 | pyproject 0.1.0.dev5、import/metadata一致、regenerate.pyの実行結果 | dev5 wheelで4本既定regen成功、25.17秒実行合計、verify_wheelのversion/source一致成功 |
 | wheel core | 新規隔離venv、installed import、全pytest、verify_wheel.py core | 269 passed /69 skipped /64.00秒、verify_wheel core成功、24source fileとREADME一致 |
 | wheel optional | 新規隔離venv、installed import、全pytest、verify_wheel.py optional | 367 passed /5 skipped /155.69秒、verify_wheel optional成功、全20例/4quick notebook/文書コード成功 |
-| 実行時間制約 | suite<300秒・基準151.22秒からの増分<60秒・各file<60秒、各benchmark<600秒 | source156.56秒・増分5.34秒・core64.00秒・optional155.69秒・全file最大26.652秒、最終benchmarkは未確認 |
+| 実行時間制約 | suite<300秒・基準151.22秒からの増分<60秒・各file<60秒、各benchmark<600秒 | source156.56秒・増分5.34秒・core64.00秒・optional155.69秒・全file最大26.652秒、被覆8invocation最大410.15秒、長さ9600は事前固定2分割483.39/469.81秒（合計953.19秒） |
 | CHANGELOG/AGENTS/handoff追記 | 0.1.0.dev5の実装/実測を反映、handoff既存本文のprefix一致 | 未確認 |
 | main pushと全remote CI | origin/mainの対象SHA、Actionsの全5job成功、jobログ | 未確認 |
 | worktree/branch cleanup | git cherryの未統合差分なし、削除対象の安全確認、削除後inventory | 未確認 |
