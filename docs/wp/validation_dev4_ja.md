@@ -45,6 +45,7 @@ K の実装全体と独立レビューは後述の統合時点で完了した。
 | K、main `c550cdf` | `python -m pytest tests -q --junitxml=output/dev4-after-k.xml` | 330 passed / 5 skipped | 149.98 |
 | N | `python -m pytest tests -q --junitxml=output/dev4-after-n.xml` | 345 passed / 5 skipped | 122.42 |
 | L、main `a7fc5e6` | `python -m pytest tests -q --junitxml=output/dev4-after-l.xml` | 354 passed / 5 skipped | 144.72 |
+| M、main `5825af4` | `python -m pytest tests -q --junitxml=output/dev4-after-m.xml` | 355 passed / 5 skipped | 148.14 |
 
 K後のskipは研究checkout未指定の照合5件で、Windows ZeroMQの補助selector警告1件が出た。
 installed wheelとremote CIは未実施。

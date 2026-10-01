@@ -24,7 +24,7 @@
 - [x] 2026-10-01 09:28 JST L 指摘への対応（f8a407d）・N後rebase・等価性再検証・main統合（a7fc5e6）・全suite（354 passed / 5 skipped、144.72秒）。
 - [x] 2026-10-01 09:13 JST M 真値比較・20 seed 以上・各仮説と感度・被覆試験・指針・完了メモ（81a5591、8e221a4、独立レビュー待ち）。
 - [x] 2026-10-01 09:28 JST M 独立レビュー記録（a1fc8e8、停止級指摘なし）。
-- [ ] M 指摘への対応・main 統合・全 suite。
+- [x] 2026-10-01 09:30 JST M 指摘への対応・main統合（5825af4）・全suite（355 passed / 5 skipped、148.14秒）。
 - [ ] O 公開 API と公開メソッドの注釈・py.typed・型検査・完了メモ。
 - [ ] O 独立レビュー記録。
 - [ ] O 指摘への対応・統合済み main への rebase・型検査・main 統合・全 suite。
@@ -127,3 +127,6 @@ pl_curveとnotebook02の説明を改めたが、既定notebook出力の再生成
 M後の全suiteを実行中である。
 O独立レビュー `/root/review_o`（gpt-6-sol/high）は、診断の配列・sequence入力、alphabetを省略する独自binary model、独自parameter型、list出力decoderの注釈の不整合を指摘した。
 O担当はこれらを修正し、K/N/L/M統合済み5825af4へrebaseして新規APIとmoduleの型検査を行う。
+
+2026-10-01 09:30 JST、M後の全suiteは355 passed / 5 skipped、148.14秒で成功した。
+最初の未完了項目はOの公開注釈と最終rebaseであり、独立レビューと担当修正を継続している。
