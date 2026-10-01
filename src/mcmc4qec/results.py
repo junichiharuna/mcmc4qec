@@ -30,7 +30,7 @@ class Result:
     with ValueError. Neither method reconstructs executable user callables.
     """
     kind: str
-    metadata: dict
+    metadata: dict[str, Any]
     elapsed_seconds: float
     estimate: float | None = None
     log_estimate: float | None = None
@@ -39,8 +39,8 @@ class Result:
     failures: int | None = None
     conditional_weight: float | None = None
     states: np.ndarray | None = None
-    acceptance: dict = field(default_factory=dict)
-    diagnostics: dict = field(default_factory=dict)
+    acceptance: dict[str, Any] = field(default_factory=dict)
+    diagnostics: dict[str, Any] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
 
     def to_json(self, *, indent: int=2) -> str:

@@ -64,7 +64,10 @@ def test_mypy_consumer_contract(tmp_path):
     env = {**os.environ, "MYPYPATH": str(source)}
     valid = tmp_path / "typing_client.py"
     valid.write_text(
-        "from mcmc4qec import CSSCode, CallableDecoder, IndependentBitFlip, Problem, exact\n"
+        "from typing import Any\n"
+        "import numpy as np\n"
+        "from numpy.typing import ArrayLike\n"
+        "from mcmc4qec import CSSCode, CallableDecoder, IndependentBitFlip, Problem, Result, exact, direct_mc, sample_faulty, diagnose, evaluate_convergence\n"
         "from mcmc4qec import BinaryLinearModel, minimum_weight_coset_representative\n"
         "code = CSSCode([[0,0,0]], [[1,1,0],[0,1,1]], [[1,1,1]], [[1,0,0]])\n"
         "decoder = CallableDecoder(lambda s: [int(tuple(s)==(1,0))], identifier='example')\n"
@@ -72,7 +75,29 @@ def test_mypy_consumer_contract(tmp_path):
         "problem = Problem(code.bit_flip_model(), noise, decoder)\n"
         "result = exact(problem, 0.25)\n"
         "model = BinaryLinearModel([[1, 0]], [[0, 1]])\n"
-        "representative = minimum_weight_coset_representative([1, 0], [[0, 1]])\n",
+        "representative = minimum_weight_coset_representative([1, 0], [[0, 1]])\n"
+        "class CustomModel:\n"
+        "    n = 1\n"
+        "    def validate_state(self, state: np.ndarray) -> list[int]: return [int(state[0])]\n"
+        "    def syndrome(self, state: np.ndarray) -> list[int]: return [int(state[0])]\n"
+        "    def observables(self, state: np.ndarray) -> list[int]: return [int(state[0])]\n"
+        "    def metadata(self) -> dict[str, Any]: return {'identifier': 'custom-model'}\n"
+        "class CustomNoise:\n"
+        "    n = 1\n"
+        "    def sample(self, p: tuple[float, int], rng: np.random.Generator) -> list[int]: return [0]\n"
+        "    def log_prob(self, state: np.ndarray, p: tuple[float, int]) -> float: return 0.0\n"
+        "    def metadata(self) -> dict[str, Any]: return {'identifier': 'custom-noise'}\n"
+        "class CustomDecoder:\n"
+        "    def predict(self, syndrome: ArrayLike) -> list[int]: return [0]\n"
+        "    def metadata(self) -> dict[str, Any]: return {'identifier': 'custom-decoder'}\n"
+        "custom = Problem(CustomModel(), CustomNoise(), CustomDecoder())\n"
+        "exact(custom, (0.25, 1))\n"
+        "direct_mc(custom, (0.25, 1), trials=4)\n"
+        "sample_faulty(custom, (0.25, 1), initial_state=[1])\n"
+        "run = Result('sample_faulty', {}, 0.0, states=np.zeros((1, 8, 1), dtype=np.uint8))\n"
+        "diagnose((run, run))\n"
+        "evaluate_convergence(np.zeros((2, 8)), other_initialization=np.ones((2, 8)))\n"
+        "evaluate_convergence((run, run), other_initialization=(run, run))\n",
         encoding="utf-8",
     )
     command = [sys.executable, "-m", "mypy", "--ignore-missing-imports"]
@@ -82,15 +107,20 @@ def test_mypy_consumer_contract(tmp_path):
 
     invalid = tmp_path / "typing_invalid.py"
     invalid.write_text(
-        "from mcmc4qec import BinaryLinearModel, CallableDecoder, IndependentBitFlip, Problem\n"
+        "from mcmc4qec import BinaryLinearModel, CallableDecoder, IndependentBitFlip, Problem, exact, direct_mc, sample_faulty\n"
         "noise = IndependentBitFlip(1)\n"
         "noise.probabilities('wrong')\n"
         "problem = Problem(BinaryLinearModel([[1]], [[1]]), noise, "
         "CallableDecoder(lambda s: [0], identifier='decoder'))\n"
-        "problem.log_prob([0], 'wrong')\n",
+        "problem.log_prob([0], 'wrong')\n"
+        "exact(problem, 'wrong')\n"
+        "direct_mc(problem, 'wrong', trials=4)\n"
+        "sample_faulty(problem, 'wrong', initial_state=[1])\n",
         encoding="utf-8",
     )
     completed = subprocess.run(command + [str(invalid)], cwd=root, env=env,
                                capture_output=True, text=True, timeout=50, check=False)
     assert completed.returncode != 0, completed.stdout + completed.stderr
     assert completed.stdout.count('incompatible type "str"') == 2, completed.stdout
+    for function in ("exact", "direct_mc", "sample_faulty"):
+        assert f'Cannot infer value of type parameter "_P" of "{function}"' in completed.stdout

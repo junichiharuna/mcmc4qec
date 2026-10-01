@@ -1,6 +1,6 @@
 """Exact enumeration, fixed-budget direct MC, and conditional MH sampling."""
 from __future__ import annotations
-from typing import Any, Protocol, cast
+from typing import Any, Protocol, TypeVar, cast
 from dataclasses import asdict, dataclass, field
 from dataclasses import replace
 import itertools
@@ -8,6 +8,7 @@ import math
 import time
 
 import numpy as np
+from numpy.typing import ArrayLike
 from .core import Problem, positive_integer
 from .kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
 from .results import Result, metadata
@@ -23,6 +24,9 @@ class _Kernel(Protocol):
     name: str
     def propose(self, state: np.ndarray, problem: Problem, p: Any,
                 rng: np.random.Generator) -> Any: ...
+
+
+_P = TypeVar("_P")
 
 
 @dataclass(frozen=True)
@@ -105,7 +109,7 @@ def spawn_seeds(seed: int | None, count: int) -> list[int]:
             for s in np.random.SeedSequence(seed).spawn(count)]
 
 
-def exact(problem: Problem, p: float | dict[str, Any] | None, *, max_states: int=1_048_576) -> Result:
+def exact(problem: Problem[_P], p: _P, *, max_states: int=1_048_576) -> Result:
     """Enumerate the full experiment state space and return an exact Result.
 
     problem binds the model, noise, decoder, and shared failure definition.
@@ -154,7 +158,7 @@ def _wilson(failures, n):
             1.0 if failures == n else min(1.0, center+radius))
 
 
-def direct_mc(problem: Problem, p: float | dict[str, Any] | None, *, trials: int, seed: int | None=None) -> Result:
+def direct_mc(problem: Problem[_P], p: _P, *, trials: int, seed: int | None=None) -> Result:
     """Return a direct Monte Carlo Result for a fixed number of experiments.
 
     problem binds the model, noise, decoder, and shared failure definition.
@@ -186,7 +190,7 @@ def direct_mc(problem: Problem, p: float | dict[str, Any] | None, *, trials: int
         warnings=warning)
 
 
-def sample_faulty(problem: Problem, p: float | dict[str, Any] | None, *, config: SamplingConfig | None=None, seed: int | None=None, initial_state: np.ndarray | None=None) -> Result:
+def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=None, seed: int | None=None, initial_state: ArrayLike | None=None) -> Result:
     """Sample normalized noise restricted to one fixed deterministic failure set.
 
     problem binds the model, noise, decoder, and shared failure definition.

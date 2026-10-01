@@ -4,6 +4,7 @@ from typing import Any
 from collections import OrderedDict
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 from .core import BinaryLinearModel, Decoder, Problem, binary, positive_integer
 from .models import DepolarizingModel
@@ -35,7 +36,7 @@ class CachedDecoder:
         if self.policy == "research_clear" and self.cap is not None and self.size > self.cap:
             self.lookup.clear()
 
-    def predict(self, syndrome: np.ndarray) -> np.ndarray:
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         syndrome = np.asarray(syndrome)
         key = (syndrome.shape, syndrome.dtype.str, syndrome.tobytes())
         if key in self.lookup:
@@ -61,7 +62,7 @@ class FailureEvaluator:
     def __init__(self, problem: Problem) -> None:
         self.problem = problem
 
-    def syndrome(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: np.ndarray | None=None) -> np.ndarray:
+    def syndrome(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: ArrayLike | None=None) -> ArrayLike:
         model = self.problem.model
         if previous is not None and previous_syndrome is not None:
             differences = np.flatnonzero(np.asarray(state) != np.asarray(previous))
@@ -80,7 +81,7 @@ class FailureEvaluator:
                     return np.asarray(previous_syndrome, dtype=np.uint8) ^ delta
         return model.syndrome(state)
 
-    def evaluate(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: np.ndarray | None=None) -> tuple[bool, np.ndarray]:
+    def evaluate(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: ArrayLike | None=None) -> tuple[bool, ArrayLike]:
         problem = self.problem
         state = problem.state(state)
         syndrome = self.syndrome(state, previous=previous,
@@ -97,6 +98,6 @@ class FailureEvaluator:
                 raise ValueError("failure predicate must return a boolean")
         return bool(faulty), syndrome
 
-    def is_faulty(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: np.ndarray | None=None) -> bool:
+    def is_faulty(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: ArrayLike | None=None) -> bool:
         return self.evaluate(state, previous=previous,
                              previous_syndrome=previous_syndrome)[0]

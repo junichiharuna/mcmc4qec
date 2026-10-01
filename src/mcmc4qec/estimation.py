@@ -83,11 +83,11 @@ class EstimationResult:
     adjacent_log_ratios: list[float]
     log_standard_errors: list[float | None]
     intervals: list[tuple[float, float] | None]
-    metadata: dict
+    metadata: dict[str, Any]
     elapsed_seconds: float
     warnings: list[str] = field(default_factory=list)
-    diagnostics: list[dict] = field(default_factory=list)
-    overlap: list[dict] = field(default_factory=list)
+    diagnostics: list[dict[str, Any]] = field(default_factory=list)
+    overlap: list[dict[str, Any]] = field(default_factory=list)
     bootstrap_log_ratio_covariance: list[list[float]] | None = None
     kind: str = "splitting_bar"
 

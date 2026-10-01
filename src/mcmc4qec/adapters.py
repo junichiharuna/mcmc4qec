@@ -92,7 +92,7 @@ class DecoderAdapter:
             except PackageNotFoundError:
                 pass
 
-    def predict(self, syndrome: np.ndarray) -> np.ndarray:
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         syndrome = _binary(syndrome, "syndrome", (1, 2))
         prediction = _binary(self.decoder.decode(syndrome, **self._decode_kwargs), "decoder output", (1,))
         if self.output_kind == "correction":

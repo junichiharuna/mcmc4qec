@@ -2,11 +2,12 @@
 from __future__ import annotations
 from typing import Any
 import numpy as np
+from numpy.typing import ArrayLike
 
 from .core import Decoder, binary, identified, json_value, positive_integer
 
 
-def _binary(value, ndim, name):
+def _binary(value: ArrayLike, ndim: int, name: str) -> np.ndarray:
     if np.asarray(value).dtype.kind not in "buif":
         raise ValueError(f"{name} must contain binary numeric values")
     return binary(value, ndim=ndim, name=name)
@@ -49,7 +50,7 @@ class SectorDecoder:
         self.x_syndrome_size = positive_integer(x_syndrome_size, "x_syndrome_size", zero=True)
         self.identifier = _identifier(identifier)
 
-    def predict(self, syndrome: np.ndarray) -> np.ndarray:
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         syndrome = _binary(syndrome, 1, "syndrome")
         if len(syndrome) < self.x_syndrome_size:
             raise ValueError("syndrome is shorter than x_syndrome_size")
@@ -92,7 +93,7 @@ class HistoryDecoder:
         self.layout = layout
         self.identifier = _identifier(identifier)
 
-    def predict(self, syndrome: np.ndarray) -> np.ndarray:
+    def predict(self, syndrome: ArrayLike) -> np.ndarray:
         history = _binary(syndrome, 2, "syndrome history")
         if history.shape[0] == 0:
             raise ValueError("syndrome history must contain at least one round")

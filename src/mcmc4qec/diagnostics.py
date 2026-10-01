@@ -1,6 +1,6 @@
 """Weight-trace diagnostics; these do not certify mixing or correctness."""
 from __future__ import annotations
-from typing import Any, Callable, cast
+from typing import Any, Iterable, cast
 import math
 
 import numpy as np
@@ -27,7 +27,7 @@ def _iat(x):
     return tau if np.isfinite(tau) and tau > 0 else None
 
 
-def weight_traces(results: Result | list[Result]) -> tuple[np.ndarray, list[Result]]:
+def weight_traces(results: Result | Iterable[Result]) -> tuple[np.ndarray, list[Result]]:
     """Extract [chain, sample] nonidentity counts from one or more Results.
 
     Equal sample counts are required so pooled split R-hat has a single segment
@@ -68,7 +68,7 @@ def _aggregate_acceptance(results):
     return counts
 
 
-def diagnose(results: Result | list[Result]) -> dict[str, Any]:
+def diagnose(results: Result | Iterable[Result]) -> dict[str, Any]:
     """Diagnose one or more independently seeded conditional-sampling Results.
 
     `results` is one Result or an iterable of Results, each with states shaped
