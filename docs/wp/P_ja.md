@@ -22,7 +22,7 @@ toric d=3 の最小・最大論理基底状態は同一なので、論文どお�
 BAR の ragged な burn 後標本は pooled BAR を解き、chain 単位の比の散らばりで区間を作るため、同数標本の API に対する漸近誤差近似を不等長 chain に延ばしたものである。
 `--make-truth-cache` は同一問題の失敗重みヒストグラムを一度列挙し、符号行列と問題 metadata、パッケージ source、重み counts の SHA-256 を付けて保存する。
 `--truth-cache` はその digest を検証し、各 p の exact 真値と exact anchor を重みヒストグラムから求める。
-`--aggregate` は設定ごとに 2026–2045 が重複なく全件ある場合だけ cohort CSV を作る。
+`--aggregate` は checked truth cache を必須とし、各 CSV の問題 digest と exact 真値を再計算して一致し、設定ごとに 2026–2045 が重複なく全件ある場合だけ cohort CSV を作る。
 
 ## 実行済みの検証
 

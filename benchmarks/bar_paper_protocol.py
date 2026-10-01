@@ -139,8 +139,14 @@ def _summary(rows, elapsed):
                 elapsed_seconds=elapsed)
 
 
-def aggregate(directory, out):
+def aggregate(directory, out, truth_cache):
     """Require every predeclared seed once per configuration before summarizing."""
+    if not truth_cache:
+        raise ValueError("--aggregate requires --truth-cache for independent exact-truth validation")
+    code = make_toric_code(3)
+    problem = Problem(code.bit_flip_model(), IndependentBitFlip(code.n), mwpm_decoder(code))
+    cache = load_truth_cache(truth_cache, code, problem)
+    problem_sha = _problem_digest(code, problem)
     groups = {}
     for path in sorted(Path(directory).glob("*_runs.csv")):
         if path.name == "cohort_runs.csv":
@@ -160,6 +166,15 @@ def aggregate(directory, out):
         seeds = [int(row["seed"]) for row in rows]
         if len(seeds) != len(COHORT) or sorted(seeds) != list(COHORT):
             raise ValueError(f"{key}: require each fixed cohort seed 2026..2045 exactly once")
+        if len({row["exact"] for row in rows}) != 1:
+            raise ValueError(f"{key}: exact truth differs across seed rows")
+        expected = cached_exact(problem, LADDERS[key[0]][-1], cache).estimate
+        if any(row["problem_sha256"] != problem_sha or
+               row["truth_cache_source_sha256"] != cache["package_source_sha256"] or
+               row["truth_source"] != "checked_weight_cache" or
+               not math.isclose(float(row["exact"]), expected, rel_tol=0, abs_tol=1e-12)
+               for row in rows):
+            raise ValueError(f"{key}: exact truth or problem provenance differs from checked cache")
         ordered = sorted(rows, key=lambda row: int(row["seed"]))
         all_rows.extend(ordered)
         summaries.append(_summary(ordered, ""))
@@ -290,14 +305,6 @@ def run(args):
         raise RuntimeError("No distinct faulty auxiliary start")
     if cache is not None:
         truth = cached_exact(problem, ladder[-1], cache).estimate
-    elif args.truth_file:
-        if not args.trust_truth_file:
-            raise ValueError("--truth-file requires --trust-truth-file and the same toric d=3 problem")
-        with Path(args.truth_file).open(newline="", encoding="utf-8") as stream:
-            truth_rows = list(csv.DictReader(stream))
-        if len(truth_rows) != 1 or truth_rows[0]["region"] != args.region:
-            raise ValueError("truth file must contain one matching-region summary row")
-        truth = float(truth_rows[0]["exact"])
     else:
         truth = exact(problem, ladder[-1]).estimate
     exact_anchor = (cached_exact(problem, ladder[0], cache) if cache is not None and args.anchor == "exact"
@@ -359,8 +366,7 @@ def run(args):
                          chains=chains, ladder="/".join(map(str, ladder)),
                          problem_sha256=_problem_digest(code, problem),
                          truth_cache_source_sha256=cache["package_source_sha256"] if cache is not None else "",
-                         truth_source="checked_weight_cache" if cache is not None else
-                                      "trusted_summary" if args.truth_file else "fresh_exact",
+                         truth_source="checked_weight_cache" if cache is not None else "fresh_exact",
                          bootstrap_replicates=args.bootstrap_replicates, block=args.block,
                          anchor_trials=args.anchor_trials, lazy=kernels.lazy,
                          cuts="/".join(",".join(map(str, rung)) for rung in cuts),
@@ -398,9 +404,6 @@ def main():
     parser.add_argument("--samples", type=int, default=600,
                         help="Retained steps for fixed-cut protocols; full trace steps before IAT cut for paper protocols")
     parser.add_argument("--anchor-trials", type=int, default=1500)
-    parser.add_argument("--truth-file", help="Previously validated same-region summary CSV to reuse exact truth")
-    parser.add_argument("--trust-truth-file", action="store_true",
-                        help="Assert truth file uses the same toric d=3 code, MWPM, and failure definition")
     parser.add_argument("--make-truth-cache", help="Enumerate the failure-weight histogram once and write a checked cache")
     parser.add_argument("--truth-cache", help="Checked failure-weight cache for exact truth and exact anchor")
     parser.add_argument("--bootstrap-replicates", type=int, default=30)
@@ -413,7 +416,7 @@ def main():
     parser.add_argument("--out", default=str(Path(tempfile.gettempdir()) / "mcmc4qec" / "bar_paper_protocol"))
     args = parser.parse_args()
     if args.aggregate:
-        aggregate(args.aggregate, args.out)
+        aggregate(args.aggregate, args.out, args.truth_cache)
         return
     if args.seed is not None:
         args.seed_start, args.seeds = args.seed, 1
