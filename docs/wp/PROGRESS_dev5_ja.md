@@ -11,15 +11,15 @@
 - [x] 2026-10-01 20:00 前提変更を `22a8e9c` に保存し、全 source suite は362 passed / 151.22秒、tracked差分なしを確認する（新規計画文書のみ未追跡）。
 - [x] 2026-10-01 研究 live 照合を再実行する（20 passed、1.97 秒、`output/dev5/phase0_crossval.xml`）。
 - [x] 2026-10-01 20:00 必読資料を確認し、P/Q指示文と受入条件を準備する（`P_instructions_ja.md`、`Q_instructions_ja.md`）。
-- [ ] P/Q の worktree を作成し、指定モデルの担当2体を起動する。
+- [x] 2026-10-01 20:01 P/Q worktreeを作成し、gpt-6-sol/highの担当2体を起動する（利用可能なsolモデルを指定）。
 
 ## WP-Q（先に統合）
 
-- [ ] 小仕様と全状態・全近傍・同 seed/RNG の受入試験を追加する。
-- [ ] 局所確率表、decoder cache、候補処理の改善を実装する。
-- [ ] toric d=5/d=7/BB72 を2回以上計測し、profile と README 案を Q 完了メモに記録する。
-- [ ] 別担当が敵対的レビューを実施し `Q_review_ja.md` を作成する。
-- [ ] レビュー指摘へ対応し、担当試験を完了する。
+- [x] 2026-10-01 20:07 小仕様と受入試験をQ worktreeに追加する（全小状態・全近傍、toric同seed/RNG、正規化回数、cache境界；担当実行19 passed / 5.48秒、main統合・独立レビューは後続）。
+- [x] 2026-10-01 20:20 局所確率表、decoder cache、候補処理をQ worktreeに実装し、型修正後の関連45件が成功する（正式レビュー・main全suiteは後続）。
+- [x] 2026-10-01 20:20 最終runtimeで3符号各2回を再計測し、profileとREADME案、例6本の既定/quickの実測をQメモに記録する。
+- [x] 2026-10-01 20:26 別担当 `/root/q_review` が敵対的レビューを実施し `Q_review_ja.md` を `ac48cd9` に保存する。
+- [x] 2026-10-01 20:26 高・中の要修正指摘なし、独立136近傍の列挙と関連45件成功を確認し、残る全suiteを統合gateに残す。
 - [ ] Q を main に merge し、全 source suite の件数・時間を記録する。
 
 ## WP-P
@@ -59,3 +59,49 @@
 完全な基準実行のJUnitは `output/dev5/phase0_full.xml`、詳細は `validation_dev5_ja.md` に記録した。
 研究live照合は同環境の `python -m pytest tests/test_crossval_research.py -q` で20件成功した。
 論文は観測量平均のcross-chain SEを定義し、full BARのend-to-end評価は未実施と記載しているため、BARへの誤差伝播を論文の検証済み結論とは扱わない。
+
+## 稼働中の担当
+
+WP-Qは `/root/wp_q`、worktreeは `A:/dev/mcmc4qec-wt/q`、branchは `wp/q` である。
+WP-Pは `/root/wp_p`、worktreeは `A:/dev/mcmc4qec-wt/p`、branchは `wp/p` である。
+両worktreeの出発点は `f2799a1` である。
+再開時はagentの現況とgit差分を確認し、既存agentが稼働中なら重複起動しない。
+Pは実装と軽量試験を先行し、最終の20seed被覆表はQ統合後mainで測定する。
+計測競合を避けるため、各担当はbenchmark実行前にメインへ連絡する。
+メインの次の未完了項目はQの小仕様・受入試験の確認であり、その後に独立レビュー、Q統合、P統合の順で進める。
+
+## 2026-10-01 20:07 の再開記録
+
+前turnはPhase 0の検証とコミットにより進捗があり、今回は最初の未完了だったQの小仕様・受入試験を実物で確認した。
+cache miss試験でCallableDecoder自身が先に不正値を拒否する問題と、非Z受理後のZで正規化が2回になる構造を指摘し、Q担当がraw decoder fixtureと表の保持更新へ修正した。
+Qの受入試験は担当実行で19 passed / 5.48秒であり、変更後の全suiteと独立レビューはまだ未実施である。
+要件全体の完了監査に使う対応表を `audit_dev5_ja.md` に作成した。
+指定Pythonから `.venv-dev5-core` と `.venv-dev5-optional` を新規作成し、coreはpytest/mypyのみ導入、packageとoptional依存が不在であることを確認した。
+optional環境はpyprojectの依存とextrasの導入を完了し、両環境とも `pip check` は成功した。
+optional環境の全extras存在とpackage不在を確認し、最終dev5 wheelは両環境とも未導入である。
+補助agent `/root/p_protocol_check` が読み取り専用で論文と実runnerのburn-in・四条件を照合し、P担当へ結果を渡す。
+メインの次の未完了項目はQ実装の確定である。
+P補助照合により各chain別burn cutと四条件の適用traceを修正する必要が判明し、修正点を `validation_dev5_ja.md` に保存した。
+Qの正式速度計測CSV6行をmainでも確認し、toricの比はd5で2.55–2.59、d7で約2.47、BB72で1.55–1.60であり、toricの2倍目標は未達とする。
+Qの既存例再計測と正式レビューは未完で、Pの修正版quick終了後にQの計測時間帯を確保する。
+API文書にPの追加keywordと仮定の説明を先行反映し、P統合時に最終実装との一致を改めて確認する。
+
+## 2026-10-01 20:20 の更新
+
+Q全suiteは359 passed /5 skipped/2 failed、162.55秒で、mypy型推論の2件を修正した後、typing/faststep/adaptersの45件が6.55秒で成功した。
+Qの全小状態・全近傍試験は新しい逆向き分布の実経路も強制choiceで比較するよう拡張済みである。
+型修正で実行時castを加えたため最終runtimeの比較を再測定し、正式な時間比はd5で2.71–2.72、d7で2.58–2.62、BB72で1.57–1.65とした。
+先行計測の数値は最終表と区別してQメモに保持する。
+mainのREADME両言語に最終6行に基づくPerformance節を追加し、公開既定と異なるbenchmarkのlazy=0、同seed反復、結果・診断込みの時間であることを明記した。
+Pはlive研究BARの差2.43e-13と修正版benchmark/API照合を実施済みだが、最終被覆表は未実施である。
+メインの次の未完了項目はQの独立レビューである。
+
+## 2026-10-01 20:26 の更新
+
+Qの独立レビューは承認で、p=0/1と部分的に決定的な座標を含む136近傍の順逆分布、詳細釣合いを検査した。
+独立レビューの関連45件は5.96秒で成功し、生CSV6行と英日README表の丸め一致を確認した。
+Qの生CSV、profile、例の出力と独立プローブをmainの `output/dev5/q/` に複写して保持した。
+例一覧の6行をQの実測値へ更新し、未測定の行と区別した。
+Pは実装レビュー用 `75c1fcc` を作成し、`/root/p_review` をgpt-6-sol/xhighで起動した。
+Pの正式数値表は未実施のまま、まず実装・論文手順・固定cohort集計をレビューし、数値表の追検証は後続とする。
+メインの次の未完了項目はQ mergeと全source suiteである。

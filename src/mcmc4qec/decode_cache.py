@@ -1,6 +1,6 @@
 """Bounded deterministic decoder cache and safe syndrome delta evaluation."""
 from __future__ import annotations
-from typing import Any
+from typing import Any, cast
 from collections import OrderedDict
 
 import numpy as np
@@ -8,6 +8,7 @@ from numpy.typing import ArrayLike
 
 from .core import BinaryLinearModel, Decoder, Problem, binary, positive_integer
 from .models import DepolarizingModel
+from .adapters import DecoderAdapter, PyMatchingAdapter
 
 
 class CachedDecoder:
@@ -39,12 +40,16 @@ class CachedDecoder:
     def predict(self, syndrome: ArrayLike) -> np.ndarray:
         syndrome = np.asarray(syndrome)
         key = (syndrome.shape, syndrome.dtype.str, syndrome.tobytes())
-        if key in self.lookup:
+        cached = self.lookup.get(key)
+        if cached is not None:
             if self.policy == "lru":
                 self.lookup.move_to_end(key)
-            return self.lookup[key].copy()
-        prediction = binary(self.decoder.predict(syndrome.copy()), ndim=1,
-                            name="prediction")
+            return cached.copy()
+        predicted = self.decoder.predict(syndrome.copy())
+        # Exact built-in adapters validate their output on this cache miss.
+        prediction: np.ndarray = (cast(np.ndarray, predicted)
+                                  if type(self.decoder) in (DecoderAdapter, PyMatchingAdapter)
+                                  else binary(predicted, ndim=1, name="prediction"))
         if self.cap is None or self.policy == "research_clear" or self.size < self.cap:
             self.lookup[key] = prediction.copy()
         elif self.policy == "lru":
