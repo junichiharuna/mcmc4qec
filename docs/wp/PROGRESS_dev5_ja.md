@@ -26,7 +26,7 @@
 
 - [x] 2026-10-01 20:33 論文BAR式と研究実装の方向を独立レビューで確認し、Pメモに小仕様・live研究値との差2.43e-13を記録する。
 - [x] 2026-10-01 20:33 cross_chainと受入(a)〜(e)、anchor分散、JSON往復、反復cutを実装し、独立6件4.87秒を確認する（統合後全suiteは別gate）。
-- [ ] 反復 Geyer burn-in と論文の四収束規則を備えた benchmark を実装する。
+- [x] 2026-10-01 20:47 反復Geyer burn-in・四規則・checked cache・固定cohort集計を `259cd6b` までに実装し、両anchorの公開API照合とpaper50の単独実行一致を確認する。
 - [ ] 600/2400/9600 の同じ20 seed と seed2026で bias/分散を切り分け、必要なら burn-in と4/16/50 chainを比較する。
 - [ ] 4構成×2領域、低p exact/MC anchor、20 seed以上のCSVと被覆/Wilson/幅/bias/収束数を記録する。
 - [ ] 論文の行番号付き整合表、利用者指針、例/notebook案、P完了メモを作成する。
@@ -125,3 +125,12 @@ paper群の長さは最悪の予備実行24.03秒/seedから選び、正式な20
 Pは低pのMC/exact anchorを同じ保存軌道から出力する拡張を検証中で、benchmarkレビューの確定後にmainへ統合する。
 Qの生CSVは `docs/wp/data_dev5/q_step.csv` にもコミットし、第三者がREADME表を再計算できるようにした。
 メインの次の未完了項目はPのbenchmark実装の確定である。
+
+## 2026-10-01 20:47 の更新
+
+Pのbenchmark実装は `259cd6b` で凍結し、独立レビューの追補文書を待ってmainへ統合する。
+低pのMC/exact anchorは同一軌道とBAR比・MCMC分散を再利用し、独立したCSVに出力する。
+paper50・全250・補助比較ありの両anchor実行は19.84秒で、単独MCと全列一致、単独exactとCSV bytes一致だった。
+独立レビューによるdefault_blockの両anchor/API quick照合は3.55秒で成功した。
+真値cacheと直接exactの差はp=0.22で1.01e-14、p=0.03で6.27e-14で、失敗196608/全262144状態を確認した。
+最初の未完了は20seedの長さ比較であり、その前提としてP統合・version更新・全suite・最終source digestのcache生成を先行する。

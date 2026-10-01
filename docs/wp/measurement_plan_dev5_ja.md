@@ -44,6 +44,9 @@ paper16とpaper50は長さを揃え、最も遅い50 chain群でも20seed全体�
 | 低p paper50 全250 | 24.03 | 480.6 |
 
 MC/exactを同じ軌道から出力する場合もcohortの定義と設定は変えない。
+追補の `--anchor both` はBAR比とMCMC log分散も1回だけ評価し、paper50・低p・全250・補助比較ありの1seedは19.84秒だった。
+これは20seed約397秒の見積であり、保存250という事前固定は変更しない。
+MCと単独MCの全CSV列、exactと単独exactのCSV bytesの一致、およびdefault_blockの両anchorと公開APIの一致を確認した。
 
 ## 長さによる偏差の比較
 
