@@ -155,3 +155,17 @@ optionalのfile別最大はcircuit kernelsの26.121秒で、source/core/optional
 既定説明を更新したpl_curveもseed7で再計測し、既定10.993秒・quick2.460秒、両方exit0で、例一覧へ反映した。
 Pへ科学計算枠を戻し、保存2400・9600の固定20seedと12cohortをmainで継続する。
 mainの現在の残件は最終数値表と独立監査、文書の結論・handoff追記・最終AGENTS更新、push/CI、worktree cleanup、全要件監査と最終報告である。
+
+## 2026-10-01 21:06 の再開情報
+
+保存2400の正式20seedは262.07秒で完了し、BAR平均0.6014329672、平均偏差-0.0012295975、seed間SD0.0122816999、平均偏差のSE0.0027462716、BAR/MC被覆とも20/20だった。
+P担当は固定済みの9600保存を2026–2035、2036–2045の2回に分け、現在は前半を計測している。
+最初の未完了項目はこの長さ比較の完成と解釈で、9600の両sliceが終わるまで追加設定を結果から選び直さない。
+defaultの初期化はnoise.sampleをfailureで棄却するので、独立bit-flipと決定的MWPMでは条件付きtargetから開始することをコードと独立レビューで確認した。
+従ってdefault群の差を初期burn不足と断定せず、非線形BARの有限標本bias、有限相関、少数chainの散らばりを区別する。
+paper群は固定論理状態からの開始なので、初期過渡の可能性は別に残る。
+この考察のレビュー追補はwp/pの `ed726d7` にあり、mainへは数値文書と一緒に後からmergeする。
+MC anchor1500試行は全長さで固定されるため、SDが1/sqrt(N)で下がり続けるとは限らない。
+主表はMC anchorを維持し、同じ全20seedの `bar_estimate/anchor_estimate` とcacheのp=0.30 exact値から作るexact-anchor換算点推定およびlog比SDを、再samplingなしの補助派生量として評価する。
+以後のsource変更は予定せず、科学表が揃ったら `/root/p_review` をfollowupして全seed・設定・Wilson・paired差・結論を監査する。
+Pの実験はmainで行うが、担当の文書とレビューの編集・commitは `A:/dev/mcmc4qec-wt/p` に限定する。
