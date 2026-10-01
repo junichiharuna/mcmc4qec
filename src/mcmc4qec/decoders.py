@@ -1,10 +1,12 @@
 """Research-compatible CSS decoder constructors with explicit logical output."""
+from __future__ import annotations
+from typing import Any
 from numbers import Integral, Real
 
 import numpy as np
 
 from .adapter_composition import SectorDecoder
-from .adapters import DecoderAdapter, matching_from_check_matrix
+from .adapters import DecoderAdapter, PyMatchingAdapter, matching_from_check_matrix
 from .core import CSSCode, gf2_rank
 
 
@@ -25,7 +27,7 @@ def _error_sector(errors):
     return errors
 
 
-def mwpm_decoder(code: CSSCode, *, errors="X"):
+def mwpm_decoder(code: CSSCode, *, errors: str="X") -> PyMatchingAdapter:
     """Decode X or Z errors with unweighted PyMatching and return logical predictions.
 
     Parameters
@@ -87,7 +89,7 @@ def _bposd(checks, logical_map, p, identifier, kw):
                           distribution="ldpc")
 
 
-def bposd_decoder(code: CSSCode, p: float, *, errors="X", **kw):
+def bposd_decoder(code: CSSCode, p: float, *, errors: str="X", **kw: Any) -> DecoderAdapter:
     """Decode X or Z errors with the RIMC BP-OSD defaults and return logical bits.
 
     ``code`` is a static CSSCode. ``p`` is the fixed decoder channel prior in
@@ -109,7 +111,7 @@ def bposd_decoder(code: CSSCode, p: float, *, errors="X", **kw):
     return _bposd(code.hx, code.lx, p, "bposd-css-z", kw)
 
 
-def depolarizing_mwpm_decoder(code: CSSCode):
+def depolarizing_mwpm_decoder(code: CSSCode) -> SectorDecoder:
     """Return independent X/Z PyMatching sector decoders in model order.
 
     The first prediction uses ``hz`` and ``lz``; the second uses ``hx`` and
@@ -127,7 +129,7 @@ def depolarizing_mwpm_decoder(code: CSSCode):
                          identifier="depolarizing-mwpm-sectors")
 
 
-def depolarizing_bposd_decoder(code: CSSCode, p: float, **kw):
+def depolarizing_bposd_decoder(code: CSSCode, p: float, **kw: Any) -> SectorDecoder:
     """Return independent X/Z BP-OSD sector decoders at prior ``p``.
 
     This is a decoder approximation only; it does not split the I/X/Y/Z noise

@@ -1,9 +1,12 @@
 """A reversible physical single-location addition, deletion, or replacement."""
+from __future__ import annotations
+from typing import Any
 import math
 
 import numpy as np
 
 from ..kernels import Proposal
+from ..core import Problem
 
 
 class PhysicalFaultProposal:
@@ -33,7 +36,7 @@ class PhysicalFaultProposal:
 
     name = "physical_fault"
 
-    def propose(self, state, problem, p, rng):
+    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         index = int(rng.integers(problem.model.n))
         label = int(rng.integers(1, problem.alphabets[index]))
@@ -43,7 +46,7 @@ class PhysicalFaultProposal:
         q_reverse = self.probability(candidate, state, problem, p)
         return Proposal(candidate, math.log(q_reverse / q_forward))
 
-    def probability(self, state, candidate, problem, p):
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         different = np.flatnonzero(state != candidate)
         if len(different) != 1:

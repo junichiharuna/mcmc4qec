@@ -3,14 +3,16 @@
 This is a DEM distribution, not an assertion that arbitrary physical categorical
 faults are independent Bernoulli variables. Optional imports happen on use.
 """
+from __future__ import annotations
+from typing import Any, Callable
 from importlib.metadata import version
 import numpy as np
-from .core import BinaryLinearModel, binary, identified
+from .core import BinaryLinearModel, Problem, binary, identified
 from .adapters import PyMatchingAdapter
 
 
 class StimDemModel(BinaryLinearModel):
-    def __init__(self, dem, *, identifier="stim-dem"):
+    def __init__(self, dem: Any, *, identifier: str="stim-dem") -> None:
         import stim
         if not isinstance(dem, stim.DetectorErrorModel):
             raise TypeError("dem must be a stim.DetectorErrorModel")
@@ -24,7 +26,7 @@ class StimDemModel(BinaryLinearModel):
             probabilities.append(instruction.args_copy()[0])
             targets = instruction.targets_copy()
             signatures.append(tuple(str(t) for t in targets))
-            pieces, piece = [], []
+            pieces, piece = [], []  # type: ignore[var-annotated]
             for target in targets:
                 if target.is_separator():
                     pieces.append(tuple(piece))
@@ -46,7 +48,7 @@ class StimDemModel(BinaryLinearModel):
         self.dem_text = str(dem)
         self.stim_version = version("stim")
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         data = super().metadata()
         data.pop("sha256")
         return identified({**data, "type": "StimDemModel", "dem_text": self.dem_text,
@@ -56,7 +58,7 @@ class StimDemModel(BinaryLinearModel):
 
 
 class StimDemNoise:
-    def __init__(self, model, *, probabilities=None, dem_factory=None, family_identifier=None):
+    def __init__(self, model: StimDemModel, *, probabilities: Any=None, dem_factory: Callable[..., Any] | None=None, family_identifier: str | None=None) -> None:
         if probabilities is not None and dem_factory is not None:
             raise ValueError("choose probabilities or dem_factory, not both")
         for fn in (probabilities, dem_factory):
@@ -69,7 +71,7 @@ class StimDemNoise:
         self.dem_factory = dem_factory
         self.family_identifier = family_identifier
 
-    def probabilities(self, p):
+    def probabilities(self, p: float | dict[str, Any] | None) -> np.ndarray:
         if self.dem_factory is not None:
             other = StimDemModel(self.dem_factory(p))
             if (self.model.error_signatures != other.error_signatures or
@@ -89,16 +91,16 @@ class StimDemNoise:
             raise ValueError("DEM probabilities must be finite values in [0, 1], one per mechanism")
         return probabilities.copy()
 
-    def sample(self, p, rng):
+    def sample(self, p: float | dict[str, Any] | None, rng: np.random.Generator) -> np.ndarray:
         return (rng.random(self.n) < self.probabilities(p)).astype(np.uint8)
 
-    def log_prob(self, state, p):
+    def log_prob(self, state: np.ndarray, p: float | dict[str, Any] | None) -> float:
         state = binary(state, shape=(self.n,), name="state")
         probabilities = self.probabilities(p)
         selected = np.where(state, probabilities, 1-probabilities)
         return -np.inf if np.any(selected == 0) else float(np.log(selected).sum())
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return identified(dict(type="StimDemNoise", model_sha256=self.model.metadata()["sha256"],
             distribution="independent Bernoulli DEM mechanisms", normalized=True,
             family_identifier=self.family_identifier,
@@ -107,8 +109,8 @@ class StimDemNoise:
             physical_circuit_equivalence="not inferred"))
 
 
-def from_stim_dem(dem, *, probabilities=None, dem_factory=None,
-                  identifier="stim-dem", family_identifier=None):
+def from_stim_dem(dem: Any, *, probabilities: Any=None, dem_factory: Callable[..., Any] | None=None,
+                  identifier: str="stim-dem", family_identifier: str | None=None) -> tuple[StimDemModel, StimDemNoise]:
     """Return (model, noise) for a Stim DetectorErrorModel distribution.
 
     Each error instruction is one Bernoulli mechanism; separator pieces stay
@@ -126,8 +128,8 @@ def from_stim_dem(dem, *, probabilities=None, dem_factory=None,
                               family_identifier=family_identifier)
 
 
-def from_stim_circuit(circuit, *, decompose_errors=False,
-                     approximate_disjoint_errors=False, identifier="circuit-dem"):
+def from_stim_circuit(circuit: Any, *, decompose_errors: bool=False,
+                     approximate_disjoint_errors: bool=False, identifier: str="circuit-dem") -> tuple[StimDemModel, StimDemNoise]:
     """Explicit conversion controls, recorded in model provenance.
 
     circuit is a stim.Circuit; return (model, noise) for its fixed DEM using
@@ -143,12 +145,12 @@ def from_stim_circuit(circuit, *, decompose_errors=False,
                                        approximate_disjoint_errors=approximate_disjoint_errors)
     model, noise = from_stim_dem(dem, identifier=identifier)
     # Store conversion provenance separately from the immutable DEM map.
-    model.conversion = dict(decompose_errors=decompose_errors,
+    model.conversion = dict(decompose_errors=decompose_errors,  # type: ignore[attr-defined]
                             approximate_disjoint_errors=approximate_disjoint_errors)
     return model, noise
 
 
-def matching_from_dem(dem, *, enable_correlations=False, identifier="dem-matching"):
+def matching_from_dem(dem: Any, *, enable_correlations: bool=False, identifier: str="dem-matching") -> PyMatchingAdapter:
     """Return a PyMatchingAdapter predicting the DEM's logical observables.
 
     dem is a stim.DetectorErrorModel. enable_correlations is used consistently

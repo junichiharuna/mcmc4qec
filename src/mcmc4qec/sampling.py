@@ -1,4 +1,6 @@
 """Exact enumeration, fixed-budget direct MC, and conditional MH sampling."""
+from __future__ import annotations
+from typing import Any, Protocol, cast
 from dataclasses import asdict, dataclass, field
 from dataclasses import replace
 import itertools
@@ -6,7 +8,7 @@ import math
 import time
 
 import numpy as np
-from .core import positive_integer
+from .core import Problem, positive_integer
 from .kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
 from .results import Result, metadata
 from .diagnostics import diagnose
@@ -15,6 +17,12 @@ from .decode_cache import CachedDecoder, FailureEvaluator
 
 class InitializationError(RuntimeError):
     """No supported faulty initial state found within the finite search budget."""
+
+
+class _Kernel(Protocol):
+    name: str
+    def propose(self, state: np.ndarray, problem: Problem, p: Any,
+                rng: np.random.Generator) -> Any: ...
 
 
 @dataclass(frozen=True)
@@ -39,7 +47,7 @@ class KernelConfig:
     zanella_fastpath: bool = True
     circuit_single: float = 0.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         weights = [self.single, self.zanella, self.cluster, self.stabilizer, self.circuit_single]
         if any(not np.isfinite(w) or w < 0 for w in weights):
             raise ValueError("kernel probabilities must be finite and nonnegative")
@@ -74,7 +82,7 @@ class SamplingConfig:
     cache_cap: int | None = None
     cache_policy: str = "research_clear"
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         for name in ("samples", "thin", "chains", "max_initial_attempts"):
             positive_integer(getattr(self, name), name)
         positive_integer(self.burn_in, "burn_in", zero=True)
@@ -86,7 +94,7 @@ class SamplingConfig:
             raise ValueError("cache_policy must be research_clear, lru, or freeze")
 
 
-def spawn_seeds(seed, count):
+def spawn_seeds(seed: int | None, count: int) -> list[int]:
     """Return count deterministic child seeds for caller-managed workers.
 
     seed follows NumPy SeedSequence semantics. Raises ValueError unless count
@@ -97,7 +105,7 @@ def spawn_seeds(seed, count):
             for s in np.random.SeedSequence(seed).spawn(count)]
 
 
-def exact(problem, p, *, max_states=1_048_576):
+def exact(problem: Problem, p: float | dict[str, Any] | None, *, max_states: int=1_048_576) -> Result:
     """Enumerate the full experiment state space and return an exact Result.
 
     problem binds the model, noise, decoder, and shared failure definition.
@@ -146,7 +154,7 @@ def _wilson(failures, n):
             1.0 if failures == n else min(1.0, center+radius))
 
 
-def direct_mc(problem, p, *, trials, seed=None):
+def direct_mc(problem: Problem, p: float | dict[str, Any] | None, *, trials: int, seed: int | None=None) -> Result:
     """Return a direct Monte Carlo Result for a fixed number of experiments.
 
     problem binds the model, noise, decoder, and shared failure definition.
@@ -178,7 +186,7 @@ def direct_mc(problem, p, *, trials, seed=None):
         warnings=warning)
 
 
-def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
+def sample_faulty(problem: Problem, p: float | dict[str, Any] | None, *, config: SamplingConfig | None=None, seed: int | None=None, initial_state: np.ndarray | None=None) -> Result:
     """Sample normalized noise restricted to one fixed deterministic failure set.
 
     problem binds the model, noise, decoder, and shared failure definition.
@@ -208,7 +216,7 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
             raise ValueError("CircuitFaultModel does not support cluster or stabilizer kernels")
     elif kc.circuit_single:
         raise ValueError("circuit_single is only supported for CircuitFaultModel")
-    kernels = [OBF(), Zanella(use_fastpath=kc.zanella_fastpath),
+    kernels: list[_Kernel] = [OBF(), Zanella(use_fastpath=kc.zanella_fastpath),
                ClusterExchange(kc.cluster_k), StabilizerFlip(), PhysicalFaultProposal()]
     cache = CachedDecoder(problem.decoder, cap=config.cache_cap,
                           policy=config.cache_policy)
@@ -218,13 +226,13 @@ def sample_faulty(problem, p, *, config=None, seed=None, initial_state=None):
     faststep = make_faststep(problem, p, enabled=kc.zanella_fastpath)
     probabilities = np.array([kc.single, kc.zanella, kc.cluster, kc.stabilizer, kc.circuit_single])
     if kc.stabilizer:
-        kernels[3]._rows(problem)
+        cast(StabilizerFlip, kernels[3])._rows(problem)
         if faststep is not None:
             faststep.stabilizers = np.asarray(problem.model.stabilizers)
     sequence = np.random.SeedSequence(seed)
     children = sequence.spawn(config.chains)
     saved = np.empty((config.chains, config.samples, problem.model.n), dtype=np.uint8)
-    acceptance = {k.name: dict(proposed=0, accepted=0, moved=0) for k in kernels}
+    acceptance: dict[str, dict[str, Any]] = {k.name: dict(proposed=0, accepted=0, moved=0) for k in kernels}
     acceptance["lazy"] = dict(proposed=0, accepted=0, moved=0)
     if initial_state is not None:
         initial = np.asarray(initial_state)

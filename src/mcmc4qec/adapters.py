@@ -6,11 +6,14 @@ callers must validate its mechanisms before constructing it. Caller-supplied
 settings describe the decoder at construction; mutating it afterwards invalidates
 that provenance (and can change the failure set).
 """
+from __future__ import annotations
+from typing import Any
 
 from importlib.metadata import PackageNotFoundError, version
 import json
 
 import numpy as np
+from .core import Decoder
 
 
 def _binary(value, name, dimensions):
@@ -56,8 +59,8 @@ class DecoderAdapter:
     rate unit; a surrounding Problem reports failure for its whole experiment.
     """
 
-    def __init__(self, decoder, *, output_kind, identifier, logical_map=None,
-                 settings=None, distribution=None, decode_kwargs=None):
+    def __init__(self, decoder: Any, *, output_kind: str, identifier: str, logical_map: np.ndarray | None=None,
+                 settings: dict[str, Any] | None=None, distribution: str | None=None, decode_kwargs: dict[str, Any] | None=None) -> None:
         if not callable(getattr(decoder, "decode", None)):
             raise TypeError("decoder must expose a callable decode method")
         if output_kind not in ("observable", "correction"):
@@ -88,16 +91,16 @@ class DecoderAdapter:
             except PackageNotFoundError:
                 pass
 
-    def predict(self, syndrome):
+    def predict(self, syndrome: np.ndarray) -> np.ndarray:
         syndrome = _binary(syndrome, "syndrome", (1, 2))
         prediction = _binary(self.decoder.decode(syndrome, **self._decode_kwargs), "decoder output", (1,))
         if self.output_kind == "correction":
-            if len(prediction) != self.logical_map.shape[1]:
+            if len(prediction) != self.logical_map.shape[1]:  # type: ignore[union-attr]
                 raise ValueError("decoder correction length does not match logical_map")
             return (self.logical_map @ prediction % 2).astype(np.uint8)
         return prediction
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         return _json_copy({
             "identifier": self.identifier,
             "adapter": type(self).__name__,
@@ -123,8 +126,8 @@ class PyMatchingAdapter(DecoderAdapter):
     ``ValueError``. No graph-completeness guarantee is inferred.
     """
 
-    def __init__(self, decoder, *, built_with_correlations, output_kind,
-                 identifier, logical_map=None, settings=None, decode_kwargs=None):
+    def __init__(self, decoder: Any, *, built_with_correlations: bool, output_kind: str,
+                 identifier: str, logical_map: np.ndarray | None=None, settings: dict[str, Any] | None=None, decode_kwargs: dict[str, Any] | None=None) -> None:
         if not isinstance(built_with_correlations, bool):
             raise ValueError("built_with_correlations must be a bool")
         kwargs = _json_copy(decode_kwargs if decode_kwargs is not None else {}, "decode_kwargs")
@@ -137,14 +140,14 @@ class PyMatchingAdapter(DecoderAdapter):
                          logical_map=logical_map, settings=settings,
                          distribution="pymatching", decode_kwargs=kwargs)
 
-    def metadata(self):
+    def metadata(self) -> dict[str, Any]:
         result = super().metadata()
         result["built_with_correlations"] = self.built_with_correlations
         return result
 
 
-def matching_from_check_matrix(check_matrix, *, logical_map, identifier,
-                               weights=None, error_probabilities=None):
+def matching_from_check_matrix(check_matrix: np.ndarray, *, logical_map: np.ndarray | None, identifier: str,
+                               weights: np.ndarray | None=None, error_probabilities: np.ndarray | None=None) -> PyMatchingAdapter:
     """Construct a static, uncorrelated correction-output Matching adapter.
 
     All binary columns are validated before constructing the graph; columns of

@@ -1,4 +1,7 @@
 """Four post-hoc consistency screens for independent MCMC chain populations."""
+from __future__ import annotations
+from typing import Any
+from .results import Result
 import math
 
 import numpy as np
@@ -43,8 +46,8 @@ def _dispersion(traces, observed_sd, variance, factor, source):
                   predicted_sd=predicted, variance_source=source, chain_iat=iats)
 
 
-def evaluate_convergence(results, *, other_initialization=None, direct_variance=None,
-                         scale_factor=1.5, sigma_cut=3.0, dispersion_factor=3.0):
+def evaluate_convergence(results: Result | list[Result], *, other_initialization: Result | None=None, direct_variance: float | None=None,
+                         scale_factor: float=1.5, sigma_cut: float=3.0, dispersion_factor: float=3.0) -> dict[str, Any]:
     """Screen a chain population using the four checks in the paper's Setup.
 
     `results` and `other_initialization` accept Result objects, sequences of

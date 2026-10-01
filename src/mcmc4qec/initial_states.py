@@ -1,9 +1,11 @@
 """Exact logical-coset representatives for conditional MCMC initialization."""
+from __future__ import annotations
+from typing import Any
 import itertools
 
 import numpy as np
 
-from .core import binary, gf2_rank
+from .core import CSSCode, binary, gf2_rank
 
 
 def _rows(stabilizers, n):
@@ -23,7 +25,7 @@ def _independent_rows(rows):
     return basis
 
 
-def minimum_weight_coset_representative(logical, stabilizers, *, time_limit=30.0):
+def minimum_weight_coset_representative(logical: np.ndarray, stabilizers: np.ndarray | None, *, time_limit: float=30.0) -> np.ndarray:
     """Return an exact minimum-Hamming-weight member of logical + span(stabilizers).
 
     `logical` is a binary `(n,)` vector and `stabilizers` is a binary `(r,n)`
@@ -87,7 +89,7 @@ def _basis(code, sector):
     raise ValueError("sector must be 'x' or 'z'")
 
 
-def logical_representatives(code, *, sector="x", time_limit=30.0):
+def logical_representatives(code: CSSCode, *, sector: str="x", time_limit: float=30.0) -> np.ndarray:
     """Minimize each logical basis row inside its own stabilizer coset.
 
     The row index denotes a basis element, not an observable bit. In an
@@ -105,7 +107,7 @@ def logical_representatives(code, *, sector="x", time_limit=30.0):
                      time_limit=time_limit) for row in logicals])
 
 
-def minimum_weight_initial_state(code, *, sector="x", time_limit=30.0):
+def minimum_weight_initial_state(code: CSSCode, *, sector: str="x", time_limit: float=30.0) -> np.ndarray:
     """Return the lightest minimized logical basis representative.
 
     Output is a binary `(n,)` array accepted by `sample_faulty(initial_state=)`
@@ -119,7 +121,7 @@ def minimum_weight_initial_state(code, *, sector="x", time_limit=30.0):
     return rows[int(np.argmin(rows.sum(axis=1)))].copy()
 
 
-def maximum_weight_initial_state(code, *, sector="x", time_limit=30.0):
+def maximum_weight_initial_state(code: CSSCode, *, sector: str="x", time_limit: float=30.0) -> np.ndarray:
     """Return the heaviest of the per-coset minimum-weight basis elements.
 
     This is the paper's long initialization, not the maximum weight anywhere
@@ -148,7 +150,7 @@ def _solve_gf2(matrix, target):
     return aug[:, -1]
 
 
-def observable_sector_initial_state(code, observable, *, sector="x", time_limit=30.0):
+def observable_sector_initial_state(code: CSSCode, observable: np.ndarray, *, sector: str="x", time_limit: float=30.0) -> np.ndarray:
     """Find the minimum-weight representative of a requested observable sector.
 
     code is a CSSCode supplying the stabilizer and logical matrices.
@@ -176,8 +178,8 @@ def observable_sector_initial_state(code, observable, *, sector="x", time_limit=
     return representative
 
 
-def random_logical_sector_initial_state(code, *, sector="x", seed=None,
-                                        rng=None, time_limit=30.0):
+def random_logical_sector_initial_state(code: CSSCode, *, sector: str="x", seed: int | np.random.SeedSequence | None=None,
+                                            rng: np.random.Generator | None=None, time_limit: float=30.0) -> np.ndarray:
     """Draw a uniform nonzero observable sector and minimize its CSS coset.
 
     Supply either `seed` or `rng`. The returned binary `(n,)` state can be used
