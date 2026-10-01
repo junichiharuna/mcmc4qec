@@ -1,0 +1,53 @@
+{
+  "plan_fixed_before_outcomes": true,
+  "source_commit": "05c70056e3cac6e9a92592daa6b186d86ceed773",
+  "source_version": "0.1.0.dev5",
+  "python": "A:/dev/mcmc4qec/.venv-dev5-source/Scripts/python.exe",
+  "workdir": "A:/dev/mcmc4qec",
+  "environment": {
+    "PYTHONPATH": "A:/dev/mcmc4qec/src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "RIMC_RESEARCH_ROOT": "A:/dev/RIMC"
+  },
+  "truth_cache": "output/dev5/p_final/truth_cache.json",
+  "seed_cohort_inclusive": [2026, 2045],
+  "outcomes_do_not_select_seeds_or_configs": true,
+  "length_comparison": {
+    "script": "benchmarks/bar_sensitivity.py",
+    "scenario": "baseline",
+    "ladder": [0.30, 0.26, 0.22],
+    "anchor": "MC 1500 trials",
+    "independent_mc_trials": 1200,
+    "chains": 4,
+    "burn_in": 180,
+    "uncertainty": "block_bootstrap",
+    "block_length": 8,
+    "bootstrap_replicates": 30,
+    "saved_samples": [600, 2400, 9600],
+    "slices": {
+      "600": [[2026, 20]],
+      "2400": [[2026, 20]],
+      "9600": [[2026, 10], [2036, 10]]
+    },
+    "reason_for_9600_split": "46.50 s per seed pilot, about 465 s per ten-seed invocation and 930 s for all twenty; split is predeclared for the 600 s invocation limit"
+  },
+  "protocol_comparison": {
+    "script": "benchmarks/bar_paper_protocol.py",
+    "regions": {
+      "dev4": {"ladder": [0.30, 0.26, 0.22], "anchors": ["mc"]},
+      "paper": {"ladder": [0.10, 0.07, 0.05, 0.03], "anchors": ["mc", "exact"], "invocation_anchor": "both"}
+    },
+    "protocols": ["default_block", "default_cross", "paper16", "paper50"],
+    "fixed_protocols": {"chains": 4, "burn_in": 180, "saved_samples": 600, "lazy": 0.05},
+    "paper_protocols": {"chains": [16, 50], "raw_steps_per_chain": 250, "burn_in": "individual iterative 5*IAT with half-trace cap", "lazy": 0},
+    "anchor_mc_trials": 1500,
+    "bootstrap_replicates": 30,
+    "block_length": 8,
+    "aux_multistart": true,
+    "seed_slices_each_invocation": [[2026, 20]],
+    "paper50_both_anchor_pilot_seconds_per_seed": 19.84,
+    "paper50_both_anchor_linear_estimate_seconds_20_seeds": 397,
+    "interpretation": "Short finite-budget coverage exploration; not a reproduction of 2000000-step paper accuracy or proof of convergence"
+  },
+  "logs": "run_log.jsonl"
+}

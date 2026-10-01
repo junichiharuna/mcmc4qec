@@ -24,8 +24,8 @@
 | Pの小問題反復被覆 | 列挙可能な問題、事前固定した約10 seed、緩い閾値のテスト | seed0–9、2bit exact問題、10件中5件以上の回帰が成功 |
 | Pの反復Geyer burn-in | 反復停止則、半trace fallback、研究コードと論文との差の明示 | P_reviewが研究1D個別cutと照合、合成cut6と半traceの受入成功、最終数値は後続 |
 | Pの四収束規則 | scaling/late drift/multistart/dispersionの実判定と未判定処理 | P_reviewで適用traceを監査、正式M未判定と補助四条件を区別、数値はladder全rungのAND |
-| Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | 600/2400の全20seedと設定を確認、9600前半10seedは483.03秒で完了、固定後半10seedを実行中、全体は未完 |
-| Pのbias/分散の識別 | 同一軌道の2誤差法、N依存、必要なburn-in/4・16・50 chain感度 | 未確認 |
+| Pの保存数600/2400/9600 | 同じ2026–2045の各seed値、exactとの差、平均bias/散らばり/幅 | data_dev5/lengthに全60行と対応差、exact換算、分散分解を保存、各20seedの集計成功、独立監査は後続 |
+| Pのbias/分散の識別 | 同一軌道の2誤差法、N依存、必要なburn-in/4・16・50 chain感度 | N依存で散らばり縮小、9600のexact換算偏差1.1SEで持続bias未確定、追加感度は未実施、同軌道2法比較と独立監査は後続 |
 | Pの4構成×2領域 | 全構成20 seed以上、各CSVと被覆/Wilson/平均幅/平均偏差/収束合格数 | 未確認 |
 | Pの低p exact/MC anchor | 同じ軌道に対する両anchor、独立seedとanchor分散の記録 | 未確認 |
 | Pの論文整合表 | chain数、burn-in、誤差棒、kernel、初期化、収束、ladder、p領域、BAR、anchorを論文行番号付きで対応 | paper_consistencyに全項目あり、P_reviewで式・cut・四規則・kernel等を照合、最終数値の反映は後続 |
