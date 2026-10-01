@@ -146,6 +146,12 @@ ESS や split R-hat などの診断は収束、エルゴード性、正しさの
 DEM サンプリングはすべての物理回路ノイズモデルとの同等性を示しません。
 回路 baseline は公開図表の再現を示すものではありません。
 
+BAR の既定の誤差評価は block bootstrap です。
+追加の `uncertainty="cross_chain"` は独立 chain 間のばらつきを評価し、2 chain 以上が必要で、pooled 点推定は変えません。
+どちらの方法も、短い chain や混合不良の chain に共通する bias を含みません。
+論文の観測量平均の実験は BAR 区間の被覆を確立しておらず、診断合格も95%被覆の保証ではありません。
+短い例を精度の高い推定として解釈する前に、[BAR 感度の検証](docs/bar_sensitivity_ja.md) と [API の仮定](docs/api_en.md) を確認してください。
+
 関連論文は in preparation です。
 ソフトウェア引用情報の著者名 `junichi haruna` は所有者の指定で確定していますが、所属、DOI、公開日、公開の詳細は未確定です。
 [CITATION.cff](CITATION.cff) と [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。

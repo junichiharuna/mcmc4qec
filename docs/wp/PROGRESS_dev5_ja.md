@@ -20,7 +20,7 @@
 - [x] 2026-10-01 20:20 最終runtimeで3符号各2回を再計測し、profileとREADME案、例6本の既定/quickの実測をQメモに記録する。
 - [x] 2026-10-01 20:26 別担当 `/root/q_review` が敵対的レビューを実施し `Q_review_ja.md` を `ac48cd9` に保存する。
 - [x] 2026-10-01 20:26 高・中の要修正指摘なし、独立136近傍の列挙と関連45件成功を確認し、残る全suiteを統合gateに残す。
-- [ ] Q を main に merge し、全 source suite の件数・時間を記録する。
+- [x] 2026-10-01 20:30 Q を `8d00cf8` で main に merge し、全source suite 366 passed / 153.24秒を確認する（研究照合を含む、`q_merged.xml`）。
 
 ## WP-P
 
@@ -105,3 +105,13 @@ Qの生CSV、profile、例の出力と独立プローブをmainの `output/dev5/
 Pは実装レビュー用 `75c1fcc` を作成し、`/root/p_review` をgpt-6-sol/xhighで起動した。
 Pの正式数値表は未実施のまま、まず実装・論文手順・固定cohort集計をレビューし、数値表の追検証は後続とする。
 メインの次の未完了項目はQ mergeと全source suiteである。
+
+## 2026-10-01 20:30 の更新
+
+Q統合後の全source suiteは366 passed / 153.24秒で、基準151.22秒からの増分は2.02秒だった。
+JUnitは `output/dev5/q_merged.xml` とし、既知のWindows zmq警告1件以外に失敗やskipはなかった。
+Pレビューはcross-chainの実装とAPI説明に大きな問題を認めず、truth CSVの検証不足を指摘した。
+P担当は未検証のtruth-file経路を撤去し、集計時にchecked cacheの問題・source digestと真値を再検証するよう `eb2586a` で修正した。
+Pの独立受入6件は4.87秒で成功し、最終数値の前にtruth cacheと直接exactの照合、および実行時間pilotを行う。
+mainのAPIとREADMEにはcross-chainの仮定と限界を反映したが、正式被覆表と結論はまだ未実施である。
+メインの次の未完了項目はPのBAR式・小仕様の記録確認である。

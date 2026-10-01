@@ -9,15 +9,15 @@
 | --- | --- | --- |
 | Phase 0のmain/origin一致、clean、全suite | 開始時のgit出力、承認済み前提コミット、JUnit | 確認済み：`22a8e9c`、`phase0_full.xml`、362 passed / 151.22秒 |
 | BAR式と研究値の照合 | 論文269–281行、研究関数、現行テストの実行結果と比較対象の説明 | 基準テスト20 passed、式の確認済み、Pの記録確定待ち |
-| Qの小仕様と試験先行 | Qメモの仕様、受入試験追加と実行記録、実装差分 | Q worktreeの仕様/試験を確認、担当19 passed / 5.48秒、最終レビュー待ち |
-| Qの局所確率表・cache・候補処理 | 実装差分、正規化回数・検証境界・適用条件 | 未確認 |
-| Qの全小状態・全近傍等価性 | 提案確率、順逆比、MH受理確率、support境界の列挙試験 | 未確認 |
-| Qのtoric d3/categorical同seed等価性 | 状態列・受理列・lazy列・kernel列・乱数消費の比較試験 | 未確認 |
-| Qの計測3符号×2回以上 | 同設定のCSV/ログ、seed、CPU/OS/Python/依存版、step/sと比 | 未確認 |
-| Qの未達原因 | 時間比が2を超えた符号のprofileと残る原因 | 未確認 |
-| Qの利用者向け説明 | Qメモの英日README案、計測時点の明示、研究なしCLIの実行 | 未確認 |
-| Qの独立レビューと指摘対応 | 別agentのQ_review、指摘ごとの修正差分と再検証 | 未確認 |
-| Q merge後の全suite | mainのmerge commitとJUnit件数・時間 | 未確認 |
+| Qの小仕様と試験先行 | Qメモの仕様、受入試験追加と実行記録、実装差分 | Qメモと当時の進捗ログを確認、git上は同一commitで時系列の独立証明にはならない |
+| Qの局所確率表・cache・候補処理 | 実装差分、正規化回数・検証境界・適用条件 | Q_review承認、正規化最大1回、miss検証/hitコピー/毎回shape比較、実型gate保持 |
+| Qの全小状態・全近傍等価性 | 提案確率、順逆比、MH受理確率、support境界の列挙試験 | ForcedChoice試験と独立136近傍列挙が成功、逆分布全再計算との差0 |
+| Qのtoric d3/categorical同seed等価性 | 状態列・受理列・lazy列・kernel列・乱数消費の比較試験 | 関連45件5.96秒、toric prefix1–24とcategorical列挙、Q_reviewに検査範囲を記録 |
+| Qの計測3符号×2回以上 | 同設定のCSV/ログ、seed、CPU/OS/Python/依存版、step/sと比 | `output/dev5/q/bench-step-dev5-final/results.csv` 6行を独立監査、READMEの丸め一致 |
+| Qの未達原因 | 時間比が2を超えた符号のprofileと残る原因 | d5 2.71–2.72、d7 2.58–2.62で未達、attempt/propose/cache/adapterのprofileをQメモとperformanceに記録 |
+| Qの利用者向け説明 | Qメモの英日README案、計測時点の明示、研究なしCLIの実行 | 両READMEへ反映、研究なしCLI成功、例6本の既定/quick計測を一覧に反映 |
+| Qの独立レビューと指摘対応 | 別agentのQ_review、指摘ごとの修正差分と再検証 | `/root/q_review` が `ac48cd9` で承認、高・中の要修正指摘なし |
+| Q merge後の全suite | mainのmerge commitとJUnit件数・時間 | `8d00cf8`、`q_merged.xml`、366 passed / 153.24秒（基準+2.02秒） |
 | Pのcross_chain API | keyword追加、2 chain未満/不正値の拒否、method記録、独立anchor分散 | 未確認 |
 | Pの標準誤差の理論値 | 合成独立chainに対する既知の分散と共有rung共分散の受入試験 | 未確認 |
 | Pの点推定と既定互換性 | 同seedで誤差法間の点推定一致、既定結果とRNG系列の互換試験 | 未確認 |

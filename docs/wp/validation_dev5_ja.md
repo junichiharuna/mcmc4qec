@@ -65,3 +65,11 @@ P担当へ各chain別cutと四条件の修正を依頼し、修正版の最終�
 
 2026-10-01に `gh repo view --json nameWithOwner,isPrivate,defaultBranchRef` で対象は `junichiharuna/mcmc4qec`、private、既定branchはmainであることを確認した。
 この時点の最新Actions run `36850587053` は開始時の `9e1b28c` に対する成功であり、dev5のCI成功とは扱わない。
+
+## Q統合後のsource検証
+
+2026-10-01、main `8d00cf8` で `PYTHONDONTWRITEBYTECODE=1` と `RIMC_RESEARCH_ROOT` を指定し、`.venv-dev5-source/Scripts/python.exe -m pytest tests -q --junitxml=output/dev5/q_merged.xml` を実行した。
+366 passed、153.24秒で、失敗とskipはなかった。
+基準362 passed /151.22秒から4件増え、時間増分は2.02秒だった。
+警告1件は既知のWindows zmq event-loop対応である。
+Qの独立レビューは `Q_review_ja.md` にあり、136近傍の逆向き分布全再計算との一致、詳細釣合い、関連45件、CSV6行の数値を確認済みである。
