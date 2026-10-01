@@ -1,16 +1,20 @@
 # Provisional citation metadata. Complete and validate before public release.
-# Release URL, license, DOI, and publication date are unconfirmed.
+# Release URL, license, DOI, affiliation, and publication date are unconfirmed.
+# The associated paper ("Trustworthy rare-event splitting for general quantum
+# codes") is in preparation and is not yet a citable reference.
 cff-version: 1.2.0
 message: >-
   Authorship is confirmed by the project owner. Publication details remain
   provisional; confirm them before citing a public software release.
 type: software
-title: "Trustworthy rare-event splitting for general quantum codes"
+title: "mcmc4qec"
 authors:
   - given-names: junichi
     family-names: haruna
-version: "0.1.0.dev3"
+version: "0.1.0.dev4"
 abstract: >-
-  Local development prototype of reusable rare-event MCMC primitives for
-  quantum error correction. The associated paper has not been assigned
-  publication metadata in this file.
+  Rare-event MCMC primitives for quantum error correction: exact enumeration,
+  direct Monte Carlo, failure-conditioned sampling with OBF, Zanella, cluster
+  exchange, and stabilizer kernels, and anchored BAR splitting for logical
+  error probabilities of CSS codes. Private development prototype; the
+  associated paper has not been assigned publication metadata in this file.
