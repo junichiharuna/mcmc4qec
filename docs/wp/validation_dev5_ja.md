@@ -48,3 +48,20 @@ optionalにはpyprojectのdependenciesとtest/matching/bposd/codes/stim/plot/not
 optionalの主要版はNumPy2.4.6、PyMatching2.4.0、ldpc2.4.1、bposd2.1、Stim1.16.0、matplotlib3.11.2、nbclient0.11.0、nbformat5.11.1、ipykernel7.4.0である。
 両環境の `pip check` は `No broken requirements found.` で成功し、optional環境もmcmc4qecはまだ導入されていない。
 この準備はwheel検証の成功を意味せず、最終dev5 wheelを導入した後に全pytestとverify_wheelを実施する。
+
+## WP-P 手順照合で検出した修正点
+
+読み取り専用の補助担当が、論文の記述だけでなく研究 `cluster_scripts/lowp_audit.py` と `compare/convergence_flags.py` の呼び出しを照合した。
+研究の実行は各chainに対する1Dの5 IAT cutであり、`src/postprocess.py` が2D入力時に採る共通median cutとは区別する（`lowp_audit.py` 267–277行）。
+反復はcut=0から最大5回で、現在のtailから得たIATの5倍を切り上げ、半traceの上限に制限し、cut不変で収束とする。
+5回で収束しない場合は半traceへfallbackする。
+四条件のscalingとlate driftには未burnの全traceのN/4、N/2、N checkpointを用い、multistartとdispersionには5 IAT後の値を用いる（`lowp_audit.py` 234–251、619–625行、`convergence_flags.py` 715–754行）。
+dispersionのWはburn後の各chain分散の算術平均、IATと残存Nはchain間中央値を使う（`lowp_audit.py` 294–324行、`convergence_flags.py` 660–684行）。
+toricの論理basisのshort/longは同じ状態になるため論文のmultistart条件は実質的な比較を提供せず、異なる論理組合せからの補助比較と区別する。
+Pの初回pilotは共通cutとburn後のS/Dを用いて199.98秒で完了したが、この旧手順の値は最終の科学表に採用しない。
+P担当へ各chain別cutと四条件の修正を依頼し、修正版の最終測定をQ統合後mainで行う。
+
+## remote 接続の確認
+
+2026-10-01に `gh repo view --json nameWithOwner,isPrivate,defaultBranchRef` で対象は `junichiharuna/mcmc4qec`、private、既定branchはmainであることを確認した。
+この時点の最新Actions run `36850587053` は開始時の `9e1b28c` に対する成功であり、dev5のCI成功とは扱わない。

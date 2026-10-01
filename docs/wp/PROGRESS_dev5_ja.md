@@ -81,3 +81,7 @@ optional環境はpyprojectの依存とextrasの導入を完了し、両環境と
 optional環境の全extras存在とpackage不在を確認し、最終dev5 wheelは両環境とも未導入である。
 補助agent `/root/p_protocol_check` が読み取り専用で論文と実runnerのburn-in・四条件を照合し、P担当へ結果を渡す。
 メインの次の未完了項目はQ実装の確定である。
+P補助照合により各chain別burn cutと四条件の適用traceを修正する必要が判明し、修正点を `validation_dev5_ja.md` に保存した。
+Qの正式速度計測CSV6行をmainでも確認し、toricの比はd5で2.55–2.59、d7で約2.47、BB72で1.55–1.60であり、toricの2倍目標は未達とする。
+Qの既存例再計測と正式レビューは未完で、Pの修正版quick終了後にQの計測時間帯を確保する。
+API文書にPの追加keywordと仮定の説明を先行反映し、P統合時に最終実装との一致を改めて確認する。
