@@ -131,7 +131,7 @@ class Decoder(Protocol):
 class FailurePredicate(Protocol):
     """Custom failure event evaluated on validated copies of one experiment."""
     def __call__(self, state: np.ndarray, predicted: np.ndarray,
-                 truth: np.ndarray) -> bool: ...
+                 truth: np.ndarray) -> bool | np.bool_: ...
     def metadata(self) -> dict[str, Any]: ...
 
 
@@ -266,7 +266,7 @@ class CallableFailure:
     Stabilizer invariance and invariance under a logical change of basis are
     never inferred for user predicates.
     """
-    def __init__(self, function: Callable[[np.ndarray, np.ndarray, np.ndarray], bool], *, identifier: str, settings: dict[str, Any] | None=None) -> None:
+    def __init__(self, function: Callable[[np.ndarray, np.ndarray, np.ndarray], bool | np.bool_], *, identifier: str, settings: dict[str, Any] | None=None) -> None:
         if not callable(function) or not identifier:
             raise ValueError("a callable and nonempty failure identifier are required")
         self.function = function

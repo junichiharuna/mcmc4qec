@@ -6,6 +6,7 @@
 `Model`、`Noise`、`Decoder` の Protocol に状態ベクトル、NumPy generator、メタデータの型を明示した。
 `Noise` と `Problem` は確率パラメータの型変数を共有し、`IndependentBitFlip` のようなスカラー専用ノイズも構造的に適合させた。
 失敗条件の呼び出しとメタデータは `FailurePredicate` Protocol で表した。
+独自 failure predicate と `CallableFailure` の callback は実行時に許される `bool` と `np.bool_` の両方を返せる型にし、`CallableFailure.__call__` 自体は従来どおり `bool` を返す。
 `Problem` と各モデル・ノイズ・デコーダーの公開メソッド、`Result` と `EstimationResult` の JSON 往復にも注釈を追加した。
 公開 `Result` と `EstimationResult` のメタデータ、診断、受理統計の辞書にもキー型を付けた。
 モデルの `alphabets` は `Problem` が省略時に二値へ補うため Protocol 上で必須にせず、配列風の戻り値を許した。
@@ -24,6 +25,7 @@ K・N・L・M 統合後の rebase を行い、`A:\dev\mcmc4qec\.venv-dev4-source
 ネストしたリストの CSS 行列、リストを返す decoder callback と直接実装した Decoder、リストのノイズ scales、`Problem` の構造的なノイズ適合を利用者コードで確認した。
 `alphabets` を持たないカスタム二値モデル、タプルを確率パラメータとするカスタムノイズ、`Result` のタプル入力、数値配列の収束診断も利用者側 mypy で確認した。
 不正なスカラー確率引数が `Problem.log_prob` と三つのサンプリング関数で検出されることも確認した。
+型検査用のカスタムノイズ例は Bernoulli の `sample` と正規化された `log_prob` を組にし、NumPy の真偽値を返す wrapper と直接実装した failure predicate も利用者側 mypy で確認した。
 `PhysicalFaultProposal.propose` の戻り値 `Proposal`、Stim DEM ファクトリの戻り値クラス、新しい `FastStepper` も公開署名検査の対象に加えた。
 `C:\Users\user\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests/test_typing.py -q` は mypy 不在時に 1 passed / 2 skipped であり、公開署名を常に検査できた。
 同じ Python 3.11 の `-m pytest tests -q` は初回注釈後に 311 passed / 6 skipped、117.31 秒だった。

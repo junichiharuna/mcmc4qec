@@ -90,6 +90,7 @@ class FailureEvaluator:
         truth = binary(problem.model.observables(state.copy()), ndim=1, name="observables")
         if predicted.shape != truth.shape:
             raise ValueError("decoder prediction and observable dimensions differ")
+        faulty: bool | np.bool_
         if problem.failure is None:
             faulty = bool(np.any(predicted != truth))
         else:
