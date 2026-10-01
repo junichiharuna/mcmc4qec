@@ -62,41 +62,42 @@ Q 統合後の `--make-truth-cache` は全 262144 状態を 36.2 秒で列挙し
 直接 `exact()` と cache の値は p=0.22 で `0.6026625647015839` と `0.602662564701594` の差 `1.01e-14`、p=0.03 で `0.02107475985928002` と `0.021074759859217335` の差 `6.27e-14` だった。
 pilot の package source SHA-256 は `9a09dd24288f3d60bccdd8eef131d538b1357ba07842cb33f0fa81bf81548462` であり、dev5 version を組み込む最終 main の cache は再生成する。
 
-## 統合後に残る科学的計測
+## dev5 最終計測
 
-| 事前固定の群 | ladder | anchor | chain | burn | 保存数 | 誤差法 | seed |
-| --- | --- | --- | ---: | --- | --- | --- | --- |
-| 長さ比較 | 0.30/0.26/0.22 | MC 1500 試行 | 4 | 固定 180 | 600、2400、9600 | block 8・30反復 | 2026–2045 |
-| dev4 被覆 | 0.30/0.26/0.22 | MC 1500 試行 | 4、4、16、50 | 固定 180 または各 chain 5·IAT | 4 chain は cut 後 600、16/50 は cut 前の全長 250 | block または cross-chain | 2026–2045 |
-| 論文領域被覆 | 0.10/0.07/0.05/0.03 | MC 1500 試行と exact | 4、4、16、50 | 固定 180 または各 chain 5·IAT | 4 chain は cut 後 600、16/50 は cut 前の全長 250 | block または cross-chain | 2026–2045 |
+計測前に [固定計画](data_dev5/measurement_plan.json) の全条件と seed 2026–2045 を確定し、main の `0.1.0.dev5`、sampling source commit `05c7005`、package source SHA-256 `50f47ab86aadb8ddc25142c696ce6cfbce631a8cf8357cbbca8ca33d397f56d5` で実行した。
+最終 truth cache の問題 digest と全失敗重み counts は Q 統合後 pilot と完全一致し、source/version の digest だけが変わった。
+長さ比較の60行は各保存長20 seed と cache provenance を集計で検証し、9600 は事前固定の10 seedずつを483.03秒と469.46秒で実行した。
+9600の全20 seedは合計約953秒であり、全体が600秒以内だったという意味ではない。
 
-4 chain の `default_block` と `default_cross` は同じ seed で同じ保存軌道を再利用し、点推定を変えずに区間幅だけを比較する。
-16/50 chain の全長 250 は被覆結果を見る前に計算時間だけから固定し、論文の 2,000,000 step と大きく違うことを表に示す。
-全 4 構成で `--aux-multistart` を用い、論文どおりの同一 basis の M は未判定に保ち、異なる faulty start の補助四条件数を別に報告する。
-低 p の MC/exact anchor は `--anchor both` で同じ軌道から出すため、4 構成×2領域の 8 回の sampling で 12 cohort の CSV を作る。
-paper 領域で最も遅い 50 chain・全長 250・補助初期値有の 1 seed pilot は単独 MC で 24.03 秒、両 anchor 同時出力の改善後で 19.84 秒だった。
-両 anchor 同時出力の 20 seed 線形見積は約 397 秒である。
-同じ条件の dev4 領域は 13.77 秒、paper 領域の 16 chain は 7.22 秒、固定 4 chain・保存 600 は dev4 5.04 秒と paper 7.55 秒であり、各構成の 20 seed は 600 秒以内の見積である。
-計算時間は環境負荷で変動するため、正式実行でも 1 invocation 600 秒を監視し、区間や被覆を見て保存数を変更しない。
-全長 250 は非常に短く、pilot でも半 trace cap が発生したため、この探索を論文精度の再現や収束確認とは扱わない。
-Q 統合後の main で、事前固定 seed 2026–2045 に対し、dev4 ladder `[0.30,0.26,0.22]` の保存 600・2400・9600 と同じ seed 2026 の点推定差を測る。
-保存長を変えるときは固定 burn 180 と block 8 を維持し、`benchmarks/bar_sensitivity.py --samples <N> --burn-in 180 --block 8 --seeds <slice> --label <unique>` を分割実行する。
-保存 9600 の seed 2026 pilot は 46.50 秒で、20 seed 全体は約 930 秒と見積もるため、2026–2035 と 2036–2045 の事前固定 10 seed ずつ 2 invocation に分ける。
-この pilot の cache 由来 exact 条件付き重みは `4.530131731513127` で、Q 統合後の seed 2026 の BAR 点推定は `0.593407854636081` だったが、正式 20 seed の表には採用しない。
-この分割は各 invocation の 600 秒上限のためで、20 seed 全体が 600 秒以内という主張はしない。
-初めから決めた全 seed の結果を残し、平均 bias、seed 間散らばり、個別 seed 2026 の推移を示す。
-差の縮小が `1/sqrt(N)` に似ても bias 不在の証明とは扱わず、縮小しない場合は固定 180、5·IAT、半 trace の cut と 4、16、50 chain の比較を計画どおりに行う。
-`bar_paper_protocol.py` は dev4 と paper ladder `[0.10,0.07,0.05,0.03]`、4 構成、paper 領域では MC と exact anchor の両方を扱う。
-各構成の保存長は Q 統合後の sampling だけの pilot に基づき、4 chain は cut 後 600、16/50 chain は cut 前 250 と結果を見る前に固定した。
-全 seed の CSV を `--aggregate` で検証する。
-被覆数と Wilson 区間、平均区間幅、平均点推定と exact の差、四条件の合否・未判定を `docs/bar_sensitivity_ja.md` に追記する。
-この最終表は現時点で未実施であり、短い pilot や dev4 の 13/20 を dev5 の結果と取り違えない。
+| 保存数/chain | MC anchor BAR 平均 bias | seed 間 SD | 平均の SE | BAR exact 被覆 | seed 2026 点推定 |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 600 | −0.011914 | 0.025610 | 0.005727 | 13/20 | 0.534471 |
+| 2400 | −0.001230 | 0.012282 | 0.002746 | 20/20 | 0.590558 |
+| 9600 | −0.003251 | 0.006966 | 0.001558 | 20/20 | 0.593408 |
 
-## 共有ファイルへの統合依頼
+同 seed の点推定差の20本平均と SE は2400−600が `+0.010684 ± 0.004678`、9600−600が `+0.008663 ± 0.005146`、9600−2400が `−0.002022 ± 0.002497` だった。
+同じCSVのBAR比を exact anchorへ再換算した補助平均 bias は順に `−0.010479`、`+0.000274`、`−0.001737` で、9600の残差は平均の約1.09 SEだった。
+9600のMC anchor点推定の平均残差は約2.09 SEだが、20 seedの標本ではanchor値とBAR比の相関が `−0.59118` となり、観測SDが単純なanchor分散目安より小さい。
+これを真の負相関や持続的biasの証明とせず、追加burn・chain感度は今回の事前計画では発動しなかった。
+既定初期化はこの固定decoder問題で失敗条件付きtargetからの棄却標本なので、default群の長さ差を初期過渡と断定しない。
+全行、集計、派生値と再計算コードは [長さデータ](data_dev5/length/aggregate/cohort_runs.csv) と [派生JSON](data_dev5/length/length_derived.json) に保存した。
 
-`docs/api_en.md` の `estimate_logical_error` に `uncertainty="block_bootstrap"` と `"cross_chain"`、2 chain 以上、独立 chain と定常性の仮定、共有 rung 共分散、独立 anchor 分散を追記する。
-README の BAR 制約段落には、区間は混合と不確かさ推定の仮定に依存し、診断合格や論文の平均重み実験が BAR 被覆を保証しないこと、`docs/bar_sensitivity_ja.md` の実測表へ進めることを書く。
-`examples/workflows/pl_curve.py` の説明と出力には、既定の短い d=3・p=0.22 実行が名目被覆を保証せず、exact との反例と cohort 表を参照するよう記す。
-notebook 02 の同じ説明も直し、メインが再生成する。
-公開既定の誤差法や chain 数を変える判断は最終被覆表を見て所有者へ提示する。
-共有ファイル、version、wheel、CI、push はメインの担当として未実施である。
+被覆比較はdev4 ladder `[0.30,0.26,0.22]` と低p ladder `[0.10,0.07,0.05,0.03]` の各4構成を固定し、低pでは両anchorを同軌道から出して8回のsamplingから12 cohortを作った。
+4 chainはcut後600、paper16/50はcut前raw250、全構成に異なるfaulty startの補助診断を付けた。
+8 invocationの20 seed実測はdev4で `91.42/82.24/97.96/271.11` 秒、低pで `124.71/111.20/138.86/409.82` 秒となり、いずれも600秒以内だった。
+修正済みaggregateは12 cohort×20 seedの240行を検証し、同点推定のblock/cross、MC/exactのBAR比・cut・診断の一致を [派生解析](data_dev5/protocol/protocol_derived.json) で照合した。
+16 chainと50 chainはSeedSequence設計上先頭16 chainを共有し、CSVに残る全seed・rungの先頭16本のcut列が一致したが、保存状態列の全要素をCSVから再照合したとは主張しない。
+未判定のPython `None` はCSVで空欄になるため、集計は両表現を同じ未判定として扱う修正をbenchmark commit `850fa0f` で統合した。
+この修正は集計だけであり、sampling sourceとraw数値は変えていない。
+全12 cohortの被覆数、Wilson区間、平均bias、seed間SD/SE、平均幅と四条件は [BAR感度の最終表](../bar_sensitivity_ja.md) に示す。
+paper16/50のraw250は論文の各chain 2,000,000 stepから大幅に短く、全4群で20/20 seedに半trace capがあり、この計測を論文精度の再現や収束の証明とは扱わない。
+
+## 統合状態と所有者判断
+
+`docs/api_en.md` には既定block bootstrapと追加cross-chainの契約、共有rung共分散と独立anchor分散、2 chain下限と少数chain正規近似の制約をmainが反映した。
+README、`examples/workflows/pl_curve.py`、notebook 02の短い実行と被覆に関する説明はmainが更新し、既定notebook再生成とwheelのcore/optional検証を完了した。
+公開既定の誤差法、chain数、保存長を自動変更する提案はせず、20 seedの有限精度と費用を示して所有者判断に残す。
+default4とpaper16/50の間ではchain数以外に初期状態、lazy、burn、trace長も同時に変わるため、結果差の単独原因を指定できない。
+paper16とpaper50の間は同じraw250・開始・lazy・cut規則でchain数だけを増やす限定的な感度比較だが、20 seedから一般化しない。
+診断と被覆探索は混合・エルゴード性・BARの正しさや名目95%被覆を保証しない。
+PyPI公開、研究repo変更、pushは行っていない。
