@@ -11,7 +11,7 @@
 - [x] 2026-10-01 20:00 前提変更を `22a8e9c` に保存し、全 source suite は362 passed / 151.22秒、tracked差分なしを確認する（新規計画文書のみ未追跡）。
 - [x] 2026-10-01 研究 live 照合を再実行する（20 passed、1.97 秒、`output/dev5/phase0_crossval.xml`）。
 - [x] 2026-10-01 20:00 必読資料を確認し、P/Q指示文と受入条件を準備する（`P_instructions_ja.md`、`Q_instructions_ja.md`）。
-- [ ] P/Q の worktree を作成し、指定モデルの担当2体を起動する。
+- [x] 2026-10-01 20:01 P/Q worktreeを作成し、gpt-6-sol/highの担当2体を起動する（利用可能なsolモデルを指定）。
 
 ## WP-Q（先に統合）
 
@@ -59,3 +59,13 @@
 完全な基準実行のJUnitは `output/dev5/phase0_full.xml`、詳細は `validation_dev5_ja.md` に記録した。
 研究live照合は同環境の `python -m pytest tests/test_crossval_research.py -q` で20件成功した。
 論文は観測量平均のcross-chain SEを定義し、full BARのend-to-end評価は未実施と記載しているため、BARへの誤差伝播を論文の検証済み結論とは扱わない。
+
+## 稼働中の担当
+
+WP-Qは `/root/wp_q`、worktreeは `A:/dev/mcmc4qec-wt/q`、branchは `wp/q` である。
+WP-Pは `/root/wp_p`、worktreeは `A:/dev/mcmc4qec-wt/p`、branchは `wp/p` である。
+両worktreeの出発点は `f2799a1` である。
+再開時はagentの現況とgit差分を確認し、既存agentが稼働中なら重複起動しない。
+Pは実装と軽量試験を先行し、最終の20seed被覆表はQ統合後mainで測定する。
+計測競合を避けるため、各担当はbenchmark実行前にメインへ連絡する。
+メインの次の未完了項目はQの小仕様・受入試験の確認であり、その後に独立レビュー、Q統合、P統合の順で進める。
