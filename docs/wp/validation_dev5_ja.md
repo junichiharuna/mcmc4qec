@@ -110,3 +110,19 @@ optional wheelで `examples/workflows/pl_curve.py --seed 7` の既定とquickも
 mainの2本のBAR benchmarkで、`RIMC_RESEARCH_ROOT` と `RESEARCH_ROOT` をそれぞれ作業領域内の模擬保護rootに設定し、`--quick --out <その子>` の4通りを実行した。
 すべてexit1でread-only保護エラーになり、対象ディレクトリが作られていないことを確認した。
 この試験は実研究repoを書込先にせずに保護分岐を検証したもので、実研究repoの不変確認とは別に扱う。
+
+## 長さ比較の独立算術監査
+
+固定した保存600/2400/9600・各20seedの全60行は、`docs/wp/data_dev5/length/` に保存した。
+独立P reviewerはraw4ファイルの60行とaggregate60行の全列一致、各長さ2026–2045の各1回、問題・source digest、設定、bootstrap成功30回を確認した。
+各seedのMC anchorと独立MCの主要列が3長さで同一であることも確認した。
+truth cacheのcountsからp=0.30と0.22の真値を再計算し、平均・SD・SE・対応差・log比・exact-anchor換算・seed2026・Wilsonを1e-12以内で再現した。
+9600でMC anchorを用いた点推定の標本SDが理論的なanchor由来SD約0.010を下回る点は、有限20seedの負の標本共分散で分散恒等式が成立することを確認した。
+独立なseed分岐は設計上の仮定であり、この有限cohortの相関から母集団の独立性を証明したり否定したりしない。
+exact-anchor換算の平均偏差は600で-1.93 SE、2400で+0.11 SE、9600で-1.09 SEで、持続biasの確証は得られなかった。
+追加burn/chain感度は現計画では未発動とし、不要と証明したわけではなく今後の候補に残す。
+20/20被覆のWilson下限は0.839であり、block長8の十分性や名目95%被覆の保証とはしない。
+最終のcoverage科学表の監査は別gateとして残る。
+
+P worktreeの予備計測・両anchor照合・reviewプローブの出力39ファイルをmainの `output/dev5/p_pilots/` に複写した。
+これらは最終60行や12cohortへ混ぜず、worktree削除後も動作・時間の検証記録として保持する。
