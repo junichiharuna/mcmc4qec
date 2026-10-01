@@ -39,3 +39,12 @@ cross-chainのBAR区間は論文の平均標準誤差の考え方を応用する
 
 CPUは `AMD Ryzen 5 3600 6-Core Processor`、OSはWindows、指定Pythonは3.11とする。
 性能測定時に依存版と実際の設定・seedを改めて出力し、他の計測と重ねない。
+
+## dev5 wheel用の環境準備
+
+2026-10-01に指定Python3.11から `--system-site-packages` を付けずに `.venv-dev5-core` と `.venv-dev5-optional` を新規作成した。
+coreにはpytest9.1.1とmypy2.3.1を導入し、mcmc4qecとoptional依存の不在を確認した。
+optionalにはpyprojectのdependenciesとtest/matching/bposd/codes/stim/plot/notebooks extras、およびmypyを導入した。
+optionalの主要版はNumPy2.4.6、PyMatching2.4.0、ldpc2.4.1、bposd2.1、Stim1.16.0、matplotlib3.11.2、nbclient0.11.0、nbformat5.11.1、ipykernel7.4.0である。
+両環境の `pip check` は `No broken requirements found.` で成功し、optional環境もmcmc4qecはまだ導入されていない。
+この準備はwheel検証の成功を意味せず、最終dev5 wheelを導入した後に全pytestとverify_wheelを実施する。

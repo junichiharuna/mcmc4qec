@@ -15,7 +15,7 @@
 
 ## WP-Q（先に統合）
 
-- [ ] 小仕様と全状態・全近傍・同 seed/RNG の受入試験を追加する。
+- [x] 2026-10-01 20:07 小仕様と受入試験をQ worktreeに追加する（全小状態・全近傍、toric同seed/RNG、正規化回数、cache境界；担当実行19 passed / 5.48秒、main統合・独立レビューは後続）。
 - [ ] 局所確率表、decoder cache、候補処理の改善を実装する。
 - [ ] toric d=5/d=7/BB72 を2回以上計測し、profile と README 案を Q 完了メモに記録する。
 - [ ] 別担当が敵対的レビューを実施し `Q_review_ja.md` を作成する。
@@ -69,3 +69,15 @@ WP-Pは `/root/wp_p`、worktreeは `A:/dev/mcmc4qec-wt/p`、branchは `wp/p` で
 Pは実装と軽量試験を先行し、最終の20seed被覆表はQ統合後mainで測定する。
 計測競合を避けるため、各担当はbenchmark実行前にメインへ連絡する。
 メインの次の未完了項目はQの小仕様・受入試験の確認であり、その後に独立レビュー、Q統合、P統合の順で進める。
+
+## 2026-10-01 20:07 の再開記録
+
+前turnはPhase 0の検証とコミットにより進捗があり、今回は最初の未完了だったQの小仕様・受入試験を実物で確認した。
+cache miss試験でCallableDecoder自身が先に不正値を拒否する問題と、非Z受理後のZで正規化が2回になる構造を指摘し、Q担当がraw decoder fixtureと表の保持更新へ修正した。
+Qの受入試験は担当実行で19 passed / 5.48秒であり、変更後の全suiteと独立レビューはまだ未実施である。
+要件全体の完了監査に使う対応表を `audit_dev5_ja.md` に作成した。
+指定Pythonから `.venv-dev5-core` と `.venv-dev5-optional` を新規作成し、coreはpytest/mypyのみ導入、packageとoptional依存が不在であることを確認した。
+optional環境はpyprojectの依存とextrasの導入を完了し、両環境とも `pip check` は成功した。
+optional環境の全extras存在とpackage不在を確認し、最終dev5 wheelは両環境とも未導入である。
+補助agent `/root/p_protocol_check` が読み取り専用で論文と実runnerのburn-in・四条件を照合し、P担当へ結果を渡す。
+メインの次の未完了項目はQ実装の確定である。
