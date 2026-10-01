@@ -41,8 +41,8 @@
 - [x] 2026-10-01 20:55 versionを0.1.0.dev5へ更新し、installed optional wheelの `notebooks/regenerate.py` で4本を再生成する（実行時間合計25.17秒）。
 - [x] 2026-10-01 20:55 既存verify_wheelとCIの自動version/全pytest/全例経路が新APIを扱うことを確認し、local core/optionalのverify_wheelが成功する（remote CI実行は後続）。
 - [x] 2026-10-01 20:56 新規core venvのinstalled wheelで全pytest 269 passed /69 skipped /64.00秒とverify_wheel coreの成功を確認する。
-- [ ] 新規optional venvにwheelをinstallし、全pytestとverify_wheel.py optionalを通す。
-- [ ] 全suite5分以内・増分60秒以内・各file60秒以内を確認する。
+- [x] 2026-10-01 21:00 新規optional venvのinstalled wheelで全pytest 367 passed /5 skipped /155.69秒とverify_wheel optionalの成功を確認する。
+- [x] 2026-10-01 21:00 source156.56秒・増分5.34秒、core64.00秒、optional155.69秒、file別最大26.652秒で全制限内を確認する。
 - [ ] CHANGELOG、AGENTS、IMPLEMENTATION_STATUS追記を更新する。
 - [ ] 最終検証済みmainをpushし、remote CI全job成功を確認する。
 - [ ] git cherryで統合を確認し、P/Q worktreeとbranchを削除する。
@@ -147,3 +147,11 @@ mainはcore wheel gateを通過し、optional wheelの全pytestをsession27208�
 optionalの全pytestと追加のpl_curve時間確認が終わったら、Pへ長さ2400/9600および12cohortの計算枠を戻す。
 notebook4本の既定出力は `baaa26a` に保存し、verify_wheel optionalの全20例・全4quick notebookと文書コードは成功済みである。
 Pの実装レビューは完了しているが、最終科学CSVの敵対的監査は同じ `/root/p_review` へfollowupして行う必要がある。
+
+## 2026-10-01 21:00 の更新
+
+optional wheelの全pytestは367 passed /5 skipped /155.69秒で、研究envを指定しないlive研究照合5件がskipされた。
+optionalのfile別最大はcircuit kernelsの26.121秒で、source/core/optionalの全gateが時間制限内だった。
+既定説明を更新したpl_curveもseed7で再計測し、既定10.993秒・quick2.460秒、両方exit0で、例一覧へ反映した。
+Pへ科学計算枠を戻し、保存2400・9600の固定20seedと12cohortをmainで継続する。
+mainの現在の残件は最終数値表と独立監査、文書の結論・handoff追記・最終AGENTS更新、push/CI、worktree cleanup、全要件監査と最終報告である。

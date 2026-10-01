@@ -99,6 +99,11 @@ installed wheelの全pytestは後続のgateとして未完了である。
 新規core venvの `python -m pytest --override-ini pythonpath= tests -q --junitxml=output/dev5/wheel_core.xml` は269 passed /69 skipped /64.00秒だった。
 研究rootとPYTHONPATHを子プロセス環境から外し、optionalがない環境として検証した。
 coreのfile別最大は `test_independent` の10.976秒だった。
+同じく研究envとPYTHONPATHを外したoptional venvの全pytestは367 passed /5 skipped /155.69秒で、JUnitは `output/dev5/wheel_optional.xml` に保存した。
+skipは研究checkout環境を指定しないlive研究照合5件で、sourceの研究env付き検証では全て実行済みである。
+optionalのfile別最大は `test_circuit_kernels` の26.121秒で、両wheelも全suite300秒・各file60秒以内だった。
+optional wheelで `examples/workflows/pl_curve.py --seed 7` の既定とquickも実行し、両方exit0、所要時間10.993秒と2.460秒、SUMMARYを確認した。
+ログと出力は `output/dev5/pl_curve_default*` と `output/dev5/pl_curve_quick*` に保持した。
 
 ## benchmark出力保護の確認
 
