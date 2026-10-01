@@ -48,3 +48,16 @@ benchmark は kernel ごとに異なる seed で失敗初期状態を探す時�
 
 担当者に成分別 MH と実際の sampler 分岐を検証するテストの追加を依頼する。
 WP-N の main 統合後に WP-L を rebase し、同一 seed の fastpath・参照経路等価性、回路テスト、全 suite を再実行する。
+
+## 担当者の対応記録
+
+WP-N 統合済み main `527548b` への rebase は競合なく完了した。
+レビューが求めた成分別 MH、failure 棄却、lazy、対角自己遷移の 64 状態遷移行列検査を `tests/test_circuit_kernels.py` に追加した。
+全 flat 近傍の OBF と Zanella、および物理提案の全 location・ラベル分岐で `propose` の候補と逆順比を `probability` に照合した。
+固定乱数の実サンプラーで各 kernel 選択、failure 棄却、受理、lazy、保存状態と受理集計を検査した。
+境界の故障率 0・1 と確率 0 ラベルの支持外近傍もテストへ追加した。
+WP-N の専用 `faststep` が回路モデルを対象外と判定することを確認した。
+レビュー指摘を受けて benchmark は共通の supported faulty 初期状態を探索し、その探索時間を step/s の測定から外すよう変更し、旧値と新値の両方を `docs/circuit_baseline_ja.md` と完了メモに残した。
+rebase 後の対象 7 ファイルは 59 passed、47.27 秒で、新しい回路カーネルテスト単体は 9 passed、28.48 秒だった。
+混合遷移行列の対角を rejection と lazy から直接計算する最終修正後の対象 7 ファイルも 59 passed、46.06 秒だった。
+共有 manifest 更新後の全 suite はメイン担当であり、この記録時点では未実施である。

@@ -38,8 +38,18 @@ Z 0.7 / OBF 0.3 の 300 標本と burn-in 100 の chain は `9.440±1.555`、診
 | Zanella | 55.67 | 0.7533 |
 | Z 0.7 / OBF 0.3 | 62.56 | 0.5333 |
 
-`PYTHONPATH=src C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bench_circuit_step.py --steps 150` は Windows PowerShell の環境変数設定で実行し、全体で 7.77 秒だった。
-各 step/s は回路構築後の `sample_faulty` 実行時間から計算し、受理率は異なる seed の短い chain の観測値である。
+上の値は WP-N 統合前の最初の計測で、全体 7.77 秒だった。
+各 step/s は回路構築後の `sample_faulty` 実行時間から計算したが、kernel ごとに異なる失敗初期状態の探索時間も含む。
+
+| WP-N 統合後、共通の supported faulty 初期状態、150 step | step/s | 受理率 |
+| --- | ---: | ---: |
+| `circuit_single` | 176.95 | 0.0067 |
+| Zanella | 52.63 | 0.6600 |
+| Z 0.7 / OBF 0.3 | 63.23 | 0.6467 |
+
+WP-N 統合後の同じコマンドは全体 7.92 秒で、共通初期状態の探索は 6 試行、0.056 秒だった。
+その探索は表の step/s から除いたが、`sample_faulty` 内の構成、provenance、診断時間は含む。
+受理率は異なる seed の短い chain の観測値である。
 物理 location の提案間で受理率が異なっても、混合品質の優劣を示さない。
 
 `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests -q` は 315 passed、5 skipped、1 failed、153.32 秒だった。
@@ -59,5 +69,19 @@ Z 0.7 / OBF 0.3 の 300 標本と burn-in 100 の chain は `9.440±1.555`、診
 旧仕様の拒否を期待する `tests/test_circuit_pipeline.py::test_circuit_rejects_unsupported_kernel_mixes` は、今回許可された `single` 混合から引き続き禁止される `cluster` 混合へ最小変更した。
 このテストファイルは担当一覧外だが、受入条件と全 suite の整合のため変更が必要であり、メインのレビューを求める。
 `sampling.py` の変更は `KernelConfig` docstring と `sample_faulty` の回路 kernel 検査だけで、`fastpath.py` の変更は `CircuitFaultNoise` 確率行分岐だけである。
-WP-N の main 統合後にこのブランチを rebase し、同一 seed の等価性テストを再実行する必要がある。
+WP-N の main 統合後の rebase と同一 seed の等価性テストは下記の通り完了した。
 回路向け cluster exchange を将来設計するなら、物理 location の group 化と group 間で異なる alphabet 長の proposal 比を定義してから、有限配置で正規化と詳細釣合いを調べる必要がある。
+
+## WP-N 統合後の rebase と独立レビューへの対応
+
+`wp/l` を WP-N 統合済み main `527548b` に rebase し、競合はなかった。
+`CircuitFaultModel` は WP-N の `make_faststep` 対象外であることを新しい固定乱数テストで確認し、回路の Zanella は WP-L の `fastpath._probability_rows` を使う。
+独立レビューの指摘に従い、64 状態の failure 集合で OBF 0.25 / Zanella 0.50 / `circuit_single` 0.25 を kernel ごとの MH 受理で合算し、lazy 0.05 と failure 棄却を対角遷移へ加えた行列の行和と詳細釣合いを検査した。
+同じ有限例で failure 集合 32 状態の連結性と全状態の自己ループを確認したが、一般問題の既約性と周期性は主張しない。
+64 状態の全 flat 近傍で OBF と Zanella の `propose` と `probability` の候補・逆順比を照合し、`circuit_single` の全 location・非零ラベル分岐も照合した。
+固定乱数列で実サンプラーに OBF の failure 棄却、Zanella の受理、物理提案の棄却と受理、lazy を通し、保存状態列と kernel 別受理集計を検査した。
+確率 0 のラベル、故障率 0 と 1、zero padding を同時に含む異種 alphabet 小回路では、支持内状態と支持外近傍の fastpath と参照経路を照合した。
+`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py -q -s --durations=10` は rebase 後の補強テストで 9 passed、28.48 秒だった。
+`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_fastpath.py tests/test_faststep.py tests/test_circuit_model.py tests/test_circuit_proposal.py tests/test_circuit_pipeline.py tests/test_circuit_surface.py tests/test_circuit_kernels.py -q` は 59 passed、47.27 秒だった。
+対角遷移を failure 棄却量と lazy の和から直接構成する最終修正後の同じコマンドも 59 passed、46.06 秒だった。
+補強後の full suite と installed wheel 検証は未実施であり、メインの共有 manifest 更新後に検証する。

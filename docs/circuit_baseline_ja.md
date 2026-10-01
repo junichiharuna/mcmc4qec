@@ -97,11 +97,21 @@ surface d=3、`p=0.03`、独立 300 試行では 108 個の失敗から `E[w|fau
 Z 0.7 / OBF 0.3 の 300 標本、burn-in 100 の chain では `E[w|faulty]=9.440±1.555`、診断 ESS は 7.674 で、二つの区間は重ならなかった。
 この通常近似区間は厳密な被覆保証ではなく、低い ESS と非交差のため混合不足などを疑う必要があり、推定精度を主張しない。
 
-| surface d=3、`p=0.02`、150 step | step/s | 受理率 |
+| surface d=3、`p=0.02`、150 step、各 kernel で初期状態を探索 | step/s | 受理率 |
 | --- | ---: | ---: |
 | `circuit_single` | 173.50 | 0.0333 |
 | Zanella | 55.67 | 0.7533 |
 | Z 0.7 / OBF 0.3 | 62.56 | 0.5333 |
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bench_circuit_step.py --steps 150` の実測であり、回路構築時間を除いた sampler の呼び出し時間を使った。
+上の表は最初の実測であり、回路構築時間を除く一方、各 kernel ごとの失敗初期状態の探索時間を `sample_faulty` に含んでいた。
+
+| surface d=3、`p=0.02`、150 step、共通の失敗初期状態 | step/s | 受理率 |
+| --- | ---: | ---: |
+| `circuit_single` | 176.95 | 0.0067 |
+| Zanella | 52.63 | 0.6600 |
+| Z 0.7 / OBF 0.3 | 63.23 | 0.6467 |
+
+`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe benchmarks/bench_circuit_step.py --steps 150` を WP-N 統合後に再実行した値である。
+共通の supported faulty 初期状態は 6 試行、0.056 秒で得られ、その探索時間を表の step/s から除いた。
+各 kernel の `sample_faulty` 呼び出し時間には構成、provenance、診断を含むため、純粋な一ステップ計算量だけの比較ではない。
 受理率と step/s は異なる seed と短い chain の観測値であり、混合品質や論理誤り率の優劣を示さない。

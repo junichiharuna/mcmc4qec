@@ -6,6 +6,8 @@ the rates and acceptance are timing observations, not mixing guarantees.
 import argparse
 import time
 
+import numpy as np
+
 from mcmc4qec import KernelConfig, SamplingConfig, spawn_seeds
 from mcmc4qec.circuit import surface_logical_idle_problem
 from mcmc4qec.sampling import sample_faulty
@@ -20,6 +22,17 @@ def main():
         parser.error('--steps must be positive')
     p = .02
     problem = surface_logical_idle_problem(distance=3, decoder_p=p)
+    seeds = spawn_seeds(args.seed, 4)
+    initializer = np.random.default_rng(seeds[3])
+    initial_start = time.perf_counter()
+    for attempts in range(1, 10_001):
+        initial = problem.noise.sample(p, initializer)
+        if problem.is_faulty(initial):
+            break
+    else:
+        raise RuntimeError('no faulty initial state found in 10000 attempts')
+    print(f'common faulty initial state: attempts={attempts} '
+          f'seconds={time.perf_counter() - initial_start:.3f} (excluded from step timing)')
     settings = {
         'circuit_single': KernelConfig(single=0, zanella=0, cluster=0,
                                        stabilizer=0, circuit_single=1, lazy=0),
@@ -28,9 +41,9 @@ def main():
         'Z+OBF': KernelConfig(single=.3, zanella=.7, cluster=0,
                               stabilizer=0, circuit_single=0, lazy=0),
     }
-    for (name, kernels), seed in zip(settings.items(), spawn_seeds(args.seed, 3)):
+    for (name, kernels), seed in zip(settings.items(), seeds[:3]):
         start = time.perf_counter()
-        result = sample_faulty(problem, p, seed=seed,
+        result = sample_faulty(problem, p, seed=seed, initial_state=initial,
             config=SamplingConfig(samples=args.steps, burn_in=0, kernels=kernels))
         elapsed = time.perf_counter() - start
         proposed = sum(entry['proposed'] for key, entry in result.acceptance.items() if key != 'lazy')
