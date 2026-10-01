@@ -94,3 +94,13 @@ optional wheelの最大test fileは24.675秒、追加5file合計35.413秒で、s
 同環境で`RIMC_RESEARCH_ROOT=A:/dev/RIMC`と`PYTHONDONTWRITEBYTECODE=1`を設定した`pytest --override-ini pythonpath= tests/test_crossval_research.py -q -k live_research`は5 passed / 15 deselected、1.00秒だった。
 mainの`python -m mypy src/mcmc4qec`は24files成功、`--strict --ignore-missing-imports`は20filesで252errorsとなり、独立レビューと一致した。
 この時点でローカル検証は完了し、remote CIはpush後に確認する。
+
+## Remote CIと後片付け
+
+main `c1c6fb919c3bb3cb7a89a2b4e2fae5fb060f80a4`の[Actions run36798208073](https://github.com/junichiharuna/mcmc4qec/actions/runs/36798208073)で全5job成功を確認した。
+core Python3.11/3.12は258 passed / 71 skipped、pytest23.83/46.28秒、optionalは356 passed / 7 skipped、118.59/119.21秒だった。
+remote optionalはmypyを入れないため、ローカルoptionalより型検査2件のskipが増える。
+Python3.11のtyping jobは通常mypy24files成功、型テスト3 passed、0.59秒で、全jobのquick例・文書・notebook stepも成功した。
+5つのwp枝はgit cherryが空でmainの祖先であることを確認し、cleanなworktreeの解決済みパスを検査してから削除した。
+研究repoのHEADは開始時の69efcfcc86af3bf24ca977a098dab0f348601affのままで、git statusは空だった。
+handoffの既存本文は開始時commitのprefixと一致し、CITATIONを変えず、LICENSEを追加していないことを確認した。

@@ -153,3 +153,12 @@ Lでは集約提案MHだけのテストを実成分別MHと固定乱数sampler�
 toricの速度比2倍目標、BARの名目95%被覆、回路H・stabilizer対応、非公開helperまでのstrict解消は達成を主張しない。
 公開既定、ライセンス、著者の所属・DOI、公開先は変更していない。
 この追記時点ではmain push、remote CI、統合済みworktree整理、最終報告の確定が残っており、結果は続けて追記する。
+
+## 2026-10-01 09時台・dev4 remote CIと完了監査
+
+main `c1c6fb919c3bb3cb7a89a2b4e2fae5fb060f80a4`をpushし、[Actions run36798208073](https://github.com/junichiharuna/mcmc4qec/actions/runs/36798208073)の全5jobが成功した。
+Python3.11/3.12のcoreは258 passed / 71 skipped、optionalは356 passed / 7 skippedで、型検査jobは通常mypy24filesと型テスト3件が成功した。
+remote optionalの2件の追加skipはmypy不在によるもので、型検査専用jobで検査している。
+各worktreeのclean状態、git cherryが空、mainへの祖先関係を確認し、解決済み対象パスを検査した上でk〜oのworktreeと枝を削除した。
+研究repoは開始時HEADのままcleanであり、既存handoff本文、CITATION、ライセンス・公開状態は変更していない。
+最終報告`docs/wp/final_report_dev4_ja.md`と`docs/wp/PROGRESS_dev4_ja.md`に完了根拠、未達の性能目標、未実施の研究精度検証、所有者判断待ち事項を記録した。

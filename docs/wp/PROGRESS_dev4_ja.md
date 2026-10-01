@@ -38,10 +38,10 @@
 - [x] 2026-10-01 09:48 JST 新規core venvへwheel導入・全suite（258 passed / 71 skipped、56.23秒）・verify_wheel core成功。
 - [x] 2026-10-01 09:50 JST 新規optional venvへwheel導入・全suite（358 passed / 5 skipped、142.24秒）・verify_wheel optional成功。
 - [x] 2026-10-01 09:50 JST CHANGELOG・AGENTSを更新しIMPLEMENTATION_STATUSへ追記する。
-- [ ] 検証済み main を origin/main へ push し remote CI 全 job の成功を確認する。
-- [ ] git cherry と clean 状態を確認して統合済み worktree と wp/k〜wp/o を削除する。
-- [ ] 研究リポジトリの clean 状態と依頼全項目の完了証拠を監査する。
-- [ ] final_report_dev4_ja.md を指定形式で作成し全項目の完了を記録・コミットする。
+- [x] 2026-10-01 09:55 JST 検証済みmain c1c6fb9をorigin/mainへpushし、remote CI run36798208073の全5job成功を確認する。
+- [x] 2026-10-01 09:55 JST git cherryが空・祖先・clean・解決済みパスを確認し、統合済み5worktreeとwp/k〜wp/oを削除する。
+- [x] 2026-10-01 09:55 JST 研究repo clean・既存handoff本文不変・公開既定と65API・各WPの完了証拠を監査する。
+- [x] 2026-10-01 09:55 JST final_report_dev4_ja.mdを指定形式で作成し、全項目の完了を記録する（この記録と同じ最終コミットに保存）。
 
 ## 実行記録と再開情報
 
@@ -141,3 +141,9 @@ optionalのinstalled packageに対する利用者コードのmypy検査も成功
 optional wheelの研究live照合は5 passed / 15 deselected、1.00秒だった。
 mainの通常mypyも24file成功、strict252errors/20fileを再確認した。
 push直前にorigin/mainが開始時c6cff92のままであることを確認し、mainだけをpushしてCIを確認する。
+
+2026-10-01 09:55 JST、main c1c6fb9のActions run36798208073は全5job成功した。
+remote coreはPython3.11/3.12とも258 passed / 71 skipped、optionalは356 passed / 7 skippedで、型検査専用jobは通常mypy24filesと型テスト3件を通した。
+各作業枝がmainの祖先でgit cherryが空、全worktreeがcleanと確認し、安全な解決済み対象パスで5worktreeと枝を削除した。
+研究repoのHEADとclean状態、handoff既存本文のprefix一致、CITATION不変、LICENSE非追加、公開既定と65名のAPI維持を監査した。
+最終報告はfinal_report_dev4_ja.mdに集約し、未達目標と未実施範囲も記載した。
