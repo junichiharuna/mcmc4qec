@@ -34,12 +34,18 @@ K 担当の小仕様と受入テストを先に確認し、main が `tests/test_
 phase flip のデータ確率行が期待 `[0.8,0.2]` に対して `[0.8,0.0666667]` となり、1 failed、0.51秒だった。
 main 管理の `fastpath.py` の alphabet 選択を depolarizing のみ4、それ以外2に変更し、main `23bd178`、K 枝への同内容 cherry-pick `3609478` に保存した。
 K worktree の同 node と `tests/test_fastpath.py` は14 passed、2.81秒だった。
-K の実装全体、独立レビュー、main への統合は未完了である。
+K の実装全体と独立レビューは後述の統合時点で完了した。
 
 ## 統合・wheel・CI
 
-未実施。
 各 WP のレビュー後に K → N → L → M → O の順に統合し、各段階の全 suite と時間をここへ追記する。
+
+| 統合 | source venv コマンド | 結果 | 秒 |
+| --- | --- | --- | ---: |
+| K、main `c550cdf` | `python -m pytest tests -q --junitxml=output/dev4-after-k.xml` | 330 passed / 5 skipped | 149.98 |
+
+K後のskipは研究checkout未指定の照合5件で、Windows ZeroMQの補助selector警告1件が出た。
+installed wheelとremote CIは未実施。
 
 ## 基準のファイル別時間
 
