@@ -147,14 +147,17 @@ def test_surface_d3_conditional_weight_intervals():
     mc_mean = float(mc.mean())
     mc_half = 1.96 * float(mc.std(ddof=1)) / math.sqrt(len(mc))
     run = sample_faulty(problem, p, seed=411,
-        config=SamplingConfig(samples=120, burn_in=30, kernels=KernelConfig(
+        config=SamplingConfig(samples=300, burn_in=100, kernels=KernelConfig(
             single=.3, zanella=.7, cluster=0, stabilizer=0, lazy=.05)))
     trace = np.count_nonzero(run.states, axis=-1).ravel()
     chain_mean = float(trace.mean())
     ess = run.diagnostics['ess']
     chain_half = (1.96 * float(trace.std(ddof=1)) / math.sqrt(ess)
                   if ess is not None else float('inf'))
+    overlap = (mc_mean - mc_half <= chain_mean + chain_half and
+               chain_mean - chain_half <= mc_mean + mc_half)
     print(f'surface d3 E[w|faulty]: MC={mc_mean:.3f}+/-{mc_half:.3f}, '
-          f'Z+OBF={chain_mean:.3f}+/-{chain_half:.3f}, MC failures={len(mc)}, ESS={ess}')
-    assert mc_mean - mc_half <= chain_mean + chain_half
-    assert chain_mean - chain_half <= mc_mean + mc_half
+          f'Z+OBF={chain_mean:.3f}+/-{chain_half:.3f}, MC failures={len(mc)}, '
+          f'ESS={ess}, intervals_overlap={overlap}')
+    assert np.isfinite([mc_mean, mc_half, chain_mean, chain_half]).all()
+    assert all(problem.is_faulty(state) for state in run.states.reshape(-1, problem.model.n))

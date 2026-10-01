@@ -1,6 +1,7 @@
 """Compare physical single-fault and Z+OBF conditional circuit sampling.
 
-Requires stim,matching extras. Measured default/--quick: about 13.6s/3.6s
+Requires stim,matching extras; plot is optional. Measured default/--quick:
+about 13.8s/3.9s
 on Windows Python 3.11. The decoder prior is
 fixed at p. Conditional chains do not estimate whole-circuit P_L, and IAT
 does not prove convergence, ergodicity, or correctness.
@@ -72,6 +73,25 @@ def main():
             writer.writerow([name, result['conditional_weight'], result['acceptance'], result['iat']])
         writer.writerow(['direct_mc', mc.conditional_weight, '', ''])
     print(f'Conditional weight and diagnostics: {out / "conditional_weight.csv"}')
+    try:
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print('matplotlib unavailable; comparison values are in CSV only.')
+    else:
+        names = [*results, 'direct MC']
+        values = [*(result['conditional_weight'] for result in results.values()),
+                  mc.conditional_weight]
+        fig, ax = plt.subplots(figsize=(6, 3.5))
+        ax.bar(names, values, color=['#4878a8', '#5a9b80', '#888888'])
+        ax.set_ylabel('E[nonidentity locations | faulty]')
+        ax.set_title('Short-run comparison; not convergence evidence')
+        fig.tight_layout()
+        image_path = out / 'conditional_weight.png'
+        fig.savefig(image_path, dpi=120)
+        plt.close(fig)
+        print(f'Comparison plot: {image_path}')
     print('Conditional state frequencies are not whole-circuit P_L; diagnostics do not prove convergence.')
     print('SUMMARY ' + json.dumps(summary))
 

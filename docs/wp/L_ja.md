@@ -15,6 +15,7 @@
 ## 受入検証
 
 `C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py -q -s --durations=10` は 6 passed、26.14 秒で、最長テストは 17.50 秒だった。
+PNG と区間記録の修正後、`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe -m pytest tests/test_circuit_kernels.py tests/test_circuit_pipeline.py tests/test_fastpath.py -q` は 24 passed、37.83 秒だった。
 repetition d=3 の 1 ラウンドの `4^3=64` 配置を使い、OBF、Zanella 参照経路、Z 0.7 / OBF 0.3 の全状態について提案正規化を検査した。
 同じ配置の失敗集合上の全一座標近傍で順向きと逆向きの提案確率および MH 受理を計算し、詳細釣合いを照合した。
 同じ問題の全配置で Zanella fastpath と参照経路の提案分布を `1e-14` の絶対許容差で照合し、同じ seed の混合 sampler の状態列と kernel 別受理集計が完全一致した。
@@ -22,12 +23,14 @@ repetition d=3 の 1 ラウンドの `4^3=64` 配置を使い、OBF、Zanella �
 異なる conditional fault 確率と location 故障率を持つ alphabet 長 2・4・4 の小回路で、確率行の数値、zero padding、全配置の fastpath と参照経路の分布を照合した。
 回路モデルで `cluster` または `stabilizer` を選ぶと、独自 failure predicate を指定しても `ValueError` となることを検査した。
 surface d=3、`p=0.03` の独立 300 試行では 108 失敗、条件付き重みの通常近似区間は `12.093±0.556` だった。
-Z 0.7 / OBF 0.3 の 120 標本と burn-in 30 の chain は `9.808±1.747`、診断 ESS は 5.548 で、二つの区間は重なった。
-通常近似区間と短い chain の比較に被覆保証はなく、診断も収束・エルゴード性・正しさの証明ではない。
+Z 0.7 / OBF 0.3 の 300 標本と burn-in 100 の chain は `9.440±1.555`、診断 ESS は 7.674 で、二つの区間は重ならなかった。
+通常近似区間と短い chain の比較に被覆保証はなく、非交差と低い ESS は混合不足などを疑う根拠となるが、どちらの推定値が正しいかは決められない。
+診断は収束・エルゴード性・正しさの証明ではない。
 
-`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe examples/circuit_zanella.py --quick` は `PYTHONPATH=src` で成功し、3.57 秒だった。
-同じ既定実行は `PYTHONPATH=src` で成功し、13.61 秒だった。
-どちらも CSV と所定キーの `SUMMARY` を出力し、条件付き chain から絶対 `P_L` を推定していない。
+`C:/Users/user/AppData/Local/Programs/Python/Python311/python.exe examples/circuit_zanella.py --quick` は `PYTHONPATH=src` で成功し、PNG 追加後の再実行で 3.89 秒だった。
+同じ既定実行は `PYTHONPATH=src` で成功し、PNG 追加後の再実行で 13.79 秒だった。
+どちらも CSV と Agg backend の PNG および所定キーの `SUMMARY` を出力し、条件付き chain から絶対 `P_L` を推定していない。
+`pymatching` import 後に `sys.modules["matplotlib"]=None` として `runpy` で quick を実行した場合も 3.50 秒で成功し、PNG を省略して CSV と同じキーの `SUMMARY` を出力した。
 
 | surface d=3、`p=0.02`、150 step | step/s | 受理率 |
 | --- | ---: | ---: |
@@ -47,7 +50,7 @@ Z 0.7 / OBF 0.3 の 120 標本と burn-in 30 の chain は `9.808±1.747`、診�
 ## メインへの統合依頼
 
 `examples/README.md` に `circuit_zanella.py` の行を追加する。
-行案は目的「surface d=3 の物理 `circuit_single` と Z+OBF の条件付き重み・受理率・IAT 比較」、extras「`stim, matching`」、既定 13.61 秒、quick 3.57 秒、出力「CSV と `SUMMARY` の条件付き重みは絶対 `P_L` でない」、注意「1、2、5、6」とする。
+行案は目的「surface d=3 の物理 `circuit_single` と Z+OBF の条件付き重み・受理率・IAT 比較」、extras「`stim, matching`、図は `plot`」、既定と quick の実測時間は本メモの再実行値、出力「PNG と CSV の条件付き重みは絶対 `P_L` でない」、注意「1、2、5、6」とする。
 `README.md` と `README_ja.md` の対応表の Physical Stim circuit locations 行を OBF、Zanella、`circuit_single` 対応に更新し、cluster と stabilizer は unavailable のままとする。
 `docs/api_en.md` の `KernelConfig` 説明に、回路モデルでは `single`、`zanella`、`circuit_single` の混合を許し、cluster と stabilizer を拒否することを追記する。
 既存 `examples/circuit_baseline.py` の冒頭 docstring は Z が使えないという旧仕様なので、文書だけを修正する。
