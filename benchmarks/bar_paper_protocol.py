@@ -139,7 +139,7 @@ def _summary(rows, elapsed):
                 mean_estimate=float(np.mean([float(row["estimate"]) for row in rows])),
                 mean_bias=float(np.mean([float(row["estimate"])-float(row["exact"]) for row in rows])),
                 four_rule_pass=sum(row["four_rule_pass"] == "True" for row in rows),
-                four_rule_unresolved=sum(row["four_rule_pass"] == "None" for row in rows),
+                four_rule_unresolved=sum(row["four_rule_pass"] in (None, "", "None") for row in rows),
                 paper_vacuous_pass=sum(row["paper_vacuous_pass"] == "True" for row in rows),
                 auxiliary_four_rule_pass=sum(row["auxiliary_four_rule_pass"] == "True" for row in rows),
                 burn_capped=sum(row["burn_capped"] == "True" for row in rows),
