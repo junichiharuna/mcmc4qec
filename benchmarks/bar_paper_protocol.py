@@ -121,6 +121,7 @@ def _summary(rows, elapsed):
     valid = [row for row in rows if row["low"] != ""]
     return dict(region=rows[0]["region"], protocol=rows[0]["protocol"],
                 anchor_kind=rows[0]["anchor_kind"], samples=rows[0]["samples"],
+                total_steps=rows[0]["total_steps"],
                 chains=rows[0]["chains"], problem_sha256=rows[0]["problem_sha256"],
                 auxiliary_start=rows[0]["auxiliary_start"], seeds=n,
                 seed_start=min(int(row["seed"]) for row in rows),
@@ -147,7 +148,7 @@ def aggregate(directory, out):
         with path.open(newline="", encoding="utf-8") as stream:
             for row in csv.DictReader(stream):
                 key = (row["region"], row["protocol"], row["anchor_kind"],
-                       row["samples"], row["chains"], row["problem_sha256"],
+                       row["samples"], row["total_steps"], row["chains"], row["problem_sha256"],
                        row["bootstrap_replicates"], row["block"],
                        row["anchor_trials"], row["auxiliary_start"], row["lazy"],
                        row["truth_source"], row["truth_cache_source_sha256"])
@@ -313,7 +314,7 @@ def run(args):
                       for child in children[:-1]]
         # Save the whole trace, then apply either a fixed or iterated post-hoc cut.
         # Both uncertainty methods read these same states and pooled BAR ratios.
-        total = args.samples + 180
+        total = args.samples + (180 if burn_mode == "fixed" else 0)
         kernels = KernelConfig(lazy=0.0) if burn_mode == "iat5" else KernelConfig()
         config = SamplingConfig(chains=chains, samples=total, burn_in=0, kernels=kernels)
         start_state = None if burn_mode == "fixed" else short
@@ -354,7 +355,8 @@ def run(args):
                            for trace in other_states])
         full, vacuous, auxiliary_full, rule_details = _convergence(states, cuts, other_states, other_cuts)
         rows.append(dict(region=args.region, protocol=args.protocol, anchor_kind=args.anchor,
-                         seed=seed, samples=args.samples, chains=chains, ladder="/".join(map(str, ladder)),
+                         seed=seed, samples=args.samples, total_steps=total,
+                         chains=chains, ladder="/".join(map(str, ladder)),
                          problem_sha256=_problem_digest(code, problem),
                          truth_cache_source_sha256=cache["package_source_sha256"] if cache is not None else "",
                          truth_source="checked_weight_cache" if cache is not None else
@@ -386,14 +388,15 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--quick", action="store_true", help="One seed with 80 retained steps")
+    parser.add_argument("--quick", action="store_true", help="One seed with an 80-step paper trace or 80 fixed-cut retained steps")
     parser.add_argument("--seed", type=int, help="Alias for --seed-start with one seed")
     parser.add_argument("--seed-start", type=int, default=2026)
     parser.add_argument("--seeds", type=int, default=20)
     parser.add_argument("--region", choices=LADDERS, default="dev4")
     parser.add_argument("--protocol", choices=PROTOCOLS, default="default_block")
     parser.add_argument("--anchor", choices=("mc", "exact"), default="mc")
-    parser.add_argument("--samples", type=int, default=600)
+    parser.add_argument("--samples", type=int, default=600,
+                        help="Retained steps for fixed-cut protocols; full trace steps before IAT cut for paper protocols")
     parser.add_argument("--anchor-trials", type=int, default=1500)
     parser.add_argument("--truth-file", help="Previously validated same-region summary CSV to reuse exact truth")
     parser.add_argument("--trust-truth-file", action="store_true",

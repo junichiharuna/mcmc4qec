@@ -11,6 +11,7 @@ chain が 1 本なら `ValueError` とし、各 chain に双方向 overlap が�
 `uncertainty_method` は既存の metadata に方法を記録し、cross-chain の比の共分散も metadata に保存する。
 
 `benchmarks/bar_paper_protocol.py` は同一 seed の保存軌道を block と cross-chain で再利用できる設定を持ち、固定 cohort 2026–2045 の一部を invocation ごとに出力する。
+`--samples` は固定 cut 群では cut 後の保存数を表し、paper 群では IAT cut 前の全 trace 歩数を表し、CSV に `total_steps` と各 chain の cut を残す。
 paper 設定は研究 `src/postprocess.py` と `cluster_scripts/lowp_audit.py` に合わせ、各 chain ごとに最初の負の自己相関で打ち切る IAT を反復推定し、5·IAT の cut が非収束なら半 trace に落とす。
 この反復 cut を `diagnostics.py` の `paper_burn_in_cut` に分離し、既存の初期正値ペア IAT とその API 挙動は変えなかった。
 paper 設定は研究 runner に独立 lazy 抽選がないため `lazy=0` とし、現行既定の 4 chain 設定は `lazy=0.05` を維持する。
@@ -50,8 +51,8 @@ JSON 往復の追加 assert 後の `python -m pytest tests/test_bar_uncertainty.
 | 事前固定の群 | ladder | anchor | chain | burn | 保存数 | 誤差法 | seed |
 | --- | --- | --- | ---: | --- | --- | --- | --- |
 | 長さ比較 | 0.30/0.26/0.22 | MC 1500 試行 | 4 | 固定 180 | 600、2400、9600 | block 8・30反復 | 2026–2045 |
-| dev4 被覆 | 0.30/0.26/0.22 | MC 1500 試行 | 4、4、16、50 | 固定 180 または各 chain 5·IAT | 4 chain は 600、16/50 は時間 pilot 後に固定 | block または cross-chain | 2026–2045 |
-| 論文領域被覆 | 0.10/0.07/0.05/0.03 | MC 1500 試行と exact | 4、4、16、50 | 固定 180 または各 chain 5·IAT | 4 chain は 600、16/50 は時間 pilot 後に固定 | block または cross-chain | 2026–2045 |
+| dev4 被覆 | 0.30/0.26/0.22 | MC 1500 試行 | 4、4、16、50 | 固定 180 または各 chain 5·IAT | 4 chain は cut 後 600、16/50 は全長を時間 pilot 後に固定 | block または cross-chain | 2026–2045 |
+| 論文領域被覆 | 0.10/0.07/0.05/0.03 | MC 1500 試行と exact | 4、4、16、50 | 固定 180 または各 chain 5·IAT | 4 chain は cut 後 600、16/50 は全長を時間 pilot 後に固定 | block または cross-chain | 2026–2045 |
 
 4 chain の `default_block` と `default_cross` は同じ seed で同じ保存軌道を再利用し、点推定を変えずに区間幅だけを比較する。
 16/50 chain の保存数は被覆結果を見る前に計算時間だけから固定し、短縮した場合は論文の 2,000,000 step と違うことを表に示す。
