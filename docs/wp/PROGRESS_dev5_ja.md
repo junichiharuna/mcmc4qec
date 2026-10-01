@@ -40,7 +40,7 @@
 - [ ] API文書、README両言語、examples一覧、pl_curveとnotebook02の説明を反映する。
 - [x] 2026-10-01 20:55 versionを0.1.0.dev5へ更新し、installed optional wheelの `notebooks/regenerate.py` で4本を再生成する（実行時間合計25.17秒）。
 - [x] 2026-10-01 20:55 既存verify_wheelとCIの自動version/全pytest/全例経路が新APIを扱うことを確認し、local core/optionalのverify_wheelが成功する（remote CI実行は後続）。
-- [ ] 新規core venvにwheelをinstallし、全pytestとverify_wheel.py coreを通す。
+- [x] 2026-10-01 20:56 新規core venvのinstalled wheelで全pytest 269 passed /69 skipped /64.00秒とverify_wheel coreの成功を確認する。
 - [ ] 新規optional venvにwheelをinstallし、全pytestとverify_wheel.py optionalを通す。
 - [ ] 全suite5分以内・増分60秒以内・各file60秒以内を確認する。
 - [ ] CHANGELOG、AGENTS、IMPLEMENTATION_STATUS追記を更新する。
@@ -134,3 +134,16 @@ paper50・全250・補助比較ありの両anchor実行は19.84秒で、単独MC
 独立レビューによるdefault_blockの両anchor/API quick照合は3.55秒で成功した。
 真値cacheと直接exactの差はp=0.22で1.01e-14、p=0.03で6.27e-14で、失敗196608/全262144状態を確認した。
 最初の未完了は20seedの長さ比較であり、その前提としてP統合・version更新・全suite・最終source digestのcache生成を先行する。
+
+## 2026-10-01 20:57 の再開情報
+
+runtimeの最終コミットは `05c7005`、source SHA-256は `50f47ab86aadb8ddc25142c696ce6cfbce631a8cf8357cbbca8ca33d397f56d5` であり、以後は文書とnotebook出力だけを更新した。
+最終truth cacheは `output/dev5/p_final/truth_cache.json` に再列挙し、pilotと全重みcountsが一致した。
+測定前のmanifestとコマンド・実時間ログは `output/dev5/p_final/measurement_plan.json` と `run_log.jsonl` にある。
+保存600の正式20seedは82.72秒の外側計測で完了し、BAR被覆13/20、独立MC20/20、平均偏差-0.0119139、seed間SD0.0256099だった。
+この段階では長さ依存やbiasの結論を出さず、最初の未完了として2400と9600の全seed比較を残す。
+WP-P担当は `/root/wp_p` が継続し、計算はmainをcwd、PYTHONPATHをmain/srcにして行い、文書追補はwp/pで行う。
+mainはcore wheel gateを通過し、optional wheelの全pytestをsession27208で実行中である。
+optionalの全pytestと追加のpl_curve時間確認が終わったら、Pへ長さ2400/9600および12cohortの計算枠を戻す。
+notebook4本の既定出力は `baaa26a` に保存し、verify_wheel optionalの全20例・全4quick notebookと文書コードは成功済みである。
+Pの実装レビューは完了しているが、最終科学CSVの敵対的監査は同じ `/root/p_review` へfollowupして行う必要がある。
