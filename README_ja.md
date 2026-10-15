@@ -11,41 +11,33 @@ CSS 符号に対する全状態の列挙、直接モンテカルロ法、基準�
 
 ## まず試す
 
-リポジトリのディレクトリで、基本パッケージをインストールします。
+リポジトリのディレクトリで、符号の生成と PyMatching に必要なパッケージをまとめてインストールします。
 
 ```sh
-python -m pip install -e .
+python -m pip install -e ".[codes,matching]"
 ```
 
-次の例では、3 量子ビットの繰り返し符号について、3 通りのビット反転率で論理誤り率を推定します。
-BAR splitting は、あるノイズ強度での論理誤り率を基準値（**anchor**）とし、ノイズ強度の列（**ladder**）に沿って他の点の論理誤り率を求める方法です。
-ここでは `p=0.4` の基準値を自動計算します。
-追加の依存パッケージは不要です。
+距離 3 の toric 符号を生成し、独立なビット反転と MWPM デコーダーを使って論理誤り率を推定します。
 
 ```python
-import numpy as np
-from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip,
-                      Problem, estimate_logical_error)
+import mcmc4qec as qec
 
-code = CSSCode(hx=np.zeros((0, 3), dtype=int),
-               hz=[[1, 1, 0], [0, 1, 1]],
-               lx=[[1, 1, 1]], lz=[[1, 0, 0]])
-decoder = CallableDecoder(lambda s: [int(tuple(s) == (1, 0))],
-                          identifier="repetition3-minimum-weight-v1")
-problem = Problem(code.bit_flip_model(), IndependentBitFlip(3), decoder)
-ladder = [0.4, 0.25, 0.1]
-result = estimate_logical_error(problem, ladder)
-for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
-    print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
+code = qec.make_toric_code(3)
+problem = qec.Problem(
+    code.bit_flip_model(), qec.IndependentBitFlip(code.n), qec.mwpm_decoder(code)
+)
+result = qec.estimate_logical_error(problem, [0.2, 0.15, 0.1])
+print(result.estimate, result.interval)
 ```
 
-出力の各行には、ノイズ強度、論理誤り率 `P_L` の推定値、誤差区間が並びます。
-`seed` を省略すると実行ごとに乱数を初期化し、同じ設定で結果を再現したい場合は `seed=73` のように整数を指定します。
-`config` を省略すると、各ノイズ強度で burn-in 100 ステップの後に 1,000 サンプルを保存しますが、この既定値は研究に必要な精度を保証するものではありません。
-`anchor` を省略すると、状態数 4,096 以下では全列挙、それを超える場合は直接 MC 10,000 試行を使い、`anchor_max_states`・`anchor_trials` で調整するか、`anchor` を明示できます（[詳細](docs/api_en.md#automatic-bar-anchor)）。
-`CallableDecoder` は論理観測量の予測値を返します。
-行列とデコーダーの規約は、[CSS 符号のチュートリアル](docs/tutorial_en.md#your-css-matrices)で説明しています。
-厳密計算・直接 MC・BAR を比較して試すには、`python examples/steane_exact.py --quick` を実行するか、[入門 notebook](notebooks/01_quickstart.ipynb)を開いてください。
+出力は、最後に指定したビット反転率 `p=0.1` での論理誤り率 `P_L` と、その誤差区間です。
+BAR splitting は、`p=0.2` で自動計算した基準値（**anchor**）を出発点に、指定したノイズ強度の列（**ladder**）に沿って論理誤り率を推定します。
+`config`・`anchor`・`seed` は省略でき、同じ設定で結果を再現したい場合は `seed=73` のように指定します。
+サンプル数や基準値の計算量を調整する方法は、[既定値と設定](docs/api_en.md#automatic-bar-anchor)を参照してください。
+既定値は最初に試すための設定であり、研究に必要な精度を保証するものではありません。
+
+追加の依存パッケージなしで試す場合は、`python -m pip install -e .` でインストールし、`python examples/steane_exact.py --quick` を実行してください。
+行列やデコーダーを自分で定義する方法は、[CSS 符号のチュートリアル](docs/tutorial_en.md#your-css-matrices)で説明しています。
 
 ## 目的に合う実行例を選ぶ
 

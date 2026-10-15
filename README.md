@@ -8,39 +8,32 @@ The package is **pre-alpha** and under active validation; it has not been publis
 
 ## Quick start
 
-From a local checkout, install the core package:
+From a local checkout, install the package with code factories and PyMatching:
 
 ```sh
-python -m pip install -e .
+python -m pip install -e ".[codes,matching]"
 ```
 
-The following example estimates the logical error probability at three bit-flip rates for a three-qubit repetition code.
-BAR splitting transfers an absolute probability from a reference point (the **anchor**) along a sequence of noise rates (the **ladder**).
-The anchor at `p=0.4` is computed automatically; no optional dependencies are needed.
+Create a distance-3 toric code and estimate its logical error probability under independent bit flips with an MWPM decoder:
 
 ```python
-import numpy as np
-from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip,
-                      Problem, estimate_logical_error)
+import mcmc4qec as qec
 
-code = CSSCode(hx=np.zeros((0, 3), dtype=int),
-               hz=[[1, 1, 0], [0, 1, 1]],
-               lx=[[1, 1, 1]], lz=[[1, 0, 0]])
-decoder = CallableDecoder(lambda s: [int(tuple(s) == (1, 0))],
-                          identifier="repetition3-minimum-weight-v1")
-problem = Problem(code.bit_flip_model(), IndependentBitFlip(3), decoder)
-ladder = [0.4, 0.25, 0.1]
-result = estimate_logical_error(problem, ladder)
-for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
-    print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
+code = qec.make_toric_code(3)
+problem = qec.Problem(
+    code.bit_flip_model(), qec.IndependentBitFlip(code.n), qec.mwpm_decoder(code)
+)
+result = qec.estimate_logical_error(problem, [0.2, 0.15, 0.1])
+print(result.estimate, result.interval)
 ```
 
-Each output row gives a noise rate, its estimated logical error probability `P_L`, and an uncertainty interval.
-Omitting `seed` starts a fresh random run; pass an integer such as `seed=73` to reproduce a run with the same settings.
-Omitting `config` uses 1,000 retained samples after 100 burn-in steps per rung; these defaults do not guarantee research accuracy.
-Omitting `anchor` uses exact enumeration for at most 4,096 states, otherwise 10,000 direct-MC trials; customize with `anchor_max_states` and `anchor_trials`, or pass an explicit `anchor` ([details](docs/api_en.md#automatic-bar-anchor)).
-`CallableDecoder` returns a prediction of the logical observable; see the [CSS tutorial](docs/tutorial_en.md#your-css-matrices) for the matrix and decoder conventions.
-For a guided comparison of exact enumeration, direct MC, and BAR, run `python examples/steane_exact.py --quick` or open the [quickstart notebook](notebooks/01_quickstart.ipynb).
+The output is the estimated logical error probability `P_L` and its uncertainty interval at the final bit-flip rate, `p=0.1`.
+BAR splitting starts from an automatically computed reference probability (**anchor**) at `p=0.2` and estimates probabilities along the supplied sequence (**ladder**).
+`config`, `anchor`, and `seed` are optional; pass `seed=73` for reproducibility with the same settings, and consult the [default settings](docs/api_en.md#automatic-bar-anchor) to adjust sampling and anchor budgets.
+The defaults provide a starting run, not a guarantee of research accuracy.
+
+For an example with only core dependencies, install with `python -m pip install -e .` and run `python examples/steane_exact.py --quick`.
+To define your own matrices or decoder, follow the [CSS tutorial](docs/tutorial_en.md#your-css-matrices).
 
 ## Choose an example
 
