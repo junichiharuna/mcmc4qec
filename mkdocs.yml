@@ -1,0 +1,87 @@
+site_name: mcmc4qec
+site_description: Rare-event sampling for quantum error correction
+repo_url: https://github.com/junichiharuna/mcmc4qec
+repo_name: junichiharuna/mcmc4qec
+edit_uri: edit/main/docs/
+docs_dir: docs
+site_dir: output/docs-site
+theme:
+  name: material
+  font: false
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.footer
+    - content.code.copy
+    - search.highlight
+plugins:
+  - search:
+      lang: [en, ja]
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            allow_inspection: false
+            show_root_heading: true
+            show_root_full_path: false
+            show_signature_annotations: true
+            separate_signature: true
+            show_source: false
+            show_if_no_docstring: true
+            merge_init_into_class: true
+            members_order: source
+            filters: ["!^_"]
+            heading_level: 2
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+      slugify: !!python/name:markdown.extensions.toc.slugify_unicode
+  - pymdownx.highlight
+  - pymdownx.superfences
+extra_css:
+  - assets/stylesheets/local-fonts.css
+hooks:
+  - docs/_site_links.py
+# Publish only the reader-facing documents listed here. Historical records,
+# measurement data, handoffs, and scripts stay in the repository.
+exclude_docs: |
+  *
+  !/index.md
+  !/index_ja.md
+  !/tutorial_en.md
+  !/tutorial_ja.md
+  !/guide_en.md
+  !/guide_ja.md
+  !/api_en.md
+  !/reference/
+  !/reference/*.md
+  # Theme assets are subject to the same exclusions as documentation files.
+  !/assets/
+  !/assets/**
+nav:
+  - Start here:
+      - Overview: index.md
+      - 日本語の案内: index_ja.md
+  - Tutorials:
+      - First estimate to your own model: tutorial_en.md
+      - 推定から自分のモデルへ: tutorial_ja.md
+  - Guides:
+      - Choose a workflow: guide_en.md
+      - 目的別ガイド: guide_ja.md
+  - API reference:
+      - Contracts and statistical conventions: api_en.md
+      - Models and noise: reference/models.md
+      - Sampling and estimation: reference/sampling.md
+      - Results and diagnostics: reference/results.md
+      - Codes and decoders: reference/codes.md
+      - Initialization: reference/initialization.md
+      - Circuits and Stim: reference/circuits.md
+validation:
+  nav:
+    omitted_files: warn
+  links:
+    not_found: warn
+    anchors: warn
+    unrecognized_links: warn

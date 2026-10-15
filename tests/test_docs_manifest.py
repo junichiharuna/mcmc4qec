@@ -1,7 +1,10 @@
 """Keep the public documentation index in sync with runnable files."""
 
 from pathlib import Path
+import ast
+import importlib.util
 import re
+from types import SimpleNamespace
 from urllib.parse import unquote, urlsplit
 
 import pytest
@@ -52,7 +55,10 @@ def test_example_index_matches_every_python_file_and_notebook():
 
 
 def test_relative_readme_links_resolve():
-    for page in (EN, JA, INDEX, TUTORIAL_EN, TUTORIAL_JA):
+    public_docs = [ROOT / "docs" / name for name in
+                   ("index.md", "index_ja.md", "guide_en.md", "guide_ja.md", "api_en.md")]
+    public_docs.extend((ROOT / "docs" / "reference").glob("*.md"))
+    for page in (EN, JA, INDEX, TUTORIAL_EN, TUTORIAL_JA, *public_docs):
         text = page.read_text(encoding="utf-8")
         for match in LINK.finditer(text):
             raw = match.group(1)
@@ -67,3 +73,42 @@ def test_japanese_python_blocks_match_english_exactly(english_page, japanese_pag
     japanese = PYTHON_BLOCK.findall(japanese_page.read_text(encoding="utf-8"))
     assert english
     assert japanese == english
+
+
+def test_generated_reference_covers_every_top_level_export_once():
+    module = ast.parse((ROOT / "src" / "mcmc4qec" / "__init__.py").read_text(encoding="utf-8"))
+    exports = next(ast.literal_eval(node.value) for node in module.body
+                   if isinstance(node, ast.Assign)
+                   and any(isinstance(target, ast.Name) and target.id == "__all__"
+                           for target in node.targets))
+    documented = []
+    for page in (ROOT / "docs" / "reference").glob("*.md"):
+        documented.extend(re.findall(r"^::: mcmc4qec\.(\w+)$",
+                                      page.read_text(encoding="utf-8"), re.MULTILINE))
+    assert len(documented) == len(set(documented))
+    assert set(documented) == set(exports)
+
+
+def test_site_links_preserve_pages_and_code_and_resolve_repository_files():
+    spec = importlib.util.spec_from_file_location("site_links", ROOT / "docs" / "_site_links.py")
+    assert spec is not None and spec.loader is not None
+    hook = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(hook)
+    page = SimpleNamespace(file=SimpleNamespace(abs_src_path=str(TUTORIAL_EN)))
+    config = {"docs_dir": str(ROOT / "docs"),
+              "repo_url": "https://github.com/junichiharuna/mcmc4qec",
+              "nav": [{"Tutorials": [{"English": "tutorial_en.md"},
+                                      {"Japanese": "tutorial_ja.md"}]}]}
+    text = ('[Japanese](tutorial_ja.md#自分の-css-行列を使う)\n'
+            '[README](../README.md#usage-notes)\n'
+            '[Records](wp/)\n'
+            '[Section](#local)\n'
+            '```python\ntext = "[example](not-a-file.md)"\n```\n')
+    converted = hook.on_page_markdown(text, page=page, config=config)
+    assert '[Japanese](tutorial_ja.md#自分の-css-行列を使う)' in converted
+    assert '[README](https://github.com/junichiharuna/mcmc4qec/blob/main/README.md#usage-notes)' in converted
+    assert '[Records](https://github.com/junichiharuna/mcmc4qec/tree/main/docs/wp)' in converted
+    assert '[Section](#local)' in converted
+    assert 'text = "[example](not-a-file.md)"' in converted
+    with pytest.raises(ValueError, match="missing link target"):
+        hook.on_page_markdown('[Missing](not-a-file.md)', page=page, config=config)

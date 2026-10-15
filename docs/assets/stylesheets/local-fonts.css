@@ -1,0 +1,5 @@
+/* Use readable local fonts for both languages without requesting web fonts. */
+:root {
+  --md-text-font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif;
+  --md-code-font-family: "Cascadia Code", "Consolas", monospace;
+}

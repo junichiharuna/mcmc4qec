@@ -39,6 +39,42 @@ tests Python 3.11 and 3.12 with and without optional dependencies. A defined
 workflow is not evidence of a successful remote run; check its actual status
 after an authorized push.
 
+## Documentation
+
+Install the documentation tools and preview from the repository root:
+
+```console
+python -m pip install -e ".[docs]"
+python -m mkdocs serve
+python -m mkdocs build --strict
+python docs/check_site.py
+```
+
+The static build is written to `output/docs-site/`. Building and previewing do
+not publish the site. The CI documentation job builds it without deploying.
+The HTML check also verifies generated anchor links and theme asset paths.
+MkDocs configuration and its explicit page list live in `mkdocs.yml`.
+When adding a page, update both `nav` and the `exclude_docs` allowlist.
+Keep the English and Japanese tutorials' Python blocks identical and runnable
+independently. Check them with the optional dependencies their examples need.
+
+API signatures and docstrings are generated from `src/mcmc4qec` using
+mkdocstrings; optional scientific backends are not needed for the docs build.
+The handwritten [API contracts](docs/api_en.md) explain assumptions that are
+not captured by signatures. New top-level exports belong in one of the pages
+under `docs/reference/`.
+
+Source Markdown retains repository-relative links. The small
+`docs/_site_links.py` hook converts links to files outside the curated site
+into repository URLs when building; historical records and raw measurements
+are not copied into the site. Keep links to site pages relative so MkDocs can
+check their targets and heading anchors.
+
+The [MkDocs configuration reference](https://www.mkdocs.org/user-guide/configuration/)
+describes navigation, exclusions, link validation, and hooks. See also the
+[Material navigation guide](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/)
+and [mkdocstrings signature options](https://mkdocstrings.github.io/python/usage/configuration/signatures/).
+
 ## Scientific changes
 
 Start with a small specification and acceptance test. For changes to proposals,

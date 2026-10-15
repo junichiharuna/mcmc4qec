@@ -1,11 +1,15 @@
 # Tutorial: from a first estimate to your own model
 
-[README](../README.md) · [日本語版](tutorial_ja.md) · [API reference](api_en.md)
+[Documentation](index.md) · [README](../README.md) · [日本語版](tutorial_ja.md) · [API reference](api_en.md)
 
 Start with the README's toric example, inspect its components and results, then adjust sampling and diagnostics before replacing components with your own.
 The initial example needs the `codes` and `matching` extras.
 Later examples using small custom models run with core dependencies alone.
 Each Python block can be run independently.
+
+Follow the [first estimate](#estimate-a-toric-codes-logical-error-probability), then [choose a method](#choose-a-method), [set the sampling budget](#set-the-sampling-budget), and [read diagnostics](#initialization-cache-and-diagnostics).
+The [saving example](#save-and-reload-results) uses a tiny model and core dependencies only.
+When adapting the library, start with [your CSS matrices](#your-css-matrices) and check small instances by enumeration before increasing the problem size.
 
 ## Estimate a toric code's logical error probability
 
@@ -68,6 +72,27 @@ Use `config` to adjust sample counts and other sampling settings, and pass an in
 All three arguments are optional.
 See the [API settings example](api_en.md#automatic-bar-anchor) for defaults and configuration.
 
+## Choose a method
+
+All four methods use the same `Problem` and failure definition, but they answer different questions.
+
+| Method | What it does | When to start here |
+| --- | --- | --- |
+| `exact(problem, p)` | Sums the normalized probability of every failing state | Validate a small model, decoder, or custom noise before sampling |
+| `direct_mc(problem, p, trials=..., seed=...)` | Draws independent experiments and estimates `failures / trials` | Failures occur often enough to observe within a fixed trial budget |
+| `sample_faulty(problem, p, ...)` | Samples states conditioned on failure | Study typical failure patterns or a conditional observable |
+| `estimate_logical_error(problem, ladder, ...)` | Combines an absolute anchor probability with adjacent BAR ratios | Estimate a sequence of failure probabilities using conditional sampling |
+
+Exact enumeration grows with the product of all coordinate alphabet sizes: an `n`-bit model has `2**n` states.
+It has no Monte Carlo sampling error, but still uses floating-point arithmetic.
+Direct MC with no observed failures does not establish zero failure probability; inspect its interval and trial count.
+Conditional MCMC deliberately keeps only failing states, so counting failures in its saved states cannot estimate the absolute failure probability.
+BAR supplies that missing normalization through the anchor.
+
+For a new problem, first check an enumerable instance, compare direct MC where failures are observable, and then use a ladder to explore lower probabilities.
+The ladder needs at least two distinct adjacent coordinates; the tutorial uses decreasing rates so its first rate is convenient for the anchor.
+The ordering alone does not ensure that neighboring conditional distributions overlap or that chains mix.
+
 ## BAR with default settings
 
 No `config` or `anchor` is required. The default `SamplingConfig()` retains 1,000 samples after 100 burn-in steps per rung, with one chain, thinning 1, Z/H weights 0.7/0.3, `cluster_k=2`, and lazy probability 0.05. Pass a `SamplingConfig` to tune the run; these defaults do not establish research accuracy, and physical circuit models still require appropriate kernel settings.
@@ -80,6 +105,38 @@ To change the sampling budget, pass, for example, `config=qec.SamplingConfig(sam
 These numbers illustrate the settings rather than prescribing a sufficient run length.
 Compare results across run lengths and initial states, and inspect the diagnostics below.
 
+The first toric example has `2**18 = 262144` possible bit-flip states, so its automatic anchor uses direct MC with the default state limit of 4,096.
+The anchor has statistical uncertainty even though the code's distance is only three.
+
+## Set the sampling budget
+
+`SamplingConfig` controls conditional sampling in both `sample_faulty` and every BAR rung.
+The counts apply to each chain, not to the whole run.
+
+| Field and default | Meaning |
+| --- | --- |
+| `samples=1000` | Number of retained states per chain after burn-in |
+| `burn_in=100` | Transitions performed before retaining states; this is a chosen count, not an automatic convergence test |
+| `thin=1` | Number of transitions between retained states |
+| `chains=1` | Number of independent RNG streams; chains currently execute sequentially |
+| `max_initial_attempts=10000` | Maximum noise draws per chain when searching for a failing initial state |
+| `kernels=KernelConfig()` | Proposal mixture and lazy-step settings |
+| `cache_cap=None` | No limit on the number of cached decoder predictions |
+| `cache_policy="research_clear"` | Soft-cap policy; `"lru"` and `"freeze"` enforce strict caps when a cap is supplied |
+
+For example, `samples=2000, burn_in=200, thin=2, chains=4` retains 8,000 states per rung and performs `4 * (200 + 2000 * 2) = 16800` transitions, excluding initialization.
+Increasing `thin` with `samples` fixed increases computation; it does not guarantee independent saved states.
+Every rejected proposal and lazy step counts as a transition, and repeated retained states are part of the sample.
+Do not remove duplicates before analyzing a trace.
+For conditional MCMC, `run.states.shape` is `(chains, samples, number_of_coordinates)`.
+
+`KernelConfig` separates the move mixture from the lazy probability.
+The weights `single`, `zanella`, `cluster`, `stabilizer`, and `circuit_single` must sum to one; they are not automatically normalized.
+With the defaults, a step is lazy with probability 0.05, selects Z with probability `0.95 * 0.7`, and selects H with probability `0.95 * 0.3`.
+For the binary model above, `cluster_k=2` exchanges two occupied and two empty coordinates in an H proposal.
+If the selected move cannot change the state, that step remains in the chain.
+Start with the defaults for supported static models and change one setting at a time while comparing diagnostics and estimates.
+
 ## Read estimates and uncertainty
 
 Statistical uncertainty is returned with numerical estimates by default.
@@ -87,6 +144,7 @@ In the BAR example, `result.estimates` and `result.intervals` follow the order o
 
 | Method | Estimate | Uncertainty |
 | --- | --- | --- |
+| Exact enumeration | `estimate` | No Monte Carlo sampling interval |
 | Direct MC | `estimate` | 95% Wilson `interval` |
 | BAR | `estimates` | `intervals` and `log_standard_errors` at each noise rate |
 | Failure-conditioned MCMC | `conditional_weight` | `conditional_weight_standard_error`: autocorrelation-aware standard error of the mean weight |
@@ -94,6 +152,27 @@ In the BAR example, `result.estimates` and `result.intervals` follow the order o
 BAR uses block bootstrap by default.
 With at least two independent chains, `uncertainty="cross_chain"` instead estimates uncertainty from variation between chains.
 Unavailable errors are `None`, not zero.
+
+For BAR, `result.estimate` and `result.interval` select the final rung; the plural fields contain all rungs.
+`log_estimates` and `log_standard_errors` use natural logarithms: a log standard error is not a standard error in probability units.
+Use the reported `intervals` when presenting probability intervals, and inspect `log_estimates` if a very small probability underflows to zero.
+
+The conditional weight is the number of nonidentity coordinates, averaged over failing states.
+It counts flipped bits for a bit-flip model and occupied fault locations for a physical circuit model; it is not the logical failure probability or an importance weight.
+Its MCSE describes uncertainty in that conditional mean.
+Neither that MCSE nor BAR's reported intervals include arbitrary model misspecification or bias from inadequate mixing.
+
+There are two separate bootstrap controls:
+
+| Setting | Quantity whose uncertainty is analyzed |
+| --- | --- |
+| `estimate_logical_error(..., bootstrap_replicates=100, bootstrap_block_length=...)` | BAR logical-probability estimates; block length is measured in retained samples per chain |
+| `DiagnosticsConfig(bootstrap_replicates=200, block_sizes=...)` | Conditional observable means; several block lengths can be compared |
+
+BAR's default block length is the rounded cube root of `samples`.
+Setting its `bootstrap_replicates=0` disables MCMC error bars in block-bootstrap mode.
+Setting the diagnostic replicate count to zero skips only the diagnostic bootstrap, leaving ACF, IAT, and blocking analysis available.
+Changing detailed diagnostic settings does not change BAR intervals.
 
 Standard BAR uses the same decoder and failure definition throughout the ladder and requires a positive anchor and observed overlap between adjacent distributions.
 Missing required observed overlap raises `OverlapError`.
@@ -145,6 +224,92 @@ For repeated decoding, `SamplingConfig(cache_cap=1000, cache_policy="lru")` appl
 Good ESS or R-hat values do not prove convergence, ergodicity, correctness, or nominal interval coverage.
 Neither block bootstrap nor cross-chain uncertainty captures bias shared by poorly mixed chains.
 The [BAR sensitivity study](bar_sensitivity_ja.md) records limitations found in short experiments.
+
+### Read the diagnostic output
+
+In the two-bit example, failure fixes `x[0]` to one while `x[1]` can vary, so the weight takes values one and two.
+This makes the weight mean informative even though every saved state is a failure.
+Read the report in this order:
+
+1. Read `run.warnings` and the report's `warnings`; short or constant traces may make uncertainty unavailable.
+2. Compare `chain_means`, `chain_iat`, and `chain_ess` across chains. A disagreement is a reason to investigate initialization and run length.
+3. Inspect the ACF and IAT for persistence. Their units are retained samples: with `thin=5`, lag one spans five sampler transitions.
+4. Compare the blocking SEs across block lengths. Longer blocks can represent longer correlations, but leave fewer batches; a single chosen length cannot certify accuracy.
+5. Repeat with longer runs and different supported failing starts, comparing the observable and the BAR estimate relevant to your question.
+
+R-hat here is classical raw split R-hat, not rank-normalized or folded R-hat.
+The reported aggregate `ess` sums chain ESS estimates and is generally not the ESS of the pooled mean.
+A constant trace does not establish zero uncertainty; the report can return `None` instead.
+
+`DiagnosticsConfig.max_lag` is inclusive and must be smaller than `samples`; each `block_sizes` entry must be at most `samples`.
+Its bootstrap replicate count must be zero or at least two.
+Its default `seed=0` controls a separate analysis RNG, not the sampler RNG.
+For an already saved run, `diagnostic_report` applies no additional burn-in or thinning and requires `observable_name` for a custom observable.
+For numerical arrays you already have, `analyze_traces` accepts a vector or an equal-length `(chains, samples)` array of retained scalar observations.
+
+## Save and reload results
+
+Use `Result` for exact, direct-MC, and conditional-MCMC results, and `EstimationResult` for BAR results.
+The following standalone example uses a four-state model, writes two JSON files in `output/tutorial/`, and reads them back.
+The small sample budget demonstrates the interface, not research precision.
+
+```python
+from pathlib import Path
+import mcmc4qec as qec
+
+problem = qec.Problem(
+    qec.BinaryLinearModel([[1, 1]], [[1, 0]]),
+    qec.IndependentBitFlip(2),
+    qec.CallableDecoder(lambda syndrome: [0], identifier="zero-v1"),
+)
+config = qec.SamplingConfig(
+    samples=128, burn_in=32, chains=2,
+    kernels=qec.KernelConfig(cluster_k=1),
+)
+run = qec.sample_faulty(problem, 0.3, config=config, seed=41)
+bar = qec.estimate_logical_error(
+    problem, [0.3, 0.2], config=config, seed=42,
+    anchor=qec.exact(problem, 0.3), bootstrap_replicates=20,
+)
+
+directory = Path("output/tutorial")
+directory.mkdir(parents=True, exist_ok=True)
+run_path = directory / "conditional_run.json"
+bar_path = directory / "bar_result.json"
+run_path.write_text(run.to_json(), encoding="utf-8")
+bar_path.write_text(bar.to_json(), encoding="utf-8")
+
+restored_run = qec.Result.from_json(run_path.read_text(encoding="utf-8"))
+restored_bar = qec.EstimationResult.from_json(bar_path.read_text(encoding="utf-8"))
+print("Saved state shape:", restored_run.states.shape)
+print("Final BAR estimate and interval:", restored_bar.estimate, restored_bar.interval)
+print("Warnings:", restored_bar.warnings)
+print("Sampling settings:", restored_run.metadata["config"])
+```
+
+`Result` preserves retained states when present, allowing later `diagnostic_report` calls.
+`EstimationResult` preserves estimates and rung diagnostics but does not contain the underlying rung states.
+JSON also records configuration, model and decoder metadata, RNG information, Python and NumPy versions, and a package-source fingerprint.
+It does not reconstruct executable `Problem` objects or user callables, and it is not a checkpoint for resuming a chain.
+Keep the code that builds the model and decoder, dependency versions, settings, and seeds alongside results when reproducing an experiment.
+Saving the same filenames again replaces those files.
+
+## Resolve common problems
+
+| Symptom | What to check or change |
+| --- | --- |
+| Missing optional dependency | Install the extras required by that example; the custom two-bit examples need only core dependencies |
+| `InitializationError` | No failing start was found within the search budget; supply a supported failing state or increase `max_initial_attempts` |
+| Invalid supplied initial state | Check its shape, positive noise probability, and failure under the actual decoder and predicate |
+| Zero-failure or all-failure MC anchor | Choose a suitable first rate, increase the fixed trial budget, or supply a compatible exact anchor |
+| `OverlapError` | Check noise support and the common failure definition, inspect mixing, and try closer adjacent ladder rates |
+| An interval or MCSE is `None` | Read warnings for short/constant chains, missing overlap in uncertainty calculations, or disabled uncertainty |
+| Kernel probabilities do not sum to one | Specify the complete intended mixture, accounting for nonzero defaults; `lazy` is separate |
+
+`sample_faulty(initial_state=...)` accepts a state shaped `(n,)` or one state per chain shaped `(chains, n)`.
+BAR instead uses `initial_states=[...]`, with one entry per rung; an entry may be `None` to use noise-based initialization there.
+These are initial states, not samples to include directly in the estimate.
+Providing a failing start avoids the search but does not establish stationarity or adequate exploration of the failure set.
 
 ## Your CSS matrices
 

@@ -6,7 +6,7 @@ mcmc4qec は、量子誤り訂正の論理誤り率を推定する Python ライ
 
 現在は検証中の **pre-alpha 版**で、パッケージとしての一般公開はまだ行っていません。
 
-[English](README.md) · [チュートリアル](docs/tutorial_ja.md) · [API 文書（英語）](docs/api_en.md) · [実行例一覧](examples/README.md)
+[English](README.md) · [ドキュメント](docs/index_ja.md) · [チュートリアル](docs/tutorial_ja.md) · [API 文書（英語）](docs/api_en.md) · [実行例一覧](examples/README.md)
 
 ## インストールと実行例
 

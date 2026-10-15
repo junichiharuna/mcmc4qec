@@ -6,7 +6,7 @@ It also provides exact enumeration for small problems and direct Monte Carlo, wi
 
 The package is **pre-alpha** and under active validation; it has not been published as a public package.
 
-[日本語版](README_ja.md) · [Tutorial](docs/tutorial_en.md) · [API reference](docs/api_en.md) · [All examples](examples/README.md)
+[日本語版](README_ja.md) · [Documentation](docs/index.md) · [Tutorial](docs/tutorial_en.md) · [API reference](docs/api_en.md) · [All examples](examples/README.md)
 
 ## Install and run
 

@@ -1,12 +1,16 @@
 # チュートリアル：最初の推定から独自モデルの導入まで
 
-[README](../README_ja.md) · [English](tutorial_en.md) · [API リファレンス](api_en.md)
+[ドキュメント](index_ja.md) · [README](../README_ja.md) · [English](tutorial_en.md) · [API リファレンス](api_en.md)
 
 README の toric 符号の例を実行し、符号の中身と推定結果を確認します。
 続いてサンプリングや診断の設定を調整し、最後に自分の符号・ノイズ・デコーダーに置き換えます。
 最初の例には `codes` と `matching` の追加パッケージが必要です。
 後半の小さなモデルを自分で定義する例は、追加パッケージなしで実行できます。
 各 Python コードブロックは単独で実行できます。
+
+[最初の推定](#toric-符号の論理誤り率を推定する)から始め、[手法の選択](#手法を選ぶ)、[サンプリング量の設定](#サンプリング量を設定する)、[診断](#初期化キャッシュ診断)の順に進めてください。
+[保存の例](#結果を保存して読み込む)は、小さなモデルを使い、追加パッケージなしで動きます。
+独自の問題へ適用する際は、[自分の CSS 行列を使う](#自分の-css-行列を使う)から始め、小さな問題の全列挙で確認してから規模を大きくしてください。
 
 ## toric 符号の論理誤り率を推定する
 
@@ -69,6 +73,30 @@ anchor は、状態空間が小さければ全列挙、それ以外では直接�
 いずれの引数も省略できます。
 既定値と設定方法は、[API の設定例](api_en.md#automatic-bar-anchor)を参照してください。
 
+## 手法を選ぶ
+
+4 つの手法は同じ `Problem` と失敗定義を使いますが、求める量や求め方が異なります。
+
+| 手法 | 計算する内容 | 最初に使う場面 |
+| --- | --- | --- |
+| `exact(problem, p)` | 失敗する全状態の正規化された確率を足し合わせる | 小さなモデル・デコーダー・独自ノイズをサンプリング前に検証する |
+| `direct_mc(problem, p, trials=..., seed=...)` | 独立な実験を生成し、`failures / trials` を推定する | 固定した試行回数の範囲で失敗を十分に観測できる |
+| `sample_faulty(problem, p, ...)` | 失敗を条件とした状態をサンプリングする | 典型的な失敗パターンや条件付き観測量を調べる |
+| `estimate_logical_error(problem, ladder, ...)` | 絶対的な anchor 確率に隣接段の BAR 比を組み合わせる | 条件付きサンプリングで複数のノイズ強度の失敗確率を推定する |
+
+全列挙の状態数は、各座標のアルファベットサイズの積で増えます。
+`n` ビットのモデルでは `2**n` 状態です。
+全列挙にはモンテカルロの標本誤差はありませんが、浮動小数点演算を使います。
+直接 MC で失敗を観測しなくても、失敗確率がゼロとはいえません。
+区間と試行回数を確認してください。
+条件付き MCMC は失敗状態だけを保存するため、その中の失敗数を数えても絶対的な失敗確率は求まりません。
+BAR では anchor によって、この不足する正規化を与えます。
+
+新しい問題では、まず全列挙できる例を確認し、失敗を観測できる領域で直接 MC と比較してから、ラダーで低い確率を調べてください。
+ラダーには少なくとも 2 段が必要で、隣接するノイズ座標は異なる必要があります。
+このチュートリアルでは、最初の段で anchor を求めやすいように確率を下げていきます。
+順序だけでは、隣接する条件付き分布の重なりや連鎖の混合は保証されません。
+
 ## 既定設定で BAR を使う
 
 `config` や `anchor` の指定は必須ではありません。
@@ -92,6 +120,38 @@ MC anchor の失敗数がゼロ、または全試行が失敗した場合は `Va
 この数値は設定方法を示す例であり、十分な実行長を示すものではありません。
 実行長と初期状態を変えて結果を比較し、以下の診断も確認してください。
 
+最初の toric の例では、ビット反転状態が `2**18 = 262144` 通りあるため、全列挙の既定上限 4,096 を超え、自動 anchor には直接 MC を使います。
+符号距離が 3 でも、anchor には統計誤差があります。
+
+## サンプリング量を設定する
+
+`SamplingConfig` は、`sample_faulty` と BAR の各段で行う条件付きサンプリングを設定します。
+回数は実行全体ではなく、各連鎖に適用されます。
+
+| フィールドと既定値 | 意味 |
+| --- | --- |
+| `samples=1000` | burn-in 後に各連鎖で保存する状態数 |
+| `burn_in=100` | 保存前に進める遷移数であり、収束を自動判定する設定ではない |
+| `thin=1` | 保存する状態間の遷移数 |
+| `chains=1` | 独立な乱数系列の数であり、現在の実装では連鎖を逐次実行する |
+| `max_initial_attempts=10000` | 失敗初期状態を探す際に、各連鎖でノイズ分布から抽出する回数の上限 |
+| `kernels=KernelConfig()` | 提案の混合と lazy ステップの設定 |
+| `cache_cap=None` | 復号結果のキャッシュ件数に上限を設けない |
+| `cache_policy="research_clear"` | ソフト上限を使う方式であり、上限指定時の `"lru"` と `"freeze"` は厳密な上限を守る |
+
+たとえば `samples=2000, burn_in=200, thin=2, chains=4` は、各段で 8,000 状態を保存し、初期化を除いて `4 * (200 + 2000 * 2) = 16800` 遷移を実行します。
+`samples` を固定して `thin` を増やすと計算量が増えますが、保存状態の独立性は保証されません。
+棄却された提案や lazy ステップも遷移として数え、繰り返して保存された同じ状態も標本に含まれます。
+系列の解析前に重複状態を削除しないでください。
+条件付き MCMC の `run.states.shape` は `(chains, samples, 座標数)` です。
+
+`KernelConfig` は、移動の混合と lazy 確率を別に扱います。
+`single`、`zanella`、`cluster`、`stabilizer`、`circuit_single` の重みの和は 1 にする必要があり、自動的には正規化されません。
+既定では、1 ステップが lazy になる確率は 0.05、Z を選ぶ確率は `0.95 * 0.7`、H を選ぶ確率は `0.95 * 0.3` です。
+上の二値モデルでは、`cluster_k=2` は H 提案で占有座標 2 個と空の座標 2 個を交換する設定です。
+選んだ移動が状態を変えられない場合も、そのステップを連鎖に残します。
+対応する静的モデルでは既定値から始め、設定を一つずつ変えながら診断と推定値を比較してください。
+
 ## 推定値と統計誤差を読む
 
 統計誤差は、追加の設定をしなくても推定値と一緒に返されます。
@@ -99,13 +159,35 @@ BAR の例では、`result.estimates` と `result.intervals` は `ladder` と同
 
 | 手法 | 推定値 | 統計誤差 |
 | --- | --- | --- |
+| 全列挙 | `estimate` | モンテカルロの標本誤差区間はない |
 | 直接 MC | `estimate` | 95% Wilson 区間 `interval` |
 | BAR | `estimates` | 各ノイズ強度の `intervals` と `log_standard_errors` |
 | 失敗条件付き MCMC | `conditional_weight` | `conditional_weight_standard_error`：自己相関を考慮した平均重みの標準誤差 |
 
-BAR は既定でブロック・ブートストラップ を使います。
-独立した連鎖 が 2 本以上ある場合は、`uncertainty="cross_chain"` により、連鎖間の変動から不確かさを推定できます。
+BAR は既定でブロックブートストラップを使います。
+独立した連鎖が 2 本以上ある場合は、`uncertainty="cross_chain"` により、連鎖間の変動から不確かさを推定できます。
 求められない誤差はゼロではなく `None` です。
+
+BAR の `result.estimate` と `result.interval` は最後の段を選び、複数形のフィールドは全段の値を持ちます。
+`log_estimates` と `log_standard_errors` は自然対数を使い、対数の標準誤差は確率そのものの標準誤差ではありません。
+確率の区間を示す際は返された `intervals` を使い、非常に小さな確率が underflow してゼロになった場合は `log_estimates` を確認してください。
+
+条件付き重みは、失敗状態における非恒等座標数の平均です。
+ビット反転モデルでは反転ビット数、物理回路モデルでは fault がある location 数であり、論理誤り率や importance weight ではありません。
+その MCSE は、この条件付き平均の不確かさを表します。
+この MCSE も BAR の区間も、任意のモデルの誤指定や混合不足によるバイアスは含みません。
+
+bootstrap の設定には、対象が異なる 2 系統があります。
+
+| 設定 | 不確かさを解析する対象 |
+| --- | --- |
+| `estimate_logical_error(..., bootstrap_replicates=100, bootstrap_block_length=...)` | BAR の論理誤り率であり、ブロック長は各連鎖の保存標本数で指定する |
+| `DiagnosticsConfig(bootstrap_replicates=200, block_sizes=...)` | 条件付き観測量の平均であり、複数のブロック長を比較できる |
+
+BAR の既定ブロック長は、`samples` の立方根を四捨五入した値です。
+ブロック・ブートストラップ方式でその `bootstrap_replicates=0` を指定すると、MCMC の誤差計算を無効にします。
+診断側の反復数をゼロにすると診断用 bootstrap だけを省き、ACF・IAT・ブロッキングの解析は残ります。
+詳細診断の設定を変えても BAR の区間は変わりません。
 
 標準の BAR では、ラダー全体で同じデコーダーと失敗定義を使い、正の anchor と、隣接する分布間で観測された重なりを必要とします。
 必要な重なりが観測されなければ `OverlapError` になります。
@@ -167,13 +249,105 @@ BAR では、同じキーワードにより各段のレポートが `result.diag
 復号を繰り返す場合、`SamplingConfig(cache_cap=1000, cache_policy="lru")` は厳密な LRU キャッシュを適用します。
 `"freeze"` は上限に達すると追加を止め、`"research_clear"` は 10 ステップごとにソフト上限を確認します。
 `KernelConfig(zanella_fastpath=True)` は、対応する独立なノイズの目標分布を変えずに高速化します。
-`diagnose` は複数の連鎖 を要約できますが、重み系列が一見良好でも、混合の十分な証拠にはなりません。
+`diagnose` は複数の連鎖を要約できますが、重み系列が一見良好でも、混合の十分な証拠にはなりません。
 `evaluate_convergence` は、連鎖の長さを変えたときの挙動、後半の定常性、異なる初期状態の集団、独立な直接 MC で推定した**条件付き観測量の分散**と IAT の関係を確認します。
 その分散や 2 つ目の初期状態の集団がなければ、対応する確認項目は未解決のままです。
 
 ESS や R-hat が良好でも、収束・エルゴード性・正しさ・区間の名目被覆率を証明するものではありません。
-ブロック・ブートストラップ も cross-chain による不確かさも、混合が不十分な連鎖 に共通するバイアスは捉えられません。
+ブロックブートストラップも cross-chain による不確かさも、混合が不十分な連鎖に共通する偏りは捉えられません。
 [BAR の感度調査](bar_sensitivity_ja.md)には、短い実験で見つかった制約を記録しています。
+
+### 診断出力を読む
+
+2 ビットの例では、失敗条件によって `x[0]` は 1 に固定されますが、`x[1]` は変動するため、重みは 1 または 2 です。
+すべての保存状態が失敗でも、重みの平均には調べる意味があります。
+次の順にレポートを確認してください。
+
+1. `run.warnings` とレポートの `warnings` を読みます。
+   短い系列や一定の系列では、不確かさを求められないことがあります。
+2. `chain_means`、`chain_iat`、`chain_ess` を連鎖間で比較します。
+   食い違いがあれば、初期化や実行長を調べる理由になります。
+3. ACF と IAT で相関の持続を確認します。
+   単位は保存標本数であり、`thin=5` なら lag 1 はサンプラーの 5 遷移に相当します。
+4. ブロック長を変えたときの標準誤差を比較します。
+   長いブロックは長い相関を扱えますが、使えるバッチ数が減り、一つのブロック長だけで精度を保証できません。
+5. 実行を長くし、ノイズの support にある別の失敗初期状態からも実行して、目的の観測量と BAR 推定値を比較します。
+
+ここでの R-hat は古典的な raw split R-hat で、rank-normalized や folded R-hat ではありません。
+集約された `ess` は各連鎖の ESS の和であり、一般に pooled mean の ESS とは異なります。
+一定の系列でも誤差ゼロとはいえず、レポートが `None` を返す場合があります。
+
+`DiagnosticsConfig.max_lag` は上限の lag を含み、`samples` より小さい必要があります。
+`block_sizes` の各要素は `samples` 以下にします。
+bootstrap の反復数は、ゼロまたは 2 以上です。
+既定の `seed=0` は解析専用の乱数生成器を設定し、サンプラーの乱数生成器を設定するものではありません。
+保存済みの実行に `diagnostic_report` を使う際、追加の burn-in 除去や間引きは行われず、独自観測量には `observable_name` が必要です。
+手元の数値配列には `analyze_traces` を使え、保存されたスカラー観測量のベクトル、または各連鎖が等長の `(chains, samples)` 配列を受け取ります。
+
+## 結果を保存して読み込む
+
+全列挙・直接 MC・条件付き MCMC の結果には `Result`、BAR の結果には `EstimationResult` を使います。
+次の単独実行できる例は、4 状態のモデルを使い、`output/tutorial/` に 2 つの JSON ファイルを書いて読み込みます。
+短いサンプリング量は使い方を示すためのもので、研究精度を示しません。
+
+```python
+from pathlib import Path
+import mcmc4qec as qec
+
+problem = qec.Problem(
+    qec.BinaryLinearModel([[1, 1]], [[1, 0]]),
+    qec.IndependentBitFlip(2),
+    qec.CallableDecoder(lambda syndrome: [0], identifier="zero-v1"),
+)
+config = qec.SamplingConfig(
+    samples=128, burn_in=32, chains=2,
+    kernels=qec.KernelConfig(cluster_k=1),
+)
+run = qec.sample_faulty(problem, 0.3, config=config, seed=41)
+bar = qec.estimate_logical_error(
+    problem, [0.3, 0.2], config=config, seed=42,
+    anchor=qec.exact(problem, 0.3), bootstrap_replicates=20,
+)
+
+directory = Path("output/tutorial")
+directory.mkdir(parents=True, exist_ok=True)
+run_path = directory / "conditional_run.json"
+bar_path = directory / "bar_result.json"
+run_path.write_text(run.to_json(), encoding="utf-8")
+bar_path.write_text(bar.to_json(), encoding="utf-8")
+
+restored_run = qec.Result.from_json(run_path.read_text(encoding="utf-8"))
+restored_bar = qec.EstimationResult.from_json(bar_path.read_text(encoding="utf-8"))
+print("Saved state shape:", restored_run.states.shape)
+print("Final BAR estimate and interval:", restored_bar.estimate, restored_bar.interval)
+print("Warnings:", restored_bar.warnings)
+print("Sampling settings:", restored_run.metadata["config"])
+```
+
+`Result` は保存状態がある場合はそれも保持し、後で `diagnostic_report` を呼べます。
+`EstimationResult` は推定値と各段の診断を保持しますが、各段の元の状態列は含みません。
+JSON には設定、モデルとデコーダーのメタデータ、乱数生成器の情報、Python と NumPy の版、パッケージソースのハッシュ値も記録されます。
+実行可能な `Problem` や独自 callable は復元されず、連鎖の再開用 checkpoint ではありません。
+実験の再現時には、モデルとデコーダーを構築するコード、依存関係の版、設定、seed も結果と一緒に残してください。
+同じファイル名で再び保存すると、そのファイルを上書きします。
+
+## よくある問題に対処する
+
+| 症状 | 確認・変更すること |
+| --- | --- |
+| optional 依存が見つからない | 例に必要な extras をインストールし、独自の 2 ビットの例は core 依存だけで試す |
+| `InitializationError` | 探索上限内で失敗初期状態が見つからないため、support にある失敗状態を渡すか `max_initial_attempts` を増やす |
+| 指定した初期状態が不正 | 形状、ノイズ分布での正の確率、実際のデコーダーと判定関数での失敗を確認する |
+| MC anchor で失敗ゼロまたは全試行失敗 | 最初のノイズ強度を見直すか、固定試行回数を増やすか、互換性のある exact anchor を渡す |
+| `OverlapError` | ノイズの support と共通の失敗定義、混合を確認し、隣接するラダー段の間隔を狭めて試す |
+| 区間や MCSE が `None` | 短い系列・一定の系列、誤差計算時の重なり不足、誤差計算の無効化などの警告を読む |
+| カーネル確率の和が 1 でない | ゼロでない既定値も含め、意図する混合全体を指定し、`lazy` は別に設定する |
+
+`sample_faulty(initial_state=...)` は、形状 `(n,)` の状態、または連鎖ごとの状態を持つ `(chains, n)` を受け取ります。
+BAR では代わりに `initial_states=[...]` を使い、各段に 1 要素を指定します。
+要素を `None` にすると、その段ではノイズ分布から初期化を試みます。
+これらは初期状態であり、そのまま推定値に加える標本ではありません。
+失敗初期状態を渡すと探索を省けますが、定常性や失敗集合の十分な探索は保証されません。
 
 ## 自分の CSS 行列を使う
 

@@ -1,5 +1,7 @@
 # Public API
 
+[Documentation](index.md) · [Tutorial](tutorial_en.md) · [Generated signatures](reference/sampling.md)
+
 The package ships a `py.typed` marker. Public entry points and internal helpers carry type annotations; validated matrix/vector inputs accept NumPy arrays and supported array-like values such as nested lists. `Noise[P]` and `Problem[P]` connect a noise implementation to its parameter type, including custom JSON-compatible parameters. A custom binary model may omit `alphabets`, in which case `Problem` uses binary coordinates. Runtime validation still checks dimensions, normalized densities, and decoder output meaning. The package and consumer examples are checked with `mypy --strict`; optional backend imports retain explicitly scoped typing exceptions.
 
 The names below cover every top-level export in `mcmc4qec.__all__`. Code factories, decoder constructors, circuit tools, and initialization helpers are also available from their corresponding submodules. The contracts require deterministic decoding and normalized noise probabilities on the entire stated state space. A probability is for the complete experiment represented by the model; a phenomenological result is not a per-round rate.
