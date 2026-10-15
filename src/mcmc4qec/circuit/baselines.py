@@ -8,13 +8,13 @@ from ..core import Problem
 from .model import CircuitFaultModel, uniform_fault_noise
 
 
-def _measurement_count(instruction):
+def _measurement_count(instruction: Any) -> int:
     if instruction.name in ("M", "MX", "MY", "MR", "MRX", "MRY", "R", "RX", "RY"):
         return len(instruction.targets_copy()) if instruction.name.startswith("M") else 0
     return 0
 
 
-def _logical_qubits(circuit, basis):
+def _logical_qubits(circuit: Any, basis: str) -> tuple[int, ...]:
     final_measure = "MX" if basis == "X" else "M"
     instructions = list(circuit)
     final = next((instruction for instruction in reversed(instructions)
@@ -108,7 +108,7 @@ def surface_logical_idle_circuit(*, distance: int=3, p: float=.01, basis: str="Z
     return output
 
 
-def surface_logical_idle_problem(*, distance: int=3, decoder_p: float=.01, basis: str="Z") -> Problem:
+def surface_logical_idle_problem(*, distance: int=3, decoder_p: float=.01, basis: str="Z") -> Problem[float | dict[str, Any] | None]:
     """Build a physical-location Problem and a DEM-derived PyMatching decoder.
 
     Args:

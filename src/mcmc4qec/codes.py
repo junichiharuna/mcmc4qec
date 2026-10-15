@@ -1,24 +1,26 @@
 """CSS factories preserving the reference research matrix ordering."""
 from __future__ import annotations
 from typing import Any
+from collections.abc import Sequence
+from numpy.typing import ArrayLike
 import numpy as np
 
 from .core import CSSCode, positive_integer
 
 
-def _distance(d):
+def _distance(d: int) -> int:
     d = positive_integer(d, "d")
     if d < 2:
         raise ValueError("d must be at least 2")
     return d
 
 
-def _from_hgp(q, *, logical_basis="paired"):
+def _from_hgp(q: Any, *, logical_basis: str="paired") -> CSSCode:
     return _css_code(*(a.toarray() for a in (q.hx, q.hz, q.lx, q.lz)),
                      logical_basis=logical_basis)
 
 
-def _css_code(hx, hz, lx, lz, *, logical_basis="paired"):
+def _css_code(hx: ArrayLike, hz: ArrayLike, lx: ArrayLike, lz: ArrayLike, *, logical_basis: str="paired") -> CSSCode:
     if logical_basis == "paired":
         return CSSCode(hx, hz, lx, lz)
     return CSSCode(hx, hz, lx, lz, logical_basis=logical_basis)
@@ -81,7 +83,7 @@ def make_hgp_hamming() -> CSSCode:
     return _from_hgp(hgp(h, h), logical_basis="independent")
 
 
-def _gf2_row_reduce(matrix):
+def _gf2_row_reduce(matrix: np.ndarray) -> tuple[np.ndarray, list[int]]:
     """Return RREF and pivot columns over GF(2), retaining reference-implementation row order."""
     a = np.asarray(matrix, dtype=np.uint8).copy()
     rows, cols = a.shape
@@ -102,7 +104,7 @@ def _gf2_row_reduce(matrix):
     return a, pivots
 
 
-def _gf2_nullspace(matrix):
+def _gf2_nullspace(matrix: np.ndarray) -> np.ndarray:
     """Return the reference-ordered basis for the GF(2) nullspace."""
     n = matrix.shape[1]
     rref, pivots = _gf2_row_reduce(matrix)
@@ -115,12 +117,12 @@ def _gf2_nullspace(matrix):
     return vectors
 
 
-def _css_logicals(hx, hz):
+def _css_logicals(hx: np.ndarray, hz: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     """Construct the same independent quotient bases as the reference implementation."""
     n = hx.shape[1]
     k = n - len(_gf2_row_reduce(hx)[1]) - len(_gf2_row_reduce(hz)[1])
 
-    def logicals_for(stabilizer, other):
+    def logicals_for(stabilizer: np.ndarray, other: np.ndarray) -> np.ndarray:
         kernel = _gf2_nullspace(stabilizer)
         if k == 0:
             return np.zeros((0, n), dtype=np.uint8)
@@ -156,14 +158,14 @@ def make_bb_code(l: int, m: int, a_terms: tuple[tuple[int, int], ...] | list[tup
                 raise ValueError(f"{name} must contain integer exponent pairs")
     block = l * m
 
-    def shift(di, dj):
+    def shift(di: int, dj: int) -> np.ndarray:
         matrix = np.zeros((block, block), dtype=np.uint8)
         for i in range(l):
             for j in range(m):
                 matrix[((i + di) % l) * m + ((j + dj) % m), i * m + j] = 1
         return matrix
 
-    def polynomial(terms):
+    def polynomial(terms: Sequence[tuple[int, int]]) -> np.ndarray:
         result = np.zeros((block, block), dtype=np.uint8)
         for di, dj in terms:
             result ^= shift(di, dj)
@@ -229,7 +231,7 @@ def make_steane_code() -> CSSCode:
     return CSSCode(h, h, lx, lz)
 
 
-def _lift_rows(checks, inner_logical, n_inner):
+def _lift_rows(checks: np.ndarray, inner_logical: np.ndarray, n_inner: int) -> np.ndarray:
     n_outer = checks.shape[1]
     rows = []
     for check in checks:
@@ -241,7 +243,7 @@ def _lift_rows(checks, inner_logical, n_inner):
     return np.array(rows, dtype=np.uint8).reshape(checks.shape[0], n_outer*n_inner)
 
 
-def _block_diag_copies(check, blocks):
+def _block_diag_copies(check: np.ndarray, blocks: int) -> np.ndarray:
     rows, n_inner = check.shape
     result = np.zeros((blocks*rows, blocks*n_inner), dtype=np.uint8)
     for block in range(blocks):

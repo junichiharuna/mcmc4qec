@@ -1,6 +1,6 @@
 """Four post-hoc consistency screens for independent MCMC chain populations."""
 from __future__ import annotations
-from typing import Any, Iterable
+from typing import Any, Iterable, cast
 from .results import Result
 import math
 
@@ -9,7 +9,7 @@ import numpy as np
 from .diagnostics import _iat, weight_traces
 
 
-def _traces(value):
+def _traces(value: Result | Iterable[Result] | np.ndarray) -> np.ndarray:
     if isinstance(value, np.ndarray):
         traces = np.asarray(value, dtype=float)
     else:
@@ -20,7 +20,7 @@ def _traces(value):
     return traces
 
 
-def _population(traces):
+def _population(traces: np.ndarray) -> tuple[float, float | None, float | None]:
     means = np.mean(traces, axis=1)
     k = len(means)
     sd = float(np.std(means, ddof=1)) if k >= 2 else None
@@ -28,11 +28,11 @@ def _population(traces):
     return float(np.mean(means)), sd, se
 
 
-def _check(ok, **values):
+def _check(ok: bool | None, **values: Any) -> dict[str, Any]:
     return {"ok": None if ok is None else bool(ok), **values}
 
 
-def _dispersion(traces, observed_sd, variance, factor, source):
+def _dispersion(traces: np.ndarray, observed_sd: float | None, variance: float, factor: float, source: str) -> dict[str, Any]:
     k, n = traces.shape
     if (k < 2 or n < 8 or observed_sd is None or variance <= 0 or
             np.any(np.var(traces, axis=1) == 0)):
@@ -40,7 +40,7 @@ def _dispersion(traces, observed_sd, variance, factor, source):
     iats = [_iat(trace) for trace in traces]
     if any(tau is None for tau in iats):
         return _check(None, ratio=None, variance_source=source, chain_iat=iats)
-    predicted = math.sqrt(variance * float(np.mean(iats)) / n)
+    predicted = math.sqrt(variance * float(np.mean(cast(list[float], iats))) / n)
     ratio = observed_sd / predicted
     return _check(ratio <= factor, ratio=ratio, observed_sd=observed_sd,
                   predicted_sd=predicted, variance_source=source, chain_iat=iats)
@@ -95,6 +95,8 @@ def evaluate_convergence(results: Result | Iterable[Result] | np.ndarray, *, oth
         warnings.append("scaling requires two chains and at least eight samples")
     else:
         _, ref_sd, _ = _population(a[:, :quarter])
+        # Both populations have at least two chains in this branch.
+        ref_sd, sd = cast(float, ref_sd), cast(float, sd)
         expected = ref_sd * math.sqrt(quarter / n)
         ratio = sd / expected if expected > 0 else (math.inf if sd > 0 else None)
         checks["scaling"] = _check(None if ratio is None else ratio <= scale_factor,

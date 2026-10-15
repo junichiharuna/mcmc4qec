@@ -9,7 +9,7 @@ _X_COMPONENT = np.array([0, 1, 1, 0], dtype=np.uint8)
 _Z_COMPONENT = np.array([0, 0, 1, 1], dtype=np.uint8)
 
 
-def _code_metadata(code):
+def _code_metadata(code: CSSCode) -> dict[str, np.ndarray]:
     return dict(hx=code.hx, hz=code.hz, lx=code.lx, lz=code.lz)
 
 
@@ -109,7 +109,7 @@ class PhenomenologicalModel:
     def validate_state(self, state: np.ndarray) -> np.ndarray:
         return categorical(state, self.alphabets)
 
-    def _cumulative_data(self, state):
+    def _cumulative_data(self, state: np.ndarray) -> np.ndarray:
         data = state[:self.n_data].reshape(self.rounds, self.code.n)
         return np.bitwise_xor.accumulate(data, axis=0)
 

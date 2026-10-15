@@ -1,0 +1,89 @@
+core: A:\dev\mcmc4qec\.venv-dev5-core\Lib\site-packages\mcmc4qec; 26 Python files match source
+examples\bar_ladder.py: exit=0, 0.47s
+p=0.4: BAR P_L=0.35200, interval=(0.35200000000000004, 0.35200000000000004)
+p=0.25: BAR P_L=0.15369, interval=(0.14967492968748397, 0.15780516077270354)
+p=0.1: BAR P_L=0.02677, interval=(0.02492075230362825, 0.02876570429390154)
+Exact final P_L: 0.028000000000000014
+Output: C:\Users\user\AppData\Local\Temp\mcmc4qec-wheel-514k7pow\bar_ladder\summary.json
+SUMMARY {"ladder": [0.4, 0.25, 0.1], "bar": [0.35200000000000004, 0.15368629198134917, 0.026774297218558993], "intervals": [[0.35200000000000004, 0.35200000000000004], [0.14967492968748397, 0.15780516077270354], [0.02492075230362825, 0.02876570429390154]], "exact": 0.028000000000000014}
+bb72_bposd.py: skipped in core (requires optional dependencies)
+examples\bit_flip.py: exit=0, 0.39s
+Exact P_L: 0.156250
+Direct MC P_L: 0.140000; 95% Wilson interval: (0.09866982633455634, 0.1948988086570756)
+Exact E[weight | faulty]: 2.100000
+MCMC E[weight | faulty]: 2.130000
+Diagnostics (do not establish convergence): {'observable': 'nonidentity coordinate count', 'iat': 1.3556211617839522, 'ess': 149.69445916549188, 'chain_iat': [1.5184848484848477, 1.1927574750830567], 'chain_ess': [65.85511873877473, 83.83934042671716], 'rhat': 1.0144702297725652, 'cross_chain_se': 0.010000000000000009, 'chain_means': [2.12, 2.14], 'warnings': ['Diagnostics do not prove convergence, ergodicity, or correctness.'], 'acceptance': {'single': {'proposed': 0, 'accepted': 0, 'moved': 0, 'acceptance_rate': None, 'move_rate': None}, 'zanella': {'proposed': 175, 'accepted': 43, 'moved': 43, 'acceptance_rate': 0.24571428571428572, 'move_rate': 0.24571428571428572}, 'cluster': {'proposed': 57, 'accepted': 57, 'moved': 50, 'acceptance_rate': 1.0, 'move_rate': 0.8771929824561403}, 'stabilizer': {'proposed': 0, 'accepted': 0, 'moved': 0, 'acceptance_rate': None, 'move_rate': None}, 'physical_fault': {'proposed': 0, 'accepted': 0, 'moved': 0, 'acceptance_rate': None, 'move_rate': None}, 'lazy': {'proposed': 8, 'accepted': 8, 'moved': 0, 'acceptance_rate': 1.0, 'move_rate': 0.0}}}
+Result JSON round trip: preserved retained states
+Output: C:\Users\user\AppData\Local\Temp\mcmc4qec-wheel-514k7pow\bit_flip\summary.json
+SUMMARY {"exact": 0.15625000000000003, "pl": 0.14, "pl_interval": [0.09866982633455634, 0.1948988086570756], "ew_exact": 2.0999999999999996, "ew_chain": 2.13}
+circuit_baseline.py: skipped in core (requires optional dependencies)
+circuit_zanella.py: skipped in core (requires optional dependencies)
+phase_flip_asymmetric.py: skipped in core (requires optional dependencies)
+phenomenological_toric.py: skipped in core (requires optional dependencies)
+examples\steane_exact.py: exit=0, 0.89s
+p=0.4: exact=0.493005; direct MC=0.476667 (0.42080166187431245, 0.533121676782833) (contains exact=True); BAR=0.493005 (0.4930047999999998, 0.4930047999999998) (contains exact=True)
+p=0.3: exact=0.444614; direct MC=0.356667 (0.30458741740255907, 0.41237023434847747) (contains exact=False); BAR=0.554002 (0.5256513861886929, 0.5838807325027209) (contains exact=False)
+p=0.2: exact=0.321498; direct MC=0.293333 (0.24468634082804494, 0.34720608727810065) (contains exact=True); BAR=0.431176 (0.3740204899418796, 0.49706525616238706) (contains exact=False)
+BAR intervals containing exact: 1/3
+BAR intervals assume chain mixing and sufficient block length; diagnostics do not prove either.
+Output: C:\Users\user\AppData\Local\Temp\mcmc4qec-wheel-514k7pow\steane_exact\summary.json
+SUMMARY {"code": "Steane-7", "ladder": [0.4, 0.3, 0.2], "exact": [0.4930047999999998, 0.44461439999999997, 0.3214976], "bar": [0.4930047999999998, 0.5540015491033619, 0.4311758233516136], "bar_intervals": [[0.4930047999999998, 0.4930047999999998], [0.5256513861886929, 0.5838807325027209], [0.3740204899418796, 0.49706525616238706]]}
+stim_dem.py: skipped in core (requires optional dependencies)
+examples\templates\byo_css_bitflip.py: exit=0, 0.49s
+Wrote C:\Users\user\AppData\Local\Temp\mcmc4qec-wheel-514k7pow\templates\byo_css_bitflip\result.json
+exact anchor P_L=0.28175; direct MC P_L=0.15; BAR P_L=0.154478
+Conditional chain mean weight=2.06; it does not estimate absolute P_L.
+Normalization enumerated at every rung. Decoder output means logical observables.
+Diagnostics do not prove convergence, ergodicity, or correctness; a full four-check verdict also needs independent direct-MC conditional variance.
+SUMMARY {"checks_passed": true, "k": 1, "n": 3, "pl": 0.15447818519942777}
+examples\templates\byo_decoder.py: exit=0, 0.35s
+Wrote C:\Users\user\AppData\Local\Temp\mcmc4qec-wheel-514k7pow\templates\byo_decoder\result.json
+Exact P_L=0.15625; direct MC P_L=0.15, Wilson interval=(0.0930598528365663, 0.23283559590832364)
+Declared decoder output_kind=correction; mapped predictions are logical observables.
+Diagnostics do not prove convergence, ergodicity, or correctness; complete four-check screening needs independent direct-MC conditional variance.
+SUMMARY {"checks_passed": true, "n": 3, "output_kind": "correction", "pl": 0.15625000000000003}
+examples\templates\byo_noise.py: exit=0, 0.36s
+Wrote C:\Users\user\AppData\Local\Temp\mcmc4qec-wheel-514k7pow\templates\byo_noise\result.json
+Exact P_L=0.098; direct MC P_L=0.1, Wilson interval=(0.0552291370606751, 0.17436566150491345)
+Decoder output means logical observables; failure is their mismatch with truth.
+Sample shape/support checked; agreement between sample frequencies and log_prob is a user contract and remains unverified.
+Diagnostics do not prove convergence or correctness; complete four-check screening needs independent direct-MC conditional variance.
+SUMMARY {"n": 3, "normalization": 1.0, "pl": 0.09800000000000006}
+templates/byo_stim_dem.py: skipped in core (requires optional dependencies)
+examples\three_noise.py: exit=0, 1.73s
+static depolarizing: target=0.15
+  Exact P_L=0.230000; direct MC=0.270000; Wilson95=(0.21323449814685846, 0.33543435198668425)
+  E[occupied coordinates | faulty]: exact=1.076087, MCMC=1.100000
+  Fixed-failure BAR P_L=0.234284; approximate interval=(0.22447208662283905, 0.244525325599858)
+  BAR uncertainty assumes mixing; 10 bootstrap replicates are only a smoke demonstration.
+phenomenological bit_flip: target={'data': 0.12, 'measurement': 0.04}
+  Exact P_L=0.211200; direct MC=0.220000; Wilson95=(0.16816538358833258, 0.28238799918293667)
+  E[occupied coordinates | faulty]: exact=1.280000, MCMC=1.330000
+  Fixed-failure BAR P_L=0.167049; approximate interval=(0.14020666187874908, 0.19903044093320515)
+  BAR uncertainty assumes mixing; 10 bootstrap replicates are only a smoke demonstration.
+phenomenological depolarizing: target={'data': 0.12, 'measurement': 0.04}
+  Exact P_L=0.324664; direct MC=0.350000; Wilson95=(0.28728824127358077, 0.4183653566395992)
+  E[occupied coordinates | faulty]: exact=1.216231, MCMC=1.210000
+  Fixed-failure BAR P_L=0.305950; approximate interval=(0.27605064168270826, 0.33908833128069515)
+  BAR uncertainty assumes mixing; 10 bootstrap replicates are only a smoke demonstration.
+Output: C:\Users\user\AppData\Local\Temp\mcmc4qec-wheel-514k7pow\three_noise\summary.json
+SUMMARY {"cases": [{"name": "static depolarizing", "exact": 0.22999999999999984, "pl": 0.27, "pl_interval": [0.21323449814685846, 0.33543435198668425], "ew_exact": 1.0760869565217392, "ew_chain": 1.1, "bar": 0.2342842505793534, "bar_interval": [0.22447208662283905, 0.244525325599858]}, {"name": "phenomenological bit_flip", "exact": 0.21120000000000003, "pl": 0.22, "pl_interval": [0.16816538358833258, 0.28238799918293667], "ew_exact": 1.2799999999999998, "ew_chain": 1.33, "bar": 0.16704907582953052, "bar_interval": [0.14020666187874908, 0.19903044093320515]}, {"name": "phenomenological depolarizing", "exact": 0.32466432000000023, "pl": 0.35, "pl_interval": [0.28728824127358077, 0.4183653566395992], "ew_exact": 1.2162312532525892, "ew_chain": 1.21, "bar": 0.30595024340103844, "bar_interval": [0.27605064168270826, 0.33908833128069515]}]}
+toric_depolarizing.py: skipped in core (requires optional dependencies)
+toric_pymatching.py: skipped in core (requires optional dependencies)
+workflows/conditional_weight.py: skipped in core (requires optional dependencies)
+workflows/convergence_check.py: skipped in core (requires optional dependencies)
+workflows/p_dependent_decoder.py: skipped in core (requires optional dependencies)
+workflows/pl_curve.py: skipped in core (requires optional dependencies)
+notebooks: skipped in core (requires notebooks extra)
+README.md block 1: skipped in core (optional)
+README.md block 2: exit=0, 0.86s
+[0.35200000000000004, 0.15501248572013632, 0.02843849729075549] [(0.35200000000000004, 0.35200000000000004), (0.1511736549727738, 0.15894879788057673), (0.027306544760934155, 0.029617373242818146)]
+docs/tutorial_en.md block 1: exit=0, 0.28s
+0.15625000000000003
+docs/tutorial_en.md block 2: exit=0, 0.29s
+0.4375000000000001
+docs/tutorial_en.md block 3: exit=0, 0.26s
+0.14843750000000006
+docs/tutorial_en.md block 4: exit=0, 0.28s
+0.15625000000000003
+docs/tutorial_en.md block 5: skipped in core (optional)

@@ -7,33 +7,33 @@ settings describe the decoder at construction; mutating it afterwards invalidate
 that provenance (and can change the failure set).
 """
 from __future__ import annotations
-from typing import Any
+from typing import Any, cast
 
 from importlib.metadata import PackageNotFoundError, version
 import json
 
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 from .core import Decoder
 
 
-def _binary(value, name, dimensions):
+def _binary(value: ArrayLike, name: str, dimensions: tuple[int, ...]) -> NDArray[np.uint8]:
     try:
         result = np.asarray(value)
     except (TypeError, ValueError) as exc:
         raise ValueError(f"{name} must be a binary array") from exc
     if result.ndim not in dimensions or result.dtype.kind not in "buif":
         raise ValueError(f"{name} must be a binary array of dimension {dimensions}")
-    if not np.all((result == 0) | (result == 1)):
+    if not ((result == 0) | (result == 1)).all():
         raise ValueError(f"{name} must contain only binary values")
     return result.astype(np.uint8, copy=True)
 
 
-def _json_copy(value, name):
+def _json_copy(value: dict[str, Any], name: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"{name} must be a JSON dictionary")
     try:
-        return json.loads(json.dumps(value, allow_nan=False))
+        return cast(dict[str, Any], json.loads(json.dumps(value, allow_nan=False)))
     except (TypeError, ValueError) as exc:
         raise ValueError(f"{name} must be a finite JSON dictionary") from exc
 
@@ -96,9 +96,10 @@ class DecoderAdapter:
         syndrome = _binary(syndrome, "syndrome", (1, 2))
         prediction = _binary(self.decoder.decode(syndrome, **self._decode_kwargs), "decoder output", (1,))
         if self.output_kind == "correction":
-            if len(prediction) != self.logical_map.shape[1]:  # type: ignore[union-attr]
+            logical_map = cast(NDArray[np.uint8], self.logical_map)
+            if len(prediction) != logical_map.shape[1]:
                 raise ValueError("decoder correction length does not match logical_map")
-            return (self.logical_map @ prediction % 2).astype(np.uint8)
+            return (logical_map @ prediction % 2).astype(np.uint8)
         return prediction
 
     def metadata(self) -> dict[str, Any]:

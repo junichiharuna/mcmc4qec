@@ -4,11 +4,11 @@ from typing import Any
 import numpy as np
 
 from .noise import IndependentBitFlip
-from .core import Problem
+from .core import Noise, Problem
 from .noise_categorical import DepolarizingNoise, PhenomenologicalNoise, _probability
 
 
-def _probability_rows(noise, p):
+def _probability_rows(noise: Noise[Any], p: Any) -> np.ndarray | None:
     """Return categorical probabilities or None for unrecognized noise."""
     # A local import avoids the circuit proposal -> kernels import cycle.
     from .circuit.model import CircuitFaultNoise
@@ -37,7 +37,7 @@ def _probability_rows(noise, p):
     return None
 
 
-def product_neighbor_distribution(state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> np.ndarray | None:
+def product_neighbor_distribution(state: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None) -> np.ndarray | None:
     """Return Zanella probabilities in flat-neighbor order, or None.
 
     None means the built-in product path is unavailable or the current state is
@@ -66,4 +66,5 @@ def product_neighbor_distribution(state: np.ndarray, problem: Problem, p: float 
     if maximum == -np.inf:
         return None
     weights = np.exp(logs - maximum)
-    return weights / weights.sum()
+    normalized: np.ndarray = weights / weights.sum()
+    return normalized

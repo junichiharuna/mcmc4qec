@@ -2,12 +2,13 @@
 from __future__ import annotations
 from typing import Any, Iterable, cast
 import math
+from numpy.typing import ArrayLike
 
 import numpy as np
 from .results import Result
 
 
-def _iat(x):
+def _iat(x: np.ndarray) -> float | None:
     """Return positive Geyer paired IAT, or None if the estimate is nonpositive.
 
     Negative serial correlation can give IAT below one and ESS above the
@@ -27,7 +28,7 @@ def _iat(x):
     return tau if np.isfinite(tau) and tau > 0 else None
 
 
-def _first_negative_iat(x):
+def _first_negative_iat(x: np.ndarray) -> float:
     """Return the first-negative-lag Geyer IAT used by the research runner."""
     x = np.asarray(x, dtype=float)
     x = x - x.mean()
@@ -44,7 +45,7 @@ def _first_negative_iat(x):
     return float(1+2*acf[1:stop].sum())
 
 
-def paper_burn_in_cut(trace):
+def paper_burn_in_cut(trace: ArrayLike) -> tuple[int, bool]:
     """Return the research runner's per-chain iterated 5-IAT cut and cap flag.
 
     Five fixed-point passes start at zero. Failure to converge or a cut at half
@@ -95,8 +96,8 @@ def weight_traces(results: Result | Iterable[Result]) -> tuple[np.ndarray, list[
     return np.concatenate(traces), results
 
 
-def _aggregate_acceptance(results):
-    counts = {}
+def _aggregate_acceptance(results: Iterable[Result]) -> dict[str, Any]:
+    counts: dict[str, Any] = {}
     for result in results:
         for kernel, stats in result.acceptance.items():
             entry = counts.setdefault(kernel, dict(proposed=0, accepted=0, moved=0))

@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-15",
+  "base_head": "35ed7f38ecae9de0a728730034f5602a2cca7e1f",
+  "final_package_sha256": "935562e9be1c530a8a53c88db4b1f5b0be04577069d0d6e67428b9ee95d9a6fa",
+  "research_head_at_final": "6c13ba0cfbbb932226ebc25e38f315b81b467371",
+  "research_runner_sha256": "5ef2e166b3048a84b553a40a617dc9deb30263e2e76978d3f2399f8edeaa53c6",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.22631-SP0",
+  "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+  "packages": {
+    "numpy": "2.4.6",
+    "pymatching": "2.4.0",
+    "ldpc": "2.4.1",
+    "stim": "1.16.0",
+    "mypy": "2.3.1"
+  },
+  "command": "benchmarks/bench_step.py --steps 10000 --seed 731 --repeats 2",
+  "profile": {
+    "before": true,
+    "trial1": true,
+    "final": false
+  },
+  "conditions": {
+    "p": 0.01,
+    "steps": 10000,
+    "seed": 731,
+    "zanella": 0.7,
+    "cluster": 0.3,
+    "cluster_k": 2,
+    "chains": 1,
+    "lazy": 0
+  },
+  "notes": [
+    "No sampling defaults changed.",
+    "Trial1 ran while parallel work was active; final ran after agent CPU experiments ended.",
+    "The six final rows were fixed in advance; same-seed repeats measure timing variability.",
+    "Research had unrelated untracked paper/referee files; this task did not alter it.",
+    "Library timings include result construction and diagnostics and exclude decoder construction."
+  ]
+}

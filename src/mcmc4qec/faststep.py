@@ -23,13 +23,17 @@ def make_faststep(problem: Problem[Any], p: Any,
     if not enabled or problem.failure is not None:
         return None
     pair = (type(problem.model), type(problem.noise))
+    from .circuit.model import CircuitFaultModel, CircuitFaultNoise
+    if pair == (CircuitFaultModel, CircuitFaultNoise):
+        from .circuit.faststep import CircuitFastStepper
+        return CircuitFastStepper(problem, cast(np.ndarray, _probability_rows(problem.noise, p)))
     allowed = ((BinaryLinearModel, IndependentBitFlip),
                (DepolarizingModel, DepolarizingNoise),
                (PhenomenologicalModel, PhenomenologicalNoise))
     if pair not in allowed:
         return None
     rows = _probability_rows(problem.noise, p)
-    return FastStepper(problem, rows)
+    return FastStepper(problem, cast(np.ndarray, rows))
 
 
 class FastStepper:
@@ -37,6 +41,8 @@ class FastStepper:
 
     def __init__(self, problem: Problem[Any], rows: np.ndarray) -> None:
         self.problem = problem
+        self.binary_model = type(problem.model) is BinaryLinearModel
+        self.phenomenological = type(problem.model) is PhenomenologicalModel
         self.rows = rows
         self.binary_logs: tuple[np.ndarray, np.ndarray] | None
         with np.errstate(divide="ignore"):
@@ -56,34 +62,37 @@ class FastStepper:
         self.groups = [(size, np.flatnonzero(np.asarray(self.alphabets) == size))
                        for size in sorted(set(self.alphabets))]
         self.stabilizers: np.ndarray | None = None
-        self.effects_s = []
-        self.effects_o = []
+        self._initialize_effects()
+        self.observables: np.ndarray | None = None
+        self.current_q: np.ndarray | None = None
+        self.next_q: np.ndarray | None = None
+        self.current_logs: np.ndarray | None = None
+        self.next_logs: np.ndarray | None = None
+        self.next_site: int | None = None
+
+    def _initialize_effects(self) -> None:
+        self.effects_s: list[np.ndarray] = []
+        self.effects_o: list[np.ndarray] = []
         zero = np.zeros(self.n, dtype=np.uint8)
         for i, size in enumerate(self.alphabets):
             syndromes, observables = [], []
             for label in range(size):
                 basis = zero.copy()
                 basis[i] = label
-                syndromes.append(np.asarray(problem.model.syndrome(basis), dtype=np.uint8))
-                observables.append(np.asarray(problem.model.observables(basis), dtype=np.uint8))
-            self.effects_s.append(syndromes)
-            self.effects_o.append(observables)
-        self.observables: np.ndarray | None = None
-        self.current_q = None
-        self.next_q = None
-        self.current_logs = None
-        self.next_logs = None
-        self.next_site: int | None = None
+                syndromes.append(np.asarray(self.problem.model.syndrome(basis), dtype=np.uint8))
+                observables.append(np.asarray(self.problem.model.observables(basis), dtype=np.uint8))
+            self.effects_s.append(np.asarray(syndromes, dtype=np.uint8))
+            self.effects_o.append(np.asarray(observables, dtype=np.uint8))
 
     def start(self, state: np.ndarray) -> None:
         self.observables = np.asarray(self.problem.model.observables(state), dtype=np.uint8)
         self.current_q = self._current_distribution(state)
 
-    def _distribution(self, state):
+    def _distribution(self, state: np.ndarray) -> np.ndarray | None:
         selected = self.rows[self.positions, state]
         if np.any(selected == 0):
             return None
-        if self.rows.shape[1] == 2:
+        if self.binary_logs is not None:
             logs = np.where(state, self.binary_logs[1], self.binary_logs[0])
         else:
             pieces = []
@@ -95,19 +104,20 @@ class FastStepper:
         return self._normalize(logs)
 
     @staticmethod
-    def _normalize(logs):
+    def _normalize(logs: np.ndarray) -> np.ndarray | None:
         maximum = logs.max()
         if maximum == -np.inf:
             return None
         weights = np.exp(logs - maximum)
-        return weights / weights.sum()
+        normalized: np.ndarray = weights / weights.sum()
+        return normalized
 
-    def _current_distribution(self, state):
+    def _current_distribution(self, state: np.ndarray) -> np.ndarray | None:
         selected = self.rows[self.positions, state]
         if np.any(selected == 0):
             self.current_logs = None
             return None
-        if self.rows.shape[1] == 2:
+        if self.binary_logs is not None:
             self.current_logs = np.where(state, self.binary_logs[1], self.binary_logs[0])
         else:
             pieces = []
@@ -118,12 +128,12 @@ class FastStepper:
             self.current_logs = np.concatenate(pieces)
         return self._normalize(self.current_logs)
 
-    def _reverse_distribution(self, candidate, site):
+    def _reverse_distribution(self, candidate: np.ndarray, site: int) -> np.ndarray | None:
         if self.rows[site, candidate[site]] == 0:
             self.next_logs = None
             return None
-        logs = self.current_logs.copy()
-        if self.rows.shape[1] == 2:
+        logs = cast(np.ndarray, self.current_logs).copy()
+        if self.binary_logs is not None:
             logs[site] = self.binary_logs[1 if candidate[site] else 0][site]
         else:
             size = self.alphabets[site]
@@ -135,38 +145,49 @@ class FastStepper:
         self.next_logs = logs
         return self._normalize(logs)
 
-    def _neighbor(self, state, index):
+    def _neighbor(self, state: np.ndarray, index: int | np.integer[Any]) -> np.ndarray:
         i = int(self.neighbor_sites[index])
         label = int(index - self.offsets[i])
         candidate = state.copy()
         candidate[i] = label + int(label >= state[i])
         return candidate
 
+    def _draw_zanella(self, state: np.ndarray, rng: np.random.Generator
+                      ) -> tuple[np.ndarray, int | None]:
+        q = self.current_q
+        if q is None:
+            q = self._current_distribution(state)
+            self.current_q = q
+        if q is None:
+            self.next_site = None
+            return state.copy(), None
+        index = int(rng.choice(len(q), p=q))
+        self.next_site = int(self.neighbor_sites[index])
+        return self._neighbor(state, index), index
+
+    def _zanella_ratio(self, state: np.ndarray, candidate: np.ndarray,
+                       index: int | None) -> float:
+        if index is None:
+            return 0.0
+        i = int(self.neighbor_sites[index])
+        reverse_index = int(self.offsets[i]) + int(state[i]) - int(state[i] > candidate[i])
+        reverse = self._reverse_distribution(candidate, i)
+        self.next_q = reverse
+        qr = 0.0 if reverse is None else float(reverse[reverse_index])
+        return -np.inf if qr == 0 else float(math.log(qr) - math.log(cast(np.ndarray, self.current_q)[index]))
+
     def propose(self, state: np.ndarray, kernel: Any,
                 rng: np.random.Generator) -> tuple[np.ndarray, float]:
         """Draw exactly the reference proposal and return its Hastings log ratio."""
+        index: int | np.integer[Any]
         name = kernel.name
         if name == "single":
             index = rng.integers(self.degree)
             self.next_site = int(self.neighbor_sites[index])
             return self._neighbor(state, index), 0.0
         if name == "zanella":
-            q = self.current_q
-            if q is None:
-                q = self._current_distribution(state)
-                self.current_q = q
-            if q is None:
-                self.next_site = None
-                return state.copy(), 0.0
-            index = rng.choice(len(q), p=q)
-            candidate = self._neighbor(state, index)
-            i = int(self.neighbor_sites[index])
-            self.next_site = i
-            reverse_index = int(self.offsets[i]) + int(state[i]) - int(state[i] > candidate[i])
-            reverse = self._reverse_distribution(candidate, i)
-            self.next_q = reverse
-            qr = 0.0 if reverse is None else float(reverse[reverse_index])
-            return candidate, -np.inf if qr == 0 else float(math.log(qr) - math.log(q[index]))
+            candidate, selected_index = self._draw_zanella(state, rng)
+            return candidate, self._zanella_ratio(state, candidate, selected_index)
         if name == "cluster":
             self.next_site = None
             size, positions = self.groups[rng.integers(len(self.groups))]
@@ -198,43 +219,63 @@ class FastStepper:
                 rng: np.random.Generator,
                 stats: dict[str, Any]) -> tuple[np.ndarray, float, np.ndarray]:
         """Apply one conditional MH step, updating stats and cached observables."""
-        candidate, log_ratio = self.propose(state, kernel, rng)
-        if np.isnan(log_ratio) or log_ratio == np.inf:
+        zanella = kernel.name == "zanella"
+        if zanella:
+            candidate, index = self._draw_zanella(state, rng)
+            log_ratio = 0.0
+        else:
+            candidate, log_ratio = self.propose(state, kernel, rng)
+        if math.isnan(log_ratio) or log_ratio == math.inf:
             raise ValueError("invalid proposal ratio")
-        selected = self.rows[self.positions, candidate]
-        if np.any(selected == 0):
-            lp = -np.inf
-        elif type(self.problem.model) is PhenomenologicalModel:
-            boundary = self.problem.model.n_data
+        # Zero probabilities already have log density -inf. Preserve the full
+        # coordinate-order sum, including the history model's two reductions.
+        if self.phenomenological:
+            boundary = cast(PhenomenologicalModel, self.problem.model).n_data
             logs = self.log_rows[self.positions, candidate]
             lp = float(logs[:boundary].sum() + logs[boundary:].sum())
         else:
             lp = float(self.log_rows[self.positions, candidate].sum())
         if not math.isfinite(lp):
             return state, current_log, current_syndrome
-        changes = (np.array([self.next_site]) if self.next_site is not None
-                   else np.flatnonzero(state != candidate))
-        syndrome = current_syndrome.copy() if len(changes) else current_syndrome
-        observables = cast(np.ndarray, self.observables).copy() if len(changes) else cast(np.ndarray, self.observables)
-        for i in changes:
-            before, after = int(state[i]), int(candidate[i])
-            syndrome ^= self.effects_s[i][before] ^ self.effects_s[i][after]
-            observables ^= self.effects_o[i][before] ^ self.effects_o[i][after]
+        if self.binary_model and self.next_site is not None:
+            # A binary single-site proposal always toggles the bit. Label zero
+            # has zero linear effect, so no temporary index array is needed.
+            i = self.next_site
+            moved = True
+            syndrome = current_syndrome ^ self.effects_s[i][1]
+            observables = cast(np.ndarray, self.observables) ^ self.effects_o[i][1]
+        else:
+            changes = ([self.next_site] if self.next_site is not None
+                       else np.flatnonzero(state != candidate))
+            moved = bool(len(changes))
+            syndrome = current_syndrome.copy() if moved else current_syndrome
+            observables = cast(np.ndarray, self.observables).copy() if moved else cast(np.ndarray, self.observables)
+            for changed_site in changes:
+                i = int(changed_site)
+                if self.binary_model:
+                    syndrome ^= self.effects_s[i][1]
+                    observables ^= self.effects_o[i][1]
+                else:
+                    before, after = int(state[i]), int(candidate[i])
+                    syndrome ^= self.effects_s[i][before] ^ self.effects_s[i][after]
+                    observables ^= self.effects_o[i][before] ^ self.effects_o[i][after]
         predicted = self.problem.decoder.predict(syndrome)
         prediction: np.ndarray = (cast(np.ndarray, predicted)
                                   if type(self.problem.decoder) is CachedDecoder
                                   else binary(predicted, ndim=1, name="prediction"))
         if prediction.shape != observables.shape:
             raise ValueError("decoder prediction and observable dimensions differ")
-        if np.any(prediction != observables):
+        if (prediction != observables).any():
+            if zanella:
+                log_ratio = self._zanella_ratio(state, candidate, index)
             u = rng.random()
             if (math.log(u) if u else -np.inf) < min(0, lp-current_log+log_ratio):
                 stats["accepted"] += 1
-                stats["moved"] += int(bool(len(changes)))
+                stats["moved"] += int(moved)
                 self.observables = observables
                 if kernel.name == "zanella":
                     self.current_q, self.current_logs = self.next_q, self.next_logs
-                elif len(changes):
+                elif moved:
                     self.current_q = self._current_distribution(candidate)
                 return candidate, lp, syndrome
         return state, current_log, current_syndrome

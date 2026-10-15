@@ -5,6 +5,7 @@ the rates and acceptance are timing observations, not mixing guarantees.
 """
 import argparse
 import time
+from unittest.mock import patch
 
 import numpy as np
 
@@ -17,6 +18,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--steps', type=int, default=150)
     parser.add_argument('--seed', type=int, default=20261001)
+    parser.add_argument('--compare-delta', action='store_true',
+                        help='compare full-effect and delta steps with identical RNG seeds')
     args = parser.parse_args()
     if args.steps < 1:
         parser.error('--steps must be positive')
@@ -50,6 +53,19 @@ def main():
         accepted = sum(entry['accepted'] for key, entry in result.acceptance.items() if key != 'lazy')
         print(f'{name}: steps={args.steps} seconds={elapsed:.3f} '
               f'step/s={args.steps / elapsed:.2f} acceptance={accepted / proposed:.4f}')
+        if args.compare_delta:
+            # Retain the existing product Zanella proposal optimization; only
+            # disable the dedicated effect/distribution-caching stepper.
+            with patch('mcmc4qec.faststep.make_faststep', return_value=None):
+                start = time.perf_counter()
+                reference = sample_faulty(problem, p, seed=seed, initial_state=initial,
+                    config=SamplingConfig(samples=args.steps, burn_in=0, kernels=kernels))
+                reference_elapsed = time.perf_counter() - start
+            if (not np.array_equal(result.states, reference.states) or
+                    result.acceptance != reference.acceptance):
+                raise AssertionError('delta/reference trajectory or acceptance differs')
+            print(f'{name} full-effect: seconds={reference_elapsed:.3f} '
+                  f'speedup={reference_elapsed / elapsed:.2f} same_trajectory=True')
 
 
 if __name__ == '__main__':

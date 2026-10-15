@@ -50,7 +50,7 @@ def test_mypy_package():
         pytest.skip("mypy is not installed")
     root = Path(__file__).resolve().parents[1]
     completed = subprocess.run(
-        [sys.executable, "-m", "mypy", "--ignore-missing-imports", "src/mcmc4qec"],
+        [sys.executable, "-m", "mypy", "--strict", "src/mcmc4qec"],
         cwd=root, capture_output=True, text=True, timeout=50, check=False,
     )
     assert completed.returncode == 0, completed.stdout + completed.stderr
@@ -110,7 +110,7 @@ def test_mypy_consumer_contract(tmp_path):
         "evaluate_convergence((run, run), other_initialization=(run, run))\n",
         encoding="utf-8",
     )
-    command = [sys.executable, "-m", "mypy", "--ignore-missing-imports"]
+    command = [sys.executable, "-m", "mypy", "--strict"]
     completed = subprocess.run(command + [str(valid)], cwd=root, env=env,
                                capture_output=True, text=True, timeout=50, check=False)
     assert completed.returncode == 0, completed.stdout + completed.stderr

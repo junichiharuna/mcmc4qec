@@ -10,18 +10,18 @@ from .adapters import DecoderAdapter, PyMatchingAdapter, matching_from_check_mat
 from .core import CSSCode, gf2_rank
 
 
-def _code(code):
+def _code(code: CSSCode) -> CSSCode:
     if not isinstance(code, CSSCode):
         raise TypeError("code must be a CSSCode")
     return code
 
 
-def _mwpm(checks, logical_map, identifier):
+def _mwpm(checks: np.ndarray, logical_map: np.ndarray, identifier: str) -> PyMatchingAdapter:
     return matching_from_check_matrix(checks, logical_map=logical_map,
                                       identifier=identifier)
 
 
-def _error_sector(errors):
+def _error_sector(errors: str) -> str:
     if not isinstance(errors, str) or errors not in ("X", "Z"):
         raise ValueError("errors must be 'X' or 'Z'")
     return errors
@@ -64,7 +64,7 @@ _BPOSD_DEFAULTS = dict(max_iter=100, bp_method="min_sum",
                        osd_method="osd_cs", osd_order=10)
 
 
-def _bposd(checks, logical_map, p, identifier, kw):
+def _bposd(checks: np.ndarray, logical_map: np.ndarray, p: float, identifier: str, kw: dict[str, Any]) -> DecoderAdapter:
     if "error_rate" in kw:
         raise ValueError("error_rate is supplied by p")
     if isinstance(p, (bool, np.bool_)) or not isinstance(p, Real) or not np.isfinite(p) or not 0 <= p <= 1:

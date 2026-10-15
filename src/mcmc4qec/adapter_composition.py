@@ -13,7 +13,7 @@ def _binary(value: ArrayLike, ndim: int, name: str) -> np.ndarray:
     return binary(value, ndim=ndim, name=name)
 
 
-def _decoder(decoder):
+def _decoder(decoder: Decoder) -> None:
     if not callable(getattr(decoder, "predict", None)) or not callable(getattr(decoder, "metadata", None)):
         raise TypeError("decoder must provide predict and metadata methods")
     metadata = json_value(decoder.metadata())
@@ -21,7 +21,7 @@ def _decoder(decoder):
         raise ValueError("decoder.metadata must return a JSON dictionary")
 
 
-def _identifier(identifier):
+def _identifier(identifier: str) -> str:
     if not isinstance(identifier, str) or not identifier.strip():
         raise ValueError("identifier must be a nonempty string")
     return identifier

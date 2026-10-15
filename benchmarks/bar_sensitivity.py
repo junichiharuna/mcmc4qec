@@ -226,6 +226,10 @@ def run(args):
             block_over_max_iat=(bar.metadata["config"]["bootstrap_block_length"] /
                                 max(taus)) if taus else "",
             max_chain_iat=max(taus) if taus else "",
+            target_rhat=(bar.diagnostics[-1]["rhat"]
+                         if bar.diagnostics[-1]["rhat"] is not None else ""),
+            target_ess=(bar.diagnostics[-1]["ess"]
+                        if bar.diagnostics[-1]["ess"] is not None else ""),
             pilot_iat=pilot_tau if pilot_tau is not None else "",
             anchor_kind=anchor.kind, anchor_estimate=anchor.estimate,
             bar_estimate=bar.estimate,

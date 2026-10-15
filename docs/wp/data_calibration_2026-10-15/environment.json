@@ -1,0 +1,14 @@
+{
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "executable": "A:\\dev\\mcmc4qec\\.venv-dev5-source\\Scripts\\python.exe",
+  "platform": "Windows-10-10.0.22631-SP0",
+  "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+  "head": "35ed7f38ecae9de0a728730034f5602a2cca7e1f",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "pymatching": "2.4.0"
+  },
+  "plan_sha256": "5202cfabc4829d4c630e80d58a19f15d57f18fd454649955f9177246f91d183c",
+  "benchmark_sha256": "c95023f020ca539a978c091435eb54cfd86c84e0afdb41fa30d3d155c4841a22"
+}

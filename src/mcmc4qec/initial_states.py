@@ -1,6 +1,7 @@
 """Exact logical-coset representatives for conditional MCMC initialization."""
 from __future__ import annotations
-from typing import Any
+from typing import Any, cast
+from collections.abc import Sized
 import itertools
 
 import numpy as np
@@ -9,13 +10,13 @@ from numpy.typing import ArrayLike
 from .core import CSSCode, binary, gf2_rank
 
 
-def _rows(stabilizers, n):
+def _rows(stabilizers: ArrayLike | None, n: int) -> np.ndarray:
     if np.asarray(stabilizers).size == 0:
         return np.zeros((0, n), dtype=np.uint8)
-    return binary(stabilizers, ndim=2, shape=(len(stabilizers), n), name="stabilizers")
+    return binary(stabilizers, ndim=2, shape=(len(cast(Sized, stabilizers)), n), name="stabilizers")
 
 
-def _independent_rows(rows):
+def _independent_rows(rows: np.ndarray) -> np.ndarray:
     basis = np.zeros((0, rows.shape[1]), dtype=np.uint8)
     rank = 0
     for row in rows:
@@ -68,7 +69,7 @@ def minimum_weight_coset_representative(logical: ArrayLike, stabilizers: ArrayLi
                   options={"time_limit": float(time_limit), "mip_rel_gap": 0.0})
     if answer.status != 0 or answer.x is None:
         raise RuntimeError("minimum-weight coset optimization did not prove optimality")
-    representative = np.rint(answer.x[:n]).astype(np.uint8)
+    representative: np.ndarray = np.rint(answer.x[:n]).astype(np.uint8)
     coefficients = np.rint(answer.x[n:n + rank]).astype(np.uint8)
     if not np.array_equal(representative, logical ^ (coefficients @ rows % 2)):
         raise RuntimeError("minimum-weight coset optimization returned an invalid state")
@@ -82,7 +83,7 @@ def minimum_weight_coset_representative(logical: ArrayLike, stabilizers: ArrayLi
     return representative
 
 
-def _basis(code, sector):
+def _basis(code: CSSCode, sector: str) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     if sector == "x":
         return code.lx, code.hx, code.lz, code.hz
     if sector == "z":
@@ -119,7 +120,7 @@ def minimum_weight_initial_state(code: CSSCode, *, sector: str="x", time_limit: 
     support and the caller's failure predicate are not evaluated here.
     """
     rows = logical_representatives(code, sector=sector, time_limit=time_limit)
-    return rows[int(np.argmin(rows.sum(axis=1)))].copy()
+    return cast(np.ndarray, rows[int(np.argmin(rows.sum(axis=1)))].copy())
 
 
 def maximum_weight_initial_state(code: CSSCode, *, sector: str="x", time_limit: float=30.0) -> np.ndarray:
@@ -133,10 +134,10 @@ def maximum_weight_initial_state(code: CSSCode, *, sector: str="x", time_limit: 
     is not guaranteed faulty for an arbitrary decoder or predicate.
     """
     rows = logical_representatives(code, sector=sector, time_limit=time_limit)
-    return rows[int(np.argmax(rows.sum(axis=1)))].copy()
+    return cast(np.ndarray, rows[int(np.argmax(rows.sum(axis=1)))].copy())
 
 
-def _solve_gf2(matrix, target):
+def _solve_gf2(matrix: np.ndarray, target: np.ndarray) -> np.ndarray:
     n = len(target)
     aug = np.hstack((matrix.astype(np.uint8).copy(), target[:, None])).astype(np.uint8)
     for col in range(n):

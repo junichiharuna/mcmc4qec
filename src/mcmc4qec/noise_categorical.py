@@ -7,7 +7,7 @@ from .core import categorical, identified, positive_integer
 from .models import PhenomenologicalModel
 
 
-def _probability(value, name):
+def _probability(value: object, name: str) -> float:
     if isinstance(value, (bool, np.bool_)) or not isinstance(value, (float, int, np.floating, np.integer)):
         raise ValueError(f"{name} must be a finite scalar probability")
     value = float(value)
@@ -16,14 +16,14 @@ def _probability(value, name):
     return value
 
 
-def _log_selected(state, probability, alphabet):
+def _log_selected(state: np.ndarray, probability: float, alphabet: int) -> float:
     selected = np.where(state == 0, 1 - probability, probability / (alphabet - 1))
     if np.any(selected == 0):
         return -np.inf
     return float(np.log(selected).sum())
 
 
-def _sample(n, probability, alphabet, rng):
+def _sample(n: int, probability: float, alphabet: int, rng: np.random.Generator) -> np.ndarray:
     if alphabet == 2:
         return (rng.random(n) < probability).astype(np.uint8)
     return rng.choice(alphabet, size=n, p=[1 - probability] + [probability / (alphabet - 1)] * (alphabet - 1)).astype(np.uint8)
@@ -77,7 +77,7 @@ class PhenomenologicalNoise:
         self.n = model.n
         self.alphabets = model.alphabets
 
-    def _parameters(self, p):
+    def _parameters(self, p: object) -> tuple[float, float]:
         if not isinstance(p, dict) or set(p) != {"data", "measurement"}:
             raise ValueError("p must specify exactly 'data' and 'measurement'")
         return _probability(p["data"], "data"), _probability(p["measurement"], "measurement")

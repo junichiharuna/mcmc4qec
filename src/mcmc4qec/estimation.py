@@ -20,8 +20,8 @@ class OverlapError(ValueError):
     """Raised when adjacent samples lack observed bidirectional BAR overlap."""
 
 
-def _sigmoid(x):
-    return np.exp(-np.logaddexp(0.0, -np.asarray(x)))
+def _sigmoid(x: np.ndarray) -> np.ndarray:
+    return cast(np.ndarray, np.exp(-np.logaddexp(0.0, -np.asarray(x))))
 
 
 def bennett_log_ratio(log_b_minus_a_at_a: Any, log_b_minus_a_at_b: Any) -> float:
@@ -48,7 +48,7 @@ def bennett_log_ratio(log_b_minus_a_at_a: Any, log_b_minus_a_at_b: Any) -> float
         raise OverlapError("no bidirectional observed support overlap for BAR")
     offset = math.log(len(b) / len(a))
 
-    def score(r):
+    def score(r: float) -> float:
         return float(_sigmoid(a-r+offset).sum() - _sigmoid(-b+r-offset).sum())
 
     low = min(float(fa.min()), float(fb.min())) + offset - 50
@@ -113,7 +113,7 @@ class EstimationResult:
         return cls(**data)
 
 
-def _coordinate(p):
+def _coordinate(p: float | dict[str, Any]) -> float | dict[str, Any]:
     p = json_value(p)
     if isinstance(p, bool) or not isinstance(p, (int, float, dict)):
         raise ValueError("each ladder coordinate must be a scalar or explicit parameter dict")
@@ -122,7 +122,7 @@ def _coordinate(p):
     return p
 
 
-def _anchor_variance(anchor, problem, p):
+def _anchor_variance(anchor: Result, problem: Problem[Any], p: float | dict[str, Any]) -> float:
     if not isinstance(anchor, Result) or anchor.kind not in ("exact", "direct_mc"):
         raise ValueError("anchor must be an exact or fixed-trial direct_mc Result")
     _anchor_log(anchor)
@@ -133,16 +133,17 @@ def _anchor_variance(anchor, problem, p):
             raise ValueError(f"anchor {key} metadata differs from the first rung")
     if anchor.kind == "exact":
         return 0.0
+    estimate = cast(float, anchor.estimate)  # Validated by _anchor_log above.
     n = positive_integer(anchor.trials, "anchor.trials")
     k = positive_integer(anchor.failures, "anchor.failures")
-    if k > n or not math.isclose(k/n, anchor.estimate, rel_tol=1e-12):
+    if k > n or not math.isclose(k/n, estimate, rel_tol=1e-12):
         raise ValueError("anchor count and point estimate are inconsistent")
     if k == n:
         raise ValueError("all-failure MC anchor has no reliable delta-method uncertainty; use exact or more trials")
-    return (1-anchor.estimate)/(n*anchor.estimate)
+    return (1-estimate)/(n*estimate)
 
 
-def _anchor_log(anchor):
+def _anchor_log(anchor: Result) -> float:
     # An exact positive mass may be below the floating-point rate range.
     log_estimate = getattr(anchor, "log_estimate", None)
     if anchor.kind == "exact" and log_estimate is not None:
@@ -154,7 +155,7 @@ def _anchor_log(anchor):
     return math.log(anchor.estimate)
 
 
-def _block_indices(shape, length, rng):
+def _block_indices(shape: tuple[int, ...], length: int, rng: np.random.Generator) -> np.ndarray:
     chains, samples = shape
     # Each chain is resampled independently. Blocks may wrap within that chain.
     starts = rng.integers(samples, size=(chains, math.ceil(samples/length)))
@@ -162,7 +163,7 @@ def _block_indices(shape, length, rng):
     return indices.reshape(chains, -1)[:, :samples]
 
 
-def _cross_chain_covariance(edges):
+def _cross_chain_covariance(edges: list[tuple[np.ndarray, np.ndarray]]) -> np.ndarray:
     """Covariance of paired BAR edge estimates from independent chain labels.
 
     Pairing edge estimates by chain label retains covariance through a shared
@@ -173,10 +174,10 @@ def _cross_chain_covariance(edges):
         raise ValueError("cross-chain uncertainty requires at least two chains")
     draws = np.asarray([[bennett_log_ratio(a[j], b[j]) for a, b in edges]
                         for j in range(chains)])
-    return np.atleast_2d(np.cov(draws, rowvar=False, ddof=1)) / chains
+    return cast(np.ndarray, np.atleast_2d(np.cov(draws, rowvar=False, ddof=1)) / chains)
 
 
-def estimate_logical_error(problem: Problem, ladder: list[float | dict[str, Any]], *, anchor: Result, config: SamplingConfig | None=None, seed: int | None=None,
+def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str, Any]], *, anchor: Result, config: SamplingConfig | None=None, seed: int | None=None,
                            initial_states: list[np.ndarray | None] | None=None, mode: str="fixed_failure", decoder_factory: Callable[[Any], Decoder] | None=None,
                            decoder_priors: list[Any] | None=None, approximation_reason: str | None=None,
                            bootstrap_replicates: int=100, bootstrap_block_length: int | None=None,

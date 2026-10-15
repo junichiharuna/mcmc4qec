@@ -1,6 +1,7 @@
 """Reversible finite-category proposals using the complete noise density."""
 from __future__ import annotations
 from typing import Any
+from collections.abc import Iterator
 from dataclasses import dataclass
 from math import comb, log
 import numpy as np
@@ -14,7 +15,7 @@ class Proposal:
     log_reverse_forward: float = 0.0
 
 
-def _alphabets(problem):
+def _alphabets(problem: Problem[Any]) -> tuple[int, ...]:
     sizes = tuple(getattr(problem.model, "alphabets", (2,) * problem.model.n))
     if len(sizes) != problem.model.n:
         raise ValueError("model.alphabets must have one entry per coordinate")
@@ -24,7 +25,7 @@ def _alphabets(problem):
     return sizes
 
 
-def _neighbors(state, alphabets):
+def _neighbors(state: np.ndarray, alphabets: tuple[int, ...]) -> Iterator[np.ndarray]:
     for i, size in enumerate(alphabets):
         for label in range(size):
             if label != state[i]:
@@ -33,7 +34,7 @@ def _neighbors(state, alphabets):
                 yield candidate
 
 
-def _neighbor_at(state, alphabets, index):
+def _neighbor_at(state: np.ndarray, alphabets: tuple[int, ...], index: int | np.integer[Any]) -> np.ndarray:
     """Map a flat neighbor index to one replacement without storing neighbors."""
     for i, size in enumerate(alphabets):
         if index < size - 1:
@@ -48,13 +49,13 @@ class OBF:
     """Uniform single-coordinate category replacement; binary OBF is unchanged."""
     name = "single"
 
-    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
+    def propose(self, state: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         alphabets = _alphabets(problem)
         index = rng.integers(sum(size-1 for size in alphabets))
         return Proposal(_neighbor_at(state, alphabets, index))
 
-    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         degree = sum(size - 1 for size in _alphabets(problem))
         return 1 / degree if np.count_nonzero(state != candidate) == 1 else 0.0
@@ -71,7 +72,7 @@ class Zanella:
     def __init__(self, *, use_fastpath: bool=True) -> None:
         self.use_fastpath = bool(use_fastpath)
 
-    def _distribution(self, state, problem, p):
+    def _distribution(self, state: np.ndarray, problem: Problem[Any], p: Any) -> np.ndarray | None:
         if self.use_fastpath:
             local = product_neighbor_distribution(state, problem, p)
             if local is not None:
@@ -81,14 +82,15 @@ class Zanella:
         alphabets = _alphabets(problem)
         logs = np.fromiter((.5 * problem.log_prob(neighbor, p)
                             for neighbor in _neighbors(state, alphabets)),
-                           dtype=float, count=sum(size-1 for size in alphabets))
+                           dtype=np.float64, count=sum(size-1 for size in alphabets))
         maximum = logs.max()
         if maximum == -np.inf:
             return None
         weights = np.exp(logs - maximum)
-        return weights / weights.sum()
+        normalized: np.ndarray = weights / weights.sum()
+        return normalized
 
-    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
+    def propose(self, state: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         q = self._distribution(state, problem, p)
         if q is None:
@@ -98,7 +100,7 @@ class Zanella:
         qr = self.probability(candidate, state, problem, p)
         return Proposal(candidate, -np.inf if qr == 0 else float(log(qr) - log(q[i])))
 
-    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         q = self._distribution(state, problem, p)
         if q is None:
@@ -130,11 +132,11 @@ class ClusterExchange:
     def __init__(self, k: int=2) -> None:
         self.k = positive_integer(k, "cluster_k")
 
-    def _groups(self, problem):
+    def _groups(self, problem: Problem[Any]) -> list[tuple[int, np.ndarray]]:
         alphabets = np.array(_alphabets(problem))
         return [(int(size), np.flatnonzero(alphabets == size)) for size in np.unique(alphabets)]
 
-    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
+    def propose(self, state: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         groups = self._groups(problem)
         size, positions = groups[rng.integers(len(groups))]
@@ -156,7 +158,7 @@ class ClusterExchange:
             candidate[selected] = rng.integers(1, size, size=self.k)
         return Proposal(candidate)
 
-    def _group_probability(self, state, candidate, size):
+    def _group_probability(self, state: np.ndarray, candidate: np.ndarray, size: int) -> float:
         occupied, empty = state != 0, state == 0
         w, z = int(occupied.sum()), int(empty.sum())
         identical = np.array_equal(state, candidate)
@@ -183,7 +185,7 @@ class ClusterExchange:
                     comb(w, self.k) * (size-1)**self.k)
         return .5 * (relocation + relabeling)
 
-    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         groups = self._groups(problem)
         probability = 0.0
@@ -203,7 +205,7 @@ class StabilizerFlip:
     """
     name = "stabilizer"
 
-    def _rows(self, problem):
+    def _rows(self, problem: Problem[Any]) -> np.ndarray:
         if any(size not in (2, 4) for size in _alphabets(problem)):
             raise ValueError("stabilizer XOR requires binary or Pauli alphabets")
         rows = getattr(problem.model, "stabilizers", None)
@@ -211,12 +213,12 @@ class StabilizerFlip:
             raise ValueError("stabilizer kernel requires static model stabilizers")
         return np.array([problem.state(row) for row in rows])
 
-    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
+    def propose(self, state: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         rows = self._rows(problem)
         return Proposal(state ^ rows[rng.integers(len(rows))])
 
-    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         rows = self._rows(problem)
         return float(np.mean(np.all(rows == (state ^ candidate), axis=1)))

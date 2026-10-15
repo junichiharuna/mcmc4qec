@@ -1,0 +1,49 @@
+{
+  "source": {
+    "tests": 394,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 394,
+    "junit_seconds": 187.821,
+    "pytest_summary": "394 passed, 1 warning in 188.05s (0:03:08)",
+    "max_file_seconds": 22.238,
+    "max_file": "tests.test_circuit_kernels"
+  },
+  "core": {
+    "tests": 347,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 76,
+    "passed": 271,
+    "junit_seconds": 78.82,
+    "pytest_summary": "271 passed, 76 skipped in 78.84s (0:01:18)",
+    "max_file_seconds": 13.043999999999999,
+    "max_file": "tests.test_independent"
+  },
+  "optional": {
+    "tests": 394,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 5,
+    "passed": 389,
+    "junit_seconds": 206.96,
+    "pytest_summary": "389 passed, 5 skipped, 1 warning in 206.97s (0:03:26)",
+    "max_file_seconds": 22.28000000000001,
+    "max_file": "tests.test_examples_workflows"
+  },
+  "package_sha256": "935562e9be1c530a8a53c88db4b1f5b0be04577069d0d6e67428b9ee95d9a6fa",
+  "wheel_sha256": "9bdd9134609b0dffe1f4670013e884ff511b1d2b833e41a83e3c7e8a416b8cb8",
+  "kernel_defaults": {
+    "single": 0.0,
+    "zanella": 0.7,
+    "cluster": 0.3,
+    "stabilizer": 0.0,
+    "cluster_k": 2,
+    "lazy": 0.05,
+    "zanella_fastpath": true,
+    "circuit_single": 0.0,
+    "circuit_groups": null
+  },
+  "remote_ci": "not run; no commit or push requested"
+}

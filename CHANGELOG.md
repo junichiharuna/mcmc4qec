@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Reduce per-step overhead while preserving seeded trajectories; defer reverse
+  Zanella normalization for candidates outside the failure set.
+- Add physical-circuit effect delta updates and opt-in cluster exchange with
+  explicit compatible location groups; retain public sampling defaults.
+- Enable strict mypy checking for package helpers and consumer contracts, with
+  optional backend exceptions scoped to their namespaces.
+- Add a fixed-seed, one-factor block-length calibration with exact anchors and
+  recorded mixing diagnostics; finite experiments do not certify coverage.
+
 - Rename the package and repository from the provisional `rimc` to `mcmc4qec`
   (import name `mcmc4qec`). No API change.
 

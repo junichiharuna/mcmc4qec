@@ -403,3 +403,44 @@ def test_at_most_one_distribution_normalization_per_step():
                 current, current_log, syndrome, kernel,
                 np.random.default_rng(seed), {"accepted": 0, "moved": 0})
             assert len(calls) - before <= 1
+
+
+@pytest.mark.parametrize("distance", [3, 5, 7])
+@pytest.mark.parametrize("p", [.01, .22])
+def test_toric_larger_seeded_trajectories(distance, p):
+    pytest.importorskip("pymatching")
+    from mcmc4qec.codes import make_toric_code
+    from mcmc4qec.decoders import mwpm_decoder
+
+    code = make_toric_code(distance)
+    problem = Problem(code.bit_flip_model(), IndependentBitFlip(code.n),
+                      mwpm_decoder(code))
+    results = [sample_faulty(problem, p, initial_state=code.lx[0], seed=731,
+        config=SamplingConfig(samples=100, burn_in=5, chains=2,
+            kernels=KernelConfig(zanella=.7, cluster=.3, cluster_k=2,
+                                 lazy=.05, zanella_fastpath=enabled)))
+        for enabled in (False, True)]
+    assert np.array_equal(results[0].states, results[1].states)
+    assert results[0].acceptance == results[1].acceptance
+
+
+def test_supported_boundary_attempts_preserve_rng():
+    problem, _ = case("bit")
+    problem.noise = IndependentBitFlip(2, scales=[1, 0])
+    state = np.array([1, 0], dtype=np.uint8)
+    for p in (.2, 1):
+        for kernel in (OBF(), Zanella(use_fastpath=False), ClusterExchange(1)):
+            for seed in range(10):
+                stepper = make_faststep(problem, p)
+                stepper.start(state)
+                left, right = np.random.default_rng(seed), np.random.default_rng(seed)
+                lp = problem.log_prob(state, p)
+                syndrome = problem.model.syndrome(state)
+                stats = {"accepted": 0, "moved": 0}
+                actual = stepper.attempt(state, lp, syndrome, kernel, left, stats)
+                expected = reference_attempt(state, lp, syndrome, kernel, problem, p, right)
+                assert np.array_equal(actual[0], expected[0])
+                assert actual[1] == expected[1]
+                assert np.array_equal(actual[2], expected[2])
+                assert stats == expected[3]
+                assert left.bit_generator.state == right.bit_generator.state

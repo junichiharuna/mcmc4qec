@@ -79,21 +79,21 @@ MC anchor には 1 回以上の失敗観測が必要です。
 
 ## 性能
 
-専用stepは、組み込みの線形モデルと積ノイズの実型の組み合わせで、標準の論理failureを使う場合に適用されます。
+専用stepは、組み込みの線形モデルまたは物理回路モデルと対応する積ノイズの実型の組み合わせで、標準の論理failureを使う場合に適用されます。
 独自派生型やfailure predicateでは汎用経路を使います。
 
-2026-10-01にWindows 11 Pro、Python 3.11.9、AMD Ryzen 5 3600で、p=0.01、10000 step、Z/H=0.7/0.3、`cluster_k=2`、1 chain、`lazy=0`を2回測定しました。
+2026-10-15にWindows 11 Pro、Python 3.11.9、AMD Ryzen 5 3600で、p=0.01、10000 step、Z/H=0.7/0.3、`cluster_k=2`、1 chain、`lazy=0`を2回測定しました。
 
 | 符号 | ライブラリ step/s | 研究runner step/s | ライブラリ/研究の時間比 |
 | --- | ---: | ---: | ---: |
-| Toric d=5 | 8,386–8,553 | 22,825–23,202 | 2.71–2.72倍 |
-| Toric d=7 | 7,322–7,605 | 19,149–19,629 | 2.58–2.62倍 |
-| BB72 | 4,826–4,932 | 7,742–7,962 | 1.57–1.65倍 |
+| Toric d=5 | 12,026–12,281 | 23,000–23,028 | 1.87–1.91倍 |
+| Toric d=7 | 10,381–10,477 | 20,147–20,162 | 1.92–1.94倍 |
+| BB72 | 6,113–6,157 | 7,914–8,186 | 1.29–1.33倍 |
 
-この参照実装は、今回の処理では研究runnerより時間がかかります。
+今回のtoricの固定条件では、両反復とも研究runnerの所要時間の2倍以内という目標を満たしました。
 ライブラリ側は結果と診断の作成を含み、両者ともdecoder構築時間を除きます。
 2回ともseed 731を使い、時間のばらつきを測ったもので、独立標本による精度評価ではありません。
-decoderの設定と残る処理時間の内訳は[性能記録](docs/performance_ja.md)を参照してください。
+変更前後の比較、decoderの設定、限界は[性能記録](docs/performance_ja.md)を参照してください。
 
 `python benchmarks/bench_step.py --steps 10000 --repeats 2 --seed 731`で実行できます。
 比較する場合は`RIMC_RESEARCH_ROOT`（または`MCMC4QEC_RESEARCH`）に読み取り専用の研究checkoutを設定し、どちらも設定しなければライブラリ側だけを測ります。
@@ -120,7 +120,7 @@ decoderの設定と残る処理時間の内訳は[性能記録](docs/performance
 | 静的 CSS depolarising | 結合した I/X/Y/Z ラベルで対応 | 任意 | 完全な論理予測が必要で、sector 合成はデコーダー側の選択 |
 | データと測定の phenomenological fault | 対応 | 非対応 | 選択した syndrome history または difference 表現を受け取るデコーダー |
 | Stim detector error model | 潜在 mechanism bit 上で対応 | 非対応 | graphlike DEM に対する matching、または自作デコーダー |
-| 物理 Stim 回路 location | OBF・Z・物理単一 fault カーネルに対応、H は非対応 | 非対応 | PyMatching を用いる中点 surface logical-idle baseline |
+| 物理 Stim 回路 location | OBF・Z・物理単一 fault、明示 location 群の H に対応 | 非対応 | PyMatching を用いる中点 surface logical-idle baseline |
 
 `exact` は小さいカテゴリ状態空間を列挙し、`direct_mc` は試行数を固定した MC を実行します。
 `sample_faulty` は失敗条件付き分布をサンプリングし、`estimate_logical_error` は anchor と隣接 rung の BAR 比を使います。
@@ -134,7 +134,10 @@ decoderの設定と残る処理時間の内訳は[性能記録](docs/performance
 
 物理回路 baseline は対応する Stim noise location の排他的な fault label をサンプリングします。
 物理単一 fault には `KernelConfig(circuit_single=1, single=0, zanella=0, cluster=0, stabilizer=0)`、Z+OBF には `KernelConfig(zanella=0.7, single=0.3, cluster=0, stabilizer=0)` を選びます。
-この3種の混合に対応し、H と stabilizer は非対応のため、既定の Z+H カーネルは使えません。
+H を混合する場合は、channel と fault label の順序が一致する location index の互いに素な群を `circuit_groups` で明示します。
+H 単独は群ごとの占有数を保存するため一般に既約ではなく、回路 stabilizer は引き続き非対応です。
+既定の Z+H 設定も回路では群の指定が必要です。
+組み込み回路モデルと標準 failure では効果の差分更新を使い、独自 failure は一般評価を維持します。
 surface logical-idle 例は 2d 回の noisy round の最初の d 回の後の中点 observable を評価します。
 DEM はデコーダー構築に使い、サンプリングは物理 location 上で行います。
 詳しくは [物理回路 baseline](examples/circuit_baseline.py) と [カーネルの比較](examples/circuit_zanella.py) を参照してください。

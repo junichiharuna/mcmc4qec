@@ -2,15 +2,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Callable, Generic, Protocol, TypeVar
+from typing import Any, Callable, Generic, Protocol, TypeVar, cast
 import hashlib
 import json
 
 import numpy as np
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 
 
-def binary(value: Any, *, ndim: int | None=None, shape: tuple[int, ...] | None=None, name: str="array") -> np.ndarray:
+def binary(value: Any, *, ndim: int | None=None, shape: tuple[int, ...] | None=None, name: str="array") -> NDArray[np.uint8]:
     if hasattr(value, "toarray"):
         value = value.toarray()
     a = np.asarray(value)
@@ -31,7 +31,7 @@ def positive_integer(value: Any, name: str, *, zero: bool=False) -> int:
     return int(value)
 
 
-def categorical(value: Any, alphabets: Any, *, name: str="state") -> np.ndarray:
+def categorical(value: Any, alphabets: Any, *, name: str="state") -> NDArray[np.uint8]:
     """Validate one finite categorical vector; zero is the identity category."""
     alphabets = np.asarray(alphabets)
     if (alphabets.ndim != 1 or alphabets.dtype.kind not in "iu" or
@@ -47,7 +47,7 @@ def categorical(value: Any, alphabets: Any, *, name: str="state") -> np.ndarray:
 
 def json_value(value: Any) -> Any:
     """Copy JSON-compatible metadata, rejecting opaque or nonfinite values."""
-    def encode(x):
+    def encode(x: object) -> Any:
         if isinstance(x, np.ndarray):
             return x.tolist()
         if isinstance(x, np.generic):
@@ -163,13 +163,13 @@ class BinaryLinearModel:
         for a in (self.H, self.L, self.stabilizers):
             a.flags.writeable = False
 
-    def validate_state(self, state: ArrayLike) -> np.ndarray:
+    def validate_state(self, state: ArrayLike) -> NDArray[np.uint8]:
         return binary(state, shape=(self.n,), name="state")
 
-    def syndrome(self, state: ArrayLike) -> np.ndarray:
+    def syndrome(self, state: ArrayLike) -> NDArray[np.uint8]:
         return self.H @ self.validate_state(state) % 2
 
-    def observables(self, state: ArrayLike) -> np.ndarray:
+    def observables(self, state: ArrayLike) -> NDArray[np.uint8]:
         return self.L @ self.validate_state(state) % 2
 
     def metadata(self) -> dict[str, Any]:
@@ -248,7 +248,7 @@ class CallableDecoder:
         self.identifier = identifier
         self.settings = json_value({} if settings is None else settings)
 
-    def predict(self, syndrome: ArrayLike) -> np.ndarray:
+    def predict(self, syndrome: ArrayLike) -> NDArray[np.uint8]:
         return binary(self.function(np.array(syndrome, copy=True)), ndim=1, name="prediction")
 
     def metadata(self) -> dict[str, Any]:
@@ -302,7 +302,7 @@ class Problem(Generic[ProblemParameter]):
 
     def __post_init__(self) -> None:
         positive_integer(self.model.n, "model.n")
-        self.alphabets = tuple(getattr(self.model, "alphabets", (2,) * self.model.n))
+        self.alphabets: tuple[int, ...] = tuple(getattr(self.model, "alphabets", (2,) * self.model.n))
         categorical(np.zeros(self.model.n, dtype=int), self.alphabets)
         if self.model.n != self.noise.n:
             raise ValueError("model and noise dimensions differ")
@@ -316,7 +316,7 @@ class Problem(Generic[ProblemParameter]):
         if self.failure is not None:
             json_value(self.failure.metadata())
 
-    def state(self, state: ArrayLike) -> np.ndarray:
+    def state(self, state: ArrayLike) -> NDArray[np.uint8]:
         state = categorical(state, self.alphabets)
         return categorical(self.model.validate_state(state), self.alphabets)
 
@@ -341,6 +341,6 @@ class Problem(Generic[ProblemParameter]):
         return bool(answer)
 
     def metadata(self) -> dict[str, Any]:
-        return json_value(dict(model=self.model.metadata(), noise=self.noise.metadata(),
+        return cast(dict[str, Any], json_value(dict(model=self.model.metadata(), noise=self.noise.metadata(),
             decoder=self.decoder.metadata(), failure=(self.failure.metadata() if self.failure
-                is not None else dict(identifier="logical-observable-mismatch-v1"))))
+                is not None else dict(identifier="logical-observable-mismatch-v1")))))

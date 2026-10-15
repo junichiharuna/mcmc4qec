@@ -36,7 +36,7 @@ class PhysicalFaultProposal:
 
     name = "physical_fault"
 
-    def propose(self, state: np.ndarray, problem: Problem, p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
+    def propose(self, state: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None, rng: np.random.Generator) -> Proposal:
         state = problem.state(state)
         index = int(rng.integers(problem.model.n))
         label = int(rng.integers(1, problem.alphabets[index]))
@@ -46,7 +46,7 @@ class PhysicalFaultProposal:
         q_reverse = self.probability(candidate, state, problem, p)
         return Proposal(candidate, math.log(q_reverse / q_forward))
 
-    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem, p: float | dict[str, Any] | None) -> float:
+    def probability(self, state: np.ndarray, candidate: np.ndarray, problem: Problem[Any], p: float | dict[str, Any] | None) -> float:
         state, candidate = problem.state(state), problem.state(candidate)
         different = np.flatnonzero(state != candidate)
         if len(different) != 1:

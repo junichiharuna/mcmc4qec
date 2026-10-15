@@ -67,17 +67,17 @@ The complete runnable ladder, including its three-bit `Problem`, is in [examples
 
 ## Performance
 
-The dedicated step path applies to exact built-in linear model/product-noise pairs with the standard logical failure predicate. Custom subclasses or failure predicates use the general path.
+The dedicated step path applies to exact built-in linear or physical-circuit model/product-noise pairs with the standard logical failure predicate. Custom subclasses or failure predicates use the general path.
 
-Two local runs on Windows 11 Pro, Python 3.11.9, and an AMD Ryzen 5 3600 measured the following rates at p=0.01, with 10,000 steps, Z/H weights 0.7/0.3, `cluster_k=2`, one chain, and `lazy=0` (2026-10-01).
+Two local runs on Windows 11 Pro, Python 3.11.9, and an AMD Ryzen 5 3600 measured the following rates at p=0.01, with 10,000 steps, Z/H weights 0.7/0.3, `cluster_k=2`, one chain, and `lazy=0` (2026-10-15).
 
 | Code | Library steps/s | Research runner steps/s | Library/research time |
 | --- | ---: | ---: | ---: |
-| Toric d=5 | 8,386–8,553 | 22,825–23,202 | 2.71–2.72× |
-| Toric d=7 | 7,322–7,605 | 19,149–19,629 | 2.58–2.62× |
-| BB72 | 4,826–4,932 | 7,742–7,962 | 1.57–1.65× |
+| Toric d=5 | 12,026–12,281 | 23,000–23,028 | 1.87–1.91× |
+| Toric d=7 | 10,381–10,477 | 20,147–20,162 | 1.92–1.94× |
+| BB72 | 6,113–6,157 | 7,914–8,186 | 1.29–1.33× |
 
-This reference implementation remains slower than the research runner on this workload. Library timings include result construction and diagnostics; both timings exclude decoder construction. The two runs share seed 731 and measure timing variation, not independent sampling accuracy. See the [measurement record](docs/performance_ja.md) for decoder settings and remaining costs.
+The measured toric workloads meet the target of at most twice the research runner's time in both repetitions. Library timings include result construction and diagnostics; both timings exclude decoder construction. The two runs share seed 731 and measure timing variation, not independent sampling accuracy. See the [measurement record](docs/performance_ja.md) for the before/after comparison, decoder settings, and limitations.
 
 Run `python benchmarks/bench_step.py --steps 10000 --repeats 2 --seed 731`. Set `RIMC_RESEARCH_ROOT` (or `MCMC4QEC_RESEARCH`) to a read-only research checkout for comparison; without either variable, the script measures the library only. It needs the `codes` and `matching` extras, supports `--quick` and `--out`, and writes CSV to a temporary directory by default. Rates vary with hardware and load and do not establish mixing or estimation accuracy.
 
@@ -99,13 +99,13 @@ For a guided first run, open [the quickstart notebook](notebooks/01_quickstart.i
 | Static CSS depolarising | Supported with joint I/X/Y/Z labels | Optional | Full logical prediction; sector composition is a decoder choice |
 | Phenomenological data and measurement faults | Supported | Unavailable | Decoder must consume the selected syndrome history or difference representation |
 | Stim detector error model | Supported on latent mechanism bits | Unavailable | Matching from a graphlike DEM, or a user decoder |
-| Physical Stim circuit locations | OBF, Z, and physical single-fault moves; H unavailable | Unavailable | Midpoint surface logical-idle baseline with PyMatching |
+| Physical Stim circuit locations | OBF, Z, physical single-fault moves, and H with explicit location groups | Unavailable | Midpoint surface logical-idle baseline with PyMatching |
 
 `exact` enumerates small categorical state spaces; `direct_mc` uses a fixed trial count; `sample_faulty` samples normalized noise conditioned on failure; `estimate_logical_error` uses adjacent BAR ratios and an anchor.
 
 Code factories include toric and surface codes, asymmetric toric, Hamming HGP, BB72/108/144, Steane, and concatenated Steane; the current toric, surface, asymmetric toric, Hamming HGP, and BB factories need `".[codes]"`. Decoder constructors cover MWPM and BP-OSD for bit-flip and phase-flip (`errors="Z"`), plus explicit sector decoding for depolarising noise. `SamplingConfig(cache_cap=..., cache_policy=...)` bounds deterministic decode caching, and `KernelConfig(zanella_fastpath=True)` uses the verified product-noise path when available. Diagnostics now include multiple-chain summaries, exact CSS coset initialization helpers, and a four-check `evaluate_convergence` screen that requires an independent direct-MC conditional variance for a complete verdict. These checks cannot prove mixing or correctness.
 
-The physical circuit baseline samples mutually exclusive fault labels at supported Stim noise locations. Choose physical single-fault moves with `KernelConfig(circuit_single=1, single=0, zanella=0, cluster=0, stabilizer=0)`, or Z+OBF with `KernelConfig(zanella=0.7, single=0.3, cluster=0, stabilizer=0)`. Mixtures of these three moves are supported; H and stabilizer moves remain unavailable, so the default Z+H setting is unsupported. The surface logical-idle example evaluates a midpoint observable after the first d of 2d noisy rounds; its DEM is used for decoder construction, while sampling stays on physical locations. See the [physical baseline](examples/circuit_baseline.py) and [kernel comparison](examples/circuit_zanella.py).
+The physical circuit baseline samples mutually exclusive fault labels at supported Stim noise locations. Choose physical single-fault moves with `KernelConfig(circuit_single=1, single=0, zanella=0, cluster=0, stabilizer=0)`, or Z+OBF with `KernelConfig(zanella=0.7, single=0.3, cluster=0, stabilizer=0)`. H additionally requires explicit `circuit_groups`: disjoint groups of location indices with matching channels and ordered fault alphabets. H preserves each group's occupancy and is generally reducible on its own. Circuit stabilizer moves remain unavailable, and the default Z+H setting requires groups before use. Built-in circuit models with the standard failure predicate use cached effect differences; custom predicates retain general evaluation. The surface logical-idle example evaluates a midpoint observable after the first d of 2d noisy rounds; its DEM is used for decoder construction, while sampling stays on physical locations. See the [physical baseline](examples/circuit_baseline.py), [kernel comparison](examples/circuit_zanella.py), and [group contract](docs/tutorial_en.md#physical-circuit-faults).
 
 Diagnostics such as ESS and split R-hat do not prove convergence, ergodicity, or correctness. A chain can remain trapped even when its weight trace looks healthy. The `p_dependent_decoder_approx` BAR mode explicitly ignores changes in failure sets and its interval omits that bias. Model support and initialization limits, observed overlap, finite samples, and block length also limit estimates. DEM sampling does not establish equivalence to every physical circuit noise model. The circuit baseline does not establish reproduction of published figures.
 

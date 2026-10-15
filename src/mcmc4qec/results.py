@@ -1,6 +1,6 @@
 """Named results with strict, portable JSON and explicit provenance."""
 from __future__ import annotations
-from typing import Any
+from typing import Any, cast
 from dataclasses import asdict, dataclass, field
 import json
 import platform
@@ -78,14 +78,14 @@ class Result:
         return cls(**data)
 
 
-def metadata(problem: Problem, p: Any, config: Any, seed_sequence: Any=None, children: Any=()) -> dict[str, Any]:
+def metadata(problem: Problem[Any], p: Any, config: Any, seed_sequence: Any=None, children: Any=()) -> dict[str, Any]:
     fingerprint = hashlib.sha256()
     package_root = Path(__file__).parent
     for source in sorted(package_root.rglob("*.py")):
         fingerprint.update(source.relative_to(package_root).as_posix().encode())
         fingerprint.update(b"\0")
         fingerprint.update(source.read_bytes())
-    return json_value({**problem.metadata(), "sampling_p": p, "config": config,
+    return cast(dict[str, Any], json_value({**problem.metadata(), "sampling_p": p, "config": config,
         "state_space": {"alphabets": problem.alphabets, "identity_category": 0},
         "library_version": VERSION, "python_version": platform.python_version(),
         "numpy_version": np.__version__, "source_commit": None,
@@ -98,4 +98,4 @@ def metadata(problem: Problem, p: Any, config: Any, seed_sequence: Any=None, chi
             spawn_key=seed_sequence.spawn_key,
             child_spawn_keys=[c.spawn_key for c in children]),
         "assumptions": ["normalized noise on a fixed finite categorical state space",
-                        "deterministic decoder and failure predicate"]})
+                        "deterministic decoder and failure predicate"]}))

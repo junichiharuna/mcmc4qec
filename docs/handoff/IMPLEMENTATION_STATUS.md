@@ -196,3 +196,24 @@ wheel jobでのmypy不在による2skipは専用typing jobで検査し、研究c
 削除対象の解決済み絶対パスが `A:/dev/mcmc4qec-wt/` 配下であることを検査し、P/Qのworktreeとbranchを削除した。
 研究repoは開始時HEAD `69efcfcc86af3bf24ca977a098dab0f348601aff` のままcleanで、handoffの承認済み前提本文はprefix一致、LICENSE・CITATION・公開sampling/kernel既定は `22a8e9c` 以後不変だった。
 最終報告は `docs/wp/final_report_dev5_ja.md` とし、名目被覆・収束・論文精度・toric速度2倍以内を達成したという主張と、要求された実装・計測・検証の完了を区別する。
+
+
+## 2026-10-15 残課題4項目の実装・軽量校正・統合検証
+
+ユーザーの指示でtoric高速化を優先し、Astraの分担3体と独立レビュー2体を用いて残課題へ対応した。
+開始HEADは35ed7f3であり、版番号0.1.0.dev5を維持した未コミット差分としてmainに統合した。
+混合CDFの事前構築、全密度総和を維持した重複走査削減、二値効果XOR、failure集合外Z候補の逆分布省略により、最終2反復の研究runner時間比はtoric d5で1.873–1.915、d7で1.925–1.941、BB72で1.295–1.330だった。
+固定p=0.01・10000step・seed731のtoric条件では2倍以内の目標を達成したが、一般性能・混合精度の保証にはしない。
+回路には既存効果tableの差分更新と、同channel・同順序fault alphabetの互いに素なlocation群を明示するHを追加し、非一様率・零support・共有failure・提案対称性・詳細釣合い・同seed/RNG・有限例の連結性とlazyを検証した。
+H単独は一般に可約で、回路stabilizerは未対応、実符号でのH混合改善は未検証のままである。
+非公開helperを含むmypy strictを有効にし、optional backend例外を限定し、新回路を含む26sourceとconsumer契約の検査を通した。
+toric d3・exact anchor・4chain/保存600でblock長8/32/128だけを変えた各20seedは被覆12/20・16/20・16/20で、全60行・事前計画・環境・exact cache・再集計を保存した。
+同seedの点推定と記録診断は一致し、block調整は混合を改善せず、名目95%被覆・一般符号・低pの校正は未達として公開既定を維持した。
+統合sourceは394 passed・188.05秒・skipなし、core wheelは271 passed/76 skipped・78.84秒、optional wheelは389 passed/5 skipped・206.97秒で、source/optionalのWindows notebookにzmq event-loop warningが各1件あった。
+両verify_wheelで26sourceファイルの一致、対応する実行例・文書コード、optionalの4quick notebookを確認した。
+研究checkoutのHEADは6c13ba0で、使用したrun_rimc_mixedはdev5参照時点から不変であり、比較前後のrunners.py hashも一致した。
+研究側のpaper/main.texとpaper/refereeには並行する別作業の変更があり、本作業は研究checkoutへ書き込んでいない。
+分担3worktreeは変更ファイル54個とdiffを退避してSHA確認後に削除し、mainの未コミット差分とoutput/dev6/worktree_snapshotsに成果を残した。
+handoff既存本文はbyte prefixを維持し、この節だけを追記した。
+LICENSE・CITATION・公開sampling既定は維持し、commit・push・remote CI・publishは実施していない。
+最終報告はdocs/wp/final_report_2026-10-15_ja.md、実行ログは同階層data_validation_2026-10-15、性能と校正の生データはdata_speed_2026-10-15とdata_calibration_2026-10-15にある。

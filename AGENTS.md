@@ -25,6 +25,16 @@ dev4領域の4chainではblock/crossの被覆が13/20・18/20、低pのexact anc
 BARと独立MCの区間が非交差となる例も記録しており、短い実行例を研究精度の保証として扱わない。
 所有者判断待ちの事項と次の依頼候補は `docs/wp/final_report_dev5_ja.md` 第6節、経緯は `docs/handoff/IMPLEMENTATION_STATUS.md` の追記にある。
 
+2026-10-15の追加開発は `35ed7f3` を基準とし、版番号0.1.0.dev5と公開既定を維持した未コミット差分である。
+toricの追加高速化後、固定条件の最終2反復は研究runner時間比d5で1.873–1.915、d7で1.925–1.941となり、今回の条件では2倍以内を達成した。
+回路は既存効果tableの差分更新と、互いに素で同channel・同fault alphabetのlocation群を `KernelConfig.circuit_groups` に明示するH提案を追加した。
+H単独は群ごとの占有数を保存して一般に可約であり、stabilizerは引き続き非対応である。
+新回路を含む26sourceでmypy strictを通し、CIと型テストもstrictへ変更した。
+toric d3・exact anchor・4chain/600保存のblock8/32/128一要因比較60行では被覆12/20・16/20・16/20となり、混合改善や名目95%被覆は保証せず既定を維持した。
+統合後sourceは394 passed・188.05秒・skipなし、file別最大22.238秒で、Windows notebookのzmq warningが1件あった。
+installed wheelはcore 271 passed/76 skipped・78.84秒、optional 389 passed/5 skipped・206.97秒で、両verify_wheelと全20例・4quick notebookの検証も成功した。
+詳細と検証状況は `docs/wp/final_report_2026-10-15_ja.md`、計画と独立レビュー・生データは同階層の2026-10-15文書にある。
+
 ## File layout
 
 - `src/mcmc4qec/` — パッケージ本体（import 名 `mcmc4qec`）。`core.py`（Model / Noise / Decoder / FailurePredicate の契約、`CSSCode`、`Problem`）、`noise.py`・`noise_categorical.py`（bit-flip、Pauli カテゴリ、phenomenological のノイズ）、`models.py`（depolarising と spacetime モデル）、`kernels.py`（OBF / Z / H / stabilizer、一般 MH）、`sampling.py`（`exact`、`direct_mc`、`sample_faulty`、config と seed 系列）、`estimation.py`（BAR、`estimate_logical_error`、block bootstrap）、`diagnostics.py`（IAT / ESS / split R-hat）、`results.py`（JSON 往復する Result と provenance）、`adapters.py`・`adapter_composition.py`（PyMatching / BP-OSD の wrapper、sector と履歴の合成）、`stim_dem.py`（DEM からのモデル構成）、`codes.py`（符号ファクトリ）、`decoders.py`（MWPM / BP-OSD / sector 復号の構築）、`fastpath.py`・`faststep.py`・`decode_cache.py`（product-noise の Zanella 分布、組み込み線形モデルの専用step、decode cache）、`convergence.py`（複数 chain 診断と `evaluate_convergence`）、`initial_states.py`（exact coset 初期化）、`circuit/`（物理回路 fault の `model.py`・`proposal.py`・`baselines.py`）

@@ -64,7 +64,7 @@ class CachedDecoder:
 class FailureEvaluator:
     """Evaluate the same failure predicate with exact single-site syndrome deltas."""
 
-    def __init__(self, problem: Problem) -> None:
+    def __init__(self, problem: Problem[Any]) -> None:
         self.problem = problem
 
     def syndrome(self, state: np.ndarray, *, previous: np.ndarray | None=None, previous_syndrome: ArrayLike | None=None) -> ArrayLike:

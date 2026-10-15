@@ -125,7 +125,7 @@ class ScriptedChoices(FixedChoices):
 
 def test_sampler_uses_selected_kernel_failure_gate_lazy_and_rejection(monkeypatch):
     problem = repetition_problem(1)
-    assert make_faststep(problem, .13) is None
+    assert make_faststep(problem, .13) is not None
     assert problem.is_faulty([0, 0, 1])
     assert problem.is_faulty([0, 0, 2])
     assert problem.is_faulty([0, 3, 2])

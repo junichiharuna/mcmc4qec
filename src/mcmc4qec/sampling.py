@@ -22,7 +22,7 @@ class InitializationError(RuntimeError):
 
 class _Kernel(Protocol):
     name: str
-    def propose(self, state: np.ndarray, problem: Problem, p: Any,
+    def propose(self, state: np.ndarray, problem: Problem[Any], p: Any,
                 rng: np.random.Generator) -> Any: ...
 
 
@@ -38,9 +38,9 @@ class KernelConfig:
     cluster_k counts occupied and empty coordinates exchanged by one H move.
     zanella_fastpath affects only exact built-in product noises. Invalid weights,
     cluster_k, or lazy probability raise ValueError. CircuitFaultModel permits
-    mixtures of single, zanella, and circuit_single. Cluster exchange has no
-    physical-location grouping contract and stabilizer XOR has no circuit
-    stabilizer representation, so both remain unsupported for circuit models.
+    mixtures of single, zanella, and circuit_single. Circuit cluster exchange
+    additionally requires explicit circuit_groups of compatible physical
+    location indices. Circuit stabilizer XOR remains unsupported.
     """
     single: float = 0.0
     zanella: float = 0.7
@@ -50,6 +50,7 @@ class KernelConfig:
     lazy: float = 0.05
     zanella_fastpath: bool = True
     circuit_single: float = 0.0
+    circuit_groups: tuple[tuple[int, ...], ...] | None = None
 
     def __post_init__(self) -> None:
         weights = [self.single, self.zanella, self.cluster, self.stabilizer, self.circuit_single]
@@ -148,7 +149,7 @@ def exact(problem: Problem[_P], p: _P, *, max_states: int=1_048_576) -> Result:
         conditional_weight=conditional, warnings=warnings)
 
 
-def _wilson(failures, n):
+def _wilson(failures: int, n: int) -> tuple[float, float]:
     z = 1.959963984540054
     rate = failures/n
     denominator = 1 + z*z/n
@@ -214,14 +215,21 @@ def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=
     kc = config.kernels
     from .circuit.model import CircuitFaultModel
     from .circuit.proposal import PhysicalFaultProposal
+    from .circuit.cluster import PhysicalClusterExchange
     is_circuit = isinstance(problem.model, CircuitFaultModel)
     if is_circuit:
-        if kc.cluster or kc.stabilizer:
-            raise ValueError("CircuitFaultModel does not support cluster or stabilizer kernels")
-    elif kc.circuit_single:
-        raise ValueError("circuit_single is only supported for CircuitFaultModel")
+        if kc.stabilizer:
+            raise ValueError("CircuitFaultModel does not support stabilizer kernels")
+        if kc.cluster and kc.circuit_groups is None:
+            raise ValueError("CircuitFaultModel cluster requires explicit circuit_groups")
+    elif kc.circuit_single or kc.circuit_groups is not None:
+        raise ValueError("circuit_single and circuit_groups require CircuitFaultModel")
     kernels: list[_Kernel] = [OBF(), Zanella(use_fastpath=kc.zanella_fastpath),
                ClusterExchange(kc.cluster_k), StabilizerFlip(), PhysicalFaultProposal()]
+    if kc.circuit_groups is not None:
+        physical_cluster = PhysicalClusterExchange(kc.circuit_groups, kc.cluster_k)
+        physical_cluster._groups(problem)
+        kernels[2] = physical_cluster
     cache = CachedDecoder(problem.decoder, cap=config.cache_cap,
                           policy=config.cache_policy)
     problem = replace(problem, decoder=cache)
@@ -229,6 +237,7 @@ def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=
     from .faststep import make_faststep
     faststep = make_faststep(problem, p, enabled=kc.zanella_fastpath)
     probabilities = np.array([kc.single, kc.zanella, kc.cluster, kc.stabilizer, kc.circuit_single])
+    cumulative_probabilities = np.cumsum(probabilities)
     if kc.stabilizer:
         cast(StabilizerFlip, kernels[3])._rows(problem)
         if faststep is not None:
@@ -281,7 +290,7 @@ def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=
                 acceptance["lazy"]["accepted"] += 1
             else:
                 # CDF selection uses caller probabilities without renormalizing.
-                chosen = int(np.searchsorted(np.cumsum(probabilities), rng.random(), side="right"))
+                chosen = int(cumulative_probabilities.searchsorted(rng.random(), side="right"))
                 chosen = min(chosen, len(kernels)-1)
                 kernel = kernels[chosen]
                 stats = acceptance[kernel.name]

@@ -20,7 +20,7 @@ jobs:
       - name: Check package and consumer typing
         timeout-minutes: 2
         run: |
-          python -m mypy src/mcmc4qec
+          python -m mypy --strict src/mcmc4qec
           python -m pytest tests/test_typing.py -q
 
   core-wheel:

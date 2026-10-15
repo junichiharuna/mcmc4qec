@@ -203,10 +203,10 @@ class CircuitFaultModel:
     def validate_state(self, state: np.ndarray) -> np.ndarray:
         return categorical(state, self.alphabets)
 
-    def _injected_circuit(self, state):
+    def _injected_circuit(self, state: np.ndarray) -> Any:
         import stim
 
-        selected = {}
+        selected: dict[int, list[tuple[FaultLocation, int]]] = {}
         for loc, label in zip(self.locations, state):
             if label:
                 selected.setdefault(loc.instruction_index, []).append((loc, int(label)))

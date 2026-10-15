@@ -115,3 +115,12 @@ Z 0.7 / OBF 0.3 の 300 標本、burn-in 100 の chain では `E[w|faulty]=9.440
 共通の supported faulty 初期状態は 6 試行、0.056 秒で得られ、その探索時間を表の step/s から除いた。
 各 kernel の `sample_faulty` 呼び出し時間には構成、provenance、診断を含むため、純粋な一ステップ計算量だけの比較ではない。
 受理率と step/s は異なる seed と短い chain の観測値であり、混合品質や論理誤り率の優劣を示さない。
+
+## 2026-10-15 の差分更新と明示群H
+
+組み込み回路model/noiseと標準failureに限り、既存の物理fault効果tableを使ったsyndrome/observableの差分更新を追加した。
+Hは `KernelConfig.circuit_groups` で同channel・同順序fault alphabetの互いに素なlocation群を明示した場合に使用できる。
+群は状態と無関係に選び、実行不能な枝は自己遷移とし、非一様率・零supportでも完全な密度とfailureを用いてMH判定する。
+H単独は群ごとの占有数を保存して一般に可約であり、回路stabilizerは引き続き非対応である。
+上記WP-L時点のH非対応という記録は過去の状態であり、現行の利用方法は [英語チュートリアル](tutorial_en.md#physical-circuit-faults) を参照する。
+小さい列挙例の詳細釣合い・連結性・lazy・同seed軌道と、短い比較計測は [実装記録](wp/circuit_2026-10-15_ja.md) と [独立レビュー](wp/circuit_review_2026-10-15_ja.md) にある。

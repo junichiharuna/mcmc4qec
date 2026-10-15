@@ -43,8 +43,18 @@ mcmc4qec = ["py.typed"]
 
 [tool.mypy]
 python_version = "3.11"
-ignore_missing_imports = true
+strict = true
 files = ["src/mcmc4qec"]
+
+# ldpc exposes these public APIs by implicit re-export in its untyped package.
+[[tool.mypy.overrides]]
+module = ["ldpc", "ldpc.*"]
+implicit_reexport = true
+
+# Optional scientific backends do not all ship PEP 561 metadata.
+[[tool.mypy.overrides]]
+module = ["scipy.*", "bposd.*", "ldpc.*", "pymatching.*", "stim.*"]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
