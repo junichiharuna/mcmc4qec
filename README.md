@@ -20,14 +20,19 @@ Create a distance-3 toric code and estimate its logical error probability under 
 import mcmc4qec as qec
 
 code = qec.make_toric_code(3)
-problem = qec.Problem(
-    code.bit_flip_model(), qec.IndependentBitFlip(code.n), qec.mwpm_decoder(code)
-)
-result = qec.estimate_logical_error(problem, [0.2, 0.15, 0.1])
-print(result.estimate, result.interval)
+noise = qec.IndependentBitFlip(code.n)
+decoder = qec.mwpm_decoder(code)
+problem = qec.Problem(code.bit_flip_model(), noise, decoder)
+
+# Physical bit-flip probabilities, from the anchor to the target.
+ladder = [0.2, 0.15, 0.1]
+result = qec.estimate_logical_error(problem, ladder)
+
+for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
+    print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
-The output is the estimated logical error probability `P_L` and its uncertainty interval at the final bit-flip rate, `p=0.1`.
+Each output row gives a physical bit-flip probability `p`, the estimated logical error probability `P_L`, and its uncertainty interval.
 BAR splitting starts from an automatically computed reference probability (**anchor**) at `p=0.2` and estimates probabilities along the supplied sequence (**ladder**).
 `config`, `anchor`, and `seed` are optional; pass `seed=73` for reproducibility with the same settings, and consult the [default settings](docs/api_en.md#automatic-bar-anchor) to adjust sampling and anchor budgets.
 The defaults provide a starting run, not a guarantee of research accuracy.

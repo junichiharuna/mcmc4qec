@@ -23,14 +23,19 @@ python -m pip install -e ".[codes,matching]"
 import mcmc4qec as qec
 
 code = qec.make_toric_code(3)
-problem = qec.Problem(
-    code.bit_flip_model(), qec.IndependentBitFlip(code.n), qec.mwpm_decoder(code)
-)
-result = qec.estimate_logical_error(problem, [0.2, 0.15, 0.1])
-print(result.estimate, result.interval)
+noise = qec.IndependentBitFlip(code.n)
+decoder = qec.mwpm_decoder(code)
+problem = qec.Problem(code.bit_flip_model(), noise, decoder)
+
+# Physical bit-flip probabilities, from the anchor to the target.
+ladder = [0.2, 0.15, 0.1]
+result = qec.estimate_logical_error(problem, ladder)
+
+for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
+    print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
-出力は、最後に指定したビット反転率 `p=0.1` での論理誤り率 `P_L` と、その誤差区間です。
+出力の各行には、物理的なビット反転率 `p`、論理誤り率 `P_L` の推定値、その誤差区間が並びます。
 BAR splitting は、`p=0.2` で自動計算した基準値（**anchor**）を出発点に、指定したノイズ強度の列（**ladder**）に沿って論理誤り率を推定します。
 `config`・`anchor`・`seed` は省略でき、同じ設定で結果を再現したい場合は `seed=73` のように指定します。
 サンプル数や基準値の計算量を調整する方法は、[既定値と設定](docs/api_en.md#automatic-bar-anchor)を参照してください。
