@@ -34,12 +34,13 @@ decoder = CallableDecoder(lambda s: [int(tuple(s) == (1, 0))],
                           identifier="repetition3-minimum-weight-v1")
 problem = Problem(code.bit_flip_model(), IndependentBitFlip(3), decoder)
 ladder = [0.4, 0.25, 0.1]
-result = estimate_logical_error(problem, ladder, seed=73)
+result = estimate_logical_error(problem, ladder)
 for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
     print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
 出力の各行には、ノイズ強度、論理誤り率 `P_L` の推定値、誤差区間が並びます。
+`seed` を省略すると実行ごとに乱数を初期化し、同じ設定で結果を再現したい場合は `seed=73` のように整数を指定します。
 `config` を省略すると、各ノイズ強度で burn-in 100 ステップの後に 1,000 サンプルを保存しますが、この既定値は研究に必要な精度を保証するものではありません。
 `anchor` を省略すると、状態数 4,096 以下では全列挙、それを超える場合は直接 MC 10,000 試行を使い、`anchor_max_states`・`anchor_trials` で調整するか、`anchor` を明示できます（[詳細](docs/api_en.md#automatic-bar-anchor)）。
 `CallableDecoder` は論理観測量の予測値を返します。

@@ -30,12 +30,13 @@ decoder = CallableDecoder(lambda s: [int(tuple(s) == (1, 0))],
                           identifier="repetition3-minimum-weight-v1")
 problem = Problem(code.bit_flip_model(), IndependentBitFlip(3), decoder)
 ladder = [0.4, 0.25, 0.1]
-result = estimate_logical_error(problem, ladder, seed=73)
+result = estimate_logical_error(problem, ladder)
 for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
     print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
 Each output row gives a noise rate, its estimated logical error probability `P_L`, and an uncertainty interval.
+Omitting `seed` starts a fresh random run; pass an integer such as `seed=73` to reproduce a run with the same settings.
 Omitting `config` uses 1,000 retained samples after 100 burn-in steps per rung; these defaults do not guarantee research accuracy.
 Omitting `anchor` uses exact enumeration for at most 4,096 states, otherwise 10,000 direct-MC trials; customize with `anchor_max_states` and `anchor_trials`, or pass an explicit `anchor` ([details](docs/api_en.md#automatic-bar-anchor)).
 `CallableDecoder` returns a prediction of the logical observable; see the [CSS tutorial](docs/tutorial_en.md#your-css-matrices) for the matrix and decoder conventions.
