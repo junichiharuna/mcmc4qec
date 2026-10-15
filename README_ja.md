@@ -19,10 +19,16 @@ python -m pip install -e ".[codes,matching]"
 
 距離 3 の toric 符号を生成し、独立なビット反転と MWPM デコーダーを使って論理誤り率を推定します。
 
+`code` は、量子ビット数 `n`、X/Z 検査行列 `hx`・`hz`、論理演算子を表す行列 `lx`・`lz` を持つ CSS 符号です。
+ビット反転を扱う場合は、`hz` からシンドロームを、`lz` から論理観測量を求めます。
+
 ```python
 import mcmc4qec as qec
 
 code = qec.make_toric_code(3)
+print("Number of qubits:", code.n)
+print("Z-check matrix shape:", code.hz.shape)
+
 noise = qec.IndependentBitFlip(code.n)
 decoder = qec.mwpm_decoder(code)
 problem = qec.Problem(code.bit_flip_model(), noise, decoder)
@@ -35,7 +41,7 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
     print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
-出力の各行には、物理的なビット反転率 `p`、論理誤り率 `P_L` の推定値、その誤差区間が並びます。
+最初に量子ビット数と検査行列のサイズを表示し、続く各行には物理的なビット反転率 `p`、論理誤り率 `P_L` の推定値、その誤差区間が並びます。
 BAR splitting は、`p=0.2` で自動計算した基準値（**anchor**）を出発点に、指定したノイズ強度の列（**ladder**）に沿って論理誤り率を推定します。
 `config`・`anchor`・`seed` は省略でき、同じ設定で結果を再現したい場合は `seed=73` のように指定します。
 サンプル数や基準値の計算量を調整する方法は、[既定値と設定](docs/api_en.md#automatic-bar-anchor)を参照してください。

@@ -16,10 +16,16 @@ python -m pip install -e ".[codes,matching]"
 
 Create a distance-3 toric code and estimate its logical error probability under independent bit flips with an MWPM decoder:
 
+`code` holds the number of qubits `n`, the X/Z check matrices `hx`/`hz`, and the logical-operator matrices `lx`/`lz`.
+For bit-flip errors, `hz` determines the syndrome and `lz` determines the logical observables.
+
 ```python
 import mcmc4qec as qec
 
 code = qec.make_toric_code(3)
+print("Number of qubits:", code.n)
+print("Z-check matrix shape:", code.hz.shape)
+
 noise = qec.IndependentBitFlip(code.n)
 decoder = qec.mwpm_decoder(code)
 problem = qec.Problem(code.bit_flip_model(), noise, decoder)
@@ -32,7 +38,7 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
     print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
-Each output row gives a physical bit-flip probability `p`, the estimated logical error probability `P_L`, and its uncertainty interval.
+After the code dimensions, each output row gives a physical bit-flip probability `p`, the estimated logical error probability `P_L`, and its uncertainty interval.
 BAR splitting starts from an automatically computed reference probability (**anchor**) at `p=0.2` and estimates probabilities along the supplied sequence (**ladder**).
 `config`, `anchor`, and `seed` are optional; pass `seed=73` for reproducibility with the same settings, and consult the [default settings](docs/api_en.md#automatic-bar-anchor) to adjust sampling and anchor budgets.
 The defaults provide a starting run, not a guarantee of research accuracy.
