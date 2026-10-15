@@ -4,11 +4,15 @@ from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[1]
 EN = ROOT / "README.md"
 JA = ROOT / "README_ja.md"
 INDEX = ROOT / "examples" / "README.md"
+TUTORIAL_EN = ROOT / "docs" / "tutorial_en.md"
+TUTORIAL_JA = ROOT / "docs" / "tutorial_ja.md"
 LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 PYTHON_BLOCK = re.compile(r"^\x60{3}python[ \t]*\n(.*?)^\x60{3}[ \t]*$", re.MULTILINE | re.DOTALL)
 
@@ -48,7 +52,7 @@ def test_example_index_matches_every_python_file_and_notebook():
 
 
 def test_relative_readme_links_resolve():
-    for page in (EN, JA, INDEX):
+    for page in (EN, JA, INDEX, TUTORIAL_EN, TUTORIAL_JA):
         text = page.read_text(encoding="utf-8")
         for match in LINK.finditer(text):
             raw = match.group(1)
@@ -57,8 +61,9 @@ def test_relative_readme_links_resolve():
                 assert target.exists(), f"{page.relative_to(ROOT)}: {raw}"
 
 
-def test_japanese_python_blocks_match_english_exactly():
-    english = PYTHON_BLOCK.findall(EN.read_text(encoding="utf-8"))
-    japanese = PYTHON_BLOCK.findall(JA.read_text(encoding="utf-8"))
+@pytest.mark.parametrize("english_page,japanese_page", [(EN, JA), (TUTORIAL_EN, TUTORIAL_JA)])
+def test_japanese_python_blocks_match_english_exactly(english_page, japanese_page):
+    english = PYTHON_BLOCK.findall(english_page.read_text(encoding="utf-8"))
+    japanese = PYTHON_BLOCK.findall(japanese_page.read_text(encoding="utf-8"))
     assert english
     assert japanese == english
