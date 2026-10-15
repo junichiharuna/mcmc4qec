@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Allow BAR calls with both `config` and `anchor` omitted, retaining existing
+  sampling defaults. Automatically enumerate up to 4,096 states or use 10,000
+  fixed direct-MC trials, with configurable budgets, independent RNG, anchor
+  uncertainty propagation, and recorded provenance. Reject zero-failure and
+  all-failure MC anchors rather than extending the trial budget adaptively.
+
 - Return conditional-weight mean and IAT-based Monte Carlo standard error by
   default, with unavailable errors represented as None.
 - Add optional numerical ACF, batch-mean error scans, and per-chain circular

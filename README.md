@@ -16,12 +16,12 @@ python -m pip install -e .
 
 The following example estimates the logical error probability at three bit-flip rates for a three-qubit repetition code.
 BAR splitting transfers an absolute probability from a reference point (the **anchor**) along a sequence of noise rates (the **ladder**).
-Here, exact enumeration supplies the anchor at `p=0.4`; no optional dependencies are needed.
+The anchor at `p=0.4` is computed automatically; no optional dependencies are needed.
 
 ```python
 import numpy as np
-from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip, KernelConfig,
-                      Problem, SamplingConfig, estimate_logical_error, exact)
+from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip,
+                      Problem, estimate_logical_error)
 
 code = CSSCode(hx=np.zeros((0, 3), dtype=int),
                hz=[[1, 1, 0], [0, 1, 1]],
@@ -30,16 +30,14 @@ decoder = CallableDecoder(lambda s: [int(tuple(s) == (1, 0))],
                           identifier="repetition3-minimum-weight-v1")
 problem = Problem(code.bit_flip_model(), IndependentBitFlip(3), decoder)
 ladder = [0.4, 0.25, 0.1]
-result = estimate_logical_error(
-    problem, ladder, anchor=exact(problem, ladder[0]),
-    config=SamplingConfig(samples=200, burn_in=30,
-                          kernels=KernelConfig(cluster_k=1)), seed=73)
+result = estimate_logical_error(problem, ladder, seed=73)
 for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
     print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
 Each output row gives a noise rate, its estimated logical error probability `P_L`, and an uncertainty interval.
-The short chain and `cluster_k=1` setting are for this small example, not a prescription for research accuracy.
+Omitting `config` uses 1,000 retained samples after 100 burn-in steps per rung; these defaults do not guarantee research accuracy.
+Omitting `anchor` uses exact enumeration for at most 4,096 states, otherwise 10,000 direct-MC trials; customize with `anchor_max_states` and `anchor_trials`, or pass an explicit `anchor` ([details](docs/api_en.md#automatic-bar-anchor)).
 `CallableDecoder` returns a prediction of the logical observable; see the [CSS tutorial](docs/tutorial_en.md#your-css-matrices) for the matrix and decoder conventions.
 For a guided comparison of exact enumeration, direct MC, and BAR, run `python examples/steane_exact.py --quick` or open the [quickstart notebook](notebooks/01_quickstart.ipynb).
 

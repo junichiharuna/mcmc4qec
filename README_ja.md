@@ -19,13 +19,13 @@ python -m pip install -e .
 
 次の例では、3 量子ビットの繰り返し符号について、3 通りのビット反転率で論理誤り率を推定します。
 BAR splitting は、あるノイズ強度での論理誤り率を基準値（**anchor**）とし、ノイズ強度の列（**ladder**）に沿って他の点の論理誤り率を求める方法です。
-ここでは `p=0.4` の基準値を全状態の列挙で計算します。
+ここでは `p=0.4` の基準値を自動計算します。
 追加の依存パッケージは不要です。
 
 ```python
 import numpy as np
-from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip, KernelConfig,
-                      Problem, SamplingConfig, estimate_logical_error, exact)
+from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip,
+                      Problem, estimate_logical_error)
 
 code = CSSCode(hx=np.zeros((0, 3), dtype=int),
                hz=[[1, 1, 0], [0, 1, 1]],
@@ -34,16 +34,14 @@ decoder = CallableDecoder(lambda s: [int(tuple(s) == (1, 0))],
                           identifier="repetition3-minimum-weight-v1")
 problem = Problem(code.bit_flip_model(), IndependentBitFlip(3), decoder)
 ladder = [0.4, 0.25, 0.1]
-result = estimate_logical_error(
-    problem, ladder, anchor=exact(problem, ladder[0]),
-    config=SamplingConfig(samples=200, burn_in=30,
-                          kernels=KernelConfig(cluster_k=1)), seed=73)
+result = estimate_logical_error(problem, ladder, seed=73)
 for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
     print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
 出力の各行には、ノイズ強度、論理誤り率 `P_L` の推定値、誤差区間が並びます。
-サンプル数や `cluster_k=1` はこの小さな例のための設定であり、研究に必要な精度を保証するものではありません。
+`config` を省略すると、各ノイズ強度で burn-in 100 ステップの後に 1,000 サンプルを保存しますが、この既定値は研究に必要な精度を保証するものではありません。
+`anchor` を省略すると、状態数 4,096 以下では全列挙、それを超える場合は直接 MC 10,000 試行を使い、`anchor_max_states`・`anchor_trials` で調整するか、`anchor` を明示できます（[詳細](docs/api_en.md#automatic-bar-anchor)）。
 `CallableDecoder` は論理観測量の予測値を返します。
 行列とデコーダーの規約は、[CSS 符号のチュートリアル](docs/tutorial_en.md#your-css-matrices)で説明しています。
 厳密計算・直接 MC・BAR を比較して試すには、`python examples/steane_exact.py --quick` を実行するか、[入門 notebook](notebooks/01_quickstart.ipynb)を開いてください。
@@ -115,7 +113,7 @@ API 文書では、`diagnostic_report` と `analyze_traces` を使って保存�
 
 ## 検証状況と利用上の注意
 
-通常の BAR 計算では、正の失敗確率を持つ基準値を与え、すべてのノイズ強度で同じデコーダーと失敗条件を使います。
+通常の BAR 計算では、自動計算または明示指定した基準値が正の失敗確率を持ち、すべてのノイズ強度で同じデコーダーと失敗条件を使う必要があります。
 隣接する分布のサンプルに、確率が正となる領域の重なりが観測されなければ、`OverlapError` が発生します。
 `p_dependent_decoder_approx` は失敗集合の変化を無視する近似であり、それによる偏りは誤差区間に含まれません。
 

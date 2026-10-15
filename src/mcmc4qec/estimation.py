@@ -13,7 +13,7 @@ import numpy as np
 
 from .core import Decoder, Problem, json_value, positive_integer
 from .results import Result, metadata
-from .sampling import SamplingConfig, sample_faulty
+from .sampling import SamplingConfig, direct_mc, exact, sample_faulty
 from .reporting import DiagnosticsConfig, _resolve_diagnostics
 
 
@@ -178,12 +178,13 @@ def _cross_chain_covariance(edges: list[tuple[np.ndarray, np.ndarray]]) -> np.nd
     return cast(np.ndarray, np.atleast_2d(np.cov(draws, rowvar=False, ddof=1)) / chains)
 
 
-def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str, Any]], *, anchor: Result, config: SamplingConfig | None=None, seed: int | None=None,
+def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str, Any]], *, anchor: Result | None=None, config: SamplingConfig | None=None, seed: int | None=None,
                            initial_states: list[np.ndarray | None] | None=None, mode: str="fixed_failure", decoder_factory: Callable[[Any], Decoder] | None=None,
                            decoder_priors: list[Any] | None=None, approximation_reason: str | None=None,
                            bootstrap_replicates: int=100, bootstrap_block_length: int | None=None,
                            uncertainty: str="block_bootstrap",
-                           diagnostics: bool | DiagnosticsConfig=False) -> EstimationResult:
+                           diagnostics: bool | DiagnosticsConfig=False,
+                           anchor_max_states: int=4096, anchor_trials: int=10_000) -> EstimationResult:
     """Sample a ladder, estimate adjacent BAR ratios, and multiply an anchor.
 
     The first ladder coordinate is the anchor. Each subsequent coordinate is
@@ -202,6 +203,14 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
     ``problem`` supplies the fixed model/noise/failure contract; ``ladder`` is
     an ordered list of at least two probability coordinates. ``anchor`` is a
     matching positive ``exact`` or fixed-trial ``direct_mc`` Result at rung 0.
+    When omitted or None, it is computed at rung 0: exact enumeration if the
+    alphabet product is at most ``anchor_max_states`` (default 4096), otherwise
+    fixed-budget direct MC with ``anchor_trials`` (default 10000). A zero
+    state limit forces MC. These budgets are ignored for an explicit anchor.
+    Automatic MC uses an additional independent child seed without changing
+    rung or bootstrap streams. Zero-failure or all-failure MC anchors raise
+    ValueError; no adaptive retry or accuracy guarantee is implied.
+    ``config=None`` uses SamplingConfig() without modifying its defaults.
     ``config`` and ``seed`` control conditional sampling; ``initial_states``
     can supply one initial state per rung. ``mode`` selects fixed failure or
     explicit decoder-dependent approximation with ``decoder_factory``,
@@ -242,6 +251,14 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
         raise ValueError("bootstrap block length exceeds retained samples per chain")
     if uncertainty == "block_bootstrap" and bootstrap_replicates and (config.samples < 8 or length < 2):
         raise ValueError("block uncertainty requires at least eight samples and block length >= 2")
+    automatic_anchor = anchor is None
+    if automatic_anchor:
+        anchor_max_states = positive_integer(anchor_max_states, "anchor_max_states", zero=True)
+        anchor_trials = positive_integer(anchor_trials, "anchor_trials")
+    if initial_states is None:
+        initial_states = [None] * len(ladder)
+    elif len(initial_states) != len(ladder):
+        raise ValueError("one initial_states entry per rung is required")
     if mode == "fixed_failure":
         if decoder_factory is not None or decoder_priors is not None or approximation_reason is not None:
             raise ValueError("decoder factory, priors, and reason require explicit approximate mode")
@@ -259,13 +276,29 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
                     for prior in priors]
     else:
         raise ValueError("unknown BAR mode")
-    variance_anchor = _anchor_variance(anchor, problems[0], ladder[0])
-    if initial_states is None:
-        initial_states = [None] * len(ladder)
-    elif len(initial_states) != len(ladder):
-        raise ValueError("one initial_states entry per rung is required")
     sequence = np.random.SeedSequence(seed)
     children = sequence.spawn(len(ladder) + 1)
+    anchor_children: list[np.random.SeedSequence] = []
+    if anchor is None:
+        # User models can expose NumPy integers; count with unbounded Python ints.
+        if math.prod(int(size) for size in problems[0].alphabets) <= anchor_max_states:
+            anchor = exact(problems[0], ladder[0], max_states=anchor_max_states)
+        else:
+            # Append a stream rather than shifting existing rung/bootstrap seeds.
+            anchor_children = sequence.spawn(1)
+            anchor_seed = int(anchor_children[0].generate_state(1, dtype=np.uint64)[0])
+            anchor = direct_mc(problems[0], ladder[0], trials=anchor_trials, seed=anchor_seed)
+    try:
+        variance_anchor = _anchor_variance(anchor, problems[0], ladder[0])
+    except ValueError as error:
+        if not automatic_anchor:
+            raise
+        raise ValueError(
+            f"Automatic anchor at the first ladder coordinate is unusable: {error}. "
+            "For MC, increase anchor_trials or choose a first ladder coordinate with "
+            "observable failures and successes; alternatively supply an explicit "
+            "exact or direct_mc anchor. Check that the failure set has positive mass."
+        ) from error
     rung_seeds = [int(child.generate_state(1, dtype=np.uint64)[0]) for child in children[:-1]]
     runs = [sample_faulty(pr, p, config=config, seed=s, initial_state=initial,
                           diagnostics=diagnostics)
@@ -344,11 +377,14 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
         warnings.append("A probability underflowed floating-point representation and its interval is omitted; use log_estimates, not a claim of zero probability.")
     run_metadata = metadata(problem, ladder[-1], dict(sampling=asdict(config), mode=mode,
         bootstrap_replicates=bootstrap_replicates, bootstrap_block_length=length,
-        bootstrap_successes=bootstrap_successes), sequence, children)
+        bootstrap_successes=bootstrap_successes), sequence, children + anchor_children)
+    if automatic_anchor:
+        run_metadata["config"].update(anchor_max_states=anchor_max_states, anchor_trials=anchor_trials)
     if diagnostic_settings is not None:
         run_metadata["config"]["diagnostics"] = json_value(asdict(diagnostic_settings))
     uncertainty_metadata = dict(ladder=ladder, mode=mode,
         approximation_reason=approximation_reason, anchor=dict(kind=anchor.kind, estimate=anchor.estimate,
+            source="automatic" if automatic_anchor else "provided",
             log_estimate=_anchor_log(anchor),
             interval=anchor.interval, trials=anchor.trials, failures=anchor.failures,
             log_variance=variance_anchor, metadata=anchor.metadata),

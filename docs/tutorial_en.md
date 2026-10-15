@@ -21,6 +21,33 @@ print(exact(problem, 0.25).estimate)  # 0.15625
 
 `CallableDecoder` returns predicted **logical observables**, not physical corrections. Keep the same decoder and failure predicate for standard BAR ladders.
 
+## BAR with default settings
+
+For the same three-qubit code, supply a ladder starting at a noise rate where failures are reasonably common:
+
+```python
+import numpy as np
+from mcmc4qec import (CSSCode, CallableDecoder, IndependentBitFlip,
+                      Problem, estimate_logical_error)
+
+code = CSSCode(hx=np.zeros((0, 3), dtype=int),
+               hz=[[1, 1, 0], [0, 1, 1]],
+               lx=[[1, 1, 1]], lz=[[1, 0, 0]])
+decoder = CallableDecoder(lambda s: [int(tuple(s) == (1, 0))],
+                          identifier="my-repetition3-logical-decoder-v1")
+problem = Problem(code.bit_flip_model(), IndependentBitFlip(code.n), decoder)
+ladder = [0.4, 0.25, 0.1]
+result = estimate_logical_error(problem, ladder, seed=73)
+for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
+    print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
+```
+
+No `config` or `anchor` is required. The default `SamplingConfig()` retains 1,000 samples after 100 burn-in steps per rung, with one chain, thinning 1, Z/H weights 0.7/0.3, `cluster_k=2`, and lazy probability 0.05. Pass a `SamplingConfig` to tune the run; these defaults do not establish research accuracy, and physical circuit models still require appropriate kernel settings.
+
+The first rung's anchor is computed by exact enumeration if the product of coordinate alphabet sizes is at most 4,096, and otherwise by 10,000 fixed direct-MC trials. For example, `estimate_logical_error(problem, ladder, anchor_max_states=0, anchor_trials=20000, seed=73)` forces a 20,000-trial MC anchor. Its independent RNG and uncertainty are recorded and propagated into the result. You can instead provide `anchor=exact(problem, ladder[0])` or a compatible independent `direct_mc` result.
+
+An MC anchor with zero failures or all trials failing raises `ValueError`; increase the trial budget, change the first noise rate, or supply a valid anchor. The automatic calculation does not extend its trial count until failures appear. Inspect warnings and `result.metadata["anchor"]`, and check mixing and sensitivity before interpreting intervals. See [automatic-anchor settings](api_en.md#automatic-bar-anchor) for validation and provenance details.
+
 ## Static CSS phase flips
 
 For binary Z-error support, `code.phase_flip_model()` measures syndrome with X checks (`hx`), reads logical observables with `lx`, and uses Z stabilizer rows (`hz`). The same `IndependentBitFlip(code.n)` represents the Bernoulli product distribution on Z-error support. For example, this three-qubit CSS code protects X errors but has no X checks to detect Z errors:
