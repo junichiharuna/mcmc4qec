@@ -1,15 +1,16 @@
 # mcmc4qec
 
 mcmc4qec は、量子誤り訂正の論理誤り率を推定する Python ライブラリです。
-直接モンテカルロ法では観測に時間がかかる、まれな失敗も推定の対象としています。
-CSS 符号に対する全状態の列挙、直接モンテカルロ法、基準値を用いた Bennett acceptance ratio（BAR）splitting に対応し、自作の符号・ノイズモデル・デコーダーも使えます。
+論理誤りがまれにしか起きない条件では、直接モンテカルロ法で十分な回数の失敗を観測するのに時間がかかります。
+mcmc4qec は、失敗を観測しやすいノイズ強度で求めた確率を基準に、ノイズ強度を段階的に下げながら論理誤り率を推定します。
+この計算には、失敗条件付き MCMC と Bennett acceptance ratio（BAR）を用いた splitting を使います。
 
+小さな問題の全列挙や直接モンテカルロ法にも対応し、組み込みの CSS 符号に加えて、自作の符号・ノイズモデル・デコーダーを使えます。
 現在は検証中の **pre-alpha 版**で、パッケージとしての一般公開はまだ行っていません。
-この文書は日本語の案内です。
-内容に相違がある場合は、英語版を優先してください。
+
 [English](README.md) · [API 文書](docs/api_en.md) · [チュートリアル](docs/tutorial_en.md) · [実行例一覧](examples/README.md)
 
-## まず試す
+## インストールと実行例
 
 リポジトリのディレクトリで、符号の生成と PyMatching に必要なパッケージをまとめてインストールします。
 
@@ -17,18 +18,13 @@ CSS 符号に対する全状態の列挙、直接モンテカルロ法、基準�
 python -m pip install -e ".[codes,matching]"
 ```
 
-距離 3 の toric 符号を生成し、独立なビット反転と MWPM デコーダーを使って論理誤り率を推定します。
-
-`code` は、量子ビット数 `n`、X/Z 検査行列 `hx`・`hz`、論理演算子を表す行列 `lx`・`lz` を持つ CSS 符号です。
-ビット反転を扱う場合は、`hz` からシンドロームを、`lz` から論理観測量を求めます。
+次の例では、距離 3 の toric 符号に独立なビット反転を加え、MWPM デコーダーで復号したときの論理誤り率を推定します。
+物理的なビット反転率を `0.2 → 0.15 → 0.1` と変え、それぞれの推定値と誤差区間を表示します。
 
 ```python
 import mcmc4qec as qec
 
 code = qec.make_toric_code(3)
-print("Number of qubits:", code.n)
-print("Z-check matrix shape:", code.hz.shape)
-
 noise = qec.IndependentBitFlip(code.n)
 decoder = qec.mwpm_decoder(code)
 problem = qec.Problem(code.bit_flip_model(), noise, decoder)
@@ -41,40 +37,92 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
     print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
-最初に量子ビット数と検査行列のサイズを表示し、続く各行には物理的なビット反転率 `p`、論理誤り率 `P_L` の推定値、その誤差区間が並びます。
-BAR splitting は、`p=0.2` で自動計算した基準値（**anchor**）を出発点に、指定したノイズ強度の列（**ladder**）に沿って論理誤り率を推定します。
-`config`・`anchor`・`seed` は省略でき、同じ設定で結果を再現したい場合は `seed=73` のように指定します。
-サンプル数や基準値の計算量を調整する方法は、[既定値と設定](docs/api_en.md#automatic-bar-anchor)を参照してください。
-既定値は最初に試すための設定であり、研究に必要な精度を保証するものではありません。
+出力の各行には、ビット反転率 `p`、論理誤り率 `P_L` の推定値、その誤差区間が並びます。
+この例は動作を確認するための設定です。
+研究に使う際は、サンプル数や診断結果を確認して計算条件を調整してください。
 
-追加の依存パッケージなしで試す場合は、`python -m pip install -e .` でインストールし、`python examples/steane_exact.py --quick` を実行してください。
+## 実行例の仕組み
+
+### 符号・ノイズ・デコーダー
+
+`make_toric_code(3)` が返す `code` には、符号を定義する行列が入っています。
+上の例では、次の属性を参照できます。
+
+| 属性 | 内容 | この例での値・形状 |
+| --- | --- | --- |
+| `code.n` | 物理量子ビット数 | `18` |
+| `code.hx`・`code.hz` | X・Z 検査行列 | それぞれ `(9, 18)` |
+| `code.lx`・`code.lz` | X・Z 論理演算子を表す行列 | それぞれ `(2, 18)` |
+
+`code.bit_flip_model()` は、ビット反転からシンドロームと論理観測量を求めるモデルを作ります。
+この計算では、それぞれ `hz` と `lz` を使います。
+`noise` は誤りの確率分布を定め、`decoder` はシンドロームから論理観測量を予測します。
+`Problem` はこのモデル・ノイズ・デコーダーをまとめ、実際の論理観測量と予測が一致するかで復号の成否を判定します。
 行列やデコーダーを自分で定義する方法は、[CSS 符号のチュートリアル](docs/tutorial_en.md#your-css-matrices)で説明しています。
 
-## 目的に合う実行例を選ぶ
+### ノイズ強度の列と基準値
 
-求めたい量に応じて、使う関数と実行例を選びます。
-特に `sample_faulty` は、**失敗が起きたという条件のもとで**サンプリングする関数です。
-得られた状態の出現頻度だけから、失敗する確率そのものを表す `P_L` は求められません。
+`ladder` は、推定に使うノイズ強度を順に並べたものです。
+上の例では、まず `p=0.2` の論理誤り率を基準値（**anchor**）として自動計算します。
+次に、隣り合うノイズ強度での論理誤り率の比を BAR で求め、`p=0.15`、`p=0.1` の推定値につなげます。
+
+基準値は、状態数が小さければ全列挙、それ以外は直接モンテカルロ法で計算します。
+`anchor` を渡して、別途求めた基準値を使うこともできます。
+サンプル数などは `config` で変更でき、同じ設定で結果を再現したい場合は `seed=73` のように指定します。
+いずれも省略可能です。
+具体的な既定値と指定方法は、[API 文書の設定例](docs/api_en.md#automatic-bar-anchor)を参照してください。
+
+## 結果と統計誤差
+
+統計誤差は、追加の設定をしなくても推定値と一緒に返します。
+上の BAR の例では、`result.estimates` と `result.intervals` が `ladder` と同じ順に並びます。
+
+| 手法 | 推定値 | 統計誤差 |
+| --- | --- | --- |
+| 直接 MC | `estimate` | 95% Wilson 区間 `interval` |
+| BAR | `estimates` | ノイズ強度ごとの `intervals` と `log_standard_errors` |
+| 失敗条件付き MCMC | `conditional_weight` | 重み平均の標準誤差 `conditional_weight_standard_error`（自己相関を考慮） |
+
+BAR の誤差評価には、既定でブロック・ブートストラップを使います。
+2 本以上の独立した連鎖を使う場合は、`uncertainty="cross_chain"` で連鎖間のばらつきから誤差を評価する方法も選べます。
+算出できない誤差は `None` となり、誤差ゼロを意味しません。
+
+### MCMC の診断
+
+失敗条件付き MCMC では、積分自己相関時間（IAT）、有効サンプルサイズ（ESS）、Gelman–Rubin 統計量（古典的な split R-hat）、連鎖間の標準誤差、提案の受理状況も `result.diagnostics` に返します。
+短い連鎖や観測量が一定の連鎖では、有用な診断値が得られない場合があります。
+
+`sample_faulty` または `estimate_logical_error` に `diagnostics=True` を指定すると、自己相関の配列、ブロック長ごとの誤差評価、条件付き観測量の平均に対するブートストラップ区間を追加します。
+これらは観測量の平均を調べるための診断で、BAR の論理誤り率の誤差区間とは別のものです。
+診断結果は数値として返され、`to_json()` で保存できます。
+詳細診断を有効にしても、サンプル列や BAR の推定値・区間は変わりません。
+
+結果の取得方法は[診断のチュートリアル](docs/tutorial_en.md#initialization-cache-and-diagnostics)、`DiagnosticsConfig` による設定や保存済みデータの解析は [API 文書](docs/api_en.md#default-statistical-errors-and-optional-detailed-diagnostics)を参照してください。
+
+## 対応機能と実行例
+
+組み込みの符号は、toric、surface、asymmetric toric、Hamming HGP、BB72/108/144、Steane、連接 Steane です。
+ノイズモデルには、ビット反転、位相反転、脱分極ノイズ、データと測定の誤りを扱う現象論的モデル、Stim の検出器誤りモデル（DEM）、物理回路の故障モデルがあります。
+デコーダーは PyMatching と BP-OSD に接続できます。
+
+### 目的に合う実行例を選ぶ
 
 | 目的 | API | 実行例 |
 | --- | --- | --- |
 | 小さな問題を全列挙する・直接 MC で計算する | `exact`、`direct_mc` | [Steane 符号での比較](examples/steane_exact.py) |
-| 複数のノイズ強度で BAR により `P_L` を推定する | `estimate_logical_error` | [toric 符号の BAR 曲線](examples/workflows/pl_curve.py)、[BAR notebook](notebooks/02_pl_curve_with_bar.ipynb) |
+| 複数のノイズ強度で論理誤り率を推定する | `estimate_logical_error` | [toric 符号の BAR 曲線](examples/workflows/pl_curve.py)、[BAR notebook](notebooks/02_pl_curve_with_bar.ipynb) |
 | 失敗した場合の誤り分布を調べる | `sample_faulty` | [条件付き重みの比較](examples/workflows/conditional_weight.py)、[複数の連鎖による診断](examples/workflows/convergence_check.py) |
-| 自分の符号・ノイズ・デコーダーを使う | `Problem` と各部品のインターフェース | [CSS 符号のひな形](examples/templates/byo_css_bitflip.py)、[ノイズのひな形](examples/templates/byo_noise.py)、[デコーダーのひな形](examples/templates/byo_decoder.py) |
+| 自分の符号・ノイズ・デコーダーを使う | `Problem` と各部品のインターフェース | [CSS 符号](examples/templates/byo_css_bitflip.py)・[ノイズ](examples/templates/byo_noise.py)・[デコーダー](examples/templates/byo_decoder.py)のひな形 |
 | 検出器誤りや物理回路の故障をサンプリングする | DEM・回路モデル | [Stim DEM](examples/stim_dem.py)、[物理回路の基本例](examples/circuit_baseline.py) |
 
-[実行例一覧](examples/README.md)には、すべてのスクリプトと notebook、必要な依存パッケージ、出力の読み方をまとめています。
+`sample_faulty` は、失敗が起きたという条件のもとでサンプリングします。
+得られた状態の出現頻度だけから、論理誤り率 `P_L` は求められません。
+すべてのスクリプトと notebook、出力の読み方は[実行例一覧](examples/README.md)にまとめています。
 
-## 対応するモデルと追加パッケージ
-
-符号の生成関数は、toric、surface、asymmetric toric、Hamming HGP、BB72/108/144、Steane、連接 Steane に対応しています。
-ノイズモデルには、ビット反転、位相反転、I/X/Y/Z をまとめて扱う脱分極ノイズ、データと測定の誤りを扱う現象論的モデル、Stim の検出器誤りモデル（DEM）、物理回路の故障モデルがあります。
-デコーダーは PyMatching と BP-OSD に接続できます。
-自作の部品を使う場合は、ノイズの正規化やデコーダーの決定性など、[API の契約](docs/api_en.md)を満たす必要があります。
+### 追加パッケージ
 
 必要な機能に応じて、依存パッケージのグループ（extra）を追加します。
-例えば [toric 符号を MWPM で復号する例](examples/toric_pymatching.py)には、`python -m pip install -e ".[codes,matching]"` を使います。
+冒頭のインストール例では、`codes` と `matching` を選んでいます。
 
 | extra | 用途 |
 | --- | --- |
@@ -85,56 +133,25 @@ BAR splitting は、`p=0.2` で自動計算した基準値（**anchor**）を出
 | `plot` | ワークフローの結果を PNG で作図（CSV 出力も利用可能） |
 | `notebooks` | notebook の実行と作図 |
 
-MCMC の更新には、1 ビット反転（OBF）、Zanella（Z）、クラスター交換（H）、静的 CSS モデルでのスタビライザー反転を使えます。
-既定値は Z/H の重みが 0.7/0.3、`cluster_k=2`、連鎖が 1 本、状態をそのまま保持する確率（lazy）が 0.05 です。
-棄却されたステップや lazy step もサンプル列に残します。
-物理回路モデルでは、H に使う故障箇所のグループを明示するなど、回路用の設定が必要です。
-対応する組み合わせと制約は、[回路のチュートリアル](docs/tutorial_en.md#physical-circuit-faults)を参照してください。
+追加パッケージなしで試す場合は、`python -m pip install -e .` でインストールし、`python examples/steane_exact.py --quick` を実行してください。
+自作の部品が満たすべき条件や MCMC の更新手法は [API 文書](docs/api_en.md)、回路モデル固有の設定は[回路のチュートリアル](docs/tutorial_en.md#physical-circuit-faults)で説明しています。
 
-## 推定値・統計誤差・診断の読み方
+## 適用条件と検証状況
 
-統計誤差は、追加の設定をしなくても推定値と一緒に返します。
+通常の BAR 計算では、正の失敗確率を持つ基準値を使い、すべてのノイズ強度でデコーダーと失敗条件を共通にする必要があります。
+隣り合う分布のサンプルに十分な重なりがあることも重要です。
+必要な重なりが観測されない場合は `OverlapError` が発生します。
+ノイズ強度に応じてデコーダーを変える近似モードについては、[API 文書](docs/api_en.md)を参照してください。
 
-| 手法 | 推定値 | 統計誤差 |
-| --- | --- | --- |
-| 直接 MC | `estimate` | 95% Wilson 区間 `interval` |
-| BAR | `estimates` | ノイズ強度ごとの `intervals` と `log_standard_errors` |
-| 条件付き MCMC | `conditional_weight` | `conditional_weight_standard_error`：IAT に基づく重み平均のモンテカルロ標準誤差 |
-
-条件付き MCMC では、積分自己相関時間（IAT）、有効サンプルサイズ（ESS）、古典的な Gelman–Rubin 統計量の split R-hat、連鎖間の標準誤差、提案の受理状況も `result.diagnostics` に返します。
-算出できない誤差は `None` となり、誤差ゼロを意味しません。
-短い連鎖や観測量が一定の連鎖では、有用な診断値が得られない場合があります。
-
-### 詳細な診断を追加する
-
-`sample_faulty` または `estimate_logical_error` に `diagnostics=True` を指定すると、自己相関の配列、ブロック長ごとの誤差評価、条件付き観測量の平均に対するブートストラップ区間を追加します。
-ラグ、ブロック長、ブートストラップの反復数は `DiagnosticsConfig` で調整できます。
-診断結果は数値として返され、`to_json()` で保存できるため、描画用パッケージは不要です。
-詳細診断には別の乱数生成器を使い、サンプル列や BAR の推定値・区間は変えません。
-
-実行例と結果の取得方法は、[診断のチュートリアル](docs/tutorial_en.md#initialization-cache-and-diagnostics)、[診断 notebook](notebooks/03_conditional_sampling_and_diagnostics.ipynb)、[API の式と設定](docs/api_en.md#default-statistical-errors-and-optional-detailed-diagnostics)を参照してください。
-API 文書では、`diagnostic_report` と `analyze_traces` を使って保存済みの結果や独自の観測量を解析する方法も説明しています。
-
-## 検証状況と利用上の注意
-
-通常の BAR 計算では、自動計算または明示指定した基準値が正の失敗確率を持ち、すべてのノイズ強度で同じデコーダーと失敗条件を使う必要があります。
-隣接する分布のサンプルに、確率が正となる領域の重なりが観測されなければ、`OverlapError` が発生します。
-`p_dependent_decoder_approx` は失敗集合の変化を無視する近似であり、それによる偏りは誤差区間に含まれません。
-
-BAR の誤差評価には、既定でブロック・ブートストラップを使います。
-`uncertainty="cross_chain"` を指定すると、全サンプルから求める点推定値を保ったまま、2 本以上の独立した連鎖のばらつきから誤差を評価します。
-どちらも、混合が不十分な連鎖に共通する偏りは評価できません。
-ESS や R-hat が良好でも、収束、エルゴード性、計算の正しさ、区間の名目被覆率は保証されません。
-短い実験における被覆率の限界は、[BAR の感度検証](docs/bar_sensitivity_ja.md)に記録しています。
-また、DEM と物理回路の基本実装ではノイズモデルが異なり、いずれも公開された回路の計算結果を再現すると示したものではありません。
-
-実行時間は、[性能記録](docs/performance_ja.md)と[ベンチマーク](benchmarks/bench_step.py)を参照してください。
-2026-10-15 の toric d=5・d=7 の測定では、その条件で研究コードの実行時間の 2 倍以内という目標を達成しました。
-同じ seed による実行時間の反復測定であり、他の条件での性能やサンプリング精度を保証するものではありません。
+統計誤差の評価だけでは、探索が不十分な MCMC による偏りは捉えきれません。
+ESS や R-hat が良好でも、収束、エルゴード性、計算の正しさ、区間の名目被覆率が保証されるわけではありません。
+短い実験で確認した誤差区間の限界は[BAR の感度検証](docs/bar_sensitivity_ja.md)、実行時間と測定条件は[性能記録](docs/performance_ja.md)に記録しています。
+DEM と物理回路では、扱うノイズモデルが異なります。
+物理回路モデルの対応範囲と検証結果は、[回路モデルの検証記録](docs/circuit_baseline_ja.md)を参照してください。
 
 ## ライセンスと引用
 
-コードのライセンスは [MIT License](LICENSE) です。
-引用情報は [CITATION.cff](CITATION.cff) にあります。
+コードのライセンスは [MIT License](LICENSE)、引用情報は [CITATION.cff](CITATION.cff) にあります。
 関連論文は準備中で、所属・DOI・リリースの詳細は未確定です。
 開発や貢献の手順は [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
+この日本語版と英語版に相違がある場合は、英語版を優先してください。

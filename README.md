@@ -1,12 +1,16 @@
 # mcmc4qec
 
-mcmc4qec is a Python library for estimating logical error probabilities in quantum error correction, including rare failures that are costly to observe with direct Monte Carlo.
-It provides exact enumeration, direct Monte Carlo, and anchored Bennett acceptance ratio (BAR) splitting for CSS codes, with support for custom codes, noise models, and decoders.
+mcmc4qec is a Python library for estimating logical error probabilities in quantum error correction.
+When logical failures are rare, observing enough of them with direct Monte Carlo can be expensive.
+mcmc4qec starts from a reference probability at a noise rate where failures are easier to observe, then estimates logical error probabilities at progressively lower noise rates.
+It combines failure-conditioned MCMC with Bennett acceptance ratio (BAR) splitting.
 
+The library also provides exact enumeration for small problems and direct Monte Carlo, with built-in CSS codes and support for custom codes, noise models, and decoders.
 The package is **pre-alpha** and under active validation; it has not been published as a public package.
+
 [日本語版](README_ja.md) · [API reference](docs/api_en.md) · [Tutorial](docs/tutorial_en.md) · [All examples](examples/README.md)
 
-## Quick start
+## Install and run
 
 From a local checkout, install the package with code factories and PyMatching:
 
@@ -14,18 +18,13 @@ From a local checkout, install the package with code factories and PyMatching:
 python -m pip install -e ".[codes,matching]"
 ```
 
-Create a distance-3 toric code and estimate its logical error probability under independent bit flips with an MWPM decoder:
-
-`code` holds the number of qubits `n`, the X/Z check matrices `hx`/`hz`, and the logical-operator matrices `lx`/`lz`.
-For bit-flip errors, `hz` determines the syndrome and `lz` determines the logical observables.
+This example estimates logical error probabilities for a distance-3 toric code under independent bit flips with an MWPM decoder.
+It follows physical bit-flip probabilities `0.2 → 0.15 → 0.1` and prints an estimate and uncertainty interval at each rate.
 
 ```python
 import mcmc4qec as qec
 
 code = qec.make_toric_code(3)
-print("Number of qubits:", code.n)
-print("Z-check matrix shape:", code.hz.shape)
-
 noise = qec.IndependentBitFlip(code.n)
 decoder = qec.mwpm_decoder(code)
 problem = qec.Problem(code.bit_flip_model(), noise, decoder)
@@ -38,37 +37,91 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
     print(f"p={p}: P_L={estimate:.6g}, interval={interval}")
 ```
 
-After the code dimensions, each output row gives a physical bit-flip probability `p`, the estimated logical error probability `P_L`, and its uncertainty interval.
-BAR splitting starts from an automatically computed reference probability (**anchor**) at `p=0.2` and estimates probabilities along the supplied sequence (**ladder**).
-`config`, `anchor`, and `seed` are optional; pass `seed=73` for reproducibility with the same settings, and consult the [default settings](docs/api_en.md#automatic-bar-anchor) to adjust sampling and anchor budgets.
-The defaults provide a starting run, not a guarantee of research accuracy.
+Each output row gives a physical bit-flip probability `p`, the estimated logical error probability `P_L`, and its uncertainty interval.
+These settings provide an initial run.
+For research use, review sample counts and diagnostics and adjust the settings accordingly.
 
-For an example with only core dependencies, install with `python -m pip install -e .` and run `python examples/steane_exact.py --quick`.
+## How the example works
+
+### Code, noise, and decoder
+
+The `code` returned by `make_toric_code(3)` contains the matrices defining the code.
+Its attributes in this example are:
+
+| Attribute | Meaning | Value or shape in this example |
+| --- | --- | --- |
+| `code.n` | Number of physical qubits | `18` |
+| `code.hx`, `code.hz` | X and Z check matrices | `(9, 18)` each |
+| `code.lx`, `code.lz` | X and Z logical-operator matrices | `(2, 18)` each |
+
+`code.bit_flip_model()` builds a model that maps bit-flip errors to syndromes and logical observables, using `hz` and `lz`, respectively.
+`noise` supplies the error distribution, and `decoder` predicts logical observables from syndromes.
+`Problem` combines the model, noise, and decoder, judging decoding success by whether the predicted logical observables match the actual ones.
 To define your own matrices or decoder, follow the [CSS tutorial](docs/tutorial_en.md#your-css-matrices).
 
-## Choose an example
+### Noise ladder and reference probability
 
-Choose the workflow for the quantity you want to compute.
-In particular, `sample_faulty` samples **conditioned on failure**: its state frequencies alone do not estimate the absolute failure probability `P_L`.
+`ladder` lists the noise rates used for estimation.
+The example first computes the logical error probability at `p=0.2` as a reference value (**anchor**).
+BAR then estimates probability ratios between adjacent noise rates to obtain the estimates at `p=0.15` and `p=0.1`.
 
-| Goal | API | Example |
+The anchor is computed by exact enumeration for small state spaces and by direct Monte Carlo otherwise.
+Pass `anchor` to supply a reference result computed separately.
+Use `config` to adjust sample counts and other sampling settings, and pass an integer such as `seed=73` for reproducibility with the same settings.
+All three arguments are optional.
+See the [API settings example](docs/api_en.md#automatic-bar-anchor) for defaults and configuration.
+
+## Results and statistical uncertainty
+
+Statistical uncertainty is returned with numerical estimates by default.
+In the BAR example, `result.estimates` and `result.intervals` follow the order of `ladder`.
+
+| Method | Estimate | Uncertainty |
 | --- | --- | --- |
-| Enumerate a small problem or run direct MC | `exact`, `direct_mc` | [Steane comparison](examples/steane_exact.py) |
-| Estimate `P_L` across noise rates with BAR | `estimate_logical_error` | [Toric BAR curve](examples/workflows/pl_curve.py), [BAR notebook](notebooks/02_pl_curve_with_bar.ipynb) |
-| Study errors conditioned on failure | `sample_faulty` | [Conditional weight](examples/workflows/conditional_weight.py), [multiple-chain checks](examples/workflows/convergence_check.py) |
-| Supply your own code, noise, or decoder | `Problem` and component interfaces | [CSS template](examples/templates/byo_css_bitflip.py), [noise template](examples/templates/byo_noise.py), [decoder template](examples/templates/byo_decoder.py) |
-| Sample detector or physical circuit faults | DEM and circuit models | [Stim DEM](examples/stim_dem.py), [physical circuit baseline](examples/circuit_baseline.py) |
+| Direct MC | `estimate` | 95% Wilson `interval` |
+| BAR | `estimates` | `intervals` and `log_standard_errors` at each noise rate |
+| Failure-conditioned MCMC | `conditional_weight` | `conditional_weight_standard_error`: autocorrelation-aware standard error of the mean weight |
 
-The [example index](examples/README.md) lists all scripts and notebooks, their dependencies, and how to interpret their output.
+BAR uses block bootstrap by default.
+With at least two independent chains, `uncertainty="cross_chain"` instead estimates uncertainty from variation between chains.
+Unavailable errors are `None`, not zero.
+
+### MCMC diagnostics
+
+Failure-conditioned MCMC also returns integrated autocorrelation time (IAT), effective sample size (ESS), classical split Gelman–Rubin R-hat, cross-chain standard errors, and acceptance statistics in `result.diagnostics`.
+Short or constant traces can be uninformative.
+
+Pass `diagnostics=True` to `sample_faulty` or `estimate_logical_error` to add autocorrelation arrays, blocking estimates across block lengths, and bootstrap intervals for conditional observable means.
+These diagnostics describe observable means and are distinct from the BAR uncertainty intervals for logical error probabilities.
+Reports are numerical results that can be saved with `to_json()`.
+Enabling detailed diagnostics leaves sampling trajectories and BAR estimates and intervals unchanged.
+
+See the [diagnostics tutorial](docs/tutorial_en.md#initialization-cache-and-diagnostics) to retrieve results, and the [API reference](docs/api_en.md#default-statistical-errors-and-optional-detailed-diagnostics) for `DiagnosticsConfig` settings and analysis of saved data.
 
 ## Supported models and dependencies
 
 Built-in code factories cover toric, surface, asymmetric toric, Hamming HGP, BB72/108/144, Steane, and concatenated Steane codes.
-Noise models include bit-flip, phase-flip, joint I/X/Y/Z depolarising noise, phenomenological data and measurement faults, Stim detector error models (DEM), and physical Stim circuit faults.
-Decoder constructors connect to PyMatching and BP-OSD; custom components follow the [API contracts](docs/api_en.md), including normalized noise and deterministic decoding.
+Noise models include bit-flip, phase-flip, depolarising noise, phenomenological data and measurement faults, Stim detector error models (DEM), and physical circuit faults.
+Decoder constructors connect to PyMatching and BP-OSD.
 
-Optional dependencies are installed as extras.
-For example, `python -m pip install -e ".[codes,matching]"` enables the [toric MWPM example](examples/toric_pymatching.py).
+### Choose an example
+
+| Goal | API | Example |
+| --- | --- | --- |
+| Enumerate a small problem or run direct MC | `exact`, `direct_mc` | [Steane comparison](examples/steane_exact.py) |
+| Estimate logical error probabilities across noise rates | `estimate_logical_error` | [Toric BAR curve](examples/workflows/pl_curve.py), [BAR notebook](notebooks/02_pl_curve_with_bar.ipynb) |
+| Study errors conditioned on failure | `sample_faulty` | [Conditional weight](examples/workflows/conditional_weight.py), [multiple-chain checks](examples/workflows/convergence_check.py) |
+| Supply your own code, noise, or decoder | `Problem` and component interfaces | [CSS](examples/templates/byo_css_bitflip.py), [noise](examples/templates/byo_noise.py), and [decoder](examples/templates/byo_decoder.py) templates |
+| Sample detector or physical circuit faults | DEM and circuit models | [Stim DEM](examples/stim_dem.py), [physical circuit baseline](examples/circuit_baseline.py) |
+
+`sample_faulty` samples conditioned on failure.
+Its state frequencies alone do not estimate the logical error probability `P_L`.
+The [example index](examples/README.md) lists all scripts and notebooks and explains their output.
+
+### Optional dependencies
+
+Install optional dependency groups (extras) for the features you need.
+The installation command above selects `codes` and `matching`.
 
 | Extra | Use |
 | --- | --- |
@@ -79,51 +132,24 @@ For example, `python -m pip install -e ".[codes,matching]"` enables the [toric M
 | `plot` | PNG plots in workflow scripts; CSV output is also available |
 | `notebooks` | Notebook execution and plotting |
 
-MCMC supports one-bit flip (OBF), Zanella (Z), cluster exchange (H), and, for static CSS models, stabilizer moves.
-Defaults are Z/H weights 0.7/0.3, `cluster_k=2`, one chain, and lazy probability 0.05; rejected and lazy steps remain in the trace.
-Physical circuit models require their own kernel configuration, including explicit location groups for H; see the [circuit tutorial](docs/tutorial_en.md#physical-circuit-faults) for supported combinations and restrictions.
+For an example with only core dependencies, install with `python -m pip install -e .` and run `python examples/steane_exact.py --quick`.
+The [API reference](docs/api_en.md) covers custom component contracts and MCMC update methods; the [circuit tutorial](docs/tutorial_en.md#physical-circuit-faults) explains settings specific to circuit models.
 
-## Estimates, errors, and diagnostics
+## Applicability and validation
 
-Statistical uncertainty is returned with numerical estimates by default.
+Standard BAR estimation requires a reference with positive failure probability and the same decoder and failure definition at every noise rate.
+Adequate sample overlap between adjacent distributions is also important.
+Missing required observed overlap raises `OverlapError`.
+See the [API reference](docs/api_en.md) for the approximate mode that allows a decoder to vary with noise rate.
 
-| Method | Estimate | Uncertainty |
-| --- | --- | --- |
-| Direct MC | `estimate` | 95% Wilson `interval` |
-| BAR | `estimates` | `intervals` and `log_standard_errors` at each noise rate |
-| Conditional MCMC | `conditional_weight` | `conditional_weight_standard_error`: IAT-based Monte Carlo standard error of the mean weight |
-
-Conditional MCMC also returns integrated autocorrelation time (IAT), effective sample size (ESS), classical split Gelman–Rubin R-hat, cross-chain standard errors, and acceptance statistics in `result.diagnostics`.
-Unavailable errors are `None`, not zero; short or constant traces can be uninformative.
-
-### Optional detailed diagnostics
-
-Pass `diagnostics=True` to `sample_faulty` or `estimate_logical_error` to add autocorrelation arrays, blocking estimates across block lengths, and bootstrap intervals for conditional observable means.
-Use `DiagnosticsConfig` to set lags, block sizes, and bootstrap repetitions.
-These reports are numerical results saved by `to_json()`; plotting packages are not required.
-Analysis uses a separate random number generator and leaves sampling trajectories and BAR estimates and intervals unchanged.
-
-For a complete example and the result fields, see the [diagnostics tutorial](docs/tutorial_en.md#initialization-cache-and-diagnostics), [diagnostics notebook](notebooks/03_conditional_sampling_and_diagnostics.ipynb), and [API formulas and settings](docs/api_en.md#default-statistical-errors-and-optional-detailed-diagnostics).
-The API also covers analysis of saved results and custom observables with `diagnostic_report` and `analyze_traces`.
-
-## Validation and limitations
-
-BAR requires an anchor with positive failure probability, the same decoder and failure definition across the standard ladder, and observed support overlap between adjacent distributions.
-Missing observed overlap raises `OverlapError`.
-The `p_dependent_decoder_approx` mode ignores changes in failure sets, and its uncertainty intervals omit that bias.
-
-BAR uses block bootstrap by default; `uncertainty="cross_chain"` uses variation across at least two independent chains while keeping pooled point estimates unchanged.
-Neither method accounts for bias shared by poorly mixed chains.
+Statistical uncertainty estimates cannot fully capture bias from poorly mixed MCMC chains.
 Good ESS or R-hat values do not prove convergence, ergodicity, correctness, or nominal interval coverage.
-The [BAR sensitivity study](docs/bar_sensitivity_ja.md) records coverage limitations of the short experiments.
-DEM sampling and the physical circuit baseline also have distinct noise models; neither establishes reproduction of published circuit results.
-
-For runtime measurements, see the [performance record](docs/performance_ja.md) and [benchmark script](benchmarks/bench_step.py).
-The recorded toric d=5 and d=7 runs on 2026-10-15 met the target of at most twice the research runner's time under the measured settings.
-Those same-seed timing repetitions do not establish performance on other workloads or sampling accuracy.
+The [BAR sensitivity study](docs/bar_sensitivity_ja.md) records interval limitations found in short experiments, and the [performance record](docs/performance_ja.md) documents runtimes and measurement conditions.
+DEM and physical circuit sampling use distinct noise models.
+See the [circuit validation record](docs/circuit_baseline_ja.md) for the physical circuit model's supported scope and validation results.
 
 ## License and citation
 
-The code uses the [MIT License](LICENSE).
-Citation metadata is in [CITATION.cff](CITATION.cff); the associated paper is in preparation, and affiliation, DOI, and release details remain pending.
+The code uses the [MIT License](LICENSE); citation metadata is in [CITATION.cff](CITATION.cff).
+The associated paper is in preparation, and affiliation, DOI, and release details remain pending.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development and contribution guidance.
