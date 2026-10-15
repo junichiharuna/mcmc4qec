@@ -13,6 +13,7 @@ from .core import Problem, positive_integer
 from .kernels import OBF, Zanella, ClusterExchange, StabilizerFlip
 from .results import Result, metadata
 from .diagnostics import diagnose
+from .reporting import DiagnosticsConfig, _resolve_diagnostics, diagnostic_report
 from .decode_cache import CachedDecoder, FailureEvaluator
 
 
@@ -191,7 +192,8 @@ def direct_mc(problem: Problem[_P], p: _P, *, trials: int, seed: int | None=None
         warnings=warning)
 
 
-def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=None, seed: int | None=None, initial_state: ArrayLike | None=None) -> Result:
+def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=None, seed: int | None=None, initial_state: ArrayLike | None=None,
+                  diagnostics: bool | DiagnosticsConfig=False) -> Result:
     """Sample normalized noise restricted to one fixed deterministic failure set.
 
     problem binds the model, noise, decoder, and shared failure definition.
@@ -207,11 +209,19 @@ def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=
     counts; a rejection/lazy step still counts and can be retained as a repeat.
     Only the requested states are allocated. Decoder predictions are cached by
     complete syndrome; research_clear checks its soft cap every ten steps.
+    diagnostics=True or DiagnosticsConfig enables additional ACF, blocking,
+    and bootstrap statistics in diagnostics['trace_analysis']. These concern
+    the conditional weight mean, not the failure probability. The default
+    False preserves lightweight diagnostics only. Analysis uses a separate
+    RNG and does not alter any sampled state or kernel acceptance count.
+    The conditional_weight mean and its conditional_weight_standard_error
+    are always returned (None for an unavailable SE), reusing the usual IAT.
     """
     start = time.perf_counter()
     config = SamplingConfig() if config is None else config
     if not isinstance(config, SamplingConfig):
         raise ValueError("config must be SamplingConfig")
+    diagnostic_settings = _resolve_diagnostics(diagnostics, config.samples)
     kc = config.kernels
     from .circuit.model import CircuitFaultModel
     from .circuit.proposal import PhysicalFaultProposal
@@ -336,8 +346,17 @@ def sample_faulty(problem: Problem[_P], p: _P, *, config: SamplingConfig | None=
     for stats in acceptance.values():
         stats["acceptance_rate"] = stats["accepted"] / stats["proposed"] if stats["proposed"] else None
         stats["move_rate"] = stats["moved"] / stats["proposed"] if stats["proposed"] else None
+    if diagnostic_settings is not None:
+        run_config["diagnostics"] = asdict(diagnostic_settings)
     result = Result("sample_faulty", metadata(problem, p, run_config, sequence, children),
                     time.perf_counter()-start, states=saved, acceptance=acceptance)
     result.diagnostics = diagnose(result)
+    result.conditional_weight = result.diagnostics["mean"]
+    result.conditional_weight_standard_error = result.diagnostics["mean_standard_error"]
     result.warnings = list(result.diagnostics["warnings"])
+    if diagnostic_settings is not None:
+        report = diagnostic_report(result, config=diagnostic_settings)
+        result.diagnostics["trace_analysis"] = report
+        result.warnings = list(dict.fromkeys([*result.warnings, *report["warnings"]]))
+        result.elapsed_seconds = time.perf_counter()-start
     return result

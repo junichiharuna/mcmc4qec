@@ -124,6 +124,38 @@ Other factories include toric, surface, asymmetric toric, Hamming HGP, BB72/108/
 
 ## Initialization, cache, and diagnostics
 
+Statistical errors accompany numerical results by default. A conditional MCMC run returns its weight mean and IAT-based Monte Carlo standard error. Use `diagnostics=True` for additional numerical ACF, blocking and bootstrap results, or provide `DiagnosticsConfig` to bound their cost:
+
+```python
+from mcmc4qec import (BinaryLinearModel, CallableDecoder, DiagnosticsConfig,
+                      IndependentBitFlip, KernelConfig, Problem, SamplingConfig,
+                      diagnostic_report, sample_faulty)
+
+# Failure is x[0] == 1; x[1] remains a variable conditional observable.
+problem = Problem(BinaryLinearModel([[1, 1]], [[1, 0]]), IndependentBitFlip(2),
+                  CallableDecoder(lambda syndrome: [0], identifier="zero-v1"))
+run = sample_faulty(problem, 0.3, seed=41,
+    config=SamplingConfig(samples=128, burn_in=32, chains=4,
+                          kernels=KernelConfig(cluster_k=1)),
+    diagnostics=DiagnosticsConfig(max_lag=32, block_sizes=(1, 4, 16, 32),
+                                  bootstrap_replicates=100, seed=7))
+print("Conditional mean and MCSE:", run.conditional_weight,
+      run.conditional_weight_standard_error)
+report = run.diagnostics["trace_analysis"]
+print("Classical split R-hat:", report["rhat"])
+print("Chain IAT / ESS:", report["chain_iat"], report["chain_ess"])
+print("ACF:", report["acf"])
+print("Batch-mean SE scan:", report["blocking"])
+print("Bootstrap mean intervals:", report["bootstrap"]["blocks"])
+
+# Alternative observables can be analyzed afterwards without resampling.
+last_bit = diagnostic_report(run, observable=lambda state: float(state[-1]),
+    observable_name="last bit", config=DiagnosticsConfig(bootstrap_replicates=0))
+print("Last-bit mean and MCSE:", last_bit["mean"], last_bit["iat_mcse"])
+```
+
+Omit `diagnostics` to skip extra analysis while still returning the default mean MCSE. In BAR, the same keyword adds per-rung reports to `result.diagnostics[i]["trace_analysis"]`. These are conditional observable errors; the logical-probability errors remain in `result.intervals` and `result.log_standard_errors`. The detailed analysis has its own RNG and does not affect sampled states or BAR uncertainty. `None` means unavailable, not zero error. Inspect block-length sensitivity, short/constant chains, and warnings before interpreting intervals. See the [API formulas and fields](api_en.md#default-statistical-errors-and-optional-detailed-diagnostics).
+
 `minimum_weight_initial_state(code)` and `maximum_weight_initial_state(code)` choose among minimum representatives of the code's logical-basis cosets. `observable_sector_initial_state(code, bits)` requests a particular nonzero observable sector even when logical bases are independent, and `random_logical_sector_initial_state(code, seed=...)` chooses a nonzero sector. These are candidates: verify that the state lies in the noise support and fails under your actual decoder and predicate before passing it as `initial_state` to `sample_faulty`. Large stabilizer ranks use SciPy MILP and require proven optimality within `time_limit`.
 
 For repeated decoding, `SamplingConfig(cache_cap=1000, cache_policy="lru")` applies a strict LRU cache; `"freeze"` stops adding entries at the cap, while `"research_clear"` checks the soft cap every ten steps. `KernelConfig(zanella_fastpath=True)` accelerates supported product noises without changing their target distribution. `diagnose` can summarize multiple chains, but an apparently healthy weight series is insufficient evidence of mixing. `evaluate_convergence` screens chain scaling, late stationarity, different starting populations, and IAT versus an independently estimated direct-MC **conditional observable variance**. Without that variance or a second initialization population, the corresponding checks remain unresolved.

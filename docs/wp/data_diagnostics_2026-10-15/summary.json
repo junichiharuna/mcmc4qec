@@ -1,0 +1,33 @@
+{
+  "base_commit": "7f8d7ba799f1d99038b83b207f9e585c787c8e53",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "numpy": "2.4.6",
+  "platform": "Windows-10-10.0.22631-SP0",
+  "package_source_sha256": "cb6255dff6e5d090e5f33731bbf45d9c4580c23d6f9c14a3cf6f4a47ce20d729",
+  "wheel_sha256": "75096270dd18066225aee2801e55d68c081852ff597a8fed5331d5ec1e5680f8",
+  "source": {
+    "passed": 469,
+    "skipped": 0,
+    "warnings": 1,
+    "seconds": 176.87,
+    "command": "python -m pytest tests -q --durations=10",
+    "research_root": "A:/dev/RIMC",
+    "bytecode_disabled": true
+  },
+  "installed_core": {
+    "passed": 103,
+    "seconds": 10.62,
+    "scope": "targeted diagnostics/convergence/estimation/BAR/public API tests",
+    "environment": ".venv-dev5-core (reused, wheel reinstalled with --no-deps --force-reinstall)"
+  },
+  "verify_core": {
+    "python_files_match": 28,
+    "succeeded": true,
+    "scope": "core quick examples and runnable README/tutorial snippets"
+  },
+  "strict_typing": "package and consumer passed in source suite",
+  "build": "isolated build successful; initial --no-isolation failed due to old local setuptools; no source configuration change",
+  "optional_wheel_full_suite": "not run for this change",
+  "remote_ci": "not run",
+  "commit": "not created for this change"
+}

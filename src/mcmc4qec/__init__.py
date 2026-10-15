@@ -5,6 +5,8 @@ from .noise import IndependentBitFlip
 from .sampling import (KernelConfig, SamplingConfig, InitializationError,
                        exact, direct_mc, sample_faulty, spawn_seeds)
 from .diagnostics import diagnose
+from .trace_stats import analyze_traces
+from .reporting import DiagnosticsConfig, diagnostic_report
 from .results import Result, VERSION as __version__
 from .adapters import DecoderAdapter, PyMatchingAdapter, matching_from_check_matrix
 from .models import DepolarizingModel, PhenomenologicalModel
@@ -29,7 +31,8 @@ from .circuit import (CircuitFaultModel, CircuitFaultNoise, FaultLocation,
 __all__ = ["BinaryLinearModel", "CSSCode", "CallableDecoder", "CallableFailure", "Problem",
            "Model", "Noise", "Decoder", "IndependentBitFlip", "KernelConfig", "SamplingConfig",
            "InitializationError", "exact", "direct_mc", "sample_faulty", "spawn_seeds",
-           "diagnose", "Result", "DecoderAdapter", "PyMatchingAdapter",
+           "diagnose", "analyze_traces", "DiagnosticsConfig", "diagnostic_report",
+           "Result", "DecoderAdapter", "PyMatchingAdapter",
            "matching_from_check_matrix", "DepolarizingModel", "PhenomenologicalModel",
            "DepolarizingNoise", "PhenomenologicalNoise", "from_stim_dem", "from_stim_circuit",
            "matching_from_dem", "estimate_logical_error", "EstimationResult",

@@ -124,13 +124,22 @@ def diagnose(results: Result | Iterable[Result]) -> dict[str, Any]:
     requires two chains and eight samples per chain. Invalid or unequal
     state shapes raise ValueError. No statistic proves stationarity,
     ergodicity, unbiasedness, or correctness.
+    ``mean_standard_error`` is the IAT-based Monte Carlo SE of the equally
+    weighted chain mean, sqrt(sum_j s_j**2 * tau_j / n) / K, assuming
+    stationary independent chains. ``chain_standard_errors`` gives each
+    chain's SE. These reuse the IAT computation; one undefined IAT leaves
+    the combined SE undefined. They concern the observable, not a failure rate.
     """
     weights, sources = weight_traces(results)
     chains, n = weights.shape
-    warnings = ["Diagnostics do not prove convergence, ergodicity, or correctness."]
+    warnings = ["Diagnostics do not prove convergence, ergodicity, or correctness.",
+                "Mean standard errors assume stationary traces and independent chains; they do not include mixing bias."]
     means = weights.mean(axis=1)
     report = dict(observable="nonidentity coordinate count", iat=None, ess=None,
                   chain_iat=[None] * chains, chain_ess=[None] * chains,
+                  mean=float(means.mean()), mean_standard_error=None,
+                  chain_standard_errors=[None] * chains,
+                  standard_error_method="independent-chain IAT Monte Carlo standard error",
                   rhat=None, cross_chain_se=None, chain_means=means.tolist(),
                   warnings=warnings, acceptance=_aggregate_acceptance(sources))
     if chains < 2:
@@ -148,11 +157,14 @@ def diagnose(results: Result | Iterable[Result]) -> dict[str, Any]:
                 continue
             report["chain_iat"][j] = tau
             report["chain_ess"][j] = float(n / tau)
+            report["chain_standard_errors"][j] = math.sqrt(float(np.var(trace, ddof=1)) * tau / n)
         if any(tau is None for tau in report["chain_iat"]):
             warnings.append("constant chain or nonpositive IAT estimate: IAT/ESS undefined")
         else:
             report["iat"] = float(np.mean(report["chain_iat"]))
             report["ess"] = float(sum(report["chain_ess"]))
+            report["mean_standard_error"] = math.sqrt(sum(
+                se * se for se in report["chain_standard_errors"])) / chains
     if chains < 2 or n < 8:
         warnings.append("split R-hat requires at least two chains and eight samples per chain")
     else:

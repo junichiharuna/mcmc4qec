@@ -44,7 +44,8 @@ mc = direct_mc(problem, p, trials=2_000, seed=11)
 chain = sample_faulty(problem, p, config=SamplingConfig(samples=100, burn_in=20), seed=12)
 print("Direct MC P_L and 95% Wilson interval:", mc.estimate, mc.interval)
 print("Direct MC E[weight | faulty]:", mc.conditional_weight)
-print("Z+H E[weight | faulty]:", np.count_nonzero(chain.states, axis=-1).mean())
+print("Z+H E[weight | faulty] and MCSE:", chain.conditional_weight,
+      chain.conditional_weight_standard_error)
 ```
 
 条件付き chain は失敗集合の**内部**の量を調べるもので、状態頻度から絶対 `P_L` は推定できません。
@@ -76,6 +77,55 @@ print(result.estimates, result.intervals)
 standard ladder では同じデコーダーと failure 定義を全 rung で使います。
 MC anchor には 1 回以上の失敗観測が必要です。
 観測された support の重なりがない場合は `OverlapError` が発生します。
+
+## 統計誤差とMCMC診断
+
+統計誤差は数値計算結果と一緒に標準で返します。
+
+| 手法 | 推定値と統計誤差 |
+| --- | --- |
+| direct MC | 論理誤り確率の `estimate` と95% Wilson区間 `interval` |
+| BAR | rungごとの `estimates`・`intervals`・`log_standard_errors` |
+| 条件付きMCMC | 重み平均 `conditional_weight` と、IATに基づく平均のMonte Carlo標準誤差（MCSE）`conditional_weight_standard_error` |
+
+条件付きMCMCは、chain別IAT/ESS、古典的split Gelman–Rubin R-hat、chain間SE、acceptance統計も `result.diagnostics` に返します。
+詳細な推定自己相関（ACF）配列、ブロッキング比較、bootstrap区間は**オプション**です。
+`diagnostics=True` で有効にし、計算量を調整する場合は `DiagnosticsConfig` を指定します。
+
+```python
+from mcmc4qec import (BinaryLinearModel, CallableDecoder, DiagnosticsConfig,
+                      IndependentBitFlip, KernelConfig, Problem, SamplingConfig,
+                      sample_faulty)
+
+# Core-only example: failure is x[0] == 1; x[1] still fluctuates.
+problem = Problem(BinaryLinearModel([[1, 1]], [[1, 0]]), IndependentBitFlip(2),
+                  CallableDecoder(lambda syndrome: [0], identifier="zero-v1"))
+run = sample_faulty(problem, 0.3, seed=41,
+    config=SamplingConfig(samples=128, burn_in=32, chains=4,
+                          kernels=KernelConfig(cluster_k=1)),
+    diagnostics=DiagnosticsConfig(max_lag=32, block_sizes=(1, 4, 16, 32),
+                                  bootstrap_replicates=100, seed=7))
+print("Conditional mean and MCSE:", run.conditional_weight,
+      run.conditional_weight_standard_error)
+report = run.diagnostics["trace_analysis"]
+print("Classical split R-hat:", report["rhat"])
+print("Chain IAT / ESS:", report["chain_iat"], report["chain_ess"])
+print("Blocking SE scan:", report["blocking"])
+print("Bootstrap mean intervals:", report["bootstrap"]["blocks"])
+```
+
+`diagnostics` を省略すると詳細解析を行わず、標準の平均MCSEは引き続き返します。
+追加bootstrapだけを省略する場合は `DiagnosticsConfig(bootstrap_replicates=0)` を指定します。
+`report["acf"]` にchain別ACFとlagが入り、lagとブロック長は保存サンプル数を単位とします。
+レポートはJSON互換の数値・配列であり、描画パッケージなしで `run.to_json()` に保存できます。
+`estimate_logical_error` も同じオプションを受け付け、rungごとに `result.diagnostics[i]["trace_analysis"]` を返します。
+
+解析は別のRNGを使い、サンプル列やBARの推定値・区間を変更しません。
+追加bootstrap区間の対象は**条件付き観測量の平均**であり、絶対論理誤り確率ではありません。
+算出不能な誤差はゼロではなく `None` となり、短いchainや定数chainでは有効な情報が得られない場合があります。
+古典的split R-hatはrank-normalized/folded版ではなく、良好な診断や狭い区間も収束や名目被覆を保証しません。
+既存Resultや独自観測量には `diagnostic_report`、数値traceには `analyze_traces` を使えます。
+詳しくは[APIの式と設定](docs/api_en.md#default-statistical-errors-and-optional-detailed-diagnostics)と[後処理の例](docs/tutorial_en.md#initialization-cache-and-diagnostics)を参照してください。
 
 ## 性能
 

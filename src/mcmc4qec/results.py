@@ -23,6 +23,9 @@ class Result:
     fixed-trial Wilson interval for direct MC, not a per-round rate.
     trials/failures count independent MC trials; conditional_weight is the
     mean number of nonidentity coordinates conditional on failure.
+    conditional_weight_standard_error is the IAT-based Monte Carlo SE of
+    that mean for conditional MCMC, assuming stationary independent chains;
+    it is None when unavailable and does not describe the failure probability.
     states has shape (chains, saved samples, coordinates) for MCMC, including
     repeated states. acceptance, diagnostics and warnings describe the run.
     Unavailable optional quantities are None. to_json rejects nonfinite or
@@ -42,6 +45,7 @@ class Result:
     acceptance: dict[str, Any] = field(default_factory=dict)
     diagnostics: dict[str, Any] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
+    conditional_weight_standard_error: float | None = None
 
     def to_json(self, *, indent: int=2) -> str:
         data = asdict(self)

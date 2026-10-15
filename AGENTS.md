@@ -37,6 +37,12 @@ installed wheelはcore 271 passed/76 skipped・78.84秒、optional 389 passed/5 
 
 ## File layout
 
+2026-10-15の `7f8d7ba` 後の追加変更では、条件付きMCMCの重み平均とIATベースMCSEを `conditional_weight`・`conditional_weight_standard_error` に標準で返す。
+詳細な数値ACF、ブロック長別SE、円環bootstrap区間は `sample_faulty`・`estimate_logical_error` の `diagnostics=True` または `DiagnosticsConfig` で有効にし、診断の `trace_analysis` に格納する。
+独自観測量の後処理は `diagnostic_report`、数値traceは `analyze_traces` を使い、観測量平均の誤差とBARの論理誤り率誤差を区別する。
+統合sourceは469 passed・176.87秒・skipなし、installed core wheel関連103 passed・10.62秒、core verify_wheelとstrict型検査は成功した。
+詳細は `docs/wp/diagnostics_2026-10-15_ja.md` と同階層の仕様・独立レビュー・検証ログにあり、この追加変更は未コミットである。
+
 - `src/mcmc4qec/` — パッケージ本体（import 名 `mcmc4qec`）。`core.py`（Model / Noise / Decoder / FailurePredicate の契約、`CSSCode`、`Problem`）、`noise.py`・`noise_categorical.py`（bit-flip、Pauli カテゴリ、phenomenological のノイズ）、`models.py`（depolarising と spacetime モデル）、`kernels.py`（OBF / Z / H / stabilizer、一般 MH）、`sampling.py`（`exact`、`direct_mc`、`sample_faulty`、config と seed 系列）、`estimation.py`（BAR、`estimate_logical_error`、block bootstrap）、`diagnostics.py`（IAT / ESS / split R-hat）、`results.py`（JSON 往復する Result と provenance）、`adapters.py`・`adapter_composition.py`（PyMatching / BP-OSD の wrapper、sector と履歴の合成）、`stim_dem.py`（DEM からのモデル構成）、`codes.py`（符号ファクトリ）、`decoders.py`（MWPM / BP-OSD / sector 復号の構築）、`fastpath.py`・`faststep.py`・`decode_cache.py`（product-noise の Zanella 分布、組み込み線形モデルの専用step、decode cache）、`convergence.py`（複数 chain 診断と `evaluate_convergence`）、`initial_states.py`（exact coset 初期化）、`circuit/`（物理回路 fault の `model.py`・`proposal.py`・`baselines.py`）
 - `tests/` — pytest。
   dev5最終文書統合後のsource全suiteは372 passed、148.48秒、skipなし（2026-10-01、Windows Python 3.11、研究照合envありの実測）。

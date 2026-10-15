@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Return conditional-weight mean and IAT-based Monte Carlo standard error by
+  default, with unavailable errors represented as None.
+- Add optional numerical ACF, batch-mean error scans, and per-chain circular
+  bootstrap intervals alongside sampling and BAR results via diagnostics.
+  Expose DiagnosticsConfig, diagnostic_report and analyze_traces for post-hoc
+  custom observables; keep sampling and BAR uncertainty RNGs unchanged.
+
 - Reduce per-step overhead while preserving seeded trajectories; defer reverse
   Zanella normalization for candidates outside the failure set.
 - Add physical-circuit effect delta updates and opt-in cluster exchange with

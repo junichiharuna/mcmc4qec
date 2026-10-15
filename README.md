@@ -39,7 +39,8 @@ mc = direct_mc(problem, p, trials=2_000, seed=11)
 chain = sample_faulty(problem, p, config=SamplingConfig(samples=100, burn_in=20), seed=12)
 print("Direct MC P_L and 95% Wilson interval:", mc.estimate, mc.interval)
 print("Direct MC E[weight | faulty]:", mc.conditional_weight)
-print("Z+H E[weight | faulty]:", np.count_nonzero(chain.states, axis=-1).mean())
+print("Z+H E[weight | faulty] and MCSE:", chain.conditional_weight,
+      chain.conditional_weight_standard_error)
 ```
 
 The conditional chain measures properties **within** the failure set; its state frequency does not estimate absolute `P_L`. The default has Z weight 0.7, H weight 0.3, `cluster_k=2`, one chain, and a separate lazy probability of 0.05. Rejected and lazy steps remain in the trace. Run the full example with `python examples/toric_pymatching.py`.
@@ -64,6 +65,44 @@ print(result.estimates, result.intervals)
 ```
 
 The complete runnable ladder, including its three-bit `Problem`, is in [examples/bar_ladder.py](examples/bar_ladder.py). Keep the same decoder and failure definition across a standard ladder. An MC anchor must observe positive failure mass. Missing observed support overlap raises `OverlapError`.
+
+## Statistical errors and MCMC diagnostics
+
+Statistical uncertainty is returned with numerical results by default:
+
+| Method | Estimate and uncertainty |
+| --- | --- |
+| Direct MC | `estimate` and the 95% Wilson `interval` for logical failure probability |
+| BAR | `estimates`, `intervals`, and `log_standard_errors` at each rung |
+| Conditional MCMC | `conditional_weight` and `conditional_weight_standard_error`, the IAT-based Monte Carlo standard error (MCSE) of the mean weight |
+
+Conditional MCMC also returns chain IAT/ESS, classical split Gelman–Rubin R-hat, cross-chain SE, and acceptance statistics in `result.diagnostics`. Detailed autocorrelation (ACF) arrays, blocking scans, and bootstrap intervals are **optional**. Enable them with `diagnostics=True`, or control their cost with `DiagnosticsConfig`:
+
+```python
+from mcmc4qec import (BinaryLinearModel, CallableDecoder, DiagnosticsConfig,
+                      IndependentBitFlip, KernelConfig, Problem, SamplingConfig,
+                      sample_faulty)
+
+# Core-only example: failure is x[0] == 1; x[1] still fluctuates.
+problem = Problem(BinaryLinearModel([[1, 1]], [[1, 0]]), IndependentBitFlip(2),
+                  CallableDecoder(lambda syndrome: [0], identifier="zero-v1"))
+run = sample_faulty(problem, 0.3, seed=41,
+    config=SamplingConfig(samples=128, burn_in=32, chains=4,
+                          kernels=KernelConfig(cluster_k=1)),
+    diagnostics=DiagnosticsConfig(max_lag=32, block_sizes=(1, 4, 16, 32),
+                                  bootstrap_replicates=100, seed=7))
+print("Conditional mean and MCSE:", run.conditional_weight,
+      run.conditional_weight_standard_error)
+report = run.diagnostics["trace_analysis"]
+print("Classical split R-hat:", report["rhat"])
+print("Chain IAT / ESS:", report["chain_iat"], report["chain_ess"])
+print("Blocking SE scan:", report["blocking"])
+print("Bootstrap mean intervals:", report["bootstrap"]["blocks"])
+```
+
+Omit `diagnostics` to skip detailed analysis while retaining the default mean MCSE. Set `DiagnosticsConfig(bootstrap_replicates=0)` to skip only the additional bootstrap. `report["acf"]` contains per-chain ACF values and lags; lag and block lengths count retained samples. Reports contain JSON-compatible numbers and arrays, and `run.to_json()` preserves them without requiring plotting packages. `estimate_logical_error` accepts the same option and returns one report per rung in `result.diagnostics[i]["trace_analysis"]`.
+
+Analysis uses a separate RNG, leaving sampling trajectories and BAR estimates/intervals unchanged. The added bootstrap intervals describe a **conditional observable mean**, not absolute logical failure probability. Unavailable errors are `None`, not zero; short or constant chains may be uninformative. Classical split R-hat is not rank-normalized/folded R-hat, and good diagnostics or narrow intervals do not prove convergence or nominal coverage. Use `diagnostic_report` for existing Results and custom observables, or `analyze_traces` for numerical traces. See the [API formulas and settings](docs/api_en.md#default-statistical-errors-and-optional-detailed-diagnostics) and [post-processing example](docs/tutorial_en.md#initialization-cache-and-diagnostics).
 
 ## Performance
 

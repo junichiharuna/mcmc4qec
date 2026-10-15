@@ -70,6 +70,7 @@ def test_mypy_consumer_contract(tmp_path):
         "from numpy.typing import ArrayLike\n"
         "from mcmc4qec import CSSCode, CallableDecoder, CallableFailure, IndependentBitFlip, Problem, Result, exact, direct_mc, sample_faulty, diagnose, evaluate_convergence\n"
         "from mcmc4qec import BinaryLinearModel, minimum_weight_coset_representative, mwpm_decoder, bposd_decoder\n"
+        "from mcmc4qec import DiagnosticsConfig, analyze_traces, diagnostic_report\n"
         "code = CSSCode([[0,0,0]], [[1,1,0],[0,1,1]], [[1,1,1]], [[1,0,0]])\n"
         "decoder = CallableDecoder(lambda s: [int(tuple(s)==(1,0))], identifier='example')\n"
         "noise = IndependentBitFlip(3, scales=[1.0, 1.0, 1.0])\n"
@@ -106,6 +107,11 @@ def test_mypy_consumer_contract(tmp_path):
         "sample_faulty(custom, (0.25, 1), initial_state=[1])\n"
         "run = Result('sample_faulty', {}, 0.0, states=np.zeros((1, 8, 1), dtype=np.uint8))\n"
         "diagnose((run, run))\n"
+        "analysis = DiagnosticsConfig(block_sizes=(1, 2), bootstrap_replicates=0)\n"
+        "sample_faulty(problem, 0.25, diagnostics=analysis)\n"
+        "analyze_traces([[0, 1, 0, 1]], bootstrap_replicates=0)\n"
+        "diagnostic_report(run, config=analysis)\n"
+        "mcse: float | None = run.conditional_weight_standard_error\n"
         "evaluate_convergence(np.zeros((2, 8)), other_initialization=np.ones((2, 8)))\n"
         "evaluate_convergence((run, run), other_initialization=(run, run))\n",
         encoding="utf-8",

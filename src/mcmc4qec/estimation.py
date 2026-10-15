@@ -14,6 +14,7 @@ import numpy as np
 from .core import Decoder, Problem, json_value, positive_integer
 from .results import Result, metadata
 from .sampling import SamplingConfig, sample_faulty
+from .reporting import DiagnosticsConfig, _resolve_diagnostics
 
 
 class OverlapError(ValueError):
@@ -181,7 +182,8 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
                            initial_states: list[np.ndarray | None] | None=None, mode: str="fixed_failure", decoder_factory: Callable[[Any], Decoder] | None=None,
                            decoder_priors: list[Any] | None=None, approximation_reason: str | None=None,
                            bootstrap_replicates: int=100, bootstrap_block_length: int | None=None,
-                           uncertainty: str="block_bootstrap") -> EstimationResult:
+                           uncertainty: str="block_bootstrap",
+                           diagnostics: bool | DiagnosticsConfig=False) -> EstimationResult:
     """Sample a ladder, estimate adjacent BAR ratios, and multiply an anchor.
 
     The first ladder coordinate is the anchor. Each subsequent coordinate is
@@ -212,6 +214,10 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
     and warnings. Invalid inputs or anchor mismatch raise ``ValueError``;
     failed initialization raises ``InitializationError`` and missing adjacent
     observed overlap raises ``OverlapError``.
+    ``diagnostics=True`` or ``DiagnosticsConfig`` adds per-rung conditional
+    weight ACF, blocking and bootstrap statistics under each diagnostics
+    entry's ``trace_analysis``. It does not change the BAR uncertainty method,
+    its RNG, point estimates or probability intervals. False is the default.
     """
     start = time.perf_counter()
     ladder = [_coordinate(p) for p in ladder]
@@ -222,6 +228,7 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
     config = SamplingConfig() if config is None else config
     if not isinstance(config, SamplingConfig):
         raise ValueError("config must be SamplingConfig")
+    diagnostic_settings = _resolve_diagnostics(diagnostics, config.samples)
     if uncertainty not in ("block_bootstrap", "cross_chain"):
         raise ValueError("uncertainty must be block_bootstrap or cross_chain")
     if uncertainty == "cross_chain" and config.chains < 2:
@@ -260,7 +267,8 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
     sequence = np.random.SeedSequence(seed)
     children = sequence.spawn(len(ladder) + 1)
     rung_seeds = [int(child.generate_state(1, dtype=np.uint64)[0]) for child in children[:-1]]
-    runs = [sample_faulty(pr, p, config=config, seed=s, initial_state=initial)
+    runs = [sample_faulty(pr, p, config=config, seed=s, initial_state=initial,
+                          diagnostics=diagnostics)
             for pr, p, s, initial in zip(problems, ladder, rung_seeds, initial_states)]
     edges, ratios, overlap = [], [], []
     for i in range(len(ladder)-1):
@@ -337,6 +345,8 @@ def estimate_logical_error(problem: Problem[Any], ladder: list[float | dict[str,
     run_metadata = metadata(problem, ladder[-1], dict(sampling=asdict(config), mode=mode,
         bootstrap_replicates=bootstrap_replicates, bootstrap_block_length=length,
         bootstrap_successes=bootstrap_successes), sequence, children)
+    if diagnostic_settings is not None:
+        run_metadata["config"]["diagnostics"] = json_value(asdict(diagnostic_settings))
     uncertainty_metadata = dict(ladder=ladder, mode=mode,
         approximation_reason=approximation_reason, anchor=dict(kind=anchor.kind, estimate=anchor.estimate,
             log_estimate=_anchor_log(anchor),
