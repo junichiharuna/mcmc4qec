@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Add `make_tile_code(l, m)` for the open-boundary weight-six tile family,
+  paired CSS logical bases, BP-OSD integration tests and a runnable example.
+  Published distance labels are not independently certified by the factory.
+- Add a fixed-cohort PBS calibration driver with checked exact banks, compact
+  traces, shared-rung BAR covariance, checksum-verified resume, and a two-node
+  submission limit. Complete and audit 46,080 traces and 64,512 analysis rows;
+  preserve coverage, bias, mixing diagnostics, and reproduction records.
+- Document disconnected failure-state components for the default Z/H mixture
+  in the fixed-decoder Steane calibration. Public defaults remain unchanged;
+  neither longer traces nor wide intervals establish correct mixing.
+
 - Allow BAR calls with both `config` and `anchor` omitted, retaining existing
   sampling defaults. Automatically enumerate up to 4,096 states or use 10,000
   fixed direct-MC trials, with configurable budgets, independent RNG, anchor

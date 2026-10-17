@@ -231,6 +231,79 @@ def make_steane_code() -> CSSCode:
     return CSSCode(h, h, lx, lz)
 
 
+def _tile_checks(l: int, m: int, box: int,
+                 horizontal: tuple[tuple[int, int], ...],
+                 vertical: tuple[tuple[int, int], ...]) -> tuple[np.ndarray, np.ndarray]:
+    """Translate reflected CSS tiles onto the unrotated open layout."""
+    reach = box - 1
+    qubits = [(direction, x, y) for direction in (0, 1)
+              for y in range(m) for x in range(l)]
+    indices = {edge: i for i, edge in enumerate(qubits)}
+    z_horizontal = tuple((reach-x, reach-y) for x, y in vertical)
+    z_vertical = tuple((reach-x, reach-y) for x, y in horizontal)
+
+    def checks(xs: range, ys: range, h: tuple[tuple[int, int], ...],
+               v: tuple[tuple[int, int], ...]) -> np.ndarray:
+        rows = np.zeros((len(xs)*len(ys), len(qubits)), dtype=np.uint8)
+        for row, (x, y) in enumerate((x, y) for y in ys for x in xs):
+            for direction, terms in enumerate((h, v)):
+                for dx, dy in terms:
+                    col = indices.get((direction, x+dx, y+dy))
+                    if col is not None:
+                        rows[row, col] ^= 1
+        return rows
+
+    hx = checks(range(l-reach), range(-reach, m), horizontal, vertical)
+    hz = checks(range(-reach, l), range(m-reach), z_horizontal, z_vertical)
+    if np.any(hx @ hz.T % 2):
+        raise ValueError("tile boundary checks do not commute")
+    keep = hx.any(axis=0) & hz.any(axis=0)
+    hx, hz = hx[:, keep], hz[:, keep]
+    hx, hz = hx[hx.any(axis=1)], hz[hz.any(axis=1)]
+    if np.any(hx @ hz.T % 2):
+        raise ValueError("tile pruning broke CSS commutation")
+    return hx, hz
+
+
+def make_tile_code(l: int, m: int, *, preset: str="w6_288_8_12") -> CSSCode:
+    """Build an open-boundary weight-six tile CSS code without optional packages.
+
+    ``l`` and ``m`` are integer edge-grid dimensions at least three, not code
+    distances. The only supported ``preset`` is ``w6_288_8_12``: horizontal
+    X support x+x**2+y**2 and vertical support 1+x**2*y+x**2*y**2. Z tiles
+    exchange the layers and reflect both coordinates about two. X anchors
+    span x=0..l-3, y=-2..m-1; Z anchors span x=-2..l-1, y=0..m-3.
+    Supports are clipped to the open grid, with qubits unsupported by either
+    check type removed. Columns are horizontal then vertical, y-major/x-minor.
+    Rows are y-major/x-minor anchors with empty checks removed.
+
+    Returns a CSSCode with a deterministic paired logical basis. The 12x12
+    instance has n=288, k=8 and literature distance 12; this function checks
+    CSS algebra but does not independently certify that distance. The 6x6
+    instance has n=72, k=8. This is a static code, not a measurement circuit.
+    BP-OSD supports its hypergraph checks; generic MWPM does not.
+    Raises ValueError for invalid dimensions, presets or CSS matrices.
+
+    Construction: Steffan et al., arXiv:2504.09171, open rectangular layout;
+    the polynomial convention is given in arXiv:2607.05897, Section II.1.
+    """
+    l, m = positive_integer(l, "l"), positive_integer(m, "m")
+    if min(l, m) < 3:
+        raise ValueError("tile l and m must be at least three")
+    if not isinstance(preset, str) or preset != "w6_288_8_12":
+        raise ValueError("unknown tile preset; use w6_288_8_12")
+    hx, hz = _tile_checks(l, m, 3, ((1, 0), (2, 0), (0, 2)),
+                         ((0, 0), (2, 1), (2, 2)))
+    lx, lz = _css_logicals(hx, hz)
+    k = len(lx)
+    gram = lx @ lz.T % 2
+    augmented, pivots = _gf2_row_reduce(np.hstack((gram, np.eye(k, dtype=np.uint8))))
+    if pivots[:k] != list(range(k)):
+        raise ValueError("incomplete tile logical pairing")
+    lz = (augmented[:, k:].T @ lz % 2).astype(np.uint8)
+    return CSSCode(hx, hz, lx, lz)
+
+
 def _lift_rows(checks: np.ndarray, inner_logical: np.ndarray, n_inner: int) -> np.ndarray:
     n_outer = checks.shape[1]
     rows = []

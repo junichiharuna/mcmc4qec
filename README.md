@@ -43,7 +43,7 @@ Continue with the [tutorial for this example](docs/tutorial_en.md) to inspect th
 
 | Area | Support |
 | --- | --- |
-| Codes | Toric, surface, asymmetric toric, Hamming HGP, BB72/108/144, Steane, concatenated Steane |
+| Codes | Toric, surface, asymmetric toric, Hamming HGP, BB72/108/144, Steane, concatenated Steane, open-boundary tile |
 | Noise | Bit-flip, phase-flip, depolarising, phenomenological data and measurement faults, Stim DEM, physical circuit faults |
 | Decoders | PyMatching, BP-OSD, custom decoders |
 | Methods | Exact enumeration (`exact`), direct MC (`direct_mc`), BAR (`estimate_logical_error`), failure-conditioned MCMC (`sample_faulty`) |

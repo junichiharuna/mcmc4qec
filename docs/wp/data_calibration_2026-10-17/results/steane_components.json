@@ -1,0 +1,306 @@
+{
+  "decoder": {
+    "identifier": "bposd-css-x",
+    "adapter": "DecoderAdapter",
+    "decoder_class": "ldpc.bposd_decoder._bposd_decoder.BpOsdDecoder",
+    "output_kind": "correction",
+    "logical_map": [
+      [
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0
+      ]
+    ],
+    "settings": {
+      "max_iter": 100,
+      "bp_method": "min_sum",
+      "osd_method": "osd_cs",
+      "osd_order": 2,
+      "error_rate": 0.03
+    },
+    "decode_kwargs": {},
+    "distribution": "ldpc",
+    "version": "2.4.1",
+    "source_graph_validated": false
+  },
+  "failure_weight_counts": [
+    0,
+    0,
+    21,
+    7,
+    28,
+    0,
+    7,
+    1
+  ],
+  "components": [
+    {
+      "size": 56,
+      "indices": [
+        3,
+        5,
+        6,
+        7,
+        9,
+        10,
+        12,
+        15,
+        17,
+        18,
+        20,
+        23,
+        24,
+        25,
+        27,
+        29,
+        33,
+        34,
+        36,
+        39,
+        40,
+        42,
+        43,
+        46,
+        48,
+        52,
+        53,
+        54,
+        57,
+        58,
+        60,
+        65,
+        66,
+        68,
+        71,
+        72,
+        76,
+        77,
+        78,
+        80,
+        82,
+        83,
+        86,
+        89,
+        90,
+        92,
+        96,
+        97,
+        99,
+        101,
+        105,
+        106,
+        108,
+        113,
+        114,
+        116
+      ],
+      "weight_counts": [
+        0,
+        0,
+        21,
+        7,
+        28,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "size": 8,
+      "indices": [
+        63,
+        95,
+        111,
+        119,
+        123,
+        125,
+        126,
+        127
+      ],
+      "weight_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        7,
+        1
+      ]
+    }
+  ],
+  "dispersed_starts": [
+    3,
+    127,
+    5,
+    63
+  ],
+  "dispersed_component_ids": [
+    0,
+    1,
+    0,
+    1
+  ],
+  "component_masses": [
+    {
+      "p": 0.1,
+      "conditional_component_mass": [
+        0.9999510116102485,
+        4.898838975162888e-05
+      ]
+    },
+    {
+      "p": 0.07,
+      "conditional_component_mass": [
+        0.9999895280136606,
+        1.047198633939029e-05
+      ]
+    },
+    {
+      "p": 0.05,
+      "conditional_component_mass": [
+        0.9999974765788857,
+        2.523421114240322e-06
+      ]
+    },
+    {
+      "p": 0.03,
+      "conditional_component_mass": [
+        0.9999996971768562,
+        3.0282314393724797e-07
+      ]
+    },
+    {
+      "p": 0.01,
+      "conditional_component_mass": [
+        0.9999999965370558,
+        3.4629443072122727e-09
+      ]
+    },
+    {
+      "p": 0.003,
+      "conditional_component_mass": [
+        0.9999999999726894,
+        2.7310468881624735e-11
+      ]
+    },
+    {
+      "p": 0.001,
+      "conditional_component_mass": [
+        0.9999999999996655,
+        3.346057705986332e-13
+      ]
+    },
+    {
+      "p": 0.0003,
+      "conditional_component_mass": [
+        0.9999999999999973,
+        2.703087605029535e-15
+      ]
+    },
+    {
+      "p": 0.0001,
+      "conditional_component_mass": [
+        1.0,
+        3.334603433896441e-17
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "p": 0.1,
+      "mixture": "Z0.7_H0.3",
+      "components": 2,
+      "minimum_self_loop": 0.2576013234077751,
+      "row_sum_error": 2.220446049250313e-16,
+      "detailed_balance_error": 2.168404344971009e-19,
+      "stationarity_error": 2.7755575615628914e-17
+    },
+    {
+      "p": 0.1,
+      "mixture": "Z0.6_H0.3_S0.1",
+      "components": 1,
+      "minimum_self_loop": 0.2550868486352358,
+      "row_sum_error": 2.220446049250313e-16,
+      "detailed_balance_error": 4.336808689942018e-19,
+      "stationarity_error": 1.3877787807814457e-17
+    },
+    {
+      "p": 0.03,
+      "mixture": "Z0.7_H0.3",
+      "components": 2,
+      "minimum_self_loop": 0.24623587799586,
+      "row_sum_error": 1.1102230246251565e-16,
+      "detailed_balance_error": 8.470329472543003e-22,
+      "stationarity_error": 2.7755575615628914e-17
+    },
+    {
+      "p": 0.03,
+      "mixture": "Z0.6_H0.3_S0.1",
+      "components": 1,
+      "minimum_self_loop": 0.2453450382821657,
+      "row_sum_error": 2.220446049250313e-16,
+      "detailed_balance_error": 2.117582368135751e-22,
+      "stationarity_error": 3.469446951953614e-17
+    },
+    {
+      "p": 0.0001,
+      "mixture": "Z0.7_H0.3",
+      "components": 2,
+      "minimum_self_loop": 0.24002216204866822,
+      "row_sum_error": 2.220446049250313e-16,
+      "detailed_balance_error": 1.2924697071141057e-26,
+      "stationarity_error": 6.938893903907228e-18
+    },
+    {
+      "p": 0.0001,
+      "mixture": "Z0.6_H0.3_S0.1",
+      "components": 1,
+      "minimum_self_loop": 0.2400189960417154,
+      "row_sum_error": 2.220446049250313e-16,
+      "detailed_balance_error": 1.0587911840678754e-22,
+      "stationarity_error": 1.3877787807814457e-17
+    }
+  ],
+  "dispersed_bar_limits": [
+    {
+      "ladder": [
+        0.1,
+        0.07,
+        0.05,
+        0.03
+      ],
+      "estimate": 0.0012883162681890893,
+      "truth": 0.016418097822239994,
+      "relative_bias": -0.9215307228560953,
+      "cross_chain_log_se": 1.4682705374428233,
+      "cross_chain_interval": [
+        7.248169544837528e-05,
+        0.022899006385175086
+      ]
+    },
+    {
+      "ladder": [
+        0.03,
+        0.01,
+        0.003,
+        0.001,
+        0.0003,
+        0.0001
+      ],
+      "estimate": 2.193369573778724e-12,
+      "truth": 2.0990202099748018e-07,
+      "relative_bias": -0.9999895505075971,
+      "cross_chain_log_se": 6.619169638782932,
+      "cross_chain_interval": [
+        5.091718711562402e-18,
+        9.448420778338792e-07
+      ]
+    }
+  ],
+  "interpretation": "No weight-five faulty states separate weights 2-4 from 6-7. Z changes weight by one; H preserves it. Lazy ensures aperiodicity, not irreducibility. The stabilizer mixture is a finite-support candidate only; defaults remain unchanged."
+}

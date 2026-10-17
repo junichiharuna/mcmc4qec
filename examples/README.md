@@ -20,6 +20,7 @@ Times below are measured seconds on Windows with Python 3.11; they vary with mac
 | [toric_depolarizing.py](toric_depolarizing.py) | Toric depolarising joint I/X/Y/Z faults | `codes, matching` | 2.268 s | 1.091 s | `pl`/`pl_interval` are direct MC; conditional weights include Pauli composition | 1, 5 |
 | [phenomenological_toric.py](phenomenological_toric.py) | Toric data/measurement faults over `rounds` | `codes, matching` | 1.792 s | 1.095 s | `pl`/`pl_interval` concern the full bounded experiment, not a per-round rate | 1, 5 |
 | [steane_exact.py](steane_exact.py) | Steane exact, direct MC, and exact-anchored BAR | none | 2.354 s | 0.516 s | `exact` and `bar` compare per-`ladder` absolute probabilities; `bar_intervals` are sampling intervals | 1, 3, 4, 5 |
+| [tile_bposd.py](tile_bposd.py) | Open-boundary tile72 with fixed-prior BP-OSD | bposd | not yet timed | 1.27 s | `pl` is fixed-budget direct MC; `conditional_weight` describes the faulty-state chain | 1, 3, 4, 5 |
 
 ## Research workflows
 

@@ -1,0 +1,13 @@
+{
+  "command": "Python311/python.exe -m pytest tests/test_calibration_audit.py tests/test_calibration_recovery.py -q",
+  "passed": 9,
+  "seconds": 2.95,
+  "files": {
+    "cluster_scripts/audit_calibration.py": "2490bc2ab3533d77b536dfbd6a372049a67d970e74e0cfeb04af10138a5e8b82",
+    "cluster_scripts/verify_recovery.py": "ce3baba14339ac69ecd99c6510740b7a3e2f9ca7e3045110c624566a783283d7",
+    "cluster_scripts/summarize_calibration.py": "45d8031f514f03962ce149ac99269c3f9bd0fd9fa2deb40f38766f478397b6c9",
+    "tests/test_calibration_audit.py": "dcc32943f9cd0c78f45fe47b5e2bce615f84f5d97de644deed98ebd1fbd3f8dd",
+    "tests/test_calibration_recovery.py": "7e4f11219c2edcfc2d1aee7ede084e8ec667892c9b4bd1aba4c429694b59de14"
+  },
+  "notes": "Local finite tests only. Full dataset verification is queued as PBS job 265195."
+}

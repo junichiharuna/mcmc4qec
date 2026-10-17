@@ -1,0 +1,19 @@
+{
+  "status": "interrupted_by_local_budget",
+  "reason": "Initial three-case invocation exceeded the local approximately 300-second pilot budget; only that process was stopped at 307.84 seconds.",
+  "complete_artifact_written": false,
+  "toric_stdout_record": {
+    "code": "toric_d3",
+    "seed": 91000,
+    "exact_seconds": 279.84837609999886,
+    "bar_seconds": 10.161882299998979,
+    "estimate": 0.021557559241686456,
+    "truth": 0.02107475985928002
+  },
+  "limitations": [
+    "The toric run completed, but its full Result JSON was not flushed before the process was stopped during a subsequent case.",
+    "Only the emitted stdout summary is retained; this is not a complete scientific artifact or coverage observation.",
+    "Timings were measured under concurrent local load and are not cluster resource estimates.",
+    "Surface and Steane were rerun with their originally assigned seeds and unchanged scientific settings in a separate output artifact."
+  ]
+}

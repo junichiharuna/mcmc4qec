@@ -1,0 +1,15 @@
+{
+  "base_commit": "6f7528645ddf988ed8008bad5c81e321aa2aaaf8",
+  "files": {
+    "cluster_scripts/calibration.py": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+    "cluster_scripts/package_bundle.py": "1dc9ff49770fa7b10fbb9b8291010bb11e4a8994cc73eed97c6baa11cf258f88",
+    "cluster_scripts/submit.py": "dd5d6f97fbedb3b9a4254715612e51b0e89cada009af8700bd96ac9cb96ee0ba",
+    "cluster_scripts/requirements.txt": "57dc951ab024291269f998463528c5493547f2b3af9e71442f3fd45d42edc1a9",
+    "dist/mcmc4qec-0.1.0.dev5-py3-none-any.whl": "f321f735cd5129ff71bf4da367bda9ec9e8d049c56bba984fa512916814219dc",
+    "tests/test_tile_codes.py": "ddc4472e3b5927fd2dc5fbf074efdec270835194c07db06edc74e7b9624321d4",
+    "tests/test_cluster_calibration.py": "93cab69e6d9d0aa631f2a414e98fe142c9ea27c2497c80863cfd3ff18f928f19",
+    "examples/tile_bposd.py": "b2c80b4726ec2bf18829ef929e8b9181c27de49e01b1875fb0626054dcfbb540",
+    "docs/wp/tile_cluster_spec_2026-10-17_ja.md": "0427c686e0a0f21e56dc9e940f18093012ccb0fed26555370a3087a9b34b5621",
+    "docs/wp/calibration_cluster_design_2026-10-17_ja.md": "8e35bb9bef8e2de2f592f65f962cbe1a16c47e3ace163ceee22e2a3f261afebb"
+  }
+}

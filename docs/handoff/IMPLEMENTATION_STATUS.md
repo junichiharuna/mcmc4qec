@@ -217,3 +217,29 @@ toric d3・exact anchor・4chain/保存600でblock長8/32/128だけを変えた�
 handoff既存本文はbyte prefixを維持し、この節だけを追記した。
 LICENSE・CITATION・公開sampling既定は維持し、commit・push・remote CI・publishは実施していない。
 最終報告はdocs/wp/final_report_2026-10-15_ja.md、実行ログは同階層data_validation_2026-10-15、性能と校正の生データはdata_speed_2026-10-15とdata_calibration_2026-10-15にある。
+
+## 2026-10-17 Tile factory・クラスタdriverとPBS投入
+
+ユーザーの追加依頼により、開境界weight-6 tileのmake_tile_code、BP-OSD接続例、固定cohortのクラスタ校正driverを実装した。
+6×6で72qubits/8logical、12×12で288/8、最小3×3で13/3と距離2を確認し、288qubitsの文献上の距離12は独立証明していない。
+RIMCを読み取り専用で参照し、専用venvとbundleをclusterへ配置してqsubでsmoke265188を実行し、終了コード0を確認した。
+第1段階の真値・4sampling shard・解析を265189〜265194としてqsub投入し、2本のafterokチェーンにより同時最大2ノード・各96CPUへ制限した。
+真値計算265189は完了したが、46,080chain・64,512解析行の校正結果はまだ確定していない。
+既定sampling設定・版番号・licenseを維持し、commit・push・remote CIは実施していない。
+実装、受入、wheel検証と投入台帳はdocs/wp/tile_cluster_report_2026-10-17_ja.mdおよびdata_calibration_2026-10-17を参照する。
+
+## 2026-10-17 固定cohort校正の完了・全件監査・回収
+
+本番265189〜265194と追加監査265195は全て終了コード0となり、46,080 trace・2,304 group・64,512解析行を回収した。
+全投入をqsubで行い、2本の依存列で同時最大2ノードを守り、再投入は不要だった。
+全marker・manifest・seed・初期状態・source・compact traceの支持・BAR方程式・区間・集計を検査し、3符号の全270,464状態を公開failure定義で再判定した。
+欠落・記録されたsampling失敗・区間未取得は0で、97 archiveの全145,449 payloadをローカルでもSHA-256照合した。
+生archiveはoutput/cluster_results/20261017-calibration、全解析行・336条件の被覆・1,776条件の混合診断・816対応比較・図とchecksum台帳はdocs/wp/data_calibration_2026-10-17/resultsに保存した。
+保存長60,000・burn-in6,000では、Steane dispersedを除いたblock128被覆は175–186/192、cross-chainは157–168/192で、全条件の名目95%被覆は保証できない。
+今回の固定BP-OSDのSteaneでは、既定Z/Hのfailure支持がweight2–4の56状態とweight6–7の8状態に分断され、詳細釣合いが成立しても可約であることを全状態対で確認した。
+dispersedは両成分に2chainずつ固定され、長traceでも相対biasはp=0.03で−92.15356%、p=0.0001で−99.998955%となり、block被覆0/192に対してcross-chainは広い区間で192/192を被覆した。
+stabilizerを含む候補は有限例で連結になったが、その混合時間と被覆は未校正なので、公開既定を変更せず、反例をAPI文書に追記した。
+Steaneの成分を結ぶ提案、16/32chainの誤差校正、tile・大きい符号・別noise・MC anchorは後続計測とする。
+最終の文書・監査・回収・有限状態テストは16 passed・13.02秒であり、今回全suiteとremote CIは再実行していない。
+RIMCは読み取り専用のままclean、基準HEADは6f7528645ddf988ed8008bad5c81e321aa2aaaf8のまま、commit・pushは実施していない。
+完了報告はdocs/wp/calibration_results_2026-10-17_ja.md、検証記録はdata_calibration_2026-10-17/completion_validation.jsonに保存した。

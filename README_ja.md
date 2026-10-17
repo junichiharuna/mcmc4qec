@@ -43,7 +43,7 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
 
 | 分野 | 対応内容 |
 | --- | --- |
-| 符号 | toric、surface、asymmetric toric、Hamming HGP、BB72/108/144、Steane、連接 Steane |
+| 符号 | toric、surface、asymmetric toric、Hamming HGP、BB72/108/144、Steane、連接 Steane、開境界tile |
 | ノイズ | ビット反転、位相反転、脱分極、現象論的なデータ・測定誤り、Stim DEM、物理回路の故障 |
 | デコーダー | PyMatching、BP-OSD、自作デコーダー |
 | 計算手法 | 全列挙 `exact`、直接 MC `direct_mc`、BAR `estimate_logical_error`、失敗条件付き MCMC `sample_faulty` |

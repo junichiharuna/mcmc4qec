@@ -31,6 +31,7 @@ EXAMPLES = {
     "circuit_baseline.py": (True, "locations detectors pl pl_interval"),
     "circuit_zanella.py": (True, "distance p kernels conditional_weight acceptance iat direct_mc_conditional_weight"),
     "bb72_bposd.py": (True, "code p pl pl_interval ew_direct ew_chain"),
+    "tile_bposd.py": (True, "code n k p pl pl_interval conditional_weight"),
     "toric_depolarizing.py": (True, "code p pl pl_interval ew_direct ew_chain"),
     "phenomenological_toric.py": (True, "code rounds p pl pl_interval"),
     "steane_exact.py": (False, "code ladder exact bar bar_intervals"),

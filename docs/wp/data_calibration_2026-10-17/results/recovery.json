@@ -1,0 +1,10 @@
+{
+  "status": "verified",
+  "manifest": "3782bf338b0a0a1fa69d9f5c1a3157adb9e6ff288f3bcc873590a51021d0d89d",
+  "remote_audit_sha256": "dfd6e24f0ca98480131292cd6bfaa2f59bb6b4af55e4433953f16f82c6008a95",
+  "archives": 97,
+  "payloads": 145449,
+  "archive_bytes": 1636106601,
+  "elapsed_seconds": 47.370644900001935,
+  "archive_directory": "A:\\dev\\mcmc4qec\\output\\cluster_results\\20261017-calibration\\archives"
+}

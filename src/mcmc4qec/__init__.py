@@ -17,7 +17,7 @@ from .adapter_composition import SectorDecoder, HistoryDecoder
 from .codes import (make_toric_code, make_surface_code, make_asymmetric_toric_code,
                     make_hgp_hamming, make_bb_code, make_bb_code_72,
                     make_bb_code_108, make_bb_code_144, make_steane_code,
-                    concatenate_css, make_concatenated_steane_code)
+                    concatenate_css, make_concatenated_steane_code, make_tile_code)
 from .decoders import (mwpm_decoder, bposd_decoder, depolarizing_mwpm_decoder,
                        depolarizing_bposd_decoder)
 from .convergence import evaluate_convergence
@@ -39,7 +39,7 @@ __all__ = ["BinaryLinearModel", "CSSCode", "CallableDecoder", "CallableFailure",
            "bennett_log_ratio", "OverlapError", "SectorDecoder", "HistoryDecoder", "__version__",
            "make_toric_code", "make_surface_code", "make_asymmetric_toric_code",
            "make_hgp_hamming", "make_bb_code", "make_bb_code_72", "make_bb_code_108",
-           "make_bb_code_144", "make_steane_code", "concatenate_css", "make_concatenated_steane_code",
+           "make_bb_code_144", "make_steane_code", "concatenate_css", "make_concatenated_steane_code", "make_tile_code",
            "mwpm_decoder", "bposd_decoder", "depolarizing_mwpm_decoder", "depolarizing_bposd_decoder",
            "evaluate_convergence", "minimum_weight_coset_representative", "logical_representatives",
            "minimum_weight_initial_state", "maximum_weight_initial_state",

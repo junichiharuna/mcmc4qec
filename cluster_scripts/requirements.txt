@@ -1,0 +1,6 @@
+# Tested Python 3.11 environment; install only into the dedicated run venv.
+numpy==2.4.6
+pymatching==2.4.0
+ldpc==2.4.1
+bposd==2.1
+pytest==9.1.1

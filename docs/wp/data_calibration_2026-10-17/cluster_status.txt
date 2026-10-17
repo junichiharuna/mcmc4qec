@@ -1,0 +1,17 @@
+2026-10-17T15:47:37+09:00
+
+node-PRISM: 
+                                                            Req'd  Req'd   Elap
+Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
+--------------- -------- -------- ---------- ------ --- --- ------ ----- - -----
+265190.node* user  workq    m4q_sampl* 38240*   1  96   32gb 00:30 R 00:03
+265191.node* user  workq    m4q_sampl*    --    1  96   32gb 00:30 Q   -- 
+265192.node* user  workq    m4q_sampl*    --    1  96   32gb 00:30 H   -- 
+265193.node* user  workq    m4q_sampl*    --    1  96   32gb 00:30 H   -- 
+265194.node* user  workq    m4q_analy*    --    1  96   46gb 19:00 H   -- 
+Job Id: 265188.node-PRISM
+    resources_used.walltime = 00:01:11
+    Exit_status = 0
+Job Id: 265189.node-PRISM
+    resources_used.walltime = 00:00:06
+    Exit_status = 0

@@ -1,0 +1,16 @@
+{
+  "job_id": "265195.node-PRISM",
+  "depends_on": "265194.node-PRISM",
+  "command": [
+    "qsub",
+    "-W",
+    "depend=afterok:265194.node-PRISM",
+    "/home/user/workspace/mcmc4qec/20261017-tile-calibration-v1/cluster_scripts/audit_20261017.sh"
+  ],
+  "files": {
+    "cluster_scripts/audit_calibration.py": "2490bc2ab3533d77b536dfbd6a372049a67d970e74e0cfeb04af10138a5e8b82",
+    "cluster_scripts/audit_20261017.sh": "bba5d0c1d4be4c4fbbf1be28fe6191f1fbac15e56fe426013fde3cbbc2792aec",
+    "tests/test_calibration_audit.py": "2268ec1c9de160474f90eff49c12af0181d3390309fd5ed889dda10c79393bd5"
+  },
+  "expected_manifest": "3782bf338b0a0a1fa69d9f5c1a3157adb9e6ff288f3bcc873590a51021d0d89d"
+}

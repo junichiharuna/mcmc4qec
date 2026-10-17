@@ -72,6 +72,8 @@ def test_mypy_consumer_contract(tmp_path):
         "from mcmc4qec import BinaryLinearModel, minimum_weight_coset_representative, mwpm_decoder, bposd_decoder\n"
         "from mcmc4qec import DiagnosticsConfig, analyze_traces, diagnostic_report\n"
         "from mcmc4qec import estimate_logical_error, EstimationResult\n"
+        "from mcmc4qec import make_tile_code\n"
+        "tile: CSSCode = make_tile_code(6, 6)\n"
         "code = CSSCode([[0,0,0]], [[1,1,0],[0,1,1]], [[1,1,1]], [[1,0,0]])\n"
         "decoder = CallableDecoder(lambda s: [int(tuple(s)==(1,0))], identifier='example')\n"
         "noise = IndependentBitFlip(3, scales=[1.0, 1.0, 1.0])\n"

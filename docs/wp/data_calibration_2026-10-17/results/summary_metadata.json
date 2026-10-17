@@ -1,0 +1,11 @@
+{
+  "manifest": "3782bf338b0a0a1fa69d9f5c1a3157adb9e6ff288f3bcc873590a51021d0d89d",
+  "coverage_conditions": 336,
+  "mixing_conditions": 1776,
+  "contrasts": 816,
+  "thresholds": {
+    "rhat": 1.01,
+    "minimum_chain_ess": 100
+  },
+  "note": "Post-hoc descriptive screens; no replicate removed from primary coverage; no multiplicity-adjusted guarantees."
+}

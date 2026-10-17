@@ -21,6 +21,8 @@ SPECS = [
      {'locations', 'detectors', 'pl', 'pl_interval'}),
     ('bb72_bposd.py', ('ldpc',),
      {'code', 'p', 'pl', 'pl_interval', 'ew_direct', 'ew_chain'}),
+    ('tile_bposd.py', ('ldpc',),
+     {'code', 'n', 'k', 'p', 'pl', 'pl_interval', 'conditional_weight'}),
     ('toric_depolarizing.py', ('pymatching', 'ldpc', 'bposd'),
      {'code', 'p', 'pl', 'pl_interval', 'ew_direct', 'ew_chain'}),
     ('phenomenological_toric.py', ('pymatching', 'ldpc', 'bposd'),

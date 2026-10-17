@@ -23,6 +23,8 @@ For a Markdown-only overview, use the [public API contracts](../api_en.md).
 
 ::: mcmc4qec.make_steane_code
 
+::: mcmc4qec.make_tile_code
+
 ::: mcmc4qec.concatenate_css
 
 ::: mcmc4qec.make_concatenated_steane_code
