@@ -1,0 +1,16 @@
+# 低ノイズBARの全cohort集計と設定間整合性
+
+単一case・targetの全kernel・初期化・chain数・burn・window・ladder・誤差法について、予定replicateが重複なく揃っていることを確認する。
+group座標とcase・target・noise・n・kernel・初期化・replicateの対応、および全設定の一致を要求する。
+記録された失敗・診断未定義・区間未取得は全replicateの分母に残し、欠落した行を失敗行へ暗黙変換しない。
+独立referenceはこの集計では設定せず、bias・RMSE・被覆を推測しない。
+全体の点推定平均や設定差は全replicateに点推定がある場合のみ返し、available-onlyの量は別欄へ明示する。
+
+一要因だけ異なる全設定対を同じreplicate番号で比較し、推定差・log比の平均と標準誤差、区間の非交差件数、未取得区間の件数を保存する。
+log比は両方正の点推定がある対だけで定義し、ゼロや欠落を除いた結果を全cohortの値に置き換えない。
+区間の非交差件数は比較可能な対の数と全予定replicate数を併記する。
+設定間の一致・区間交差・良い診断は収束・精度・名目被覆の保証として扱わない。
+多数の設定対を探索する記述統計であり、同時推測や推奨設定の決定を行わない。
+
+CLIはpartition collectionの読み取り検証を経て実行し、collection・manifest・解析source・入力hashに結合した別出力を新規保存する。
+独立referenceとの比較と全traceの再復号は別工程とする。

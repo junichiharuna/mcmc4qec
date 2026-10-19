@@ -1,0 +1,21 @@
+{
+  "observed": "2026-10-19T00:51:54.279051+00:00",
+  "file": "tests/test_tile_low_noise_partitioned_trace_audit_resources.py",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-experimental-optional\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "--override-ini",
+    "pythonpath=",
+    "tests/test_tile_low_noise_partitioned_trace_audit_resources.py",
+    "-q",
+    "--durations=5",
+    "--junitxml=A:\\dev\\mcmc4qec\\docs\\wp\\data_experimental_release_2026-10-19\\file_time_v1_1.xml"
+  ],
+  "seconds": 31.700005499995314,
+  "returncode": 0,
+  "timeout": false,
+  "file_sha256": "c57bc220b22f5194e0e1b92fa2bf572505ceecd816a4c85eaadd0d6820b75611",
+  "file_unchanged": true,
+  "log_sha256": "22a756297d2335e9a02abf1d3b628ae92c4b54ce76d389950068e1defff15a0d"
+}

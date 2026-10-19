@@ -1,0 +1,73 @@
+# 低ノイズsampling archive処理の受入
+
+[小仕様](tile_low_noise_archive_spec_2026-10-19_ja.md)に従い、`cluster_scripts/tile_low_noise_archive.py`と対応テストを追加した。
+最初にimport未実装、次にexport未実装6件、最後に圧縮中のfile追加・worker変更2件の失敗を記録し、それぞれ実装後に通過を確認した。
+最終source SHAは`17fc7ec2a0373481b049b1528414e76c79d70f9b026edf58084c351f3428e6cf`、test SHAは`635c906442546c47868a77932e7d78775988778709258a0635f2b566e3bd0157`である。
+
+Windowsは新旧archive検証の36件を4.05秒、隔離Linux v3は同じ36件を1.15秒で通過し、skipはない。
+Windows logは`data_tile_validation_2026-10-17/low_noise_archive_export_acceptance_v2.txt`、SHAは`025e975efee978e89071496262ac1e68e4325aa29943dc738f5b506f3b0384e0`である。
+Linuxの応答・source hash・実行コマンドは`data_tile_validation_2026-10-17/low_noise_archive_linux_acceptance_v3.json`、SHAは`18583673ff954b0a2553e6d7fe3b395f1b5de1bf0626cdf2f0f4dc69b867e7b0`である。
+受入用配置は`/home/user/workspace/mcmc4qec/20261019-tile-low-archive-v3`で、既存計算元や稼働中の解析bundleは変更しなかった。
+v1・v2は追加検査前の別sourceに対する受入であり、現行sourceの根拠はv3である。
+
+検証は失敗artifactを残した全task集合、external manifest/archive/index hash、payloadの破損・欠落・重複・余分なfile、case/targetの不一致、capacityの誤混入を含む。
+実driverのtask列挙器との一致、検査中の3入力の変更、export中のpayload変更・file追加・worker変更、PBS環境のないexport拒否、既存出力への上書き拒否も確認した。
+exportのPBS変数はテストfixtureであり、本番export jobの終了証拠としては使わない。
+
+親によるコードレビューでは、既存検証器のstream検査を再利用し、低ノイズの7座標と外部固定hashを追加した範囲を確認した。
+サブエージェント利用上限のため、この追加処理の独立レビューは未実施である。
+実データへのexport・qsub・archive回収は未実施で、解析artifactのarchive対応も残る。
+正式投入時は固定worker/helper/Python・source manifest・元jobの完了証拠を結び付け、共通lockと最大2ノードを守る入口を使用する。
+この受入は転送・file集合の検査であり、再復号・混合・BAR被覆を追加検証したとは扱わない。
+
+## 正式比較の入力hashとの連結
+
+[投入仕様](tile_low_noise_archive_dispatch_spec_2026-10-19_ja.md)に従い、metadata gateとPBS workerを追加した。
+gateは元sampling・最終比較のF/exit0/run_count1・脚本pathと、固定manifest・受理記録・completion・Python・source・accepted indexのhashを照合する。
+workerは生成したarchiveを最終比較で消費済みの外部indexでも再検証し、一致時だけ正式completionを書く。
+生成側の自己整合性だけで、異なるデータを校正済みとして受け入れない。
+
+Windowsのexport・gate・worker・従来archiveの計56件は5.61秒、隔離Linux v6の同56件は1.30秒・skipなしで成功した。
+Linux receiptは`data_tile_validation_2026-10-17/low_noise_archive_linux_acceptance_v6.json`、SHAは`66d0703fc5296676f32c0d1066feb74b9c5cb92f2e7486bfdc530976307f7e9f`である。
+Linux v4は起動スクリプトの文字列置換が`str()`呼出しを壊してpytest起動前に失敗し、その証拠を保存した。
+v5で起動側だけを修正して51件、worker追加後のv6で56件を検証した。
+v4の失敗を科学計算の失敗やテスト成功には数えない。
+
+p=.01の受理済み最終reportから、全61,632 artifact・184,897ファイルのhashを抜き出した。
+失敗artifactを除く条件は入れず、全予定taskの3ファイル組とmanifestを選んだ。
+結果は`data_tile_validation_2026-10-17/low_sampling_export_case2_target0_inputs_v1/`に保存し、index SHAは`b78ff0af9a251118d9070c206f3fed672aed68606ac0070b3c8680fb90669b24`、抽出記録SHAは`86ec93fbe0be8e990f9c23903d0862de9472313247fa049a1f601e95b0a588bd`である。
+これは既存hashの抽出であり、今回ローカルへ生データを回収したという意味ではない。
+
+正式exportの配置は`/home/user/workspace/mcmc4qec/20261019-tile-low-sampling-recovery-case2-target0-v1`である。
+stage SHAは`bf74ad9bf1d76f7eca77ee6e1ddbf7db3f1dcdf1d0ba58788248fde4920b8740`、PBS脚本SHAは`7dfc34b3afd036b4445eccf1ba2b7949630440d40f85e2b3a0aa506bd59d9f14`である。
+既存WSS exportの投入制御をadaptし、lock・qsub・曖昧応答を扱う関数のASTが同じことと、追加10テスト・0.80秒の成功を確認した。
+固定sourceの入口は`output/submit_low_sampling_export_case2_target0_once.py`、SHAは`66b9855f60ffd49868c8b99766fd7db394aea3e35e4a4f083592e03088547603`で、exact copyもデータdirectoryに保存した。
+実クラスタでのpreflightは成功し、metadata gate・固定source・controller終了・PBS脚本構文を照合した。
+1 CPU・32 GiB・24時間は初回の要求上限であり、ETAではない。
+preflightの空き枠は観測時だけの値なので、実qsub時には共通lockの下で再照合する。
+この時点でexportのexecute・実回収は未実施であり、解析archive対応と独立レビューも残る。
+
+## 解析archiveとPBS workerの追加
+
+[解析回収仕様](tile_low_noise_analysis_archive_spec_2026-10-19_ja.md)に従い、sampling側を変更せず解析archiveと専用workerを追加した。
+受理済み最終reportから全768groupの3ファイル組とmanifest・解析contextを取り出し、外部sampling indexを加えた2,307 memberの固定indexを作成した。
+sampling indexは包装時のmetadataであり、元解析directoryに存在したファイルとは扱わない。
+解析payloadと全sampling入力markerの対応を検査するが、sampling payloadの再走査・再復号・BAR再計算は行わない。
+失敗groupも予定集合から除外しない。
+
+解析archive追加時の受入はWindows72件・5.65秒、Linux v7は92件・1.63秒で成功した。
+専用workerは新規出力・PBS割当・脚本path・投入intent・固定Python・stage・前後のmetadata gateを確認する。
+追加11件を含む関連62件はWindows4.14秒、Linux v8は0.95秒・skipなしで成功した。
+Linux v8 receipt SHAは`045c2b820520a279227228a95938d0d79414369775a87d7268d0f4d4dc652b6b`である。
+異なる受理index、欠けたcontext/index pin、実行中のstage・gate・PBS変更時にcompletionを作らないことも検査した。
+投入制御は既存WSSのlock・qsub・曖昧応答処理と同じASTを保ち、専用adapterの10件・0.58秒が成功した。
+
+解析index SHAは`a50621fa245815da43aa8a1cb55174eb3f619e55787d7a30bd36c52603987d57`、抽出記録SHAは`14e6675e946713e145208e061cb38202e8efe605271c66114eb1294c4e0e777e`である。
+新規stageは`20261019-tile-low-analysis-recovery-case2-target0-v1`、stage SHAは`77f56dbff067a2b06c37aaf52cc2add6e442e061a59c2a78cba13bae618be170`である。
+prepared記録SHAは`f3a57af815b7e7fdb11826645e0724534453f008b74f3be68aca930bca61560f`、脚本SHAは`3a0c648821fdbeaab834c2566ea3e68ff1c364c3d54b121d5ce2ef37577bb56f`である。
+入口は`output/submit_low_analysis_export_case2_target0_once.py`、SHAは`05aeea52e8d40baf81bab7a58e3862cc69b24d91f4f9ca66fc388f0053b10407`である。
+preflightを1回実行し、固定入力・controller終了・PBS脚本とmetadata gateが通ること、既存2jobの要求node数が2で空き枠がないことを確認した。
+preflight stdout SHAは`1f7141fb2a0d4b43c95798c23b3b954d0117c11ebed510107217cb1f602cf660`である。
+executeは未実施であり、実export・PBS終端受理・ローカルarchive回収の成功はまだ主張しない。
+今回の親レビューでは、sampling workerの固定配置を変えないこと、追加metadataもgateのhash集合へ含めること、archive検査成功と正式回収完了を区別することを確認した。
+サブエージェント利用上限により、この追加の独立レビューは未実施である。

@@ -1,0 +1,166 @@
+# 分割samplingから既存final v3への接続
+
+## 目的と既存入口
+
+BAR collectorとfull trace監査の実完了記録を、submit_low_noise_final_report_once_v3.pyの既存契約へ渡す。
+固定12条件のregistry、各条件192 replicate・768 group・67584行、独立WSS referenceの対応を維持する。
+科学reader・数値計算・WSS source relocationの検証は既存v3を使用する。
+metadataの組立をraw payload検証や最終比較完了とは扱わない。
+
+## source結合の実確認
+
+既存final v3のbinding f59cc3e90867f81770cea35c348e1db1654f3922c272c73abeb569fd32bf19b3は、partitioned moduleとcoreを生成元のanalysis-v11から読み込む。
+元の環境とfinal v3の両方でsource hashを取得し、analysis24ファイル・trace24ファイル・collection42ファイルの絶対パスとbytesの一致を確認した。
+finalのbootstrap・science検証と全native binary・runtime検証も成功した。
+静的なreport import closureに入らないsubmit_tile_low_noise_partitioned_analysis.pyは、凍結acceptance manifest ff79cc15a5b653db5e68dc8edd145c4cae26530fc7068d6dbd05b5dd94229025の権威で別途確認した。
+この追加sourceのhashとacceptance manifestをentry.input_sha256にも含め、既存の正確なreport source closureを書き換えない。
+成功記録はdata_tile_validation_2026-10-17/low_partition_final_source_bridge_v2.jsonで、SHAは1be74aef4adc31ef4e1ce92ce0318834664529d5b7796c9002a128a85c0701dcである。
+v1は「readerの全ファイルが静的report import closureに含まれる」という過剰な仮定で拒否された記録として保持する。
+v1の失敗後は検証を省かず、既存の凍結manifestを使って追加ファイルを検証するv2で確認した。
+
+## 入力と受入
+
+localで実BAR collector completionと実full trace completionのintent・script・stdout/stderr・receiptを、固定sourceと実execute記録から再構成する。
+local読取の前後で全証拠hashを比較し、同じpathに異なるhashを統合しない。
+BARとtraceの元requestにあるinputs・collector_prepared_sha256・collector_completion_sha256・collector_acceptedの完全一致を要求する。
+両job IDは異なる実jobとし、case・target・sampling root・full audit rootを固定命名に照合する。
+remoteへは両completionの外部SHAと内容、元のsampling・analysis・trace準備のauthorityを渡す。
+両rootが同じcase・target・192 replicateのsampling manifestに対応し、BARとtraceが同じsampling collectorを参照することを検証する。
+両completionのscopeと全metadata hashを確認し、現時点での実PBS終端・脚本・resource・hostを再照合する。
+remoteでは外部completion SHA・内容・外部prepared SHAを固定した後、元requestのauthority digestと生成物hashを再確認する。
+既存partitioned analysis.read_plan、trace.read_planとread_terminalを使用し、同じproduction planと192 anchor identityを結合する。
+両jobの実台帳が準備済み台帳と一致し、現在のPBS終端が親側受理時と変わらないことを要求する。
+trace measurementとaudit markerは小さい証拠として検証できるが、final entryのinput_sha256にはmeasurements・groupsなどのraw artifactを入れない。
+元completionのhashを固定することでmetadata集合を結合し、大きなpayloadの検証はfinal computeへ渡す。
+
+## 最終比較契約への写像
+
+entry.readerはpartitioned、rootはpartitioned-full-C-T-v1、audit_rootはpartitioned-trace-full-C-T-v1とする。
+collection_submissionはanalysis-collection-submission/submission.jsonを指す。
+producer_completionはpartition-collection/summary.json、artifactsはrows.jsonlのpathと既存summaryのhashを使用する。
+collector completionのworker計測・親側完了scopeは補助証拠として別に固定する。
+collection_acceptanceの成功は完了済みcollectorと監査のmetadata受理を表し、現在の全payloadを再検証済みとは記載しない。
+anchors192の件数はsampling完了証拠と全anchor identityから確認し、失敗や未取得を除外して作らない。
+upstreamはsamplingの全partition、sampling collector、BARの全partition、full trace監査、WSS生成とWSS監査、BAR collectorを網羅する。
+全jobはselector_member=Trueとし、既存selector_jobsが導く台帳path・manifest・allowed_exitsとの完全一致を要求する。
+upstream一覧は既存final v3のselector_jobsから作り、元のsampling・analysis計画から得たroleと台帳pathの全件集合に一致することを確認する。
+現在の実qstatを既存check_terminal・check_pbsに渡し、実台帳にresourceがない旧jobだけは実Resource_Listから資源を復元する。
+全実終端を前後で比較し、terminalファイルを保存する前に証拠を固定する。
+BAR collectorのroleはcollectionとし、実job ID・host・groups768・rows67584をsummaryから取得する。
+samplingの記録された失敗終了codeを成功終了に置き換えない。
+WSS全16条件の保存済みaudit markerを固定し、選択conditionは既存compatible_conditionで求める。
+config組立ではmanifest・analysis context・partition plan・collector summary・trace planの現在の内容と受理済みjoin内容の一致を要求する。
+WSS監査の全16 markerと2 payload hashを保存し、payload本体の読み取りはfinal computeへ残す。
+追加reader sourceをsampling acceptance manifestで再照合し、親側completion・preparedと同じmetadata入力集合に固定する。
+新しいinputs/partitioned-caseC-targetT-v1へrequest・実terminal・collection acceptance・resource decisionを保存する。
+出力先が存在する場合は上書きせず、失敗途中の生成物も保持する。
+既存validate・selector membership・実PBS再照合に成功した後だけconfig.jsonを作り、返却scopeはraw reader未実行・prepare未実行・qsub未実行とする。
+実assembly入口は固定final v3 wrapperのhashと既存source bindingを確認してbootstrap・scienceを呼び、completed_inputs→entry→upstream→writeを順に実行する。
+sampling・final・WSS・controllerのrootは既存配置に固定し、12条件のregistryを保持する。
+local入口は両completionの実連鎖からrequestを再構成し、固定helper source・外部binding・生成script・intent・stdout/stderr・receiptを保存する。
+通信失敗・不正response・実行中のlocal証拠変更は未受理として保持し、同じ出力先へ自動再実行しない。
+assembly自体からqsubを呼ばず、後続final prepare・preflight・execute・sealの証拠と分離する。
+final一回実行入口はassemblyの実script・intent・成功receipt・stdout/stderrを固定sourceから再構成して検証する。
+prepare→preflight→execute→sealの各実記録を順に要求し、control SHAは実prepare responseから取得する。
+executeは実preflightと同じmanifest・resource・脚本hash・controlを要求し、固定final v3のsubmit --executeだけを呼ぶ。
+最大2node・共有lock・qsub応答不明時の保持は既存final v3の検査をそのまま使用する。
+local側でもphaseごとのintentを一回だけ作り、応答が不明または検証できないexecuteを自動再投入しない。
+sealは実executeのjob IDと一致する既存final v3の受理結果だけを保存する。
+
+## 計算資源と検証
+
+final resourceはserialの1 CPU・1 worker・最大1nodeとし、全体の待機中を含む最大2node制限を既存qsub入口で維持する。
+実collectorのPBS wall/RSSと、full trace監査・WSS監査の実測から追加hash走査の予算を明示する。
+追加走査の予算は計画上の余裕であり、精密なhash速度モデルや完了時刻予測とは扱わない。
+partitioned finalの初回要求は1 CPU・1 worker・24時間を上限とし、実collector walltimeと30分の固定余裕を引いた残りを未測定の追加hash予算として明記する。
+並列trace監査のwalltimeをserial hash時間へ換算せず、trace監査とWSS監査の実PBS walltime・RSSは別の観測値として固定する。
+要求memoryはmax(16 GiB, 実collector RSS)の2倍を整数GiBに切り上げ、340 GiBを超える場合は拒否する。
+実collector walltimeだけで24時間の要求枠から30分の余裕を引いた範囲を使い切る場合も拒否し、実測値を切り詰めない。
+resource decisionのconfirmedはこの初回要求の確定を表し、完了時間やmemory上限の実証ではない。
+初回が時間・memory制限で終了した場合は実記録を保持し、資源の再検討なしに再投入しない。
+既存confirmed_resourceが要求する上限と実測根拠を満たさない場合、架空の実測値で通さない。
+metadata組立ではraw readerを呼ばず、既存validateとselector membershipの事前照合まで行う。
+PBS computeが現在のrows・raw group・trace・anchor・WSSを実際に再検証した後、既存sealで最終結果を受理する。
+
+## 未実施
+
+2026-10-19 07:19時点でsource bridgeの実確認まで完了した。
+local完了記録の結合、remote metadata組立、実resource decision、final v3への一回実行transportは未実装である。
+残り9条件の正式比較や本仕様の本番接続は未実施である。
+
+## 2026-10-19 07:24 JST: local入力結合の実装
+
+output/low_partition_final_join_inputs.pyで両completionの実記録を再構成する処理を実装した。
+実prepare・execute・completionの各scriptとintent、成功receipt、stdout/stderr hashを既存の固定sourceから照合する。
+BARとtraceの元sampling authorityの完全一致、別々の実job ID、固定case・target・root・full cohort・scopeを要求する。
+既存final source bindingと成功したsource bridgeを外部SHAで固定して返却する。
+WindowsではBAR記録6件・8.69秒、trace記録6件・9.36秒、結合条件17件・0.45秒が成功した。
+Linuxでは結合条件17件・0.04秒が成功した。
+実C0T0の未完了sampling collectorを検出し、process呼出し0件で拒否した。
+negative gateのzero SHAは意図的な不正値であり、実authorityとして使用しない。
+依存66ファイルと外部証拠2件をpartition_final_join_inputs_v1に保存した。
+remote metadata組立、実測を用いたresource decision、final v3の一回実行transportは未実装である。
+本番の入力結合・final接続は全9条件で未実施である。
+
+## 2026-10-19 07:29 JST: remote完了証拠の照合
+
+output/low_partition_final_assemble_remote.pyにfinal_join_completed_inputsを実装した。
+両completionの外部SHA・内容・prepared SHA・元requestのauthorityと生成物を照合し、必要なmetadataの欠落を拒否する。
+既存analysis.read_plan、trace.read_planとread_terminalで同じproduction plan・192 anchor identityを確認する。
+実台帳と準備済み台帳、現在の実PBS終端・host・resourceを照合し、読み取り前後の変更を拒否する。
+この段階ではraw payloadを読まず、最終比較済みとも扱わない。
+既存final v3のEvidenceを用いた19件がWindows2.17秒・Linux0.17秒で成功した。
+科学readerとPBSは合成fixtureであり、本番cohortの検証成功ではない。
+Windows fixtureのrelative path表記は実Linux記録と同じPOSIX形式にした。
+依存69ファイルと外部証拠をpartition_final_assemble_inputs_v1へ保存した。
+全上流job census、resource decision、config保存とfinal transportは未実装である。
+
+## 2026-10-19 07:40 JST: job一覧と初回資源要求
+
+output/low_partition_final_upstream.pyに既存selector_jobsを使う全上流job一覧生成を実装した。
+元計画からの全role・台帳集合との一致、失敗終了codeの保持、実終端と脚本・資源・host、前後の変化を検証する。
+terminal保存とqsubはこの関数では行わない。
+既存final v3のselectorと実check_terminal・check_pbsを使った合成fixture26件がWindows5.01秒・Linux0.65秒で成功した。
+output/low_partition_final_resource.pyに明示的な初回24時間要求を実装した。
+実collector wall/RSSを下回る要求を作らず、trace・WSS監査の観測費用と未測定の追加hash予算を区別する。
+既存confirmed_resourceを使った合成fixture13件がWindows0.65秒・Linux0.06秒で成功した。
+依存73ファイルと外部証拠をpartition_final_resource_v1へ保存した。
+実cohortの資源確定、config保存、final一回実行transportと本番final接続は未実施である。
+
+## 2026-10-19 07:45 JST: config構築と保存
+
+output/low_partition_final_config.pyにentry構築と既存契約に沿うconfig保存を実装した。
+現plan・context・collector summaryと受理済みjoin内容を照合し、completion・prepared・追加source・WSS全16 markerを固定する。
+WSSのjson・npzのhashは保存するがpayloadを読み取らず、rows本体もこの段階では読まない。
+sampling-submissions/anchors以下の台帳を一般input_sha256へ重複登録すると既存raw-path guardに拒否されることを受入で確認した。
+全台帳と脚本は専用upstreamで固定・照合し、一般metadataへの重複登録を行わない構成に修正した。
+request・terminal・acceptance・resource decisionを新規保存し、既存validateと実PBS再照合が成功した後だけconfig.jsonを保存する。
+途中失敗の証拠は保持し、既存出力を上書きしない。
+Windows21件・6.46秒とLinux21件・0.96秒が成功した。
+native bootstrap・controller状態とplan/PBSは合成fixtureであり、実cohortや実環境の再検証済みとは扱わない。
+依存75ファイルと外部証拠をpartition_final_config_v1へ保存した。
+全helperの実assembly入口、final一回実行transport、本番config生成と投入は未実施である。
+
+## 2026-10-19 07:50 JST: assemblyの実行入口
+
+output/low_partition_final_assembly_remote.pyが固定wrapperとsource bindingを読み、実bootstrap・scienceから全helperを結合する。
+output/assemble_low_partition_final_once.pyが両completionの実連鎖を再構成し、固定helperで生成したscriptを一回だけSSHへ渡す。
+local intent・scriptと全入力の前後hash、responseのauthority・config path・scope・resource・job IDを確認する。
+失敗・割込み時もstdout/stderr・receiptを保持し、同じ出力先へ再実行しない。
+Windows17件・1.28秒、Linux17件・0.28秒が成功した。
+実Linuxのbootstrap・science通過後に不正rootを拒否するgateも成功した。
+実C0T0の不足したsampling collector completionをCLIが検出し、process呼出し0件・production intent生成0件だった。
+negative gateのzero SHAは意図的な不正値であり、production authorityではない。
+依存78ファイルと外部証拠をpartition_final_assembly_transport_v1へ保存した。
+本番assembly・config生成、後続final prepare/preflight/execute/sealの接続と実行は未実施である。
+
+## 2026-10-19 07:54 JST: final phase transport
+
+output/invoke_low_partition_final_once.pyで実assemblyと各前段phaseのscript・intent・成功receipt・stdout/stderrを再構成する。
+既存final v3のprepare・submit・seal CLIへ固定configと実control SHAを渡す。
+executeだけがsubmit --executeを呼び、応答不明やlocal証拠変更の場合は未受理として保存する。
+実preflightとexecuteの脚本・manifest・resource一致、実executeとsealのjob ID一致を要求する。
+合成SSH応答による24件がWindows5.07秒・Linux1.42秒で成功した。
+依存80ファイルと外部証拠をpartition_final_invocation_transport_v1へ保存した。
+実行手順はlow_partition_final_runbook_2026-10-19_ja.mdに保存した。
+本番assembly・final各phaseは全9条件で未実施である。

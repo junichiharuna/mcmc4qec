@@ -1,0 +1,744 @@
+{
+  "observed": "2026-10-18T10:49:37.067275+09:00",
+  "bundle": "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2",
+  "bundle_files": 85,
+  "bundle_files_unchanged": true,
+  "existing_case3_unchanged": true,
+  "existing_case3_sha256": {
+    "runs/capacity-3/sampling_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+    "runs/capacity-3/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+    "runs/capacity-3/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+    "runs/capacity-3/manifest.json": "c624ff6354a10bfb705fb33f224b1ebd4ecf63aa2b495e63a01e22791e58fe47",
+    "runs/capacity-3/audit.sh": "9a5503c231cf055307543db4c7f200c6df1234fb47d39b6e866057220c4f8dbb",
+    "runs/capacity-3/dry_run.json": "574660575ebe1a23289930076082ffd9519592b1a06930fda1ea723e29773c83",
+    "runs/full-3/sampling_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+    "runs/full-3/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+    "runs/full-3/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+    "runs/full-3/manifest.json": "ca165338d83d88d100039d1002c44310acaf7d8e6765f11d3e5a7347cf7a8864"
+  },
+  "native_profile": {
+    "fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c",
+    "source_sha256": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6",
+    "runtime": {
+      "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+      "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+      "python": "3.11.9",
+      "packages": {
+        "numpy": "2.4.6",
+        "pymatching": "2.4.0",
+        "ldpc": "2.4.1",
+        "bposd": "2.1"
+      },
+      "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838"
+    },
+    "platform": "Linux-4.18.0-477.10.1.el8_8.x86_64-x86_64-with-glibc2.28",
+    "machine": "x86_64",
+    "python_build": [
+      "main",
+      "Apr 19 2024 16:48:06"
+    ],
+    "byteorder": "little",
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    },
+    "native_ldpc_sha256": {
+      "belief_find_decoder/_belief_find_decoder.cpython-311-x86_64-linux-gnu.so": "c8f8cf5d31d72ab693863ff96f74dc433e1c2b760eeda8a2d1bc9107a6fa9b49",
+      "bp_decoder/_bp_decoder.cpython-311-x86_64-linux-gnu.so": "5b128e424b9e77ae6cfd87624c39cd2f3eefba2ce0c26c13ad65cb00ca5c4264",
+      "bp_flip/_bp_flip.cpython-311-x86_64-linux-gnu.so": "331e9c0ca0a0309dba9263d9c4d3b26930d67a61eae989dcf2ce5f901290d88f",
+      "bplsd_decoder/_bplsd_decoder.cpython-311-x86_64-linux-gnu.so": "8adb27738d412bda0df30a80179e98a44a3edac1dfccc62cf070214ef8dcd977",
+      "bposd_decoder/_bposd_decoder.cpython-311-x86_64-linux-gnu.so": "625f6d5e006969be220e91a020bcb6cd050ada53a11b6557db440e473f2410cf",
+      "lsd_decoder/_lsd_decoder.cpython-311-x86_64-linux-gnu.so": "f63007a4b023039df9d0e1b04a0fdc234f1341132594acd4bb67e71b8b433f8e",
+      "mod2/_mod2.cpython-311-x86_64-linux-gnu.so": "d192d9b5c7efa068a19a8a530ba1a6256c9beadd8beb983f419af540392075e3",
+      "union_find_decoder/_union_find_decoder.cpython-311-x86_64-linux-gnu.so": "719876ac30cb0a9ffb743d14fb2075cb03d4accf44ab7fd245d03bf8bd77b06d"
+    },
+    "problem_hash": "b2b0c121400961a78f41ae7eb1b604d96f59fcedac9019e56f5934e2b727eb00",
+    "repeated": [
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      }
+    ],
+    "fresh": [
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      },
+      {
+        "predicted": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "sector": 94,
+        "failure": true
+      }
+    ],
+    "decoder_probe": {
+      "samples": 4,
+      "repeat_mismatches": 0,
+      "reverse_mismatches": 0,
+      "fresh_mismatches": 0,
+      "syndrome_violations": 0,
+      "failure_definition_mismatches": 0,
+      "prior_comparisons": []
+    },
+    "agrees_with_stored_sector": true,
+    "warning": "One selected state only. Agreement within these repetitions is not a universal determinism proof. Different OS/native binaries can differ even when package version strings match; the mechanism has not been isolated by this probe."
+  },
+  "native_profile_digest": "292c01e24195aa0bc466f86a7aa87e96be4d3c3f6033b540a8da3c3844618f6f",
+  "native_seconds": 1.182918893173337,
+  "records": [
+    {
+      "case": 0,
+      "roots": {
+        "capacity": {
+          "root": "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/capacity-0",
+          "manifest": "7dbe3663ca80203850f4f830549b4c30e5099f2b6889e968d093d6a0f1cd9057",
+          "plan": {
+            "schema": 1,
+            "purpose": "trace_audit_capacity",
+            "case": 0,
+            "replicates": 24,
+            "sampling_manifest": "d2f5d5a3e806732514eecb9dca5432f296d914607d9a81bb2f15ca8616ace8fd",
+            "platform_profile": "292c01e24195aa0bc466f86a7aa87e96be4d3c3f6033b540a8da3c3844618f6f",
+            "platform_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c",
+            "runtime": {
+              "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+              "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+              "python": "3.11.9",
+              "packages": {
+                "numpy": "2.4.6",
+                "pymatching": "2.4.0",
+                "ldpc": "2.4.1",
+                "bposd": "2.1"
+              },
+              "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+              "bar_sampler_sha256": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb"
+            },
+            "sources": {
+              "wrapper": "8b59e4cc8cf1f77dc64d5154dbf2b65a899e0d22dba9b4713f583021e623a119",
+              "audit": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+              "native_probe": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6"
+            },
+            "required_threads": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1",
+              "MKL_NUM_THREADS": "1",
+              "NUMEXPR_NUM_THREADS": "1"
+            },
+            "warning": "Compact arrays checked at every saved step; only stored initial/checkpoint physical states re-decoded. Recorded seeds are checked, not full RNG trajectory replay. Uses the same decoder implementation, not an independent decoder correctness proof. No mixing or coverage inference. Failed sampling tasks remain in the denominator. Capacity is a fixed subset for resource measurement, not full-cohort validation. Timings include group audit persistence; the measurement record write is excluded."
+          },
+          "groups": 96,
+          "dry_run": {
+            "command": [
+              "qsub",
+              "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/capacity-0/audit.sh"
+            ],
+            "manifest": "7dbe3663ca80203850f4f830549b4c30e5099f2b6889e968d093d6a0f1cd9057",
+            "script_sha256": "698ed5d34ca0c4094c72afcf4f157ce6ecb208223897f58eb3d88eae7e7f2fae",
+            "resource": {
+              "cpus": 96,
+              "memory_gb": 32,
+              "wall_seconds": 1800,
+              "walltime": "00:30:00",
+              "requested_nodes": 1,
+              "max_nodes": 2,
+              "warning": "Initial resource measurement budget, not a measured runtime or completion guarantee."
+            },
+            "submit_source_sha256": "31fddab5214373358dde2f68da9905ad0fc7b046f20f8069a2191526b479f711",
+            "source_root": "/home/user/workspace/mcmc4qec/20261017-tile-production-v1/runs/production",
+            "job_id": "dry-run"
+          },
+          "bash_n_returncode": 0,
+          "files_sha256": {
+            "sampling_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+            "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+            "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+            "manifest.json": "ca5a746e9ab9a7c289f349f697883a4e375d0a8f5a72bf7017305183d23677e1",
+            "audit.sh": "698ed5d34ca0c4094c72afcf4f157ce6ecb208223897f58eb3d88eae7e7f2fae",
+            "dry_run.json": "12453c8494934b9ab107b0be5d73c90933cfbbfcbd6328275c02c7f6b1cdb030"
+          }
+        },
+        "full": {
+          "root": "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/full-0",
+          "manifest": "a77bf7b17c964d2f0d8ab3a6ab0e976a0a7b9628e8527cd00820a78f6086dc44",
+          "plan": {
+            "schema": 1,
+            "purpose": "trace_audit_full",
+            "case": 0,
+            "replicates": 192,
+            "sampling_manifest": "d2f5d5a3e806732514eecb9dca5432f296d914607d9a81bb2f15ca8616ace8fd",
+            "platform_profile": "292c01e24195aa0bc466f86a7aa87e96be4d3c3f6033b540a8da3c3844618f6f",
+            "platform_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c",
+            "runtime": {
+              "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+              "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+              "python": "3.11.9",
+              "packages": {
+                "numpy": "2.4.6",
+                "pymatching": "2.4.0",
+                "ldpc": "2.4.1",
+                "bposd": "2.1"
+              },
+              "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+              "bar_sampler_sha256": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb"
+            },
+            "sources": {
+              "wrapper": "8b59e4cc8cf1f77dc64d5154dbf2b65a899e0d22dba9b4713f583021e623a119",
+              "audit": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+              "native_probe": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6"
+            },
+            "required_threads": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1",
+              "MKL_NUM_THREADS": "1",
+              "NUMEXPR_NUM_THREADS": "1"
+            },
+            "warning": "Compact arrays checked at every saved step; only stored initial/checkpoint physical states re-decoded. Recorded seeds are checked, not full RNG trajectory replay. Uses the same decoder implementation, not an independent decoder correctness proof. No mixing or coverage inference. Failed sampling tasks remain in the denominator. Capacity is a fixed subset for resource measurement, not full-cohort validation. Timings include group audit persistence; the measurement record write is excluded."
+          },
+          "groups": 768,
+          "files_sha256": {
+            "sampling_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+            "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+            "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+            "manifest.json": "2b1d56c14534905b1a8aaa030128d13246ccc766d5e1bb21e5d973857ebd27e4"
+          }
+        }
+      }
+    },
+    {
+      "case": 1,
+      "roots": {
+        "capacity": {
+          "root": "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/capacity-1",
+          "manifest": "107be2506d7cd31e469ddda463841c222b53b981ba160e15181ac9a3ba437920",
+          "plan": {
+            "schema": 1,
+            "purpose": "trace_audit_capacity",
+            "case": 1,
+            "replicates": 24,
+            "sampling_manifest": "d2f5d5a3e806732514eecb9dca5432f296d914607d9a81bb2f15ca8616ace8fd",
+            "platform_profile": "292c01e24195aa0bc466f86a7aa87e96be4d3c3f6033b540a8da3c3844618f6f",
+            "platform_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c",
+            "runtime": {
+              "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+              "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+              "python": "3.11.9",
+              "packages": {
+                "numpy": "2.4.6",
+                "pymatching": "2.4.0",
+                "ldpc": "2.4.1",
+                "bposd": "2.1"
+              },
+              "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+              "bar_sampler_sha256": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb"
+            },
+            "sources": {
+              "wrapper": "8b59e4cc8cf1f77dc64d5154dbf2b65a899e0d22dba9b4713f583021e623a119",
+              "audit": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+              "native_probe": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6"
+            },
+            "required_threads": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1",
+              "MKL_NUM_THREADS": "1",
+              "NUMEXPR_NUM_THREADS": "1"
+            },
+            "warning": "Compact arrays checked at every saved step; only stored initial/checkpoint physical states re-decoded. Recorded seeds are checked, not full RNG trajectory replay. Uses the same decoder implementation, not an independent decoder correctness proof. No mixing or coverage inference. Failed sampling tasks remain in the denominator. Capacity is a fixed subset for resource measurement, not full-cohort validation. Timings include group audit persistence; the measurement record write is excluded."
+          },
+          "groups": 96,
+          "dry_run": {
+            "command": [
+              "qsub",
+              "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/capacity-1/audit.sh"
+            ],
+            "manifest": "107be2506d7cd31e469ddda463841c222b53b981ba160e15181ac9a3ba437920",
+            "script_sha256": "07da9e2d82844bcb3440679543d105876e639958c75ce6431aa7a2529b9d0714",
+            "resource": {
+              "cpus": 96,
+              "memory_gb": 32,
+              "wall_seconds": 1800,
+              "walltime": "00:30:00",
+              "requested_nodes": 1,
+              "max_nodes": 2,
+              "warning": "Initial resource measurement budget, not a measured runtime or completion guarantee."
+            },
+            "submit_source_sha256": "31fddab5214373358dde2f68da9905ad0fc7b046f20f8069a2191526b479f711",
+            "source_root": "/home/user/workspace/mcmc4qec/20261017-tile-production-v1/runs/production",
+            "job_id": "dry-run"
+          },
+          "bash_n_returncode": 0,
+          "files_sha256": {
+            "sampling_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+            "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+            "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+            "manifest.json": "25a9d5cf5c08b4070947cdb0aa1949910819ff5508269657f69ae9d0f77cc693",
+            "audit.sh": "07da9e2d82844bcb3440679543d105876e639958c75ce6431aa7a2529b9d0714",
+            "dry_run.json": "eb1a9a1bc51329d8b4c02f7bac0336b1d42392cec7a599cb87ba78507d2df521"
+          }
+        },
+        "full": {
+          "root": "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/full-1",
+          "manifest": "6e8988e3c7f4271b45cb693e0f826d0cdc46a641e1f0f118215cadc76bc62c85",
+          "plan": {
+            "schema": 1,
+            "purpose": "trace_audit_full",
+            "case": 1,
+            "replicates": 192,
+            "sampling_manifest": "d2f5d5a3e806732514eecb9dca5432f296d914607d9a81bb2f15ca8616ace8fd",
+            "platform_profile": "292c01e24195aa0bc466f86a7aa87e96be4d3c3f6033b540a8da3c3844618f6f",
+            "platform_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c",
+            "runtime": {
+              "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+              "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+              "python": "3.11.9",
+              "packages": {
+                "numpy": "2.4.6",
+                "pymatching": "2.4.0",
+                "ldpc": "2.4.1",
+                "bposd": "2.1"
+              },
+              "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+              "bar_sampler_sha256": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb"
+            },
+            "sources": {
+              "wrapper": "8b59e4cc8cf1f77dc64d5154dbf2b65a899e0d22dba9b4713f583021e623a119",
+              "audit": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+              "native_probe": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6"
+            },
+            "required_threads": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1",
+              "MKL_NUM_THREADS": "1",
+              "NUMEXPR_NUM_THREADS": "1"
+            },
+            "warning": "Compact arrays checked at every saved step; only stored initial/checkpoint physical states re-decoded. Recorded seeds are checked, not full RNG trajectory replay. Uses the same decoder implementation, not an independent decoder correctness proof. No mixing or coverage inference. Failed sampling tasks remain in the denominator. Capacity is a fixed subset for resource measurement, not full-cohort validation. Timings include group audit persistence; the measurement record write is excluded."
+          },
+          "groups": 768,
+          "files_sha256": {
+            "sampling_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+            "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+            "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+            "manifest.json": "fb6909db9f85eb4572bf17d87509b41855405fdd71a1b41266e07148f25c9c54"
+          }
+        }
+      }
+    },
+    {
+      "case": 2,
+      "roots": {
+        "capacity": {
+          "root": "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/capacity-2",
+          "manifest": "dc27e7e9f2234f9dfe690938ee8d6b538279503b93197fceaa2617c44f2eb542",
+          "plan": {
+            "schema": 1,
+            "purpose": "trace_audit_capacity",
+            "case": 2,
+            "replicates": 24,
+            "sampling_manifest": "d2f5d5a3e806732514eecb9dca5432f296d914607d9a81bb2f15ca8616ace8fd",
+            "platform_profile": "292c01e24195aa0bc466f86a7aa87e96be4d3c3f6033b540a8da3c3844618f6f",
+            "platform_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c",
+            "runtime": {
+              "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+              "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+              "python": "3.11.9",
+              "packages": {
+                "numpy": "2.4.6",
+                "pymatching": "2.4.0",
+                "ldpc": "2.4.1",
+                "bposd": "2.1"
+              },
+              "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+              "bar_sampler_sha256": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb"
+            },
+            "sources": {
+              "wrapper": "8b59e4cc8cf1f77dc64d5154dbf2b65a899e0d22dba9b4713f583021e623a119",
+              "audit": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+              "native_probe": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6"
+            },
+            "required_threads": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1",
+              "MKL_NUM_THREADS": "1",
+              "NUMEXPR_NUM_THREADS": "1"
+            },
+            "warning": "Compact arrays checked at every saved step; only stored initial/checkpoint physical states re-decoded. Recorded seeds are checked, not full RNG trajectory replay. Uses the same decoder implementation, not an independent decoder correctness proof. No mixing or coverage inference. Failed sampling tasks remain in the denominator. Capacity is a fixed subset for resource measurement, not full-cohort validation. Timings include group audit persistence; the measurement record write is excluded."
+          },
+          "groups": 96,
+          "dry_run": {
+            "command": [
+              "qsub",
+              "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/capacity-2/audit.sh"
+            ],
+            "manifest": "dc27e7e9f2234f9dfe690938ee8d6b538279503b93197fceaa2617c44f2eb542",
+            "script_sha256": "94acf62af6cd0e67a99e964971808ca87383e49c42d619cdbab2ea358310fd42",
+            "resource": {
+              "cpus": 96,
+              "memory_gb": 32,
+              "wall_seconds": 1800,
+              "walltime": "00:30:00",
+              "requested_nodes": 1,
+              "max_nodes": 2,
+              "warning": "Initial resource measurement budget, not a measured runtime or completion guarantee."
+            },
+            "submit_source_sha256": "31fddab5214373358dde2f68da9905ad0fc7b046f20f8069a2191526b479f711",
+            "source_root": "/home/user/workspace/mcmc4qec/20261017-tile-production-v1/runs/production",
+            "job_id": "dry-run"
+          },
+          "bash_n_returncode": 0,
+          "files_sha256": {
+            "sampling_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+            "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+            "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+            "manifest.json": "6e74a50990cf330e309f69fcd869afc6eb805ba36d8c763ddd5d0f52283145d4",
+            "audit.sh": "94acf62af6cd0e67a99e964971808ca87383e49c42d619cdbab2ea358310fd42",
+            "dry_run.json": "da3c55b7fe7871fb8ebcd6f00449bc34a605e529327cfb23b19127a0c2fff889"
+          }
+        },
+        "full": {
+          "root": "/home/user/workspace/mcmc4qec/20261018-tile-trace-audit-v2/runs/full-2",
+          "manifest": "6778d183b106dd6b92603b9fb71f40dec882cbd3e4aca1e82a30118d3c57bef3",
+          "plan": {
+            "schema": 1,
+            "purpose": "trace_audit_full",
+            "case": 2,
+            "replicates": 192,
+            "sampling_manifest": "d2f5d5a3e806732514eecb9dca5432f296d914607d9a81bb2f15ca8616ace8fd",
+            "platform_profile": "292c01e24195aa0bc466f86a7aa87e96be4d3c3f6033b540a8da3c3844618f6f",
+            "platform_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c",
+            "runtime": {
+              "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+              "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+              "python": "3.11.9",
+              "packages": {
+                "numpy": "2.4.6",
+                "pymatching": "2.4.0",
+                "ldpc": "2.4.1",
+                "bposd": "2.1"
+              },
+              "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+              "bar_sampler_sha256": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb"
+            },
+            "sources": {
+              "wrapper": "8b59e4cc8cf1f77dc64d5154dbf2b65a899e0d22dba9b4713f583021e623a119",
+              "audit": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+              "native_probe": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6"
+            },
+            "required_threads": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1",
+              "MKL_NUM_THREADS": "1",
+              "NUMEXPR_NUM_THREADS": "1"
+            },
+            "warning": "Compact arrays checked at every saved step; only stored initial/checkpoint physical states re-decoded. Recorded seeds are checked, not full RNG trajectory replay. Uses the same decoder implementation, not an independent decoder correctness proof. No mixing or coverage inference. Failed sampling tasks remain in the denominator. Capacity is a fixed subset for resource measurement, not full-cohort validation. Timings include group audit persistence; the measurement record write is excluded."
+          },
+          "groups": 768,
+          "files_sha256": {
+            "sampling_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+            "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+            "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+            "manifest.json": "e68570f5cb3fb3be50b424ab23d4a610b7d5f56f234296389b72d5460f9012d2"
+          }
+        }
+      }
+    }
+  ],
+  "qsub_executed": false,
+  "capacity_measured": false,
+  "full_audit_completed": false,
+  "scope": "Plan creation, strict native fixture validation on login, dry-run and bash syntax only. Compute-node preflight and capacity measurements remain required before full audit sizing. Existing controller and max two nodes retained."
+}

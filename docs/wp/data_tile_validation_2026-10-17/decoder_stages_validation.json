@@ -1,0 +1,29 @@
+{
+  "remote_bundle": "/home/user/workspace/mcmc4qec/20261018-tile-decoder-stages-v1",
+  "bundle_sha256": "d0c115656650e46335ec5f989cd0187a4cd1b0a124612ad0bc800b69e793b3bc",
+  "windows_acceptance": {
+    "passed": 3,
+    "seconds": 2.47
+  },
+  "linux_acceptance": {
+    "passed": 3,
+    "seconds": 1.72
+  },
+  "source_sha256": {
+    "cluster_scripts/probe_tile_decoder_stages.py": "3ff742e448ac91dc0e867081673611617c5e385e4eb2b700403f27526f51e8fb",
+    "tests/test_tile_decoder_stages.py": "f6c33fd0c7247d366392202eb84b9d7d337abf45c9713e6c5efb233d29b6b1d2"
+  },
+  "evidence_sha256": {
+    "decoder_stages_windows.json": "088fa6db4ab4e76936bfa6cb8f1b46a04372f030cd819f5048cd9237a5046ed7",
+    "decoder_stages_linux.json": "a5dfb5568c353da6f5fbd621af574dd5bd7f4a5c909ee659ee1d40a54524029d",
+    "decoder_stages_comparison.json": "e24d095401937919547174de8a5a1dd72c3ba1a2ad1fd8283dee4909f8333f21",
+    "decoder_cython_sources_windows.json": "6912ac3daf07482dbbb53463bbd0c1152437bd7c8d51b927c16abbafb057710c",
+    "decoder_cython_sources_linux.json": "98d4097dede3059a0dd7141f9119df219069debe7b50e4ce30e888ebe091e824",
+    "decoder_osd_source_provenance.json": "a0b323195aa33ea1620e076a45ff1e5b27c71bdac187bb866b54c624fc456189"
+  },
+  "normalized_cython_sources_equal": true,
+  "source_archive_sort_header_present": false,
+  "qsub_submitted": false,
+  "native_binaries_modified": false,
+  "warning": "Selected single counterexample; final observed BP and OSD0 agree, X OSDW differs. No candidate-order observation, root-cause attribution, population-rate or BAR-bias estimate."
+}

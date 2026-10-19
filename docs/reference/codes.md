@@ -37,6 +37,18 @@ For a Markdown-only overview, use the [public API contracts](../api_en.md).
 
 ::: mcmc4qec.depolarizing_bposd_decoder
 
+::: mcmc4qec.bplsd_decoder
+
+::: mcmc4qec.depolarizing_bplsd_decoder
+
+::: mcmc4qec.belief_find_decoder
+
+::: mcmc4qec.depolarizing_belief_find_decoder
+
+::: mcmc4qec.union_find_decoder
+
+::: mcmc4qec.depolarizing_union_find_decoder
+
 ::: mcmc4qec.DecoderAdapter
 
 ::: mcmc4qec.PyMatchingAdapter

@@ -21,6 +21,7 @@ Times below are measured seconds on Windows with Python 3.11; they vary with mac
 | [phenomenological_toric.py](phenomenological_toric.py) | Toric data/measurement faults over `rounds` | `codes, matching` | 1.792 s | 1.095 s | `pl`/`pl_interval` concern the full bounded experiment, not a per-round rate | 1, 5 |
 | [steane_exact.py](steane_exact.py) | Steane exact, direct MC, and exact-anchored BAR | none | 2.354 s | 0.516 s | `exact` and `bar` compare per-`ladder` absolute probabilities; `bar_intervals` are sampling intervals | 1, 3, 4, 5 |
 | [tile_bposd.py](tile_bposd.py) | Open-boundary tile72 with fixed-prior BP-OSD | bposd | not yet timed | 1.27 s | `pl` is fixed-budget direct MC; `conditional_weight` describes the faulty-state chain | 1, 3, 4, 5 |
+| [decoder_comparison.py](decoder_comparison.py) | Fixed BP-OSD/BP-LSD/BeliefFind; toric also has standalone UF and optional MWPM | `bposd`; toric: `codes`; `--mwpm`: `matching` | 2.145 s | 1.617 s | Default Steane has exact references and fixed-trial MC; JSON records settings and shared seed | 1, 3, 4, 5; short usage example, no performance ranking; standalone UF requires ldpc 2.4.1 |
 
 ## Research workflows
 
@@ -30,6 +31,26 @@ Times below are measured seconds on Windows with Python 3.11; they vary with mac
 | [workflows/conditional_weight.py](workflows/conditional_weight.py) | Direct-MC versus Z+H conditional weight | `codes, matching` (`plot` for PNG) | 4.985 s | 1.842 s | `ew_direct`/`ew_chain` are `E[w\|faulty]` at `ps`, not `P_L` | 1, 5 |
 | [workflows/convergence_check.py](workflows/convergence_check.py) | Multiple initial populations and four convergence checks | `codes, matching` | 1.450 s | 1.010 s | `checks`, `verdict`, and `warnings` screen results; a complete screen needs independent direct-MC conditional variance | 1, 5; a good verdict proves neither convergence, ergodicity, nor correctness |
 | [workflows/p_dependent_decoder.py](workflows/p_dependent_decoder.py) | Fixed BP-OSD ladder versus explicit approximate mode | `codes` | 1.720 s | 0.780 s | `fixed` uses one decoder; `approx` changes it with p and omits that bias from intervals | 1, 2, 3, 4, 5 |
+| [workflows/tile_capacity_fixed_prior.py](workflows/tile_capacity_fixed_prior.py) | Tile72/288 bit-flip or joint depolarizing BAR with target-fixed BP-OSD and independent MC | `bposd` | not yet timed | 2.84 s (tile72 bit, seed 7) | `bar` and `independent_mc` estimate failure of any logical observable; sector prior is explicit | 1–5; demonstration budgets are not validated precision settings |
+
+The tile workflow supports `--size 6` (tile72) or `--size 12` (tile288),
+`--noise bit` or `--noise depolarizing`, `--initialization rejection` or `logical`,
+and the experimental comparison `--kernel ZHS`. Depolarizing sector decoders
+use prior `2*target_p/3` while the sampled noise keeps joint I/X/Y/Z probabilities.
+The default target is .03 for tile72 and .05 for tile288. Every ladder uses one
+fixed decoder object. The quick tile72-depolarizing run at seed 7 gave BAR
+[.01563, .02815], which missed the completed independent high-budget MC reference
+interval [.03004, .03030], even though it overlapped the example's small MC interval.
+This one-seed observation is not a bias or coverage calibration; the ongoing
+[tile validation study](../docs/wp/tile_validation_status_2026-10-17_ja.md)
+tracks the full fixed cohorts and applicable limits.
+The quick runs above used Windows, while the high-budget reference used Linux.
+A saved tile288 state later exposed a different BP-OSD failure decision between
+those environments despite matching package versions and priors.
+Their failure sets have not been established as identical, so that cross-platform
+interval comparison must not be used to attribute a discrepancy to BAR or mixing.
+Keep reference, anchor and ladder runs in the same pinned native environment;
+see the [reproducible platform discrepancy](../docs/wp/tile_decoder_platform_2026-10-17_ja.md).
 
 For a standard BAR ladder, keep one decoder and failure predicate across every rung. A BP-OSD decoder built at `p`, a depolarising BP-OSD decoder, and the circuit baseline's `decoder_p` depend on their construction probability. Changing that probability across rungs requires the explicit `p_dependent_decoder_approx` mode, whose interval excludes the resulting failure-set bias. BAR also requires an exact anchor or an MC anchor with at least one observed failure. If adjacent sampled ensembles have no observed support overlap, refine the ladder rather than interpreting an `OverlapError` as a probability.
 

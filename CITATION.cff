@@ -11,11 +11,11 @@ title: "mcmc4qec"
 authors:
   - given-names: junichi
     family-names: haruna
-version: "0.1.0.dev4"
+version: "0.1.0.dev5"
 license: MIT
 abstract: >-
   Rare-event MCMC primitives for quantum error correction: exact enumeration,
   direct Monte Carlo, failure-conditioned sampling with OBF, Zanella, cluster
   exchange, and stabilizer kernels, and anchored BAR splitting for logical
-  error probabilities of CSS codes. Private development prototype; the
+  error probabilities of CSS codes. Experimental research software; the
   associated paper has not been assigned publication metadata in this file.

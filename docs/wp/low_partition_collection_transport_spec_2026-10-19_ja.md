@@ -1,0 +1,36 @@
+# 低ノイズ分割samplingのcollector投入
+
+対象は固定v11で準備済みのcase0・1・3、各target0・1・2の9条件とする。
+既存generatorのsource、plan、実行中job、固定一回投入入口は変更しない。
+科学計算・集約アルゴリズムは既存`tile_low_noise_sampling_partitions.py`を使い、親側にprepare・preflight・executeの保存付きtransportを追加する。
+
+prepareの前に、その条件の全anchor/sample分割の実際のローカル投入receiptを集める。
+各receiptは既存generator入口のsource hash、固定selection、成功したqsub応答、準備済みledgerとの一致を確認し、job IDの重複や欠落を拒否する。
+元の固定source・manifest・native binary・Pythonを検査してからremote helperをimportする。
+各分割の実PBS終端、脚本、run_count1、summary・native preflight・実行intentと全予定taskを既存`partition_evidence`で確認する。
+記録済みtask失敗によるexit2は既存仕様どおり保持し、正常終了の分割だけを選んで集約しない。
+
+prepareは全分割の終端記録を封印し、既存submitterのdry-runでcollector脚本と資源を固定する。
+要求は既存の1 CPU・32 GiB・2時間を使い、実測ETAとは扱わない。
+準備前後で元の入力hashを比較し、生成したcollector脚本・dry-run・全upstream metadataのhashをprepared記録へ保存する。
+prepareではqsubを呼ばない。
+
+preflight・executeは外部指定されたprepared hashを必須とし、保存済みmetadataと実PBS終端を再確認する。
+executeは既存の共有lock、旧controller終了、待機中を含む最大2ノード、intent先行、qsub一回、曖昧応答時の証拠保持を再利用する。
+不確実な応答や既存intentに対して自動再投入しない。
+既存generator wrapperのguard処理は変更せず、collectorのphase/indexと入力・脚本を固定したadapterとして使う。
+
+collectorのF/exit0、既存`collector_terminal`と`read_completed_sampling`による検証、後段解析への接続は別の操作とし、qsub receiptだけをsampling全体の完了と呼ばない。
+受入は全9条件の予定分割集合、receipt欠落・改変・job重複、不完全終端・rerun・script差、失敗task保持、metadata変更、上限2ノード、重複qsub防止、曖昧応答の保持を含む。
+本番prepareは各条件の全分割が終端となった後にだけ実行する。
+
+## collector完了の受理
+
+投入入口は固定したまま、別入口でcollectorの完了を受理する。
+ローカルのprepareとexecuteの全証拠・source hash・prepared hash・実job IDを確認し、実remote ledgerとの一致を要求する。
+既存collectorのF/exit0/run_count1と脚本を確認してから`collector_terminal`で終端を封印する。
+既存`completed_partition_evidence`で全予定taskのindex・分割summary・失敗数・source/native/実行intentを確認する。
+これはraw payloadを全走査したcollector結果のmetadata受理であり、親側でraw payloadを再hashしたとは扱わない。
+終端と全消費metadataを処理前後に確認し、受理記録は新規作成だけとする。
+不完全job・再実行・metadata変更・他jobのreceiptは拒否し、qsubを呼ばない。
+この段階で失敗taskを消さず、後段解析と独立reference比較は別工程として残す。

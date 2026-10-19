@@ -243,3 +243,221 @@ Steaneの成分を結ぶ提案、16/32chainの誤差校正、tile・大きい符
 最終の文書・監査・回収・有限状態テストは16 passed・13.02秒であり、今回全suiteとremote CIは再実行していない。
 RIMCは読み取り専用のままclean、基準HEADは6f7528645ddf988ed8008bad5c81e321aa2aaaf8のまま、commit・pushは実施していない。
 完了報告はdocs/wp/calibration_results_2026-10-17_ja.md、検証記録はdata_calibration_2026-10-17/completion_validation.jsonに保存した。
+
+## 2026-10-17 Tile code-capacity検証の開始
+
+d78377eを基準に、tile72-bitからtile288/depolarizingまでの独立検証を開始した。
+仕様・受入を先行し、decoder再現性とlogical failure、候補ZHS、直接MC reference、長trace保存とBAR解析のdriverを追加した。
+qsub265196の96task pilotは終了コード0で完了し、全artifact archiveを回収した。
+tile288低pのrejection初期化上限到達も記録し、失敗seedを置き換えていない。
+固定81,788,928試行の独立referenceを265197、384taskの最長trace容量測定を265198としてqsub投入した。
+各1ノード96CPU、同時最大2ノードとし、本校正sampling・被覆評価・低noise拡張・最終利用手順は未完了である。
+進捗はdocs/wp/tile_validation_status_2026-10-17_ja.md、事前計画と生データは同階層のtile_validation_planおよびdata_tile_validation_2026-10-17に保存する。
+新たなcommit・push、公開既定とRIMCの変更は実施していない。
+
+### 2026-10-17 Tile独立reference完了と本校正開始
+
+直接MC referenceのqsub265197は81,788,928試行・1,248chunkを終了コード0で完了し、回収hash、全seed/RNG、target priorを含むProblem metadata、生countからのsummary再現を確認した。
+sampling容量測定265198も384task全成功で完了し、回収照合済みである。
+人工配列による解析容量測定265199を実行し、本校正case 3を265200としてqsub投入した。
+容量実測から本番samplingは合計約25.4ノード時間と予測し、投入順3/0/1/2、各ジョブ1ノード96CPU、同時要求最大2ノードを維持する。
+ユーザーの追加指示を受け、weight-stratified referenceの小仕様・有限受入・層別primitive・独立pilot driverを追加した。
+層別の最終受入は8 passed・2.08秒で、weight-pilot-v2を準備したが、この記録時点で層別qsubは未投入である。
+全体の検証と報告は未完了で、詳細と再開先は `docs/wp/tile_validation_status_2026-10-17_ja.md` とデータ索引にある。
+
+### 2026-10-17 Tile解析資源確定と層別pilot投入
+
+人工配列による解析容量測定265199は96group全成功、終了コード0・walltime20分14秒で完了し、全artifactを回収・hash照合した。
+本解析の資源計画を固定し、samplingとanchorの全task記録を確認してから解析をqsubするcontrollerを別bundleへ配置した。
+本校正case 3の265200は実行中、層別pilotの265201はqsub投入済み・待機中で、要求は計2ノードである。
+層別pilotの全task・raw状態・seed・prior・failure countを照合する監査を仕様・受入・実装の順で追加し、local 11 passed・1.99秒、cluster 11 passed・1.05秒を確認した。
+本pilotの回収・監査と層別本計測は未実施で、pilotをP_L referenceとして扱わない。
+公開APIのみのtile72/288・bit/depolarizing利用例4本を実行し、ladder全体の固定priorを確認した。
+短いtile72-depolarizing例のBAR区間は高予算直接MCの参考区間と非交差であり、利用例の動作確認を精度保証にしない。
+各配置先・再現コマンド・実測・hashはdata_tile_validation_2026-10-17の索引に保存した。
+
+### 2026-10-17 Tile固定条件の投入継続controller
+
+本校正の一要因対応比較を追加し、受入10 passed・0.49秒、追加driverの統合71 passed・4.92秒を確認した。
+実データの対応比較は解析完了後に行い、欠落推定・未取得区間・未定義診断を除外しない。
+固定済みsampling4条件と解析4条件を最大2要求ノード内で順次qsubする軽量controllerを追加し、local/clusterで関連13testを通した。
+2026-10-17 11:18 UTC、別bundleのtile-coordinator-v1でPID3756042として起動し、process表から生存確認した。
+初回観測は265200 R・265201 Q、要求2ノードで待機だった。
+controller稼働中は手動で同じproductionをqsubせず、終了・観測エラー・未受領intentは実processとPBS・投入台帳で確認する。
+再現手順・sourceと設定hash・記録先はデータ索引に追記し、既存ジョブのsource・科学manifestは変更していない。
+
+### 2026-10-17 Tile支持の代数的確認と初期化層別の準備
+
+tile72/288のbit/depolarizingについて、同じsyndrome・logicalを保存する差分空間がstabilizerのrow spaceと一致することをrank32/140/64/280で確認し、行列・環境・hashをstructure_auditへ保存した。
+このfiber内の連結性を全failure支持の既約性・実測混合・被覆と分けて説明するtile_kernel_support文書を追加した。
+depolarizingのlogical初期化は偶数replicateがX basis、奇数replicateがZ basisとなるため、主結果192 replicateを再現したうえで各96 replicateを補助集計する後処理を追加した。
+層別の受入は6 passed・1.30秒、追加driver統合は90 passed・6.56秒で、失敗を除外せず原replicate IDを保持する。
+実データの層別評価は未実施で、固定ジョブとcontrollerは稼働を継続し、source・manifestは変更していない。
+
+### 2026-10-18 Tile層別referenceのqsub準備
+
+層別referenceの固定manifestと監査済みpilotから資源要求を見積もるsubmitterを仕様・受入・実装の順で追加した。
+未測定weightと未実測の合成用予備時間を明示し、24時間・340 GiBを超える計画を拒否する。
+coordinator稼働中と最大2要求ノードを超える投入を拒否し、qsub前のintent保存により応答不明時の自動再投入を防ぐ。
+関連受入はWindowsで39 passed・10.43秒で、資源・投入の受入は合成pilotと模擬qsubを使った。
+実pilotによる予算・資源要求の確定、追加submitterのLinux配置と実投入は未実施で、稼働中のジョブ・既存bundleを変更していない。
+同日の追加配置で `20261018-tile-weight-reference-v3` にsubmitterを含む新bundleを置き、Linuxで39 passed・7.24秒とlogin nodeのnative probe一致を確認した。
+実pilotからのplanと資源要求・compute node preflight・qsubは未実施で、今後の準備先をv3とする。
+
+### 2026-10-18 Tile本校正case3 samplingと層別pilotの回収
+
+265200は終了コード0・7時間16分10秒でsampling完了し、30,720 trace全て成功記録だった。
+192 anchorと合わせた30,912 artifactを回収してidentity・payload hashを照合したが、全件数値trace監査とBAR解析は未実施である。
+265201も終了コード0・13秒で完了し、層別pilotの全1,536 task・721,024試行・192層を回収・raw乱数再生成・metadata/count監査した。
+失敗taskとlabel矛盾はなくRSS取得も完全で、本番driverが実監査を受理した。
+pilotは論理エラー率referenceに使わず、独立本番予算の固定・投入は未実施である。
+controllerは後続のtile72-bit 265209とtile288-bit 265210をqsub投入し、最新確認はR/Q・要求計2ノードだった。
+証跡と制約は `docs/wp/data_tile_validation_2026-10-17/case3_weight_pilot_completion.json` および索引に保存した。
+
+### 2026-10-18 Tile層別referenceの独立本番予算固定
+
+実pilotだけから配分するplannerを仕様・受入・実装の順で追加し、Windowsで30 passed・2.94秒、Linuxで30 passed・1.11秒を確認した。
+全16条件について4,000,000パターン以下を全列挙し、他の層は平滑化pilot分散と計算費用に基づく固定MC予算とした。
+最低4,096試行、最大4,194,304試行、尾部上限1e-14を維持し、合計97,857,608試行・23,938 chunkを固定した。
+新v4 bundleでbyte一致、実pilotを用いるplanとlogin node native照合、1ノード・96 CPU・32 GiB・4時間30分のdry-runを確認した。
+本番qsubとreference取得は未実施で、既存coordinatorに競合する投入は行っていない。
+記録は `weight_reference_allocation.json`、`weight_reference_manifest_v4.json`、`weight_reference_deployment_v4.json` などに保存し、今後の層別本番の準備先をv4とした。
+
+### 2026-10-18 Tile全trace監査の計測・投入wrapper
+
+既存の数値監査を維持し、固定96 groupの資源計測と全768 groupの本監査を別rootで行うwrapper・qsub submitterを追加した。
+実compute nodeのnative証跡とgroupのwall/CPU/RSSを保存し、監査失敗を除外しない。
+関連41件がWindowsで7.36秒、Linuxで2.35秒で通り、新v2 bundle上でcase3のplan・capacity dry-run・login node native照合を確認した。
+実資源計測と全件監査は未実施で、既存controller稼働中の追加投入を拒否する。
+03:32 JSTに265209のR、265210のQ、coordinator PID3756042の稼働を確認し、要求計2ノードを維持した。
+記録は `docs/wp/tile_trace_audit_execution_2026-10-18_ja.md` と `trace_audit_execution_deployment_v2.json` に保存した。
+
+### 2026-10-18 Tile単独BARの計時driver
+
+選択設定を独立seed stage140/141で再実行し、構築・独立anchor・初期化・sampling・compact検証・解析を別計時するdriverを追加した。
+選択chain数でも元の校正の最大chain数をlogical初期化strideに使い、X/Zの割当てを維持する。
+失敗chainを残し、anchor 0失敗を確率0の結論にせず、cached taskの過去時間を新規phase時間と区別する。
+短い実tile traceを含む関連32件がWindowsで9.46秒、Linuxで7.57秒で通り、新v1 bundleとlogin native照合を保存した。
+実比較設定の選択・本計測manifest・資源実測・専用submitter・独立精度確認は未完了で、追加qsubは行っていない。
+03:39 JSTに265209 R・265210 Q・coordinator PID3756042の稼働を確認した。
+記録は `docs/wp/tile_time_to_accuracy_plan_2026-10-17_ja.md` と `bar_timing_deployment_v1.json` に保存した。
+
+### 2026-10-18 Tile全cohortの経験的相対精度評価
+
+reference区間に対して分母も変化する相対RMSEの最小・最大を評価する追加集計を実装した。
+全固定replicateと既存summary/raw rowsのhash・数値整合を確認し、未取得や0下端を合格にせず、診断と区間被覆を別に残す。
+関連26件がWindowsで0.85秒、Linuxで0.19秒で通り、新v1 bundleを配置した。
+実BARデータへの適用・設定選択は未実施で、有限cohortの経験的判定を母RMSEや名目被覆の保証とは扱わない。
+03:44 JSTに265209 R・265210 Q・coordinator PID3756042の稼働を確認し、要求2ノードを維持した。
+証跡は `precision_assessment_deployment_v1.json`、仕様は `docs/wp/tile_time_to_accuracy_plan_2026-10-17_ja.md` に保存した。
+
+### 2026-10-18 Tile pilotのpaired prior効果
+
+全96taskの元記録とcompact countsをhash・集計値で照合し、全64 prior比較のpaired表と不確実性を派生保存した。
+physical p=.1、prior .1→.0001のtile288-bitは成功→失敗16例・失敗→成功7例、depolarizingは7例・8例で、判定境界の変化と失敗率純差を区別した。
+全64比較の3周辺確率へBonferroniを適用し、0不一致をfailure集合の同一性と扱わない。
+関連18件がWindowsで1.96秒、Linuxで0.98秒で通り、両環境で同じLinux pilotの派生値を再生成した。
+これは新しいdecoder実行やBAR bias計測ではなく、判定集合のprior依存性の記録である。
+03:51 JSTに265209 R・265210 Q・coordinator PID3756042の稼働を確認した。
+記録は `docs/wp/tile_decoder_prior_effect_2026-10-18_ja.md` と `prior_effect_validation.json` に保存した。
+
+
+## 2026-10-18 Tile decoder段階別観測の追記
+
+固定1状態のWindows/Linux差を追加調査し、最終BP soft値・hard decision・OSD-0は一致、X側のOSD-Wで26ビット・logical predictionで5ビットの差を確認した。
+両X correctionは重み22でsyndromeを満たし、Z側の出力は一致した。
+各native実装内部の候補順は未観測で、原因・頻度・論理エラー率差は未確定である。
+同梱Cython sourceは改行正規化後に一致し、raw hash差をアルゴリズム差と扱わない。
+probeの受入3件はWindowsで2.47秒、Linuxで1.72秒で通った。
+実測・環境・source hash・新規bundleの記録は docs/wp/data_tile_validation_2026-10-17/decoder_stages_validation.json、説明は docs/wp/tile_decoder_platform_2026-10-17_ja.md にある。
+既存production環境とジョブは変更せず、qsubの追加投入・commit・pushは行っていない。
+
+
+## 2026-10-18 単独BAR計時のcase別投入
+
+単独BAR計時driverにcase別分割と排他的execution intentを追加し、専用qsub submitterで完全なcapacity artifact・native証跡・資源要求・2ノード上限を確認するようにした。
+元のcondition indexとseed、全8条件の選択・未達記録、独立96/192 replicateは保持する。
+関連42件はWindowsで12.47秒、Linuxで8.49秒で通り、不変bundle 20261018-tile-bar-timing-v2へ配置した。
+単一threadのlogin profile照合も通り、指定なし手動probeがguardに拒否された証跡も保存した。
+実設定選択・capacity・本計時・同精度の時間比は未実施で、合成資源測定や模擬qsubの受入を実投入と扱わない。
+実行手順は docs/wp/tile_time_to_accuracy_plan_2026-10-17_ja.md、hash・検証記録は同階層dataのbar_timing_deployment_v2.jsonにある。
+04:15 JSTにcoordinator PID3756042と265209・265210の実稼働を確認し、追加投入・commit・pushは実施していない。
+
+
+## 2026-10-18 独立計時候補の固定選択規則
+
+全192 replicateから再計算した相対RMSEをreference区間全体で評価し、目標を満たした設定から予定step数と固定tie規則で独立計時候補を選ぶ処理を追加した。
+診断未定義・区間未取得・被覆は別指標として保持し、全8条件のselected/unmetと根拠hashを保存する。
+これは独立確認用の候補であり、最速・推奨・名目被覆の保証ではない。
+関連30件はWindowsで2.14秒、Linuxで0.99秒で通り、不変bundle 20261018-tile-selection-v1へ配置した。
+実校正への適用は未実施で、根拠は docs/wp/data_tile_validation_2026-10-17/timing_selection_deployment_v1.json にある。
+04:20 JST時点でcoordinatorと265209・265210の稼働を確認し、追加qsub・commit・pushは行っていない。
+
+
+## 2026-10-18 Tile検証の日本語中間報告
+
+docs/wp/tile_validation_report_2026-10-18_ja.mdへ確認済み結果と適用限界を集約した。
+符号構成・failure・BP-OSDの環境間差とprior感度、独立MC reference、kernel議論の範囲、低noise・計時の未実施事項を区別した。
+reference表の全count・丸め値・区間、16ローカルリンク、利用例sourceと実行済み記録の一致を確認した。
+証跡は同階層dataのinterim_report_validation.jsonにあり、最終校正や推奨設定が完了した報告とは扱わない。
+
+
+## 2026-10-18 条件付き平均weightのreference比較
+
+target rungのweight診断を独立MC referenceと比較する全cohort集計を追加した。
+欠測・診断未定義を除外せず、weight観測量の平均差・RMSE・replicate間SE・reference delta SEをBARの確率誤差と区別する。
+短い実tile traceとの平均一致を含む13件がWindowsで2.61秒、Linuxで1.42秒で通った。
+不変bundle 20261018-tile-weight-comparison-v1へ配置し、hashと範囲は docs/wp/data_tile_validation_2026-10-17/weight_comparison_deployment_v1.json にある。
+本校正への適用は未実施で、JSON metadata照合を元trace・ACF配列の全件監査とは扱わない。
+04:49 JSTにcoordinatorと265209・265210の稼働を確認し、追加qsub・commit・pushは行っていない。
+
+## 2026-10-18 MC計時の新規実行と容量artifact照合
+
+MC計時runで既存task・summary・実行intentを拒否し、再利用を新規phase時間に混ぜないようにした。
+資源見積もりで全容量taskのidentity・JSON/NPZ hash・summaryとの一致・MC metadataと、native preflightのmanifest・hostname・PBS_JOBID・実行intentへの結合を検査する。
+小仕様と受入失敗を先に確認し、関連59件がWindowsで22.99秒、Linuxで9.40秒で通った。
+不変bundle 20261018-tile-mc-timing-v3でmanifest、login node上のnative preflight、capacity dry-runを確認し、今後のMC計時先をv3とする。
+証跡は docs/wp/data_tile_validation_2026-10-17/mc_timing_deployment_v3.json にあり、capacity・本計測・同精度の実測比較は未実施である。
+05:07 JSTの実processとPBSではcoordinatorと265209・265210が稼働し、計2ノードを維持した。
+既存bundle・稼働ジョブは変更せず、追加qsub・commit・pushは行っていない。
+
+## 2026-10-18 独立計時cohortの精度・費用集計
+
+全replicateの精度と費用を比較する tile_timing_metrics.py を追加した。
+有限reference区間全域でMC・BAR双方が経験的精度を満たす場合だけ、平均task wall・CPU時間の比を出す。
+失敗taskの費用・時間欠測・BAR計時で未収集の混合診断を保持し、母精度や名目95%被覆の保証にしない。
+小仕様・未実装時の受入失敗・実装の順に進め、関連32件がWindowsで1.73秒、Linuxで0.47秒で通った。
+不変bundle 20261018-tile-timing-metrics-v1へ配置し、証跡は docs/wp/data_tile_validation_2026-10-17/timing_metrics_deployment_v1.json にある。
+この変更は統計後処理の中核であり、実計時artifactの読込みと監査adapter、実結果への適用は未完了である。
+05:16 JSTにcoordinatorと265209・265210の稼働を実確認し、計2ノードを維持、追加qsub・commit・pushは行っていない。
+
+## 2026-10-18 計時artifactと精度・費用集計の接続
+
+計時artifactのmanifest・元budget/settings・native記録と実行intent・全task hash/identity・summary・seed/model metadata・referenceを照合する接続処理を追加した。
+全192 replicateの失敗費用や選択未達を保持し、job全体のphase walltimeを条件別に按分しない。
+小仕様と未実装時の受入失敗の後、関連36件がWindowsで28.04秒、Linuxで2.74秒で通った。
+初期fixtureは80.45秒を要したため、合成modelの結合検査と短い実MC metadataを分離し、最終の同testはWindowsで25.51秒となった。
+不変bundle 20261018-tile-timing-comparison-v1へ配置し、既存MC v3の両manifestが再構築と一致することも確認した。
+今後のBAR計時は新bundle、MC計時は準備済みv3を使い、旧bundleを変更しない。
+実計時への適用・比較ジョブの資源測定とqsub・独立精度と時間比の評価は未実施であり、全物理状態の再復号や選択元の再解析を済ませたとは扱わない。
+証跡は docs/wp/data_tile_validation_2026-10-17/timing_comparison_deployment_v1.json にある。
+05:28 JSTにcoordinatorと265209・265210の稼働を確認し、計2ノードを維持、追加qsub・commit・pushは行っていない。
+
+## 2026-10-18 bit-flip 2caseの完了anchorを回収・監査
+
+稼働中のsamplingに先行して完了したtile72-bit・tile288-bitの各192 anchorを回収した。
+全archive payloadのhash・identity・固定manifestと、記録seed・予算・Problem hash・count/推定値/Wilson区間・phase summaryの一致を確認した。
+各3,145,728試行で失敗countは1,838,748 / 2,114,117、task失敗と0失敗countのanchorはいずれもなかった。
+物理sampling p=.1、decoder prior .03 / .05のanchorであり、target pのreferenceやBAR被覆の結果とは区別し、各replicateのanchorを合算値で置き換えない。
+元の物理誤り列と完全なdirect_mc RNG metadataは未保存のため、独立raw試行再集計・再復号はしていない。
+証跡は docs/wp/data_tile_validation_2026-10-17/production_anchor_recovery_01.json とcase別の原summary・転送検証・anchor auditにある。
+05:49 JSTにはcoordinatorと265209・265210が計2ノードで稼働し、sampling完了・BAR解析・校正は未完了だった。
+既存source/manifest・ジョブを変更せず、追加qsub・commit・pushは行っていない。
+
+## 2026-10-18 固定reference・anchor・MCMCのseed重複検査
+
+固定source/manifestのreference 1,248・anchor 768・初期化190,464・sampling 190,464の計382,944 seedを列挙し、cohort間を含め重複0件を確認した。
+回収済みcase 0・1・3の576 anchor記録も予定seedと一致し、referenceについてはarchive/summaryに結び付いた既存の全chunk seed監査を使用した。
+未完了samplingの記録seed全件、bootstrap・計時用namespaceは未確認で、乱数列の統計的独立性の証明とは扱わない。
+Windowsで10.73秒の照合を実行し、結果・再現script・環境を docs/wp/data_tile_validation_2026-10-17/seed_namespace_audit.json、audit_seed_namespaces.py、seed_namespace_environment.json に保存した。
+05:53 JSTにcoordinatorと265209・265210の稼働を確認し、計2ノードを維持、追加qsub・commit・pushは行っていない。

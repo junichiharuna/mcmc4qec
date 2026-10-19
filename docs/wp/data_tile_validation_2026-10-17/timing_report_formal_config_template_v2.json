@@ -1,0 +1,150 @@
+{
+  "bar": [
+    {
+      "case": 0,
+      "proof": {
+        "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/independent_payload_verification.json",
+        "sha256": "b22c9f0f6caa35d4f88573c2daa64035645d547d4452110f014e20bb7ebc765b"
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0",
+      "terminal": {
+        "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/terminal.json",
+        "sha256": "17af22ed522ba7a66866f9c5b1f9c41e0c64bc4a8b9ffa672f29349722967b0b"
+      },
+      "transfer": {
+        "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/transfer_verification.json",
+        "sha256": "c41e5a3a8c8384d269bb97c5de8390e6a68b2925a1fd1a3b19c8958ff2a37717"
+      },
+      "verification": {
+        "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/verification.json",
+        "sha256": "3bd3614926b290f3987557e20927d251c5244ed9b213266caeaa2df47055de77"
+      }
+    },
+    {
+      "case": 1,
+      "root": null,
+      "expected_root": "/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-1",
+      "proof": {
+        "path": null,
+        "sha256": null
+      },
+      "verification": {
+        "path": null,
+        "sha256": null
+      },
+      "transfer": {
+        "path": null,
+        "sha256": null
+      },
+      "terminal": {
+        "path": null,
+        "sha256": null
+      }
+    },
+    {
+      "case": 2,
+      "root": null,
+      "expected_root": "/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-2",
+      "proof": {
+        "path": null,
+        "sha256": null
+      },
+      "verification": {
+        "path": null,
+        "sha256": null
+      },
+      "transfer": {
+        "path": null,
+        "sha256": null
+      },
+      "terminal": {
+        "path": null,
+        "sha256": null
+      }
+    },
+    {
+      "case": 3,
+      "root": null,
+      "expected_root": "/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-3",
+      "proof": {
+        "path": null,
+        "sha256": null
+      },
+      "verification": {
+        "path": null,
+        "sha256": null
+      },
+      "transfer": {
+        "path": null,
+        "sha256": null
+      },
+      "terminal": {
+        "path": null,
+        "sha256": null
+      }
+    }
+  ],
+  "mc": {
+    "proof": {
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/local_verification.json",
+      "sha256": "e9e4e542fc94c9cc1f5d2022eeb7283bc09d82ba3af833d9bb402d98ffa7a851"
+    },
+    "root": "/home/user/workspace/mcmc4qec/20261018-tile-mc-timing-v3/runs/mc-benchmark",
+    "submission_output": {
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_submission_v1_stdout.txt",
+      "sha256": "56c9fb0cab8f52e55b8d117663e015e8619af072b592bb241e2ff5ce1adf9758"
+    },
+    "terminal": {
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/terminal.json",
+      "sha256": "60737fba1ca714ac5907559edded717f2b04e106612fb96645efb3c45cf44751"
+    },
+    "verification": {
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/benchmark_verification.json",
+      "sha256": "b09c899ebf20a0a7ccb951cbbb187fdcd5616a9939b70e34eb0558c73e1013a2"
+    }
+  },
+  "reference": {
+    "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/reference_summary.json",
+    "sha256": "72afbc93f9fb33d46cc967e542856a6a42031f6a0e1d2f2423c90aaf2e0a5d15"
+  },
+  "reference_audit": {
+    "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/reference_audit.json",
+    "sha256": "de21132dc1a757c97a9c2a8c9efce3ae4f5e6946dada1ab82f20aff89a34f46e"
+  },
+  "seed_census": {
+    "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/bar_seed_census_evidence_v1/independent_verification.json",
+    "sha256": "a480854ea51d32056f6baa72f0720e560481e63ab1681470d52fe4e51ace214d"
+  },
+  "selection_recoveries": [
+    {
+      "case": 0,
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/final_reaggregation_case0_evidence_v1/recovered/recovery.json",
+      "sha256": "e721803fedc76b867d6f177b66954135768a4466b3fe22f3ba46def5043280a2"
+    },
+    {
+      "case": 1,
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/final_reaggregation_case1_evidence_v1/recovered/recovery.json",
+      "sha256": "8cb7db4b37cc042aeba286f513b535f077fe9c244c21f310d633e730780d481b"
+    },
+    {
+      "case": 2,
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/final_reaggregation_case2_evidence_v1/recovered/recovery.json",
+      "sha256": "e44ccbe2ee65aa09864e243e5a28c95c4b04b918643c7b36ccdeffa14c390d92"
+    },
+    {
+      "case": 3,
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/final_reaggregation_case3_evidence_v1/recovered/recovery.json",
+      "sha256": "0e68919e22f3446293fa743478649fa436e4e83e7bb7274fdcc3d5beab32e132"
+    }
+  ],
+  "settings": {
+    "path": "/home/user/workspace/mcmc4qec/20261018-tile-timing-report-v2/docs/wp/data_tile_validation_2026-10-17/bar_timing_selected_settings_v1.json",
+    "sha256": "47c0d2c624c5ec56478bf4c5bd47179651a893b2cce424c759f168e1009bd02c"
+  },
+  "template_only": true,
+  "pending_cases": [
+    1,
+    2,
+    3
+  ]
+}

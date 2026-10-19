@@ -1,0 +1,26 @@
+# selector親のホスト間ファイル同一性検査
+
+## 根拠と範囲
+
+final親の265288と診断265289で、同じ共有ファイルのdevice番号がloginとcomputeで異なることを確認済みである。
+selector親にもprepare時の全snapshotとcompute時のsnapshotを比較する箇所、およびcomputeのfinish-proofとloginのsealを比較する箇所がある。
+この2境界に限り、保存snapshotのSHA・解決先・modeを比較する。
+device・inodeを証拠から削除せず、同一プロセス内でのsnapshot一致、computeのbeginからfinish、lock・intent所有権の厳密比較は変更しない。
+
+## 仕様
+
+snapshotはsha256・target・device・inode・modeの5keyを持つ既存schemaのままとする。
+portable比較でも欠落・余剰keyを拒否する。
+read_planでは保存されたcontrol inputsと現入力をportable比較し、入力census・外部hash・prepare意味内容・script検証を維持する。
+sealではfinish-proof内のcompletion・end PBS・全filesを現プロセスのEvidenceへまず登録し、保存snapshotとportable比較する。
+その後の読み取りから公開まで、現プロセスで最初に得た完全snapshotを使って変更を拒否する。
+同じpathがfinish-proof内の複数箇所にある場合も、保存されたportable内容と現snapshotの一致をそれぞれ確認する。
+computeのbeginとfinishは同じ実行ホスト上であり、既存の完全snapshot比較を維持する。
+
+## 受入
+
+prepareとcompute、およびcomputeとsealのdevice・inode差だけを模擬し、内容・解決先・modeが一致すれば受理する。
+SHA・target・mode・schemaの差を拒否する。
+sealの初回読取り後に同一プロセス内のinodeが変わる場合を拒否し、portable比較が処理中の置換検出を無効化しないことを確認する。
+既存の一回qsub・共有lock・不確実応答・最大2node・metadata限定prepare・厳密descriptorの受入を通す。
+Linuxでは新しい別bundleに配置し、旧準備済み記録・旧module・稼働中jobを変更しない。

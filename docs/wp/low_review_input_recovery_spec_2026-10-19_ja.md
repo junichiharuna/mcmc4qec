@@ -1,0 +1,27 @@
+# 独立算術レビュー用plan・rowsの回収
+
+sealで固定された外部SHAを指定して最終reportを読み、audited_collection.evidence_sha256からproduction planとpartition-collection/rows.jsonlのpathとhashを取得する。
+候補rowsは1件だけとし、同じrootのsampling_manifest.jsonがある場合はそれを、ない場合はmanifest.jsonをproduction plan候補とする。
+sampling_manifest.jsonを持つ分割sampling rootのwrapper manifestをproduction planと誤認しない。
+absoluteな正規形pathとSHA256を要求し、未知のpath集合や欠損証拠を拒否する。
+
+新規出力先へscpで2ファイルを取得し、各ファイルのSHAをreportの固定値と照合する。
+保存済みreportのhashは回収前後で再確認する。
+planはJSONとして読み、purpose・case・target・192 replicate・canonical manifestを最終reportと照合する。
+rowsの数値をこの段階で解釈せず、次の独立算術レビューで全67,584行を検証する。
+qsub・native probe・raw trace走査・数値再計算は行わない。
+転送失敗・hash不一致・入力変更では途中ファイルとstdout/stderrを保存し、collection.jsonは作らない。
+既存出力先への自動再試行や上書きは行わない。
+成功は最終reportと同じbytesを保存したことを意味し、現在のPBS終端の再検証や科学的収束の保証とは区別する。
+
+## 2026-10-19の検証
+
+Windowsで15件・0.74秒、Linuxで15件・0.05秒の受入に成功した。
+分割samplingのproduction plan選択、既存staged root、欠損・重複path、不正SHA、入力変更、転送失敗・割込みと上書き拒否を確認した。
+完了済みC2T2の実remote rootからproduction plan 2,362 byteとrows 330,061,028 byteをscpで取得し、seal済みreportのhashと一致した。
+この実転送はlow_final_case2_target2_review_inputs_v1に保存した。
+collection.jsonのSHA256はc598ab0bbfa2f75452216521d3fd0a239ecc13e41fdd29a8662a6eec29a02e6dである。
+sourceとテストはlow_review_input_sources_v1に保存し、manifest SHA256は052362bea3178969263b11a03da38b5e663bc2465985a0d47411599f505d9a20である。
+Linux受入記録のSHA256は64082882f2a3824dfc460ceafc95d725add1d3c5db22e149eb22ee94ecb9a2d5である。
+取得したbytesは前段の独立算術レビューで用いたファイルと同じSHAであり、同一内容の算術レビューは繰り返していない。
+残り9条件の本番回収は未実施である。

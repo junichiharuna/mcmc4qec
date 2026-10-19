@@ -1,0 +1,16 @@
+# 低ノイズBARと重み層別referenceの接続
+
+BAR collectionの全行を検証し、同一case・target physical priorの重み層別referenceと比較する。
+decoder設定・package/runtime・native profileが一致しないreferenceは拒否する。
+全設定の予定replicateを保持し、区間未取得・失敗・未定義診断を分母から除外しない。
+reference条件を一度だけ監査し、同じreferenceを全設定へ使う。
+省略weightの質量上界を含むreference区間を使い、部分和を全論理誤り率の点推定へ置き換えない。
+既存の区間reference評価を用いてbias・RMSEの範囲と、reference区間全体を含む被覆・交差し得る被覆を返す。
+点referenceのbias・RMSE・被覆を新たに作らず、referenceの有限標本不確かさとcohortの標本不確かさを区別する。
+失敗したreference条件は未取得のまま全BAR設定を残す。
+
+純比較関数はrawデータ・native環境の監査済みを主張しない。
+CLIではpartition collectionの全件読み取り検証と、重み層別referenceのraw chunk・draw/count・事前固定label checkpoint監査を通す。
+全referenceラベルの再復号、全物理MCMC状態の再復号、独立decoder実装の検証とは扱わない。
+実データの監査が大きいためCLIはPBSと単一thread環境を要求し、qsub投入と資源見積りは別工程とする。
+初回の実reference比較は未実施である。

@@ -1,0 +1,1087 @@
+{
+  "observed": "2026-10-19T00:51:16.674009+00:00",
+  "receipt_sha256": "d129eac64de19061cbf8c596ab1a3fc3e56e0885be3a70c514450b50242066f7",
+  "complete_success": true,
+  "counts": {
+    "skipped": 252,
+    "passed": 696
+  },
+  "seconds": 28.32209130001138,
+  "per_file_cumulative_seconds": {
+    "tests/test_categorical_kernels.py": 14.585978099959902,
+    "tests/test_independent.py": 14.14425200005644,
+    "tests/test_pipeline.py": 10.970114999945508,
+    "tests/test_acceptance.py": 6.424090399959823,
+    "tests/test_estimation.py": 5.018371100042714,
+    "tests/test_examples_real.py": 5.011014500079909,
+    "tests/test_bar_uncertainty.py": 4.82357779997983,
+    "tests/test_examples_templates.py": 4.293455199862365,
+    "tests/test_auto_anchor.py": 3.525777300033951,
+    "tests/test_tile_low_noise_archive.py": 3.206585300154984,
+    "tests/test_faststep.py": 3.000700300122844,
+    "tests/test_fastpath.py": 2.528240799845662,
+    "tests/test_bar_coverage.py": 2.237746700004209,
+    "tests/test_phase_flip.py": 2.014779999968596,
+    "tests/test_tile_low_noise_analysis_archive.py": 1.9239392997696996,
+    "tests/test_tile_low_noise_export_worker.py": 1.4538823999173474,
+    "tests/test_bar_block_control.py": 1.4362590999808162,
+    "tests/test_tile_low_noise_analysis_export_worker.py": 1.3642307999543846,
+    "tests/test_diagnostic_options.py": 1.276538100122707,
+    "tests/test_crossval_research.py": 0.9149021999328397,
+    "tests/test_examples_workflows.py": 0.7593046999827493,
+    "tests/test_tile_reference_source_binding.py": 0.41148779992363416,
+    "tests/test_artifact_archive.py": 0.32095199992181733,
+    "tests/test_trace_stats_review.py": 0.31451409999863245,
+    "tests/test_noise_models.py": 0.29512150018126704,
+    "tests/test_tile_codes.py": 0.2670129000325687,
+    "tests/test_tile_low_noise_export_gate.py": 0.2667529001191724,
+    "tests/test_logical_basis.py": 0.256010300014168,
+    "tests/test_codes.py": 0.20389309999882244,
+    "tests/test_bplsd_decoders.py": 0.19514350019744597,
+    "tests/test_convergence.py": 0.16589030000614002,
+    "tests/test_belief_find_decoders.py": 0.13361530005931854,
+    "tests/test_union_find_decoders.py": 0.12763660002383403,
+    "tests/test_tile_weight_comparison.py": 0.10525380002218299,
+    "tests/test_calibration_recovery.py": 0.10073059998103417,
+    "tests/test_checked_decoder.py": 0.09809320006752387,
+    "tests/test_trace_stats.py": 0.0972767999919597,
+    "tests/test_tile_precision_assessment.py": 0.09119889998692088,
+    "tests/test_docs_manifest.py": 0.0895934000145644,
+    "tests/test_tile_comparisons.py": 0.07834359991829842,
+    "tests/test_tile_coordinator.py": 0.07656260003568605,
+    "tests/test_tile_initialization_strata.py": 0.06882009998662397,
+    "tests/test_decoders.py": 0.061158199911005795,
+    "tests/test_tile_summary.py": 0.05363939987728372,
+    "tests/test_adapter_composition.py": 0.038499000074807554,
+    "tests/test_adapters.py": 0.025622299930546433,
+    "tests/test_initial_states.py": 0.024251499911770225,
+    "tests/test_regressions.py": 0.021297499974025413,
+    "tests/test_tile_timing_metrics.py": 0.019014299963600934,
+    "tests/test_tile_weight_reference_comparison.py": 0.018180099839810282,
+    "tests/test_typing.py": 0.014439099992159754,
+    "tests/test_provenance.py": 0.010723100014729425,
+    "tests/test_tile_anchor_audit.py": 0.00558109994744882,
+    "tests/test_tile_mc_precision_budget.py": 0.004725200036773458,
+    "tests/test_public_api.py": 0.0035272000241093338,
+    "tests/test_tile_reference_audit.py": 0.0005828999856021255
+  },
+  "cumulative_over_60_seconds": {},
+  "skipped": [
+    {
+      "test": "::tests.test_calibration_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_circuit_delta_cluster",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_circuit_kernels",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_circuit_model",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_circuit_pipeline",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_circuit_proposal",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_circuit_surface",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_cluster_calibration",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_decoder_comparison_example",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_notebooks",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_steane_components",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_stim_dem",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_analysis",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_bar_time",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_final_reaggregation",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_low_noise",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_low_noise_analysis_capacity",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_low_noise_analysis_partitions",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_low_noise_partitioned_analysis",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_low_noise_partitioned_trace_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_low_noise_sampling_partitions",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_low_noise_timing_selection",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_low_noise_trace_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_mc_time",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_production",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_seed_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_trace_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_weight_reference",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_submit_tile_weight_reference_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_analysis_capacity",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_audited_results",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_bar_analysis",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_bar_study",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_bar_time_benchmark",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_decoder_stages",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_early_mixing",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_final_reaggregation",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_analysis",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_analysis_capacity",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_analysis_partitions",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_audited_collection",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_partitioned_analysis",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_partitioned_analysis_integration",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_partitioned_audit_integration",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_partitioned_collection",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_partitioned_trace_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_partitioned_trace_audit_resources",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_reference_comparison",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_sampling_partition_evidence",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_sampling_partitions",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_staging",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_staging_control",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_study",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_summary",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_timing_census",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_timing_evaluation_report",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_timing_execution",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_timing_plan",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_timing_seed_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_timing_selection",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_trace_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_trace_audit_resources",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_low_noise_trace_audit_run",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_mc_time_benchmark",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_mixing_comparison_report",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_mixing_execution",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_mixing_inventory",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_prior_effect",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_reference",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_saved_reference_relocation",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_seed_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_select_timing",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_structure_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_study",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_timing_comparison",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_timing_evaluation_report",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_timing_selection_from_final",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_trace_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_trace_audit_run",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_weight_allocation",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_weight_pilot",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_weight_pilot_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_weight_reference",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_weight_reference_audit",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_weight_reference_audit_run",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_weight_reference_driver",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "::tests.test_tile_weight_stratified",
+      "reason": "collection skipped"
+    },
+    {
+      "test": "tests.test_codes::test_small_code_parameters[make_toric_code-2-8-2]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_codes::test_small_code_parameters[make_toric_code-3-18-2]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_codes::test_small_code_parameters[make_surface_code-2-5-1]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_codes::test_small_code_parameters[make_surface_code-3-13-1]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_codes::test_research_code_parameters_and_logical_completeness[<lambda>-30-2-False]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_codes::test_research_code_parameters_and_logical_completeness[make_hgp_hamming-58-16-True]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_codes::test_small_code_x_distance_by_exhaustive_low_weights[<lambda>-3]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_codes::test_large_code_x_distance_witness_only[make_hgp_hamming-3]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_crossval_research::test_research_matrix_bytes[<lambda>-bd8b591e864907a99e82e7705af8ccabbf0f6e596657451183b0004a6a9328ac]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_crossval_research::test_research_matrix_bytes[<lambda>-bc54927b2b14a89a5f34167d6ce0a09dd318ce25482e0a339fc834739128da77]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_crossval_research::test_research_matrix_bytes[<lambda>-e40d656805f71789bbe5bfcb20f3a9847720c96d9f4c35a7c73f83ddc2eb4f69]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_crossval_research::test_research_matrix_bytes[<lambda>-08708bfdc7ffa6c6537cdbe8f0191f3616fd552aa061c429bbcbb255f24abe4d]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_crossval_research::test_research_matrix_bytes[<lambda>-f53441180a1b5fca84b93d04e1e6b6d5c7733716d49a2c98c82a06948ab0b5d1]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_crossval_research::test_research_matrix_bytes[<lambda>-ec34745b31b5ec4cbb689c4d89e4151bb6374c5890dc9b176a3e5e93957c2d67]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_crossval_research::test_research_matrix_bytes[make_hgp_hamming-1fe2f6f185e30fecb3a8aa1945856be056dedbabfa2b33d6d3791924c4d60d00]",
+      "reason": "could not import 'bposd': No module named 'bposd'"
+    },
+    {
+      "test": "tests.test_crossval_research::test_live_research_decoder_all_toric_d3_syndromes[mwpm]",
+      "reason": "set RIMC_RESEARCH_ROOT for live research comparison"
+    },
+    {
+      "test": "tests.test_crossval_research::test_live_research_decoder_all_toric_d3_syndromes[bposd]",
+      "reason": "set RIMC_RESEARCH_ROOT for live research comparison"
+    },
+    {
+      "test": "tests.test_crossval_research::test_live_research_decoder_all_toric_d3_syndromes[depolarizing_mwpm]",
+      "reason": "set RIMC_RESEARCH_ROOT for live research comparison"
+    },
+    {
+      "test": "tests.test_crossval_research::test_live_research_decoder_all_toric_d3_syndromes[depolarizing_bposd]",
+      "reason": "set RIMC_RESEARCH_ROOT for live research comparison"
+    },
+    {
+      "test": "tests.test_crossval_research::test_live_research_phase_flip_mwpm_all_toric_d3_syndromes",
+      "reason": "set RIMC_RESEARCH_ROOT for live research comparison"
+    },
+    {
+      "test": "tests.test_decoders::test_mwpm_all_syndromes_match_research_recipe[<lambda>0]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_decoders::test_mwpm_all_syndromes_match_research_recipe[<lambda>1]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_decoders::test_bposd_all_syndromes_match_research_recipe",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_decoders::test_depolarizing_sector_mwpm_all_syndromes[<lambda>0]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_decoders::test_depolarizing_sector_mwpm_all_syndromes[<lambda>1]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_decoders::test_depolarizing_sector_bposd_all_syndromes",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_decoders::test_mwpm_rejects_hyperedge_columns",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_decoders::test_bposd_settings_are_explicit",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_decoders::test_bposd_unsafe_order_rejected_before_native_constructor[10]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_decoders::test_bposd_unsafe_order_rejected_before_native_constructor[order1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_decoders::test_bposd_numpy_integer_order_is_normalized_before_native_constructor",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_timing_metrics::test_short_actual_mc_record_can_be_assessed",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_weight_comparison::test_real_small_analysis_weight_matches_saved_target_traces",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_weight_reference_comparison::test_zero_mc_failures_keep_positive_bound",
+      "reason": "MC stratum confidence bounds require optional SciPy"
+    },
+    {
+      "test": "tests.test_typing::test_mypy_package",
+      "reason": "mypy is not installed"
+    },
+    {
+      "test": "tests.test_typing::test_mypy_consumer_contract",
+      "reason": "mypy is not installed"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-peeling-<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-peeling-<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-inversion-<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-inversion-<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-peeling-<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-peeling-<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-inversion-<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-inversion-<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_boundary_degree_one_accepts_odd_syndrome",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_inversion_general_css_all_syndromes[X]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_inversion_general_css_all_syndromes[Z]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_depolarizing_all_sector_pairs_and_metadata[peeling]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_depolarizing_all_sector_pairs_and_metadata[inversion]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_unknown_version_fails_before_native[2.4.0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_unknown_version_fails_before_native[2.4.2]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_unknown_version_fails_before_native[3.0.0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_unknown_version_fails_before_native[2.4.1+modified]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_invalid_or_unrealizable_syndrome[syndrome0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_invalid_or_unrealizable_syndrome[syndrome1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_invalid_or_unrealizable_syndrome[syndrome2]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_invalid_or_unrealizable_syndrome[syndrome3]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_union_find_decoders::test_native_exception_not_retried",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_codes::test_tile_bposd_corrects_single_qubit_errors[X]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_codes::test_tile_bposd_corrects_single_qubit_errors[Z]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_initialization_strata::test_basis_indices_match_actual_fixed_initializer[6]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_initialization_strata::test_basis_indices_match_actual_fixed_initializer[12]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_low_noise_analysis_archive::test_group_census_matches_actual_analysis_driver",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_adapter_composition::test_real_pymatching_repeated_history",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_adapter_composition::test_real_bposd_spacetime_round_major_flat",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_adapters::test_real_pymatching_repetition_code",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_adapters::test_matching_preserves_trailing_unobservable_fault_dimensions",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_adapters::test_real_bposd_object_without_special_wrapper",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_artifact_archive::test_production_sampling_matches_actual_task_generator",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_tile_low_noise_archive::test_census_matches_actual_driver",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_options_applied_to_native[product_sum]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_general_css_representative_syndromes[X-make_hgp_hamming]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_general_css_representative_syndromes[X-make_bb_code_72]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_general_css_representative_syndromes[X-<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_general_css_representative_syndromes[X-<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_general_css_representative_syndromes[Z-make_hgp_hamming]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_general_css_representative_syndromes[Z-make_bb_code_72]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_general_css_representative_syndromes[Z-<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_general_css_representative_syndromes[Z-<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_steane_all_errors_native_recipe_and_reproducibility[lsd_0-0-X]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_steane_all_errors_native_recipe_and_reproducibility[lsd_0-0-Z]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_steane_all_errors_native_recipe_and_reproducibility[lsd_cs-0-X]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_steane_all_errors_native_recipe_and_reproducibility[lsd_cs-0-Z]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_steane_all_errors_native_recipe_and_reproducibility[lsd_e-0-X]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_steane_all_errors_native_recipe_and_reproducibility[lsd_e-0-Z]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_depolarizing_matches_separate_sectors_and_fixed_prior",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_other_codes_fixed_errors[<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_other_codes_fixed_errors[<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_other_codes_fixed_errors[make_hgp_hamming]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_other_codes_fixed_errors[make_bb_code_72]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_other_codes_fixed_errors[<lambda>2]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_other_codes_fixed_errors[<lambda>3]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options2]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options3]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options4]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options5]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options6]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options7]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options8]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options9]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options10]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options11]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options12]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options13]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options14]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options15]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options16]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options17]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options18]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options19]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options20]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_bad_settings_rejected_before_native[options21]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_metadata_defaults_and_numpy_scalars",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_zero_columns_and_redundant_zero_checks",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_zero_syndrome_identity_rule_does_not_call_native[0.1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_zero_syndrome_identity_rule_does_not_call_native[0.9]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_full_state_failure_definition_and_sampling_integration[X]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_bplsd_decoders::test_full_state_failure_definition_and_sampling_integration[Z]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_examples_real::test_example[toric_pymatching.py-dependencies3-keys3]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_examples_real::test_example[stim_dem.py-dependencies4-keys4]",
+      "reason": "could not import 'stim': No module named 'stim'"
+    },
+    {
+      "test": "tests.test_examples_real::test_example[circuit_baseline.py-dependencies5-keys5]",
+      "reason": "could not import 'stim': No module named 'stim'"
+    },
+    {
+      "test": "tests.test_examples_real::test_example[bb72_bposd.py-dependencies6-keys6]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_examples_real::test_example[tile_bposd.py-dependencies7-keys7]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_examples_real::test_example[toric_depolarizing.py-dependencies8-keys8]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_examples_real::test_example[phenomenological_toric.py-dependencies9-keys9]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_initial_states::test_exact_milp_branch_for_thirteen_stabilizers",
+      "reason": "could not import 'scipy.optimize': No module named 'scipy'"
+    },
+    {
+      "test": "tests.test_initial_states::test_nontrivial_milp_matches_full_coset_enumeration",
+      "reason": "could not import 'scipy.optimize': No module named 'scipy'"
+    },
+    {
+      "test": "tests.test_phase_flip::test_phase_model_is_dual_bit_model[make_hgp_hamming]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_phase_flip::test_asymmetric_toric_phase_exact_equals_dual_bit_exact",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_phase_flip::test_z_decoder_selection_validation_and_existing_identifier",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_phase_flip::test_z_bposd_identifier_and_default_unchanged",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_phase_flip::test_z_bposd_predictions_use_x_checks_on_nonselfdual_code",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_examples_templates::test_default_quick_run[byo_stim_dem]",
+      "reason": "could not import 'stim': No module named 'stim'"
+    },
+    {
+      "test": "tests.test_phase_flip::test_example_quick_cli",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_examples_templates::test_research_output_is_rejected[byo_stim_dem]",
+      "reason": "could not import 'stim': No module named 'stim'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_workflow_quick[pl_curve.py-keys0-matching]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_workflow_quick[conditional_weight.py-keys1-matching]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_workflow_quick[convergence_check.py-keys2-matching]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_workflow_quick[p_dependent_decoder.py-keys3-codes]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_workflow_quick[tile_capacity_fixed_prior.py-keys4-bposd]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_plot_fallback_keeps_csv[pl_curve.py]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_plot_fallback_keeps_csv[conditional_weight.py]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_all_syndromes_native_mapping_and_order_independence[X-make_steane_code]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_all_syndromes_native_mapping_and_order_independence[X-<lambda>]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_all_syndromes_native_mapping_and_order_independence[Z-make_steane_code]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_all_syndromes_native_mapping_and_order_independence[Z-<lambda>]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_peeling_graphlike_all_syndromes[X-<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_peeling_graphlike_all_syndromes[X-<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_peeling_graphlike_all_syndromes[Z-<lambda>0]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_peeling_graphlike_all_syndromes[Z-<lambda>1]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_depolarizing_sector_prior_order_and_metadata",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_settings_defaults_and_alias_are_explicit",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_belief_find_decoders::test_options_applied_to_native[min_sum]",
+      "reason": "could not import 'ldpc': No module named 'ldpc'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_convergence_initial_populations_are_distinct[0]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_examples_workflows::test_convergence_initial_populations_are_distinct[4]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_faststep::test_toric_d3_seeded_trajectory_and_rng_calls",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_faststep::test_toric_larger_seeded_trajectories[0.01-3]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_faststep::test_toric_larger_seeded_trajectories[0.01-5]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_faststep::test_toric_larger_seeded_trajectories[0.01-7]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_faststep::test_toric_larger_seeded_trajectories[0.22-3]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_faststep::test_toric_larger_seeded_trajectories[0.22-5]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_faststep::test_toric_larger_seeded_trajectories[0.22-7]",
+      "reason": "could not import 'pymatching': No module named 'pymatching'"
+    },
+    {
+      "test": "tests.test_regressions::test_dem_bound_noise_rejects_different_detector_maps_of_equal_width",
+      "reason": "could not import 'stim': No module named 'stim'"
+    }
+  ],
+  "data_open_paths": [],
+  "probe_sha256": {
+    "core_installed_suite_v2.gw0.jsonl": "48c2658cdf5acb726587a1eb96e709bf90a9cbbafecf4c4147086de74116a53f",
+    "core_installed_suite_v2.gw1.jsonl": "d95566b816906cec5e9556a053a753527c58231d23fcd2952f5b6f76e290feb0",
+    "core_installed_suite_v2.gw2.jsonl": "648e317ad1370649d53f68a86ce631e908e551866b720c5468dd057f82c08381",
+    "core_installed_suite_v2.gw3.jsonl": "08c02dd215bc5408e008fa491843cde180b05e5f8f40ec14d9c46a1f13931ea6"
+  },
+  "scope": "JUnit outcomes and summed setup/call/teardown time per file. Cumulative time is not elapsed parallel file time. Data opens are observed dependencies, not a static completeness proof."
+}

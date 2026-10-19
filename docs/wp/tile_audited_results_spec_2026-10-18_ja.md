@@ -1,0 +1,35 @@
+# 主校正の監査済み入力と集計の接続
+
+既存のfrozen sampling・analysis・監査driverを変更せず、読み取り専用の`tile_audited_results.py`を追加する。
+`read_results(root, audit_root, case, *, sampling_verification, analysis_verification, anchor_verification, anchor_audit, reference_verification, reference_audit)`は既存productionとfull trace監査root、および既存archive検証・科学監査JSONを読み、新規reportを返す。
+`root`にはmanifest、analysis manifest、reference summary、anchor phase summary、全trace・anchor・analysis artifact、rows、summaryが必要である。
+`audit_root`にはfull plan、sampling manifest、native profile/fixture、preflight、execution intent、submission/script、全measurement・group監査artifactとsummaryが必要である。
+verification JSONは`artifact_archive.py`で作成したものを用い、archive自体をこのadapterで再走査したとは扱わない。
+
+固定192 replicate・768 group・全rung/chainを要求し、capacity監査を本監査の代用にしない。
+既存`artifact_archive.expected_artifacts`によるidentity、全payload hash、監査保存markerとcurrent marker、native/PBS/source証拠を照合する。
+archive検証reportのpayload mapはcurrent artifactへ照合し、anchor監査とsampling archive中のanchorが同じbyte列であることを確かめる。
+reference監査のarchive hash・summary hash・model hash・成功flagsを検査し、analysis contextのreferenceと照合する。
+anchorの全192記録は既存`audit_tile_anchors.audit_records`で再集計し、保存済み監査とphase summaryを再現する。
+全analysis rowを一度消費し、予定条件・group・replicate・target・reference・失敗状態・anchor分散とrowsを検査し、`tile_summary.summarize_condition`でsummaryを再現する。
+sampling失敗・anchor失敗・0失敗anchor・区間未取得・診断未定義を分母から除外しない。
+missing・corrupt・不一致は拒否し、入力調査と必要な該当群の再計算を要求する。
+
+元productionと監査rootは計算終了後の読み取り専用snapshotであることを前提とする。
+全payloadを一度hash検査し、最後にfile identity・size・mtime/ctimeを再確認し、JSONとmarkerはhashも再照合する。
+これは変更者がfile timestamp等を偽装する敵対的状況を防ぐ仕組みではなく、入力を変更するwriterがいる状態での実行を認めない。
+archive検証reportの真偽を独立に認証する仕組みは追加しない。
+
+旧analysisはhistorical consumed-input hashを記録していないため、`historical_consumed_input_hashes_recorded=False`を必ず保存する。
+今回確認するのは回収済み・現在の入力と監査の整合性であり、解析当時の入力hash証明とは呼ばない。
+bootstrap再計算、native probe再実行、全物理状態の再復号、全trajectory再生は行わず、それぞれFalseを保存する。
+compact配列の科学監査と保存checkpointの再復号は既存監査の証拠を再利用する。
+referenceのraw trial再計数とanchorの物理error再生成も行わない。
+top-level入力証拠のhashと全artifact inventoryのdigest、監査範囲、失敗数、全192分母の集計をreportへ残す。
+実使用sourceのhashを開始前に固定して終端再照合し、reference監査のpackage hashと固定sampling runtimeを結合する。
+既存成功trace監査の保存長・checkpoint予定個数・初期状態・seed確認flagsを検査する。
+保存済み隣接log比と共分散からpoint・anchor分散・log SE・区間を算術再現するが、BAR方程式の再求解やbootstrap標本の再計算は行わない。
+CLIは全payload読取りを伴うためPBS_JOBIDを必要とし、新しいoutputだけを排他的に作成する。
+
+受入は小fixtureを用い、全予定集合、missing/failedの違い、current marker/payload改変、reference/anchor混入、native/PBS結合、summary/rows改変、終端変更拒否、scope flagsを検査する。
+本番archiveのlocal全走査・qsub・remote実行はこの開発では行わない。

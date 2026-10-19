@@ -1,0 +1,620 @@
+{
+  "all_four_intervals_overlap": true,
+  "all_four_mc_points_inside_wss_intervals": true,
+  "archive_bytes_rehashed": false,
+  "bar_rows_scanned": false,
+  "common_runtime_and_decoder_metadata_matched": true,
+  "independent_stream_proven": false,
+  "input_sha256": {
+    "main_mc_wss_synthesis_environment_check_v1.json": "6fbb61abda469adf1a11092727b3abaa965d201b2935c2512a0e8f72306cc7cf",
+    "reference_archive_verification.json": "18c5901783f779c12c66e1c0129e702530f05098c4b47c6350d1f3609176e205",
+    "reference_audit.json": "de21132dc1a757c97a9c2a8c9efce3ae4f5e6946dada1ab82f20aff89a34f46e",
+    "reference_manifest.json": "95225cdb6b1f729f7aab7e47658bc3d0fe163b82aeadce18dc6697ba47e19c16",
+    "reference_native_environment.json": "ee2080edd61bb5997a6e3b1c70eb821b0522907939bb0de86a69f23b19213e67",
+    "reference_summary.json": "72afbc93f9fb33d46cc967e542856a6a42031f6a0e1d2f2423c90aaf2e0a5d15",
+    "weight_reference_audit_manifest_v1.json": "3644e76e4b7fd6c4ac89138026477e4ac136fe098263c0c20ca2129dd3c1ec3d",
+    "weight_reference_audit_native_preflight_v1.json": "a41e2ddbe279ed138c70039e480037eef71f41d258012a1a5eda69ed9906c948",
+    "weight_reference_audit_summary_v1.json": "f8c1304c3bfee090e278f534453b3253c1d92410db66f0c72df400476ad44d97",
+    "weight_reference_audit_terminal_validation_v1.json": "6cbc9b2a5effc9a7972ea7fc18c8ceda530633dff4662e4dd43a47fecd409fef",
+    "weight_reference_manifest_v4.json": "9a9b99c51a05cd6d9998c75549bfcdeaeeb2925d115b7208349abc598f455016",
+    "weight_reference_summary_v1.json": "82f2c54ce326f7772991d77398356cbf867367e8f861ab1932171c1d6b010339"
+  },
+  "main_case_comparisons": [
+    {
+      "case": 0,
+      "intervals_overlap": true,
+      "mc_interval_999_fully_inside_wss_interval": false,
+      "mc_point_inside_wss_interval": true,
+      "mc_primary": {
+        "estimate": 0.04296747843424479,
+        "failures": 270328,
+        "interval_95": [
+          0.04280930235039038,
+          0.043126212630733005
+        ],
+        "interval_999": [
+          0.04270223863855563,
+          0.043234291328864624
+        ],
+        "interval_method": "Wilson",
+        "trials": 6291456
+      },
+      "n": 72,
+      "noise": "bit",
+      "target_prior": 0.03,
+      "wss_interval_minus_mc_interval_range": [
+        -0.0003537656347550183,
+        0.0003160264243085714
+      ],
+      "wss_interval_to_mc_interval_ratio_range": [
+        0.9918174758072458,
+        1.0074006992229028
+      ],
+      "wss_partial_minus_mc_point": -1.8031685409883313e-05,
+      "wss_partial_to_mc_point_ratio": 0.9995803410843045,
+      "wss_secondary": {
+        "case": 0,
+        "condition": 0,
+        "confidence_level": 0.999,
+        "full_point_estimate": null,
+        "interval": [
+          0.042880525694109606,
+          0.0430182650628642
+        ],
+        "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+        "maximum_weight": 20,
+        "mc_standard_error_plugin": 1.053643515205647e-05,
+        "n": 72,
+        "noise": "bit",
+        "omitted_mass_upper": 1.8410391809062673e-15,
+        "partial_estimate": 0.042949446748834906,
+        "physical_decoder_prior": 0.03,
+        "strata_count": 21,
+        "synthesis_reproduced_on_current_windows": true,
+        "synthesis_reproduced_on_pinned_linux": true,
+        "trials": 10049011
+      },
+      "wss_to_mc_interval_width_ratio": 0.2588829476167115
+    },
+    {
+      "case": 1,
+      "intervals_overlap": true,
+      "mc_interval_999_fully_inside_wss_interval": true,
+      "mc_point_inside_wss_interval": true,
+      "mc_primary": {
+        "estimate": 0.028949260711669922,
+        "failures": 182133,
+        "interval_95": [
+          0.028818535709776046,
+          0.029080560944770236
+        ],
+        "interval_999": [
+          0.02873011725798018,
+          0.029170025514780776
+        ],
+        "interval_method": "Wilson",
+        "trials": 6291456
+      },
+      "n": 288,
+      "noise": "bit",
+      "target_prior": 0.05,
+      "wss_interval_minus_mc_interval_range": [
+        -0.0021161117197789105,
+        0.0031410707225127815
+      ],
+      "wss_interval_to_mc_interval_ratio_range": [
+        0.9274559523882948,
+        1.1093302437406622
+      ],
+      "wss_partial_minus_mc_point": 0.0002333100860911555,
+      "wss_partial_to_mc_point_ratio": 1.0080592761388585,
+      "wss_secondary": {
+        "case": 1,
+        "condition": 4,
+        "confidence_level": 0.999,
+        "full_point_estimate": null,
+        "interval": [
+          0.027053913795001865,
+          0.03187118798049296
+        ],
+        "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+        "maximum_weight": 50,
+        "mc_standard_error_plugin": 0.00014286050790837454,
+        "n": 288,
+        "noise": "bit",
+        "omitted_mass_upper": 4.7689883369961065e-15,
+        "partial_estimate": 0.029182570797761077,
+        "physical_decoder_prior": 0.05,
+        "strata_count": 51,
+        "synthesis_reproduced_on_current_windows": true,
+        "synthesis_reproduced_on_pinned_linux": true,
+        "trials": 5144817
+      },
+      "wss_to_mc_interval_width_ratio": 10.95063370832496
+    },
+    {
+      "case": 2,
+      "intervals_overlap": true,
+      "mc_interval_999_fully_inside_wss_interval": false,
+      "mc_point_inside_wss_interval": true,
+      "mc_primary": {
+        "estimate": 0.030168533325195312,
+        "failures": 189804,
+        "interval_95": [
+          0.030035161072199324,
+          0.030302479320463326
+        ],
+        "interval_999": [
+          0.029944944656293836,
+          0.03039373914680026
+        ],
+        "interval_method": "Wilson",
+        "trials": 6291456
+      },
+      "n": 72,
+      "noise": "depolarizing",
+      "target_prior": 0.03,
+      "wss_interval_minus_mc_interval_range": [
+        -0.00044056977863024885,
+        0.00032085667808763596
+      ],
+      "wss_interval_to_mc_interval_ratio_range": [
+        0.9855045877540003,
+        1.0107148863279063
+      ],
+      "wss_partial_minus_mc_point": -5.9162832255963554e-05,
+      "wss_partial_to_mc_point_ratio": 0.9980389224885999,
+      "wss_secondary": {
+        "case": 2,
+        "condition": 8,
+        "confidence_level": 0.999,
+        "full_point_estimate": null,
+        "interval": [
+          0.02995316936817001,
+          0.030265801334381472
+        ],
+        "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+        "maximum_weight": 20,
+        "mc_standard_error_plugin": 1.947162148731994e-05,
+        "n": 72,
+        "noise": "depolarizing",
+        "omitted_mass_upper": 1.8410391809062673e-15,
+        "partial_estimate": 0.03010937049293935,
+        "physical_decoder_prior": 0.03,
+        "strata_count": 21,
+        "synthesis_reproduced_on_current_windows": true,
+        "synthesis_reproduced_on_pinned_linux": true,
+        "trials": 9698525
+      },
+      "wss_to_mc_interval_width_ratio": 0.6966038416797103
+    },
+    {
+      "case": 3,
+      "intervals_overlap": true,
+      "mc_interval_999_fully_inside_wss_interval": true,
+      "mc_point_inside_wss_interval": true,
+      "mc_primary": {
+        "estimate": 0.0029504776000976564,
+        "failures": 185628,
+        "interval_95": [
+          0.002937105686142206,
+          0.002963910212090432
+        ],
+        "interval_999": [
+          0.0029280623675130932,
+          0.0029730639166305984
+        ],
+        "interval_method": "Wilson",
+        "trials": 62914560
+      },
+      "n": 288,
+      "noise": "depolarizing",
+      "target_prior": 0.05,
+      "wss_interval_minus_mc_interval_range": [
+        -0.0007600524720900973,
+        0.0014560287203474057
+      ],
+      "wss_interval_to_mc_interval_ratio_range": [
+        0.7443538069132829,
+        1.4972669764490236
+      ],
+      "wss_partial_minus_mc_point": -1.0371869804989223e-05,
+      "wss_partial_to_mc_point_ratio": 0.9964846810548076,
+      "wss_secondary": {
+        "case": 3,
+        "condition": 12,
+        "confidence_level": 0.999,
+        "full_point_estimate": null,
+        "interval": [
+          0.002213011444540501,
+          0.004384091087860499
+        ],
+        "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+        "maximum_weight": 50,
+        "mc_standard_error_plugin": 5.672452845847443e-05,
+        "n": 288,
+        "noise": "depolarizing",
+        "omitted_mass_upper": 4.7689883369961065e-15,
+        "partial_estimate": 0.002940105730292667,
+        "physical_decoder_prior": 0.05,
+        "strata_count": 51,
+        "synthesis_reproduced_on_current_windows": true,
+        "synthesis_reproduced_on_pinned_linux": true,
+        "trials": 1331281
+      },
+      "wss_to_mc_interval_width_ratio": 48.24455348528142
+    }
+  ],
+  "new_native_probe": false,
+  "nominal_coverage_certified": false,
+  "observed_jst": "2026-10-18T15:27:02.427223+09:00",
+  "primary_reference": "preplanned independent direct MC",
+  "raw_trials_reaudited": false,
+  "saved_audit_and_summary_bindings_verified": true,
+  "saved_native_binary_hashes_matched": true,
+  "schema": 1,
+  "secondary_reference": "audited bounded WSS",
+  "source_sha256": {
+    "tile_bar_analysis.py": "7d22afe9b4ee554e255ca1556510b2c76d892d7817ad44ae7a423971a58505de",
+    "tile_weight_reference_comparison.py": "b0c03ca5b9eb2e7adfcb913c43fe810e371f51c530f6893f040b2eade0f262a2",
+    "tile_weight_stratified.py": "65eaa6833a1978dfb85c7718db03def0ebf478d59988cfb0aea4ca920673d585"
+  },
+  "synthesis_environment_note": "All sixteen passed existing synthesis tolerance on pinned Linux. Two secondary low-p strata differ by up to 4.6e-12 relatively on Windows; all four main targets pass on both. No tolerance changed.",
+  "truth_certified": false,
+  "wall_seconds": 1.2887526999984402,
+  "warning": "Summary-only consistency check using saved audit bindings. Direct MC remains primary. WSS partial sums are not full point references; their omitted mass is retained. Interval overlap does not certify truth, accuracy, population RMSE, nominal coverage or independent RNG streams. No new raw-file audit or archive rehash was performed. Saved native evidence matches; no cross-OS decoder reproducibility is claimed.",
+  "wss_conditions_reconstructed": [
+    {
+      "case": 0,
+      "condition": 0,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        0.042880525694109606,
+        0.0430182650628642
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 20,
+      "mc_standard_error_plugin": 1.053643515205647e-05,
+      "n": 72,
+      "noise": "bit",
+      "omitted_mass_upper": 1.8410391809062673e-15,
+      "partial_estimate": 0.042949446748834906,
+      "physical_decoder_prior": 0.03,
+      "strata_count": 21,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 10049011
+    },
+    {
+      "case": 0,
+      "condition": 1,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        0.0025764593946474706,
+        0.0025779929648659643
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 14,
+      "mc_standard_error_plugin": 1.5583193871130053e-07,
+      "n": 72,
+      "noise": "bit",
+      "omitted_mass_upper": 6.758180009301218e-16,
+      "partial_estimate": 0.0025772259889461973,
+      "physical_decoder_prior": 0.01,
+      "strata_count": 15,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 6989299
+    },
+    {
+      "case": 0,
+      "condition": 2,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        0.00015190300429955927,
+        0.00015190804002956739
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 10,
+      "mc_standard_error_plugin": 5.963470824608544e-10,
+      "n": 72,
+      "noise": "bit",
+      "omitted_mass_upper": 4.52645895147584e-16,
+      "partial_estimate": 0.00015190552073219483,
+      "physical_decoder_prior": 0.003,
+      "strata_count": 11,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 5813747
+    },
+    {
+      "case": 0,
+      "condition": 3,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        1.4294542619067877e-05,
+        1.4294564407788293e-05
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 8,
+      "mc_standard_error_plugin": 2.794039933192119e-12,
+      "n": 72,
+      "noise": "bit",
+      "omitted_mass_upper": 8.042060035047471e-17,
+      "partial_estimate": 1.4294553506273261e-05,
+      "physical_decoder_prior": 0.001,
+      "strata_count": 9,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 5465587
+    },
+    {
+      "case": 1,
+      "condition": 4,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        0.027053913795001865,
+        0.03187118798049296
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 50,
+      "mc_standard_error_plugin": 0.00014286050790837454,
+      "n": 288,
+      "noise": "bit",
+      "omitted_mass_upper": 4.7689883369961065e-15,
+      "partial_estimate": 0.029182570797761077,
+      "physical_decoder_prior": 0.05,
+      "strata_count": 51,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 5144817
+    },
+    {
+      "case": 1,
+      "condition": 5,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        3.3419944370269276e-08,
+        1.038163335890121e-05
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 23,
+      "mc_standard_error_plugin": 2.694144271292571e-07,
+      "n": 288,
+      "noise": "bit",
+      "omitted_mass_upper": 5.02494809277051e-15,
+      "partial_estimate": 6.4268873375551e-07,
+      "physical_decoder_prior": 0.01,
+      "strata_count": 24,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 7123185
+    },
+    {
+      "case": 1,
+      "condition": 6,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        2.2322340171710182e-13,
+        1.2594912218352896e-07
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 15,
+      "mc_standard_error_plugin": 3.7222724383363155e-09,
+      "n": 288,
+      "noise": "bit",
+      "omitted_mass_upper": 1.398797676910072e-15,
+      "partial_estimate": 5.264352469032883e-09,
+      "physical_decoder_prior": 0.003,
+      "strata_count": 16,
+      "synthesis_reproduced_on_current_windows": false,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 8454385
+    },
+    {
+      "case": 1,
+      "condition": 7,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        6.309944586015671e-15,
+        1.7406849390070254e-09
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 11,
+      "mc_standard_error_plugin": 7.137666997316734e-11,
+      "n": 288,
+      "noise": "bit",
+      "omitted_mass_upper": 4.177187461534978e-16,
+      "partial_estimate": 1.0094180142318528e-10,
+      "physical_decoder_prior": 0.001,
+      "strata_count": 12,
+      "synthesis_reproduced_on_current_windows": false,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 8446193
+    },
+    {
+      "case": 2,
+      "condition": 8,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        0.02995316936817001,
+        0.030265801334381472
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 20,
+      "mc_standard_error_plugin": 1.947162148731994e-05,
+      "n": 72,
+      "noise": "depolarizing",
+      "omitted_mass_upper": 1.8410391809062673e-15,
+      "partial_estimate": 0.03010937049293935,
+      "physical_decoder_prior": 0.03,
+      "strata_count": 21,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 9698525
+    },
+    {
+      "case": 2,
+      "condition": 9,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        0.0019476637418754938,
+        0.0019557995175693153
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 14,
+      "mc_standard_error_plugin": 7.331637939342994e-07,
+      "n": 72,
+      "noise": "depolarizing",
+      "omitted_mass_upper": 6.758180009301218e-16,
+      "partial_estimate": 0.0019517234202748154,
+      "physical_decoder_prior": 0.01,
+      "strata_count": 15,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 7437533
+    },
+    {
+      "case": 2,
+      "condition": 10,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        0.00012577791425118524,
+        0.0001258614602556782
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 10,
+      "mc_standard_error_plugin": 9.170838962474756e-09,
+      "n": 72,
+      "noise": "depolarizing",
+      "omitted_mass_upper": 4.52645895147584e-16,
+      "partial_estimate": 0.00012581958790074308,
+      "physical_decoder_prior": 0.003,
+      "strata_count": 11,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 6274269
+    },
+    {
+      "case": 2,
+      "condition": 11,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        1.2363283244099694e-05,
+        1.236433253008209e-05
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 8,
+      "mc_standard_error_plugin": 1.2821635587957666e-10,
+      "n": 72,
+      "noise": "depolarizing",
+      "omitted_mass_upper": 8.042060035047471e-17,
+      "partial_estimate": 1.2363806643416953e-05,
+      "physical_decoder_prior": 0.001,
+      "strata_count": 9,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 5999837
+    },
+    {
+      "case": 3,
+      "condition": 12,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        0.002213011444540501,
+        0.004384091087860499
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 50,
+      "mc_standard_error_plugin": 5.672452845847443e-05,
+      "n": 288,
+      "noise": "depolarizing",
+      "omitted_mass_upper": 4.7689883369961065e-15,
+      "partial_estimate": 0.002940105730292667,
+      "physical_decoder_prior": 0.05,
+      "strata_count": 51,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 1331281
+    },
+    {
+      "case": 3,
+      "condition": 13,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        5.4522233011243575e-09,
+        2.0050098251715794e-05
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 23,
+      "mc_standard_error_plugin": 3.8224032381066513e-07,
+      "n": 288,
+      "noise": "depolarizing",
+      "omitted_mass_upper": 5.02494809277051e-15,
+      "partial_estimate": 6.126214978763684e-07,
+      "physical_decoder_prior": 0.01,
+      "strata_count": 24,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 2773073
+    },
+    {
+      "case": 3,
+      "condition": 14,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        7.964352362397457e-20,
+        8.722735422242108e-07
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 15,
+      "mc_standard_error_plugin": 1.9523266918653027e-15,
+      "n": 288,
+      "noise": "depolarizing",
+      "omitted_mass_upper": 1.398797676910072e-15,
+      "partial_estimate": 2.0706918019283636e-15,
+      "physical_decoder_prior": 0.003,
+      "strata_count": 16,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 3371089
+    },
+    {
+      "case": 3,
+      "condition": 15,
+      "confidence_level": 0.999,
+      "full_point_estimate": null,
+      "interval": [
+        9.487024409356872e-21,
+        3.180647669745652e-08
+      ],
+      "interval_method": "Clopper-Pearson per MC stratum, Bonferroni, plus omitted-mass bound",
+      "maximum_weight": 11,
+      "mc_standard_error_plugin": 1.7074085076423909e-16,
+      "n": 288,
+      "noise": "depolarizing",
+      "omitted_mass_upper": 4.177187461534978e-16,
+      "partial_estimate": 1.707616969703804e-16,
+      "physical_decoder_prior": 0.001,
+      "strata_count": 12,
+      "synthesis_reproduced_on_current_windows": true,
+      "synthesis_reproduced_on_pinned_linux": true,
+      "trials": 3485777
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "files": {
+    "output/recover_completed_tile_analysis.py": "b303aaf1d915443da4f99b13405c51bcc0f6dba9a2ec0771421c8ff500506d05",
+    "docs/wp/data_tile_validation_2026-10-17/test_analysis_recovery_helper_v2.py": "4252a7ecc486bef5a51fd5720ba14b8ebef2007ccdcdbf6f8132d613f9e65148",
+    "cluster_scripts/artifact_archive.py": "8a6c213cf4b19ed916d79e0d485168d1f6131244f6465ed7c50084da03ff0384"
+  },
+  "bash_n_returncode": 0,
+  "pbs_script_sha256": "efae3cca860d6bb0375896d63b68b6f360416f2382c200c150db12ec1cb9c62d",
+  "python": "3.11.9 (main, Apr 19 2024, 16:48:06) [GCC 11.2.0]",
+  "platform": "Linux-4.18.0-477.10.1.el8_8.x86_64-x86_64-with-glibc2.28",
+  "scope": "Fixed three-file Linux post-test hashes and syntactic check of actual stage function PBS template; no staging or qsub."
+}

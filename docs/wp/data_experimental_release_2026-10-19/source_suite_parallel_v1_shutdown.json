@@ -1,0 +1,5 @@
+{
+  "observed": "2026-10-19T09:33:34.551523+09:00",
+  "final_log_sha256": "940fdb0f4514ea1cbf24311b0c8cf0ae043639c0cc4b94cf2f94cfc431869e97",
+  "note": "Workers emitted teardown warnings after the timeout receipt; no pytest or execnet Python processes remained at the subsequent CIM check."
+}

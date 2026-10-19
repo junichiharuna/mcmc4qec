@@ -1,0 +1,29 @@
+# 低ノイズBAR解析の合成資源計測
+
+低p sampling capacityは各replicateが1 chainなので、多chain BAR解析の資源計測には転用しない。
+解析capacityは同じcase/targetの本番候補planを内包し、全chain数・全trace長・全rung・burn・window・block・bootstrap回数で解析の計算本体を実行する。
+2 kernel×2 initialization×2 replicateの8群を用い、同時workerは8とする。
+synthetic weight・syndrome weight・logical sectorは物理状態から生成したものではなく、推定値・混合・被覆には一切解釈しない。
+科学計算の入力監査を偽のmetadataで通さず、検査済み入力の下流にある数値計算関数だけを共有する。
+合成計測の保存先・manifest purpose・artifact identityにsyntheticを明示し、返す記録は費用と出力件数だけとする。
+
+synthetic配列のseedは`seed((155,case,target,kernel,init,rep,rung,chain),2)`とする。
+解析bootstrapは本番と同じ座標式でstage155・purpose0を使い、本番stage153と分離する。
+8群全ての成功と正の有限時間・RSSを要求し、失敗や欠落を成功群の平均で埋めない。
+本番の群数は2×2×192=768とし、全群を保持したままworker数とjob分割だけを資源に合わせる。
+最大worker RSSの1.5倍をworker当たりの予算とし、8 GiBの固定余裕を加えて340 GiB以内となる1〜96 workerを選ぶ。
+計算時間は最大群のwall time×ceil(groups/workers)の2倍に600秒を加え、1800秒単位で切り上げる。
+24時間を超える場合は全群を順序どおりの複数partitionに分け、最後の小partitionも欠落させない。
+この外挿は人工入力での測定に基づく資源見積もりであり、低pの実測精度・time-to-accuracyの代用ではない。
+時間計測は合成配列生成と数値coreを対象とし、本番のchecksum照合・NPZ入力・ACF/JSON出力は含まない。
+8同時workerから最大96 workerへの外挿ではメモリ帯域などの競合も未測定であり、2倍の余裕で本番の終了を保証しない。
+partitionは全群を保持した実行計画の出力であり、初版では本番driverのpartition実行には接続していなかった。
+後続の実行接続は[partition仕様](tile_low_noise_analysis_partitions_spec_2026-10-18_ja.md)に記し、実測capacityと本番samplingが揃うまで本番planを作らない。
+
+実行は新規manifestを保存したrootに限り、PBS_JOBID・単一thread環境と不変source/runtime/planを検査する。
+排他的execution intentを保存し、既存artifactやsummaryのあるphaseを自動再実行しない。
+native profileの一致も実行時に確認し、合成数値に必要な環境とsourceの証拠を保存する。
+資源出力のCLIは保存manifest・source/runtime・native入力・compute-node preflight・PBS job/host・worker数を照合し、各artifactの完全markerとpayload hash・summary一致を要求する。
+全設定の出力件数・正の診断件数・区間取得不能ゼロを確認し、時間とRSSだけを記したsummaryから本番資源を確定しない。
+qsub submitterは別に用意し、初回capacityの1 node・96 CPU・340 GiB・24時間は未測定時の上限要求であって終了予測ではない。
+最大2ノードと稼働coordinatorの競合禁止は既存運用を維持する。

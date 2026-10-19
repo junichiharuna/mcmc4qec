@@ -1,0 +1,28 @@
+{
+  "observed": "2026-10-19T00:57:01.002442+00:00",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-experimental-optional\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "tests",
+    "-q",
+    "--override-ini",
+    "pythonpath=",
+    "-n",
+    "8",
+    "--dist=worksteal",
+    "-p",
+    "release_probe",
+    "--durations=20",
+    "--junitxml=A:\\dev\\mcmc4qec\\docs\\wp\\data_experimental_release_2026-10-19\\candidate_optional_suite_v1.xml"
+  ],
+  "cwd": "A:\\dev\\mcmc4qec\\output\\experimental_release_20261019\\candidate_v1",
+  "seconds": 251.45212770000217,
+  "returncode": 0,
+  "timeout": false,
+  "inputs_unchanged": true,
+  "changed_files": [],
+  "original_worktree_data_opens": [],
+  "export_manifest_sha256": "dd80e5ba89815c720ffb1f5e7c73120c4b2cce5d349cf13db2373a018bb3b161",
+  "log_sha256": "a29ed1496376bd57513c189154d29e0634e879f0753587212e2edb2667d3e9b6"
+}

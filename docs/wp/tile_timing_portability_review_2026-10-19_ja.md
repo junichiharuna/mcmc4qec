@@ -1,0 +1,54 @@
+# 低ノイズ計時の保存参照・ホスト間検証の修正レビュー
+
+## 範囲
+
+小仕様は`tile_saved_wss_source_binding_spec_2026-10-19_ja.md`と`tile_selector_cross_host_identity_spec_2026-10-19_ja.md`である。
+親が実装とレビューを担当し、サブエージェント利用上限により独立レビューは未実施である。
+科学計算、固定seed、192反復の分母、設定順位、参照区間、時間比の採否規則は変更していない。
+
+保存済みWSS監査のsourceに限り、固定された旧・現root直下のPythonファイルの名前集合と実bytesのhash一致を確認する。
+元reportは保持し、既存report検証へ渡す一時コピーだけsource辞書を現配置へ置き換える。
+selectorの現native fixture検査は維持し、stage4のmetadata準備へ新しいnative実行やraw入力走査を加えない。
+stage4のfull検査では従来どおり消費済みraw入力をhash照合する。
+
+selector親のprepare→compute、compute→sealだけ保存snapshotのSHA・解決先・modeを比較し、device・inodeを証拠に残す。
+同一プロセス中の完全snapshot比較とcomputeのbegin→finish比較は維持する。
+sealでは現プロセスのEvidenceへ全保存対象を登録してから読み進め、途中の同一bytes置換も拒否する。
+新しいmoduleを含む実import closureを別Linux配置で固定し、既存配置と稼働中jobを上書きしない。
+
+## Windows受入
+
+共通source対応・selector・stage4・実ファイル接続の4ファイルは130 passed・32.95秒であった。
+selector親のホスト差・既存投入契約・レビューの3ファイルは55 passed・61.04秒であった。
+後続の計画・seed監査・census・実行・実行gateの5ファイルは122 passed・50.50秒であった。
+3組で307件を検証し、各ログと計測JSONを`data_tile_validation_2026-10-17/`に保存した。
+source対応の実装前は23件、接続前は4件が失敗し、ホスト間対応の実装前は10 failed・3 passedであった。
+既存の簡略metadata fixtureにはsource検査のmock範囲を明記し、別の実sourceファイル接続テストで配置差・破損拒否・元report保持を確認した。
+
+## Linux検証の初回停止
+
+`20261019-tile-low-timing-portability-v1`ではbootstrapと実source closure検査を通過後、nativeバイナリ一覧のpath比較で停止し、pytestは未実施である。
+検査スクリプトが仮想環境のリンク経由のpathを使う一方、既存固定記録は実体pathを使っていた。
+読み取り専用の診断で8バイナリの解決先・固定hash・現在hashが一致することを確認した。
+初回の配置・出力・失敗記録は保持した。
+検査スクリプトだけnative rootをresolveする修正を加え、同じ科学sourceとテストを別のv2配置で検証する。
+この文書の作成時点ではv2の結果は未取得であり、正式selector投入・低ノイズ計時の完了を意味しない。
+
+## Linux検査起動の修正
+
+v2は240秒のSSH時間上限となり、受入結果は取得できなかった。
+307件にはspawnを実行する既存テストが含まれるが、検査runnerの`__main__` guardが不足していた。
+残存した検査parentとworkerを確認して停止し、SIGTERM後も残ったresource trackerとorphan workerの3 PIDはSIGKILLで停止した。
+当該検査には正式入力・qsub操作を含まず、本計算のjobには変更を加えていない。
+v2のbufferedテスト出力は保存できなかったため、その証拠欠落を`low_timing_portability_deployment_v2_failure.json`に明記した。
+v3は`__main__` guardを加え、標準出力・標準エラーをremoteのファイルへ保存し、remote側にも時間上限を設ける。
+科学sourceとテスト内容は変更せず、別のv3配置で検証する。
+
+## Linux最終受入
+
+v3の隔離配置で307 passed・111.76秒・skipなしを確認した。
+実際にloadした87 sourceのhash・解決先・import originとruntimeを固定し、nativeバイナリ8件と保存fixture2件を含む検査をテスト前後で通した。
+既存86 sourceのうち3 moduleを更新し、共通helper1 moduleを追加したため、変更しない83 sourceとcore packageは旧固定値と一致する。
+元のv1・v2失敗記録は保持し、正式受入はv3の結果に限る。
+Linuxの受入JSON SHAは`a88355159f8053972538432e8d56e0994b12c6c5e0704412be76de9154546506`である。
+小さいfixtureと実source照合の成功であり、全12条件の実データ比較・正式selector・低ノイズ独立計時を完了したとは扱わない。

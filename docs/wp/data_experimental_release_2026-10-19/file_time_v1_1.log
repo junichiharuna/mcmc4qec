@@ -1,0 +1,8 @@
+...................                                                      [100%]
+============================= slowest 5 durations =============================
+13.34s call     tests/test_tile_low_noise_partitioned_trace_audit_resources.py::test_measured_partition_capacity_checks_terminal_payloads_and_plan
+0.93s call     tests/test_tile_low_noise_partitioned_trace_audit_resources.py::test_incomplete_failed_lower_bound_or_excessive_capacity_rejected[<lambda>6]
+0.92s call     tests/test_tile_low_noise_partitioned_trace_audit_resources.py::test_capacity_must_be_eight_workers_and_exact_subset[purpose-low_noise_trace_audit_full]
+0.91s call     tests/test_tile_low_noise_partitioned_trace_audit_resources.py::test_phase_rehash_overhead_is_included_and_full_workers_not_an_input
+0.91s call     tests/test_tile_low_noise_partitioned_trace_audit_resources.py::test_incomplete_failed_lower_bound_or_excessive_capacity_rejected[<lambda>7]
+19 passed in 31.09s

@@ -1,0 +1,21 @@
+{
+  "observed": "2026-10-19T00:51:22.560321+00:00",
+  "file": "tests/test_submit_tile_low_noise_timing_selection_review.py",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-experimental-optional\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "--override-ini",
+    "pythonpath=",
+    "tests/test_submit_tile_low_noise_timing_selection_review.py",
+    "-q",
+    "--durations=5",
+    "--junitxml=A:\\dev\\mcmc4qec\\docs\\wp\\data_experimental_release_2026-10-19\\file_time_v1_0.xml"
+  ],
+  "seconds": 37.5354631000082,
+  "returncode": 0,
+  "timeout": false,
+  "file_sha256": "8c0cdd941422f59ac9a62c1ed6658d7960e5ebe75c60297e7c53fbd7c5732069",
+  "file_unchanged": true,
+  "log_sha256": "819ac89f1f8f96bed96a0de0dc96b180508e96eed391258e02180dbce30fba13"
+}

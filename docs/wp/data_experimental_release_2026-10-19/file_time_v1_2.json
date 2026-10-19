@@ -1,0 +1,21 @@
+{
+  "observed": "2026-10-19T00:52:30.838962+00:00",
+  "file": "tests/test_tile_weight_reference_audit_run.py",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-experimental-optional\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "--override-ini",
+    "pythonpath=",
+    "tests/test_tile_weight_reference_audit_run.py",
+    "-q",
+    "--durations=5",
+    "--junitxml=A:\\dev\\mcmc4qec\\docs\\wp\\data_experimental_release_2026-10-19\\file_time_v1_2.xml"
+  ],
+  "seconds": 36.55240040001809,
+  "returncode": 0,
+  "timeout": false,
+  "file_sha256": "92835c4554bab0192e8ca27766cf59dc59516f36526f7cbc62eff0240083395a",
+  "file_unchanged": true,
+  "log_sha256": "6c16c476b22af2c216b02209ddc10d5c34e4867b38b62aa4f7ed8a489eac046e"
+}

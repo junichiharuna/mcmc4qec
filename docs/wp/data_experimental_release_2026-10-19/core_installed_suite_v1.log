@@ -1,0 +1,1791 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- A:\dev\mcmc4qec\.venv-experimental-core\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: A:\dev\mcmc4qec
+configfile: pyproject.toml
+plugins: xdist-3.8.0
+created: 4/4 workers
+4 workers [861 items]
+
+scheduling tests via WorkStealingScheduling
+
+tests/test_acceptance.py::test_exact_reference_and_support_endpoints 
+tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets6-state6-kernel6] 
+tests/test_tile_low_noise_archive.py::test_export_rechecks_file_census_and_worker_bytes[worker_changed] 
+tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel1] 
+[gw0] [  0%] PASSED tests/test_acceptance.py::test_exact_reference_and_support_endpoints 
+tests/test_acceptance.py::test_transition_detailed_balance_with_nonidentical_probabilities[kernel0] 
+[gw0] [  0%] PASSED tests/test_acceptance.py::test_transition_detailed_balance_with_nonidentical_probabilities[kernel0] 
+tests/test_acceptance.py::test_transition_detailed_balance_with_nonidentical_probabilities[kernel1] 
+[gw0] [  0%] PASSED tests/test_acceptance.py::test_transition_detailed_balance_with_nonidentical_probabilities[kernel1] 
+tests/test_acceptance.py::test_transition_detailed_balance_with_nonidentical_probabilities[kernel2] 
+[gw0] [  0%] PASSED tests/test_acceptance.py::test_transition_detailed_balance_with_nonidentical_probabilities[kernel2] 
+tests/test_acceptance.py::test_transition_detailed_balance_with_nonidentical_probabilities[kernel3] 
+[gw0] [  0%] PASSED tests/test_acceptance.py::test_transition_detailed_balance_with_nonidentical_probabilities[kernel3] 
+tests/test_acceptance.py::test_stabilizer_rechecks_custom_failure 
+[gw0] [  0%] PASSED tests/test_acceptance.py::test_stabilizer_rechecks_custom_failure 
+tests/test_acceptance.py::test_mcmc_exact_conditional_and_reproducibility 
+[gw1] [  0%] PASSED tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets6-state6-kernel6] 
+tests/test_categorical_kernels.py::test_cluster_relabel_probability_sums_duplicate_paths_and_unavailable_moves 
+[gw1] [  0%] PASSED tests/test_categorical_kernels.py::test_cluster_relabel_probability_sums_duplicate_paths_and_unavailable_moves 
+tests/test_categorical_kernels.py::test_cluster_k1_reaches_fixed_group_occupancy_component 
+[gw1] [  1%] PASSED tests/test_categorical_kernels.py::test_cluster_k1_reaches_fixed_group_occupancy_component 
+tests/test_categorical_kernels.py::test_pauli_stabilizer_xor_probabilities_include_repeated_rows 
+[gw3] [  1%] PASSED tests/test_tile_low_noise_archive.py::test_export_rechecks_file_census_and_worker_bytes[worker_changed] 
+tests/test_tile_low_noise_export_gate.py::test_saved_metadata_gate_has_no_trace_dependency 
+[gw3] [  1%] PASSED tests/test_tile_low_noise_export_gate.py::test_saved_metadata_gate_has_no_trace_dependency 
+tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[manifest] 
+[gw3] [  1%] PASSED tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[manifest] 
+tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[final_completion] 
+[gw3] [  1%] PASSED tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[final_completion] 
+tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[accepted] 
+[gw3] [  1%] PASSED tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[accepted] 
+tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[accepted_index] 
+[gw3] [  1%] PASSED tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[accepted_index] 
+tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[python] 
+[gw3] [  1%] PASSED tests/test_tile_low_noise_export_gate.py::test_fixed_input_changes_rejected[python] 
+tests/test_tile_low_noise_export_gate.py::test_actual_pbs_terminal_required[job_state-R] 
+[gw3] [  1%] PASSED tests/test_tile_low_noise_export_gate.py::test_actual_pbs_terminal_required[job_state-R] 
+tests/test_tile_low_noise_export_gate.py::test_actual_pbs_terminal_required[Exit_status-1] 
+[gw3] [  2%] PASSED tests/test_tile_low_noise_export_gate.py::test_actual_pbs_terminal_required[Exit_status-1] 
+tests/test_tile_low_noise_export_gate.py::test_actual_pbs_terminal_required[run_count-2] 
+[gw3] [  2%] PASSED tests/test_tile_low_noise_export_gate.py::test_actual_pbs_terminal_required[run_count-2] 
+tests/test_tile_low_noise_export_gate.py::test_actual_pbs_terminal_required[Submit_arguments-other.sh] 
+[gw3] [  2%] PASSED tests/test_tile_low_noise_export_gate.py::test_actual_pbs_terminal_required[Submit_arguments-other.sh] 
+tests/test_tile_low_noise_export_gate.py::test_condition_and_report_are_bound[case-1] 
+[gw3] [  2%] PASSED tests/test_tile_low_noise_export_gate.py::test_condition_and_report_are_bound[case-1] 
+tests/test_tile_low_noise_export_gate.py::test_condition_and_report_are_bound[target_index-2] 
+[gw3] [  2%] PASSED tests/test_tile_low_noise_export_gate.py::test_condition_and_report_are_bound[target_index-2] 
+tests/test_tile_low_noise_export_gate.py::test_condition_and_report_are_bound[manifest_digest-0000000000000000000000000000000000000000000000000000000000000000] 
+[gw3] [  2%] PASSED tests/test_tile_low_noise_export_gate.py::test_condition_and_report_are_bound[manifest_digest-0000000000000000000000000000000000000000000000000000000000000000] 
+tests/test_tile_low_noise_export_gate.py::test_condition_and_report_are_bound[report_sha256-0000000000000000000000000000000000000000000000000000000000000000] 
+[gw3] [  2%] PASSED tests/test_tile_low_noise_export_gate.py::test_condition_and_report_are_bound[report_sha256-0000000000000000000000000000000000000000000000000000000000000000] 
+tests/test_tile_low_noise_export_gate.py::test_source_python_files_are_pinned 
+[gw3] [  2%] PASSED tests/test_tile_low_noise_export_gate.py::test_source_python_files_are_pinned 
+tests/test_tile_low_noise_export_worker.py::test_worker_accepts_external_index_and_seals_once 
+[gw1] [  3%] PASSED tests/test_categorical_kernels.py::test_pauli_stabilizer_xor_probabilities_include_repeated_rows 
+tests/test_checked_decoder.py::test_physical_correction_and_input_are_checked_before_logical_mapping 
+[gw1] [  3%] PASSED tests/test_checked_decoder.py::test_physical_correction_and_input_are_checked_before_logical_mapping 
+tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome0] 
+[gw1] [  3%] PASSED tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome0] 
+tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome1] 
+[gw1] [  3%] PASSED tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome1] 
+tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome2] 
+[gw1] [  3%] PASSED tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome2] 
+tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome3] 
+[gw1] [  3%] PASSED tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome3] 
+tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome4] 
+[gw1] [  3%] PASSED tests/test_checked_decoder.py::test_invalid_or_unrealizable_syndrome_never_calls_backend[syndrome4] 
+tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction0] 
+[gw1] [  3%] PASSED tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction0] 
+tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction1] 
+[gw1] [  3%] PASSED tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction1] 
+tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction2] 
+[gw1] [  4%] PASSED tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction2] 
+tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction3] 
+[gw1] [  4%] PASSED tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction3] 
+tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction4] 
+[gw1] [  4%] PASSED tests/test_checked_decoder.py::test_invalid_correction_is_never_a_logical_prediction[correction4] 
+tests/test_checked_decoder.py::test_metadata_and_matrices_are_copied 
+[gw1] [  4%] PASSED tests/test_checked_decoder.py::test_metadata_and_matrices_are_copied 
+tests/test_checked_decoder.py::test_backend_exception_propagates 
+[gw1] [  4%] PASSED tests/test_checked_decoder.py::test_backend_exception_propagates 
+tests/test_checked_decoder.py::test_all_binary_syndromes_with_dependent_checks 
+[gw1] [  4%] PASSED tests/test_checked_decoder.py::test_all_binary_syndromes_with_dependent_checks 
+tests/test_codes.py::test_small_code_parameters[make_toric_code-2-8-2] 
+[gw1] [  4%] SKIPPED tests/test_codes.py::test_small_code_parameters[make_toric_code-2-8-2] 
+tests/test_codes.py::test_small_code_parameters[make_toric_code-3-18-2] 
+[gw1] [  4%] SKIPPED tests/test_codes.py::test_small_code_parameters[make_toric_code-3-18-2] 
+tests/test_codes.py::test_small_code_parameters[make_surface_code-2-5-1] 
+[gw1] [  4%] SKIPPED tests/test_codes.py::test_small_code_parameters[make_surface_code-2-5-1] 
+tests/test_codes.py::test_small_code_parameters[make_surface_code-3-13-1] 
+[gw1] [  5%] SKIPPED tests/test_codes.py::test_small_code_parameters[make_surface_code-3-13-1] 
+tests/test_codes.py::test_invalid_distance[make_surface_code-True] 
+[gw1] [  5%] PASSED tests/test_codes.py::test_invalid_distance[make_surface_code-True] 
+tests/test_codes.py::test_invalid_distance[make_surface_code-1] 
+[gw1] [  5%] PASSED tests/test_codes.py::test_invalid_distance[make_surface_code-1] 
+tests/test_codes.py::test_invalid_distance[make_surface_code-0] 
+[gw1] [  5%] PASSED tests/test_codes.py::test_invalid_distance[make_surface_code-0] 
+tests/test_codes.py::test_invalid_distance[make_surface_code--1] 
+[gw1] [  5%] PASSED tests/test_codes.py::test_invalid_distance[make_surface_code--1] 
+tests/test_codes.py::test_invalid_distance[make_surface_code-2.5] 
+[gw1] [  5%] PASSED tests/test_codes.py::test_invalid_distance[make_surface_code-2.5] 
+tests/test_codes.py::test_invalid_distance[make_toric_code-True] 
+[gw1] [  5%] PASSED tests/test_codes.py::test_invalid_distance[make_toric_code-True] 
+tests/test_codes.py::test_invalid_distance[make_toric_code-1] 
+[gw1] [  5%] PASSED tests/test_codes.py::test_invalid_distance[make_toric_code-1] 
+tests/test_codes.py::test_invalid_distance[make_toric_code-0] 
+[gw1] [  6%] PASSED tests/test_codes.py::test_invalid_distance[make_toric_code-0] 
+tests/test_codes.py::test_invalid_distance[make_toric_code--1] 
+[gw1] [  6%] PASSED tests/test_codes.py::test_invalid_distance[make_toric_code--1] 
+tests/test_codes.py::test_invalid_distance[make_toric_code-2.5] 
+[gw1] [  6%] PASSED tests/test_codes.py::test_invalid_distance[make_toric_code-2.5] 
+tests/test_codes.py::test_research_code_parameters_and_logical_completeness[<lambda>-30-2-False] 
+[gw1] [  6%] SKIPPED tests/test_codes.py::test_research_code_parameters_and_logical_completeness[<lambda>-30-2-False] 
+tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_hgp_hamming-58-16-True] 
+[gw1] [  6%] SKIPPED tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_hgp_hamming-58-16-True] 
+tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_bb_code_72-72-12-True] 
+[gw1] [  6%] PASSED tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_bb_code_72-72-12-True] 
+tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_bb_code_108-108-8-True] 
+[gw1] [  6%] PASSED tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_bb_code_108-108-8-True] 
+tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_bb_code_144-144-12-True] 
+[gw1] [  6%] PASSED tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_bb_code_144-144-12-True] 
+tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_steane_code-7-1-False] 
+[gw1] [  6%] PASSED tests/test_codes.py::test_research_code_parameters_and_logical_completeness[make_steane_code-7-1-False] 
+tests/test_codes.py::test_research_code_parameters_and_logical_completeness[<lambda>-49-1-False] 
+[gw1] [  7%] PASSED tests/test_codes.py::test_research_code_parameters_and_logical_completeness[<lambda>-49-1-False] 
+tests/test_codes.py::test_invalid_factory_arguments[make_asymmetric_toric_code-args0] 
+[gw1] [  7%] PASSED tests/test_codes.py::test_invalid_factory_arguments[make_asymmetric_toric_code-args0] 
+tests/test_codes.py::test_invalid_factory_arguments[make_asymmetric_toric_code-args1] 
+[gw1] [  7%] PASSED tests/test_codes.py::test_invalid_factory_arguments[make_asymmetric_toric_code-args1] 
+tests/test_codes.py::test_invalid_factory_arguments[make_concatenated_steane_code-args2] 
+[gw1] [  7%] PASSED tests/test_codes.py::test_invalid_factory_arguments[make_concatenated_steane_code-args2] 
+tests/test_codes.py::test_invalid_factory_arguments[make_concatenated_steane_code-args3] 
+[gw1] [  7%] PASSED tests/test_codes.py::test_invalid_factory_arguments[make_concatenated_steane_code-args3] 
+tests/test_codes.py::test_small_code_x_distance_by_exhaustive_low_weights[make_steane_code-3] 
+[gw1] [  7%] PASSED tests/test_codes.py::test_small_code_x_distance_by_exhaustive_low_weights[make_steane_code-3] 
+tests/test_codes.py::test_small_code_x_distance_by_exhaustive_low_weights[<lambda>-3] 
+[gw1] [  7%] SKIPPED tests/test_codes.py::test_small_code_x_distance_by_exhaustive_low_weights[<lambda>-3] 
+tests/test_codes.py::test_large_code_x_distance_witness_only[make_hgp_hamming-3] 
+[gw1] [  7%] SKIPPED tests/test_codes.py::test_large_code_x_distance_witness_only[make_hgp_hamming-3] 
+tests/test_codes.py::test_large_code_x_distance_witness_only[make_bb_code_72-6] 
+[gw1] [  8%] PASSED tests/test_codes.py::test_large_code_x_distance_witness_only[make_bb_code_72-6] 
+tests/test_codes.py::test_large_code_x_distance_witness_only[make_bb_code_108-12] 
+[gw1] [  8%] PASSED tests/test_codes.py::test_large_code_x_distance_witness_only[make_bb_code_108-12] 
+tests/test_codes.py::test_large_code_x_distance_witness_only[make_bb_code_144-12] 
+[gw1] [  8%] PASSED tests/test_codes.py::test_large_code_x_distance_witness_only[make_bb_code_144-12] 
+tests/test_codes.py::test_large_code_x_distance_witness_only[<lambda>-9] 
+[gw1] [  8%] PASSED tests/test_codes.py::test_large_code_x_distance_witness_only[<lambda>-9] 
+tests/test_convergence.py::test_diagnose_multiple_results_and_kernel_counts 
+[gw1] [  8%] PASSED tests/test_convergence.py::test_diagnose_multiple_results_and_kernel_counts 
+tests/test_convergence.py::test_stationary_ar1_passes_four_checks 
+[gw1] [  8%] PASSED tests/test_convergence.py::test_stationary_ar1_passes_four_checks 
+tests/test_convergence.py::test_two_basins_are_rejected_by_multistart 
+[gw3] [  8%] PASSED tests/test_tile_low_noise_export_worker.py::test_worker_accepts_external_index_and_seals_once 
+tests/test_tile_low_noise_export_worker.py::test_self_consistent_export_cannot_replace_accepted_data 
+[gw1] [  8%] PASSED tests/test_convergence.py::test_two_basins_are_rejected_by_multistart 
+tests/test_convergence.py::test_drift_and_dispersion_fail_independently 
+[gw1] [  8%] PASSED tests/test_convergence.py::test_drift_and_dispersion_fail_independently 
+tests/test_convergence.py::test_persistent_chain_offsets_fail_scaling 
+[gw1] [  9%] PASSED tests/test_convergence.py::test_persistent_chain_offsets_fail_scaling 
+tests/test_convergence.py::test_missing_multistart_is_unresolved 
+[gw1] [  9%] PASSED tests/test_convergence.py::test_missing_multistart_is_unresolved 
+tests/test_convergence.py::test_direct_variance_is_required_for_four_check_pass 
+[gw1] [  9%] PASSED tests/test_convergence.py::test_direct_variance_is_required_for_four_check_pass 
+tests/test_convergence.py::test_zero_se_and_zero_reference_scatter_do_not_hide_disagreement 
+[gw1] [  9%] PASSED tests/test_convergence.py::test_zero_se_and_zero_reference_scatter_do_not_hide_disagreement 
+tests/test_convergence.py::test_negative_ar1_has_iat_below_one_and_ess_above_sample_count 
+[gw1] [  9%] PASSED tests/test_convergence.py::test_negative_ar1_has_iat_below_one_and_ess_above_sample_count 
+tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-bd8b591e864907a99e82e7705af8ccabbf0f6e596657451183b0004a6a9328ac] 
+[gw1] [  9%] SKIPPED tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-bd8b591e864907a99e82e7705af8ccabbf0f6e596657451183b0004a6a9328ac] 
+tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-bc54927b2b14a89a5f34167d6ce0a09dd318ce25482e0a339fc834739128da77] 
+[gw1] [  9%] SKIPPED tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-bc54927b2b14a89a5f34167d6ce0a09dd318ce25482e0a339fc834739128da77] 
+tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-e40d656805f71789bbe5bfcb20f3a9847720c96d9f4c35a7c73f83ddc2eb4f69] 
+[gw1] [  9%] SKIPPED tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-e40d656805f71789bbe5bfcb20f3a9847720c96d9f4c35a7c73f83ddc2eb4f69] 
+tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-08708bfdc7ffa6c6537cdbe8f0191f3616fd552aa061c429bbcbb255f24abe4d] 
+[gw1] [  9%] SKIPPED tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-08708bfdc7ffa6c6537cdbe8f0191f3616fd552aa061c429bbcbb255f24abe4d] 
+tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-f53441180a1b5fca84b93d04e1e6b6d5c7733716d49a2c98c82a06948ab0b5d1] 
+[gw1] [ 10%] SKIPPED tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-f53441180a1b5fca84b93d04e1e6b6d5c7733716d49a2c98c82a06948ab0b5d1] 
+tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-ec34745b31b5ec4cbb689c4d89e4151bb6374c5890dc9b176a3e5e93957c2d67] 
+[gw1] [ 10%] SKIPPED tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-ec34745b31b5ec4cbb689c4d89e4151bb6374c5890dc9b176a3e5e93957c2d67] 
+tests/test_crossval_research.py::test_research_matrix_bytes[make_hgp_hamming-1fe2f6f185e30fecb3a8aa1945856be056dedbabfa2b33d6d3791924c4d60d00] 
+[gw1] [ 10%] SKIPPED tests/test_crossval_research.py::test_research_matrix_bytes[make_hgp_hamming-1fe2f6f185e30fecb3a8aa1945856be056dedbabfa2b33d6d3791924c4d60d00] 
+tests/test_crossval_research.py::test_research_matrix_bytes[make_bb_code_72-8023f746dbce8344f4d7135c3dea63ac8dbaeec44d415b07983c650e7ef22835] 
+[gw1] [ 10%] PASSED tests/test_crossval_research.py::test_research_matrix_bytes[make_bb_code_72-8023f746dbce8344f4d7135c3dea63ac8dbaeec44d415b07983c650e7ef22835] 
+tests/test_crossval_research.py::test_research_matrix_bytes[make_bb_code_108-65916c07fcbbb10f223e524360b6b2b1922a991b36d8589f71b0fa4ffe2586f2] 
+[gw1] [ 10%] PASSED tests/test_crossval_research.py::test_research_matrix_bytes[make_bb_code_108-65916c07fcbbb10f223e524360b6b2b1922a991b36d8589f71b0fa4ffe2586f2] 
+tests/test_crossval_research.py::test_research_matrix_bytes[make_bb_code_144-c76d406fc93afc5ec4057a4f6a3a6413f823e6083802d3d075aeac2b464316a5] 
+[gw1] [ 10%] PASSED tests/test_crossval_research.py::test_research_matrix_bytes[make_bb_code_144-c76d406fc93afc5ec4057a4f6a3a6413f823e6083802d3d075aeac2b464316a5] 
+tests/test_crossval_research.py::test_research_matrix_bytes[make_steane_code-a76054125138a0af2a30fdaed69499bd6ac3fd8f0617f09a00610d590bc5dc05] 
+[gw1] [ 10%] PASSED tests/test_crossval_research.py::test_research_matrix_bytes[make_steane_code-a76054125138a0af2a30fdaed69499bd6ac3fd8f0617f09a00610d590bc5dc05] 
+tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-4a3000c07cb4769666f648923e074cfdf97ce9a54cae522556fe3ebae6085afa] 
+[gw1] [ 10%] PASSED tests/test_crossval_research.py::test_research_matrix_bytes[<lambda>-4a3000c07cb4769666f648923e074cfdf97ce9a54cae522556fe3ebae6085afa] 
+tests/test_crossval_research.py::test_research_bar_value_on_identical_synthetic_weight_traces 
+[gw1] [ 11%] PASSED tests/test_crossval_research.py::test_research_bar_value_on_identical_synthetic_weight_traces 
+tests/test_crossval_research.py::test_live_research_decoder_all_toric_d3_syndromes[mwpm] 
+[gw1] [ 11%] SKIPPED tests/test_crossval_research.py::test_live_research_decoder_all_toric_d3_syndromes[mwpm] 
+tests/test_crossval_research.py::test_live_research_decoder_all_toric_d3_syndromes[bposd] 
+[gw1] [ 11%] SKIPPED tests/test_crossval_research.py::test_live_research_decoder_all_toric_d3_syndromes[bposd] 
+tests/test_crossval_research.py::test_live_research_decoder_all_toric_d3_syndromes[depolarizing_mwpm] 
+[gw1] [ 11%] SKIPPED tests/test_crossval_research.py::test_live_research_decoder_all_toric_d3_syndromes[depolarizing_mwpm] 
+tests/test_crossval_research.py::test_live_research_decoder_all_toric_d3_syndromes[depolarizing_bposd] 
+[gw1] [ 11%] SKIPPED tests/test_crossval_research.py::test_live_research_decoder_all_toric_d3_syndromes[depolarizing_bposd] 
+tests/test_crossval_research.py::test_reproduction_script_requires_research_root_before_output 
+[gw1] [ 11%] PASSED tests/test_crossval_research.py::test_reproduction_script_requires_research_root_before_output 
+tests/test_crossval_research.py::test_live_research_phase_flip_mwpm_all_toric_d3_syndromes 
+[gw3] [ 11%] PASSED tests/test_tile_low_noise_export_worker.py::test_self_consistent_export_cannot_replace_accepted_data 
+[gw1] [ 11%] SKIPPED tests/test_crossval_research.py::test_live_research_phase_flip_mwpm_all_toric_d3_syndromes 
+tests/test_tile_low_noise_export_worker.py::test_worker_rejects_bad_execution_context[no_pbs] 
+tests/test_crossval_research.py::test_reproduction_script_rejects_output_within_research_root 
+[gw3] [ 11%] PASSED tests/test_tile_low_noise_export_worker.py::test_worker_rejects_bad_execution_context[no_pbs] 
+tests/test_tile_low_noise_export_worker.py::test_worker_rejects_bad_execution_context[changed_stage] 
+[gw3] [ 12%] PASSED tests/test_tile_low_noise_export_worker.py::test_worker_rejects_bad_execution_context[changed_stage] 
+tests/test_tile_low_noise_export_worker.py::test_worker_rejects_bad_execution_context[wrong_script] 
+[gw3] [ 12%] PASSED tests/test_tile_low_noise_export_worker.py::test_worker_rejects_bad_execution_context[wrong_script] 
+tests/test_tile_mc_precision_budget.py::test_relative_rmse_matches_finite_binomial_distribution 
+[gw3] [ 12%] PASSED tests/test_tile_mc_precision_budget.py::test_relative_rmse_matches_finite_binomial_distribution 
+tests/test_tile_mc_precision_budget.py::test_reference_bounds_determine_ordered_budgets_and_fixed_rounding 
+[gw3] [ 12%] PASSED tests/test_tile_mc_precision_budget.py::test_reference_bounds_determine_ordered_budgets_and_fixed_rounding 
+tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[0-0.1] 
+[gw3] [ 12%] PASSED tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[0-0.1] 
+tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[1.1-0.1] 
+[gw3] [ 12%] PASSED tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[1.1-0.1] 
+tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[0.2-0] 
+[gw3] [ 12%] PASSED tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[0.2-0] 
+tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[0.2--1] 
+[gw3] [ 12%] PASSED tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[0.2--1] 
+tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[nan-0.1] 
+[gw3] [ 13%] PASSED tests/test_tile_mc_precision_budget.py::test_invalid_probability_or_precision_rejected[nan-0.1] 
+tests/test_tile_precision_assessment.py::test_relative_minimum_is_second_moment_over_mean_not_absolute_minimum 
+[gw3] [ 13%] PASSED tests/test_tile_precision_assessment.py::test_relative_minimum_is_second_moment_over_mean_not_absolute_minimum 
+tests/test_tile_precision_assessment.py::test_scale_invariance_without_second_moment_underflow[1.0] 
+[gw3] [ 13%] PASSED tests/test_tile_precision_assessment.py::test_scale_invariance_without_second_moment_underflow[1.0] 
+tests/test_tile_precision_assessment.py::test_scale_invariance_without_second_moment_underflow[1e-150] 
+[gw3] [ 13%] PASSED tests/test_tile_precision_assessment.py::test_scale_invariance_without_second_moment_underflow[1e-150] 
+tests/test_tile_precision_assessment.py::test_scale_invariance_without_second_moment_underflow[1e-300] 
+[gw3] [ 13%] PASSED tests/test_tile_precision_assessment.py::test_scale_invariance_without_second_moment_underflow[1e-300] 
+tests/test_tile_precision_assessment.py::test_missing_points_never_pass_using_available_subset 
+[gw3] [ 13%] PASSED tests/test_tile_precision_assessment.py::test_missing_points_never_pass_using_available_subset 
+tests/test_tile_precision_assessment.py::test_undefined_diagnostics_and_missing_intervals_are_not_filtered 
+[gw3] [ 13%] PASSED tests/test_tile_precision_assessment.py::test_undefined_diagnostics_and_missing_intervals_are_not_filtered 
+tests/test_tile_precision_assessment.py::test_zero_estimates_and_zero_reference_boundary_are_distinct 
+[gw3] [ 13%] PASSED tests/test_tile_precision_assessment.py::test_zero_estimates_and_zero_reference_boundary_are_distinct 
+tests/test_tile_precision_assessment.py::test_invalid_reference_rejected[reference0] 
+[gw3] [ 13%] PASSED tests/test_tile_precision_assessment.py::test_invalid_reference_rejected[reference0] 
+tests/test_tile_precision_assessment.py::test_invalid_reference_rejected[reference1] 
+[gw3] [ 14%] PASSED tests/test_tile_precision_assessment.py::test_invalid_reference_rejected[reference1] 
+tests/test_tile_precision_assessment.py::test_invalid_reference_rejected[reference2] 
+[gw3] [ 14%] PASSED tests/test_tile_precision_assessment.py::test_invalid_reference_rejected[reference2] 
+tests/test_tile_precision_assessment.py::test_duplicate_replicate_and_invalid_threshold_rejected 
+[gw3] [ 14%] PASSED tests/test_tile_precision_assessment.py::test_duplicate_replicate_and_invalid_threshold_rejected 
+tests/test_tile_precision_assessment.py::test_floating_overflow_is_recorded_without_nonfinite_json 
+[gw3] [ 14%] PASSED tests/test_tile_precision_assessment.py::test_floating_overflow_is_recorded_without_nonfinite_json 
+tests/test_tile_precision_assessment.py::test_complete_persisted_cohort_and_tamper_refusal 
+[gw0] [ 14%] PASSED tests/test_acceptance.py::test_mcmc_exact_conditional_and_reproducibility 
+tests/test_acceptance.py::test_direct_mc_same_failure_and_zero_failures_interval 
+[gw3] [ 14%] PASSED tests/test_tile_precision_assessment.py::test_complete_persisted_cohort_and_tamper_refusal 
+tests/test_tile_precision_assessment.py::test_mixed_summary_cannot_certify_raw_rows 
+[gw1] [ 14%] PASSED tests/test_crossval_research.py::test_reproduction_script_rejects_output_within_research_root 
+tests/test_decoders.py::test_mwpm_all_syndromes_match_research_recipe[<lambda>0] 
+[gw1] [ 14%] SKIPPED tests/test_decoders.py::test_mwpm_all_syndromes_match_research_recipe[<lambda>0] 
+tests/test_decoders.py::test_mwpm_all_syndromes_match_research_recipe[<lambda>1] 
+[gw1] [ 14%] SKIPPED tests/test_decoders.py::test_mwpm_all_syndromes_match_research_recipe[<lambda>1] 
+tests/test_decoders.py::test_bposd_all_syndromes_match_research_recipe 
+[gw1] [ 15%] SKIPPED tests/test_decoders.py::test_bposd_all_syndromes_match_research_recipe 
+tests/test_decoders.py::test_depolarizing_sector_mwpm_all_syndromes[<lambda>0] 
+[gw1] [ 15%] SKIPPED tests/test_decoders.py::test_depolarizing_sector_mwpm_all_syndromes[<lambda>0] 
+tests/test_decoders.py::test_depolarizing_sector_mwpm_all_syndromes[<lambda>1] 
+[gw2] [ 15%] PASSED tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel1] 
+tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel2] 
+[gw1] [ 15%] SKIPPED tests/test_decoders.py::test_depolarizing_sector_mwpm_all_syndromes[<lambda>1] 
+tests/test_decoders.py::test_depolarizing_sector_bposd_all_syndromes 
+[gw3] [ 15%] PASSED tests/test_tile_precision_assessment.py::test_mixed_summary_cannot_certify_raw_rows 
+tests/test_tile_reference_audit.py::test_conditional_weight_chunk_delta_uses_count_weighting 
+[gw3] [ 15%] PASSED tests/test_tile_reference_audit.py::test_conditional_weight_chunk_delta_uses_count_weighting 
+tests/test_tile_reference_source_binding.py::test_relocated_identical_sources_keep_both_provenances 
+[gw1] [ 15%] SKIPPED tests/test_decoders.py::test_depolarizing_sector_bposd_all_syndromes 
+tests/test_decoders.py::test_mwpm_rejects_hyperedge_columns 
+[gw1] [ 15%] SKIPPED tests/test_decoders.py::test_mwpm_rejects_hyperedge_columns 
+tests/test_decoders.py::test_bposd_settings_are_explicit 
+[gw1] [ 16%] SKIPPED tests/test_decoders.py::test_bposd_settings_are_explicit 
+tests/test_decoders.py::test_bposd_unsafe_order_rejected_before_native_constructor[10] 
+[gw3] [ 16%] PASSED tests/test_tile_reference_source_binding.py::test_relocated_identical_sources_keep_both_provenances 
+tests/test_tile_reference_source_binding.py::test_same_root_still_checks_bytes 
+[gw1] [ 16%] SKIPPED tests/test_decoders.py::test_bposd_unsafe_order_rejected_before_native_constructor[10] 
+tests/test_decoders.py::test_bposd_unsafe_order_rejected_before_native_constructor[order1] 
+[gw1] [ 16%] SKIPPED tests/test_decoders.py::test_bposd_unsafe_order_rejected_before_native_constructor[order1] 
+tests/test_decoders.py::test_bposd_numpy_integer_order_is_normalized_before_native_constructor 
+[gw1] [ 16%] SKIPPED tests/test_decoders.py::test_bposd_numpy_integer_order_is_normalized_before_native_constructor 
+tests/test_decoders.py::test_bposd_noninteger_order_rejected[True] 
+[gw3] [ 16%] PASSED tests/test_tile_reference_source_binding.py::test_same_root_still_checks_bytes 
+[gw1] [ 16%] PASSED tests/test_decoders.py::test_bposd_noninteger_order_rejected[True] 
+tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[hash] 
+tests/test_decoders.py::test_bposd_noninteger_order_rejected[2.0] 
+[gw1] [ 16%] PASSED tests/test_decoders.py::test_bposd_noninteger_order_rejected[2.0] 
+tests/test_decoders.py::test_bposd_noninteger_order_rejected[-1] 
+[gw1] [ 16%] PASSED tests/test_decoders.py::test_bposd_noninteger_order_rejected[-1] 
+tests/test_decoders.py::test_bposd_prior_validation[True] 
+[gw1] [ 17%] PASSED tests/test_decoders.py::test_bposd_prior_validation[True] 
+tests/test_decoders.py::test_bposd_prior_validation[prior1] 
+[gw1] [ 17%] PASSED tests/test_decoders.py::test_bposd_prior_validation[prior1] 
+tests/test_decoders.py::test_bposd_prior_validation[-0.1] 
+[gw1] [ 17%] PASSED tests/test_decoders.py::test_bposd_prior_validation[-0.1] 
+tests/test_decoders.py::test_bposd_prior_validation[1.1] 
+[gw1] [ 17%] PASSED tests/test_decoders.py::test_bposd_prior_validation[1.1] 
+tests/test_decoders.py::test_bposd_prior_validation[nan] 
+[gw1] [ 17%] PASSED tests/test_decoders.py::test_bposd_prior_validation[nan] 
+tests/test_decoders.py::test_bposd_prior_validation[inf] 
+[gw1] [ 17%] PASSED tests/test_decoders.py::test_bposd_prior_validation[inf] 
+[gw3] [ 17%] PASSED tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[hash] 
+tests/test_decoders.py::test_bposd_prior_validation[prior6] 
+tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[extra] 
+[gw1] [ 17%] PASSED tests/test_decoders.py::test_bposd_prior_validation[prior6] 
+tests/test_diagnostic_options.py::test_default_does_not_compute_extra_diagnostics 
+[gw3] [ 18%] PASSED tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[extra] 
+tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[missing] 
+[gw3] [ 18%] PASSED tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[missing] 
+[gw1] [ 18%] PASSED tests/test_diagnostic_options.py::test_default_does_not_compute_extra_diagnostics 
+tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[wrong_root] 
+tests/test_diagnostic_options.py::test_opt_in_keeps_states_rng_and_acceptance_and_roundtrips 
+[gw3] [ 18%] PASSED tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[wrong_root] 
+tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[relative] 
+[gw3] [ 18%] PASSED tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[relative] 
+tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[non_python] 
+[gw3] [ 18%] PASSED tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[non_python] 
+tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[nested] 
+[gw3] [ 18%] PASSED tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[nested] 
+tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[empty] 
+[gw1] [ 18%] PASSED tests/test_diagnostic_options.py::test_opt_in_keeps_states_rng_and_acceptance_and_roundtrips 
+tests/test_diagnostic_options.py::test_short_and_constant_default_uncertainty_is_unavailable 
+[gw3] [ 18%] PASSED tests/test_tile_reference_source_binding.py::test_relocation_rejects_nonportable_differences[empty] 
+tests/test_tile_reference_source_binding.py::test_source_bytes_and_mid_read_changes_rejected[old] 
+[gw3] [ 19%] PASSED tests/test_tile_reference_source_binding.py::test_source_bytes_and_mid_read_changes_rejected[old] 
+tests/test_tile_reference_source_binding.py::test_source_bytes_and_mid_read_changes_rejected[new] 
+[gw1] [ 19%] PASSED tests/test_diagnostic_options.py::test_short_and_constant_default_uncertainty_is_unavailable 
+tests/test_diagnostic_options.py::test_old_json_without_new_optional_field_is_accepted 
+[gw3] [ 19%] PASSED tests/test_tile_reference_source_binding.py::test_source_bytes_and_mid_read_changes_rejected[new] 
+tests/test_tile_reference_source_binding.py::test_reference_context_allows_only_proven_source_relocation 
+[gw1] [ 19%] PASSED tests/test_diagnostic_options.py::test_old_json_without_new_optional_field_is_accepted 
+tests/test_diagnostic_options.py::test_true_and_bootstrap_disabled 
+[gw3] [ 19%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_allows_only_proven_source_relocation 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[actual_native_profile_digest] 
+[gw3] [ 19%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[actual_native_profile_digest] 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[native_profile_digest] 
+[gw3] [ 19%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[native_profile_digest] 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[reference_context] 
+[gw3] [ 19%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[reference_context] 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[input_sha256] 
+[gw1] [ 19%] PASSED tests/test_diagnostic_options.py::test_true_and_bootstrap_disabled 
+tests/test_diagnostic_options.py::test_bar_diagnostics_preserve_estimate_and_probability_uncertainty[block_bootstrap] 
+[gw3] [ 20%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[input_sha256] 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[original_pbs_job_id] 
+[gw3] [ 20%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[original_pbs_job_id] 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[conditions] 
+[gw3] [ 20%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[conditions] 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[workers] 
+[gw3] [ 20%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[workers] 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[required_threads] 
+[gw3] [ 20%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[required_threads] 
+tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[resources] 
+[gw3] [ 20%] PASSED tests/test_tile_reference_source_binding.py::test_reference_context_rejects_every_other_plan_difference[resources] 
+tests/test_tile_reference_source_binding.py::test_current_audit_sources_must_be_in_checked_plan 
+[gw3] [ 20%] PASSED tests/test_tile_reference_source_binding.py::test_current_audit_sources_must_be_in_checked_plan 
+tests/test_tile_reference_source_binding.py::test_metadata_source_context_does_not_probe_native 
+[gw3] [ 20%] PASSED tests/test_tile_reference_source_binding.py::test_metadata_source_context_does_not_probe_native 
+tests/test_tile_reference_source_binding.py::test_change_during_source_consumption_is_rejected 
+[gw3] [ 21%] PASSED tests/test_tile_reference_source_binding.py::test_change_during_source_consumption_is_rejected 
+tests/test_tile_reference_source_binding.py::test_symlink_source_is_rejected 
+[gw3] [ 21%] PASSED tests/test_tile_reference_source_binding.py::test_symlink_source_is_rejected 
+tests/test_tile_reference_source_binding.py::test_directory_named_python_file_is_rejected 
+[gw3] [ 21%] PASSED tests/test_tile_reference_source_binding.py::test_directory_named_python_file_is_rejected 
+tests/test_tile_summary.py::test_missing_interval_and_diagnostics_stay_in_denominator 
+[gw3] [ 21%] PASSED tests/test_tile_summary.py::test_missing_interval_and_diagnostics_stay_in_denominator 
+tests/test_tile_summary.py::test_missing_point_does_not_turn_available_subset_into_full_rmse 
+[gw3] [ 21%] PASSED tests/test_tile_summary.py::test_missing_point_does_not_turn_available_subset_into_full_rmse 
+tests/test_tile_summary.py::test_duplicate_missing_and_nonfinite_replicates_rejected 
+[gw3] [ 21%] PASSED tests/test_tile_summary.py::test_duplicate_missing_and_nonfinite_replicates_rejected 
+tests/test_tile_summary.py::test_rmse_reference_range_can_have_interior_minimum 
+[gw3] [ 21%] PASSED tests/test_tile_summary.py::test_rmse_reference_range_can_have_interior_minimum 
+tests/test_tile_summary.py::test_artifact_aggregation_requires_every_condition_and_keeps_failures 
+[gw2] [ 21%] PASSED tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel2] 
+tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel3] 
+[gw3] [ 21%] PASSED tests/test_tile_summary.py::test_artifact_aggregation_requires_every_condition_and_keeps_failures 
+tests/test_tile_timing_metrics.py::test_cost_ratio_is_ratio_of_complete_means_not_mean_of_task_ratios 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_cost_ratio_is_ratio_of_complete_means_not_mean_of_task_ratios 
+tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[above_target] 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[above_target] 
+tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[failed] 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[failed] 
+tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[missing_point] 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[missing_point] 
+tests/test_tile_timing_metrics.py::test_missing_cost_cannot_pass_through_available_only_mean 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_missing_cost_cannot_pass_through_available_only_mean 
+tests/test_tile_timing_metrics.py::test_interval_missing_is_retained_separately_from_point_precision 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_interval_missing_is_retained_separately_from_point_precision 
+tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[-1.0] 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[-1.0] 
+tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[nan] 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[nan] 
+tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[inf] 
+[gw3] [ 22%] PASSED tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[inf] 
+tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[True] 
+[gw3] [ 23%] PASSED tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[True] 
+tests/test_tile_timing_metrics.py::test_duplicate_replicate_and_unknown_status_rejected 
+[gw3] [ 23%] PASSED tests/test_tile_timing_metrics.py::test_duplicate_replicate_and_unknown_status_rejected 
+tests/test_tile_timing_metrics.py::test_zero_reference_and_zero_time_do_not_produce_nonfinite_ratios 
+[gw3] [ 23%] PASSED tests/test_tile_timing_metrics.py::test_zero_reference_and_zero_time_do_not_produce_nonfinite_ratios 
+tests/test_tile_timing_metrics.py::test_short_actual_mc_record_can_be_assessed 
+[gw3] [ 23%] SKIPPED tests/test_tile_timing_metrics.py::test_short_actual_mc_record_can_be_assessed 
+tests/test_tile_weight_comparison.py::test_mean_uncertainty_and_reference_difference 
+[gw3] [ 23%] PASSED tests/test_tile_weight_comparison.py::test_mean_uncertainty_and_reference_difference 
+tests/test_tile_weight_comparison.py::test_missing_points_keep_full_denominator_and_undefined_diagnostics 
+[gw3] [ 23%] PASSED tests/test_tile_weight_comparison.py::test_missing_points_keep_full_denominator_and_undefined_diagnostics 
+tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[duplicate] 
+[gw3] [ 23%] PASSED tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[duplicate] 
+tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[absent] 
+[gw3] [ 23%] PASSED tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[absent] 
+tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[nan] 
+[gw3] [ 24%] PASSED tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[nan] 
+tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[negative_se] 
+[gw3] [ 24%] PASSED tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[negative_se] 
+tests/test_tile_weight_comparison.py::test_missing_diagnostic_requires_target_sampling_failure 
+[gw3] [ 24%] PASSED tests/test_tile_weight_comparison.py::test_missing_diagnostic_requires_target_sampling_failure 
+tests/test_tile_weight_comparison.py::test_json_only_reader_checks_identity_and_metadata_hash 
+[gw3] [ 24%] PASSED tests/test_tile_weight_comparison.py::test_json_only_reader_checks_identity_and_metadata_hash 
+tests/test_tile_weight_comparison.py::test_persisted_comparison_binds_reference_and_keeps_missing_replicate 
+[gw3] [ 24%] PASSED tests/test_tile_weight_comparison.py::test_persisted_comparison_binds_reference_and_keeps_missing_replicate 
+tests/test_tile_weight_comparison.py::test_real_small_analysis_weight_matches_saved_target_traces 
+[gw3] [ 24%] SKIPPED tests/test_tile_weight_comparison.py::test_real_small_analysis_weight_matches_saved_target_traces 
+tests/test_tile_weight_reference_comparison.py::test_full_small_enumeration_matches_known_probability 
+[gw3] [ 24%] PASSED tests/test_tile_weight_reference_comparison.py::test_full_small_enumeration_matches_known_probability 
+tests/test_tile_weight_reference_comparison.py::test_unknown_tail_is_not_zero_failure_reference 
+[gw3] [ 24%] PASSED tests/test_tile_weight_reference_comparison.py::test_unknown_tail_is_not_zero_failure_reference 
+tests/test_tile_weight_reference_comparison.py::test_range_extrema_match_independent_grid 
+[gw3] [ 24%] PASSED tests/test_tile_weight_reference_comparison.py::test_range_extrema_match_independent_grid 
+tests/test_tile_weight_reference_comparison.py::test_unavailable_points_keep_full_denominator[False] 
+[gw3] [ 25%] PASSED tests/test_tile_weight_reference_comparison.py::test_unavailable_points_keep_full_denominator[False] 
+tests/test_tile_weight_reference_comparison.py::test_unavailable_points_keep_full_denominator[True] 
+[gw3] [ 25%] PASSED tests/test_tile_weight_reference_comparison.py::test_unavailable_points_keep_full_denominator[True] 
+tests/test_tile_weight_reference_comparison.py::test_zero_mc_failures_keep_positive_bound 
+[gw1] [ 25%] PASSED tests/test_diagnostic_options.py::test_bar_diagnostics_preserve_estimate_and_probability_uncertainty[block_bootstrap] 
+tests/test_diagnostic_options.py::test_bar_diagnostics_preserve_estimate_and_probability_uncertainty[cross_chain] 
+[gw3] [ 25%] FAILED tests/test_tile_weight_reference_comparison.py::test_zero_mc_failures_keep_positive_bound 
+tests/test_tile_weight_reference_comparison.py::test_condition_identity_and_explicit_partial_fields 
+[gw3] [ 25%] PASSED tests/test_tile_weight_reference_comparison.py::test_condition_identity_and_explicit_partial_fields 
+tests/test_tile_weight_reference_comparison.py::test_different_case_or_prior_rejected[1-0.01] 
+[gw3] [ 25%] PASSED tests/test_tile_weight_reference_comparison.py::test_different_case_or_prior_rejected[1-0.01] 
+tests/test_tile_weight_reference_comparison.py::test_different_case_or_prior_rejected[0-0.003] 
+[gw3] [ 25%] PASSED tests/test_tile_weight_reference_comparison.py::test_different_case_or_prior_rejected[0-0.003] 
+tests/test_tile_weight_reference_comparison.py::test_changed_synthesis_rejected[partial_estimate] 
+[gw3] [ 25%] PASSED tests/test_tile_weight_reference_comparison.py::test_changed_synthesis_rejected[partial_estimate] 
+tests/test_tile_weight_reference_comparison.py::test_changed_synthesis_rejected[omitted_mass_upper] 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_changed_synthesis_rejected[omitted_mass_upper] 
+tests/test_tile_weight_reference_comparison.py::test_changed_synthesis_rejected[mc_standard_error_plugin] 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_changed_synthesis_rejected[mc_standard_error_plugin] 
+tests/test_tile_weight_reference_comparison.py::test_count_mismatch_rejected 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_count_mismatch_rejected 
+tests/test_tile_weight_reference_comparison.py::test_unavailable_reference_keeps_diagnostics_without_metrics 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_unavailable_reference_keeps_diagnostics_without_metrics 
+tests/test_tile_weight_reference_comparison.py::test_duplicate_or_missing_replicates_rejected[rows0] 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_duplicate_or_missing_replicates_rejected[rows0] 
+tests/test_tile_weight_reference_comparison.py::test_duplicate_or_missing_replicates_rejected[rows1] 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_duplicate_or_missing_replicates_rejected[rows1] 
+tests/test_tile_weight_reference_comparison.py::test_invalid_bounds_rejected[interval0] 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_invalid_bounds_rejected[interval0] 
+tests/test_tile_weight_reference_comparison.py::test_invalid_bounds_rejected[interval1] 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_invalid_bounds_rejected[interval1] 
+tests/test_tile_weight_reference_comparison.py::test_invalid_bounds_rejected[interval2] 
+[gw3] [ 26%] PASSED tests/test_tile_weight_reference_comparison.py::test_invalid_bounds_rejected[interval2] 
+tests/test_tile_weight_reference_comparison.py::test_finite_tiny_probabilities_are_not_rounded_to_zero 
+[gw3] [ 27%] PASSED tests/test_tile_weight_reference_comparison.py::test_finite_tiny_probabilities_are_not_rounded_to_zero 
+tests/test_tile_weight_reference_comparison.py::test_inputs_not_modified 
+[gw3] [ 27%] PASSED tests/test_tile_weight_reference_comparison.py::test_inputs_not_modified 
+tests/test_trace_stats.py::test_acf_matches_direct_biased_covariance_and_no_mutation 
+[gw3] [ 27%] PASSED tests/test_trace_stats.py::test_acf_matches_direct_biased_covariance_and_no_mutation 
+tests/test_trace_stats.py::test_batch_means_and_discarded_tail_are_explicit 
+[gw3] [ 27%] PASSED tests/test_trace_stats.py::test_batch_means_and_discarded_tail_are_explicit 
+tests/test_trace_stats.py::test_iat_mean_uncertainty_uses_variance_weighting 
+[gw3] [ 27%] PASSED tests/test_trace_stats.py::test_iat_mean_uncertainty_uses_variance_weighting 
+tests/test_trace_stats.py::test_seeded_bootstrap_reproducibility_and_rng_isolation 
+[gw3] [ 27%] PASSED tests/test_trace_stats.py::test_seeded_bootstrap_reproducibility_and_rng_isolation 
+tests/test_trace_stats.py::test_entropy_seed_recorded_for_reproduction 
+[gw3] [ 27%] PASSED tests/test_trace_stats.py::test_entropy_seed_recorded_for_reproduction 
+tests/test_trace_stats.py::test_circular_bootstrap_matches_explicit_chainwise_resampling 
+[gw3] [ 27%] PASSED tests/test_trace_stats.py::test_circular_bootstrap_matches_explicit_chainwise_resampling 
+tests/test_trace_stats.py::test_one_constant_chain_does_not_claim_pooled_mean_certainty 
+[gw3] [ 27%] PASSED tests/test_trace_stats.py::test_one_constant_chain_does_not_claim_pooled_mean_certainty 
+tests/test_trace_stats.py::test_constants_are_undefined_not_zero_certainty[x0] 
+[gw3] [ 28%] PASSED tests/test_trace_stats.py::test_constants_are_undefined_not_zero_certainty[x0] 
+tests/test_trace_stats.py::test_constants_are_undefined_not_zero_certainty[x1] 
+[gw3] [ 28%] PASSED tests/test_trace_stats.py::test_constants_are_undefined_not_zero_certainty[x1] 
+tests/test_trace_stats.py::test_constants_are_undefined_not_zero_certainty[x2] 
+[gw3] [ 28%] PASSED tests/test_trace_stats.py::test_constants_are_undefined_not_zero_certainty[x2] 
+tests/test_trace_stats.py::test_short_trace_and_default_blocks 
+[gw3] [ 28%] PASSED tests/test_trace_stats.py::test_short_trace_and_default_blocks 
+tests/test_trace_stats.py::test_negative_correlation_keeps_ess_above_sample_count 
+[gw3] [ 28%] PASSED tests/test_trace_stats.py::test_negative_correlation_keeps_ess_above_sample_count 
+tests/test_trace_stats.py::test_invalid_traces[x0] 
+[gw3] [ 28%] PASSED tests/test_trace_stats.py::test_invalid_traces[x0] 
+tests/test_trace_stats.py::test_invalid_traces[x1] 
+[gw3] [ 28%] PASSED tests/test_trace_stats.py::test_invalid_traces[x1] 
+tests/test_trace_stats.py::test_invalid_traces[3.0] 
+[gw3] [ 28%] PASSED tests/test_trace_stats.py::test_invalid_traces[3.0] 
+tests/test_trace_stats.py::test_invalid_traces[x3] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_traces[x3] 
+tests/test_trace_stats.py::test_invalid_traces[x4] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_traces[x4] 
+tests/test_trace_stats.py::test_invalid_traces[x5] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_traces[x5] 
+tests/test_trace_stats.py::test_invalid_traces[x6] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_traces[x6] 
+tests/test_trace_stats.py::test_invalid_traces[x7] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_traces[x7] 
+tests/test_trace_stats.py::test_invalid_traces[x8] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_traces[x8] 
+tests/test_trace_stats.py::test_invalid_options[kwargs0] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs0] 
+tests/test_trace_stats.py::test_invalid_options[kwargs1] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs1] 
+tests/test_trace_stats.py::test_invalid_options[kwargs2] 
+[gw3] [ 29%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs2] 
+tests/test_trace_stats.py::test_invalid_options[kwargs3] 
+[gw3] [ 30%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs3] 
+tests/test_trace_stats.py::test_invalid_options[kwargs4] 
+[gw3] [ 30%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs4] 
+tests/test_trace_stats.py::test_invalid_options[kwargs5] 
+[gw3] [ 30%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs5] 
+tests/test_trace_stats.py::test_invalid_options[kwargs6] 
+[gw3] [ 30%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs6] 
+tests/test_trace_stats.py::test_invalid_options[kwargs7] 
+[gw3] [ 30%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs7] 
+tests/test_trace_stats.py::test_invalid_options[kwargs8] 
+[gw3] [ 30%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs8] 
+tests/test_trace_stats.py::test_invalid_options[kwargs9] 
+[gw3] [ 30%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs9] 
+tests/test_trace_stats.py::test_invalid_options[kwargs10] 
+[gw3] [ 30%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs10] 
+tests/test_trace_stats.py::test_invalid_options[kwargs11] 
+[gw3] [ 31%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs11] 
+tests/test_trace_stats.py::test_invalid_options[kwargs12] 
+[gw3] [ 31%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs12] 
+[gw2] [ 31%] PASSED tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel3] 
+tests/test_trace_stats.py::test_invalid_options[kwargs13] 
+[gw3] [ 31%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs13] 
+tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel4] 
+tests/test_trace_stats.py::test_invalid_options[kwargs14] 
+[gw3] [ 31%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs14] 
+tests/test_trace_stats.py::test_invalid_options[kwargs15] 
+[gw3] [ 31%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs15] 
+tests/test_trace_stats.py::test_invalid_options[kwargs16] 
+[gw3] [ 31%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs16] 
+tests/test_trace_stats.py::test_invalid_options[kwargs17] 
+[gw3] [ 31%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs17] 
+tests/test_trace_stats.py::test_invalid_options[kwargs18] 
+[gw3] [ 31%] PASSED tests/test_trace_stats.py::test_invalid_options[kwargs18] 
+tests/test_trace_stats.py::test_extreme_finite_values_produce_json_safe_report 
+[gw3] [ 32%] PASSED tests/test_trace_stats.py::test_extreme_finite_values_produce_json_safe_report 
+tests/test_trace_stats_review.py::test_default_mcse_preserves_valid_chain_when_other_chain_constant 
+[gw3] [ 32%] PASSED tests/test_trace_stats_review.py::test_default_mcse_preserves_valid_chain_when_other_chain_constant 
+tests/test_trace_stats_review.py::test_short_nonconstant_chains_have_unavailable_default_mcse 
+[gw3] [ 32%] PASSED tests/test_trace_stats_review.py::test_short_nonconstant_chains_have_unavailable_default_mcse 
+tests/test_trace_stats_review.py::test_pre_mcse_json_remains_readable 
+[gw3] [ 32%] PASSED tests/test_trace_stats_review.py::test_pre_mcse_json_remains_readable 
+tests/test_trace_stats_review.py::test_custom_observable_must_return_finite_real_scalar[value0] 
+[gw3] [ 32%] PASSED tests/test_trace_stats_review.py::test_custom_observable_must_return_finite_real_scalar[value0] 
+tests/test_trace_stats_review.py::test_custom_observable_must_return_finite_real_scalar[(1+2j)] 
+[gw3] [ 32%] PASSED tests/test_trace_stats_review.py::test_custom_observable_must_return_finite_real_scalar[(1+2j)] 
+tests/test_trace_stats_review.py::test_custom_observable_must_return_finite_real_scalar[inf] 
+[gw3] [ 32%] PASSED tests/test_trace_stats_review.py::test_custom_observable_must_return_finite_real_scalar[inf] 
+tests/test_trace_stats_review.py::test_heterogeneous_retention_spacing_is_not_a_single_physical_lag 
+[gw3] [ 32%] PASSED tests/test_trace_stats_review.py::test_heterogeneous_retention_spacing_is_not_a_single_physical_lag 
+tests/test_trace_stats_review.py::test_decimal_constant_chain_has_no_acf_despite_centering_roundoff 
+[gw3] [ 32%] PASSED tests/test_trace_stats_review.py::test_decimal_constant_chain_has_no_acf_despite_centering_roundoff 
+tests/test_trace_stats_review.py::test_classical_split_rhat_ignores_only_odd_middle_sample 
+[gw3] [ 33%] PASSED tests/test_trace_stats_review.py::test_classical_split_rhat_ignores_only_odd_middle_sample 
+tests/test_trace_stats_review.py::test_batch_mcse_keeps_independent_chain_strata_and_truncates_tail 
+[gw3] [ 33%] PASSED tests/test_trace_stats_review.py::test_batch_mcse_keeps_independent_chain_strata_and_truncates_tail 
+tests/test_trace_stats_review.py::test_circular_bootstrap_matches_exact_conditional_variance_with_partial_block 
+[gw1] [ 33%] PASSED tests/test_diagnostic_options.py::test_bar_diagnostics_preserve_estimate_and_probability_uncertainty[cross_chain] 
+tests/test_diagnostic_options.py::test_custom_observable_and_result_group_do_not_mutate_states 
+[gw3] [ 33%] PASSED tests/test_trace_stats_review.py::test_circular_bootstrap_matches_exact_conditional_variance_with_partial_block 
+tests/test_trace_stats_review.py::test_stationary_ar1_mcse_tracks_known_asymptotic_variance 
+[gw3] [ 33%] PASSED tests/test_trace_stats_review.py::test_stationary_ar1_mcse_tracks_known_asymptotic_variance 
+tests/test_trace_stats_review.py::test_diagnostics_affine_equivariance_including_bootstrap_interval 
+[gw1] [ 33%] PASSED tests/test_diagnostic_options.py::test_custom_observable_and_result_group_do_not_mutate_states 
+tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs0] 
+[gw1] [ 33%] PASSED tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs0] 
+tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs1] 
+[gw1] [ 33%] PASSED tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs1] 
+tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs2] 
+[gw1] [ 34%] PASSED tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs2] 
+tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs3] 
+[gw1] [ 34%] PASSED tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs3] 
+tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs4] 
+[gw1] [ 34%] PASSED tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs4] 
+tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs5] 
+[gw3] [ 34%] PASSED tests/test_trace_stats_review.py::test_diagnostics_affine_equivariance_including_bootstrap_interval 
+[gw1] [ 34%] PASSED tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs5] 
+tests/test_typing.py::test_public_signatures_are_annotated 
+tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs6] 
+[gw1] [ 34%] PASSED tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs6] 
+tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs7] 
+[gw1] [ 34%] PASSED tests/test_diagnostic_options.py::test_config_rejects_invalid_arguments[kwargs7] 
+tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[1] 
+[gw1] [ 34%] PASSED tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[1] 
+tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[None] 
+[gw3] [ 34%] PASSED tests/test_typing.py::test_public_signatures_are_annotated 
+[gw1] [ 35%] PASSED tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[None] 
+tests/test_typing.py::test_mypy_package 
+tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[yes] 
+[gw1] [ 35%] PASSED tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[yes] 
+tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[settings3] 
+[gw1] [ 35%] PASSED tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[settings3] 
+tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[settings4] 
+[gw1] [ 35%] PASSED tests/test_diagnostic_options.py::test_invalid_options_fail_before_sampling[settings4] 
+tests/test_docs_manifest.py::test_example_index_matches_every_python_file_and_notebook 
+[gw3] [ 35%] SKIPPED tests/test_typing.py::test_mypy_package 
+tests/test_typing.py::test_mypy_consumer_contract 
+[gw1] [ 35%] PASSED tests/test_docs_manifest.py::test_example_index_matches_every_python_file_and_notebook 
+tests/test_docs_manifest.py::test_relative_readme_links_resolve 
+[gw3] [ 35%] SKIPPED tests/test_typing.py::test_mypy_consumer_contract 
+tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-peeling-<lambda>0] 
+[gw3] [ 35%] SKIPPED tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-peeling-<lambda>0] 
+tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-peeling-<lambda>1] 
+[gw3] [ 36%] SKIPPED tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-peeling-<lambda>1] 
+tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-inversion-<lambda>0] 
+[gw3] [ 36%] SKIPPED tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-inversion-<lambda>0] 
+tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-inversion-<lambda>1] 
+[gw3] [ 36%] SKIPPED tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[X-inversion-<lambda>1] 
+tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-peeling-<lambda>0] 
+[gw3] [ 36%] SKIPPED tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-peeling-<lambda>0] 
+tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-peeling-<lambda>1] 
+[gw3] [ 36%] SKIPPED tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-peeling-<lambda>1] 
+tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-inversion-<lambda>0] 
+[gw3] [ 36%] SKIPPED tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-inversion-<lambda>0] 
+tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-inversion-<lambda>1] 
+[gw3] [ 36%] SKIPPED tests/test_union_find_decoders.py::test_all_small_graphlike_syndromes_repeat_reverse_fresh[Z-inversion-<lambda>1] 
+tests/test_union_find_decoders.py::test_boundary_degree_one_accepts_odd_syndrome 
+[gw3] [ 36%] SKIPPED tests/test_union_find_decoders.py::test_boundary_degree_one_accepts_odd_syndrome 
+tests/test_union_find_decoders.py::test_inversion_general_css_all_syndromes[X] 
+[gw1] [ 36%] PASSED tests/test_docs_manifest.py::test_relative_readme_links_resolve 
+tests/test_docs_manifest.py::test_japanese_python_blocks_match_english_exactly[english_page0-japanese_page0] 
+[gw1] [ 37%] PASSED tests/test_docs_manifest.py::test_japanese_python_blocks_match_english_exactly[english_page0-japanese_page0] 
+tests/test_docs_manifest.py::test_japanese_python_blocks_match_english_exactly[english_page1-japanese_page1] 
+[gw3] [ 37%] SKIPPED tests/test_union_find_decoders.py::test_inversion_general_css_all_syndromes[X] 
+tests/test_union_find_decoders.py::test_inversion_general_css_all_syndromes[Z] 
+[gw1] [ 37%] PASSED tests/test_docs_manifest.py::test_japanese_python_blocks_match_english_exactly[english_page1-japanese_page1] 
+tests/test_docs_manifest.py::test_generated_reference_covers_every_top_level_export_once 
+[gw1] [ 37%] PASSED tests/test_docs_manifest.py::test_generated_reference_covers_every_top_level_export_once 
+tests/test_docs_manifest.py::test_site_links_preserve_pages_and_code_and_resolve_repository_files 
+[gw3] [ 37%] SKIPPED tests/test_union_find_decoders.py::test_inversion_general_css_all_syndromes[Z] 
+tests/test_union_find_decoders.py::test_depolarizing_all_sector_pairs_and_metadata[peeling] 
+[gw1] [ 37%] PASSED tests/test_docs_manifest.py::test_site_links_preserve_pages_and_code_and_resolve_repository_files 
+tests/test_estimation.py::test_bennett_exact_empirical_distributions_and_unequal_counts 
+[gw1] [ 37%] PASSED tests/test_estimation.py::test_bennett_exact_empirical_distributions_and_unequal_counts 
+tests/test_estimation.py::test_support_zeros_and_no_observed_overlap 
+[gw1] [ 37%] PASSED tests/test_estimation.py::test_support_zeros_and_no_observed_overlap 
+tests/test_estimation.py::test_real_ladder_sampling_bootstrap_and_json 
+[gw3] [ 37%] SKIPPED tests/test_union_find_decoders.py::test_depolarizing_all_sector_pairs_and_metadata[peeling] 
+tests/test_union_find_decoders.py::test_depolarizing_all_sector_pairs_and_metadata[inversion] 
+[gw3] [ 38%] SKIPPED tests/test_union_find_decoders.py::test_depolarizing_all_sector_pairs_and_metadata[inversion] 
+tests/test_union_find_decoders.py::test_invalid_method[bad] 
+[gw3] [ 38%] PASSED tests/test_union_find_decoders.py::test_invalid_method[bad] 
+tests/test_union_find_decoders.py::test_invalid_method[] 
+[gw3] [ 38%] PASSED tests/test_union_find_decoders.py::test_invalid_method[] 
+tests/test_union_find_decoders.py::test_invalid_method[True] 
+[gw3] [ 38%] PASSED tests/test_union_find_decoders.py::test_invalid_method[True] 
+tests/test_union_find_decoders.py::test_invalid_method[method3] 
+[gw3] [ 38%] PASSED tests/test_union_find_decoders.py::test_invalid_method[method3] 
+tests/test_union_find_decoders.py::test_invalid_method[None] 
+[gw3] [ 38%] PASSED tests/test_union_find_decoders.py::test_invalid_method[None] 
+tests/test_union_find_decoders.py::test_unsupported_growth_parameter[0] 
+[gw3] [ 38%] PASSED tests/test_union_find_decoders.py::test_unsupported_growth_parameter[0] 
+tests/test_union_find_decoders.py::test_unsupported_growth_parameter[2] 
+[gw3] [ 38%] PASSED tests/test_union_find_decoders.py::test_unsupported_growth_parameter[2] 
+tests/test_union_find_decoders.py::test_unsupported_growth_parameter[-1] 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_unsupported_growth_parameter[-1] 
+tests/test_union_find_decoders.py::test_unsupported_growth_parameter[True] 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_unsupported_growth_parameter[True] 
+tests/test_union_find_decoders.py::test_unsupported_growth_parameter[bits4] 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_unsupported_growth_parameter[bits4] 
+tests/test_union_find_decoders.py::test_unsupported_growth_parameter[1.0] 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_unsupported_growth_parameter[1.0] 
+tests/test_union_find_decoders.py::test_unsupported_growth_parameter[4294967296] 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_unsupported_growth_parameter[4294967296] 
+tests/test_union_find_decoders.py::test_unsupported_growth_parameter[None] 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_unsupported_growth_parameter[None] 
+tests/test_union_find_decoders.py::test_code_and_sector_validation 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_code_and_sector_validation 
+tests/test_union_find_decoders.py::test_hyperedges_rejected_before_backend 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_hyperedges_rejected_before_backend 
+tests/test_union_find_decoders.py::test_zero_degree_rejected_before_backend[peeling] 
+[gw3] [ 39%] PASSED tests/test_union_find_decoders.py::test_zero_degree_rejected_before_backend[peeling] 
+tests/test_union_find_decoders.py::test_zero_degree_rejected_before_backend[inversion] 
+[gw3] [ 40%] PASSED tests/test_union_find_decoders.py::test_zero_degree_rejected_before_backend[inversion] 
+tests/test_union_find_decoders.py::test_unknown_version_fails_before_native[2.4.0] 
+[gw3] [ 40%] SKIPPED tests/test_union_find_decoders.py::test_unknown_version_fails_before_native[2.4.0] 
+tests/test_union_find_decoders.py::test_unknown_version_fails_before_native[2.4.2] 
+[gw3] [ 40%] SKIPPED tests/test_union_find_decoders.py::test_unknown_version_fails_before_native[2.4.2] 
+tests/test_union_find_decoders.py::test_unknown_version_fails_before_native[3.0.0] 
+[gw3] [ 40%] SKIPPED tests/test_union_find_decoders.py::test_unknown_version_fails_before_native[3.0.0] 
+tests/test_union_find_decoders.py::test_unknown_version_fails_before_native[2.4.1+modified] 
+[gw3] [ 40%] SKIPPED tests/test_union_find_decoders.py::test_unknown_version_fails_before_native[2.4.1+modified] 
+tests/test_union_find_decoders.py::test_optional_dependency_missing 
+[gw3] [ 40%] PASSED tests/test_union_find_decoders.py::test_optional_dependency_missing 
+tests/test_union_find_decoders.py::test_invalid_or_unrealizable_syndrome[syndrome0] 
+[gw3] [ 40%] SKIPPED tests/test_union_find_decoders.py::test_invalid_or_unrealizable_syndrome[syndrome0] 
+tests/test_union_find_decoders.py::test_invalid_or_unrealizable_syndrome[syndrome1] 
+[gw3] [ 40%] SKIPPED tests/test_union_find_decoders.py::test_invalid_or_unrealizable_syndrome[syndrome1] 
+tests/test_union_find_decoders.py::test_invalid_or_unrealizable_syndrome[syndrome2] 
+[gw3] [ 40%] SKIPPED tests/test_union_find_decoders.py::test_invalid_or_unrealizable_syndrome[syndrome2] 
+tests/test_union_find_decoders.py::test_invalid_or_unrealizable_syndrome[syndrome3] 
+[gw3] [ 41%] SKIPPED tests/test_union_find_decoders.py::test_invalid_or_unrealizable_syndrome[syndrome3] 
+tests/test_union_find_decoders.py::test_native_exception_not_retried 
+[gw3] [ 41%] SKIPPED tests/test_union_find_decoders.py::test_native_exception_not_retried 
+tests/test_tile_codes.py::test_surface_limit_layout_has_known_distance[3] 
+[gw3] [ 41%] PASSED tests/test_tile_codes.py::test_surface_limit_layout_has_known_distance[3] 
+tests/test_tile_codes.py::test_surface_limit_layout_has_known_distance[4] 
+[gw2] [ 41%] PASSED tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel4] 
+tests/test_independent.py::test_same_custom_failure_for_exact_direct_mc_and_correlated_mcmc 
+[gw3] [ 41%] PASSED tests/test_tile_codes.py::test_surface_limit_layout_has_known_distance[4] 
+tests/test_tile_codes.py::test_tile_boundary_rows_follow_independent_polynomial_evaluation 
+[gw3] [ 41%] PASSED tests/test_tile_codes.py::test_tile_boundary_rows_follow_independent_polynomial_evaluation 
+tests/test_tile_codes.py::test_tile_bposd_corrects_single_qubit_errors[X] 
+[gw3] [ 41%] SKIPPED tests/test_tile_codes.py::test_tile_bposd_corrects_single_qubit_errors[X] 
+tests/test_tile_codes.py::test_tile_bposd_corrects_single_qubit_errors[Z] 
+[gw3] [ 41%] SKIPPED tests/test_tile_codes.py::test_tile_bposd_corrects_single_qubit_errors[Z] 
+tests/test_tile_comparisons.py::test_shared_fluctuation_cancels_and_reference_range_is_exact 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_shared_fluctuation_cancels_and_reference_range_is_exact 
+tests/test_tile_comparisons.py::test_missing_intervals_and_diagnostics_never_filter_pairs 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_missing_intervals_and_diagnostics_never_filter_pairs 
+tests/test_tile_comparisons.py::test_missing_points_and_nonpositive_log_ratios_stay_explicit 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_missing_points_and_nonpositive_log_ratios_stay_explicit 
+tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[missing] 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[missing] 
+tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[duplicate] 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[duplicate] 
+tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[nan] 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[nan] 
+tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[invalid_interval] 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[invalid_interval] 
+tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[inconsistent_available] 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_invalid_fixed_cohorts_rejected[inconsistent_available] 
+tests/test_tile_comparisons.py::test_all_and_only_one_factor_pairs_generated 
+[gw3] [ 42%] PASSED tests/test_tile_comparisons.py::test_all_and_only_one_factor_pairs_generated 
+tests/test_tile_comparisons.py::test_complete_file_pipeline_and_updated_hash_cannot_hide_missing_pair 
+[gw3] [ 43%] PASSED tests/test_tile_comparisons.py::test_complete_file_pipeline_and_updated_hash_cannot_hide_missing_pair 
+tests/test_tile_coordinator.py::test_waits_for_both_queued_and_running_nodes 
+[gw3] [ 43%] PASSED tests/test_tile_coordinator.py::test_waits_for_both_queued_and_running_nodes 
+tests/test_tile_coordinator.py::test_fixed_sampling_order_then_ready_analysis_in_measured_order 
+[gw3] [ 43%] PASSED tests/test_tile_coordinator.py::test_fixed_sampling_order_then_ready_analysis_in_measured_order 
+tests/test_tile_coordinator.py::test_invalid_stage_state_and_resource_count_rejected 
+[gw3] [ 43%] PASSED tests/test_tile_coordinator.py::test_invalid_stage_state_and_resource_count_rejected 
+tests/test_tile_coordinator.py::test_submission_uses_existing_driver_and_records_receipt 
+[gw3] [ 43%] PASSED tests/test_tile_coordinator.py::test_submission_uses_existing_driver_and_records_receipt 
+tests/test_tile_coordinator.py::test_ambiguous_submission_is_not_automatically_retried 
+[gw3] [ 43%] PASSED tests/test_tile_coordinator.py::test_ambiguous_submission_is_not_automatically_retried 
+tests/test_tile_coordinator.py::test_wrong_job_receipt_is_not_accepted 
+[gw3] [ 43%] PASSED tests/test_tile_coordinator.py::test_wrong_job_receipt_is_not_accepted 
+tests/test_tile_coordinator.py::test_failed_sampling_exit_requires_complete_recorded_tasks 
+[gw3] [ 43%] PASSED tests/test_tile_coordinator.py::test_failed_sampling_exit_requires_complete_recorded_tasks 
+tests/test_tile_coordinator.py::test_queue_observation_failure_is_distinct_from_a_terminal_job 
+[gw3] [ 44%] PASSED tests/test_tile_coordinator.py::test_queue_observation_failure_is_distinct_from_a_terminal_job 
+tests/test_tile_coordinator.py::test_source_pins_and_unacknowledged_intent_stop_continuation 
+[gw3] [ 44%] PASSED tests/test_tile_coordinator.py::test_source_pins_and_unacknowledged_intent_stop_continuation 
+tests/test_tile_initialization_strata.py::test_opposite_initialization_biases_are_not_hidden_by_pooled_mean 
+[gw3] [ 44%] PASSED tests/test_tile_initialization_strata.py::test_opposite_initialization_biases_are_not_hidden_by_pooled_mean 
+tests/test_tile_initialization_strata.py::test_failed_seed_stays_in_both_primary_and_its_stratum 
+[gw3] [ 44%] PASSED tests/test_tile_initialization_strata.py::test_failed_seed_stays_in_both_primary_and_its_stratum 
+tests/test_tile_initialization_strata.py::test_rejection_parity_control_is_not_labelled_as_logical_start 
+[gw3] [ 44%] PASSED tests/test_tile_initialization_strata.py::test_rejection_parity_control_is_not_labelled_as_logical_start 
+tests/test_tile_initialization_strata.py::test_basis_indices_match_actual_fixed_initializer[6] 
+[gw3] [ 44%] SKIPPED tests/test_tile_initialization_strata.py::test_basis_indices_match_actual_fixed_initializer[6] 
+tests/test_tile_initialization_strata.py::test_basis_indices_match_actual_fixed_initializer[12] 
+[gw3] [ 44%] SKIPPED tests/test_tile_initialization_strata.py::test_basis_indices_match_actual_fixed_initializer[12] 
+tests/test_tile_initialization_strata.py::test_file_pipeline_reproduces_primary_summary_and_rejects_changes 
+[gw3] [ 44%] PASSED tests/test_tile_initialization_strata.py::test_file_pipeline_reproduces_primary_summary_and_rejects_changes 
+tests/test_tile_low_noise_analysis_archive.py::test_complete_archive_and_failed_group_preserved 
+[gw3] [ 44%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_complete_archive_and_failed_group_preserved 
+tests/test_tile_low_noise_analysis_archive.py::test_exact_group_input_census 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_exact_group_input_census 
+tests/test_tile_low_noise_analysis_archive.py::test_bad_archive_rejected[omitted] 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_bad_archive_rejected[omitted] 
+tests/test_tile_low_noise_analysis_archive.py::test_bad_archive_rejected[corrupt] 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_bad_archive_rejected[corrupt] 
+tests/test_tile_low_noise_analysis_archive.py::test_bad_archive_rejected[duplicate] 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_bad_archive_rejected[duplicate] 
+tests/test_tile_low_noise_analysis_archive.py::test_bad_archive_rejected[extra] 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_bad_archive_rejected[extra] 
+tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[manifest] 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[manifest] 
+tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[analysis_manifest] 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[analysis_manifest] 
+tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[sampling_index] 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[sampling_index] 
+tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[file_index] 
+[gw3] [ 45%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[file_index] 
+tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[archive] 
+[gw3] [ 46%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_all_external_hashes_are_required[archive] 
+tests/test_tile_low_noise_analysis_archive.py::test_different_condition_rejected[case-0] 
+[gw3] [ 46%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_different_condition_rejected[case-0] 
+tests/test_tile_low_noise_analysis_archive.py::test_different_condition_rejected[target_index-0] 
+[gw3] [ 46%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_different_condition_rejected[target_index-0] 
+tests/test_tile_low_noise_analysis_archive.py::test_sampling_index_census_and_marker_links_are_external[missing] 
+[gw3] [ 46%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_sampling_index_census_and_marker_links_are_external[missing] 
+tests/test_tile_low_noise_analysis_archive.py::test_sampling_index_census_and_marker_links_are_external[extra] 
+[gw3] [ 46%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_sampling_index_census_and_marker_links_are_external[extra] 
+tests/test_tile_low_noise_analysis_archive.py::test_sampling_index_census_and_marker_links_are_external[different_marker] 
+[gw3] [ 46%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_sampling_index_census_and_marker_links_are_external[different_marker] 
+tests/test_tile_low_noise_analysis_archive.py::test_context_bound_to_production[sampling_manifest-0000000000000000000000000000000000000000000000000000000000000000] 
+[gw3] [ 46%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_context_bound_to_production[sampling_manifest-0000000000000000000000000000000000000000000000000000000000000000] 
+tests/test_tile_low_noise_analysis_archive.py::test_context_bound_to_production[purpose-capacity] 
+[gw3] [ 46%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_context_bound_to_production[purpose-capacity] 
+tests/test_tile_low_noise_analysis_archive.py::test_context_bound_to_production[seed_stage-155] 
+[gw3] [ 47%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_context_bound_to_production[seed_stage-155] 
+tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[archive] 
+[gw3] [ 47%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[archive] 
+tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[manifest] 
+[gw3] [ 47%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[manifest] 
+tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[analysis_manifest] 
+[gw3] [ 47%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[analysis_manifest] 
+tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[sampling_index] 
+[gw3] [ 47%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[sampling_index] 
+tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[file_index] 
+[gw3] [ 47%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_changed_input_during_stream_rejected[file_index] 
+tests/test_tile_low_noise_analysis_archive.py::test_group_census_matches_actual_analysis_driver 
+[gw3] [ 47%] SKIPPED tests/test_tile_low_noise_analysis_archive.py::test_group_census_matches_actual_analysis_driver 
+tests/test_tile_low_noise_analysis_archive.py::test_cli_retains_existing_verification 
+[gw3] [ 47%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_cli_retains_existing_verification 
+tests/test_tile_low_noise_analysis_archive.py::test_export_requires_pbs_and_new_output 
+[gw3] [ 47%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_requires_pbs_and_new_output 
+tests/test_tile_low_noise_analysis_archive.py::test_export_roundtrip_uses_accepted_index 
+[gw3] [ 48%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_roundtrip_uses_accepted_index 
+tests/test_tile_low_noise_analysis_archive.py::test_export_rejects_wrong_source[missing] 
+[gw3] [ 48%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_rejects_wrong_source[missing] 
+tests/test_tile_low_noise_analysis_archive.py::test_export_rejects_wrong_source[extra] 
+[gw3] [ 48%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_rejects_wrong_source[extra] 
+tests/test_tile_low_noise_analysis_archive.py::test_export_rejects_wrong_source[corrupt] 
+[gw3] [ 48%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_rejects_wrong_source[corrupt] 
+tests/test_tile_low_noise_analysis_archive.py::test_export_cannot_substitute_new_self_consistent_payloads 
+[gw3] [ 48%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_cannot_substitute_new_self_consistent_payloads 
+tests/test_tile_low_noise_analysis_archive.py::test_export_changes_during_compression_rejected[payload] 
+[gw3] [ 48%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_changes_during_compression_rejected[payload] 
+tests/test_tile_low_noise_analysis_archive.py::test_export_changes_during_compression_rejected[new_file] 
+[gw3] [ 48%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_changes_during_compression_rejected[new_file] 
+tests/test_tile_low_noise_analysis_archive.py::test_export_changes_during_compression_rejected[worker] 
+[gw0] [ 48%] PASSED tests/test_acceptance.py::test_direct_mc_same_failure_and_zero_failures_interval 
+tests/test_acceptance.py::test_initialization_empty_support_and_invalid_inputs 
+[gw1] [ 49%] PASSED tests/test_estimation.py::test_real_ladder_sampling_bootstrap_and_json 
+tests/test_estimation.py::test_anchor_metadata_and_validation 
+[gw0] [ 49%] PASSED tests/test_acceptance.py::test_initialization_empty_support_and_invalid_inputs 
+tests/test_acceptance.py::test_endpoint_zanella_and_diagnostic_nonclaims 
+[gw0] [ 49%] PASSED tests/test_acceptance.py::test_endpoint_zanella_and_diagnostic_nonclaims 
+tests/test_acceptance.py::test_metadata_identifies_model_noise_decoder_and_source 
+[gw1] [ 49%] PASSED tests/test_estimation.py::test_anchor_metadata_and_validation 
+tests/test_estimation.py::test_approximate_mode_requires_explicit_inputs_and_records_them 
+[gw0] [ 49%] PASSED tests/test_acceptance.py::test_metadata_identifies_model_noise_decoder_and_source 
+tests/test_acceptance.py::test_independent_seed_spawn 
+[gw0] [ 49%] PASSED tests/test_acceptance.py::test_independent_seed_spawn 
+tests/test_adapter_composition.py::test_sector_explicit_boundary_and_output_order 
+[gw0] [ 49%] PASSED tests/test_adapter_composition.py::test_sector_explicit_boundary_and_output_order 
+tests/test_adapter_composition.py::test_full_history_is_retained[history-expected0] 
+[gw0] [ 49%] PASSED tests/test_adapter_composition.py::test_full_history_is_retained[history-expected0] 
+tests/test_adapter_composition.py::test_full_history_is_retained[check_major_history-expected1] 
+[gw0] [ 49%] PASSED tests/test_adapter_composition.py::test_full_history_is_retained[check_major_history-expected1] 
+tests/test_adapter_composition.py::test_full_history_is_retained[round_major_flat-expected2] 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_full_history_is_retained[round_major_flat-expected2] 
+tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome0] 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome0] 
+tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome1] 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome1] 
+tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome2] 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome2] 
+tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome3] 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome3] 
+tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome4] 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome4] 
+tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome5] 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome5] 
+tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome6] 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_invalid_history_rejected[syndrome6] 
+tests/test_adapter_composition.py::test_invalid_options_and_decoder_output 
+[gw0] [ 50%] PASSED tests/test_adapter_composition.py::test_invalid_options_and_decoder_output 
+[gw1] [ 51%] PASSED tests/test_estimation.py::test_approximate_mode_requires_explicit_inputs_and_records_them 
+tests/test_adapter_composition.py::test_real_pymatching_repeated_history 
+tests/test_estimation.py::test_general_density_parameter_dict_and_no_weight_shortcut 
+[gw0] [ 51%] SKIPPED tests/test_adapter_composition.py::test_real_pymatching_repeated_history 
+tests/test_adapter_composition.py::test_real_bposd_spacetime_round_major_flat 
+[gw0] [ 51%] SKIPPED tests/test_adapter_composition.py::test_real_bposd_spacetime_round_major_flat 
+tests/test_adapters.py::test_correction_requires_explicit_mapping_and_preserves_history 
+[gw0] [ 51%] PASSED tests/test_adapters.py::test_correction_requires_explicit_mapping_and_preserves_history 
+tests/test_adapters.py::test_observable_is_not_remapped_by_length 
+[gw0] [ 51%] PASSED tests/test_adapters.py::test_observable_is_not_remapped_by_length 
+tests/test_adapters.py::test_invalid_decoder_output_rejected[output0] 
+[gw0] [ 51%] PASSED tests/test_adapters.py::test_invalid_decoder_output_rejected[output0] 
+tests/test_adapters.py::test_invalid_decoder_output_rejected[output1] 
+[gw0] [ 51%] PASSED tests/test_adapters.py::test_invalid_decoder_output_rejected[output1] 
+tests/test_adapters.py::test_invalid_decoder_output_rejected[output2] 
+[gw0] [ 51%] PASSED tests/test_adapters.py::test_invalid_decoder_output_rejected[output2] 
+tests/test_adapters.py::test_invalid_decoder_output_rejected[output3] 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_invalid_decoder_output_rejected[output3] 
+tests/test_adapters.py::test_invalid_decoder_output_rejected[1] 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_invalid_decoder_output_rejected[1] 
+tests/test_adapters.py::test_invalid_decoder_output_rejected[output5] 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_invalid_decoder_output_rejected[output5] 
+tests/test_adapters.py::test_invalid_decoder_output_rejected[output6] 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_invalid_decoder_output_rejected[output6] 
+tests/test_adapters.py::test_correction_length_and_binary_input_validation 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_correction_length_and_binary_input_validation 
+tests/test_adapters.py::test_metadata_is_json_and_defensively_copied 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_metadata_is_json_and_defensively_copied 
+tests/test_adapters.py::test_correlation_settings_must_agree[True-False] 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_correlation_settings_must_agree[True-False] 
+tests/test_adapters.py::test_correlation_settings_must_agree[False-True] 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_correlation_settings_must_agree[False-True] 
+tests/test_adapters.py::test_correlation_setting_is_forwarded_and_recorded 
+[gw0] [ 52%] PASSED tests/test_adapters.py::test_correlation_setting_is_forwarded_and_recorded 
+tests/test_adapters.py::test_hyperedge_rejected_before_import_or_construction 
+[gw0] [ 53%] PASSED tests/test_adapters.py::test_hyperedge_rejected_before_import_or_construction 
+tests/test_adapters.py::test_real_pymatching_repetition_code 
+[gw3] [ 53%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_changes_during_compression_rejected[worker] 
+tests/test_tile_low_noise_analysis_archive.py::test_export_changes_during_final_verification_rejected 
+[gw0] [ 53%] SKIPPED tests/test_adapters.py::test_real_pymatching_repetition_code 
+tests/test_adapters.py::test_matching_preserves_trailing_unobservable_fault_dimensions 
+[gw0] [ 53%] SKIPPED tests/test_adapters.py::test_matching_preserves_trailing_unobservable_fault_dimensions 
+tests/test_adapters.py::test_invalid_logical_map_rejected[mapping0] 
+[gw0] [ 53%] PASSED tests/test_adapters.py::test_invalid_logical_map_rejected[mapping0] 
+tests/test_adapters.py::test_invalid_logical_map_rejected[mapping1] 
+[gw0] [ 53%] PASSED tests/test_adapters.py::test_invalid_logical_map_rejected[mapping1] 
+tests/test_adapters.py::test_invalid_logical_map_rejected[mapping2] 
+[gw0] [ 53%] PASSED tests/test_adapters.py::test_invalid_logical_map_rejected[mapping2] 
+tests/test_adapters.py::test_invalid_logical_map_rejected[mapping3] 
+[gw0] [ 53%] PASSED tests/test_adapters.py::test_invalid_logical_map_rejected[mapping3] 
+tests/test_adapters.py::test_decode_error_is_propagated 
+[gw0] [ 54%] PASSED tests/test_adapters.py::test_decode_error_is_propagated 
+tests/test_adapters.py::test_real_bposd_object_without_special_wrapper 
+[gw0] [ 54%] SKIPPED tests/test_adapters.py::test_real_bposd_object_without_special_wrapper 
+tests/test_artifact_archive.py::test_archive_checks_both_payloads_and_expected_keys 
+[gw0] [ 54%] PASSED tests/test_artifact_archive.py::test_archive_checks_both_payloads_and_expected_keys 
+tests/test_artifact_archive.py::test_production_anchor_subset_requires_explicit_case_and_exact_identity 
+[gw0] [ 54%] PASSED tests/test_artifact_archive.py::test_production_anchor_subset_requires_explicit_case_and_exact_identity 
+tests/test_artifact_archive.py::test_production_sampling_matches_actual_task_generator 
+[gw0] [ 54%] SKIPPED tests/test_artifact_archive.py::test_production_sampling_matches_actual_task_generator 
+tests/test_artifact_archive.py::test_production_analysis_context_is_bound_to_sampling 
+[gw0] [ 54%] PASSED tests/test_artifact_archive.py::test_production_analysis_context_is_bound_to_sampling 
+tests/test_artifact_archive.py::test_complete_sampling_archive_retains_failed_tasks_and_rejects_missing_or_other_case 
+[gw3] [ 54%] PASSED tests/test_tile_low_noise_analysis_archive.py::test_export_changes_during_final_verification_rejected 
+tests/test_tile_low_noise_analysis_export_worker.py::test_complete_export_once 
+[gw0] [ 54%] PASSED tests/test_artifact_archive.py::test_complete_sampling_archive_retains_failed_tasks_and_rejects_missing_or_other_case 
+tests/test_artifact_archive.py::test_analysis_cli_checks_both_manifests_and_reference_bytes 
+[gw0] [ 54%] PASSED tests/test_artifact_archive.py::test_analysis_cli_checks_both_manifests_and_reference_bytes 
+tests/test_auto_anchor.py::test_omitted_anchor_and_config_match_explicit_defaults 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_complete_export_once 
+tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[no_pbs] 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[no_pbs] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[wrong_script] 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[wrong_script] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[changed_stage] 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[changed_stage] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[missing_context_pin] 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[missing_context_pin] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[missing_sampling_pin] 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[missing_sampling_pin] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[wrong_context_path] 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[wrong_context_path] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[different_accepted_payload] 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_reject_before_completion[different_accepted_payload] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_execution_changes_do_not_seal[stage] 
+[gw3] [ 55%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_execution_changes_do_not_seal[stage] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_execution_changes_do_not_seal[gate] 
+[gw3] [ 56%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_execution_changes_do_not_seal[gate] 
+tests/test_tile_low_noise_analysis_export_worker.py::test_execution_changes_do_not_seal[pbs] 
+[gw3] [ 56%] PASSED tests/test_tile_low_noise_analysis_export_worker.py::test_execution_changes_do_not_seal[pbs] 
+tests/test_tile_low_noise_archive.py::test_complete_census_and_failed_artifact_retained 
+[gw3] [ 56%] PASSED tests/test_tile_low_noise_archive.py::test_complete_census_and_failed_artifact_retained 
+tests/test_tile_low_noise_archive.py::test_rejects_incomplete_or_changed_archive[corrupt] 
+[gw3] [ 56%] PASSED tests/test_tile_low_noise_archive.py::test_rejects_incomplete_or_changed_archive[corrupt] 
+tests/test_tile_low_noise_archive.py::test_rejects_incomplete_or_changed_archive[duplicate] 
+[gw3] [ 56%] PASSED tests/test_tile_low_noise_archive.py::test_rejects_incomplete_or_changed_archive[duplicate] 
+tests/test_tile_low_noise_archive.py::test_rejects_incomplete_or_changed_archive[extra] 
+[gw3] [ 56%] PASSED tests/test_tile_low_noise_archive.py::test_rejects_incomplete_or_changed_archive[extra] 
+tests/test_tile_low_noise_archive.py::test_rejects_incomplete_or_changed_archive[omit] 
+[gw3] [ 56%] PASSED tests/test_tile_low_noise_archive.py::test_rejects_incomplete_or_changed_archive[omit] 
+tests/test_tile_low_noise_archive.py::test_external_pin_must_match[manifest_sha256] 
+[gw3] [ 56%] PASSED tests/test_tile_low_noise_archive.py::test_external_pin_must_match[manifest_sha256] 
+tests/test_tile_low_noise_archive.py::test_external_pin_must_match[archive_sha256] 
+[gw3] [ 57%] PASSED tests/test_tile_low_noise_archive.py::test_external_pin_must_match[archive_sha256] 
+tests/test_tile_low_noise_archive.py::test_external_pin_must_match[file_index_sha256] 
+[gw0] [ 57%] PASSED tests/test_auto_anchor.py::test_omitted_anchor_and_config_match_explicit_defaults 
+tests/test_auto_anchor.py::test_mc_fixed_budget_independent_seed_variance_and_reproducibility[block_bootstrap] 
+[gw1] [ 57%] PASSED tests/test_estimation.py::test_general_density_parameter_dict_and_no_weight_shortcut 
+tests/test_estimation.py::test_no_overlap_between_endpoint_rungs 
+[gw3] [ 57%] PASSED tests/test_tile_low_noise_archive.py::test_external_pin_must_match[file_index_sha256] 
+tests/test_tile_low_noise_archive.py::test_explicit_condition_binding[case-0] 
+[gw3] [ 57%] PASSED tests/test_tile_low_noise_archive.py::test_explicit_condition_binding[case-0] 
+tests/test_tile_low_noise_archive.py::test_explicit_condition_binding[target_index-2] 
+[gw1] [ 57%] PASSED tests/test_estimation.py::test_no_overlap_between_endpoint_rungs 
+tests/test_estimation.py::test_mc_anchor_delta_variance 
+[gw3] [ 57%] PASSED tests/test_tile_low_noise_archive.py::test_explicit_condition_binding[target_index-2] 
+tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change0] 
+[gw3] [ 57%] PASSED tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change0] 
+tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change1] 
+[gw3] [ 57%] PASSED tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change1] 
+tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change2] 
+[gw3] [ 58%] PASSED tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change2] 
+tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change3] 
+[gw3] [ 58%] PASSED tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change3] 
+tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change4] 
+[gw3] [ 58%] PASSED tests/test_tile_low_noise_archive.py::test_invalid_plan_cannot_define_production_census[change4] 
+tests/test_tile_low_noise_archive.py::test_census_matches_actual_driver 
+[gw3] [ 58%] SKIPPED tests/test_tile_low_noise_archive.py::test_census_matches_actual_driver 
+tests/test_tile_low_noise_archive.py::test_extra_index_entry_rejected 
+[gw3] [ 58%] PASSED tests/test_tile_low_noise_archive.py::test_extra_index_entry_rejected 
+tests/test_tile_low_noise_archive.py::test_manifest_required_in_archive_index 
+[gw3] [ 58%] PASSED tests/test_tile_low_noise_archive.py::test_manifest_required_in_archive_index 
+tests/test_tile_low_noise_archive.py::test_input_mutation_during_stream_rejected[archive] 
+[gw3] [ 58%] PASSED tests/test_tile_low_noise_archive.py::test_input_mutation_during_stream_rejected[archive] 
+tests/test_tile_low_noise_archive.py::test_input_mutation_during_stream_rejected[manifest] 
+[gw3] [ 58%] PASSED tests/test_tile_low_noise_archive.py::test_input_mutation_during_stream_rejected[manifest] 
+tests/test_tile_low_noise_archive.py::test_input_mutation_during_stream_rejected[file_index] 
+[gw3] [ 59%] PASSED tests/test_tile_low_noise_archive.py::test_input_mutation_during_stream_rejected[file_index] 
+tests/test_tile_low_noise_archive.py::test_cli_writes_new_result_and_refuses_overwrite 
+[gw3] [ 59%] PASSED tests/test_tile_low_noise_archive.py::test_cli_writes_new_result_and_refuses_overwrite 
+tests/test_tile_low_noise_archive.py::test_export_requires_pbs_and_fresh_output 
+[gw3] [ 59%] PASSED tests/test_tile_low_noise_archive.py::test_export_requires_pbs_and_fresh_output 
+tests/test_tile_low_noise_archive.py::test_export_roundtrip_preserves_failed_and_all_artifacts 
+[gw1] [ 59%] PASSED tests/test_estimation.py::test_mc_anchor_delta_variance 
+tests/test_estimation.py::test_changing_failure_set_bias_is_explicit_and_exceeds_one_is_not_an_interval 
+[gw1] [ 59%] PASSED tests/test_estimation.py::test_changing_failure_set_bias_is_explicit_and_exceeds_one_is_not_an_interval 
+tests/test_estimation.py::test_exact_anchor_underflow_retains_log_probability 
+[gw1] [ 59%] PASSED tests/test_estimation.py::test_exact_anchor_underflow_retains_log_probability 
+tests/test_estimation.py::test_old_positive_anchor_without_log_field_value_still_works 
+[gw0] [ 59%] PASSED tests/test_auto_anchor.py::test_mc_fixed_budget_independent_seed_variance_and_reproducibility[block_bootstrap] 
+tests/test_auto_anchor.py::test_mc_fixed_budget_independent_seed_variance_and_reproducibility[cross_chain] 
+[gw1] [ 59%] PASSED tests/test_estimation.py::test_old_positive_anchor_without_log_field_value_still_works 
+tests/test_examples_real.py::test_example[bit_flip.py-dependencies0-keys0] 
+[gw3] [ 59%] PASSED tests/test_tile_low_noise_archive.py::test_export_roundtrip_preserves_failed_and_all_artifacts 
+tests/test_tile_low_noise_archive.py::test_export_rejects_invalid_source_artifacts[missing] 
+[gw0] [ 60%] PASSED tests/test_auto_anchor.py::test_mc_fixed_budget_independent_seed_variance_and_reproducibility[cross_chain] 
+tests/test_auto_anchor.py::test_threshold_counts_categorical_alphabet_product[15-direct_mc] 
+[gw1] [ 60%] PASSED tests/test_examples_real.py::test_example[bit_flip.py-dependencies0-keys0] 
+[gw3] [ 60%] PASSED tests/test_tile_low_noise_archive.py::test_export_rejects_invalid_source_artifacts[missing] 
+tests/test_examples_real.py::test_example[three_noise.py-dependencies1-keys1] 
+tests/test_tile_low_noise_archive.py::test_export_rejects_invalid_source_artifacts[extra] 
+[gw3] [ 60%] PASSED tests/test_tile_low_noise_archive.py::test_export_rejects_invalid_source_artifacts[extra] 
+tests/test_tile_low_noise_archive.py::test_export_rejects_invalid_source_artifacts[corrupt] 
+[gw0] [ 60%] PASSED tests/test_auto_anchor.py::test_threshold_counts_categorical_alphabet_product[15-direct_mc] 
+tests/test_auto_anchor.py::test_threshold_counts_categorical_alphabet_product[16-exact] 
+[gw0] [ 60%] PASSED tests/test_auto_anchor.py::test_threshold_counts_categorical_alphabet_product[16-exact] 
+tests/test_auto_anchor.py::test_large_numpy_integer_alphabets_do_not_overflow_into_enumeration 
+[gw0] [ 60%] PASSED tests/test_auto_anchor.py::test_large_numpy_integer_alphabets_do_not_overflow_into_enumeration 
+tests/test_auto_anchor.py::test_approximate_mode_anchor_uses_first_constructed_decoder 
+[gw0] [ 60%] PASSED tests/test_auto_anchor.py::test_approximate_mode_anchor_uses_first_constructed_decoder 
+tests/test_auto_anchor.py::test_dictionary_coordinates 
+[gw3] [ 60%] PASSED tests/test_tile_low_noise_archive.py::test_export_rejects_invalid_source_artifacts[corrupt] 
+tests/test_tile_low_noise_archive.py::test_export_rejects_source_mutation_during_compression 
+[gw0] [ 61%] PASSED tests/test_auto_anchor.py::test_dictionary_coordinates 
+tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_max_states--1] 
+[gw0] [ 61%] PASSED tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_max_states--1] 
+tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_max_states-True] 
+[gw0] [ 61%] PASSED tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_max_states-True] 
+tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_max_states-4.0] 
+[gw0] [ 61%] PASSED tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_max_states-4.0] 
+tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_trials-0] 
+[gw0] [ 61%] PASSED tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_trials-0] 
+tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_trials--1] 
+[gw0] [ 61%] PASSED tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_trials--1] 
+tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_trials-False] 
+[gw0] [ 61%] PASSED tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_trials-False] 
+tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_trials-10.0] 
+[gw0] [ 61%] PASSED tests/test_auto_anchor.py::test_invalid_automatic_budget_rejected[anchor_trials-10.0] 
+tests/test_auto_anchor.py::test_explicit_anchor_ignores_automatic_budget 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_explicit_anchor_ignores_automatic_budget 
+tests/test_auto_anchor.py::test_uninformative_anchor_has_actionable_error[4-False] 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_uninformative_anchor_has_actionable_error[4-False] 
+tests/test_auto_anchor.py::test_uninformative_anchor_has_actionable_error[0-False] 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_uninformative_anchor_has_actionable_error[0-False] 
+tests/test_auto_anchor.py::test_uninformative_anchor_has_actionable_error[0-True] 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_uninformative_anchor_has_actionable_error[0-True] 
+tests/test_auto_anchor.py::test_exact_validation_error_is_not_hidden_by_mc_fallback 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_exact_validation_error_is_not_hidden_by_mc_fallback 
+tests/test_auto_anchor.py::test_exact_all_failure_anchor_is_valid 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_exact_all_failure_anchor_is_valid 
+tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra0] 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra0] 
+tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra1] 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra1] 
+tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra2] 
+[gw0] [ 62%] PASSED tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra2] 
+tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra3] 
+[gw0] [ 63%] PASSED tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra3] 
+tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra4] 
+[gw0] [ 63%] PASSED tests/test_auto_anchor.py::test_known_invalid_inputs_rejected_before_anchor_computation[extra4] 
+tests/test_auto_anchor.py::test_auto_exact_underflow_preserves_finite_log_probability 
+[gw3] [ 63%] PASSED tests/test_tile_low_noise_archive.py::test_export_rejects_source_mutation_during_compression 
+tests/test_tile_low_noise_archive.py::test_export_rechecks_file_census_and_worker_bytes[new_artifact] 
+[gw0] [ 63%] PASSED tests/test_auto_anchor.py::test_auto_exact_underflow_preserves_finite_log_probability 
+tests/test_bar_block_control.py::test_block_length_preserves_sampling_and_point_estimate 
+[gw3] [ 63%] PASSED tests/test_tile_low_noise_archive.py::test_export_rechecks_file_census_and_worker_bytes[new_artifact] 
+tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_0-0-X] 
+[gw3] [ 63%] SKIPPED tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_0-0-X] 
+tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_0-0-Z] 
+[gw3] [ 63%] SKIPPED tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_0-0-Z] 
+tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_cs-0-X] 
+[gw3] [ 63%] SKIPPED tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_cs-0-X] 
+tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_cs-0-Z] 
+[gw3] [ 63%] SKIPPED tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_cs-0-Z] 
+tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_e-0-X] 
+[gw3] [ 64%] SKIPPED tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_e-0-X] 
+tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_e-0-Z] 
+[gw3] [ 64%] SKIPPED tests/test_bplsd_decoders.py::test_steane_all_errors_native_recipe_and_reproducibility[lsd_e-0-Z] 
+tests/test_bplsd_decoders.py::test_depolarizing_matches_separate_sectors_and_fixed_prior 
+[gw3] [ 64%] SKIPPED tests/test_bplsd_decoders.py::test_depolarizing_matches_separate_sectors_and_fixed_prior 
+tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[<lambda>0] 
+[gw3] [ 64%] SKIPPED tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[<lambda>0] 
+tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[<lambda>1] 
+[gw3] [ 64%] SKIPPED tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[<lambda>1] 
+tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[make_hgp_hamming] 
+[gw3] [ 64%] SKIPPED tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[make_hgp_hamming] 
+tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[make_bb_code_72] 
+[gw3] [ 64%] SKIPPED tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[make_bb_code_72] 
+tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[<lambda>2] 
+[gw3] [ 64%] SKIPPED tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[<lambda>2] 
+tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[<lambda>3] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_other_codes_fixed_errors[<lambda>3] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options0] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options0] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options1] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options1] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options2] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options2] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options3] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options3] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options4] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options4] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options5] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options5] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options6] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options6] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options7] 
+[gw3] [ 65%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options7] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options8] 
+[gw3] [ 66%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options8] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options9] 
+[gw3] [ 66%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options9] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options10] 
+[gw3] [ 66%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options10] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options11] 
+[gw3] [ 66%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options11] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options12] 
+[gw3] [ 66%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options12] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options13] 
+[gw3] [ 66%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options13] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options14] 
+[gw3] [ 66%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options14] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options15] 
+[gw3] [ 66%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options15] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options16] 
+[gw3] [ 67%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options16] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options17] 
+[gw3] [ 67%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options17] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options18] 
+[gw3] [ 67%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options18] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options19] 
+[gw3] [ 67%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options19] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options20] 
+[gw3] [ 67%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options20] 
+tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options21] 
+[gw3] [ 67%] SKIPPED tests/test_bplsd_decoders.py::test_bad_settings_rejected_before_native[options21] 
+tests/test_bplsd_decoders.py::test_bad_prior[0] 
+[gw3] [ 67%] PASSED tests/test_bplsd_decoders.py::test_bad_prior[0] 
+tests/test_bplsd_decoders.py::test_bad_prior[1] 
+[gw3] [ 67%] PASSED tests/test_bplsd_decoders.py::test_bad_prior[1] 
+tests/test_bplsd_decoders.py::test_bad_prior[-0.1] 
+[gw3] [ 67%] PASSED tests/test_bplsd_decoders.py::test_bad_prior[-0.1] 
+tests/test_bplsd_decoders.py::test_bad_prior[1.1] 
+[gw3] [ 68%] PASSED tests/test_bplsd_decoders.py::test_bad_prior[1.1] 
+tests/test_bplsd_decoders.py::test_bad_prior[True] 
+[gw3] [ 68%] PASSED tests/test_bplsd_decoders.py::test_bad_prior[True] 
+tests/test_bplsd_decoders.py::test_bad_prior[nan] 
+[gw3] [ 68%] PASSED tests/test_bplsd_decoders.py::test_bad_prior[nan] 
+tests/test_bplsd_decoders.py::test_bad_prior[inf] 
+[gw3] [ 68%] PASSED tests/test_bplsd_decoders.py::test_bad_prior[inf] 
+tests/test_bplsd_decoders.py::test_bad_prior[p7] 
+[gw3] [ 68%] PASSED tests/test_bplsd_decoders.py::test_bad_prior[p7] 
+tests/test_bplsd_decoders.py::test_metadata_defaults_and_numpy_scalars 
+[gw3] [ 68%] SKIPPED tests/test_bplsd_decoders.py::test_metadata_defaults_and_numpy_scalars 
+tests/test_bplsd_decoders.py::test_missing_optional_dependency 
+[gw3] [ 68%] PASSED tests/test_bplsd_decoders.py::test_missing_optional_dependency 
+tests/test_bplsd_decoders.py::test_invalid_code_and_sector 
+[gw3] [ 68%] PASSED tests/test_bplsd_decoders.py::test_invalid_code_and_sector 
+tests/test_bplsd_decoders.py::test_zero_columns_and_redundant_zero_checks 
+[gw3] [ 68%] SKIPPED tests/test_bplsd_decoders.py::test_zero_columns_and_redundant_zero_checks 
+tests/test_bplsd_decoders.py::test_zero_syndrome_identity_rule_does_not_call_native[0.1] 
+[gw3] [ 69%] SKIPPED tests/test_bplsd_decoders.py::test_zero_syndrome_identity_rule_does_not_call_native[0.1] 
+tests/test_bplsd_decoders.py::test_zero_syndrome_identity_rule_does_not_call_native[0.9] 
+[gw3] [ 69%] SKIPPED tests/test_bplsd_decoders.py::test_zero_syndrome_identity_rule_does_not_call_native[0.9] 
+tests/test_bplsd_decoders.py::test_full_state_failure_definition_and_sampling_integration[X] 
+[gw3] [ 69%] SKIPPED tests/test_bplsd_decoders.py::test_full_state_failure_definition_and_sampling_integration[X] 
+tests/test_bplsd_decoders.py::test_full_state_failure_definition_and_sampling_integration[Z] 
+[gw3] [ 69%] SKIPPED tests/test_bplsd_decoders.py::test_full_state_failure_definition_and_sampling_integration[Z] 
+tests/test_calibration_recovery.py::test_recovered_file_bytes 
+[gw3] [ 69%] PASSED tests/test_calibration_recovery.py::test_recovered_file_bytes 
+tests/test_calibration_recovery.py::test_internally_corrupt_payload_even_with_valid_archive_hash 
+[gw3] [ 69%] PASSED tests/test_calibration_recovery.py::test_internally_corrupt_payload_even_with_valid_archive_hash 
+tests/test_calibration_recovery.py::test_missing_archived_payload 
+[gw3] [ 69%] PASSED tests/test_calibration_recovery.py::test_missing_archived_payload 
+tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets0-kernel0] 
+[gw3] [ 69%] PASSED tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets0-kernel0] 
+tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets1-kernel1] 
+[gw3] [ 70%] PASSED tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets1-kernel1] 
+tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets2-kernel2] 
+[gw2] [ 70%] PASSED tests/test_independent.py::test_same_custom_failure_for_exact_direct_mc_and_correlated_mcmc 
+tests/test_independent.py::test_rejected_single_flips_remain_in_recorded_trace 
+[gw1] [ 70%] PASSED tests/test_examples_real.py::test_example[three_noise.py-dependencies1-keys1] 
+tests/test_examples_real.py::test_example[bar_ladder.py-dependencies2-keys2] 
+[gw3] [ 70%] PASSED tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets2-kernel2] 
+tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets3-kernel3] 
+[gw2] [ 70%] PASSED tests/test_independent.py::test_rejected_single_flips_remain_in_recorded_trace 
+tests/test_independent.py::test_cluster_uses_density_ratio_for_equal_weight_correlated_states 
+[gw0] [ 70%] PASSED tests/test_bar_block_control.py::test_block_length_preserves_sampling_and_point_estimate 
+tests/test_bar_coverage.py::test_small_problem_bar_intervals_cover_exact_across_seeds 
+[gw1] [ 70%] PASSED tests/test_examples_real.py::test_example[bar_ladder.py-dependencies2-keys2] 
+tests/test_examples_real.py::test_example[toric_pymatching.py-dependencies3-keys3] 
+[gw1] [ 70%] SKIPPED tests/test_examples_real.py::test_example[toric_pymatching.py-dependencies3-keys3] 
+tests/test_examples_real.py::test_example[stim_dem.py-dependencies4-keys4] 
+[gw1] [ 70%] SKIPPED tests/test_examples_real.py::test_example[stim_dem.py-dependencies4-keys4] 
+tests/test_examples_real.py::test_example[circuit_baseline.py-dependencies5-keys5] 
+[gw1] [ 71%] SKIPPED tests/test_examples_real.py::test_example[circuit_baseline.py-dependencies5-keys5] 
+tests/test_examples_real.py::test_example[bb72_bposd.py-dependencies6-keys6] 
+[gw1] [ 71%] SKIPPED tests/test_examples_real.py::test_example[bb72_bposd.py-dependencies6-keys6] 
+tests/test_examples_real.py::test_example[tile_bposd.py-dependencies7-keys7] 
+[gw1] [ 71%] SKIPPED tests/test_examples_real.py::test_example[tile_bposd.py-dependencies7-keys7] 
+tests/test_examples_real.py::test_example[toric_depolarizing.py-dependencies8-keys8] 
+[gw1] [ 71%] SKIPPED tests/test_examples_real.py::test_example[toric_depolarizing.py-dependencies8-keys8] 
+tests/test_examples_real.py::test_example[phenomenological_toric.py-dependencies9-keys9] 
+[gw1] [ 71%] SKIPPED tests/test_examples_real.py::test_example[phenomenological_toric.py-dependencies9-keys9] 
+tests/test_examples_real.py::test_example[steane_exact.py-dependencies10-keys10] 
+[gw3] [ 71%] PASSED tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets3-kernel3] 
+tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets4-kernel4] 
+[gw3] [ 71%] PASSED tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets4-kernel4] 
+tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets5-kernel5] 
+[gw1] [ 71%] PASSED tests/test_examples_real.py::test_example[steane_exact.py-dependencies10-keys10] 
+tests/test_examples_real.py::test_research_output_is_rejected 
+[gw2] [ 72%] PASSED tests/test_independent.py::test_cluster_uses_density_ratio_for_equal_weight_correlated_states 
+tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state0] 
+[gw2] [ 72%] PASSED tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state0] 
+tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state1] 
+[gw2] [ 72%] PASSED tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state1] 
+tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state2] 
+[gw2] [ 72%] PASSED tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state2] 
+tests/test_initial_states.py::test_exact_minimum_for_each_coset_by_enumeration 
+[gw2] [ 72%] PASSED tests/test_initial_states.py::test_exact_minimum_for_each_coset_by_enumeration 
+tests/test_initial_states.py::test_random_sector_is_nonzero_and_reproducible 
+[gw2] [ 72%] PASSED tests/test_initial_states.py::test_random_sector_is_nonzero_and_reproducible 
+tests/test_initial_states.py::test_observable_sector_uses_crossing_matrix 
+[gw2] [ 72%] PASSED tests/test_initial_states.py::test_observable_sector_uses_crossing_matrix 
+tests/test_initial_states.py::test_independent_crossing_matrix_and_sample_faulty_input 
+[gw2] [ 72%] PASSED tests/test_initial_states.py::test_independent_crossing_matrix_and_sample_faulty_input 
+tests/test_initial_states.py::test_nonbinary_coset_and_invalid_sector_rejected 
+[gw2] [ 72%] PASSED tests/test_initial_states.py::test_nonbinary_coset_and_invalid_sector_rejected 
+tests/test_initial_states.py::test_exact_milp_branch_for_thirteen_stabilizers 
+[gw2] [ 73%] SKIPPED tests/test_initial_states.py::test_exact_milp_branch_for_thirteen_stabilizers 
+tests/test_initial_states.py::test_nontrivial_milp_matches_full_coset_enumeration 
+[gw2] [ 73%] SKIPPED tests/test_initial_states.py::test_nontrivial_milp_matches_full_coset_enumeration 
+tests/test_logical_basis.py::test_independent_logicals_require_explicit_opt_in 
+[gw2] [ 73%] PASSED tests/test_logical_basis.py::test_independent_logicals_require_explicit_opt_in 
+tests/test_logical_basis.py::test_dependent_logicals_rejected[paired] 
+[gw2] [ 73%] PASSED tests/test_logical_basis.py::test_dependent_logicals_rejected[paired] 
+tests/test_logical_basis.py::test_dependent_logicals_rejected[independent] 
+[gw2] [ 73%] PASSED tests/test_logical_basis.py::test_dependent_logicals_rejected[independent] 
+tests/test_logical_basis.py::test_unknown_basis_rejected 
+[gw2] [ 73%] PASSED tests/test_logical_basis.py::test_unknown_basis_rejected 
+tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[False] 
+[gw2] [ 73%] PASSED tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[False] 
+tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[True] 
+[gw1] [ 73%] PASSED tests/test_examples_real.py::test_research_output_is_rejected 
+tests/test_examples_templates.py::test_default_quick_run[byo_css_bitflip] 
+[gw3] [ 73%] PASSED tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets5-kernel5] 
+tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets6-kernel6] 
+[gw2] [ 74%] PASSED tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[True] 
+tests/test_logical_basis.py::test_nonzero_correction_predictions_follow_logical_coordinates 
+[gw2] [ 74%] PASSED tests/test_logical_basis.py::test_nonzero_correction_predictions_follow_logical_coordinates 
+tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0] 
+[gw2] [ 74%] PASSED tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0] 
+tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0.1] 
+[gw2] [ 74%] PASSED tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0.1] 
+tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[1] 
+[gw2] [ 74%] PASSED tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[1] 
+tests/test_noise_models.py::test_pauli_both_sectors_and_stabilizer_invariance 
+[gw2] [ 74%] PASSED tests/test_noise_models.py::test_pauli_both_sectors_and_stabilizer_invariance 
+tests/test_noise_models.py::test_y_flips_both_x_and_z_check_sectors 
+[gw2] [ 74%] PASSED tests/test_noise_models.py::test_y_flips_both_x_and_z_check_sectors 
+tests/test_noise_models.py::test_two_round_unencoded_analytic_fault_probability 
+[gw2] [ 74%] PASSED tests/test_noise_models.py::test_two_round_unencoded_analytic_fault_probability 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-bit_flip] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-bit_flip] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-depolarizing] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-depolarizing] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-bit_flip] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-bit_flip] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-depolarizing] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-depolarizing] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-bit_flip] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-bit_flip] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-depolarizing] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-depolarizing] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-bit_flip] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-bit_flip] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-depolarizing] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-depolarizing] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-bit_flip] 
+[gw2] [ 75%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-bit_flip] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-depolarizing] 
+[gw2] [ 76%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-depolarizing] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-bit_flip] 
+[gw2] [ 76%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-bit_flip] 
+tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-depolarizing] 
+[gw2] [ 76%] PASSED tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-depolarizing] 
+tests/test_noise_models.py::test_history_difference_and_final_boundary 
+[gw2] [ 76%] PASSED tests/test_noise_models.py::test_history_difference_and_final_boundary 
+tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[bit_flip] 
+[gw2] [ 76%] PASSED tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[bit_flip] 
+tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[depolarizing] 
+[gw2] [ 76%] PASSED tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[depolarizing] 
+tests/test_noise_models.py::test_pauli_accumulates_by_product_not_integer_addition 
+[gw2] [ 76%] PASSED tests/test_noise_models.py::test_pauli_accumulates_by_product_not_integer_addition 
+tests/test_noise_models.py::test_phenomenological_probability_schema[0.1] 
+[gw2] [ 76%] PASSED tests/test_noise_models.py::test_phenomenological_probability_schema[0.1] 
+tests/test_noise_models.py::test_phenomenological_probability_schema[p1] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_phenomenological_probability_schema[p1] 
+tests/test_noise_models.py::test_phenomenological_probability_schema[p2] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_phenomenological_probability_schema[p2] 
+tests/test_noise_models.py::test_phenomenological_probability_schema[p3] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_phenomenological_probability_schema[p3] 
+tests/test_noise_models.py::test_phenomenological_probability_schema[p4] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_phenomenological_probability_schema[p4] 
+tests/test_noise_models.py::test_phenomenological_probability_schema[p5] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_phenomenological_probability_schema[p5] 
+tests/test_noise_models.py::test_depolarizing_invalid_state[state0] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_depolarizing_invalid_state[state0] 
+tests/test_noise_models.py::test_depolarizing_invalid_state[state1] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_depolarizing_invalid_state[state1] 
+tests/test_noise_models.py::test_depolarizing_invalid_state[state2] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_depolarizing_invalid_state[state2] 
+tests/test_noise_models.py::test_depolarizing_invalid_state[state3] 
+[gw2] [ 77%] PASSED tests/test_noise_models.py::test_depolarizing_invalid_state[state3] 
+tests/test_noise_models.py::test_depolarizing_invalid_state[state4] 
+[gw2] [ 78%] PASSED tests/test_noise_models.py::test_depolarizing_invalid_state[state4] 
+tests/test_noise_models.py::test_depolarizing_invalid_state[state5] 
+[gw2] [ 78%] PASSED tests/test_noise_models.py::test_depolarizing_invalid_state[state5] 
+tests/test_noise_models.py::test_measurement_coordinates_remain_binary 
+[gw2] [ 78%] PASSED tests/test_noise_models.py::test_measurement_coordinates_remain_binary 
+tests/test_noise_models.py::test_required_boundaries_and_invalid_options 
+[gw2] [ 78%] PASSED tests/test_noise_models.py::test_required_boundaries_and_invalid_options 
+tests/test_noise_models.py::test_seed_reproducibility_and_metadata 
+[gw2] [ 78%] PASSED tests/test_noise_models.py::test_seed_reproducibility_and_metadata 
+tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[repetition3] 
+[gw2] [ 78%] PASSED tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[repetition3] 
+tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_steane_code] 
+[gw2] [ 78%] PASSED tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_steane_code] 
+tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_hgp_hamming] 
+[gw2] [ 78%] SKIPPED tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_hgp_hamming] 
+tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_bb_code_72] 
+[gw2] [ 78%] PASSED tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_bb_code_72] 
+tests/test_phase_flip.py::test_binary_sector_all_states_and_exact_duality 
+[gw2] [ 79%] PASSED tests/test_phase_flip.py::test_binary_sector_all_states_and_exact_duality 
+tests/test_phase_flip.py::test_repetition_code_has_distinct_x_and_z_failure_rates 
+[gw2] [ 79%] PASSED tests/test_phase_flip.py::test_repetition_code_has_distinct_x_and_z_failure_rates 
+tests/test_phase_flip.py::test_asymmetric_toric_phase_exact_equals_dual_bit_exact 
+[gw2] [ 79%] SKIPPED tests/test_phase_flip.py::test_asymmetric_toric_phase_exact_equals_dual_bit_exact 
+tests/test_phase_flip.py::test_z_decoder_selection_validation_and_existing_identifier 
+[gw2] [ 79%] SKIPPED tests/test_phase_flip.py::test_z_decoder_selection_validation_and_existing_identifier 
+tests/test_phase_flip.py::test_z_bposd_identifier_and_default_unchanged 
+[gw2] [ 79%] SKIPPED tests/test_phase_flip.py::test_z_bposd_identifier_and_default_unchanged 
+tests/test_phase_flip.py::test_z_bposd_predictions_use_x_checks_on_nonselfdual_code 
+[gw2] [ 79%] SKIPPED tests/test_phase_flip.py::test_z_bposd_predictions_use_x_checks_on_nonselfdual_code 
+tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[history] 
+[gw1] [ 79%] PASSED tests/test_examples_templates.py::test_default_quick_run[byo_css_bitflip] 
+tests/test_examples_templates.py::test_default_quick_run[byo_noise] 
+[gw0] [ 79%] PASSED tests/test_bar_coverage.py::test_small_problem_bar_intervals_cover_exact_across_seeds 
+tests/test_bar_uncertainty.py::test_independent_chain_standard_error_and_shared_rung_covariance 
+[gw0] [ 80%] PASSED tests/test_bar_uncertainty.py::test_independent_chain_standard_error_and_shared_rung_covariance 
+tests/test_bar_uncertainty.py::test_same_pooled_point_estimate_and_metadata 
+[gw3] [ 80%] PASSED tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets6-kernel6] 
+tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets0-state0-kernel0] 
+[gw2] [ 80%] PASSED tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[history] 
+tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[difference] 
+[gw1] [ 80%] PASSED tests/test_examples_templates.py::test_default_quick_run[byo_noise] 
+tests/test_examples_templates.py::test_default_quick_run[byo_decoder] 
+[gw3] [ 80%] PASSED tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets0-state0-kernel0] 
+tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets1-state1-kernel1] 
+[gw0] [ 80%] PASSED tests/test_bar_uncertainty.py::test_same_pooled_point_estimate_and_metadata 
+tests/test_bar_uncertainty.py::test_mc_anchor_variance_is_independent_of_shared_rung_covariance 
+[gw1] [ 80%] PASSED tests/test_examples_templates.py::test_default_quick_run[byo_decoder] 
+tests/test_examples_templates.py::test_default_quick_run[byo_stim_dem] 
+[gw1] [ 80%] SKIPPED tests/test_examples_templates.py::test_default_quick_run[byo_stim_dem] 
+tests/test_examples_templates.py::test_invalid_input_stops_before_sampling[byo_css_bitflip-inject0-commute] 
+[gw2] [ 80%] PASSED tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[difference] 
+tests/test_phase_flip.py::test_phenomenological_phase_flip_check_history_and_fastpath 
+[gw2] [ 81%] PASSED tests/test_phase_flip.py::test_phenomenological_phase_flip_check_history_and_fastpath 
+[gw1] [ 81%] PASSED tests/test_examples_templates.py::test_invalid_input_stops_before_sampling[byo_css_bitflip-inject0-commute] 
+tests/test_phase_flip.py::test_z_coset_initializer_is_faulty_and_chain_targets_exact_weight 
+tests/test_examples_templates.py::test_invalid_input_stops_before_sampling[byo_noise-inject1-normalized] 
+[gw2] [ 81%] PASSED tests/test_phase_flip.py::test_z_coset_initializer_is_faulty_and_chain_targets_exact_weight 
+tests/test_phase_flip.py::test_invalid_phenomenological_data_noise 
+[gw2] [ 81%] PASSED tests/test_phase_flip.py::test_invalid_phenomenological_data_noise 
+tests/test_phase_flip.py::test_example_quick_cli 
+[gw2] [ 81%] SKIPPED tests/test_phase_flip.py::test_example_quick_cli 
+tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[static] 
+[gw1] [ 81%] PASSED tests/test_examples_templates.py::test_invalid_input_stops_before_sampling[byo_noise-inject1-normalized] 
+tests/test_examples_templates.py::test_invalid_input_stops_before_sampling[byo_noise-inject2-state] 
+[gw0] [ 81%] PASSED tests/test_bar_uncertainty.py::test_mc_anchor_variance_is_independent_of_shared_rung_covariance 
+tests/test_bar_uncertainty.py::test_invalid_method_and_single_chain_rejected 
+[gw0] [ 81%] PASSED tests/test_bar_uncertainty.py::test_invalid_method_and_single_chain_rejected 
+tests/test_bar_uncertainty.py::test_small_exact_reference_coverage_smoke 
+[gw1] [ 81%] PASSED tests/test_examples_templates.py::test_invalid_input_stops_before_sampling[byo_noise-inject2-state] 
+tests/test_examples_templates.py::test_invalid_input_stops_before_sampling[byo_decoder-inject3-correction output] 
+[gw1] [ 82%] PASSED tests/test_examples_templates.py::test_invalid_input_stops_before_sampling[byo_decoder-inject3-correction output] 
+tests/test_examples_templates.py::test_research_output_is_rejected[byo_css_bitflip] 
+[gw1] [ 82%] PASSED tests/test_examples_templates.py::test_research_output_is_rejected[byo_css_bitflip] 
+tests/test_examples_templates.py::test_research_output_is_rejected[byo_noise] 
+[gw1] [ 82%] PASSED tests/test_examples_templates.py::test_research_output_is_rejected[byo_noise] 
+tests/test_examples_templates.py::test_research_output_is_rejected[byo_decoder] 
+[gw2] [ 82%] PASSED tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[static] 
+tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[bit_flip] 
+[gw1] [ 82%] PASSED tests/test_examples_templates.py::test_research_output_is_rejected[byo_decoder] 
+tests/test_examples_templates.py::test_research_output_is_rejected[byo_stim_dem] 
+[gw1] [ 82%] SKIPPED tests/test_examples_templates.py::test_research_output_is_rejected[byo_stim_dem] 
+tests/test_examples_templates.py::test_environment_research_root_is_rejected 
+[gw3] [ 82%] PASSED tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets1-state1-kernel1] 
+tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets2-state2-kernel2] 
+[gw1] [ 82%] PASSED tests/test_examples_templates.py::test_environment_research_root_is_rejected 
+tests/test_examples_workflows.py::test_workflow_quick[pl_curve.py-keys0-matching] 
+[gw1] [ 83%] SKIPPED tests/test_examples_workflows.py::test_workflow_quick[pl_curve.py-keys0-matching] 
+tests/test_examples_workflows.py::test_workflow_quick[conditional_weight.py-keys1-matching] 
+[gw1] [ 83%] SKIPPED tests/test_examples_workflows.py::test_workflow_quick[conditional_weight.py-keys1-matching] 
+tests/test_examples_workflows.py::test_workflow_quick[convergence_check.py-keys2-matching] 
+[gw1] [ 83%] SKIPPED tests/test_examples_workflows.py::test_workflow_quick[convergence_check.py-keys2-matching] 
+tests/test_examples_workflows.py::test_workflow_quick[p_dependent_decoder.py-keys3-codes] 
+[gw1] [ 83%] SKIPPED tests/test_examples_workflows.py::test_workflow_quick[p_dependent_decoder.py-keys3-codes] 
+tests/test_examples_workflows.py::test_workflow_quick[tile_capacity_fixed_prior.py-keys4-bposd] 
+[gw1] [ 83%] SKIPPED tests/test_examples_workflows.py::test_workflow_quick[tile_capacity_fixed_prior.py-keys4-bposd] 
+tests/test_examples_workflows.py::test_plot_fallback_keeps_csv[pl_curve.py] 
+[gw1] [ 83%] SKIPPED tests/test_examples_workflows.py::test_plot_fallback_keeps_csv[pl_curve.py] 
+tests/test_examples_workflows.py::test_plot_fallback_keeps_csv[conditional_weight.py] 
+[gw1] [ 83%] SKIPPED tests/test_examples_workflows.py::test_plot_fallback_keeps_csv[conditional_weight.py] 
+tests/test_examples_workflows.py::test_configured_research_root_is_rejected[RIMC_RESEARCH_ROOT] 
+[gw3] [ 83%] PASSED tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets2-state2-kernel2] 
+tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets3-state3-kernel3] 
+[gw1] [ 83%] PASSED tests/test_examples_workflows.py::test_configured_research_root_is_rejected[RIMC_RESEARCH_ROOT] 
+tests/test_examples_workflows.py::test_configured_research_root_is_rejected[RESEARCH_ROOT] 
+[gw1] [ 84%] PASSED tests/test_examples_workflows.py::test_configured_research_root_is_rejected[RESEARCH_ROOT] 
+tests/test_examples_workflows.py::test_convergence_initial_populations_are_distinct[0] 
+[gw1] [ 84%] SKIPPED tests/test_examples_workflows.py::test_convergence_initial_populations_are_distinct[0] 
+tests/test_examples_workflows.py::test_convergence_initial_populations_are_distinct[4] 
+[gw1] [ 84%] SKIPPED tests/test_examples_workflows.py::test_convergence_initial_populations_are_distinct[4] 
+tests/test_examples_workflows.py::test_missing_bar_interval_is_reported 
+[gw1] [ 84%] PASSED tests/test_examples_workflows.py::test_missing_bar_interval_is_reported 
+tests/test_fastpath.py::test_all_states_all_neighbors_match_reference[bit] 
+[gw1] [ 84%] PASSED tests/test_fastpath.py::test_all_states_all_neighbors_match_reference[bit] 
+tests/test_fastpath.py::test_all_states_all_neighbors_match_reference[pauli] 
+[gw1] [ 84%] PASSED tests/test_fastpath.py::test_all_states_all_neighbors_match_reference[pauli] 
+tests/test_fastpath.py::test_all_states_all_neighbors_match_reference[phenom] 
+[gw1] [ 84%] PASSED tests/test_fastpath.py::test_all_states_all_neighbors_match_reference[phenom] 
+tests/test_fastpath.py::test_identical_seed_trajectory_and_acceptance[bit-initial0] 
+[gw2] [ 84%] PASSED tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[bit_flip] 
+tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[depolarizing] 
+[gw1] [ 85%] PASSED tests/test_fastpath.py::test_identical_seed_trajectory_and_acceptance[bit-initial0] 
+tests/test_fastpath.py::test_identical_seed_trajectory_and_acceptance[pauli-initial1] 
+[gw0] [ 85%] PASSED tests/test_bar_uncertainty.py::test_small_exact_reference_coverage_smoke 
+tests/test_bar_uncertainty.py::test_research_style_iterated_geyer_cut 
+[gw0] [ 85%] PASSED tests/test_bar_uncertainty.py::test_research_style_iterated_geyer_cut 
+tests/test_belief_find_decoders.py::test_all_syndromes_native_mapping_and_order_independence[X-make_steane_code] 
+[gw0] [ 85%] SKIPPED tests/test_belief_find_decoders.py::test_all_syndromes_native_mapping_and_order_independence[X-make_steane_code] 
+tests/test_belief_find_decoders.py::test_all_syndromes_native_mapping_and_order_independence[X-<lambda>] 
+[gw0] [ 85%] SKIPPED tests/test_belief_find_decoders.py::test_all_syndromes_native_mapping_and_order_independence[X-<lambda>] 
+tests/test_belief_find_decoders.py::test_all_syndromes_native_mapping_and_order_independence[Z-make_steane_code] 
+[gw0] [ 85%] SKIPPED tests/test_belief_find_decoders.py::test_all_syndromes_native_mapping_and_order_independence[Z-make_steane_code] 
+tests/test_belief_find_decoders.py::test_all_syndromes_native_mapping_and_order_independence[Z-<lambda>] 
+[gw0] [ 85%] SKIPPED tests/test_belief_find_decoders.py::test_all_syndromes_native_mapping_and_order_independence[Z-<lambda>] 
+tests/test_belief_find_decoders.py::test_peeling_graphlike_all_syndromes[X-<lambda>0] 
+[gw0] [ 85%] SKIPPED tests/test_belief_find_decoders.py::test_peeling_graphlike_all_syndromes[X-<lambda>0] 
+tests/test_belief_find_decoders.py::test_peeling_graphlike_all_syndromes[X-<lambda>1] 
+[gw0] [ 85%] SKIPPED tests/test_belief_find_decoders.py::test_peeling_graphlike_all_syndromes[X-<lambda>1] 
+tests/test_belief_find_decoders.py::test_peeling_graphlike_all_syndromes[Z-<lambda>0] 
+[gw0] [ 86%] SKIPPED tests/test_belief_find_decoders.py::test_peeling_graphlike_all_syndromes[Z-<lambda>0] 
+tests/test_belief_find_decoders.py::test_peeling_graphlike_all_syndromes[Z-<lambda>1] 
+[gw0] [ 86%] SKIPPED tests/test_belief_find_decoders.py::test_peeling_graphlike_all_syndromes[Z-<lambda>1] 
+tests/test_belief_find_decoders.py::test_depolarizing_sector_prior_order_and_metadata 
+[gw0] [ 86%] SKIPPED tests/test_belief_find_decoders.py::test_depolarizing_sector_prior_order_and_metadata 
+tests/test_belief_find_decoders.py::test_invalid_prior_before_native[0] 
+[gw0] [ 86%] PASSED tests/test_belief_find_decoders.py::test_invalid_prior_before_native[0] 
+tests/test_belief_find_decoders.py::test_invalid_prior_before_native[1] 
+[gw0] [ 86%] PASSED tests/test_belief_find_decoders.py::test_invalid_prior_before_native[1] 
+tests/test_belief_find_decoders.py::test_invalid_prior_before_native[-1] 
+[gw0] [ 86%] PASSED tests/test_belief_find_decoders.py::test_invalid_prior_before_native[-1] 
+tests/test_belief_find_decoders.py::test_invalid_prior_before_native[nan] 
+[gw0] [ 86%] PASSED tests/test_belief_find_decoders.py::test_invalid_prior_before_native[nan] 
+tests/test_belief_find_decoders.py::test_invalid_prior_before_native[inf] 
+[gw0] [ 86%] PASSED tests/test_belief_find_decoders.py::test_invalid_prior_before_native[inf] 
+tests/test_belief_find_decoders.py::test_invalid_prior_before_native[True] 
+[gw0] [ 86%] PASSED tests/test_belief_find_decoders.py::test_invalid_prior_before_native[True] 
+tests/test_belief_find_decoders.py::test_invalid_prior_before_native[0.1] 
+[gw0] [ 87%] PASSED tests/test_belief_find_decoders.py::test_invalid_prior_before_native[0.1] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw0] 
+[gw0] [ 87%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw0] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw1] 
+[gw0] [ 87%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw1] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw2] 
+[gw0] [ 87%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw2] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw3] 
+[gw0] [ 87%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw3] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw4] 
+[gw0] [ 87%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw4] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw5] 
+[gw0] [ 87%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw5] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw6] 
+[gw0] [ 87%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw6] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw7] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw7] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw8] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw8] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw9] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw9] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw10] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw10] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw11] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw11] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw12] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw12] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw13] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw13] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw14] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw14] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw15] 
+[gw0] [ 88%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw15] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw16] 
+[gw0] [ 89%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw16] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw17] 
+[gw0] [ 89%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw17] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw18] 
+[gw0] [ 89%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw18] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw19] 
+[gw0] [ 89%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw19] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw20] 
+[gw0] [ 89%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw20] 
+tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw21] 
+[gw0] [ 89%] PASSED tests/test_belief_find_decoders.py::test_invalid_options_before_native[kw21] 
+tests/test_belief_find_decoders.py::test_hyperedge_peeling_and_zero_column_both_modes_rejected_before_native 
+[gw0] [ 89%] PASSED tests/test_belief_find_decoders.py::test_hyperedge_peeling_and_zero_column_both_modes_rejected_before_native 
+tests/test_belief_find_decoders.py::test_optional_missing_is_informative 
+[gw0] [ 89%] PASSED tests/test_belief_find_decoders.py::test_optional_missing_is_informative 
+tests/test_belief_find_decoders.py::test_native_bad_correction_raises_instead_of_logical_success 
+[gw0] [ 90%] PASSED tests/test_belief_find_decoders.py::test_native_bad_correction_raises_instead_of_logical_success 
+tests/test_belief_find_decoders.py::test_settings_defaults_and_alias_are_explicit 
+[gw0] [ 90%] SKIPPED tests/test_belief_find_decoders.py::test_settings_defaults_and_alias_are_explicit 
+tests/test_belief_find_decoders.py::test_invalid_sector_before_native[Y] 
+[gw0] [ 90%] PASSED tests/test_belief_find_decoders.py::test_invalid_sector_before_native[Y] 
+tests/test_belief_find_decoders.py::test_invalid_sector_before_native[x] 
+[gw0] [ 90%] PASSED tests/test_belief_find_decoders.py::test_invalid_sector_before_native[x] 
+tests/test_belief_find_decoders.py::test_invalid_sector_before_native[None] 
+[gw0] [ 90%] PASSED tests/test_belief_find_decoders.py::test_invalid_sector_before_native[None] 
+tests/test_belief_find_decoders.py::test_invalid_sector_before_native[errors3] 
+[gw0] [ 90%] PASSED tests/test_belief_find_decoders.py::test_invalid_sector_before_native[errors3] 
+tests/test_belief_find_decoders.py::test_invalid_sector_before_native[1] 
+[gw0] [ 90%] PASSED tests/test_belief_find_decoders.py::test_invalid_sector_before_native[1] 
+tests/test_belief_find_decoders.py::test_invalid_code_and_second_sector_rejected_before_native 
+[gw0] [ 90%] PASSED tests/test_belief_find_decoders.py::test_invalid_code_and_second_sector_rejected_before_native 
+tests/test_belief_find_decoders.py::test_options_applied_to_native[min_sum] 
+[gw0] [ 90%] SKIPPED tests/test_belief_find_decoders.py::test_options_applied_to_native[min_sum] 
+tests/test_belief_find_decoders.py::test_options_applied_to_native[product_sum] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_options_applied_to_native[product_sum] 
+tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[X-make_hgp_hamming] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[X-make_hgp_hamming] 
+tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[X-make_bb_code_72] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[X-make_bb_code_72] 
+tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[X-<lambda>0] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[X-<lambda>0] 
+tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[X-<lambda>1] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[X-<lambda>1] 
+tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[Z-make_hgp_hamming] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[Z-make_hgp_hamming] 
+tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[Z-make_bb_code_72] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[Z-make_bb_code_72] 
+tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[Z-<lambda>0] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[Z-<lambda>0] 
+tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[Z-<lambda>1] 
+[gw0] [ 91%] SKIPPED tests/test_belief_find_decoders.py::test_general_css_representative_syndromes[Z-<lambda>1] 
+tests/test_faststep.py::test_exact_type_gate_and_custom_failure_fallback 
+[gw0] [ 92%] PASSED tests/test_faststep.py::test_exact_type_gate_and_custom_failure_fallback 
+tests/test_faststep.py::test_support_boundaries_and_rng_for_other_kernels 
+[gw0] [ 92%] PASSED tests/test_faststep.py::test_support_boundaries_and_rng_for_other_kernels 
+tests/test_faststep.py::test_actual_attempt_matches_reference_on_every_faulty_state[bit] 
+[gw0] [ 92%] PASSED tests/test_faststep.py::test_actual_attempt_matches_reference_on_every_faulty_state[bit] 
+tests/test_faststep.py::test_actual_attempt_matches_reference_on_every_faulty_state[pauli] 
+[gw1] [ 92%] PASSED tests/test_fastpath.py::test_identical_seed_trajectory_and_acceptance[pauli-initial1] 
+tests/test_fastpath.py::test_identical_seed_trajectory_and_acceptance[phenom-initial2] 
+[gw0] [ 92%] PASSED tests/test_faststep.py::test_actual_attempt_matches_reference_on_every_faulty_state[pauli] 
+tests/test_faststep.py::test_actual_attempt_matches_reference_on_every_faulty_state[phenom] 
+[gw0] [ 92%] PASSED tests/test_faststep.py::test_actual_attempt_matches_reference_on_every_faulty_state[phenom] 
+tests/test_faststep.py::test_phenomenological_depolarizing_two_round_history_trajectory 
+[gw0] [ 92%] PASSED tests/test_faststep.py::test_phenomenological_depolarizing_two_round_history_trajectory 
+tests/test_faststep.py::test_toric_d3_seeded_trajectory_and_rng_calls 
+[gw0] [ 92%] SKIPPED tests/test_faststep.py::test_toric_d3_seeded_trajectory_and_rng_calls 
+tests/test_faststep.py::test_faststep_cache_hit_still_checks_prediction_shape 
+[gw0] [ 93%] PASSED tests/test_faststep.py::test_faststep_cache_hit_still_checks_prediction_shape 
+tests/test_faststep.py::test_cached_decoder_copy_and_miss_validation 
+[gw0] [ 93%] PASSED tests/test_faststep.py::test_cached_decoder_copy_and_miss_validation 
+tests/test_faststep.py::test_at_most_one_distribution_normalization_per_step 
+[gw0] [ 93%] PASSED tests/test_faststep.py::test_at_most_one_distribution_normalization_per_step 
+tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.01-3] 
+[gw0] [ 93%] SKIPPED tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.01-3] 
+tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.01-5] 
+[gw0] [ 93%] SKIPPED tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.01-5] 
+tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.01-7] 
+[gw0] [ 93%] SKIPPED tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.01-7] 
+tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.22-3] 
+[gw0] [ 93%] SKIPPED tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.22-3] 
+tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.22-5] 
+[gw0] [ 93%] SKIPPED tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.22-5] 
+tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.22-7] 
+[gw0] [ 93%] SKIPPED tests/test_faststep.py::test_toric_larger_seeded_trajectories[0.22-7] 
+tests/test_faststep.py::test_supported_boundary_attempts_preserve_rng 
+[gw0] [ 94%] PASSED tests/test_faststep.py::test_supported_boundary_attempts_preserve_rng 
+tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel0] 
+[gw1] [ 94%] PASSED tests/test_fastpath.py::test_identical_seed_trajectory_and_acceptance[phenom-initial2] 
+tests/test_fastpath.py::test_correlated_and_overridden_noise_never_take_fast_path 
+[gw1] [ 94%] PASSED tests/test_fastpath.py::test_correlated_and_overridden_noise_never_take_fast_path 
+tests/test_fastpath.py::test_zero_support_matches_reference[bit] 
+[gw1] [ 94%] PASSED tests/test_fastpath.py::test_zero_support_matches_reference[bit] 
+tests/test_fastpath.py::test_zero_support_matches_reference[pauli] 
+[gw1] [ 94%] PASSED tests/test_fastpath.py::test_zero_support_matches_reference[pauli] 
+tests/test_fastpath.py::test_zero_support_matches_reference[phenom] 
+[gw1] [ 94%] PASSED tests/test_fastpath.py::test_zero_support_matches_reference[phenom] 
+tests/test_fastpath.py::test_cache_cap_policies_and_safe_copies 
+[gw1] [ 94%] PASSED tests/test_fastpath.py::test_cache_cap_policies_and_safe_copies 
+tests/test_fastpath.py::test_cache_rejects_fractional_decoder_output_before_cast 
+[gw1] [ 94%] PASSED tests/test_fastpath.py::test_cache_rejects_fractional_decoder_output_before_cast 
+tests/test_fastpath.py::test_incremental_failure_matches_full_evaluation 
+[gw1] [ 95%] PASSED tests/test_fastpath.py::test_incremental_failure_matches_full_evaluation 
+tests/test_faststep.py::test_z_distribution_and_mh_probability_for_every_neighbor[bit] 
+[gw1] [ 95%] PASSED tests/test_faststep.py::test_z_distribution_and_mh_probability_for_every_neighbor[bit] 
+tests/test_faststep.py::test_z_distribution_and_mh_probability_for_every_neighbor[pauli] 
+[gw3] [ 95%] PASSED tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets3-state3-kernel3] 
+tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets4-state4-kernel4] 
+[gw0] [ 95%] PASSED tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel0] 
+tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[count] 
+[gw0] [ 95%] PASSED tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[count] 
+tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[interval] 
+[gw0] [ 95%] PASSED tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[interval] 
+tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[missing] 
+[gw0] [ 95%] PASSED tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[missing] 
+tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[duplicate] 
+[gw0] [ 95%] PASSED tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[duplicate] 
+tests/test_tile_codes.py::test_tile_parameters_and_paired_logicals[4-4-32-8] 
+[gw0] [ 95%] PASSED tests/test_tile_codes.py::test_tile_parameters_and_paired_logicals[4-4-32-8] 
+tests/test_tile_codes.py::test_tile_parameters_and_paired_logicals[6-6-72-8] 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_tile_parameters_and_paired_logicals[6-6-72-8] 
+tests/test_tile_codes.py::test_tile_parameters_and_paired_logicals[12-12-288-8] 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_tile_parameters_and_paired_logicals[12-12-288-8] 
+tests/test_tile_codes.py::test_tile_invalid_dimensions[args0] 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_tile_invalid_dimensions[args0] 
+tests/test_tile_codes.py::test_tile_invalid_dimensions[args1] 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_tile_invalid_dimensions[args1] 
+tests/test_tile_codes.py::test_tile_invalid_dimensions[args2] 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_tile_invalid_dimensions[args2] 
+tests/test_tile_codes.py::test_tile_invalid_dimensions[args3] 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_tile_invalid_dimensions[args3] 
+tests/test_tile_codes.py::test_tile_invalid_dimensions[args4] 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_tile_invalid_dimensions[args4] 
+tests/test_tile_codes.py::test_unknown_tile_is_not_silently_substituted 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_unknown_tile_is_not_silently_substituted 
+tests/test_tile_codes.py::test_minimal_tile_pruning_and_full_finite_logical_quotient 
+[gw0] [ 96%] PASSED tests/test_tile_codes.py::test_minimal_tile_pruning_and_full_finite_logical_quotient 
+tests/test_tile_codes.py::test_surface_limit_layout_has_known_distance[2] 
+[gw0] [ 97%] PASSED tests/test_tile_codes.py::test_surface_limit_layout_has_known_distance[2] 
+tests/test_regressions.py::test_model_bound_noise_rejects_same_width_but_different_coordinate_meaning 
+[gw0] [ 97%] PASSED tests/test_regressions.py::test_model_bound_noise_rejects_same_width_but_different_coordinate_meaning 
+tests/test_regressions.py::test_dem_bound_noise_rejects_different_detector_maps_of_equal_width 
+[gw0] [ 97%] SKIPPED tests/test_regressions.py::test_dem_bound_noise_rejects_different_detector_maps_of_equal_width 
+tests/test_regressions.py::test_json_alphabet_validation_prevents_uint8_wraparound 
+[gw0] [ 97%] PASSED tests/test_regressions.py::test_json_alphabet_validation_prevents_uint8_wraparound 
+tests/test_regressions.py::test_dev0_binary_json_without_state_space_metadata_still_loads 
+[gw0] [ 97%] PASSED tests/test_regressions.py::test_dev0_binary_json_without_state_space_metadata_still_loads 
+tests/test_tile_anchor_audit.py::test_boundary_counts_and_independent_anchor_variance_are_preserved 
+[gw0] [ 97%] PASSED tests/test_tile_anchor_audit.py::test_boundary_counts_and_independent_anchor_variance_are_preserved 
+tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[seed] 
+[gw0] [ 97%] PASSED tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[seed] 
+tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[prior] 
+[gw0] [ 97%] PASSED tests/test_tile_anchor_audit.py::test_inconsistent_or_incomplete_anchor_cohort_rejected[prior] 
+tests/test_faststep.py::test_same_seed_full_result[weights0-phenom-initial2] 
+[gw1] [ 98%] PASSED tests/test_faststep.py::test_z_distribution_and_mh_probability_for_every_neighbor[pauli] 
+tests/test_faststep.py::test_z_distribution_and_mh_probability_for_every_neighbor[phenom] 
+[gw1] [ 98%] PASSED tests/test_faststep.py::test_z_distribution_and_mh_probability_for_every_neighbor[phenom] 
+tests/test_faststep.py::test_same_seed_full_result[weights0-bit-initial0] 
+[gw3] [ 98%] PASSED tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets4-state4-kernel4] 
+tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets5-state5-kernel5] 
+[gw0] [ 98%] PASSED tests/test_faststep.py::test_same_seed_full_result[weights0-phenom-initial2] 
+tests/test_faststep.py::test_same_seed_full_result[weights1-bit-initial0] 
+[gw1] [ 98%] PASSED tests/test_faststep.py::test_same_seed_full_result[weights0-bit-initial0] 
+tests/test_faststep.py::test_same_seed_full_result[weights0-pauli-initial1] 
+[gw0] [ 98%] PASSED tests/test_faststep.py::test_same_seed_full_result[weights1-bit-initial0] 
+tests/test_faststep.py::test_same_seed_full_result[weights1-pauli-initial1] 
+[gw2] [ 98%] PASSED tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[depolarizing] 
+tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[static] 
+[gw0] [ 98%] PASSED tests/test_faststep.py::test_same_seed_full_result[weights1-pauli-initial1] 
+tests/test_faststep.py::test_same_seed_full_result[weights1-phenom-initial2] 
+[gw3] [ 98%] PASSED tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets5-state5-kernel5] 
+tests/test_provenance.py::test_fingerprint_includes_subpackages 
+[gw1] [ 99%] PASSED tests/test_faststep.py::test_same_seed_full_result[weights0-pauli-initial1] 
+tests/test_public_api.py::test_public_exports_are_documented_and_importable 
+[gw1] [ 99%] PASSED tests/test_public_api.py::test_public_exports_are_documented_and_importable 
+tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[depolarizing] 
+[gw3] [ 99%] PASSED tests/test_provenance.py::test_fingerprint_includes_subpackages 
+tests/test_public_api.py::test_runtime_version_matches_distribution_configuration 
+[gw3] [ 99%] PASSED tests/test_public_api.py::test_runtime_version_matches_distribution_configuration 
+[gw0] [ 99%] PASSED tests/test_faststep.py::test_same_seed_full_result[weights1-phenom-initial2] 
+tests/test_regressions.py::test_exact_distinguishes_underflow_from_empty_failure_support 
+[gw0] [ 99%] PASSED tests/test_regressions.py::test_exact_distinguishes_underflow_from_empty_failure_support 
+[gw2] [ 99%] PASSED tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[static] 
+tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[bit_flip] 
+[gw1] [ 99%] PASSED tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[depolarizing] 
+[gw2] [100%] PASSED tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[bit_flip] 
+
+================================== FAILURES ===================================
+__________________ test_zero_mc_failures_keep_positive_bound __________________
+[gw3] win32 -- Python 3.11.9 A:\dev\mcmc4qec\.venv-experimental-core\Scripts\python.exe
+
+    def test_zero_mc_failures_keep_positive_bound():
+>       ref=w.synthesize(3,"bit",.2,[dict(w=k,mode="mc",trials=8,failures=0) for k in range(4)])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_tile_weight_reference_comparison.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+cluster_scripts\tile_weight_stratified.py:112: in synthesize
+    lower,upper=clopper_pearson(failures,trials,alpha/mc_count)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+failures = 0, trials = 8, alpha = 0.00025
+
+    def clopper_pearson(failures,trials,alpha):
+>       from scipy.stats import beta
+E       ModuleNotFoundError: No module named 'scipy'
+
+cluster_scripts\tile_weight_stratified.py:77: ModuleNotFoundError
+- generated xml file: A:\dev\mcmc4qec\docs\wp\data_experimental_release_2026-10-19\core_installed_suite_v1.xml -
+============================ slowest 30 durations =============================
+14.64s call     tests/test_independent.py::test_same_custom_failure_for_exact_direct_mc_and_correlated_mcmc
+7.93s call     tests/test_acceptance.py::test_direct_mc_same_failure_and_zero_failures_interval
+5.46s call     tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel1]
+4.79s call     tests/test_acceptance.py::test_mcmc_exact_conditional_and_reproducibility
+4.67s call     tests/test_estimation.py::test_real_ladder_sampling_bootstrap_and_json
+4.34s call     tests/test_bar_uncertainty.py::test_small_exact_reference_coverage_smoke
+4.32s call     tests/test_bar_coverage.py::test_small_problem_bar_intervals_cover_exact_across_seeds
+4.11s call     tests/test_examples_real.py::test_example[three_noise.py-dependencies1-keys1]
+3.77s call     tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets3-state3-kernel3]
+3.64s call     tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets1-state1-kernel1]
+3.56s call     tests/test_estimation.py::test_general_density_parameter_dict_and_no_weight_shortcut
+3.41s call     tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[depolarizing]
+3.39s call     tests/test_independent.py::test_cluster_uses_density_ratio_for_equal_weight_correlated_states
+3.01s call     tests/test_bar_block_control.py::test_block_length_preserves_sampling_and_point_estimate
+2.84s call     tests/test_auto_anchor.py::test_omitted_anchor_and_config_match_explicit_defaults
+2.13s call     tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[bit_flip]
+2.07s call     tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[static]
+1.95s call     tests/test_examples_real.py::test_example[steane_exact.py-dependencies10-keys10]
+1.79s call     tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[depolarizing]
+1.74s call     tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets3-kernel3]
+1.68s call     tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets6-kernel6]
+1.64s call     tests/test_categorical_kernels.py::test_complete_proposal_matrix_and_mh_detailed_balance[alphabets5-kernel5]
+1.41s call     tests/test_bar_uncertainty.py::test_mc_anchor_variance_is_independent_of_shared_rung_covariance
+1.39s call     tests/test_tile_low_noise_archive.py::test_export_roundtrip_preserves_failed_and_all_artifacts
+1.36s call     tests/test_tile_low_noise_archive.py::test_export_rechecks_file_census_and_worker_bytes[worker_changed]
+1.24s call     tests/test_auto_anchor.py::test_mc_fixed_budget_independent_seed_variance_and_reproducibility[block_bootstrap]
+1.22s call     tests/test_bar_uncertainty.py::test_same_pooled_point_estimate_and_metadata
+1.21s call     tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel4]
+1.20s call     tests/test_categorical_kernels.py::test_draws_match_probabilities_including_duplicate_relabel_paths[alphabets6-state6-kernel6]
+1.18s call     tests/test_examples_real.py::test_example[bit_flip.py-dependencies0-keys0]
+=========================== short test summary info ===========================
+FAILED tests/test_tile_weight_reference_comparison.py::test_zero_mc_failures_keep_positive_bound - ModuleNotFoundError: No module named 'scipy'
+================= 1 failed, 696 passed, 251 skipped in 45.28s =================

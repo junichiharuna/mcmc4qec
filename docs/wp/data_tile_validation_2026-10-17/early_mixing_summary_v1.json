@@ -1,0 +1,665 @@
+{
+  "archive_sha256": "97423e604a5cdd7f80bd458c61ee195d0c311dd3c4d4332d231633c9194add42",
+  "audited_trace_records": 128,
+  "available_groups": 16,
+  "flagged_observables": 169,
+  "groups": [
+    {
+      "available_chain_ess_min": 43.35384697834157,
+      "available_rhat_max": 1.017516008260577,
+      "conditional_weight": 20.585062500000003,
+      "conditional_weight_standard_error": 0.1570885696891041,
+      "flagged_observables": 2,
+      "group": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "high_rhat_observables": 2,
+      "low_ess_observables": 2,
+      "observables": 10,
+      "sector_transitions": [
+        3603,
+        3526,
+        3610,
+        3635,
+        3441,
+        3366,
+        3847,
+        3860
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        254,
+        254,
+        254,
+        254,
+        255,
+        253,
+        254,
+        254
+      ],
+      "wall_seconds": 1.0852637691423297
+    },
+    {
+      "available_chain_ess_min": 35.57083862262474,
+      "available_rhat_max": 1.0189882349875745,
+      "conditional_weight": 20.653458333333337,
+      "conditional_weight_standard_error": 0.1454193173189442,
+      "flagged_observables": 2,
+      "group": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "high_rhat_observables": 2,
+      "low_ess_observables": 2,
+      "observables": 10,
+      "sector_transitions": [
+        3586,
+        4071,
+        3727,
+        3793,
+        3693,
+        3546,
+        3605,
+        3844
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        254,
+        255,
+        255,
+        254,
+        253,
+        255,
+        253,
+        254
+      ],
+      "wall_seconds": 1.1067018806934357
+    },
+    {
+      "available_chain_ess_min": 48.80374199428668,
+      "available_rhat_max": 1.0090675221137928,
+      "conditional_weight": 20.716916666666666,
+      "conditional_weight_standard_error": 0.12466103854943364,
+      "flagged_observables": 2,
+      "group": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "high_rhat_observables": 0,
+      "low_ess_observables": 2,
+      "observables": 10,
+      "sector_transitions": [
+        3916,
+        3637,
+        3472,
+        3524,
+        3703,
+        3844,
+        3701,
+        3921
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        253,
+        253,
+        255,
+        252,
+        254,
+        255,
+        255,
+        255
+      ],
+      "wall_seconds": 0.9942224929109216
+    },
+    {
+      "available_chain_ess_min": 56.35157454861667,
+      "available_rhat_max": 1.0140922097583078,
+      "conditional_weight": 20.517093750000004,
+      "conditional_weight_standard_error": 0.13236535155895943,
+      "flagged_observables": 2,
+      "group": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "high_rhat_observables": 2,
+      "low_ess_observables": 2,
+      "observables": 10,
+      "sector_transitions": [
+        3342,
+        3760,
+        3297,
+        3628,
+        3966,
+        3190,
+        3309,
+        3763
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        255,
+        254,
+        254,
+        254,
+        253,
+        253,
+        254,
+        255
+      ],
+      "wall_seconds": 0.9925001235678792
+    },
+    {
+      "available_chain_ess_min": 32.72814817375434,
+      "available_rhat_max": 1.0189248094514747,
+      "conditional_weight": 20.706458333333334,
+      "conditional_weight_standard_error": 0.1495569268953711,
+      "flagged_observables": 2,
+      "group": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "high_rhat_observables": 2,
+      "low_ess_observables": 2,
+      "observables": 10,
+      "sector_transitions": [
+        3518,
+        3096,
+        3119,
+        3288,
+        3160,
+        3585,
+        3786,
+        3122
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        255,
+        254,
+        255,
+        254,
+        249,
+        255,
+        254,
+        252
+      ],
+      "wall_seconds": 1.04618058539927
+    },
+    {
+      "available_chain_ess_min": 50.14067193392402,
+      "available_rhat_max": 1.0088932236331425,
+      "conditional_weight": 20.48482291666667,
+      "conditional_weight_standard_error": 0.12850977181124557,
+      "flagged_observables": 2,
+      "group": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "high_rhat_observables": 0,
+      "low_ess_observables": 2,
+      "observables": 10,
+      "sector_transitions": [
+        3113,
+        2908,
+        3623,
+        3086,
+        3588,
+        3097,
+        3155,
+        3320
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        254,
+        253,
+        253,
+        250,
+        254,
+        255,
+        254,
+        253
+      ],
+      "wall_seconds": 1.040164202451706
+    },
+    {
+      "available_chain_ess_min": 7.9674489112936175,
+      "available_rhat_max": 1.0356768592717678,
+      "conditional_weight": 20.207979166666664,
+      "conditional_weight_standard_error": 0.25307141784398424,
+      "flagged_observables": 10,
+      "group": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "high_rhat_observables": 6,
+      "low_ess_observables": 10,
+      "observables": 10,
+      "sector_transitions": [
+        2781,
+        3492,
+        3319,
+        2274,
+        3254,
+        3160,
+        3266,
+        3415
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        254,
+        255,
+        255,
+        254,
+        253,
+        253,
+        253,
+        255
+      ],
+      "wall_seconds": 1.0609463853761554
+    },
+    {
+      "available_chain_ess_min": 30.30516583679599,
+      "available_rhat_max": 1.01883167951111,
+      "conditional_weight": 20.29164583333333,
+      "conditional_weight_standard_error": 0.17112113803623621,
+      "flagged_observables": 3,
+      "group": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "high_rhat_observables": 3,
+      "low_ess_observables": 2,
+      "observables": 10,
+      "sector_transitions": [
+        2920,
+        3282,
+        3500,
+        2880,
+        2906,
+        2903,
+        3512,
+        3421
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        253,
+        254,
+        253,
+        254,
+        253,
+        254,
+        254,
+        254
+      ],
+      "wall_seconds": 0.983817033469677
+    },
+    {
+      "available_chain_ess_min": 15.12009297461178,
+      "available_rhat_max": 1.0586422315829038,
+      "conditional_weight": 20.993645833333332,
+      "conditional_weight_standard_error": 0.16873437182643872,
+      "flagged_observables": 18,
+      "group": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "high_rhat_observables": 18,
+      "low_ess_observables": 18,
+      "observables": 18,
+      "sector_transitions": [
+        1192,
+        1080,
+        1281,
+        916,
+        1383,
+        1033,
+        1311,
+        1258
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        371,
+        303,
+        366,
+        310,
+        367,
+        305,
+        361,
+        373
+      ],
+      "wall_seconds": 1.679072086699307
+    },
+    {
+      "available_chain_ess_min": 15.084369010319975,
+      "available_rhat_max": 1.0457651056876118,
+      "conditional_weight": 21.31102083333333,
+      "conditional_weight_standard_error": 0.17798247129837558,
+      "flagged_observables": 18,
+      "group": [
+        3,
+        0,
+        0,
+        1
+      ],
+      "high_rhat_observables": 18,
+      "low_ess_observables": 18,
+      "observables": 18,
+      "sector_transitions": [
+        1337,
+        1255,
+        1334,
+        1313,
+        1499,
+        1582,
+        1228,
+        1131
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        374,
+        334,
+        346,
+        405,
+        391,
+        418,
+        347,
+        365
+      ],
+      "wall_seconds": 1.6719360761344433
+    },
+    {
+      "available_chain_ess_min": 12.368545864198099,
+      "available_rhat_max": 1.052428612104922,
+      "conditional_weight": 21.34096875,
+      "conditional_weight_standard_error": 0.1696059045695301,
+      "flagged_observables": 18,
+      "group": [
+        3,
+        0,
+        1,
+        0
+      ],
+      "high_rhat_observables": 18,
+      "low_ess_observables": 18,
+      "observables": 18,
+      "sector_transitions": [
+        835,
+        1140,
+        1152,
+        1224,
+        1212,
+        1287,
+        1078,
+        1392
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        239,
+        297,
+        328,
+        320,
+        372,
+        383,
+        289,
+        345
+      ],
+      "wall_seconds": 1.6395743237808347
+    },
+    {
+      "available_chain_ess_min": 5.2636914678845885,
+      "available_rhat_max": 1.171640506617555,
+      "conditional_weight": 20.725135416666667,
+      "conditional_weight_standard_error": 0.2868553485544099,
+      "flagged_observables": 18,
+      "group": [
+        3,
+        0,
+        1,
+        1
+      ],
+      "high_rhat_observables": 18,
+      "low_ess_observables": 18,
+      "observables": 18,
+      "sector_transitions": [
+        1336,
+        1064,
+        1019,
+        546,
+        1146,
+        1062,
+        1327,
+        1314
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        363,
+        329,
+        372,
+        173,
+        330,
+        342,
+        384,
+        415
+      ],
+      "wall_seconds": 1.698189726099372
+    },
+    {
+      "available_chain_ess_min": 8.106136650244258,
+      "available_rhat_max": 1.0865190312798456,
+      "conditional_weight": 21.183083333333336,
+      "conditional_weight_standard_error": 0.22058140801846685,
+      "flagged_observables": 18,
+      "group": [
+        3,
+        1,
+        0,
+        0
+      ],
+      "high_rhat_observables": 18,
+      "low_ess_observables": 18,
+      "observables": 18,
+      "sector_transitions": [
+        943,
+        1228,
+        1270,
+        1411,
+        601,
+        1113,
+        1159,
+        911
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        293,
+        349,
+        379,
+        422,
+        235,
+        326,
+        350,
+        278
+      ],
+      "wall_seconds": 1.725462500937283
+    },
+    {
+      "available_chain_ess_min": 8.183586128295,
+      "available_rhat_max": 1.0854053550961567,
+      "conditional_weight": 20.833,
+      "conditional_weight_standard_error": 0.20463693811601963,
+      "flagged_observables": 18,
+      "group": [
+        3,
+        1,
+        0,
+        1
+      ],
+      "high_rhat_observables": 18,
+      "low_ess_observables": 18,
+      "observables": 18,
+      "sector_transitions": [
+        970,
+        1000,
+        1037,
+        864,
+        1027,
+        682,
+        1259,
+        703
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        305,
+        295,
+        286,
+        283,
+        307,
+        206,
+        359,
+        237
+      ],
+      "wall_seconds": 1.7674400880932808
+    },
+    {
+      "available_chain_ess_min": 9.244433799766504,
+      "available_rhat_max": 1.0564414135441476,
+      "conditional_weight": 20.959260416666666,
+      "conditional_weight_standard_error": 0.27940531376963157,
+      "flagged_observables": 18,
+      "group": [
+        3,
+        1,
+        1,
+        0
+      ],
+      "high_rhat_observables": 18,
+      "low_ess_observables": 18,
+      "observables": 18,
+      "sector_transitions": [
+        1065,
+        805,
+        1289,
+        949,
+        1060,
+        1196,
+        1111,
+        634
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        308,
+        264,
+        341,
+        312,
+        324,
+        349,
+        351,
+        231
+      ],
+      "wall_seconds": 1.6834043571725488
+    },
+    {
+      "available_chain_ess_min": 4.945053122796199,
+      "available_rhat_max": 1.099203087701856,
+      "conditional_weight": 20.637010416666666,
+      "conditional_weight_standard_error": 0.2602605476033541,
+      "flagged_observables": 18,
+      "group": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "high_rhat_observables": 18,
+      "low_ess_observables": 18,
+      "observables": 18,
+      "sector_transitions": [
+        1180,
+        1151,
+        1013,
+        1078,
+        1258,
+        1048,
+        586,
+        827
+      ],
+      "status": "ok",
+      "undefined_observables": 0,
+      "unique_sectors": [
+        343,
+        343,
+        322,
+        328,
+        329,
+        270,
+        217,
+        284
+      ],
+      "wall_seconds": 1.734159386716783
+    }
+  ],
+  "initial_states_checked": 128,
+  "input_errors": 0,
+  "input_files_sha256": {
+    "groups/1-0-0-0.json": "04bb325ee1ce63a9f3dbbb53ae14cec56b0a9df2a647271a0b27518ffbe1e676",
+    "groups/1-0-0-1.json": "76b6e8bd9bbe2c0bf145b0349b40f1426c9b3a1a504b1179347f7a4e764d11fb",
+    "groups/1-0-1-0.json": "0331f18d5314eff6c28ed844e4b7d2d061dd670d1cabe9ba77aeeb5dd79c312e",
+    "groups/1-0-1-1.json": "285fdda4eef8a1c214e2a7ae9728a743fd57e7e39d9c3e717f64fbc1ae7a6703",
+    "groups/1-1-0-0.json": "ca55133701f73302f5adbe8536c6cdd0b8bac9b1ec3705e4853b529d120cddb9",
+    "groups/1-1-0-1.json": "703dd8794b1f960d8150b523d69d455b3c95eed571387a1b5528332a2ac88775",
+    "groups/1-1-1-0.json": "f41076bb3df3c876514a22152bfc42618b21782e0d7ba9f9353a2d27a48de38f",
+    "groups/1-1-1-1.json": "276115d654fa1220fc11b0bf7f857031f81b90ae48c1ec045261e4f69e401076",
+    "groups/3-0-0-0.json": "896f4e6fe884b0a61f2b9b263650c061098f59acc89ea79c16b58f3c7be1a309",
+    "groups/3-0-0-1.json": "acfc1eb6a69f8a21513ac05b840088812c2988d16876a435503313786cac6c40",
+    "groups/3-0-1-0.json": "486b32829db9373ff53454ed66fa467cf2757f8fdc3dd74c9115b4e7a573a1f9",
+    "groups/3-0-1-1.json": "43077e69540afee62104ca882a3be2398a53cc0ae8a8cad4e4d6db28c1eae4b9",
+    "groups/3-1-0-0.json": "f3e91ff3f8381097e49115738e305ebdd772726ebbdb997dc18f855016131902",
+    "groups/3-1-0-1.json": "6b4f849e40d6dd3eb39d128064c7ebce31c28d299d98f719b2458b10bb26addb",
+    "groups/3-1-1-0.json": "37599b5f277cdf53c4580e3c8837a27facfee91352291499a40849ad3a8d4f0a",
+    "groups/3-1-1-1.json": "14a160afe26e5a6ecd83b4131d996f982c302bfcda747d300dc1238bc0672306",
+    "manifest.json": "1a7fa9033217e69a0ac680aa4fcc933f9aadfe1f227f1b2e1801b45b66ffdae7",
+    "native_preflight.json": "3db00b15f75f5b13b1c25d00bb7df198b139f8844f5e3d2eb14c93bb1a86e8db",
+    "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+    "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+    "production_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce"
+  },
+  "physical_checkpoint_redecodes": 2432,
+  "planned_groups": 16,
+  "planned_observable_groups": 224,
+  "planned_traces": 128,
+  "source_sha256": "b2c343115a3479742304bc6a37e8b0289456321b15c8861f28d2e8239ba479f8",
+  "sum_group_seconds": 21.909035018645227,
+  "undefined_observables": 0,
+  "warning": "Fixed early subset only, with two replicates per setting. Rhat/ESS are diagnostics, not convergence or accuracy proofs. Available ranges exclude undefined values but planned/undefined denominators are retained. Weight errors are conditional-weight IAT MCSE, not BAR uncertainty. No reference/BAR estimate or setting/seed change."
+}

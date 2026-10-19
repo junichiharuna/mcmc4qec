@@ -1,0 +1,147 @@
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - setuptools>=77
+* Getting build dependencies for wheel...
+running egg_info
+creating src\mcmc4qec.egg-info
+writing src\mcmc4qec.egg-info\PKG-INFO
+writing dependency_links to src\mcmc4qec.egg-info\dependency_links.txt
+writing requirements to src\mcmc4qec.egg-info\requires.txt
+writing top-level names to src\mcmc4qec.egg-info\top_level.txt
+writing manifest file 'src\mcmc4qec.egg-info\SOURCES.txt'
+reading manifest file 'src\mcmc4qec.egg-info\SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'src\mcmc4qec.egg-info\SOURCES.txt'
+* Installed build dependency versions:
+  - setuptools==84.0.0
+* Building wheel...
+running bdist_wheel
+running build
+running build_py
+creating build\lib\mcmc4qec
+copying src\mcmc4qec\adapters.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\adapter_composition.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\belief_find_decoders.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\bplsd_decoders.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\codes.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\convergence.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\core.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\decoders.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\decode_cache.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\diagnostics.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\estimation.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\fastpath.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\faststep.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\initial_states.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\kernels.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\models.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\noise.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\noise_categorical.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\reporting.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\results.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\sampling.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\stim_dem.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\trace_stats.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\union_find_decoders.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\_checked_decoder.py -> build\lib\mcmc4qec
+copying src\mcmc4qec\__init__.py -> build\lib\mcmc4qec
+creating build\lib\mcmc4qec\circuit
+copying src\mcmc4qec\circuit\baselines.py -> build\lib\mcmc4qec\circuit
+copying src\mcmc4qec\circuit\cluster.py -> build\lib\mcmc4qec\circuit
+copying src\mcmc4qec\circuit\faststep.py -> build\lib\mcmc4qec\circuit
+copying src\mcmc4qec\circuit\model.py -> build\lib\mcmc4qec\circuit
+copying src\mcmc4qec\circuit\proposal.py -> build\lib\mcmc4qec\circuit
+copying src\mcmc4qec\circuit\__init__.py -> build\lib\mcmc4qec\circuit
+running egg_info
+writing src\mcmc4qec.egg-info\PKG-INFO
+writing dependency_links to src\mcmc4qec.egg-info\dependency_links.txt
+writing requirements to src\mcmc4qec.egg-info\requires.txt
+writing top-level names to src\mcmc4qec.egg-info\top_level.txt
+reading manifest file 'src\mcmc4qec.egg-info\SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'src\mcmc4qec.egg-info\SOURCES.txt'
+copying src\mcmc4qec\py.typed -> build\lib\mcmc4qec
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\mcmc4qec
+copying build\lib\mcmc4qec\adapters.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\adapter_composition.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\belief_find_decoders.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\bplsd_decoders.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+creating build\bdist.win-amd64\wheel\mcmc4qec\circuit
+copying build\lib\mcmc4qec\circuit\baselines.py -> build\bdist.win-amd64\wheel\.\mcmc4qec\circuit
+copying build\lib\mcmc4qec\circuit\cluster.py -> build\bdist.win-amd64\wheel\.\mcmc4qec\circuit
+copying build\lib\mcmc4qec\circuit\faststep.py -> build\bdist.win-amd64\wheel\.\mcmc4qec\circuit
+copying build\lib\mcmc4qec\circuit\model.py -> build\bdist.win-amd64\wheel\.\mcmc4qec\circuit
+copying build\lib\mcmc4qec\circuit\proposal.py -> build\bdist.win-amd64\wheel\.\mcmc4qec\circuit
+copying build\lib\mcmc4qec\circuit\__init__.py -> build\bdist.win-amd64\wheel\.\mcmc4qec\circuit
+copying build\lib\mcmc4qec\codes.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\convergence.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\core.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\decoders.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\decode_cache.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\diagnostics.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\estimation.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\fastpath.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\faststep.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\initial_states.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\kernels.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\models.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\noise.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\noise_categorical.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\py.typed -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\reporting.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\results.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\sampling.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\stim_dem.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\trace_stats.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\union_find_decoders.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\_checked_decoder.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+copying build\lib\mcmc4qec\__init__.py -> build\bdist.win-amd64\wheel\.\mcmc4qec
+running install_egg_info
+Copying src\mcmc4qec.egg-info to build\bdist.win-amd64\wheel\.\mcmc4qec-0.1.0.dev5-py3.11.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\mcmc4qec-0.1.0.dev5.dist-info\WHEEL
+creating 'A:\\dev\\mcmc4qec\\output\\experimental_release_20261019\\dist_git_v3\\.tmp-zp70yskz\\mcmc4qec-0.1.0.dev5-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+adding 'mcmc4qec/__init__.py'
+adding 'mcmc4qec/_checked_decoder.py'
+adding 'mcmc4qec/adapter_composition.py'
+adding 'mcmc4qec/adapters.py'
+adding 'mcmc4qec/belief_find_decoders.py'
+adding 'mcmc4qec/bplsd_decoders.py'
+adding 'mcmc4qec/codes.py'
+adding 'mcmc4qec/convergence.py'
+adding 'mcmc4qec/core.py'
+adding 'mcmc4qec/decode_cache.py'
+adding 'mcmc4qec/decoders.py'
+adding 'mcmc4qec/diagnostics.py'
+adding 'mcmc4qec/estimation.py'
+adding 'mcmc4qec/fastpath.py'
+adding 'mcmc4qec/faststep.py'
+adding 'mcmc4qec/initial_states.py'
+adding 'mcmc4qec/kernels.py'
+adding 'mcmc4qec/models.py'
+adding 'mcmc4qec/noise.py'
+adding 'mcmc4qec/noise_categorical.py'
+adding 'mcmc4qec/py.typed'
+adding 'mcmc4qec/reporting.py'
+adding 'mcmc4qec/results.py'
+adding 'mcmc4qec/sampling.py'
+adding 'mcmc4qec/stim_dem.py'
+adding 'mcmc4qec/trace_stats.py'
+adding 'mcmc4qec/union_find_decoders.py'
+adding 'mcmc4qec/circuit/__init__.py'
+adding 'mcmc4qec/circuit/baselines.py'
+adding 'mcmc4qec/circuit/cluster.py'
+adding 'mcmc4qec/circuit/faststep.py'
+adding 'mcmc4qec/circuit/model.py'
+adding 'mcmc4qec/circuit/proposal.py'
+adding 'mcmc4qec-0.1.0.dev5.dist-info/licenses/LICENSE'
+adding 'mcmc4qec-0.1.0.dev5.dist-info/METADATA'
+adding 'mcmc4qec-0.1.0.dev5.dist-info/WHEEL'
+adding 'mcmc4qec-0.1.0.dev5.dist-info/top_level.txt'
+adding 'mcmc4qec-0.1.0.dev5.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel
+Successfully built mcmc4qec-0.1.0.dev5-py3-none-any.whl

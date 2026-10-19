@@ -1,0 +1,20 @@
+
+ Да  \u26a0  Warning from the Material for MkDocs team
+ Да
+ Да  MkDocs 2.0, the underlying framework of Material for MkDocs,
+ Да  will introduce backward-incompatible changes, including:
+ Да
+ Да  Б~ All plugins will stop working \u2013 the plugin system has been removed
+ Да  Б~ All theme overrides will break \u2013 the theming system has been rewritten
+ Да  Б~ No migration path exists \u2013 existing projects cannot be upgraded
+ Да  Б~ Closed contribution model \u2013 community members can't report bugs
+ Да  Б~ Currently unlicensed \u2013 unsuitable for production use
+ Да
+ Да  Our full analysis:
+ Да
+ Да  https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: A:\dev\mcmc4qec\output\docs-site
+INFO    -  Documentation built in 9.30 seconds
+Checked 13 content pages and 1441 local links/assets

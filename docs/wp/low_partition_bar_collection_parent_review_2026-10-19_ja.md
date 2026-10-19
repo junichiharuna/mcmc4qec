@@ -1,0 +1,79 @@
+# 分割BAR集約の親処理・実装レビュー
+
+## 2026-10-19 06:59 JST
+
+小仕様を保存し、入力検証とworkerについて受入テストを先に用意して実装した。
+外部analysis prepared・completion SHAと既存analysis_bindingを組み合わせ、全partitionの実PBS終端・scope・metadata・件数を検証する。
+計画順の全partitionを要求し、重複したgroupや不完全な67584行を受理しない。
+固定hashを複数の証拠から結合するときは既知hashを上書きせず、不一致を拒否する。
+workerはsource・Python・PBS_JOBID・実台帳をimport前に検証し、既存collectの結果と保存されたsummary・rows hashを照合する。
+PBS脚本はcontrolとcontrol SHAから再構成して比較するため、controlが脚本hashを含む循環参照を作らない。
+実処理のwall・CPU・最大RSSをworker completionへ記録する。
+全group payloadの検証と、後続final readerによるtrace・anchor・WSS検証を区別する。
+
+Windowsの入力検証21件は8.88秒、worker13件は1.02秒で成功した。
+入力テストの初版は大量のfixtureファイル作成で軽量計算の時間上限を超えるおそれがあったため中断した。
+768 groupの件数を保ちつつ767個のmarker hashを仮想fixtureにし、変更検出対象のmarkerは実ファイルにした。
+Linuxの両テスト合計34件は4.06秒で成功し、実qsubは呼んでいない。
+fixtureの科学reader・PBS応答は代用しているため、本番の科学データ検証成功を意味しない。
+本レビューは主担当によるもので、追加サブエージェントの独立レビューは利用上限のため未実施である。
+
+## 保存物と未実施事項
+
+data_tile_validation_2026-10-17/partition_bar_collection_components_v1に依存を含む26ファイルを保存した。
+manifest SHAは1e519db996bb0b1403a0ed0572141c4e51b670698180ad598fc035693aa18ff6である。
+Linux receipt SHAはee63c504d803a6295b476b2b756ad26c5a6ed5f6763b9fe7272b70863d6bbaa1である。
+復元先はoutputであり、保存用ディレクトリから親入口を直接実行しない。
+collectorのprepare・共有lock付きqsub入口・親側完了受理・final v3への証拠構築は未実装である。
+production collectorのprepare・preflight・execute・completionは全条件で未実施である。
+
+## 2026-10-19 07:05 JST: prepare接続
+
+remote prepareは入力検証の後、acceptance manifestに固定されたbundle全source、analysis metadata、native binaryの全件、Pythonをcontrolへ固定する。
+workerの既知SHAを確認してから新規出力先へ保存し、deterministicなPBS脚本を生成してbash -nを通す。
+生成後に全入力・PBS・計画・生成物を再検証し、成功したparent-preparedを最後に保存する。
+実submission用prepared.jsonと、親側のauthority・上流証拠を含むparent-prepared.jsonを区別した。
+local入口は既存prepare・execute・completionのscript・intent・stdout/stderr・receiptを再構成して、計画順の全partitionを要求する。
+欠落・改変・通信失敗・割込みでは一回実行記録を保持して自動再試行しない。
+remoteの受入テスト18件はWindows0.86秒・Linux0.12秒、localの16件はWindows7.54秒で成功した。
+remoteのruntime検証はsource・native census・Pythonの変更も実ファイルfixtureで確認した。
+実C0T0のsampling collector completion intentが未取得であることを検出し、process呼出し0件で拒否した。
+negative gateのzero SHAは意図的な不正値であり、実行権限の根拠に使用しない。
+全依存30ファイルのmanifest SHAはb885cca568784e457ac936c09ece6d4e37cb5c80f49977076d792bd4046ee6d9である。
+Linux receipt SHAはf2b91a36240854990c97af1064eefadbd5fa40c4623ca35131ac85388ea53566である。
+negative gate SHAは5f82bc8a439ca9b8e582c945439afd05a1e3832ebd9b72afc93bcd5f09d7f523である。
+production collector prepare・preflight・execute・completionは全条件で未実施である。
+qsub入口・親側完了受理・final v3への証拠構築を次に接続する。
+
+## 2026-10-19 07:09 JST: qsub入口
+
+外部parent-prepared SHAからrequest・生成物・scopeを照合し、同じcontrolからの脚本再構成と固定resourceの一致を検証する。
+remote preflightはqsubを呼ばず、executeはroot・phase=bar_collection・pidで共有lockを所有する。
+submission intentとguard intentの保存前後で全入力・source/native・実上流PBS・旧controller・node予算を再確認する。
+qsubは一度だけ呼び、timeout・割込み・不正job ID・非zero終了では曖昧な記録とlockを残す。
+途中で他処理のlockに変わった場合、そのlockを消さない。
+local入口は実prepareのscript・intent・stdout/stderr・receiptを再構成し、外部prepared SHAを確認する。
+execute成功の返却台帳は準備済み台帳とjob IDの組に限定し、通信失敗や入力変更では成功と扱わない。
+remote23件はWindows2.06秒・Linux0.38秒、local14件はWindows9.17秒で成功した。
+合成fixtureのqsub・PBS応答を用いた検証であり、本番collectorは投入していない。
+全依存34ファイルのmanifest SHAはf2aebe7e2fd93129a96c9595ee1239d26d7c71410b540c35278b4805d43079acである。
+Linux receipt SHAはc06bb03b1597389c57492fcadc7313f2283cb9fe89f201e493b5ea3e5726e8dbである。
+production collector prepare・preflight・execute・completionは全条件で未実施である。
+親側完了受理とfinal v3への証拠構築を次に接続する。
+
+## 2026-10-19 07:14 JST: 完了受理
+
+remote完了受理は実execute台帳・guardと、PBSのF・exit0・run_count1・脚本・1node/1CPU/32GiB・24時間上限・実hostを照合する。
+worker intentに固定controlの全入力hashと実submissionが含まれることを確認し、前後でhashを検証する。
+worker完了とsummaryのmanifest・partition manifest・analysis context・全partition summary hash・768 group・67584行を結合する。
+区間未取得・診断未定義・flag・sampling失敗の件数は値を保持し、分母から除外しない。
+workerのwall・CPU・最大RSSは実測証拠として保存する。
+親処理は大きなrows payloadを読み直さず、workerとsummaryのhash証拠、ファイル存在・stat前後一致を確認する。
+statの一致は内容一致の保証ではなく、parent_rows_payload_rehashed=Falseとして後続final PBS検証を残す。
+local入口は実executeのscript・intent・stdout/stderr・receiptを固定sourceから再構成し、完了応答のjob・prepared SHA・件数・scopeを検証する。
+remote17件はWindows2.60秒・Linux0.53秒、local11件はWindows10.05秒で成功した。
+Windows fixtureのPBS脚本表記はshlex.joinに修正し、実装が期待するPOSIXのSubmit_arguments形式に揃えた。
+依存38ファイルのmanifest SHAは5174292255eb91922221e9ef4a178627a99bd4ce3614ee30f02634435002bc58である。
+Linux receipt SHAはdd5cdc8b987b4d223a1c51997c3ec89ae9e6664f0bbd2d195097717366a777adである。
+production collector prepare・preflight・execute・completionは全条件で未実施である。
+BAR collectorとfull trace監査の完了証拠をfinal v3へ渡す構築処理を次に接続する。

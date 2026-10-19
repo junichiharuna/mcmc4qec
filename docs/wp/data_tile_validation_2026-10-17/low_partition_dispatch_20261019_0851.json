@@ -1,0 +1,64 @@
+{
+  "observed": "2026-10-19T08:50:09.275129+09:00",
+  "active": {
+    "265316.node-PRISM": {
+      "job_state": "R",
+      "run_count": 1,
+      "Resource_List": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "15:30:00"
+      },
+      "resources_used": {
+        "cpupercent": 9457,
+        "cput": "292:57:12",
+        "mem": "12511844kb",
+        "ncpus": 96,
+        "vmem": "43671932kb",
+        "walltime": "03:06:44"
+      },
+      "stime": "Mon Oct 19 05:41:58 2026"
+    },
+    "265319.node-PRISM": {
+      "job_state": "R",
+      "run_count": 1,
+      "Resource_List": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "16:00:00"
+      },
+      "resources_used": {
+        "cpupercent": 3870,
+        "cput": "00:06:27",
+        "mem": "8793168kb",
+        "ncpus": 96,
+        "vmem": "40466956kb",
+        "walltime": "00:00:10"
+      },
+      "stime": "Mon Oct 19 08:49:48 2026"
+    }
+  },
+  "requested_nodes": 2,
+  "capacity_job": "265318.node-PRISM",
+  "capacity_binding_sha256": "8f641269eb41579a939057d536ab5cbea7f8157dd7c78f691ad2cccbe354526e",
+  "capacity_profile_sha256": "7e91444c099b9c33aecdda62c98a0736639b57082ac967d6af3777bb073f878d",
+  "capacity_resource": {
+    "workers": 96,
+    "cpus": 96,
+    "memory_gb": 234,
+    "max_group_wall_seconds": 1610.3678889852017
+  },
+  "capacity_partition_walltime": [
+    "07:30:00"
+  ],
+  "sampling_submission_receipt_sha256": "cf8e5ba30343fc869571236483ffc384bcbc557e8364de630aedabfaed22a3f0",
+  "sampling_job": "265319.node-PRISM",
+  "formal_low_conditions_complete": 3,
+  "formal_low_conditions_total": 12
+}

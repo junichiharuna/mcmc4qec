@@ -1,0 +1,1359 @@
+{
+  "schema": 1,
+  "purpose": "saved_mixing_summary_comparison",
+  "cases": [
+    {
+      "case": 0,
+      "job_id": "265271.node-PRISM",
+      "collection_root": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1",
+      "groups": 768,
+      "replicates": 192,
+      "rows": 875520,
+      "inventory_complete": true,
+      "failed_sampling": 0,
+      "verification": {
+        "path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\verification.json",
+        "sha256": "35a1d9353c1d0b467b1bb8f86fd51060b4aa8c99402e443c989dd03b5daab926"
+      },
+      "census": {
+        "cohorts": 4560,
+        "rows": 875520,
+        "replicates": 192,
+        "sector_cohorts": 336,
+        "observables": {
+          "coarse_bennett_edge_0": 96,
+          "fine_bennett_edge_0": 96,
+          "logical_bit_0": 336,
+          "logical_bit_1": 336,
+          "logical_bit_2": 336,
+          "logical_bit_3": 336,
+          "logical_bit_4": 336,
+          "logical_bit_5": 336,
+          "logical_bit_6": 336,
+          "logical_bit_7": 336,
+          "syndrome_weight": 336,
+          "weight": 336,
+          "fine_bennett_edge_1": 96,
+          "coarse_bennett_edge_1": 96,
+          "fine_bennett_edge_2": 96,
+          "fine_bennett_edge_3": 96,
+          "coarse_bennett_edge_2": 96,
+          "fine_bennett_edge_4": 96,
+          "fine_bennett_edge_5": 96,
+          "sector": 336
+        },
+        "status_counts": {
+          "stored": 875520
+        },
+        "undefined": 2,
+        "nonfinite": 0,
+        "stored_missing_fields": 0,
+        "failed_sampling": 0,
+        "inventory_complete": true
+      },
+      "rows_reference": {
+        "sha256": "a9cb4a142df496155abe6ad1700324327fd5d84c7e16443a6c1195c946bf3724",
+        "bytes": 914460277,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case0-v1/inventory/rows.jsonl",
+        "path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory\\rows.jsonl"
+      },
+      "postprocessing_measurement": {
+        "wall_seconds": 140.31298873759806,
+        "cpu_seconds": 137.826953564,
+        "peak_rss_mb": 188.91796875
+      },
+      "native_scope": "Pinned upstream runtime/native audit; no fresh native probe"
+    },
+    {
+      "case": 1,
+      "job_id": "265272.node-PRISM",
+      "collection_root": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1",
+      "groups": 768,
+      "replicates": 192,
+      "rows": 617472,
+      "inventory_complete": true,
+      "failed_sampling": 0,
+      "verification": {
+        "path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\verification.json",
+        "sha256": "cd788a7b5289b15d9b5330fd06ba294d4963bb1d91151185df6288b11fded7cb"
+      },
+      "census": {
+        "cohorts": 3216,
+        "rows": 617472,
+        "replicates": 192,
+        "sector_cohorts": 240,
+        "observables": {
+          "coarse_bennett_edge_0": 96,
+          "fine_bennett_edge_0": 96,
+          "logical_bit_0": 240,
+          "logical_bit_1": 240,
+          "logical_bit_2": 240,
+          "logical_bit_3": 240,
+          "logical_bit_4": 240,
+          "logical_bit_5": 240,
+          "logical_bit_6": 240,
+          "logical_bit_7": 240,
+          "syndrome_weight": 240,
+          "weight": 240,
+          "fine_bennett_edge_1": 96,
+          "coarse_bennett_edge_1": 96,
+          "fine_bennett_edge_2": 96,
+          "fine_bennett_edge_3": 96,
+          "sector": 240
+        },
+        "status_counts": {
+          "stored": 617472
+        },
+        "undefined": 290,
+        "nonfinite": 0,
+        "stored_missing_fields": 0,
+        "failed_sampling": 0,
+        "inventory_complete": true
+      },
+      "rows_reference": {
+        "sha256": "f6784a1e0a8b8997b45b910ae92784142a9f8ad28a82d23f4568fa7286bb47c0",
+        "bytes": 519992499,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case1-v1/inventory/rows.jsonl",
+        "path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory\\rows.jsonl"
+      },
+      "postprocessing_measurement": {
+        "wall_seconds": 88.04125307779759,
+        "cpu_seconds": 86.091025766,
+        "peak_rss_mb": 158.5859375
+      },
+      "native_scope": "Pinned upstream runtime/native audit; no fresh native probe"
+    },
+    {
+      "case": 2,
+      "job_id": "265273.node-PRISM",
+      "collection_root": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1",
+      "groups": 768,
+      "replicates": 192,
+      "rows": 1391616,
+      "inventory_complete": true,
+      "failed_sampling": 0,
+      "verification": {
+        "path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\verification.json",
+        "sha256": "89560ab3a345ecfbd97c97b68fbc33fc73e39fc5e7006e4901cb67045d55722f"
+      },
+      "census": {
+        "cohorts": 7248,
+        "rows": 1391616,
+        "replicates": 192,
+        "sector_cohorts": 336,
+        "observables": {
+          "coarse_bennett_edge_0": 96,
+          "fine_bennett_edge_0": 96,
+          "logical_bit_0": 336,
+          "logical_bit_1": 336,
+          "logical_bit_10": 336,
+          "logical_bit_11": 336,
+          "logical_bit_12": 336,
+          "logical_bit_13": 336,
+          "logical_bit_14": 336,
+          "logical_bit_15": 336,
+          "logical_bit_2": 336,
+          "logical_bit_3": 336,
+          "logical_bit_4": 336,
+          "logical_bit_5": 336,
+          "logical_bit_6": 336,
+          "logical_bit_7": 336,
+          "logical_bit_8": 336,
+          "logical_bit_9": 336,
+          "syndrome_weight": 336,
+          "weight": 336,
+          "fine_bennett_edge_1": 96,
+          "coarse_bennett_edge_1": 96,
+          "fine_bennett_edge_2": 96,
+          "fine_bennett_edge_3": 96,
+          "coarse_bennett_edge_2": 96,
+          "fine_bennett_edge_4": 96,
+          "fine_bennett_edge_5": 96,
+          "sector": 336
+        },
+        "status_counts": {
+          "stored": 1391616
+        },
+        "undefined": 4140,
+        "nonfinite": 0,
+        "stored_missing_fields": 0,
+        "failed_sampling": 0,
+        "inventory_complete": true
+      },
+      "rows_reference": {
+        "sha256": "ba555b6539893cf2662d69d0d33103a1eddd8f2c73dd36ca36ee51de60acb1d3",
+        "bytes": 1192884488,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case2-v1/inventory/rows.jsonl",
+        "path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory\\rows.jsonl"
+      },
+      "postprocessing_measurement": {
+        "wall_seconds": 200.86924251914024,
+        "cpu_seconds": 197.731199121,
+        "peak_rss_mb": 248.703125
+      },
+      "native_scope": "Pinned upstream runtime/native audit; no fresh native probe"
+    },
+    {
+      "case": 3,
+      "job_id": "265274.node-PRISM",
+      "collection_root": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1",
+      "groups": 768,
+      "replicates": 192,
+      "rows": 986112,
+      "inventory_complete": true,
+      "failed_sampling": 0,
+      "verification": {
+        "path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\verification.json",
+        "sha256": "61058ca7283051a2ce51e3ca0767112b158ac918c4be42872cfe211719ee0e62"
+      },
+      "census": {
+        "cohorts": 5136,
+        "rows": 986112,
+        "replicates": 192,
+        "sector_cohorts": 240,
+        "observables": {
+          "coarse_bennett_edge_0": 96,
+          "fine_bennett_edge_0": 96,
+          "logical_bit_0": 240,
+          "logical_bit_1": 240,
+          "logical_bit_10": 240,
+          "logical_bit_11": 240,
+          "logical_bit_12": 240,
+          "logical_bit_13": 240,
+          "logical_bit_14": 240,
+          "logical_bit_15": 240,
+          "logical_bit_2": 240,
+          "logical_bit_3": 240,
+          "logical_bit_4": 240,
+          "logical_bit_5": 240,
+          "logical_bit_6": 240,
+          "logical_bit_7": 240,
+          "logical_bit_8": 240,
+          "logical_bit_9": 240,
+          "syndrome_weight": 240,
+          "weight": 240,
+          "fine_bennett_edge_1": 96,
+          "coarse_bennett_edge_1": 96,
+          "fine_bennett_edge_2": 96,
+          "fine_bennett_edge_3": 96,
+          "sector": 240
+        },
+        "status_counts": {
+          "stored": 986112
+        },
+        "undefined": 76653,
+        "nonfinite": 0,
+        "stored_missing_fields": 0,
+        "failed_sampling": 0,
+        "inventory_complete": true
+      },
+      "rows_reference": {
+        "sha256": "051c119be17633308245a96949f38a63ac6a5003b6d81bdcee4564ee1f53aa4e",
+        "bytes": 839897337,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case3-v1/inventory/rows.jsonl",
+        "path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory\\rows.jsonl"
+      },
+      "postprocessing_measurement": {
+        "wall_seconds": 133.7500143656507,
+        "cpu_seconds": 131.776508635,
+        "peak_rss_mb": 199.87890625
+      },
+      "native_scope": "Pinned upstream runtime/native audit; no fresh native probe"
+    }
+  ],
+  "cohorts": 20160,
+  "input_sha256": {
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\artifact_archive.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\artifact_archive.py",
+      "sha256": "8a6c213cf4b19ed916d79e0d485168d1f6131244f6465ed7c50084da03ff0384",
+      "bytes": 7239
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_calibration.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_calibration.py",
+      "sha256": "2490bc2ab3533d77b536dfbd6a372049a67d970e74e0cfeb04af10138a5e8b82",
+      "bytes": 23249
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_anchors.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_anchors.py",
+      "sha256": "15fd06d35ae14c2172b9694ca4c2b9e96966c69adc6a127fd8e80f1056c0e419",
+      "bytes": 6331
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_low_noise_traces.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_low_noise_traces.py",
+      "sha256": "7628202a5dacdc809a34bb29793dc3a4724e0e1e6e3e43897949211774fc1c7b",
+      "bytes": 10525
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_reference.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_reference.py",
+      "sha256": "647263528c10f0e2d24000e0ee583d967deca21f5ab60a51cd00c515d327eeef",
+      "bytes": 4400
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_structure.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_structure.py",
+      "sha256": "2e6d9ae98e485fa51e06f58a379f73e86f85099690eb8a5ff0e703f86cb574a1",
+      "bytes": 4028
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_traces.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_traces.py",
+      "sha256": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+      "bytes": 10831
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_weight_pilot.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_weight_pilot.py",
+      "sha256": "3b1cf0a2d08db9fb34d3995e14ded1a690e313c73fa6ff1b93faa86f9195669e",
+      "bytes": 8616
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_weight_reference.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_weight_reference.py",
+      "sha256": "1dc569e9736e3a45c315c6b53db18d203cb03f85cfec73ed660c740071e57293",
+      "bytes": 10709
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\calibration.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\calibration.py",
+      "sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+      "bytes": 31948
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\package_bundle.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\package_bundle.py",
+      "sha256": "1dc9ff49770fa7b10fbb9b8291010bb11e4a8994cc73eed97c6baa11cf258f88",
+      "bytes": 1656
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\package_tile_study.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\package_tile_study.py",
+      "sha256": "c22ffabb1c8198d386a096897b441404681cdeadfd69b6c3ab743290046ffe53",
+      "bytes": 2731
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\probe_tile_decoder_platform.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\probe_tile_decoder_platform.py",
+      "sha256": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6",
+      "bytes": 3010
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\probe_tile_decoder_stages.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\probe_tile_decoder_stages.py",
+      "sha256": "3ff742e448ac91dc0e867081673611617c5e385e4eb2b700403f27526f51e8fb",
+      "bytes": 7169
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\steane_components.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\steane_components.py",
+      "sha256": "a63941d3eb77565042b564dc0319a2627458a1df2d510dd53b3467fd91a803cd",
+      "bytes": 5850
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit.py",
+      "sha256": "dd5d6f97fbedb3b9a4254715612e51b0e89cada009af8700bd96ac9cb96ee0ba",
+      "bytes": 5788
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_analysis.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_analysis.py",
+      "sha256": "d851acec71c02aef8b5a4bcacd12b079fff4d6d182e8c69f67a5699c6fef4c0e",
+      "bytes": 7819
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_analysis_capacity.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_analysis_capacity.py",
+      "sha256": "9abe7b93f4048993f278246c41142bfeb61ac05e87262adce32439c231ea5bb6",
+      "bytes": 2443
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_bar_time.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_bar_time.py",
+      "sha256": "b2e7af97f34f031262e004e7704f5baab32ef7cc8209fbc62ee9ae9d3e823489",
+      "bytes": 8167
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_capacity.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_capacity.py",
+      "sha256": "470496ebea42dc1697941c43a987de85cd6ec220f36470603546ae9a96685b88",
+      "bytes": 2707
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_final_reaggregation.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_final_reaggregation.py",
+      "sha256": "99f54e526695cce8963f065329e0402c2155d7b20355f9b9da8a4573f4448a75",
+      "bytes": 7244
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise.py",
+      "sha256": "617515186afde4248f5bb1b0ae193c491c7fd8c1b65457f123a8d8883a402020",
+      "bytes": 11741
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_analysis_capacity.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_analysis_capacity.py",
+      "sha256": "b7cc0b53133a1709f863babed2ac06028a990d1a9de3810fae62c8c097a7d7e7",
+      "bytes": 7615
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_analysis_partitions.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_analysis_partitions.py",
+      "sha256": "567af9ea33fadf346390ab1ad0abaf3f0149e094398c5cba33aa60a7bfdbc937",
+      "bytes": 7488
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_partitioned_analysis.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_partitioned_analysis.py",
+      "sha256": "ce79747f6c955bd30a4963326834f3be15d5796561eb9d3b9a28255a39d950b7",
+      "bytes": 7010
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_partitioned_trace_audit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_partitioned_trace_audit.py",
+      "sha256": "a33d3ae2e4a34740eea5f332aacf0de6220e9a124a1c242c8622e0d48d3d8cc5",
+      "bytes": 10156
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_sampling_partitions.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_sampling_partitions.py",
+      "sha256": "10125e6533a9e492904a27f4fddb60eeed3df8390d41913d43f39485cdeb021b",
+      "bytes": 7060
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_timing_execution.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_timing_execution.py",
+      "sha256": "e008f847fdf5b3074de944dcb9f55f2eb998868f0a9c0c2410781d9329ccd485",
+      "bytes": 6721
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_timing_selection.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_timing_selection.py",
+      "sha256": "70554a13dca33f7ec12dab4e975dc0a1fd591193effac474661a8bb0b53b1173",
+      "bytes": 33777
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_trace_audit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_trace_audit.py",
+      "sha256": "a4409c31f4fe92141b0216231c1aeed9bd563c674b47afce390489e7733e8f43",
+      "bytes": 10121
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_mc_time.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_mc_time.py",
+      "sha256": "3e81e7d96ae6b4913889e33886330c0787fa53cecf2e7c7c199f2fbd439fc39a",
+      "bytes": 9326
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_mixing_execution.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_mixing_execution.py",
+      "sha256": "3cb0a9b41863195a478e22f9fdd8a39611fffdb7a4b6e1d0f45fddbd388d4242",
+      "bytes": 5805
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_pilot.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_pilot.py",
+      "sha256": "df464052fddec0fe62b1d1c83f00a06711e1f869eb4a51582ce0f5298792b9e3",
+      "bytes": 2451
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_production.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_production.py",
+      "sha256": "06517a2ccb36b6e9b61f57db8673febfb0bb1ca7d3d62f836ba9af9a34b9d82d",
+      "bytes": 6193
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_reference.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_reference.py",
+      "sha256": "7d9b7e7f9fd38fcb89cc5778f6803052ece644bbc3720ff10cde55c40781acec",
+      "bytes": 2370
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_seed_audit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_seed_audit.py",
+      "sha256": "b0d19e5ff4973846f9e11ceecc27aa954ce6f2b49ae512b33cd20bcb76715cab",
+      "bytes": 17594
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_trace_audit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_trace_audit.py",
+      "sha256": "31fddab5214373358dde2f68da9905ad0fc7b046f20f8069a2191526b479f711",
+      "bytes": 8065
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_pilot.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_pilot.py",
+      "sha256": "888aceaa08c7ff5acfc06136fb5a85308af6cfdb8d8014f694319c5cb190a6b9",
+      "bytes": 2384
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_reference.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_reference.py",
+      "sha256": "d1d4e80661e94fa8e4b04b376a6aa5f5720c502e6c9c3756e23cfb4304f1af93",
+      "bytes": 6446
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_reference_audit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_reference_audit.py",
+      "sha256": "81c7b1d96423723e3bc64d7b62f9e5678ce258c5ce41a37fee1591963a7e9889",
+      "bytes": 7207
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\summarize_calibration.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\summarize_calibration.py",
+      "sha256": "45d8031f514f03962ce149ac99269c3f9bd0fd9fa2deb40f38766f478397b6c9",
+      "bytes": 10149
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\summarize_tile_pilot.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\summarize_tile_pilot.py",
+      "sha256": "cd549e6400ff791ceec87212f492fdeb41adb4d7955399069f8d6c6681d1438e",
+      "bytes": 2496
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_analysis_capacity.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_analysis_capacity.py",
+      "sha256": "68ae808e4fc333e8736304a215b5d308a0f5d9ca54fa26bac031b141a4964f39",
+      "bytes": 4770
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_audited_results.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_audited_results.py",
+      "sha256": "3f9a5bfa85dd8fe722926296dfec2ba28bbf07a615fc13502217f63d0789a1ea",
+      "bytes": 23612
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_analysis.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_analysis.py",
+      "sha256": "7d22afe9b4ee554e255ca1556510b2c76d892d7817ad44ae7a423971a58505de",
+      "bytes": 12034
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_study.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_study.py",
+      "sha256": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb",
+      "bytes": 9078
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_time_benchmark.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_time_benchmark.py",
+      "sha256": "15a9a8c254bd2570decd635e73844c4c6d3bccf1fc9ba679569851495765f41a",
+      "bytes": 14052
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_comparisons.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_comparisons.py",
+      "sha256": "b8faac8a7c55809a89eddf1ffb2a9c0b5065781ee8da189388279404dba62ad4",
+      "bytes": 8269
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_coordinator.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_coordinator.py",
+      "sha256": "4617da6ebc30b501a924e4660009f31aaf0481c5c658b036c362dbf16519bb2c",
+      "bytes": 11603
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_early_mixing.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_early_mixing.py",
+      "sha256": "ef18d0996ddad1a6baa85136a5b39556b5fb9b4987deac2a244b4760b35eaa7b",
+      "bytes": 10937
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_final_reaggregation.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_final_reaggregation.py",
+      "sha256": "0c1e244322a519fc31e6134e6f2decfb548b03f8b9d7cfd42c2559a843aeec51",
+      "bytes": 24816
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_initialization_strata.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_initialization_strata.py",
+      "sha256": "ca1bc5b501f6239fb27cf3a67d93330eba417862b344b3f2a485b34e1ea20704",
+      "bytes": 5809
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis.py",
+      "sha256": "4b2e4fa26ab54180dbdf4bc9cdfadd2cbe0781087037c84ac343def481080f7e",
+      "bytes": 22390
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis_capacity.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis_capacity.py",
+      "sha256": "9908043898bd57bd6346728f4b88a160dad43ab05f5ca879e65eed78339114a6",
+      "bytes": 12361
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis_partitions.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis_partitions.py",
+      "sha256": "8b6d420f1025fb7893b38a133eef751955f549c5c25f4e9c6882defc21cd2c78",
+      "bytes": 18548
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_audited_collection.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_audited_collection.py",
+      "sha256": "0992af2ed784db964bbb9cca52678af17793c7b952c3b2342920850c5f4b8e6e",
+      "bytes": 13305
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_analysis.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_analysis.py",
+      "sha256": "5ae94aaec62506d7b54d946530c3988f4b3ba5dbac844905915c574fdc7e0491",
+      "bytes": 18231
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_collection.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_collection.py",
+      "sha256": "cabd93cb4212ef45470257477d4751ca5f213f5dd8ce765fc62ea9bd1878b9c4",
+      "bytes": 11410
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_trace_audit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_trace_audit.py",
+      "sha256": "2998e22daaa402d64e0de1094388122f8c9b7b5ba0a08fff07ab3e162d802296",
+      "bytes": 15901
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_trace_audit_resources.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_trace_audit_resources.py",
+      "sha256": "964d16c8cb4705243fdaefb900582f771f2c4d506f0dbd51bedc77cdc78c0255",
+      "bytes": 9921
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_reference_comparison.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_reference_comparison.py",
+      "sha256": "06c5f55fa0f86ecd0e1af2a421e3d97808018444282a2042b85a64a7b1926186",
+      "bytes": 6740
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_sampling_partitions.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_sampling_partitions.py",
+      "sha256": "766e34275905eaeb13a99402cc963f0bc9894047a33f3a58b38aa7afb8047455",
+      "bytes": 42150
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_staging.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_staging.py",
+      "sha256": "d2595162fb7e9fe02ca2a89d292cece30e86a545f8a06dc8b0d6cb142f9ac9ea",
+      "bytes": 30041
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_staging_control.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_staging_control.py",
+      "sha256": "9eb1071f5152d0cb257e7c0913daa49d1524389de9aa8e24515b409f38842d0d",
+      "bytes": 22915
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_study.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_study.py",
+      "sha256": "6ce8ef25b06646c46b8c59ba02d59e6841c766cd28ad270d356e462326082f22",
+      "bytes": 14583
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_summary.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_summary.py",
+      "sha256": "0b5d408744db4d37ee322be61de740ec9a9eed4e3368836f4c6f426467bdb080",
+      "bytes": 7014
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_census.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_census.py",
+      "sha256": "7e45d49b1955444e257852ea82a76933941f0e5620890701fbaa903770821692",
+      "bytes": 28742
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_evaluation_report.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_evaluation_report.py",
+      "sha256": "2975f7e8d08f7fd8137b4c3a9b3245b1af8a8bd409b2206facc8b369326beb78",
+      "bytes": 44687
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_execution.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_execution.py",
+      "sha256": "d32c910b25058cc76f3d4d540c3b40801febd810f66b7e156b2b554be8ddc7cc",
+      "bytes": 50835
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_plan.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_plan.py",
+      "sha256": "5af5ead8ccde47650456d079b63c1d95d2579248866b2d07ad84ff6e706ceb6b",
+      "bytes": 14160
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_seed_audit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_seed_audit.py",
+      "sha256": "e851473bb020f2f3982732439007d3e6406456487f1f30a7fc10cc2cedbd0531",
+      "bytes": 8453
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_selection.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_selection.py",
+      "sha256": "c9bfc751ebe5bed030dce4ade7c39316ea620673d3c1c6f2c218dacf9967fa6a",
+      "bytes": 23931
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_trace_audit_resources.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_trace_audit_resources.py",
+      "sha256": "f36a77a4abd12a653687026c4f51b26b3d0e0c35f21cad6694da89c768a3eafd",
+      "bytes": 13704
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_trace_audit_run.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_trace_audit_run.py",
+      "sha256": "6f4412200b9cd0e7eb7ac593efad63f4cdb37c7f874f9bfd643da9d5184ad49e",
+      "bytes": 12925
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mc_precision_budget.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mc_precision_budget.py",
+      "sha256": "72a2bbc75097b0c7372de51f596ea7b7d3ad8c39dd21053cb0c47ae79261b587",
+      "bytes": 3377
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mc_time_benchmark.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mc_time_benchmark.py",
+      "sha256": "4b7d35dcd661b67237a2614d1375d14c6d02c9f03e05dc083bbfe7e054787501",
+      "bytes": 9987
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_comparison_report.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_comparison_report.py",
+      "sha256": "8230bb45d25ffd1a3fb1e8f158f18d3173e3d0208151dc2cb7390f464854bd43",
+      "bytes": 23869
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_execution.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_execution.py",
+      "sha256": "796acceaa3c59b4bbf7aa2f2e00aaeb38d8038b51fa8009b7dd94754aa987f0a",
+      "bytes": 17377
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_inventory.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_inventory.py",
+      "sha256": "bd464813f0c7d307131b3784262c639ed2677a3e60fec53913eb8905f6ed3b31",
+      "bytes": 15851
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_precision_assessment.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_precision_assessment.py",
+      "sha256": "17683c69be40c80fa8754811deb67ea90a872bce0131cf9b9bcd34637a94e193",
+      "bytes": 7319
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_prior_effect.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_prior_effect.py",
+      "sha256": "2a8bc858b3e033eac36dc5d2fc83180994fb700f5c873c5ddfe5ff0858555c52",
+      "bytes": 5226
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_reference.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_reference.py",
+      "sha256": "566a3d10901dbb823e0c6cc4de66d012593ac8f14524c6a5b6d5dd13eb705e81",
+      "bytes": 5050
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_seed_audit.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_seed_audit.py",
+      "sha256": "7c6276d10d08eda9d110df0af06dbab3c661339e7d304cd545fc1fef1150fec8",
+      "bytes": 17154
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_select_timing.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_select_timing.py",
+      "sha256": "c07644797d0b76aba4dac8ae4dbb434bb1573fd82651e4b20529963fe79fc0a3",
+      "bytes": 6742
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_study.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_study.py",
+      "sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+      "bytes": 11961
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_summary.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_summary.py",
+      "sha256": "f8f324eac24d748639a4e55bf0f410d04800bb5b2452699379c9a4eda8769574",
+      "bytes": 6683
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_comparison.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_comparison.py",
+      "sha256": "66113d5341fdcdb49f7154225ee038520017add6dce9d9eeef340761f1ff43f1",
+      "bytes": 11865
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_evaluation_report.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_evaluation_report.py",
+      "sha256": "0b6c393f0b77237110cee090dc7a464c247e3b83df55174760ff971f7efcdf98",
+      "bytes": 26263
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_metrics.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_metrics.py",
+      "sha256": "045fb6b7121a2031da1c7d0d2127466834983b4eb09d14ae586358f38cc565cc",
+      "bytes": 4847
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_selection_from_final.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_selection_from_final.py",
+      "sha256": "578729aff7231bfc7d835c3d0633a14bc78ea322b808abd241276574033b5d8f",
+      "bytes": 13074
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_trace_audit_run.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_trace_audit_run.py",
+      "sha256": "8b59e4cc8cf1f77dc64d5154dbf2b65a899e0d22dba9b4713f583021e623a119",
+      "bytes": 6950
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_allocation.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_allocation.py",
+      "sha256": "377d4fe0d961f4a134c81535e6bdbee2fb591be2ec941cc6e76149a7ca87d9a5",
+      "bytes": 7066
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_comparison.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_comparison.py",
+      "sha256": "288f8d2457e1ec760c420d08957fcf122ecce9cc85d2a117e021883ef7076127",
+      "bytes": 9586
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_pilot.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_pilot.py",
+      "sha256": "bfdc2c4b245cb685eda95c7705e8f9be491a23c04f26608501d093418898154b",
+      "bytes": 4079
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference.py",
+      "sha256": "90821b35f32e8a90770f9d32021c9698191cdb2e04b0eff6d02528943d613393",
+      "bytes": 8862
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_audit_run.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_audit_run.py",
+      "sha256": "5c19ada96f0ea576ff2660db260a935a5846852d40185aa649becb7568742b8a",
+      "bytes": 12763
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_comparison.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_comparison.py",
+      "sha256": "b0c03ca5b9eb2e7adfcb913c43fe810e371f51c530f6893f040b2eade0f262a2",
+      "bytes": 6834
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_driver.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_driver.py",
+      "sha256": "8b99a9f23ca01f2fca4d05a4b7fcb48eb87f9014b26df86d4dfabc7c7e1dce63",
+      "bytes": 9691
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_stratified.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_stratified.py",
+      "sha256": "65eaa6833a1978dfb85c7718db03def0ebf478d59988cfb0aea4ca920673d585",
+      "bytes": 5673
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\verify_recovery.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\verify_recovery.py",
+      "sha256": "ce3baba14339ac69ecd99c6510740b7a3e2f9ca7e3045110c624566a783283d7",
+      "bytes": 2751
+    },
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\verify_tile_workflow_examples.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\cluster_scripts\\verify_tile_workflow_examples.py",
+      "sha256": "5709fe8dc919a3822c512b7df26acae08f6e9ce03a06625ff3172eff717ab0fb",
+      "bytes": 2558
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\__init__.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\__init__.py",
+      "sha256": "e65d6ef57725328aa0e9e803c08eaf0773afa39ad4390ca4f358f4889d5dbda7",
+      "bytes": 4129
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\_checked_decoder.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\_checked_decoder.py",
+      "sha256": "ac128802f19ff863e260f137a9741f0d21d2d40ae21903d06a28c815b718b10e",
+      "bytes": 3120
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\adapter_composition.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\adapter_composition.py",
+      "sha256": "69f1b5bfbd29eca3b0cc04e90a2239f3c983ccf4b6dc5dbd05895f9df68d8b6a",
+      "bytes": 5865
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\adapters.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\adapters.py",
+      "sha256": "8bd338a581d5520ad475c74c3ceef0b50a7dd8354b9ea709943cfd2340d36ad7",
+      "bytes": 10534
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\belief_find_decoders.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\belief_find_decoders.py",
+      "sha256": "d9e9a6d59076a5d97376ccc314505de73588ed3b8d6044b7297af94e71f59b26",
+      "bytes": 7240
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\bplsd_decoders.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\bplsd_decoders.py",
+      "sha256": "756d661cbab6a7d443892b7f7b3b5254bad8a70796d363665a1b8ee1e54d3145",
+      "bytes": 6004
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\__init__.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\__init__.py",
+      "sha256": "37c841b1592144e0688c0275e9db9ffc012f5111373e3e40e614e594600beb41",
+      "bytes": 618
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\baselines.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\baselines.py",
+      "sha256": "f8e18d9c255274ce18e92c73ed459229379928d4b8480162b5ecd236dfe1905b",
+      "bytes": 7231
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\cluster.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\cluster.py",
+      "sha256": "2d47add827b210abc9758ed277e4672d93eb6bf4f69e5332785320763d37c087",
+      "bytes": 3075
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\faststep.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\faststep.py",
+      "sha256": "9213444b51128fc954e22a1ce0e1340e92f3ded3c08145de84d7c9927f929854",
+      "bytes": 1260
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\model.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\model.py",
+      "sha256": "d5983f8afbb41969ae0692c1d0f4143c002335edd243367641de9c04a09e9684",
+      "bytes": 17787
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\proposal.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\proposal.py",
+      "sha256": "803987ef724fa4b5010557baab8a7996aabeca2ded1e9259add8c7bf73c68435",
+      "bytes": 2426
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\codes.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\codes.py",
+      "sha256": "2ff9e36fc0b8601b770413e0e4a57e7007a4a9e300e700f7d0672ac5919c81fc",
+      "bytes": 15675
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\convergence.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\convergence.py",
+      "sha256": "762ebde09542f4b0c5fef59becfcc57bddf10628bfb5912768768ad27994a47d",
+      "bytes": 9006
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\core.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\core.py",
+      "sha256": "17931113f94dda0b15db876a062edca6099eb3aa7af337c105c04a9f6dc206ca",
+      "bytes": 16662
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\decode_cache.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\decode_cache.py",
+      "sha256": "807ab712dc69c43417e4a55c4280acc54a38b7a2c1561cbc636909296770e628",
+      "bytes": 5258
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\decoders.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\decoders.py",
+      "sha256": "100897c931316de2614a54836bdf44988e695e0b29566b14a9492cd9e42a2945",
+      "bytes": 7025
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\diagnostics.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\diagnostics.py",
+      "sha256": "a7ecb368459a5b278cfb879f11c7f0946bdc045f13dc6ffa87153d91a57817fe",
+      "bytes": 8206
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\estimation.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\estimation.py",
+      "sha256": "7b02dc0f6c449f0baa997faabbc0bf4c98d2e0a9e2454daa9dc9dc1bdd3940c9",
+      "bytes": 23181
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\fastpath.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\fastpath.py",
+      "sha256": "e1af542a96beffcd2768a68b4e3bdc53559916c22fbbfe83292e815ce5eddf9a",
+      "bytes": 3059
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\faststep.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\faststep.py",
+      "sha256": "e5c9d8bc39af675675ba3a201df37b039295ab2e02b4f8c8e8b5fff8b919865c",
+      "bytes": 13569
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\initial_states.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\initial_states.py",
+      "sha256": "d9b663a3b9d022b00dba1b17494264a48d83c7f488ed98c56696a6c438a27e59",
+      "bytes": 10700
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\kernels.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\kernels.py",
+      "sha256": "d2796a45fd39bf2aa02566ed4b369658014ba60e034ed4f13a71c4e5f528b6a6",
+      "bytes": 10278
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\models.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\models.py",
+      "sha256": "34c15684824ebdb49ce16067c2d86c27b77327c9ffc13eb501476e7ed75b645a",
+      "bytes": 7484
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\noise.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\noise.py",
+      "sha256": "980f1cf411c46a697d44aa39527b6e2be09e5e0303ca467561b59d991ec02c03",
+      "bytes": 2409
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\noise_categorical.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\noise_categorical.py",
+      "sha256": "9b77e3e9397175bd5bc79470a0ded3c3a3570910df7a7727769b0ff38e3cb56f",
+      "bytes": 5266
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\reporting.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\reporting.py",
+      "sha256": "de7deb480ff115f698e6e79dab7153a2d3a18f3d80ab8943a52bcce2565ec16c",
+      "bytes": 5595
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\results.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\results.py",
+      "sha256": "ba00fadc802dadd2624c7da075944d29356c67525c9137c3b58edf36f4e57574",
+      "bytes": 5411
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\sampling.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\sampling.py",
+      "sha256": "b6002366adcc376e6d681fe6a07c77e77da452355fae81302a1bfc9d65683a40",
+      "bytes": 19019
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\stim_dem.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\stim_dem.py",
+      "sha256": "6edb4cf438eaa30cfe4bba504bf5ba5eaaa816c14b12eb0c1dce018c92a511da",
+      "bytes": 9875
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\trace_stats.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\trace_stats.py",
+      "sha256": "261ed5263356f4a9355557feb23aad6565c4ea44dd0bfb7b85293c28ab5a3131",
+      "bytes": 11657
+    },
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\union_find_decoders.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\union_find_decoders.py",
+      "sha256": "2cfb0936281dda5a66a3306fea5d64d629ab4d7d414d26a3d7b6d640ee8674e5",
+      "bytes": 4556
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_comparison_inputs_v2.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_comparison_inputs_v2.json",
+      "sha256": "e5a0634e50faa9c177125d78641cf84852aa54ff0d598646846da983b1a32248",
+      "bytes": 2624
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\collect_mixing_full_v1.py": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\collect_mixing_full_v1.py",
+      "sha256": "88d4d94cf6b59d3583f18efc14406d8f3c7a7f63b859c0a36111d41e5119989a",
+      "bytes": 16543
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_preparation_v1.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_preparation_v1.json",
+      "sha256": "011aef0ef043c6f36d94b82e14079c31c12e64b4502c8d18132a9b14a88a350d",
+      "bytes": 10649
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\production_manifest.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\production_manifest.json",
+      "sha256": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+      "bytes": 1966
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\final_reaggregation_case0_evidence_v1\\recovered\\inputs\\0\\analysis_manifest.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\final_reaggregation_case0_evidence_v1\\recovered\\inputs\\0\\analysis_manifest.json",
+      "sha256": "e372d911a475e15dd86c0c9aa53839ceeab033fdabd59f8cfab44b56c76f0d72",
+      "bytes": 2367
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\verification.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\verification.json",
+      "sha256": "35a1d9353c1d0b467b1bb8f86fd51060b4aa8c99402e443c989dd03b5daab926",
+      "bytes": 9661
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\manifest.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\manifest.json",
+      "sha256": "da6882b11ad14d56a6addb39a199d7e664daf1dde11662e0283e9a12a0d56222",
+      "bytes": 10283
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\dry_run.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\dry_run.json",
+      "sha256": "59c52e797d5dfb5eb3d021b8417aef1ef7907b7e8dd014613ab5d5a545367ea4",
+      "bytes": 3283
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\submission-intent.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\submission-intent.json",
+      "sha256": "69f87b3d42f640f5875c74e15e4b8917b23f44bdf2528abb1b6012bc0e0107dd",
+      "bytes": 3360
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\submission.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\submission.json",
+      "sha256": "71040bd81d93fa3ec5a64a906437c59e8896e9a2c798f90551cfb00c41ef410b",
+      "bytes": 3395
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\execution-intent.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\execution-intent.json",
+      "sha256": "61e6eff0e64342615a57ecf6cfa1fa236f6a902417e8d088935819f3eb1d0755",
+      "bytes": 428
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory.sh": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory.sh",
+      "sha256": "ddad7437f6f7366d910dd1bbb278aaba5387f87829a350e586fceb1de58d81c7",
+      "bytes": 1039
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory.out": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory.out",
+      "sha256": "1f20ae62de1ec33a4d8e22adad0072700e70a149fcf22df6c7d23fbfd91d83a6",
+      "bytes": 46
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory.err": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\summary.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\summary.json",
+      "sha256": "d5a6bce42bd63f0a7b7a00ab25836cc9792c8b9dbd1bbac1bc00b60f496f190a",
+      "bytes": 1099
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\upstream-completion-at-submit.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\upstream-completion-at-submit.json",
+      "sha256": "a28e3ef2e0f3d8743cadfff815a3af4301166a9d04b88c6ee251d8ecf69eb2cf",
+      "bytes": 1144
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory\\summary.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\full\\inventory\\summary.json",
+      "sha256": "82a254693cb0205385532489a1d41341b12e2333d300915fce8d93db15ded141",
+      "bytes": 13814932
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\accepted_parent_receipt.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case0_evidence_v1\\accepted_parent_receipt.json",
+      "sha256": "b48eaa5fe919631bcfcc1f0087022f0fdbcd0916798ee57304c47e07387791e8",
+      "bytes": 3484
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\verification.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\verification.json",
+      "sha256": "cd788a7b5289b15d9b5330fd06ba294d4963bb1d91151185df6288b11fded7cb",
+      "bytes": 9560
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\manifest.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\manifest.json",
+      "sha256": "80bd225294278afd297065bd88a7f3438d65e2f9844b3b577f408c9068b484fb",
+      "bytes": 10282
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\dry_run.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\dry_run.json",
+      "sha256": "885ca3c56645c49cf78af14dcb795dd250dc209af22ed5eec4b3b512cc097631",
+      "bytes": 3283
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\submission-intent.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\submission-intent.json",
+      "sha256": "ef933e22d86a6b90ca340b73666d1c4f11ef7610ad1620d0e93ce5c839b7d586",
+      "bytes": 3360
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\submission.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\submission.json",
+      "sha256": "1433297e4870bb0a132f50dafd2d0a378bb440b548cbff34a463eb35c23cd282",
+      "bytes": 3395
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\execution-intent.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\execution-intent.json",
+      "sha256": "17cdd13f9feeea91b76fb2d9a13e14b915dbce20963e07bc61424a1f4eac6d11",
+      "bytes": 428
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory.sh": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory.sh",
+      "sha256": "b7fdced0deeeae43446aa3191712cb795b0b2e7f8ab66815c6e96935dee32948",
+      "bytes": 1039
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory.out": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory.out",
+      "sha256": "227736dc0b196b18f6fb3f883ff848cd9bb7a1a8c76cbda2dc9199b9d5aeb8ce",
+      "bytes": 46
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory.err": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\summary.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\summary.json",
+      "sha256": "1719387dab884387c2f1c240c2a3a121bcee42203ca4bf21caa8b59ccf44e1cd",
+      "bytes": 1096
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\upstream-completion-at-submit.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\upstream-completion-at-submit.json",
+      "sha256": "d79a9e8e98180c2984941464a7a46e323fc03ceca89219b9a6bc36401c033228",
+      "bytes": 1145
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory\\summary.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\full\\inventory\\summary.json",
+      "sha256": "335410a636ecd7f4e4510cb65ba6203c229e55c8aa06b0adc5363e65ad4236f9",
+      "bytes": 9781772
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\accepted_parent_receipt.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case1_evidence_v1\\accepted_parent_receipt.json",
+      "sha256": "b8af59794cd8a091ee4ce6af55b77e34d5840ad6fc3a11926837a9802a9ab001",
+      "bytes": 3484
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\verification.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\verification.json",
+      "sha256": "89560ab3a345ecfbd97c97b68fbc33fc73e39fc5e7006e4901cb67045d55722f",
+      "bytes": 9905
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\manifest.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\manifest.json",
+      "sha256": "c3156cda7e5ab91b82ee60d3f23da940e5153c320b36bf931b05ff408be76509",
+      "bytes": 10278
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\dry_run.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\dry_run.json",
+      "sha256": "9bdb56ecc6b9c54951c74de87b29a802bb760604938f4b54a9364f0dc91d6af3",
+      "bytes": 3283
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\submission-intent.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\submission-intent.json",
+      "sha256": "c97941c058e66f34cb5686779ebd739d3e1a84ea1c93691edb77791e7cd721eb",
+      "bytes": 3360
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\submission.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\submission.json",
+      "sha256": "826d2d33a92b6ffee4a66e0fc5dec4f56c094b11a53d92fc1aad5d6376985483",
+      "bytes": 3395
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\execution-intent.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\execution-intent.json",
+      "sha256": "e3f1fb270370182db09cefc12cb3eb41401b8735a7988c4688f492040243bdf7",
+      "bytes": 428
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory.sh": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory.sh",
+      "sha256": "bb5fe01bb2dd0e0dfa02a3a8c4165f9da5a2ae5df5fca4defa6842874b3e9734",
+      "bytes": 1039
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory.out": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory.out",
+      "sha256": "44b43c79b4619e349472aa6ce2c3ee130e77a30ac1feb60d54b98dcbad22a29e",
+      "bytes": 46
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory.err": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\summary.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\summary.json",
+      "sha256": "9689419d05c5b8c9fd45d8aae3c7577578ccea517a3e1e5e365e8d50f4fb7cf4",
+      "bytes": 1098
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\upstream-completion-at-submit.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\upstream-completion-at-submit.json",
+      "sha256": "b752214bf20186f172c685a88c592a0b6156dfed2632dc088b3299c9da38cd09",
+      "bytes": 1145
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory\\summary.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\full\\inventory\\summary.json",
+      "sha256": "dd526858c647a4fc97557835a1c36d36eca6a78fa0204a0451cd67d643261111",
+      "bytes": 22098049
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\accepted_parent_receipt.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case2_evidence_v1\\accepted_parent_receipt.json",
+      "sha256": "8ca9daa4a62ac15847cb15c0a168105a229f743386f7ec62b365d36d38fe17bb",
+      "bytes": 3484
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\verification.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\verification.json",
+      "sha256": "61058ca7283051a2ce51e3ca0767112b158ac918c4be42872cfe211719ee0e62",
+      "bytes": 9799
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\manifest.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\manifest.json",
+      "sha256": "86458efb5eca7bcf90eab318cb4ad2995ba013dbdbbaafe30671941c11a2ff72",
+      "bytes": 10281
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\dry_run.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\dry_run.json",
+      "sha256": "50c9f543b3450a40b3b7bbbe4c6c37aaff3804119446bce5c0666b2f8eee3d66",
+      "bytes": 3283
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\submission-intent.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\submission-intent.json",
+      "sha256": "ecb111c9e4033ff838386933c7a209dd5a066e43cfd996f9fb69be852c177458",
+      "bytes": 3360
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\submission.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\submission.json",
+      "sha256": "72b057a283ec67536a1cc99bd9341e24b1333baf2943266f57f92e7a3444cbc6",
+      "bytes": 3395
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\execution-intent.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\execution-intent.json",
+      "sha256": "fac1bf8c09de3e46cc55a7d928d65a91c3d9e1615846f8fa6ec8fe45b5cb236a",
+      "bytes": 428
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory.sh": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory.sh",
+      "sha256": "4f43da3b3b2df9d16fc8615c4530df4f143d6e6eae567876fa3df7e0fc5ff05f",
+      "bytes": 1039
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory.out": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory.out",
+      "sha256": "4e30fe9ca22f533a3ffce3b11fe8008c43d707a5e3036c1fc6583c5dbe65669a",
+      "bytes": 46
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory.err": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\summary.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\summary.json",
+      "sha256": "ea251dfcece2d8ca40beec39f6f1335f3e90f9a4ca61fa5e3ae5e10b1e072e44",
+      "bytes": 1098
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\upstream-completion-at-submit.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\upstream-completion-at-submit.json",
+      "sha256": "bb5ad4cc7fbe70a630e135753090f661459a14d98bd39929ecae1ddd319c5d57",
+      "bytes": 1145
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory\\summary.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\full\\inventory\\summary.json",
+      "sha256": "da35a54554a9b0d2f9644c5fc1e0309e1588bb7465c27d9d19b9b68ceaa48b15",
+      "bytes": 15620348
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\accepted_parent_receipt.json": {
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\mixing_execution_full_case3_evidence_v1\\accepted_parent_receipt.json",
+      "sha256": "7e557911396d7f50d70a2171a45edcce68c96e9dd8fdbfd00a5e8ba91fad9748",
+      "bytes": 3484
+    }
+  },
+  "source_paths": [
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\artifact_archive.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_calibration.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_anchors.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_low_noise_traces.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_reference.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_structure.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_traces.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_weight_pilot.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\audit_tile_weight_reference.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\calibration.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\package_bundle.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\package_tile_study.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\probe_tile_decoder_platform.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\probe_tile_decoder_stages.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\steane_components.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_analysis.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_analysis_capacity.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_bar_time.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_capacity.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_final_reaggregation.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_analysis_capacity.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_analysis_partitions.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_partitioned_analysis.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_partitioned_trace_audit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_sampling_partitions.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_timing_execution.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_timing_selection.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_low_noise_trace_audit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_mc_time.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_mixing_execution.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_pilot.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_production.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_reference.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_seed_audit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_trace_audit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_pilot.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_reference.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\submit_tile_weight_reference_audit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\summarize_calibration.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\summarize_tile_pilot.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_analysis_capacity.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_audited_results.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_analysis.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_study.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_bar_time_benchmark.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_comparisons.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_coordinator.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_early_mixing.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_final_reaggregation.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_initialization_strata.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis_capacity.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_analysis_partitions.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_audited_collection.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_analysis.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_collection.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_trace_audit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_partitioned_trace_audit_resources.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_reference_comparison.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_sampling_partitions.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_staging.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_staging_control.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_study.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_summary.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_census.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_evaluation_report.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_execution.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_plan.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_seed_audit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_timing_selection.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_trace_audit_resources.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_low_noise_trace_audit_run.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mc_precision_budget.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mc_time_benchmark.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_comparison_report.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_execution.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_mixing_inventory.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_precision_assessment.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_prior_effect.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_reference.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_seed_audit.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_select_timing.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_study.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_summary.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_comparison.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_evaluation_report.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_metrics.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_timing_selection_from_final.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_trace_audit_run.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_allocation.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_comparison.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_pilot.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_audit_run.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_comparison.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_reference_driver.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\tile_weight_stratified.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\verify_recovery.py",
+    "A:\\dev\\mcmc4qec\\cluster_scripts\\verify_tile_workflow_examples.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\__init__.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\_checked_decoder.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\adapter_composition.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\adapters.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\belief_find_decoders.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\bplsd_decoders.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\__init__.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\baselines.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\cluster.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\faststep.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\model.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\circuit\\proposal.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\codes.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\convergence.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\core.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\decode_cache.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\decoders.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\diagnostics.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\estimation.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\fastpath.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\faststep.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\initial_states.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\kernels.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\models.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\noise.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\noise_categorical.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\reporting.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\results.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\sampling.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\stim_dem.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\trace_stats.py",
+    "A:\\dev\\mcmc4qec\\src\\mcmc4qec\\union_find_decoders.py"
+  ],
+  "scientific_diagnostics_recomputed": false,
+  "jsonl_reread": false,
+  "raw_payloads_reaudited": false,
+  "seed_level_union_evaluated": false,
+  "paired_differences_evaluated": false,
+  "strata_96_evaluated": false,
+  "warning": "Summary marginal counts do not identify seed-level unions, correlations, paired differences, or 96/96 initialization strata. Saved diagnostics are descriptive, not convergence, ergodicity, bias or coverage guarantees. JSONL/NPZ/native/ACF are not rechecked. Historical consumed-input hashes were not recorded by the original analysis."
+}

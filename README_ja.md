@@ -45,10 +45,11 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
 | --- | --- |
 | 符号 | toric、surface、asymmetric toric、Hamming HGP、BB72/108/144、Steane、連接 Steane、開境界tile |
 | ノイズ | ビット反転、位相反転、脱分極、現象論的なデータ・測定誤り、Stim DEM、物理回路の故障 |
-| デコーダー | PyMatching、BP-OSD、自作デコーダー |
+| デコーダー | PyMatching、BP-OSD、BP-LSD（order 0）、BeliefFind、Union-Find、自作デコーダー |
 | 計算手法 | 全列挙 `exact`、直接 MC `direct_mc`、BAR `estimate_logical_error`、失敗条件付き MCMC `sample_faulty` |
 
 依存パッケージは、符号生成用の `codes`、デコーダー用の `matching`・`bposd`、Stim 用の `stim` を選んで追加できます。
+`bposd` extraにはBP-LSD・BeliefFind・Union-Findが使う`ldpc`も含まれ、[decoderの比較例と制約](docs/wp/basic_decoders_usage_2026-10-18_ja.md)で利用方法を確認できます。
 作図には `plot`、notebook の実行には `notebooks` を使います。
 追加パッケージなしで試す場合は、`python -m pip install -e .` でインストールし、`python examples/steane_exact.py --quick` を実行してください。
 
@@ -68,6 +69,11 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
 `sample_faulty` のサンプルだけから、論理誤り率そのものは求められません。
 
 統計誤差や良好な MCMC 診断値だけで、収束や区間の名目被覆率が保証されるわけではありません。
+tile72/288のcode-capacity検証では、bit-flip・depolarizingの主4条件を完了し、低ノイズの校正と独立計時を継続しています。
+検証した設定には混合診断が悪い例や被覆不足があり、この実験的実装によって一般に信頼できる95%区間や直接MCに対する速度優位が確立したとは扱いません。
+保存済みのBP-OSD入力でWindowsとLinuxの論理失敗判定が異なる例があるため、BARのladderとreference計算ではdecoder設定・目標prior・native環境を固定してください。
+[tile検証報告](docs/wp/tile_validation_report_2026-10-18_ja.md)、[現在の検証状況](docs/wp/tile_validation_status_2026-10-17_ja.md)、[追加decoderの検証記録](docs/wp/basic_decoders_validation_2026-10-18_ja.md)を参照してください。
+追加decoderのテストは接続契約と選択した小問題を対象としており、論理誤り率・BAR被覆・比較速度の校正は未実施です。
 検証の条件と限界は、[BAR の感度検証](docs/bar_sensitivity_ja.md)、[性能記録](docs/performance_ja.md)、[回路モデルの検証記録](docs/circuit_baseline_ja.md)を参照してください。
 
 ## ライセンスと引用

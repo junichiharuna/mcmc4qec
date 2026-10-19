@@ -1,0 +1,123 @@
+# 主4条件の保存済み混合診断比較：集計小仕様
+
+## 1. 目的と範囲
+
+主校正4caseの全cohort混合後処理が終端・回収・独立照合を通過した後、保存済みinventory summaryから日本語の比較報告を作る。
+対象はtile72/288のbit-flip・depolarizingであり、低ノイズ本校正や独立BAR計時の診断へ結果を流用しない。
+既存の[混合一覧仕様](tile_mixing_inventory_spec_2026-10-18_ja.md)、[実行仕様](tile_mixing_execution_spec_2026-10-18_ja.md)、[正式回収仕様](data_tile_validation_2026-10-17/mixing_full_collection_spec_v1_ja.md)を再利用する。
+2026-10-18の本仕様作成中にcase0のfull job 265271のF/exit0と正式回収照合が報告されたが、全4caseの受理はまだ揃っておらず科学比較は未実施である。
+case0の回収verificationは`data_tile_validation_2026-10-17/mixing_execution_full_case0_evidence_v1/verification.json`、固定SHAは`35a1d9353c1d0b467b1bb8f86fd51060b4aa8c99402e443c989dd03b5daab926`である。
+単独のsummaryやPBS正常終了だけを受理済み科学結果として採用しない。
+本作業は仕様保存までで、変換コード・受入・本番集計は未実施である。
+
+ACF、IAT、ESS、R-hat、BAR、bootstrap、decoder、raw trace監査、native probeを再実行しない。
+今回の必須報告はsummaryに保存された全kernel/init/window/rung/observableの記述比較だけとする。
+大きいrows.jsonlは回収済みhashと証拠へのリンクで再現用に保持し、本集計では再走査・再hashしない。
+新しいseed単位のJSONL集計や追加PBS jobは今回の範囲に加えない。
+
+## 2. 受理する入力と結合
+
+全4caseについて、固定collectorの成功verification、親の実submission receipt、full manifest・dry-run・execution intent・execution summary・inventory/summary.jsonを指定する。
+既存collectorが確認したPBS F/exit0、run_count=1、実script・host・資源、prepare/source/core/Python、upstream audited-resultsとanalysis archiveの結合を、保存されたverificationのbyte SHAから追跡する。
+固定full preparation、各caseの回収verification、collector source、元科学source、報告変換sourceのpath/hashを出力に記録する。
+入力の受理pinは実成果物だけから親が固定し、未完了caseの値やhashを仮置きしない。
+case集合が厳密に0,1,2,3でない、capacity modeである、groupsが768でない、replicatesが192でない場合には正式比較を発行しない。
+転送後のローカルsummary bytesをverificationのinventory/summary.json hashへ、execution summary内のinventory_summary_sha256へ結合する。
+inventoryのrows_sha256、execution summaryのrows_sha256、回収verificationのinventory/rows.jsonl hashとsizeを相互照合するが、これは保存receiptの整合確認であり、現在のJSONL全bytesを再検査したという主張ではない。
+既存collectorのvalidate_reportとexpected_diagnosticsの契約を再利用し、全予定cohort key、各192 replicate ID、各statusの分母、scalar/vector/sectorの予定要素数を維持する。
+production manifestとanalysis contextは、受理済み保存snapshotまたはそれらとbyte SHAで結合した入力から読み、現行make_planによる新しい値への置換は行わない。
+inventory_complete=falseは記録通り保持し、出力を出せることと診断が完全・良好であることを別のfieldにする。
+入力の構造不正・hash不一致・予定identity欠落は検証失敗であり、科学的なmissing値へ変換して受理しない。
+開始時と出力直前に、実際に読んだ小さい入力・実使用sourceの解決先とbyte SHAを再照合する。
+既存production・bundle・回収rootを書き換えず、新規排他directoryへだけ出力し、途中失敗時に成功summaryを残さない。
+
+## 3. 保存summaryから比較できる項目
+
+主keyはkind/case/kernel/init/chains/burn/samples/rung/observableであり、replicate分母はすべて192である。
+物理観測量はweight、syndrome_weight、bit-flipのlogical_bit_0..7、depolarizingのlogical_bit_0..15を全rungで保持する。
+Bennettはcoarse/fineとedge番号をobservableに保持し、同じedgeの両端rungを別の行にする。
+物理観測量やsectorにladder・BAR誤差法の次元を追加して重複計上しない。
+rung番号に対応する物理pは受理済みproduction manifestから補足し、target rungも同じmanifestから判定する。
+各行にはstatus_countsのstored、missing_recorded_sampling_failure、missing_unexpectedを0件も含めて明示し、合計192を確認する。
+undefined、nonfinite、stored_missing_fieldsと、保存screenのundefined/high_rhat/low_ess/flaggedは別の列に保存する。
+これらの件数は重なり得るため合計して失敗seed数を作らない。
+保存screenはR-hat>1.01、いずれかのchain ESS<100、R-hatまたはchain ESSが未定義、という既存定義をそのまま使い、閾値を再設定しない。
+inventory側undefinedは保存screenに加えmissing/null/nonfiniteの検出を含むので、保存screenのundefinedと同義にしない。
+保存flagの分母表示は192とし、missingのためflag自体が存在しない行数も別記して「警告なし」へ数えない。
+
+scalarのmean/iat/ess/iat_mcse/cross_chain_se/rhatについて、expected_values、finite_values、null_values、nonfinite_values、sum、min、max、mean、available_only_meanを保存値のまま出す。
+chain_means/chain_iat/chain_essとsector_transitions/unique_sectorsは192×chains要素の集計であり、192 seedのscalar統計と区別する。
+vectorのsummaryはchain位置をまとめた周辺集計であり、chainごとの位置別統計や各replicateの最小chain ESSへ読み替えない。
+主meanがnullならnullのまま示し、available_only_meanを主meanの代替として無注記で表示しない。
+保存sumのoverflowによるnullも欠測扱いへ丸めず、保存値と有限要素数を併記する。
+IATなどの保存最小・最大値は有限値の範囲であり、欠測を含む全seedの範囲や信頼区間ではない。
+sector_transitionsは保存window内のchainごとの遷移回数、unique_sectorsはchainごとの訪問種類数であり、全chainでの訪問集合の和集合ではない。
+sector遷移が見えたことを失敗支持全体の連結性や十分な混合の証明としない。
+
+## 4. 比較表と解釈
+
+全予定条件の表を機械可読JSONとCSVへ保存し、日本語本文では次の固定切り口を用いる。
+第1表は4caseの実job・受理証拠・全768group・192seed・inventory_complete・failed_sampling・欠測の一覧とする。
+第2表は最大chain・burn6000・最長保存長を固定し、全2kernel×2initについて、targetと全rungのweight/syndrome/logical bit/Bennett別の保存screen件数を並べる。
+第2表の「全rung」はrungごとの行を並べる意味であり、各seedのflagの和集合ではない。
+第3表は同じ条件内で4chain対最大chain、burn600対6000、各保存長を対比し、一度に一つの設定軸だけを変える。
+第4表は同じrung/window/chainsのsector遷移・unique数をkernel/init間で対比し、192×chainsの分母とnull/nonfiniteを併記する。
+coarse/fine Bennettの対比はedgeの物理p両端を表示し、同じedge番号だけで異なるladderの値を対応させない。
+異なるcase間では観測量の物理尺度、bit数、rung数、最長保存長、chain数が異なるので、未正規化IAT/ESS/重みの優劣を一つの順位へまとめない。
+複数windowは同じtraceを再利用し、4chainは最大chainのprefixであるため、表の設定数を独立試行数として扱わない。
+kernel/init間の同じreplicate番号は設計上の対応番号であり、同じ初期状態・同じ乱数列を共有した比較とは主張しない。
+本報告では新しい差の信頼区間、有意差検定、多重比較後の設定選択や推奨設定決定を行わない。
+
+## 5. 既存BAR報告との違いと復元不能な量
+
+[主校正報告](tile_validation_report_2026-10-18_ja.md)のBAR flagは、選択ladderに含まれる全rungの物理観測量と当該ladderのBennett両端診断をseed単位でORした既存解析値である。
+本inventory summaryのstored_flag_countsは単一observable・単一rung・単一windowの周辺件数である。
+したがってtarget weightのflagが少なくてもBAR flagが多いことと矛盾せず、両者の件数を一致させるための変更はしない。
+既存の受理済み主BAR再集計が保存した全192のseed-level flagsは、その出典と定義を明示して引用できるが、本summaryから独立再現したとはしない。
+全rung/observableのflagのseed単位和集合、複数flagの交差、数値のseed対応差、相関、median/quantile、zero-sector-transitionのseed数は周辺summaryから一般には復元できない。
+depolarizing logical初期化のX/Z basis別96/96層別も、このsummaryにはreplicateごとの値が無いため作らない。
+既存の主BAR96/96層別は別の受理済み再集計として参照し、本inventoryの観測量別層別が得られたとは扱わない。
+これらの不足は未評価として記載し、件数の和、平均の差、全体meanから推測して埋めない。
+収束、既約性、支持の連結性、詳細釣合い、bias、名目95%被覆の保証は本記述表から導かない。
+保存数値を再計算しないため、元解析にhistorical consumed-input hashが無い制約と、今回ACF/NPZ/raw状態/nativeを再監査しない範囲を報告へ引き継ぐ。
+
+## 6. 親用報告の見出し案と成果物
+
+日本語本文の見出しは「受理範囲と分母」「target観測量と全rung/Bennettの違い」「kernel・初期化の比較」「chain数・burn-in・保存長の比較」「logical sector移動」「BAR精度・被覆報告との対応と限界」とする。
+本文は全予定表へのリンクを付け、極端な行だけの抜粋を全体結果と誤認させない。
+新規出力にはreport_ja.md、cohorts.json、cohorts.csv、provenance.jsonを保存する。
+固定windowの全rung/observable、target weightの全window、固定windowのsectorについて、それぞれrung_observable_comparison.csv、controls_target_weight.csv、sector_comparison.csvを追加し、全表からの固定条件抽出と明示する。
+本文のobservable family別flag件数範囲は各cohortの保存件数の最小〜最大であり、seed単位の和集合ではなく、併記するmissing診断行数の和も独立seed数ではない。
+provenanceには全4caseの実jobと受理pin、入力/sourceの開始・終端照合、JSONLの既存回収path/bytes/SHA、falseの再計算scopeを含める。
+実行済みwrapperのCPU/wall/RSSを載せる場合は混合後処理の実測と明記し、MCMC効率・time-to-accuracyや科学計算の総費用へ読み替えない。
+inventoryに残る歴史的なproduction_cpu_io_measured=falseを上書きせず、wrapperで別途測った値とのscope差を説明する。
+新実装が必要な場合は新規の報告変換1moduleと専用testに限定し、既存inventory・科学解析・collector・主報告の受理済みsourceを変更しない。
+
+## 7. 受入案
+
+受入は小さいsynthetic summaryと固定契約のfixtureだけで行い、巨大JSONL・raw trace・本番remoteを読まない。
+正常fixtureで全予定keyと各192 ID、scalar192・vector/sector192×chains、全status列と保存数値が変換後も一致することを確認する。
+未完了case、capacity、case重複、cohort欠落/重複、replicate欠落/重複、分母不一致、hash/source/receipt結合不一致は正式出力前に拒否する。
+missing failure、missing unexpected、stored null、nonfinite、screen undefined、inventory undefinedが混在するfixtureで、分母を減らさず別列を保つことを確認する。
+inventory_complete=falseでも元の状態を保持できる一方、構造不正を同じ状態へ変換して通さないことを確認する。
+sectorの同一window/rungを物理observable数だけ複製せず、Bennett両端とcoarse/fineの識別を保持することを確認する。
+summaryに周辺件数だけを与えたfixtureで、seed-level OR、対応差、96/96層別を生成せず未評価を明記することを確認する。
+主mean=nullかつavailable_only_meanが有限、sum=null、0件flag、欠けたstatusの0補完を含めて、保存値の意味を保つことを確認する。
+小入力または実使用sourceの途中byte変更・同じbytesの解決先変更、既存出力rootを拒否し、成功reportが残らないことを確認する。
+JSONLを読もうとすると失敗するfixtureと科学再計算関数を呼ぶと失敗するfixtureで、今回のmetadata/summaryだけの範囲を確認する。
+受入後に独立レビューを受け、全4caseの実受理pinが揃った時点でのみ正式比較を実行する。
+
+## 8. 変換APIと入力形式
+
+新moduleは`cluster_scripts/tile_mixing_comparison_report.py`、専用受入は`tests/test_tile_mixing_comparison_report.py`とする。
+CLIは`--config PATH --config-sha256 SHA --output NEW_DIRECTORY`とし、configを外部pinした同じbytesから解釈する。
+configはschema=1、collector・preparation・production_plan・analysis_contextをそれぞれpath/sha256で指定し、casesにcase番号・回収root・verificationのpath/sha256を全4件指定する。
+analysis_contextはfull snapshotの原analysis_manifest.json pathのSHAとinventory input_sha256へ結び、inventoryのcontext digest、sampling manifest/runtime、保存analysis source SHAも照合する。
+collectorは固定sourceをhash検査した後でimportし、既存validate_report/validate_pbsを使う。
+回収root内ではFILESのうちrows.jsonlを除く小さいmetadata・summary・logのhash/sizeを保存verificationへ照合し、summaryだけの独立入力で結合を省略しない。
+rows.jsonlについては実ファイルを開かず、保存verificationのsize/hash/pathを参照として出力する。
+formal preparation・親receipt・実job・manifest・dry-run・execution intent・terminal・upstream hashの相互結合を確認し、受理済みcollectorによる元source/native確認は保存証拠として引用する。
+報告の実行sourceは新moduleと既存inventoryのローカル依存sourceを始終固定するが、元PBSと現在の報告環境が同一であるとは要求・主張しない。
+source追加も検出するため、ローカルcluster_scriptsのPython sourceとcore packageのPython source全体を保守的に始終固定する。
+stored診断が0件で保存flag辞書が空の場合は各flag件数を0として表示するが、flags_absent=192とstored=0を必ず保持し、警告なしとは解釈しない。
+sectorの保存flag辞書は空であり、not_applicableとflags_absent=nullを表示して診断未取得と区別する。

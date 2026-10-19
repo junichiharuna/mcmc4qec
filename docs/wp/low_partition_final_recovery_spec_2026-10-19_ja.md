@@ -1,0 +1,39 @@
+# 分割sampling final reportの回収
+
+実assembly・prepare・preflight・execute・sealの記録を既存入口で再構成してから、受理済みreportと14件の実行証拠を回収する。
+未完了job、未受理seal、応答不明のexecuteからは回収を開始しない。
+回収は読み取り専用であり、qsub・native probe・数値再計算・raw trace走査は行わない。
+
+## remote snapshot
+
+対象はaccepted.json、sealで固定したreport・completion・submission・selector/provenance terminal、control.json、controlが指すconfig.json、report.sh/out/err、submission-intent.json、qsub-response.json、execution.jsonの14件である。
+root・config path・control SHA・実submission・実seal内容はlocalで検証済みの記録から渡す。
+現在のPBSはF・Exit_status 0・run_count 1であることを要求し、保存済みselector terminalの当該jobと照合する。
+全ファイルを通常ファイル・aliasなしとして読み、hash・byte数と前後のidentityを固定する。
+reportは512 MiB、個別metadataは32 MiB、metadata総量は64 MiBを回収処理の上限とし、超過時は切り詰めず拒否する。
+上限は研究データの変更や選別ではなく、回収処理の初回実行制限である。
+reportはstreaming hashのみを取得し、JSON解析やbase64埋込みは行わない。
+metadataはbase64で返し、reportだけを後続scpで取得する。
+submissionとintent・qsub response・script、controlとconfig、compute completionとsealのidentity・全cohort件数を照合する。
+failure.jsonが存在する場合は拒否する。
+全hash・identityと実PBSを再確認してsnapshotを返す。
+
+## local回収
+
+新規出力先だけを使用し、14件の正確なpath集合と外部report SHAを照合してから保存する。
+metadataはbase64を厳密にdecodeし、全ファイルのhashとbyte数を確認する。
+取得中にlocal authority・script・intentが変化した場合は未受理とする。
+scpの失敗やhash不一致では途中ファイルとtransport記録を残し、既存出力へ自動再実行しない。
+collection.jsonは全検査成功後だけ作る。
+回収成功はseal時点のreport bytesと実行証拠の保存を意味し、数値レビューやrawデータ全回収の完了とは区別する。
+
+## 2026-10-19の検証
+
+remote helperのWindows受入は24件・1.96秒、local入口は22件・2.18秒、Linuxの両者合計は46件・0.54秒で成功した。
+local入口の受入では実形式のassemblyと全phaseの記録を再構成し、欠損seal・改変seal・不正artifact集合・転送中のauthority変更・scp失敗・割込みを確認した。
+Linux受入ではPBSと転送を合成しており、本番cohortの成功や実通信の成功を代替しない。
+別途、完了済みC2T2の実remote rootとjob265315を読み取り、14件すべてのSHA・byte数・metadata bytesが既存の回収証拠と一致した。
+127,140,854 byteのreportはstreaming hashで照合し、再計算や再転送は行っていない。
+この実データ確認は共通readerの確認であり、分割samplingの残り9条件に対するlocal authority再構成と本番転送は未実施である。
+実データ確認のverification.jsonのSHA256は`a0d656265f1e57598372fda3233f86312a560daf930009bda9afeda55463d078`である。
+source archiveのmanifestは`024bb8fc40a775c59dde8d1532779047f7ee35162dd4a7a7002e9543a5419cbe`、Linux受入記録は`0974338274f335ca7ac34cc187d5578adca619166d3ff2aa36a5436a57315fe0`で固定した。

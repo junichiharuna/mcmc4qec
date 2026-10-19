@@ -1,0 +1,34 @@
+# 低ノイズ解析archiveの回収仕様
+
+sampling archiveとは別に、固定本番manifest・analysis context・全予定groupの解析artifactを保存する。
+groupは`(case,target,kernel,initial,replicate)`の5座標で、各groupのJSON・NPZ・done markerを全て残す。
+失敗や診断未定義を含むartifactを除外しない。
+本仕様は保存bytesと予定集合の検査であり、行の再集計・ACF・BAR・復号を実行しない。
+
+外部固定のsampling file indexから、各groupが参照する全rung・chainと共有anchorのmarker hashを組み立てる。
+解析markerの`analysis` digest、group座標、`input_artifact_markers`全集合がこの期待値と一致することを確認する。
+sampling index自体も全予定sampling/anchorの3ファイル組とmanifestを含むことを確認し、部分集合や余分なtaskを拒否する。
+このindexへの連結はsampling payloadの再走査ではなく、別途受理したsampling indexを境界とする。
+
+archiveには`manifest.json`、`analysis_manifest.json`、`sampling-input-sha256.json`と全解析artifactを入れる。
+最後のindexは梱包時に加えるmetadataであり、元の計算directoryに同名fileが存在したとは主張しない。
+解析payloadとmanifest/contextのhashは正式最終reportから抽出し、sampling indexのhashを加えた外部file indexに固定する。
+回収検査はmanifest・context・sampling index・file index・archiveの外部SHAを必須とし、streamで全memberを検査して展開しない。
+前後の入力identityと小さい入力bytesを照合し、欠落・余分なfile・重複・別group・別sampling入力・改変を拒否する。
+
+exportはPBS割当内で新規directoryへ行い、外部固定indexとの一致を圧縮前後に確認する。
+sourceの全解析artifactとmetadataは読取り専用とし、圧縮中のfile追加・payload変更・実行source変更も検出する。
+完了記録はarchive検証後だけ保存し、失敗出力を保持して自動再実行しない。
+PBSの元job・実exportの終端、source/Python binding、qsub最大2ノードは投入・正式受理手順で別途結び付ける。
+
+受入は小さい完全archive、失敗artifactの保持、正しい全group/input連結、欠落・改変・別条件・別context・別sampling index・余分なfile・重複、入力変更検出を含む。
+exportの受入ではPBSのない実行・既存出力・元dataの改変を拒否し、外部indexとのround tripを確認する。
+本校正用・sampling用の既存検証器や投入済みbundleは変更せず、別moduleと配置を用いる。
+# PBS workerの受入条件
+
+解析exportはsampling exportと別配置・別completionを用い、既存の固定sampling workerは変更しない。
+metadata gateでは解析contextとsampling indexも固定source一覧に含め、実行前後に既存の最終比較受理・PBS終端検査と合わせて照合する。
+workerは自身のPBS job、投入intent、実行Python、固定stageを検査し、既存の解析archive検証に成功した場合だけcompletionを作る。
+再実行、別脚本、途中のstageまたはmetadata変更、受理済みindexと異なるpayloadはcompletionを残さず拒否する。
+これは回収用workerであり、科学計算の再実行やPBS終端の正式受理、ローカル回収の代わりにはならない。
+

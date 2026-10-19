@@ -1,0 +1,37 @@
+{
+  "observed_utc": "2026-10-18T07:42:30.679093+00:00",
+  "job_id": "265263.node-PRISM",
+  "job": {
+    "Job_Name": "m4q_bartime",
+    "Job_Owner": "user@cpucluster-prism",
+    "job_state": "F",
+    "Exit_status": 0,
+    "run_count": 1,
+    "Resource_List": {
+      "mem": "32gb",
+      "ncpus": 96,
+      "nodect": 1,
+      "place": "free",
+      "select": "1:ncpus=96:mem=32gb",
+      "walltime": "00:30:00"
+    },
+    "resources_used": {
+      "cpupercent": 6694,
+      "cput": "02:09:22",
+      "mem": "8691628kb",
+      "ncpus": 96,
+      "vmem": "43042328kb",
+      "walltime": "00:01:31"
+    },
+    "ctime": "Sun Oct 18 16:40:22 2026",
+    "stime": "Sun Oct 18 16:40:22 2026",
+    "mtime": "Sun Oct 18 16:41:55 2026",
+    "obittime": "Sun Oct 18 16:41:55 2026",
+    "exec_host": "node012/0*96",
+    "exec_vnode": "(node012:ncpus=96:mem=33554432kb)",
+    "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0/timing.sh",
+    "comment": "Job run at Sun Oct 18 at 16:40 on (node012:ncpus=96:mem=33554432kb) and finished",
+    "Output_Path": "cpucluster-prism:/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0/timing.out",
+    "Error_Path": "cpucluster-prism:/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0/timing.err"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "schema": "main-trace-audit-completion-v1",
+  "all_four_full_jobs_completed": true,
+  "cases": [
+    {
+      "case": 0,
+      "capacity": {
+        "job": "265222.node-PRISM",
+        "groups": 96,
+        "replicates": 24,
+        "phase_wall_seconds": 10.789070796221495,
+        "pbs_walltime": "00:00:14",
+        "tasks": 10752,
+        "failed_sampling_tasks": 0,
+        "redecoded_checkpoints": 720384,
+        "summary_sha256": "8caafae6be046486e25ca68d2fbdc5ebe34c0561cd467964c5975e27c462dd15",
+        "recovery_sha256": "da990a545e7ff185a5e43fe6c2c2a484bb4123ce4b46298a7cbf4f9e8dc68098"
+      },
+      "full": {
+        "job": "265223.node-PRISM",
+        "groups": 768,
+        "replicates": 192,
+        "phase_wall_seconds": 72.62401026207954,
+        "pbs_walltime": "00:01:15",
+        "tasks": 86016,
+        "failed_sampling_tasks": 0,
+        "redecoded_checkpoints": 5763072,
+        "summary_sha256": "64495828ec89410e0bc813441b22c6f69d0491fc65fa022e936becd167c847f0",
+        "recovery_sha256": "878d301a4606b0feb0605a655b6610d1fa5681127c50086392488beeb93f33be"
+      }
+    },
+    {
+      "case": 1,
+      "capacity": {
+        "job": "265224.node-PRISM",
+        "groups": 96,
+        "replicates": 24,
+        "phase_wall_seconds": 7.802762617357075,
+        "pbs_walltime": "00:00:10",
+        "tasks": 3840,
+        "failed_sampling_tasks": 0,
+        "redecoded_checkpoints": 72960,
+        "summary_sha256": "a3cf9009cf70afa514603d795737c1cedd7623e1b68d62b1b3c4ee3ea6bc3daa",
+        "recovery_sha256": "f5f138e175984275e937cbfa6d8c08a8667ce50c65d2f6f53cb58b39362f8aa5"
+      },
+      "full": {
+        "job": "265225.node-PRISM",
+        "groups": 768,
+        "replicates": 192,
+        "phase_wall_seconds": 48.88033557217568,
+        "pbs_walltime": "00:00:51",
+        "tasks": 30720,
+        "failed_sampling_tasks": 0,
+        "redecoded_checkpoints": 583680,
+        "summary_sha256": "e107250df0400149b148f81de1a3985dd1d5aa3b9b14ca60724fedb1af155542",
+        "recovery_sha256": "a9db59553ce61de192d4975dc2a00ee4d60568fcf10979b98f124fcf71834700"
+      }
+    },
+    {
+      "case": 2,
+      "capacity": {
+        "job": "265226.node-PRISM",
+        "groups": 96,
+        "replicates": 24,
+        "phase_wall_seconds": 4.781198271550238,
+        "pbs_walltime": "00:00:07",
+        "tasks": 5376,
+        "failed_sampling_tasks": 0,
+        "redecoded_checkpoints": 102144,
+        "summary_sha256": "405067249e6e2d1a474fec74cfa7b74ea8e4e31b6f75ba81d286f59c40d686a0",
+        "recovery_sha256": "4d2ae9bb9afcd6734e52d60733e1690a12d7bd289e6ea33db5c6d553ef7b1470"
+      },
+      "full": {
+        "job": "265228.node-PRISM",
+        "groups": 768,
+        "replicates": 192,
+        "phase_wall_seconds": 23.389858340844512,
+        "pbs_walltime": "00:00:26",
+        "tasks": 43008,
+        "failed_sampling_tasks": 0,
+        "redecoded_checkpoints": 817152,
+        "summary_sha256": "ab0fe7fb011975d70d45a3a1dd3ba9b33bb1ddbbca9f7bcffcfd32910ce0f915",
+        "recovery_sha256": "6786ecd7a106aab6e1fb6c19a6c9881bea705d37ab6dd35ceca11e706c5e5406"
+      }
+    },
+    {
+      "case": 3,
+      "capacity": {
+        "job": "265229.node-PRISM",
+        "groups": 96,
+        "replicates": 24,
+        "phase_wall_seconds": 12.236065649427474,
+        "pbs_walltime": "00:00:15",
+        "tasks": 3840,
+        "failed_sampling_tasks": 0,
+        "redecoded_checkpoints": 72960,
+        "summary_sha256": "654840b8d9fe5f258c8ec501a7b15e885488efc72ee65719f02537d1e56121bb",
+        "recovery_sha256": "884bce6ca8688789c1c5e4d85b85d72291e1ac6359674e3462134c1ff6c66015"
+      },
+      "full": {
+        "job": "265230.node-PRISM",
+        "groups": 768,
+        "replicates": 192,
+        "phase_wall_seconds": 79.99075551424176,
+        "pbs_walltime": "00:01:22",
+        "tasks": 30720,
+        "failed_sampling_tasks": 0,
+        "redecoded_checkpoints": 583680,
+        "summary_sha256": "a1da5efc27675882c3ba4107a91b8a317150c8a368741dd3a25807d064d732d7",
+        "recovery_sha256": "f785891852449a12d1b3b8042ae4807cb05cac2542c8c05ac7efaac38cb5bd5f"
+      }
+    }
+  ],
+  "full_tasks": 190464,
+  "full_redecoded_checkpoints": 7747584,
+  "scope": "Exact recovered summary/native/job bindings and planned group identities checked. Current full group payload verification is delegated to the subsequent audited-results adapter. Compact trace checks and saved initial/checkpoint decoding use the same decoder; no unsaved-state replay, independent decoder proof, mixing proof or coverage guarantee."
+}

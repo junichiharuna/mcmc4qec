@@ -19,7 +19,9 @@ from .codes import (make_toric_code, make_surface_code, make_asymmetric_toric_co
                     make_bb_code_108, make_bb_code_144, make_steane_code,
                     concatenate_css, make_concatenated_steane_code, make_tile_code)
 from .decoders import (mwpm_decoder, bposd_decoder, depolarizing_mwpm_decoder,
-                       depolarizing_bposd_decoder)
+                       depolarizing_bposd_decoder, bplsd_decoder, depolarizing_bplsd_decoder,
+                       belief_find_decoder, depolarizing_belief_find_decoder,
+                       union_find_decoder, depolarizing_union_find_decoder)
 from .convergence import evaluate_convergence
 from .initial_states import (minimum_weight_coset_representative, logical_representatives,
                              minimum_weight_initial_state, maximum_weight_initial_state,
@@ -41,6 +43,8 @@ __all__ = ["BinaryLinearModel", "CSSCode", "CallableDecoder", "CallableFailure",
            "make_hgp_hamming", "make_bb_code", "make_bb_code_72", "make_bb_code_108",
            "make_bb_code_144", "make_steane_code", "concatenate_css", "make_concatenated_steane_code", "make_tile_code",
            "mwpm_decoder", "bposd_decoder", "depolarizing_mwpm_decoder", "depolarizing_bposd_decoder",
+           "bplsd_decoder", "depolarizing_bplsd_decoder", "belief_find_decoder",
+           "depolarizing_belief_find_decoder", "union_find_decoder", "depolarizing_union_find_decoder",
            "evaluate_convergence", "minimum_weight_coset_representative", "logical_representatives",
            "minimum_weight_initial_state", "maximum_weight_initial_state",
            "random_logical_sector_initial_state", "observable_sector_initial_state",

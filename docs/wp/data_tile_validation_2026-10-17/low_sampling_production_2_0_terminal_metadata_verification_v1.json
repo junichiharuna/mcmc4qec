@@ -1,0 +1,351 @@
+{
+  "capacity": false,
+  "first_observation": {
+    "full_payload_scan": false,
+    "job": "265259.node-PRISM",
+    "local_helper_sha256": "2c7e6ea574ebd51391275dac4b52fa750094713bbbe6160404593184098c1392",
+    "manifest": "132fd5122718ed8b719f0f15d653c25615197a917239236d0ab1d554f3d30d6d",
+    "npz_read": false,
+    "observed_utc": "2026-10-18T09:29:54.875631+00:00",
+    "pbs": {
+      "Exit_status": 0,
+      "Resource_List": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "09:30:00"
+      },
+      "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/production-2-0/low-noise.sh",
+      "exec_host": "node011/0*96",
+      "exec_vnode": "(node011:ncpus=96:mem=33554432kb)",
+      "job_state": "F",
+      "mtime": "Sun Oct 18 18:28:22 2026",
+      "obittime": "Sun Oct 18 18:28:22 2026",
+      "resources_used": {
+        "cpupercent": 9398,
+        "cput": "226:25:30",
+        "mem": "9605584kb",
+        "ncpus": 96,
+        "vmem": "40811040kb",
+        "walltime": "02:25:11"
+      },
+      "run_count": 1,
+      "stime": "Sun Oct 18 16:03:09 2026"
+    },
+    "phases": {
+      "anchors": {
+        "completion_marker_count": 192,
+        "execution_intent_present": true,
+        "execution_intent_sha256": "2cee098273b1e2fa12dd028cb0fe3f55aa08f83af7778cb8736b620359b2f2ac",
+        "native_preflight_present": true,
+        "native_preflight_sha256": "0a82b179887db684755b8d9872b8b4a8f2ca48887478eb5988e2aaa117760625",
+        "saved_compute_native_profile_matches": true,
+        "selected_metadata_checks": [
+          {
+            "json_sha256": "b41d7f8073f2b6f6671e11ca81b5c04429de183efaefee2245686b08b16ffa1c",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "json_sha256": "b74e2d50f0f5adfd6d2a38c945765f93f7ad1f6bdba49b3a30218ed936898f92",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              26,
+              0,
+              0
+            ]
+          },
+          {
+            "json_sha256": "39c96c6bb5b0bd5305141ac623dafa0df59a35601654c86b248a4f383161ed4e",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              5,
+              0,
+              0
+            ]
+          }
+        ],
+        "summary_metadata": {
+          "failed": 0,
+          "manifest": "132fd5122718ed8b719f0f15d653c25615197a917239236d0ab1d554f3d30d6d",
+          "native_preflight_sha256": "0a82b179887db684755b8d9872b8b4a8f2ca48887478eb5988e2aaa117760625",
+          "phase": "anchors",
+          "phase_wall_seconds": 36.23126069735736,
+          "tasks": 192,
+          "warning": "Fixed-prior low-noise study. All failed tasks retained. Logical initialization is not stationary. Diagnostics, support checks and setting agreement do not certify convergence, accuracy or coverage. Capacity samples never enter production."
+        },
+        "summary_present": true,
+        "summary_sha256": "01aa15a6deb90075c917c87f95643b5daa86e34467b906b148ca6e9adbf001ae",
+        "summary_task_census_checked": true
+      },
+      "sample": {
+        "completion_marker_count": 61440,
+        "execution_intent_present": true,
+        "execution_intent_sha256": "559a4376be76abae40710f74def20cabead79b64ba85c0661dd631b9725d6aa8",
+        "native_preflight_present": true,
+        "native_preflight_sha256": "2d42cd0c04a2359a25f04c5187343fdf07e3d69dda4bdd6689c43fa77fa109c0",
+        "saved_compute_native_profile_matches": true,
+        "selected_metadata_checks": [
+          {
+            "json_sha256": "195028165651dddf3ed1cd2830ce934dfaa09e3992d77816e6ce1224868a6395",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              6,
+              1
+            ]
+          },
+          {
+            "json_sha256": "4caa8690a0324e86da0088cb88adb978d2df4e8eb2a05a36b1815ba047a305bc",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              6,
+              6
+            ]
+          },
+          {
+            "json_sha256": "3f94fed6feacf8c1964355ebdab92cd3731219ba4ba1ab456017d9436afc15f6",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              9,
+              7
+            ]
+          }
+        ],
+        "summary_metadata": {
+          "failed": 0,
+          "manifest": "132fd5122718ed8b719f0f15d653c25615197a917239236d0ab1d554f3d30d6d",
+          "native_preflight_sha256": "2d42cd0c04a2359a25f04c5187343fdf07e3d69dda4bdd6689c43fa77fa109c0",
+          "phase": "sample",
+          "phase_wall_seconds": 8670.505442367867,
+          "tasks": 61440,
+          "warning": "Fixed-prior low-noise study. All failed tasks retained. Logical initialization is not stationary. Diagnostics, support checks and setting agreement do not certify convergence, accuracy or coverage. Capacity samples never enter production."
+        },
+        "summary_present": true,
+        "summary_sha256": "53b25b0779abd86de1805c1230703c0569951720c567efef05261ea8d5b6f3fb",
+        "summary_task_census_checked": true
+      }
+    },
+    "qsub_executed": false,
+    "read_only": true,
+    "receipt_script_plan_binding_verified": true,
+    "remote_seconds": 0.5766841983422637,
+    "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/production-2-0",
+    "scope": "Metadata-only running-job observation. At most three JSON metadata records per phase checked; no full artifact audit or scientific inference."
+  },
+  "full_artifact_hash_audit": false,
+  "full_summary_task_census_checked": true,
+  "input_sha256": {
+    "low_sampling_production_2_0_preparation_v1.json": "4fd7423467cc406e5ceb5486ac4b5de4b14a91cacfd69c881242c7ab6fbee38a",
+    "low_sampling_production_2_0_submission_v1_stdout.txt": "0fa04699b3d5a55f62cfa468a23b50ea66514acfc3aa245fb56f50ff4094cc2a",
+    "observe_low_sampling_single_v1.py": "2c7e6ea574ebd51391275dac4b52fa750094713bbbe6160404593184098c1392",
+    "verify_low_sampling_2_0_terminal_v1.py": "d934efbaccdd15466d06c938a13d61b3c1d9784f3c16bf9dbe2e2f383acf6f4a"
+  },
+  "job": "265259.node-PRISM",
+  "last_observation": {
+    "full_payload_scan": false,
+    "job": "265259.node-PRISM",
+    "local_helper_sha256": "2c7e6ea574ebd51391275dac4b52fa750094713bbbe6160404593184098c1392",
+    "manifest": "132fd5122718ed8b719f0f15d653c25615197a917239236d0ab1d554f3d30d6d",
+    "npz_read": false,
+    "observed_utc": "2026-10-18T09:29:57.886307+00:00",
+    "pbs": {
+      "Exit_status": 0,
+      "Resource_List": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "09:30:00"
+      },
+      "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/production-2-0/low-noise.sh",
+      "exec_host": "node011/0*96",
+      "exec_vnode": "(node011:ncpus=96:mem=33554432kb)",
+      "job_state": "F",
+      "mtime": "Sun Oct 18 18:28:22 2026",
+      "obittime": "Sun Oct 18 18:28:22 2026",
+      "resources_used": {
+        "cpupercent": 9398,
+        "cput": "226:25:30",
+        "mem": "9605584kb",
+        "ncpus": 96,
+        "vmem": "40811040kb",
+        "walltime": "02:25:11"
+      },
+      "run_count": 1,
+      "stime": "Sun Oct 18 16:03:09 2026"
+    },
+    "phases": {
+      "anchors": {
+        "completion_marker_count": 192,
+        "execution_intent_present": true,
+        "execution_intent_sha256": "2cee098273b1e2fa12dd028cb0fe3f55aa08f83af7778cb8736b620359b2f2ac",
+        "native_preflight_present": true,
+        "native_preflight_sha256": "0a82b179887db684755b8d9872b8b4a8f2ca48887478eb5988e2aaa117760625",
+        "saved_compute_native_profile_matches": true,
+        "selected_metadata_checks": [
+          {
+            "json_sha256": "b41d7f8073f2b6f6671e11ca81b5c04429de183efaefee2245686b08b16ffa1c",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "json_sha256": "b74e2d50f0f5adfd6d2a38c945765f93f7ad1f6bdba49b3a30218ed936898f92",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              26,
+              0,
+              0
+            ]
+          },
+          {
+            "json_sha256": "39c96c6bb5b0bd5305141ac623dafa0df59a35601654c86b248a4f383161ed4e",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              5,
+              0,
+              0
+            ]
+          }
+        ],
+        "summary_metadata": {
+          "failed": 0,
+          "manifest": "132fd5122718ed8b719f0f15d653c25615197a917239236d0ab1d554f3d30d6d",
+          "native_preflight_sha256": "0a82b179887db684755b8d9872b8b4a8f2ca48887478eb5988e2aaa117760625",
+          "phase": "anchors",
+          "phase_wall_seconds": 36.23126069735736,
+          "tasks": 192,
+          "warning": "Fixed-prior low-noise study. All failed tasks retained. Logical initialization is not stationary. Diagnostics, support checks and setting agreement do not certify convergence, accuracy or coverage. Capacity samples never enter production."
+        },
+        "summary_present": true,
+        "summary_sha256": "01aa15a6deb90075c917c87f95643b5daa86e34467b906b148ca6e9adbf001ae",
+        "summary_task_census_checked": true
+      },
+      "sample": {
+        "completion_marker_count": 61440,
+        "execution_intent_present": true,
+        "execution_intent_sha256": "559a4376be76abae40710f74def20cabead79b64ba85c0661dd631b9725d6aa8",
+        "native_preflight_present": true,
+        "native_preflight_sha256": "2d42cd0c04a2359a25f04c5187343fdf07e3d69dda4bdd6689c43fa77fa109c0",
+        "saved_compute_native_profile_matches": true,
+        "selected_metadata_checks": [
+          {
+            "json_sha256": "195028165651dddf3ed1cd2830ce934dfaa09e3992d77816e6ce1224868a6395",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              6,
+              1
+            ]
+          },
+          {
+            "json_sha256": "4caa8690a0324e86da0088cb88adb978d2df4e8eb2a05a36b1815ba047a305bc",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              6,
+              6
+            ]
+          },
+          {
+            "json_sha256": "3f94fed6feacf8c1964355ebdab92cd3731219ba4ba1ab456017d9436afc15f6",
+            "status": "ok",
+            "task": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              9,
+              7
+            ]
+          }
+        ],
+        "summary_metadata": {
+          "failed": 0,
+          "manifest": "132fd5122718ed8b719f0f15d653c25615197a917239236d0ab1d554f3d30d6d",
+          "native_preflight_sha256": "2d42cd0c04a2359a25f04c5187343fdf07e3d69dda4bdd6689c43fa77fa109c0",
+          "phase": "sample",
+          "phase_wall_seconds": 8670.505442367867,
+          "tasks": 61440,
+          "warning": "Fixed-prior low-noise study. All failed tasks retained. Logical initialization is not stationary. Diagnostics, support checks and setting agreement do not certify convergence, accuracy or coverage. Capacity samples never enter production."
+        },
+        "summary_present": true,
+        "summary_sha256": "53b25b0779abd86de1805c1230703c0569951720c567efef05261ea8d5b6f3fb",
+        "summary_task_census_checked": true
+      }
+    },
+    "qsub_executed": false,
+    "read_only": true,
+    "receipt_script_plan_binding_verified": true,
+    "remote_seconds": 0.5706805046647787,
+    "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/production-2-0",
+    "scope": "Metadata-only running-job observation. At most three JSON metadata records per phase checked; no full artifact audit or scientific inference."
+  },
+  "npz_read": false,
+  "planned_anchor_tasks": 192,
+  "planned_groups": 768,
+  "planned_sampling_tasks": 61440,
+  "qsub_executed": false,
+  "replicates": 192,
+  "scope": "Terminal PBS success and complete phase-summary task census only. Saved native/job/source/receipt bindings match. At most three JSON metadata records per phase checked. Full raw payload audit and numerical trace audit remain separate.",
+  "stable_terminal_pbs_and_native_binding": true,
+  "success": true
+}

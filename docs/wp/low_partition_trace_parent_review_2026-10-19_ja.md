@@ -1,0 +1,158 @@
+# 分割sampling対応trace監査の親側接続の検証記録
+
+## 2026-10-19 06:21 JST: capacity準備
+
+小仕様・受入テスト・実装の順にremote準備部品とlocal一回実行入口を追加した。
+既存の科学計算sourceは変更していない。
+remote側はWindows15 passed・0.63秒、Linux15 passed・0.11秒で、qsubを呼ばない人工fixtureによる受入である。
+未完了collector、別条件、変更された完了証拠、既存root、途中のsource・metadata・PBS変更、資源値の不一致、予期しないjob応答を拒否した。
+local側はWindows12 passed・1.03秒で、実completion readerを使うfixture、BAR capacityからの独立性、応答検証、通信失敗、割込み、途中変更と一回実行制約を確認した。
+samplingのraw trace全payloadをこの親処理で検証したとは扱わない。
+
+remote部品は`output/low_partition_trace_prepare_remote.py`、SHAは4efca84efa37d2517553d30177696608dc8bf7f8a8b4042026d66169e6d39fa6である。
+local入口は`output/prepare_low_partition_trace_once.py`、SHAは8061bd24d73d3f51d7c45721de2f7559024ee20b28cd3eaae2f1c33a07a36f71である。
+remote受入用4ファイルは`data_tile_validation_2026-10-17/partition_trace_prepare_transport_v1/`に保存し、manifest SHAは2212d4132a03f84b43a43734736ba061fd984591e1ac959d545f49e0fab17b0fである。
+Linux receiptは`low_partition_trace_prepare_linux_acceptance_v1.json`、SHAはe3ebeb71ed8c6b60e80ca21682bacfbfd1a8e5972a1f4528ba635a1b328d1f89である。
+local入口の全依存を含む17ファイルは`partition_trace_local_prepare_transport_v1/`に保存し、manifest SHAはa24a792c271c0d499079db445492c06b454b55b192424d96e744251d2491c66bである。
+保管sourceは元のoutput配置へ復元して使い、保管ディレクトリ内で直接実行しない。
+
+実case0 target0はcollector未完了なので、local authority構築がSSH前に拒否され、remote呼出0であることを確認した。
+負例では未取得prepared SHAに0を置いており、実投入authorityではない。
+記録は`low_partition_trace_prepare_incomplete_sampling_gate_v1.json`、SHAは7142feae339e330328b8b3ccb4a9cba564903da552db88218d0dc094ce1fc7d3である。
+保管と検査scriptの`check_low_partition_trace_prepare_linux_v1.py`、`preserve_low_partition_trace_local_prepare_v1.py`は実行済みである。
+
+実collector正式受理後、local入口に`--case`、`--target-index`、実collector prepare成功receiptの`--collector-prepared-sha256`を渡す。
+監査rootは固定bundle内の`runs/partitioned-trace-capacity-{case}-{target}-v1`になる。
+全条件のproduction trace prepare・qsubは未実施で、qsub guard、capacity完了受理、実測full準備と完了受理の親側接続は残っている。
+BAR側の解析collectorと監査済み結果集約の親側接続も未実装である。
+これらは科学計算本体の未実装とは区別する。
+
+## 2026-10-19 06:26 JST: capacityのpreflight・一回qsub入口
+
+remote qsub guardとlocal入口を実装し、固定prepare成功記録から投入する接続を追加した。
+remote側はWindows28 passed・1.31秒、Linux28 passed・0.28秒で、local側はWindows13 passed・2.02秒だった。
+人工fixtureによる受入であり、実PBSへのqsubは行っていない。
+trace固有のroot・pid共有lock owner、上流jobの終端・exit・run_count・脚本、全input/source、旧controller、待機中を含む最大2nodeを検証する。
+guard intentの保存後も再確認し、二度目のrunner呼出や異なるqsubを拒否する。
+timeout・不正応答・非0終了・割込みでは記録とlockを保持する。
+local側はprepare証拠の改変をSSH前に拒否し、execute成功時は期待台帳とjob IDを照合する。
+
+remote部品は`output/low_partition_trace_submit_remote.py`、SHAは18705b13f6a12b69e5928c779c7b82fcdea60961b6a0356ce89a719fe02c2e0cである。
+local入口は`output/submit_low_partition_trace_once.py`、SHAはa496f2fcd69b1b7a0e1b726d8d65e16cf42e3d464428486194fd6730db4e3467である。
+全依存とテスト23ファイルは`data_tile_validation_2026-10-17/partition_trace_submit_transport_v1/`へ保存した。
+manifest SHAは347945a8789fa9807f3960ffabbc73a3bb3c3e4785228c904e9c65d86cde90edである。
+Linux receiptは`low_partition_trace_submit_linux_acceptance_v1.json`、SHAはb50439df874d4b2ba6c008d019ce21764c04547de72eb8febb92c16613c83a5aである。
+再現scriptの`check_low_partition_trace_submit_linux_v1.py`は実行済みであり、同じ出力先へ再実行しない。
+
+local入口へprepareと同じcase・target・collector prepared SHAに加え、trace capacity prepare成功receiptの`--prepared-sha256`と`--action preflight`または`execute`を渡す。
+全条件のproduction trace prepare・preflight・executeは未実施である。
+capacity完了受理、実測fullの準備・投入・完了受理、BAR collectorと監査済み集約の親側接続は残る。
+
+## 2026-10-19 06:31 JST: capacityの正式完了受理
+
+remote完了受理とlocal入口を実装した。
+remote側はWindows16 passed・2.06秒、Linux16 passed・0.31秒、local側はWindows11 passed・3.57秒だった。
+実qsubを呼ばない人工fixtureで、実executeとremote台帳・guardの対応、PBS終端、resource、source・metadata変更、既存証拠の上書き拒否を確認した。
+reader間でsummary hashを新しい値に置き換えてしまう問題を負例で検出し、既知hashとの一致を確認してから追加する処理へ修正した。
+
+実行時には既存read_terminalとmeasured_capacityを使い、2 replicate・8 groupのartifact、参照trace hash、task/checkpoint censusとnative証拠を検証する。
+新しいsamplingやcheckpointの再復号はこの親処理では行わない。
+資源値はworkers=1の仮full計画に対する推定記録であり、選択workerのfull計画は後続のprepare_fullで再検証する。
+全192 replicateの監査完了とは扱わない。
+これらの科学readerはfixtureでは代替されており、今回のtransportテストだけで本番データに対するreader成功を主張しない。
+
+remote部品は`output/low_partition_trace_complete_remote.py`、SHAはf00ab0d70180329bfcf2372dd546b58a293ad39307fd28a5254b0be7c83b2e70である。
+local入口は`output/complete_low_partition_trace_once.py`、SHAはb0b06a5a69ef60b6d8d79c6ab1aea68ac9dc2a4ac2936c55e453eead7ec86dbaである。
+全依存とテスト27ファイルは`data_tile_validation_2026-10-17/partition_trace_completion_transport_v1/`に保存した。
+manifest SHAはee5470dab56e92094d5e7625747c9f677f8fe19032867b4290bdc73907a8c143である。
+Linux receiptは`low_partition_trace_complete_linux_acceptance_v1.json`、SHAは0213634ab1f33aecfb2988e0396d11a7f87ab25859775bd8aafd4c3a32d63943である。
+再現scriptの`check_low_partition_trace_complete_linux_v1.py`は実行済みである。
+
+local入口へcase・target・実collector prepared SHA・実trace capacity prepared SHAを渡す。
+production trace prepare・preflight・execute・completionは全条件で未実施である。
+実測full監査の準備・投入・完了受理、BAR collectorと監査済み集約の親側接続は残る。
+06:30 JSTのPBS観測では265313がR/run_count1・02:40:41、265316がR/run_count1・00:48:23で、要求node数は合計2だった。
+
+## 2026-10-19 06:34 JST: 実測full監査のremote prepare
+
+正式capacity completionを受け取るremote prepare部品を追加し、Windows13 passed・2.24秒、Linux13 passed・0.33秒だった。
+人工fixtureで未完了・別authority・capacity変更・PBS変更・既存root・資源不一致・予期しないjob応答を拒否し、qsubしないことを確認した。
+実行時には既存prepare_fullでcapacityと参照traceを再検証し、選択workerで192 replicateの計画を固定してから既存submitterのdry-runを呼ぶ。
+fullの保存先は固定bundle内runs/partitioned-trace-full-{case}-{target}-v1である。
+この準備はcapacity対象traceの検証にとどまり、full監査完了とは扱わない。
+
+remote部品は`output/low_partition_trace_full_prepare_remote.py`、SHAは2850e0dc8c2fd152470107cad3019b1922dc3c331f46624c0e2a4d5b433e6688である。
+全依存とテスト29ファイルを`data_tile_validation_2026-10-17/partition_trace_full_prepare_transport_v1/`へ保存した。
+manifest SHAはe1cbe1abf84374d56510e1be91e16411f798b870577225aaa21c7fe772c82883である。
+Linux receiptは`low_partition_trace_full_prepare_linux_acceptance_v1.json`、SHAは069fed76a85696580ec3eb93f25a36c85d9dd6bf8239b11517a641b294607064である。
+再現scriptの`check_low_partition_trace_full_prepare_linux_v1.py`は実行済みである。
+
+full prepare用local入口とcapacity completionのlocal証拠構築、full qsub・完了受理はまだ未実装である。
+production full prepareも未実施であり、実capacity終了後にlocal入口を通じて接続する。
+BAR collectorと監査済み集約の親側接続も残っている。
+
+## 2026-10-19 06:40 JST: full local prepareとremote qsub guard
+
+full prepare用local入口を追加し、Windows12 passed・7.32秒だった。
+実capacity completionのintent・script・出力・成功receiptを固定sourceから再構成し、元のexecuteとjob・prepared SHA・scope・completion hashを照合する。
+改変されたcompletionと通信失敗・途中変更・割込みを受理せず、一回実行の記録を保持する。
+local入口は`output/prepare_low_partition_trace_full_once.py`、SHAはc7a58daac4419bc5e29d4622bb282985e931873b62d334557682ae9d241e0b68である。
+全依存31ファイルを`data_tile_validation_2026-10-17/partition_trace_full_local_prepare_transport_v1/`に保存し、manifest SHAはd060df4de3b9f165c7cdee1944efabbe79a528b40d0b07147c5df66b4badd0a6である。
+実case0 target0の未完了collectorを使う入力構築はSSH前に拒否され、remote呼出0だった。
+負例の0のprepared hashは実行authorityではなく、gate SHAはfe22357e65721da3aac51a30611b47c2bcd259f6904b9eb994e092aab4596240である。
+実capacity正式受理後、入口へcase・target・collector prepared SHA・capacity prepared SHAを渡す。
+保管と負例検査scriptは`preserve_low_partition_trace_full_local_prepare_v1.py`で実行済みである。
+
+full qsubのremote guardも追加し、Windows20 passed・3.07秒、Linux20 passed・0.56秒だった。
+fullの生成済み計画・脚本・選択資源とcapacity完了証拠・実終端を再照合し、既存checked_planによる資源再検証を通す。
+共有lock取得後にinput/source・旧controller・待機中を含む最大2node・実submission intentを確認し、guard保存後にも確認する。
+上流qstatへ元のcapacity authorityを渡す接続もfixtureで確認し、qsubは一度だけ許可する。
+remote部品は`output/low_partition_trace_full_submit_remote.py`、SHAは0b88c0b74793597f8d4d3b42088abdd57d167619783be7bba7b652d66e775ce4である。
+全依存33ファイルを`partition_trace_full_submit_transport_v1/`へ保存し、manifest SHAは7f730baf406dfe27850b709e45da80c7bcd5f087843b1694292758fd578aca9eである。
+Linux receipt SHAは318e628133ef2c2a0efcced8e3696156c0ab2734911f30c8fd90646fd3bfa630である。
+再現scriptの`check_low_partition_trace_full_submit_linux_v1.py`は実行済みである。
+
+full qsubのlocal入口、full完了受理、BAR collectorと監査済み集約の親側接続は残る。
+production full prepare・preflight・executeは全条件で未実施で、人工fixtureを実データ受理と扱わない。
+06:39前後のPBS観測では265313がR/run_count1・02:48:43、265316がR/run_count1・00:56:25で、要求node数合計2だった。
+
+## 2026-10-19 06:43 JST: full qsub local入口
+
+full prepareの実記録と外部prepared SHAを読むlocal投入入口を接続し、Windows13 passed・10.00秒だった。
+prepareのreceipt・intent・script・stdout/stderrの変更をSSH前に拒否し、正常なpreflight・execute、timeout、不正JSON、非0終了、異なる台帳、割込みと再投入拒否をfixtureで確認した。
+実qsubは行っておらず、remote guardは前節のLinux20件で受理したsourceを維持した。
+
+local入口は`output/submit_low_partition_trace_full_once.py`、SHAは389493ac7b2f924540dc67b070bf13e727a65243f72bce0b8f7e974eb7789d47である。
+全依存35ファイルを`data_tile_validation_2026-10-17/partition_trace_full_local_submit_transport_v1/`に保存した。
+manifest SHAは03c0e7ed4d6baea057e50104e32e76de3eb6374a680246ad46582e12724ac152である。
+保管scriptの`preserve_low_partition_trace_full_local_submit_v1.py`は実行済みである。
+実full prepare成功後、入口へcase・target・collector prepared SHA・capacity prepared SHA・full prepared SHAとaction=preflightまたはexecuteを渡す。
+production full prepare・preflight・executeは全条件で未実施である。
+full完了受理とBAR collector・監査済み集約の親側接続は残っている。
+
+## 2026-10-19 06:48 JST: full監査ジョブの親側完了受理
+
+full完了受理をremote・local双方に接続した。
+remote側はWindows18 passed・9.00秒、Linux18 passed・2.29秒、local側はWindows11 passed・11.30秒だった。
+実qsubを呼ばない人工fixtureで、768 groupの欠落・順序・件数不一致、sampling失敗数の不一致、measurement・marker・native証拠の変更、実終端の不一致と途中変更を検出した。
+失敗samplingを1件含むfixtureを分母768 taskのまま受理し、都合のよいgroupだけを選ばないことを確認した。
+transportテストでは科学readerと多数のartifact hashを代替しており、この受入を本番データの科学検証成功とは扱わない。
+
+実行時には実execute台帳・guard・PBSを照合し、既存read_terminalで実行証拠を結合する。
+768 group全てのmeasurement artifactを既存load_artifactで読み、summaryと比較し、audit groupのdone markerも照合する。
+親側で大きなaudit group payloadとraw trace全体を再走査したという主張は行わず、後続PBS集約で検証する範囲を明示する。
+source・metadata・capacity実終端・full実終端を前後で照合し、一回だけcompletionを保存する。
+
+remote部品は`output/low_partition_trace_full_complete_remote.py`、SHAはa40ed2135b567475582eaea4875815067d9bdf8c11f1340d9001dcd9d5cc2aa4である。
+local入口は`output/complete_low_partition_trace_full_once.py`、SHAは2127af0dc3525cbcb687af1a937137496bd4988c15c574a547e699d16bb7ddb7である。
+全依存39ファイルを`data_tile_validation_2026-10-17/partition_trace_full_completion_transport_v1/`へ保存した。
+manifest SHAは1626d5cc5bef875eb6e70da21a979ace93ca6259d5fac169de2fe668c19dd064である。
+Linux receipt SHAは0d13b35267a542717e233756e3f9479199875b9171396cea9bb3893c9c865e5bである。
+再現scriptの`check_low_partition_trace_full_complete_linux_v1.py`は実行済みである。
+
+local入口へcase・target・collector prepared SHA・capacity prepared SHA・full prepared SHAを渡す。
+production full prepare・preflight・execute・completionは全条件で未実施である。
+BAR collectorと正式比較への証拠接続は残っている。
+既存final v3入口はpartitioned readerにも対応しており、正式collectorのproducer証拠とrows hashを要求するため、先に実BAR collectorを接続する。
+WSS sourceの配置差を扱う既存v3検証を維持し、直接の報告関数呼出で省略しない。
+直近PBSでは265313がR/run_count1・02:56:44、265316がR/run_count1・01:04:26で、要求node数は合計2だった。

@@ -1,0 +1,1232 @@
+{
+  "observed": "2026-10-19T09:34:42.188302+09:00",
+  "scope": "Inventory proposal only; no export, staging, commit, upload, or deletion. Excludes new measurement data until deliberate selection. Links in code fences are omitted; directory targets need separate review.",
+  "candidate": [
+    ".github/workflows/tests.yml",
+    ".gitignore",
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "CITATION.cff",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "README.md",
+    "README_ja.md",
+    "benchmarks/bar_paper_protocol.py",
+    "benchmarks/bar_sensitivity.py",
+    "benchmarks/bench_circuit_step.py",
+    "benchmarks/bench_step.py",
+    "benchmarks/decoder_survey_probe.py",
+    "cluster_scripts/README.md",
+    "cluster_scripts/artifact_archive.py",
+    "cluster_scripts/audit_20261017.sh",
+    "cluster_scripts/audit_calibration.py",
+    "cluster_scripts/audit_tile_anchors.py",
+    "cluster_scripts/audit_tile_low_noise_traces.py",
+    "cluster_scripts/audit_tile_reference.py",
+    "cluster_scripts/audit_tile_structure.py",
+    "cluster_scripts/audit_tile_traces.py",
+    "cluster_scripts/audit_tile_weight_pilot.py",
+    "cluster_scripts/audit_tile_weight_reference.py",
+    "cluster_scripts/calibration.py",
+    "cluster_scripts/package_bundle.py",
+    "cluster_scripts/package_tile_study.py",
+    "cluster_scripts/probe_tile_decoder_platform.py",
+    "cluster_scripts/probe_tile_decoder_stages.py",
+    "cluster_scripts/requirements.txt",
+    "cluster_scripts/steane_components.py",
+    "cluster_scripts/submit.py",
+    "cluster_scripts/submit_tile_analysis.py",
+    "cluster_scripts/submit_tile_analysis_capacity.py",
+    "cluster_scripts/submit_tile_bar_time.py",
+    "cluster_scripts/submit_tile_capacity.py",
+    "cluster_scripts/submit_tile_final_reaggregation.py",
+    "cluster_scripts/submit_tile_low_noise.py",
+    "cluster_scripts/submit_tile_low_noise_analysis_capacity.py",
+    "cluster_scripts/submit_tile_low_noise_analysis_partitions.py",
+    "cluster_scripts/submit_tile_low_noise_partitioned_analysis.py",
+    "cluster_scripts/submit_tile_low_noise_partitioned_trace_audit.py",
+    "cluster_scripts/submit_tile_low_noise_sampling_partitions.py",
+    "cluster_scripts/submit_tile_low_noise_timing_execution.py",
+    "cluster_scripts/submit_tile_low_noise_timing_selection.py",
+    "cluster_scripts/submit_tile_low_noise_trace_audit.py",
+    "cluster_scripts/submit_tile_mc_time.py",
+    "cluster_scripts/submit_tile_mixing_execution.py",
+    "cluster_scripts/submit_tile_pilot.py",
+    "cluster_scripts/submit_tile_production.py",
+    "cluster_scripts/submit_tile_reference.py",
+    "cluster_scripts/submit_tile_seed_audit.py",
+    "cluster_scripts/submit_tile_trace_audit.py",
+    "cluster_scripts/submit_tile_weight_pilot.py",
+    "cluster_scripts/submit_tile_weight_reference.py",
+    "cluster_scripts/submit_tile_weight_reference_audit.py",
+    "cluster_scripts/summarize_calibration.py",
+    "cluster_scripts/summarize_tile_pilot.py",
+    "cluster_scripts/tile_analysis_capacity.py",
+    "cluster_scripts/tile_audited_results.py",
+    "cluster_scripts/tile_bar_analysis.py",
+    "cluster_scripts/tile_bar_study.py",
+    "cluster_scripts/tile_bar_time_benchmark.py",
+    "cluster_scripts/tile_comparisons.py",
+    "cluster_scripts/tile_coordinator.py",
+    "cluster_scripts/tile_early_mixing.py",
+    "cluster_scripts/tile_final_reaggregation.py",
+    "cluster_scripts/tile_initialization_strata.py",
+    "cluster_scripts/tile_low_noise_analysis.py",
+    "cluster_scripts/tile_low_noise_analysis_archive.py",
+    "cluster_scripts/tile_low_noise_analysis_capacity.py",
+    "cluster_scripts/tile_low_noise_analysis_export_worker.py",
+    "cluster_scripts/tile_low_noise_analysis_partitions.py",
+    "cluster_scripts/tile_low_noise_archive.py",
+    "cluster_scripts/tile_low_noise_audited_collection.py",
+    "cluster_scripts/tile_low_noise_export_gate.py",
+    "cluster_scripts/tile_low_noise_export_worker.py",
+    "cluster_scripts/tile_low_noise_partitioned_analysis.py",
+    "cluster_scripts/tile_low_noise_partitioned_collection.py",
+    "cluster_scripts/tile_low_noise_partitioned_trace_audit.py",
+    "cluster_scripts/tile_low_noise_partitioned_trace_audit_resources.py",
+    "cluster_scripts/tile_low_noise_reference_comparison.py",
+    "cluster_scripts/tile_low_noise_sampling_partitions.py",
+    "cluster_scripts/tile_low_noise_staging.py",
+    "cluster_scripts/tile_low_noise_staging_control.py",
+    "cluster_scripts/tile_low_noise_study.py",
+    "cluster_scripts/tile_low_noise_summary.py",
+    "cluster_scripts/tile_low_noise_timing_census.py",
+    "cluster_scripts/tile_low_noise_timing_evaluation_report.py",
+    "cluster_scripts/tile_low_noise_timing_execution.py",
+    "cluster_scripts/tile_low_noise_timing_plan.py",
+    "cluster_scripts/tile_low_noise_timing_seed_audit.py",
+    "cluster_scripts/tile_low_noise_timing_selection.py",
+    "cluster_scripts/tile_low_noise_trace_audit_resources.py",
+    "cluster_scripts/tile_low_noise_trace_audit_run.py",
+    "cluster_scripts/tile_mc_precision_budget.py",
+    "cluster_scripts/tile_mc_time_benchmark.py",
+    "cluster_scripts/tile_mixing_comparison_report.py",
+    "cluster_scripts/tile_mixing_execution.py",
+    "cluster_scripts/tile_mixing_inventory.py",
+    "cluster_scripts/tile_precision_assessment.py",
+    "cluster_scripts/tile_prior_effect.py",
+    "cluster_scripts/tile_reference.py",
+    "cluster_scripts/tile_reference_source_binding.py",
+    "cluster_scripts/tile_seed_audit.py",
+    "cluster_scripts/tile_select_timing.py",
+    "cluster_scripts/tile_study.py",
+    "cluster_scripts/tile_summary.py",
+    "cluster_scripts/tile_timing_comparison.py",
+    "cluster_scripts/tile_timing_evaluation_report.py",
+    "cluster_scripts/tile_timing_metrics.py",
+    "cluster_scripts/tile_timing_selection_from_final.py",
+    "cluster_scripts/tile_trace_audit_run.py",
+    "cluster_scripts/tile_weight_allocation.py",
+    "cluster_scripts/tile_weight_comparison.py",
+    "cluster_scripts/tile_weight_pilot.py",
+    "cluster_scripts/tile_weight_reference.py",
+    "cluster_scripts/tile_weight_reference_audit_run.py",
+    "cluster_scripts/tile_weight_reference_comparison.py",
+    "cluster_scripts/tile_weight_reference_driver.py",
+    "cluster_scripts/tile_weight_stratified.py",
+    "cluster_scripts/verify_recovery.py",
+    "cluster_scripts/verify_tile_workflow_examples.py",
+    "docs/_site_links.py",
+    "docs/api_en.md",
+    "docs/assets/stylesheets/local-fonts.css",
+    "docs/bar_sensitivity_ja.md",
+    "docs/check_site.py",
+    "docs/circuit_baseline_ja.md",
+    "docs/convergence_ja.md",
+    "docs/crossval_research_ja.md",
+    "docs/dev_request_2026-09-30.md",
+    "docs/dev_request_2026-09-30_examples.md",
+    "docs/dev_request_2026-10-01.md",
+    "docs/dev_request_2026-10-01_bar_speed.md",
+    "docs/guide_en.md",
+    "docs/guide_ja.md",
+    "docs/handoff/HANDOFF.md",
+    "docs/handoff/IMPLEMENTATION_PLAN.md",
+    "docs/handoff/IMPLEMENTATION_STATUS.md",
+    "docs/handoff/spec/RIMC_ライブラリ仕様書_v0.1.md",
+    "docs/handoff/spec/library-identity.json",
+    "docs/index.md",
+    "docs/index_ja.md",
+    "docs/initial_library_ja.md",
+    "docs/paper_consistency_ja.md",
+    "docs/performance_ja.md",
+    "docs/reference/circuits.md",
+    "docs/reference/codes.md",
+    "docs/reference/initialization.md",
+    "docs/reference/models.md",
+    "docs/reference/results.md",
+    "docs/reference/sampling.md",
+    "docs/stage1_ja.md",
+    "docs/tutorial_en.md",
+    "docs/tutorial_ja.md",
+    "docs/validation_initial_ja.md",
+    "docs/validation_stage1_ja.md",
+    "docs/wp/A_ja.md",
+    "docs/wp/A_reproduce.py",
+    "docs/wp/A_review_ja.md",
+    "docs/wp/B_ja.md",
+    "docs/wp/B_review_ja.md",
+    "docs/wp/C_ja.md",
+    "docs/wp/C_review_ja.md",
+    "docs/wp/D_docstrings.patch",
+    "docs/wp/D_ja.md",
+    "docs/wp/D_review_ja.md",
+    "docs/wp/E_ja.md",
+    "docs/wp/E_review_ja.md",
+    "docs/wp/F_ja.md",
+    "docs/wp/F_review_ja.md",
+    "docs/wp/G_ja.md",
+    "docs/wp/G_review_ja.md",
+    "docs/wp/H_ja.md",
+    "docs/wp/H_review_ja.md",
+    "docs/wp/I_ja.md",
+    "docs/wp/I_review_ja.md",
+    "docs/wp/J_ja.md",
+    "docs/wp/J_review_ja.md",
+    "docs/wp/K_instructions_ja.md",
+    "docs/wp/K_ja.md",
+    "docs/wp/K_review_ja.md",
+    "docs/wp/L_instructions_ja.md",
+    "docs/wp/L_ja.md",
+    "docs/wp/L_review_ja.md",
+    "docs/wp/M_instructions_ja.md",
+    "docs/wp/M_ja.md",
+    "docs/wp/M_review_ja.md",
+    "docs/wp/N_instructions_ja.md",
+    "docs/wp/N_ja.md",
+    "docs/wp/N_review_ja.md",
+    "docs/wp/O_instructions_ja.md",
+    "docs/wp/O_ja.md",
+    "docs/wp/O_review_ja.md",
+    "docs/wp/PROGRESS_dev4_ja.md",
+    "docs/wp/PROGRESS_dev5_ja.md",
+    "docs/wp/P_instructions_ja.md",
+    "docs/wp/P_ja.md",
+    "docs/wp/P_review_ja.md",
+    "docs/wp/Q_instructions_ja.md",
+    "docs/wp/Q_ja.md",
+    "docs/wp/Q_review_ja.md",
+    "docs/wp/RESUME_ja.md",
+    "docs/wp/audit_dev5_ja.md",
+    "docs/wp/automatic_anchor_2026-10-15_ja.md",
+    "docs/wp/bar_timing_seed_connection_spec_2026-10-18_ja.md",
+    "docs/wp/basic_decoders_review_2026-10-18_ja.md",
+    "docs/wp/basic_decoders_usage_2026-10-18_ja.md",
+    "docs/wp/basic_decoders_validation_2026-10-18_ja.md",
+    "docs/wp/belief_find_factory_spec_2026-10-18_ja.md",
+    "docs/wp/bplsd_factory_spec_2026-10-18_ja.md",
+    "docs/wp/calibration_2026-10-15_ja.md",
+    "docs/wp/calibration_audit_spec_2026-10-17_ja.md",
+    "docs/wp/calibration_cluster_design_2026-10-17_ja.md",
+    "docs/wp/calibration_results_2026-10-17_ja.md",
+    "docs/wp/circuit_2026-10-15_ja.md",
+    "docs/wp/circuit_review_2026-10-15_ja.md",
+    "docs/wp/data_calibration_2026-10-15/README.md",
+    "docs/wp/data_calibration_2026-10-15/block128.log",
+    "docs/wp/data_calibration_2026-10-15/block128_runs.csv",
+    "docs/wp/data_calibration_2026-10-15/block128_summary.csv",
+    "docs/wp/data_calibration_2026-10-15/block32.log",
+    "docs/wp/data_calibration_2026-10-15/block32_runs.csv",
+    "docs/wp/data_calibration_2026-10-15/block32_summary.csv",
+    "docs/wp/data_calibration_2026-10-15/block8.log",
+    "docs/wp/data_calibration_2026-10-15/block8_runs.csv",
+    "docs/wp/data_calibration_2026-10-15/block8_summary.csv",
+    "docs/wp/data_calibration_2026-10-15/environment.json",
+    "docs/wp/data_calibration_2026-10-15/paired.csv",
+    "docs/wp/data_calibration_2026-10-15/plan_ja.md",
+    "docs/wp/data_calibration_2026-10-15/recompute.log",
+    "docs/wp/data_calibration_2026-10-15/recompute.py",
+    "docs/wp/data_calibration_2026-10-15/summary.csv",
+    "docs/wp/data_calibration_2026-10-15/truth_cache.json",
+    "docs/wp/data_calibration_2026-10-17/README.md",
+    "docs/wp/data_calibration_2026-10-17/audit_validation.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_audit.log",
+    "docs/wp/data_calibration_2026-10-17/cluster_audit_stderr.log",
+    "docs/wp/data_calibration_2026-10-17/cluster_audit_submission.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_bundle.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_completion_status.txt",
+    "docs/wp/data_calibration_2026-10-17/cluster_environment.lock.txt",
+    "docs/wp/data_calibration_2026-10-17/cluster_production_manifest.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_production_submission.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_smoke_manifest.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_smoke_submission.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_smoke_timing.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_status.txt",
+    "docs/wp/data_calibration_2026-10-17/cluster_truth_steane.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_truth_surface3.json",
+    "docs/wp/data_calibration_2026-10-17/cluster_truth_toric3.json",
+    "docs/wp/data_calibration_2026-10-17/completion_tests.log",
+    "docs/wp/data_calibration_2026-10-17/completion_validation.json",
+    "docs/wp/data_calibration_2026-10-17/pilot.py",
+    "docs/wp/data_calibration_2026-10-17/pilot_interrupted.json",
+    "docs/wp/data_calibration_2026-10-17/pilot_surface_steane.json",
+    "docs/wp/data_calibration_2026-10-17/results/archives.json",
+    "docs/wp/data_calibration_2026-10-17/results/audit.json",
+    "docs/wp/data_calibration_2026-10-17/results/coverage_dispersed.pdf",
+    "docs/wp/data_calibration_2026-10-17/results/coverage_dispersed.png",
+    "docs/wp/data_calibration_2026-10-17/results/coverage_rows.csv.gz",
+    "docs/wp/data_calibration_2026-10-17/results/coverage_stationary.pdf",
+    "docs/wp/data_calibration_2026-10-17/results/coverage_stationary.png",
+    "docs/wp/data_calibration_2026-10-17/results/coverage_summary.csv",
+    "docs/wp/data_calibration_2026-10-17/results/inventory.jsonl.gz",
+    "docs/wp/data_calibration_2026-10-17/results/mixing_summary.csv",
+    "docs/wp/data_calibration_2026-10-17/results/paired_comparisons.csv",
+    "docs/wp/data_calibration_2026-10-17/results/recovery.json",
+    "docs/wp/data_calibration_2026-10-17/results/steane_components.json",
+    "docs/wp/data_calibration_2026-10-17/results/summary_metadata.json",
+    "docs/wp/data_calibration_2026-10-17/verify_core.log",
+    "docs/wp/data_calibration_2026-10-17/verify_optional.log",
+    "docs/wp/data_calibration_2026-10-17/verify_report.py",
+    "docs/wp/data_dev5/README.md",
+    "docs/wp/data_dev5/analyze_length.py",
+    "docs/wp/data_dev5/analyze_protocol.py",
+    "docs/wp/data_dev5/length/aggregate/cohort_runs.csv",
+    "docs/wp/data_dev5/length/aggregate/cohort_summary.csv",
+    "docs/wp/data_dev5/length/length_derived.json",
+    "docs/wp/data_dev5/length/raw/baseline_2400_2026_20_runs.csv",
+    "docs/wp/data_dev5/length/raw/baseline_2400_2026_20_summary.csv",
+    "docs/wp/data_dev5/length/raw/baseline_600_2026_20_runs.csv",
+    "docs/wp/data_dev5/length/raw/baseline_600_2026_20_summary.csv",
+    "docs/wp/data_dev5/length/raw/baseline_9600_2026_10_runs.csv",
+    "docs/wp/data_dev5/length/raw/baseline_9600_2026_10_summary.csv",
+    "docs/wp/data_dev5/length/raw/baseline_9600_2036_10_runs.csv",
+    "docs/wp/data_dev5/length/raw/baseline_9600_2036_10_summary.csv",
+    "docs/wp/data_dev5/measurement_environment.json",
+    "docs/wp/data_dev5/measurement_plan.json",
+    "docs/wp/data_dev5/protocol/aggregate/cohort_runs.csv",
+    "docs/wp/data_dev5/protocol/aggregate/cohort_summary.csv",
+    "docs/wp/data_dev5/protocol/protocol_derived.json",
+    "docs/wp/data_dev5/protocol/raw/dev4_default_block_mc_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/dev4_default_block_mc_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/dev4_default_cross_mc_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/dev4_default_cross_mc_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/dev4_paper16_mc_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/dev4_paper16_mc_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/dev4_paper50_mc_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/dev4_paper50_mc_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_default_block_exact_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_default_block_exact_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_default_block_mc_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_default_block_mc_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_default_cross_exact_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_default_cross_exact_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_default_cross_mc_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_default_cross_mc_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_paper16_exact_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_paper16_exact_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_paper16_mc_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_paper16_mc_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_paper50_exact_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_paper50_exact_2026_20_summary.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_paper50_mc_2026_20_runs.csv",
+    "docs/wp/data_dev5/protocol/raw/paper_paper50_mc_2026_20_summary.csv",
+    "docs/wp/data_dev5/q_step.csv",
+    "docs/wp/data_dev5/run_log.jsonl",
+    "docs/wp/data_dev5/truth_cache.json",
+    "docs/wp/data_diagnostics_2026-10-15/README.md",
+    "docs/wp/data_diagnostics_2026-10-15/core-tests.log",
+    "docs/wp/data_diagnostics_2026-10-15/source-tests.log",
+    "docs/wp/data_diagnostics_2026-10-15/summary.json",
+    "docs/wp/data_diagnostics_2026-10-15/verify-core.log",
+    "docs/wp/data_speed_2026-10-15/README.md",
+    "docs/wp/data_speed_2026-10-15/before.csv",
+    "docs/wp/data_speed_2026-10-15/environment.json",
+    "docs/wp/data_speed_2026-10-15/final.csv",
+    "docs/wp/data_speed_2026-10-15/final.log",
+    "docs/wp/data_speed_2026-10-15/trial1.csv",
+    "docs/wp/data_validation_2026-10-15/README.md",
+    "docs/wp/data_validation_2026-10-15/core.log",
+    "docs/wp/data_validation_2026-10-15/optional.log",
+    "docs/wp/data_validation_2026-10-15/source.log",
+    "docs/wp/data_validation_2026-10-15/summary.json",
+    "docs/wp/data_validation_2026-10-15/verify_core.log",
+    "docs/wp/data_validation_2026-10-15/verify_optional.log",
+    "docs/wp/decoder_survey_2026-10-18_ja.md",
+    "docs/wp/diagnostic_options_spec_2026-10-15_ja.md",
+    "docs/wp/diagnostic_review_2026-10-15_ja.md",
+    "docs/wp/diagnostics_2026-10-15_ja.md",
+    "docs/wp/examples_integration_ja.md",
+    "docs/wp/experimental_release_readiness_2026-10-19_ja.md",
+    "docs/wp/final_report_2026-10-15_ja.md",
+    "docs/wp/final_report_dev4_ja.md",
+    "docs/wp/final_report_dev5_ja.md",
+    "docs/wp/final_report_examples_ja.md",
+    "docs/wp/final_report_ja.md",
+    "docs/wp/integration_ja.md",
+    "docs/wp/low_final_arithmetic_review_spec_2026-10-19_ja.md",
+    "docs/wp/low_partition_analysis_bridge_2026-10-19_ja.md",
+    "docs/wp/low_partition_analysis_parent_review_2026-10-19_ja.md",
+    "docs/wp/low_partition_analysis_parent_spec_2026-10-19_ja.md",
+    "docs/wp/low_partition_bar_collection_parent_review_2026-10-19_ja.md",
+    "docs/wp/low_partition_bar_collection_parent_spec_2026-10-19_ja.md",
+    "docs/wp/low_partition_collection_transport_review_2026-10-19_ja.md",
+    "docs/wp/low_partition_collection_transport_spec_2026-10-19_ja.md",
+    "docs/wp/low_partition_final_join_spec_2026-10-19_ja.md",
+    "docs/wp/low_partition_final_recovery_spec_2026-10-19_ja.md",
+    "docs/wp/low_partition_final_runbook_2026-10-19_ja.md",
+    "docs/wp/low_partition_trace_parent_review_2026-10-19_ja.md",
+    "docs/wp/low_partition_trace_parent_spec_2026-10-19_ja.md",
+    "docs/wp/low_review_input_recovery_spec_2026-10-19_ja.md",
+    "docs/wp/low_target2_final_adapter_2026-10-19_ja.md",
+    "docs/wp/measurement_plan_dev5_ja.md",
+    "docs/wp/next_work_2026-10-15_ja.md",
+    "docs/wp/phase0_ja.md",
+    "docs/wp/speed_review_2026-10-15_ja.md",
+    "docs/wp/submit_tile_low_noise_analysis_capacity_spec_2026-10-18_ja.md",
+    "docs/wp/submit_tile_low_noise_analysis_partitions_spec_2026-10-18_ja.md",
+    "docs/wp/submit_tile_low_noise_trace_audit_spec_2026-10-18_ja.md",
+    "docs/wp/submit_tile_seed_audit_spec_2026-10-18_ja.md",
+    "docs/wp/submit_tile_weight_reference_audit_spec_2026-10-18_ja.md",
+    "docs/wp/tile_audited_results_spec_2026-10-18_ja.md",
+    "docs/wp/tile_cluster_report_2026-10-17_ja.md",
+    "docs/wp/tile_cluster_spec_2026-10-17_ja.md",
+    "docs/wp/tile_codes_survey_2026-10-17_ja.md",
+    "docs/wp/tile_decoder_platform_2026-10-17_ja.md",
+    "docs/wp/tile_decoder_prior_effect_2026-10-18_ja.md",
+    "docs/wp/tile_early_mixing_2026-10-18_ja.md",
+    "docs/wp/tile_early_mixing_plan_2026-10-18_ja.md",
+    "docs/wp/tile_final_reaggregation_spec_2026-10-18_ja.md",
+    "docs/wp/tile_full_audit_execution_2026-10-18_ja.md",
+    "docs/wp/tile_kernel_support_2026-10-17_ja.md",
+    "docs/wp/tile_low_noise_analysis_archive_spec_2026-10-19_ja.md",
+    "docs/wp/tile_low_noise_analysis_capacity_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_analysis_partitions_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_analysis_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_analysis_validation_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_archive_dispatch_spec_2026-10-19_ja.md",
+    "docs/wp/tile_low_noise_archive_review_2026-10-19_ja.md",
+    "docs/wp/tile_low_noise_archive_spec_2026-10-19_ja.md",
+    "docs/wp/tile_low_noise_audited_collection_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_case2_t1_t2_staging_entry_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_execution_validation_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_final_reference_report_parent_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_independent_timing_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_partitioned_analysis_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_partitioned_trace_audit_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_plan_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_reference_comparison_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_reference_validation_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_sampling_partitions_proposal_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_sampling_partitions_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_staged_parent_submission_proposal_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_staged_readiness_runbook_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_staging_control_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_staging_copy_submission_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_staging_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_summary_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_census_bridge_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_evaluation_report_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_execution_implementation_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_execution_linux_handoff_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_execution_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_manifest_seed_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_selection_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_selector_parent_entry_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_selector_parent_implementation_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_timing_stage4_deployment_preparation_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_trace_audit_resources_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_trace_audit_run_spec_2026-10-18_ja.md",
+    "docs/wp/tile_low_noise_trace_audit_spec_2026-10-18_ja.md",
+    "docs/wp/tile_main_timing_report_collection_spec_2026-10-18_ja.md",
+    "docs/wp/tile_mixing_comparison_report_spec_2026-10-18_ja.md",
+    "docs/wp/tile_mixing_execution_spec_2026-10-18_ja.md",
+    "docs/wp/tile_mixing_inventory_spec_2026-10-18_ja.md",
+    "docs/wp/tile_saved_wss_source_binding_spec_2026-10-19_ja.md",
+    "docs/wp/tile_seed_audit_spec_2026-10-18_ja.md",
+    "docs/wp/tile_selector_cross_host_identity_spec_2026-10-19_ja.md",
+    "docs/wp/tile_time_to_accuracy_plan_2026-10-17_ja.md",
+    "docs/wp/tile_timing_comparison_scope_review_2026-10-18_ja.md",
+    "docs/wp/tile_timing_evaluation_report_spec_2026-10-18_ja.md",
+    "docs/wp/tile_timing_portability_review_2026-10-19_ja.md",
+    "docs/wp/tile_timing_report_linux_handoff_2026-10-18_ja.md",
+    "docs/wp/tile_timing_report_submission_runbook_2026-10-18_ja.md",
+    "docs/wp/tile_timing_report_submission_spec_2026-10-18_ja.md",
+    "docs/wp/tile_timing_selection_from_final_spec_2026-10-18_ja.md",
+    "docs/wp/tile_trace_audit_execution_2026-10-18_ja.md",
+    "docs/wp/tile_validation_plan_2026-10-17_ja.md",
+    "docs/wp/tile_validation_report_2026-10-18_ja.md",
+    "docs/wp/tile_validation_status_2026-10-17_ja.md",
+    "docs/wp/tile_weight_reference_audit_run_spec_2026-10-18_ja.md",
+    "docs/wp/tile_weight_reference_audit_spec_2026-10-18_ja.md",
+    "docs/wp/tile_weight_reference_comparison_spec_2026-10-18_ja.md",
+    "docs/wp/tile_weight_stratified_spec_2026-10-17_ja.md",
+    "docs/wp/trace_stats_spec_2026-10-15_ja.md",
+    "docs/wp/typing_2026-10-15_ja.md",
+    "docs/wp/union_find_factory_spec_2026-10-18_ja.md",
+    "docs/wp/validation_dev2_ja.md",
+    "docs/wp/validation_dev4_ja.md",
+    "docs/wp/validation_dev5_ja.md",
+    "docs/wp/verify_wheel.py",
+    "examples/README.md",
+    "examples/bar_ladder.py",
+    "examples/bb72_bposd.py",
+    "examples/bit_flip.py",
+    "examples/circuit_baseline.py",
+    "examples/circuit_zanella.py",
+    "examples/decoder_comparison.py",
+    "examples/phase_flip_asymmetric.py",
+    "examples/phenomenological_toric.py",
+    "examples/steane_exact.py",
+    "examples/stim_dem.py",
+    "examples/templates/byo_css_bitflip.py",
+    "examples/templates/byo_decoder.py",
+    "examples/templates/byo_noise.py",
+    "examples/templates/byo_stim_dem.py",
+    "examples/three_noise.py",
+    "examples/tile_bposd.py",
+    "examples/toric_depolarizing.py",
+    "examples/toric_pymatching.py",
+    "examples/workflows/conditional_weight.py",
+    "examples/workflows/convergence_check.py",
+    "examples/workflows/p_dependent_decoder.py",
+    "examples/workflows/pl_curve.py",
+    "examples/workflows/tile_capacity_fixed_prior.py",
+    "mkdocs.yml",
+    "notebooks/01_quickstart.ipynb",
+    "notebooks/02_pl_curve_with_bar.ipynb",
+    "notebooks/03_conditional_sampling_and_diagnostics.ipynb",
+    "notebooks/04_bring_your_own.ipynb",
+    "notebooks/regenerate.py",
+    "pyproject.toml",
+    "src/mcmc4qec/__init__.py",
+    "src/mcmc4qec/_checked_decoder.py",
+    "src/mcmc4qec/adapter_composition.py",
+    "src/mcmc4qec/adapters.py",
+    "src/mcmc4qec/belief_find_decoders.py",
+    "src/mcmc4qec/bplsd_decoders.py",
+    "src/mcmc4qec/circuit/__init__.py",
+    "src/mcmc4qec/circuit/baselines.py",
+    "src/mcmc4qec/circuit/cluster.py",
+    "src/mcmc4qec/circuit/faststep.py",
+    "src/mcmc4qec/circuit/model.py",
+    "src/mcmc4qec/circuit/proposal.py",
+    "src/mcmc4qec/codes.py",
+    "src/mcmc4qec/convergence.py",
+    "src/mcmc4qec/core.py",
+    "src/mcmc4qec/decode_cache.py",
+    "src/mcmc4qec/decoders.py",
+    "src/mcmc4qec/diagnostics.py",
+    "src/mcmc4qec/estimation.py",
+    "src/mcmc4qec/fastpath.py",
+    "src/mcmc4qec/faststep.py",
+    "src/mcmc4qec/initial_states.py",
+    "src/mcmc4qec/kernels.py",
+    "src/mcmc4qec/models.py",
+    "src/mcmc4qec/noise.py",
+    "src/mcmc4qec/noise_categorical.py",
+    "src/mcmc4qec/py.typed",
+    "src/mcmc4qec/reporting.py",
+    "src/mcmc4qec/results.py",
+    "src/mcmc4qec/sampling.py",
+    "src/mcmc4qec/stim_dem.py",
+    "src/mcmc4qec/trace_stats.py",
+    "src/mcmc4qec/union_find_decoders.py",
+    "tests/test_acceptance.py",
+    "tests/test_adapter_composition.py",
+    "tests/test_adapters.py",
+    "tests/test_artifact_archive.py",
+    "tests/test_auto_anchor.py",
+    "tests/test_bar_block_control.py",
+    "tests/test_bar_coverage.py",
+    "tests/test_bar_uncertainty.py",
+    "tests/test_belief_find_decoders.py",
+    "tests/test_bplsd_decoders.py",
+    "tests/test_calibration_audit.py",
+    "tests/test_calibration_recovery.py",
+    "tests/test_categorical_kernels.py",
+    "tests/test_checked_decoder.py",
+    "tests/test_circuit_delta_cluster.py",
+    "tests/test_circuit_kernels.py",
+    "tests/test_circuit_model.py",
+    "tests/test_circuit_pipeline.py",
+    "tests/test_circuit_proposal.py",
+    "tests/test_circuit_surface.py",
+    "tests/test_cluster_calibration.py",
+    "tests/test_codes.py",
+    "tests/test_convergence.py",
+    "tests/test_crossval_research.py",
+    "tests/test_decoder_comparison_example.py",
+    "tests/test_decoders.py",
+    "tests/test_diagnostic_options.py",
+    "tests/test_docs_manifest.py",
+    "tests/test_estimation.py",
+    "tests/test_examples_real.py",
+    "tests/test_examples_templates.py",
+    "tests/test_examples_workflows.py",
+    "tests/test_fastpath.py",
+    "tests/test_faststep.py",
+    "tests/test_independent.py",
+    "tests/test_initial_states.py",
+    "tests/test_logical_basis.py",
+    "tests/test_noise_models.py",
+    "tests/test_notebooks.py",
+    "tests/test_phase_flip.py",
+    "tests/test_pipeline.py",
+    "tests/test_provenance.py",
+    "tests/test_public_api.py",
+    "tests/test_regressions.py",
+    "tests/test_steane_components.py",
+    "tests/test_stim_dem.py",
+    "tests/test_submit_tile_analysis.py",
+    "tests/test_submit_tile_bar_time.py",
+    "tests/test_submit_tile_final_reaggregation.py",
+    "tests/test_submit_tile_low_noise.py",
+    "tests/test_submit_tile_low_noise_analysis_capacity.py",
+    "tests/test_submit_tile_low_noise_analysis_partitions.py",
+    "tests/test_submit_tile_low_noise_partitioned_analysis.py",
+    "tests/test_submit_tile_low_noise_partitioned_trace_audit.py",
+    "tests/test_submit_tile_low_noise_sampling_partitions.py",
+    "tests/test_submit_tile_low_noise_timing_selection.py",
+    "tests/test_submit_tile_low_noise_timing_selection_cross_host.py",
+    "tests/test_submit_tile_low_noise_timing_selection_review.py",
+    "tests/test_submit_tile_low_noise_trace_audit.py",
+    "tests/test_submit_tile_mc_time.py",
+    "tests/test_submit_tile_production.py",
+    "tests/test_submit_tile_seed_audit.py",
+    "tests/test_submit_tile_trace_audit.py",
+    "tests/test_submit_tile_weight_reference.py",
+    "tests/test_submit_tile_weight_reference_audit.py",
+    "tests/test_tile_analysis_capacity.py",
+    "tests/test_tile_anchor_audit.py",
+    "tests/test_tile_audited_results.py",
+    "tests/test_tile_bar_analysis.py",
+    "tests/test_tile_bar_study.py",
+    "tests/test_tile_bar_time_benchmark.py",
+    "tests/test_tile_codes.py",
+    "tests/test_tile_comparisons.py",
+    "tests/test_tile_coordinator.py",
+    "tests/test_tile_decoder_stages.py",
+    "tests/test_tile_early_mixing.py",
+    "tests/test_tile_final_reaggregation.py",
+    "tests/test_tile_initialization_strata.py",
+    "tests/test_tile_low_noise_analysis.py",
+    "tests/test_tile_low_noise_analysis_archive.py",
+    "tests/test_tile_low_noise_analysis_capacity.py",
+    "tests/test_tile_low_noise_analysis_export_worker.py",
+    "tests/test_tile_low_noise_analysis_partitions.py",
+    "tests/test_tile_low_noise_archive.py",
+    "tests/test_tile_low_noise_audited_collection.py",
+    "tests/test_tile_low_noise_export_gate.py",
+    "tests/test_tile_low_noise_export_worker.py",
+    "tests/test_tile_low_noise_partitioned_analysis.py",
+    "tests/test_tile_low_noise_partitioned_analysis_integration.py",
+    "tests/test_tile_low_noise_partitioned_audit_integration.py",
+    "tests/test_tile_low_noise_partitioned_collection.py",
+    "tests/test_tile_low_noise_partitioned_trace_audit.py",
+    "tests/test_tile_low_noise_partitioned_trace_audit_resources.py",
+    "tests/test_tile_low_noise_reference_comparison.py",
+    "tests/test_tile_low_noise_sampling_partition_evidence.py",
+    "tests/test_tile_low_noise_sampling_partitions.py",
+    "tests/test_tile_low_noise_staging.py",
+    "tests/test_tile_low_noise_staging_control.py",
+    "tests/test_tile_low_noise_study.py",
+    "tests/test_tile_low_noise_summary.py",
+    "tests/test_tile_low_noise_timing_census.py",
+    "tests/test_tile_low_noise_timing_evaluation_report.py",
+    "tests/test_tile_low_noise_timing_execution.py",
+    "tests/test_tile_low_noise_timing_execution_gate.py",
+    "tests/test_tile_low_noise_timing_plan.py",
+    "tests/test_tile_low_noise_timing_seed_audit.py",
+    "tests/test_tile_low_noise_timing_selection.py",
+    "tests/test_tile_low_noise_trace_audit.py",
+    "tests/test_tile_low_noise_trace_audit_resources.py",
+    "tests/test_tile_low_noise_trace_audit_run.py",
+    "tests/test_tile_mc_precision_budget.py",
+    "tests/test_tile_mc_time_benchmark.py",
+    "tests/test_tile_mixing_comparison_report.py",
+    "tests/test_tile_mixing_execution.py",
+    "tests/test_tile_mixing_inventory.py",
+    "tests/test_tile_precision_assessment.py",
+    "tests/test_tile_prior_effect.py",
+    "tests/test_tile_reference.py",
+    "tests/test_tile_reference_audit.py",
+    "tests/test_tile_reference_source_binding.py",
+    "tests/test_tile_saved_reference_relocation.py",
+    "tests/test_tile_seed_audit.py",
+    "tests/test_tile_select_timing.py",
+    "tests/test_tile_structure_audit.py",
+    "tests/test_tile_study.py",
+    "tests/test_tile_summary.py",
+    "tests/test_tile_timing_comparison.py",
+    "tests/test_tile_timing_evaluation_report.py",
+    "tests/test_tile_timing_metrics.py",
+    "tests/test_tile_timing_selection_from_final.py",
+    "tests/test_tile_trace_audit.py",
+    "tests/test_tile_trace_audit_run.py",
+    "tests/test_tile_weight_allocation.py",
+    "tests/test_tile_weight_comparison.py",
+    "tests/test_tile_weight_pilot.py",
+    "tests/test_tile_weight_pilot_audit.py",
+    "tests/test_tile_weight_reference.py",
+    "tests/test_tile_weight_reference_audit.py",
+    "tests/test_tile_weight_reference_audit_run.py",
+    "tests/test_tile_weight_reference_comparison.py",
+    "tests/test_tile_weight_reference_driver.py",
+    "tests/test_tile_weight_stratified.py",
+    "tests/test_trace_stats.py",
+    "tests/test_trace_stats_review.py",
+    "tests/test_typing.py",
+    "tests/test_union_find_decoders.py"
+  ],
+  "unselected_relative_targets": {
+    "docs/wp/data_basic_decoders_2026-10-18": {
+      "kind": "directory",
+      "bytes": null,
+      "referenced_by": [
+        "docs/wp/basic_decoders_validation_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_basic_decoders_2026-10-18/current_worktree_binding_2026-10-18_v1.json": {
+      "kind": "file",
+      "bytes": 7053,
+      "referenced_by": [
+        "docs/wp/basic_decoders_validation_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_decoder_survey_2026-10-18": {
+      "kind": "directory",
+      "bytes": null,
+      "referenced_by": [
+        "docs/wp/decoder_survey_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_experimental_release_2026-10-19/documentation_v1.json": {
+      "kind": "file",
+      "bytes": 740,
+      "referenced_by": [
+        "docs/wp/experimental_release_readiness_2026-10-19_ja.md"
+      ]
+    },
+    "docs/wp/data_experimental_release_2026-10-19/source_suite_v1.json": {
+      "kind": "file",
+      "bytes": 21072,
+      "referenced_by": [
+        "docs/wp/experimental_release_readiness_2026-10-19_ja.md"
+      ]
+    },
+    "docs/wp/data_experimental_release_2026-10-19/publication_inventory_v1.json": {
+      "kind": "file",
+      "bytes": 3165,
+      "referenced_by": [
+        "docs/wp/experimental_release_readiness_2026-10-19_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_noise_pending_dispatch_ledger_v5_ja.md": {
+      "kind": "file",
+      "bytes": 97489,
+      "referenced_by": [
+        "docs/wp/low_partition_final_runbook_2026-10-19_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/early_mixing_summary_v1.json": {
+      "kind": "file",
+      "bytes": 16379,
+      "referenced_by": [
+        "docs/wp/tile_early_mixing_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/early_mixing_group_records_v1.json": {
+      "kind": "file",
+      "bytes": 5415387,
+      "referenced_by": [
+        "docs/wp/tile_early_mixing_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/audited_results_windows_acceptance_v1.json": {
+      "kind": "file",
+      "bytes": 1760,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_analysis_linux_acceptance_v9.txt": {
+      "kind": "file",
+      "bytes": 283,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_analysis_linux_provenance_v9.json": {
+      "kind": "file",
+      "bytes": 22031,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_analysis_source_binding_v9.json": {
+      "kind": "file",
+      "bytes": 2307,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/recover_completed_tile_analysis_v2.py": {
+      "kind": "file",
+      "bytes": 19171,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/analysis_recovery_helper_spec_v2_ja.md": {
+      "kind": "file",
+      "bytes": 3516,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/analysis_recovery_helper_acceptance_v2.json": {
+      "kind": "file",
+      "bytes": 1885,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/analysis_recovery_linux_acceptance_v2.json": {
+      "kind": "file",
+      "bytes": 1087,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/analysis_recovery_linux_validation_v2.json": {
+      "kind": "file",
+      "bytes": 800,
+      "referenced_by": [
+        "docs/wp/tile_full_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/structure_audit/summary.json": {
+      "kind": "file",
+      "bytes": 25533,
+      "referenced_by": [
+        "docs/wp/tile_kernel_support_2026-10-17_ja.md",
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_sampling_capacity_preparation_v1.json": {
+      "kind": "file",
+      "bytes": 35217,
+      "referenced_by": [
+        "docs/wp/tile_low_noise_plan_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_analysis_capacity_remaining_preparation_v1.json": {
+      "kind": "file",
+      "bytes": 10075,
+      "referenced_by": [
+        "docs/wp/tile_low_noise_plan_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_sampling_capacity_0_0_terminal_v1.json": {
+      "kind": "file",
+      "bytes": 75048,
+      "referenced_by": [
+        "docs/wp/tile_low_noise_sampling_partitions_proposal_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/mixing_full_collection_spec_v1_ja.md": {
+      "kind": "file",
+      "bytes": 2467,
+      "referenced_by": [
+        "docs/wp/tile_mixing_comparison_report_spec_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/direct_mc_precision_budget.json": {
+      "kind": "file",
+      "bytes": 4409,
+      "referenced_by": [
+        "docs/wp/tile_time_to_accuracy_plan_2026-10-17_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/reassess_mc_timing_summary_v1.py": {
+      "kind": "file",
+      "bytes": 8883,
+      "referenced_by": [
+        "docs/wp/tile_timing_comparison_scope_review_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/timing_mc_achieved_precision_v1.json": {
+      "kind": "file",
+      "bytes": 34354,
+      "referenced_by": [
+        "docs/wp/tile_timing_comparison_scope_review_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/timing_mc_achieved_precision_v1_ja.md": {
+      "kind": "file",
+      "bytes": 2076,
+      "referenced_by": [
+        "docs/wp/tile_timing_comparison_scope_review_2026-10-18_ja.md",
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/bar_seed_census_evidence_v1/REPORT_ja.md": {
+      "kind": "file",
+      "bytes": 2239,
+      "referenced_by": [
+        "docs/wp/tile_timing_comparison_scope_review_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/timing_report_formal_config_template_v2.json": {
+      "kind": "file",
+      "bytes": 6351,
+      "referenced_by": [
+        "docs/wp/tile_timing_report_submission_runbook_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/trace_audit_remaining_plans_preparation_v1.json": {
+      "kind": "file",
+      "bytes": 30570,
+      "referenced_by": [
+        "docs/wp/tile_trace_audit_execution_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/main_trace_audit_completion_v1.json": {
+      "kind": "file",
+      "bytes": 4700,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/final_reaggregation_four_case_scientific_summary_v1_ja.md": {
+      "kind": "file",
+      "bytes": 4978,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md",
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/decoder_stages_validation.json": {
+      "kind": "file",
+      "bytes": 1607,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/reference_summary.json": {
+      "kind": "file",
+      "bytes": 1603,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/reference_audit.json": {
+      "kind": "file",
+      "bytes": 1338,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/main_mc_wss_summary_comparison_v1.json": {
+      "kind": "file",
+      "bytes": 21965,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/figures_main_calibration_v1/main_calibration_comparison.png": {
+      "kind": "file",
+      "bytes": 172224,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/figures_main_calibration_v1/caption_ja.md": {
+      "kind": "file",
+      "bytes": 2255,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/figures_main_calibration_v1/main_calibration_comparison.svg": {
+      "kind": "file",
+      "bytes": 26863,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/figures_main_calibration_v1/README_ja.md": {
+      "kind": "file",
+      "bytes": 2260,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/mixing_full_collection_index_v1.json": {
+      "kind": "file",
+      "bytes": 12762,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/mixing_comparison_four_case_v1/report_ja.md": {
+      "kind": "file",
+      "bytes": 8203,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/production_anchor_audit-0.json": {
+      "kind": "file",
+      "bytes": 1484,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/production_anchor_audit-1.json": {
+      "kind": "file",
+      "bytes": 1482,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/production_anchor_audit-2.json": {
+      "kind": "file",
+      "bytes": 1485,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/production_anchor_audit-3.json": {
+      "kind": "file",
+      "bytes": 1480,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/interim_anchor_update_validation_v1.json": {
+      "kind": "file",
+      "bytes": 2285,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/weight_reference_summary_v1.json": {
+      "kind": "file",
+      "bytes": 75973,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/weight_reference_audit_terminal_validation_v1.json": {
+      "kind": "file",
+      "bytes": 31382,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_sampling_production_2_0_terminal_metadata_verification_v1.json": {
+      "kind": "file",
+      "bytes": 13364,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_collection_case2_target0_evidence_v1/collection_verification.json": {
+      "kind": "file",
+      "bytes": 2930,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_final_case2_target0_scientific_review_v1/report_ja.md": {
+      "kind": "file",
+      "bytes": 3457,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/figures_low_case2_target0_v1/caption_ja.md": {
+      "kind": "file",
+      "bytes": 1937,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_final_case2_target1_scientific_review_v1/report_ja.md": {
+      "kind": "file",
+      "bytes": 3994,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md",
+        "docs/wp/tile_validation_status_2026-10-17_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/figures_low_case2_target1_v1/caption_ja.md": {
+      "kind": "file",
+      "bytes": 1857,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_case2_target2_row_diagnostics_v1/report_ja.md": {
+      "kind": "file",
+      "bytes": 2624,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_final_case2_target2_scientific_review_v1/report_ja.md": {
+      "kind": "file",
+      "bytes": 4369,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/figures_low_case2_target2_v1/caption_ja.md": {
+      "kind": "file",
+      "bytes": 1161,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_case2_three_targets_v1/report_ja.md": {
+      "kind": "file",
+      "bytes": 3939,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_sampling_capacity_all12_summary_v1_ja.md": {
+      "kind": "file",
+      "bytes": 2573,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/local_verification.json": {
+      "kind": "file",
+      "bytes": 674,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/independent_payload_verification.json": {
+      "kind": "file",
+      "bytes": 1452,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/bar_main_case1_evidence_v1/independent_payload_verification.json": {
+      "kind": "file",
+      "bytes": 1453,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/bar_main_case2_evidence_v1/independent_payload_verification.json": {
+      "kind": "file",
+      "bytes": 1454,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/main_timing_report_result_evidence_v1/results/report_ja.md": {
+      "kind": "file",
+      "bytes": 1513,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/main_timing_scientific_review_v1/report_ja.md": {
+      "kind": "file",
+      "bytes": 5989,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/BAR_TIMING_PREPARATION_v1_ja.md": {
+      "kind": "file",
+      "bytes": 5355,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/workflow_example_checks.json": {
+      "kind": "file",
+      "bytes": 4597,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/decoder_platform_linux.json": {
+      "kind": "file",
+      "bytes": 3455,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/README.md": {
+      "kind": "file",
+      "bytes": 101974,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md",
+        "docs/wp/tile_validation_status_2026-10-17_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/seed_census_evidence_v1/REPORT_ja.md": {
+      "kind": "file",
+      "bytes": 4117,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/bar_seed_census_evidence_v1/independent_verification.json": {
+      "kind": "file",
+      "bytes": 1676,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_basic_decoders_2026-10-18/integration_validation.json": {
+      "kind": "file",
+      "bytes": 2772,
+      "referenced_by": [
+        "docs/wp/tile_validation_report_2026-10-18_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/low_partition_dispatch_20261019_0851.json": {
+      "kind": "file",
+      "bytes": 1868,
+      "referenced_by": [
+        "docs/wp/tile_validation_status_2026-10-17_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/case0_bar_summary_read_v1_ja.md": {
+      "kind": "file",
+      "bytes": 4108,
+      "referenced_by": [
+        "docs/wp/tile_validation_status_2026-10-17_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/case2_bar_summary_read_v1_ja.md": {
+      "kind": "file",
+      "bytes": 4326,
+      "referenced_by": [
+        "docs/wp/tile_validation_status_2026-10-17_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/case1_bar_summary_read_v1_ja.md": {
+      "kind": "file",
+      "bytes": 4041,
+      "referenced_by": [
+        "docs/wp/tile_validation_status_2026-10-17_ja.md"
+      ]
+    },
+    "docs/wp/data_tile_validation_2026-10-17/case3_bar_summary_read_v1_ja.md": {
+      "kind": "file",
+      "bytes": 3962,
+      "referenced_by": [
+        "docs/wp/tile_validation_status_2026-10-17_ja.md"
+      ]
+    },
+    "docs/wp": {
+      "kind": "directory",
+      "bytes": null,
+      "referenced_by": [
+        "examples/README.md"
+      ]
+    }
+  },
+  "outside_repository_links": []
+}

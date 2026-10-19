@@ -1,0 +1,55 @@
+{
+  "observed": "2026-10-18T08:44:28.071751+09:00",
+  "source_files": 33,
+  "source_map_sha256": "4a57bf1342498e70ba79330b2cb3b753f64098b9a9bd6218d8a04a33b2fbe4c8",
+  "linux_source_match": true,
+  "wheel_sha256": "43de73c1d21b10af36b39fe0e8766a0b30b8533146738b694dd62d4b1a0dbcf6",
+  "installed": {
+    "core": {
+      "source_match": true,
+      "verify_wheel_returncode": 0,
+      "path": "A:\\dev\\mcmc4qec\\.venv-dev5-core\\Lib\\site-packages\\mcmc4qec"
+    },
+    "optional": {
+      "source_match": true,
+      "verify_wheel_returncode": 0,
+      "path": "A:\\dev\\mcmc4qec\\.venv-dev5-optional\\Lib\\site-packages\\mcmc4qec"
+    }
+  },
+  "source_acceptance": {
+    "windows_passed": 202,
+    "linux_passed_including_example": 210
+  },
+  "wheel_tests": {
+    "core": {
+      "passed": 114,
+      "skipped": 88
+    },
+    "optional": {
+      "passed": 202,
+      "skipped": 0
+    }
+  },
+  "strict_mypy": {
+    "source_files": 32,
+    "returncode": 0
+  },
+  "scope": "Targeted acceptance, old decoder regressions, installed wheel source equality, all verify_wheel quick examples/notebooks and doc code blocks. Not full pytest suite, scientific coverage or performance calibration.",
+  "evidence_sha256": {
+    "acceptance_manifest.json": "8d469dfeaebb8a2900ff0308bc122a806c75e88f48a3140a7ef6e9b880e3f54f",
+    "acceptance_manifest_v2.json": "9faaa02381d0f379ec157670a473720d7bfd1edfe08cc71664e7d4280cfdbe10",
+    "cluster_observation.json": "5637e7998c4398f55e4448465d56a6c532478e6ef11bf2596203a18c7cd13a88",
+    "linux_acceptance.txt": "c26ddbeb37cae886c2263302a330200ffffd10b55870ce854ed8576a4883edef",
+    "linux_acceptance_v2.txt": "6c3975646b07184ce77726dbbf66ff02a3bc6fe5166ced68b3a928879e013cd9",
+    "linux_deployment.json": "5527c93668993733992848a0091f52b243fa0acb430132a5627eaaa29d5ad87d",
+    "linux_deployment_v2.json": "ee84d460c310d57f92799bb3754b462dfa3cc636de6d359a9e67194428d68c7b",
+    "linux_provenance.json": "c75a9226a0d17fce65145bce461bbfbc4657c24fbb03d05973e662085be9a65f",
+    "linux_provenance_v2.json": "7b71b5738311788cf13a97d417a1d884a7c3b40afc719264b13c2c72c8b3416d",
+    "linux_source_binding.json": "b4e79120ddc2ae14e966392c3fdfcdcb0dc562cc6a2e77b887e904346def06eb",
+    "linux_source_binding_v2.json": "7ffe61f52ce1f0a202d2812c9bd2edd226ca45ebc32156d23d86a16c30acbea9",
+    "windows_wheel_core.txt": "fc1ac99a52ca48ee86493aa0424a4368c708e7ef61b6f885fadaed4d31812c16",
+    "windows_wheel_core_v2.txt": "5b8c7043a7586e20babd867086aeeed27ae5af82697257772e03e585a1263b44",
+    "windows_wheel_optional.txt": "bdf14922f0a000bc6c9a031443b290d9d92ed0e8e4c941bce36dafa8f66f82f3",
+    "windows_wheel_optional_v2.txt": "a9e3a6bf7a383f78552c4793eeb69ce2256fdc3fdc8fc0cb3e1fa52605f4bd34"
+  }
+}

@@ -7,6 +7,13 @@ on:
 permissions:
   contents: read
 
+env:
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+  NUMEXPR_NUM_THREADS: "1"
+  PYTHONHASHSEED: "0"
+
 jobs:
   documentation:
     runs-on: ubuntu-latest
@@ -51,7 +58,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Build and install wheel
         run: |
-          python -m pip install build pytest
+          python -m pip install build pytest "pytest-xdist>=3,<4"
           python -m build --wheel
           python -m pip install dist/*.whl
       - name: Confirm installed package and absent optional dependencies
@@ -67,7 +74,7 @@ jobs:
           PY
       - name: Test installed wheel
         timeout-minutes: 5
-        run: python -m pytest --override-ini pythonpath= tests/ -q
+        run: python -m pytest --override-ini pythonpath= tests/ -q -n auto --dist=worksteal
       - name: Verify core quick examples and documentation
         timeout-minutes: 5
         run: python -I docs/wp/verify_wheel.py core
@@ -84,7 +91,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Build and install wheel with optional decoders
         run: |
-          python -m pip install build pytest
+          python -m pip install build pytest "pytest-xdist>=3,<4"
           python -m build --wheel
           python - <<'PY'
           from pathlib import Path
@@ -96,7 +103,7 @@ jobs:
           PY
       - name: Test installed wheel with optional decoders
         timeout-minutes: 5
-        run: python -m pytest --override-ini pythonpath= tests/ -q
+        run: python -m pytest --override-ini pythonpath= tests/ -q -n auto --dist=worksteal
       - name: Verify all quick examples and notebooks
         timeout-minutes: 5
         env:

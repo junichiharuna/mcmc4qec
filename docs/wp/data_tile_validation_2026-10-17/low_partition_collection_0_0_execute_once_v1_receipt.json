@@ -1,0 +1,70 @@
+{
+  "action": "execute",
+  "ambiguous": false,
+  "authority_sha256": "cbd7bd95e3d3fb5df1f947f5457eaa3d184d32906ecd862b810553a71fa28e9e",
+  "case": 0,
+  "execute_requested": true,
+  "job_id": "265323.node-PRISM",
+  "output_sha256": {
+    "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "75b878da3f124a1ecfc8750d8701891860d7ad388bee65c283c709571eec0a36"
+  },
+  "prepared_sha256": "45c9015ab98bd1468a7305630106c4161602516737f705df2445e67470de4db6",
+  "remote_script_sha256": "63d472a92fccda2a56a5485089f63667aa1917e381438da26cbb7364a339e96d",
+  "response": {
+    "bundle": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v11",
+    "bundle_binding": {
+      "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+      "python_path": "/home/user/miniconda3/envs/py311/bin/python3.11",
+      "python_sha256": "7c4b0f4c2b37f9aae938c7f6e62f5b7a2a002154762f3b66f19a89d402c96989",
+      "source_sha256": {
+        "audit_tile_traces.py": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+        "calibration.py": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+        "probe_tile_decoder_platform.py": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6",
+        "submit.py": "dd5d6f97fbedb3b9a4254715612e51b0e89cada009af8700bd96ac9cb96ee0ba",
+        "submit_tile_capacity.py": "470496ebea42dc1697941c43a987de85cd6ec220f36470603546ae9a96685b88",
+        "submit_tile_low_noise.py": "617515186afde4248f5bb1b0ae193c491c7fd8c1b65457f123a8d8883a402020",
+        "submit_tile_low_noise_analysis_capacity.py": "b7cc0b53133a1709f863babed2ac06028a990d1a9de3810fae62c8c097a7d7e7",
+        "submit_tile_low_noise_sampling_partitions.py": "10125e6533a9e492904a27f4fddb60eeed3df8390d41913d43f39485cdeb021b",
+        "submit_tile_mc_time.py": "3e81e7d96ae6b4913889e33886330c0787fa53cecf2e7c7c199f2fbd439fc39a",
+        "tile_bar_analysis.py": "7d22afe9b4ee554e255ca1556510b2c76d892d7817ad44ae7a423971a58505de",
+        "tile_bar_study.py": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb",
+        "tile_low_noise_analysis.py": "4b2e4fa26ab54180dbdf4bc9cdfadd2cbe0781087037c84ac343def481080f7e",
+        "tile_low_noise_analysis_capacity.py": "9908043898bd57bd6346728f4b88a160dad43ab05f5ca879e65eed78339114a6",
+        "tile_low_noise_sampling_partitions.py": "766e34275905eaeb13a99402cc963f0bc9894047a33f3a58b38aa7afb8047455",
+        "tile_low_noise_study.py": "6ce8ef25b06646c46b8c59ba02d59e6841c766cd28ad270d356e462326082f22",
+        "tile_mc_precision_budget.py": "72a2bbc75097b0c7372de51f596ea7b7d3ad8c39dd21053cb0c47ae79261b587",
+        "tile_mc_time_benchmark.py": "4b7d35dcd661b67237a2614d1375d14c6d02c9f03e05dc083bbfe7e054787501",
+        "tile_study.py": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838"
+      }
+    },
+    "command": [
+      "qsub",
+      "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-0-v1/sampling-collection-submission/partition.sh"
+    ],
+    "job_id": "265323.node-PRISM",
+    "manifest": "11774cd436c19eb6e0869bb9358fff2b08c081d7380e9a2a3c85bfada43954b9",
+    "partition": null,
+    "phase": "collect",
+    "resource": {
+      "cpus": 1,
+      "max_nodes": 2,
+      "measured": false,
+      "memory_gb": 32,
+      "requested_nodes": 1,
+      "wall_seconds": 7200,
+      "walltime": "02:00:00",
+      "warning": "Initial full-collection budget; not a measured completion prediction.",
+      "workers": 1
+    },
+    "script_sha256": "15cb2feb79ce7aabce5686e244835607137bfad41446acb9a2c40b4910538f11"
+  },
+  "returncode": 0,
+  "source_sha256": {
+    "A:\\dev\\mcmc4qec\\output\\low_partition_collection_inputs.py": "5e7294f1cc5bf4a84fac6940f01120aa1a67a9d7bf10caf711533537f0483d7c",
+    "A:\\dev\\mcmc4qec\\output\\low_partition_collection_remote.py": "9e4face4a4950ffc3a6c6d4ce3a76c2f43deb731d85d1fee121ed56950158800",
+    "A:\\dev\\mcmc4qec\\output\\submit_low_partition_collection_once.py": "470971246d312f53fa1d30b6792c2ce62f9056ad168c131bed2ee8f0aa8f7d0f",
+    "A:\\dev\\mcmc4qec\\output\\submit_low_partition_once.py": "1c916201a1c25e1d4d1578503174e48135af4593700b73eea7f860894660e8a6"
+  },
+  "target_index": 0
+}

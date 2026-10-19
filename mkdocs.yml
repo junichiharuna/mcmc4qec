@@ -55,6 +55,8 @@ exclude_docs: |
   !/guide_en.md
   !/guide_ja.md
   !/api_en.md
+  !/experimental_release_notes_en.md
+  !/experimental_release_notes_ja.md
   !/reference/
   !/reference/*.md
   # Theme assets are subject to the same exclusions as documentation files.
@@ -70,6 +72,9 @@ nav:
   - Guides:
       - Choose a workflow: guide_en.md
       - 目的別ガイド: guide_ja.md
+  - Experimental release:
+      - Candidate notes: experimental_release_notes_en.md
+      - 公開候補ノート: experimental_release_notes_ja.md
   - API reference:
       - Contracts and statistical conventions: api_en.md
       - Models and noise: reference/models.md

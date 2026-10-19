@@ -1,0 +1,156 @@
+{
+  "observed": "2026-10-19T09:25:54.019659+09:00",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.22631-SP0",
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "pytest": "9.1.1",
+    "ldpc": "2.4.1",
+    "bposd": "2.1",
+    "pymatching": "2.4.0",
+    "stim": "1.16.0",
+    "build": null
+  },
+  "tracked": {
+    ".github": {
+      "files": 1,
+      "bytes": 3277
+    },
+    ".gitignore": {
+      "files": 1,
+      "bytes": 123
+    },
+    "AGENTS.md": {
+      "files": 1,
+      "bytes": 14285
+    },
+    "CHANGELOG.md": {
+      "files": 1,
+      "bytes": 8278
+    },
+    "CITATION.cff": {
+      "files": 1,
+      "bytes": 984
+    },
+    "CONTRIBUTING.md": {
+      "files": 1,
+      "bytes": 4952
+    },
+    "LICENSE": {
+      "files": 1,
+      "bytes": 1071
+    },
+    "README.md": {
+      "files": 1,
+      "bytes": 5384
+    },
+    "README_ja.md": {
+      "files": 1,
+      "bytes": 6019
+    },
+    "benchmarks": {
+      "files": 4,
+      "bytes": 55196
+    },
+    "cluster_scripts": {
+      "files": 10,
+      "bytes": 88373
+    },
+    "docs": {
+      "files": 112,
+      "bytes": 1046082
+    },
+    "docs/wp/data_calibration_2026-10-15": {
+      "files": 17,
+      "bytes": 57798
+    },
+    "docs/wp/data_calibration_2026-10-17": {
+      "files": 39,
+      "bytes": 10372089
+    },
+    "docs/wp/data_dev5": {
+      "files": 46,
+      "bytes": 634724
+    },
+    "docs/wp/data_diagnostics_2026-10-15": {
+      "files": 5,
+      "bytes": 20145
+    },
+    "docs/wp/data_speed_2026-10-15": {
+      "files": 6,
+      "bytes": 5778
+    },
+    "docs/wp/data_validation_2026-10-15": {
+      "files": 7,
+      "bytes": 37113
+    },
+    "examples": {
+      "files": 22,
+      "bytes": 112467
+    },
+    "mkdocs.yml": {
+      "files": 1,
+      "bytes": 2422
+    },
+    "notebooks": {
+      "files": 5,
+      "bytes": 142234
+    },
+    "pyproject.toml": {
+      "files": 1,
+      "bytes": 2042
+    },
+    "src": {
+      "files": 29,
+      "bytes": 242260
+    },
+    "tests": {
+      "files": 45,
+      "bytes": 261195
+    }
+  },
+  "untracked": {
+    "benchmarks": {
+      "files": 1,
+      "bytes": 6132
+    },
+    "cluster_scripts": {
+      "files": 100,
+      "bytes": 1145527
+    },
+    "docs": {
+      "files": 98,
+      "bytes": 972378
+    },
+    "docs/wp/data_basic_decoders_2026-10-18": {
+      "files": 17,
+      "bytes": 39963
+    },
+    "docs/wp/data_decoder_survey_2026-10-18": {
+      "files": 9,
+      "bytes": 173547
+    },
+    "docs/wp/data_experimental_release_2026-10-19": {
+      "files": 3,
+      "bytes": 2422
+    },
+    "docs/wp/data_tile_validation_2026-10-17": {
+      "files": 19831,
+      "bytes": 13482952092
+    },
+    "examples": {
+      "files": 2,
+      "bytes": 11952
+    },
+    "src": {
+      "files": 4,
+      "bytes": 20920
+    },
+    "tests": {
+      "files": 101,
+      "bytes": 820759
+    }
+  },
+  "scope": "Local publication inventory; no files staged, committed, uploaded, or deleted."
+}

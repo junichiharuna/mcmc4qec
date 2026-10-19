@@ -1,0 +1,306 @@
+{
+  "records": [
+    {
+      "code": "toric3",
+      "decoder": "bp",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "toric3",
+      "decoder": "bp_osd0",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "toric3",
+      "decoder": "bp_lsd0",
+      "samples": 19,
+      "correction_differences": 3,
+      "logical_prediction_differences": 2,
+      "failure_label_differences": 2
+    },
+    {
+      "code": "toric3",
+      "decoder": "belief_find_inversion",
+      "samples": 19,
+      "correction_differences": 2,
+      "logical_prediction_differences": 2,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "toric3",
+      "decoder": "uf_inversion_compat_string",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "toric3",
+      "decoder": "uf_peeling_compat_string",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "surface3",
+      "decoder": "bp",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "surface3",
+      "decoder": "bp_osd0",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "surface3",
+      "decoder": "bp_lsd0",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "surface3",
+      "decoder": "belief_find_inversion",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "surface3",
+      "decoder": "uf_inversion_compat_string",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "surface3",
+      "decoder": "uf_peeling_compat_string",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "steane",
+      "decoder": "bp",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "steane",
+      "decoder": "bp_osd0",
+      "samples": 19,
+      "correction_differences": 1,
+      "logical_prediction_differences": 1,
+      "failure_label_differences": 1
+    },
+    {
+      "code": "steane",
+      "decoder": "bp_lsd0",
+      "samples": 19,
+      "correction_differences": 1,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "steane",
+      "decoder": "belief_find_inversion",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "steane",
+      "decoder": "uf_inversion_compat_string",
+      "samples": 19,
+      "correction_differences": 5,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "bp",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "bp_osd0",
+      "samples": 19,
+      "correction_differences": 8,
+      "logical_prediction_differences": 7,
+      "failure_label_differences": 3
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "bp_lsd0",
+      "samples": 19,
+      "correction_differences": 7,
+      "logical_prediction_differences": 6,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "belief_find_inversion",
+      "samples": 19,
+      "correction_differences": 4,
+      "logical_prediction_differences": 3,
+      "failure_label_differences": 1
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "uf_inversion_compat_string",
+      "samples": 19,
+      "correction_differences": 11,
+      "logical_prediction_differences": 11,
+      "failure_label_differences": 3
+    },
+    {
+      "code": "bb72",
+      "decoder": "bp",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "bb72",
+      "decoder": "bp_osd0",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "bb72",
+      "decoder": "bp_lsd0",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "bb72",
+      "decoder": "belief_find_inversion",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "bb72",
+      "decoder": "uf_inversion_compat_string",
+      "samples": 19,
+      "correction_differences": 7,
+      "logical_prediction_differences": 5,
+      "failure_label_differences": 1
+    },
+    {
+      "code": "tile72",
+      "decoder": "bp",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile72",
+      "decoder": "bp_osd0",
+      "samples": 19,
+      "correction_differences": 5,
+      "logical_prediction_differences": 1,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile72",
+      "decoder": "bp_lsd0",
+      "samples": 19,
+      "correction_differences": 5,
+      "logical_prediction_differences": 2,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile72",
+      "decoder": "belief_find_inversion",
+      "samples": 19,
+      "correction_differences": 1,
+      "logical_prediction_differences": 1,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile72",
+      "decoder": "uf_inversion_compat_string",
+      "samples": 19,
+      "correction_differences": 6,
+      "logical_prediction_differences": 5,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile288",
+      "decoder": "bp",
+      "samples": 19,
+      "correction_differences": 0,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile288",
+      "decoder": "bp_osd0",
+      "samples": 19,
+      "correction_differences": 7,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile288",
+      "decoder": "bp_lsd0",
+      "samples": 19,
+      "correction_differences": 5,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile288",
+      "decoder": "belief_find_inversion",
+      "samples": 19,
+      "correction_differences": 8,
+      "logical_prediction_differences": 0,
+      "failure_label_differences": 0
+    },
+    {
+      "code": "tile288",
+      "decoder": "uf_inversion_compat_string",
+      "samples": 19,
+      "correction_differences": 9,
+      "logical_prediction_differences": 9,
+      "failure_label_differences": 0
+    }
+  ],
+  "raw_counts_recomputed": true,
+  "inputs_equal": true,
+  "package_versions_equal": true,
+  "source_sha256": "cffc245bd5f9074ce4273b3968a323787dd93fac138c019b3b6d7e8943edca67",
+  "audit_source_sha256": "f780e42360e3e203bd43b31488b7bc967b636a14aa6306e54e6744ad4de919b3",
+  "warning": "Finite common-input comparison only. Physical correction differences need not change logical predictions or failure labels. No LER, performance or general determinism guarantee."
+}

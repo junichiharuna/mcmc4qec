@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add checked BP-LSD (order 0), BeliefFind, and Union-Find factories, including
+  depolarizing sector adapters, small-code tests, and comparison examples.
+  Reject unsupported native options and invalid corrections explicitly.
+  These interface checks do not calibrate logical error rates or BAR coverage.
+- Link current tile code-capacity results and unfinished low-noise validation
+  from the English and Japanese README and documentation overview.
+
 - Add `make_tile_code(l, m)` for the open-boundary weight-six tile family,
   paired CSS logical bases, BP-OSD integration tests and a runnable example.
   Published distance labels are not independently certified by the factory.

@@ -1,0 +1,35 @@
+{
+  "observed": "2026-10-18T10:04:07.159788+09:00",
+  "input_sha256": {
+    "cluster_scripts/tile_audited_results.py": "3f9a5bfa85dd8fe722926296dfec2ba28bbf07a615fc13502217f63d0789a1ea",
+    "tests/test_tile_audited_results.py": "83c9e3e350e4dfee756d68648c0cadfed29f49b63260602a54cd95ffcd9599d6",
+    "docs/wp/tile_audited_results_spec_2026-10-18_ja.md": "af583f1b105a38aab705db3b4f1d3bc2cd1baf590c1dd263ecc6e8a4871a823f",
+    "cluster_scripts/tile_low_noise_audited_collection.py": "0992af2ed784db964bbb9cca52678af17793c7b952c3b2342920850c5f4b8e6e",
+    "tests/test_tile_low_noise_audited_collection.py": "d3121748cfee03c08920706a79022d9235a86d6e5a471eebb7768a13b3170268",
+    "docs/wp/tile_low_noise_audited_collection_spec_2026-10-18_ja.md": "74344f71eea34d9635f2c4979afab57f9635ba8fb9b555e5e414672a7d9805f1"
+  },
+  "windows_acceptance": [
+    {
+      "test": "tests/test_tile_audited_results.py",
+      "passed": 17,
+      "seconds": 43.23,
+      "source": "implementation agent tool result; raw console log not separately saved"
+    },
+    {
+      "test": "tests/test_tile_low_noise_audited_collection.py",
+      "passed": 10,
+      "seconds": 33.83,
+      "source": "implementation agent tool result; raw console log not separately saved"
+    }
+  ],
+  "core": {
+    "skipped": 2,
+    "seconds": 0.24,
+    "source": "parent tool result; PowerShell wrapper exit code 1 for all-skipped collection"
+  },
+  "independent_reviews": {
+    "main": "low_noise_analysis: no remaining blocking finding",
+    "low": "union_find: no remaining blocking finding"
+  },
+  "scope": "Acceptance uses small actual artifacts and explicit full-census fixtures. Full production scan, bootstrap rerun and scientific calibration not performed."
+}

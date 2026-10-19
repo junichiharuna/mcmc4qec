@@ -1,0 +1,96 @@
+# 分割sampling対応trace監査の親側接続
+
+## 対象と独立性
+
+正式sampling collectorの完了後に、同じ条件のtrace監査capacityを準備する。
+BAR解析とは独立して進められるが、実投入時には待機中を含めて最大2要求nodeを守る。
+既存のpartitioned trace監査・資源推定・submitterを使い、科学計算コードと固定seed群を変更しない。
+capacityは既存仕様どおり2 replicate・8 workerで、資源値は固定helperの初期上限をそのまま使い、完了時間の予測とは扱わない。
+full監査は同条件capacityの実測と正式完了受理の後に別途準備する。
+
+## capacity準備の受入条件
+
+固定sampling collector入口の完了記録からauthorityを構成し、source/native・collector prepared SHA・completion SHA・実jobと脚本を照合する。
+sampling全partitionの完了記録、collector終端、全metadata hash、production条件と既存readerの完了証拠を前後で検証する。
+raw trace全payloadはこの親処理で走査せず、PBS監査で確認する。
+監査rootは固定bundle内のruns/partitioned-trace-capacity-{case}-{target}-v1とし、既存出力とsampling rootの包含関係を拒否する。
+既存prepareで計画を作り、既存submitterのdry-runだけを呼び、脚本構文・qsub引数・資源値を確認する。
+manifest・sampling manifest・platform証拠・脚本・dry-run記録をhashで固定し、sourceと上流終端を再確認して親prepared記録を一度だけ保存する。
+未完了・別条件・途中変更・既存出力・予期しない投入応答を拒否し、自動再試行しない。
+prepareの成功は実qsub・実監査・全payload検証の成功とは区別する。
+
+## local入力と一回prepare
+
+既存のcollector completion再構成helperを使い、実prepare・execute・completionのsource、intent、stdout/stderr、成功receiptをSSH前に照合する。
+BAR capacityの入力は要求せず、collector完了証拠からtrace capacity専用authorityを作る。
+固定sourceを連結したremote scriptとintentを保存し、成功応答のpurpose、authority、監査root、scope、prepared hashを確認する。
+通信失敗・不正応答・途中変更・割込みでも記録を保持し、同じ出力先への自動再試行を拒否する。
+
+## capacityのpreflightと一回qsub
+
+localのprepare成功記録と外部prepared SHAから同じauthorityを再構成する。
+remoteでは全生成ファイル、source/native、sampling完了証拠とcollector実終端、固定計画と初期資源を再検証する。
+preflightはqsubせず、executeで既存trace submitterの共有lockを使う。
+trace submitterのlock ownerはroot・pidであり、generatorやBARのlock形式を流用しない。
+既存submitterの上流qstatは準備台帳に含まれるjobだけを許可し、期待exit・run_count1・脚本を確認する。
+qsub直前にはsource・入力・実終端・旧controller終了・待機中を含む最大2node・lock owner・submission intentを再確認する。
+guard intentを保存した後にも確認し、期待するqsubを一度だけ許可する。
+通信失敗・不正job応答・非0終了ではguard receiptと既存submitterのlockを保持し、自動再試行しない。
+local側もintent・script・stdout/stderr・receiptを保存し、成功時はprepared台帳と実job IDの一致を確認する。
+
+## capacityの正式完了受理
+
+実executeの成功記録とremote台帳・guardを照合し、PBSのF・exit0・run_count1・脚本・要求資源を確認する。
+PBS保存項目を状態・脚本・資源・実測時間・hostに絞り、環境変数一覧は保存しない。
+既存read_terminalで実submissionとexecution・native証拠を結合する。
+同条件full監査のworkers=1の仮計画をメモリ上だけに作り、既存measured_capacityで2 replicate・8 groupのcapacity artifactと参照trace hash、task/checkpoint census、native環境を検証する。
+この処理は保存済みartifactの検証であり、新規samplingやcheckpointの再復号は行わない。
+得られた資源推定は仮計画に対応する記録として保存し、full準備時にworker選択後の計画で改めて既存prepare_fullの検証を通す。
+全capacity metadata・source・sampling完了証拠・実PBSを前後で照合し、一回だけparent-completionを保存する。
+capacityの検証を全192 replicateの監査完了とは扱わず、scopeを明示する。
+local側は実execute証拠を再構成し、応答のjob・prepared SHA・execute receipt SHA・scopeとcompletion hashを照合する。
+
+## 実測full監査の準備
+
+正式capacity completionの外部hashとaccepted JSONを入力とし、元のcapacity authority、全metadata、source/native、sampling collector、実capacity PBS終端を再照合する。
+full rootは同じbundle内のruns/partitioned-trace-full-{case}-{target}-v1に固定し、既存出力とcapacity・sampling rootとの包含関係を拒否する。
+既存prepare_fullでcapacity artifactと参照traceを検証し、選択workerに対応する192 replicateの計画を作る。
+既存submitterのdry-runで脚本と資源を確認し、全生成ファイルのhash、capacity完了証拠、上流終端とsourceを前後で照合する。
+親prepared記録には元のcapacity completion hashと選択済み資源を保存し、qsubは行わない。
+この準備で検証するtraceはcapacityの対象だけであり、full監査の完了や全trace再復号を主張しない。
+
+## full prepareのlocal入口
+
+固定capacity completion入口から実execute・completionのintent、script、stdout/stderr、成功receiptを再構成し、全入力とsourceのhashをSSH前に照合する。
+capacity完了のjob・prepared SHA・execute receipt SHA・scopeとremote completion hashが一致する場合にだけfull authorityを構成する。
+元のcollector authorityとcapacity authorityを保持し、full保存先を固定bundleから導出する。
+一回実行のintentとscriptを先に保存し、応答のpurpose・authority・root・scope・prepared hashと全local入力の前後一致を検証する。
+不完全な完了記録、途中変更、通信失敗、割込みを受理せず、同じ出力先へ自動再試行しない。
+
+## full監査のpreflight・qsub
+
+外部full prepared SHAとlocal prepare成功記録により、full root・計画・脚本・選択workerと資源を固定する。
+capacity completionの全証拠と実終端、sampling collector、source/nativeを再検証し、既存checked_planで同条件capacityから資源を再評価する。
+preflightでは投入せず、executeは既存trace submitterのroot・pid共有lockを取得してから固定qsubを一度だけ呼ぶ。
+上流sampling jobのqstatだけを許可し、capacityの実終端はfull bindingの再検証で確認する。
+guard intent保存前後にfull入力・capacity・source・旧controller・待機中を含む最大2node・lock・実submission intentを照合する。
+不明な応答や途中変更では記録を残して自動再投入しない。
+local入口ではfull prepareの成功receipt・intent・script・stdout/stderrを固定sourceから再構成し、外部prepared SHAと全入力hashを照合する。
+preflightとexecuteは別々の一回記録とし、execute成功時にはprepared台帳と実job IDの一致を検証する。
+
+## full監査ジョブの親側完了受理
+
+実full executeの成功記録とremote台帳・guard、PBSのF・exit0・run_count1・脚本・資源を照合する。
+既存read_terminalでsubmission・execution・native証拠を結合し、summaryのnative hashと固定manifestを確認する。
+計画上の768 groupが順序・重複なしでsummaryに揃うことと、task・sampling失敗・checkpoint件数の合計一致を確認する。
+各groupの小さいmeasurement artifactを既存load_artifactで読み、summary行との一致とartifact hashを確認する。
+audit groupのdone markerをsummary行のhashと照合し、全metadata・source・capacity実終端・full実終端を前後で再確認する。
+full監査ジョブの完了として受理するが、親処理で大きなaudit group JSONやraw trace全体を再走査したとは扱わない。
+全audit group payload・trace対応・anchorを検証する処理は後続のPBS集約で実行する。
+sampling失敗数は保持して合計し、都合のよいgroupやseedだけを選ばない。
+
+## 後続
+
+local一回実行入口、qsub guard、capacityの完了受理と全小規模artifact検証、measured profileに基づくfull準備、fullの完了受理を順に接続する。
+BAR partition完了とfull trace監査完了を受けて、全group payload・trace対応・anchor・WSS referenceを照合するPBS集約へ進む。
+診断未定義・区間未取得・sampling失敗を分母から除外しない。

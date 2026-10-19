@@ -29,6 +29,7 @@ python -m pip install -e ".[codes,matching]"
 | 引数・返り値・クラスのメソッドを調べる | [サンプリング API](reference/sampling.md)、[結果と診断の API](reference/results.md) |
 | スクリプトや notebook を動かす | [実行例一覧（英語）](../examples/README.md) |
 | 数値結果の検証記録を読む | [検証記録への案内](../README_ja.md#利用上の注意) |
+| tileの現時点の結果と未完了の検証を確認する | [tile検証報告](wp/tile_validation_report_2026-10-18_ja.md)、[検証状況](wp/tile_validation_status_2026-10-17_ja.md) |
 
 API リファレンスの引数・型・docstring は、現在のソースから生成します。
 推定法の前提は引数の一覧だけでは分からないので、API の契約を説明した文書も併せて参照してください。

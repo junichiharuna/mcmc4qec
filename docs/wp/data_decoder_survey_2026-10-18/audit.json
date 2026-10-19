@@ -1,0 +1,103 @@
+{
+  "source_sha256": "cffc245bd5f9074ce4273b3968a323787dd93fac138c019b3b6d7e8943edca67",
+  "records_per_platform": 37,
+  "raw_counts_recomputed": true,
+  "inputs_equal": true,
+  "cross_platform_correction_differences": [
+    {
+      "code": "toric3",
+      "decoder": "bp_lsd0",
+      "correction_differences": 3
+    },
+    {
+      "code": "toric3",
+      "decoder": "belief_find_inversion",
+      "correction_differences": 2
+    },
+    {
+      "code": "steane",
+      "decoder": "bp_osd0",
+      "correction_differences": 1
+    },
+    {
+      "code": "steane",
+      "decoder": "bp_lsd0",
+      "correction_differences": 1
+    },
+    {
+      "code": "steane",
+      "decoder": "uf_inversion_compat_string",
+      "correction_differences": 5
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "bp_osd0",
+      "correction_differences": 8
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "bp_lsd0",
+      "correction_differences": 7
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "belief_find_inversion",
+      "correction_differences": 4
+    },
+    {
+      "code": "hgp_hamming",
+      "decoder": "uf_inversion_compat_string",
+      "correction_differences": 11
+    },
+    {
+      "code": "bb72",
+      "decoder": "uf_inversion_compat_string",
+      "correction_differences": 7
+    },
+    {
+      "code": "tile72",
+      "decoder": "bp_osd0",
+      "correction_differences": 5
+    },
+    {
+      "code": "tile72",
+      "decoder": "bp_lsd0",
+      "correction_differences": 5
+    },
+    {
+      "code": "tile72",
+      "decoder": "belief_find_inversion",
+      "correction_differences": 1
+    },
+    {
+      "code": "tile72",
+      "decoder": "uf_inversion_compat_string",
+      "correction_differences": 6
+    },
+    {
+      "code": "tile288",
+      "decoder": "bp_osd0",
+      "correction_differences": 7
+    },
+    {
+      "code": "tile288",
+      "decoder": "bp_lsd0",
+      "correction_differences": 5
+    },
+    {
+      "code": "tile288",
+      "decoder": "belief_find_inversion",
+      "correction_differences": 8
+    },
+    {
+      "code": "tile288",
+      "decoder": "uf_inversion_compat_string",
+      "correction_differences": 9
+    }
+  ],
+  "archive_sha256": {
+    "linux_artifacts.tar.gz": "c419a162f1c6be9bab9bd1b274a803ce91644858e03600891af3af4ce5f1d706",
+    "windows_artifacts.tar.gz": "1d27393fe2d391ae26cdb11ed0f0dcbc9d829556788a48c6f16c9151887334b5"
+  },
+  "warning": "Finite common-input probe only; not general decoder determinism, accuracy, speed or platform equivalence."
+}

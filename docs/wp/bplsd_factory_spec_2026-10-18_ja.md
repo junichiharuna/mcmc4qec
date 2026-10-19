@@ -1,0 +1,33 @@
+# BP-LSD factoryの小仕様と受入
+
+追加decoder対応の第1段階として、`bplsd_decoder`と`depolarizing_bplsd_decoder`を公開する。
+既存のMWPM・BP-OSD・sampling既定・実行中クラスタbundleは変更しない。
+
+`p`は固定したbinary sector priorであり、depolarizing版でも物理Pauli確率から暗黙に変換しない。
+物理Pauli確率pに合わせる場合、利用者はsector priorとして2p/3を渡し、joint I/X/Y/Z noiseを維持する。
+Xにはhz/lz、Zにはhx/lxを使い、sector合成の出力順はX、Zとする。
+既定はmax_iter=100、minimum_sum、係数1、parallel schedule、1 thread、random schedule無効、syndrome入力、lsd_0/order0、bits_per_step=1、always_run_lsd=Falseとする。
+端点の対数特異性を避けるため0<p<1を要求する。
+変更可能なkeywordはmax_iter、bp_method、ms_scaling_factor、lsd_method、lsd_order、bits_per_step、always_run_lsdだけとし、未知名・prior上書き・random schedule指定はnative呼出し前に拒否する。
+LSDはlsd_0、lsd_cs、lsd_eを受け付けるが、独立レビュー後の受入範囲はorder0に限定する。
+当初の全体nullityによる上限は局所clusterのnullityを保護しないため撤回し、正orderはnative前に拒否する。
+ldpc 2.4.1の局所OSDに対して正orderの安全性を確認するか、安全な実装へ置き換えるまで高order探索は提供しない。
+bits_per_stepは1以上n以下、max_iterは正整数、整数はnative signed int範囲内とする。
+別設定・別priorはmetadataで区別する。
+
+新factoryのadapterはbinaryな1次元syndromeの長さと実現可能性をnative呼出し前に検査する。
+実現可能性はHの左零空間との直交で判定し、依存checkに対する不可能な入力をnativeへ渡さない。
+補正はbinary・長さn・Hc=sを満たすことを毎回検査してからlogical mapへ写す。
+不正補正はValueErrorとし、成功・論理失敗のいずれにも黙って分類せず、暗黙fallbackもしない。
+backend例外はそのまま伝播する。
+独立レビューでldpc 2.4.1のzero_syndrome変数が全zero入力時に未初期化のまま読まれる箇所を確認したため、BP-LSD factoryはzero syndromeをnativeへ渡さず恒等補正と定義する。
+これは全priorで固定した明示的なdecoder規則であり、metadataのzero_syndrome_policyに記録する。
+他のdecoderにこの規則を暗黙に適用せず、非zero入力のnative例外をfallbackで隠さない。
+同じ設定のdeterministic decoderを要求するが、有限テストから全入力・別OS・別native buildでの同一性は保証しない。
+backendを構築後に変更するとmetadataとfailure集合の契約が失効する。
+
+受入はSteane全128状態、実現可能な全syndrome、小toricの依存check、X/Z mapping、反復・逆順・新規object、LSD後処理の強制実行、各方式・小orderを含む。
+tile72/288・surface・HGP・BBには少数の固定状態で接続を確認する。
+偽backendでsyndrome不一致・binary/shape不正・入力破壊・例外伝播を検査する。
+optional依存なしのimportとfactoryのImportError、設定拒否、metadataの防御的コピー、strict型検査と公開API文書の整合を確認する。
+これらは論理エラー率・速度順位・BAR被覆の検証ではなく、各decoderの統計校正は別途必要である。

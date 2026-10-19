@@ -1,0 +1,58 @@
+{
+  "scope": "Saved-summary equality and visual inspection only; no new scientific computation.",
+  "rows": 12,
+  "cases": 4,
+  "replicates_per_row": 192,
+  "csv_json_all_fields_equal": true,
+  "input_hashes_unchanged": true,
+  "input_files": 19,
+  "png_size": [
+    2484,
+    1116
+  ],
+  "svg_parsed": true,
+  "visual_qa": {
+    "performed": true,
+    "method": "view_image inspection of generated PNG",
+    "labels_and_counts_legible": true,
+    "overlap_or_clipping_observed": false,
+    "nominal_line_and_finite_reference_scope_visible": true
+  },
+  "artifact_sha256": {
+    "caption_ja.md": "fd09e0e3f668a2cadedcac82fab5b9d7282666f414ac775003675c067f44142a",
+    "figure_data.csv": "24a4be828eda49d905a7e9ee224925053b7ca831d66b046a8a1374ab7252235c",
+    "figure_data.json": "b94dcd841a3f32580df1b44c66fb5ae36e24cdd298bdbb40daed48f7dddd538f",
+    "main_calibration_comparison.png": "e52351f62b7e761b8283cd751041f71d65f13372e682a4a69812dd9d71ced4bb",
+    "main_calibration_comparison.svg": "10feaa1ef314d5a36d51513598f0632c45e8ec4a1d1c677e5a6f54473586c060",
+    "README_ja.md": "b675f4e5a46eaefa01baa71b1b6db3c349c7e4f3ad35b8be134cfe6c01ede705",
+    "regenerate.py": "e88c6006c7c37ca752db5ee1acd5f04f14be117108b32d85a6d510470d7b34a7"
+  },
+  "shown_relative_rmse_percent": [
+    0.8054383021697497,
+    4.8150505190718365,
+    1.9033236095009536,
+    7.210805518705618
+  ],
+  "shown_covered_mc_point": [
+    [
+      183,
+      185,
+      186
+    ],
+    [
+      124,
+      178,
+      176
+    ],
+    [
+      166,
+      180,
+      177
+    ],
+    [
+      114,
+      177,
+      178
+    ]
+  ]
+}

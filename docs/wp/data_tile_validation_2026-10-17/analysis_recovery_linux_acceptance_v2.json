@@ -1,0 +1,13 @@
+{
+  "root": "/home/user/workspace/mcmc4qec/20261018-tile-analysis-recovery-v2",
+  "files": {
+    "output/recover_completed_tile_analysis.py": "b303aaf1d915443da4f99b13405c51bcc0f6dba9a2ec0771421c8ff500506d05",
+    "docs/wp/data_tile_validation_2026-10-17/test_analysis_recovery_helper_v2.py": "4252a7ecc486bef5a51fd5720ba14b8ebef2007ccdcdbf6f8132d613f9e65148",
+    "cluster_scripts/artifact_archive.py": "8a6c213cf4b19ed916d79e0d485168d1f6131244f6465ed7c50084da03ff0384"
+  },
+  "archive_sha256": "aee18c9411b29fc3c737f9122f03e6b44d2231e2b5911e66f183a5a2ed5083c8",
+  "returncode": 0,
+  "ssh_seconds": 2.2013779999979306,
+  "command": "cd /home/user/workspace/mcmc4qec/20261018-tile-analysis-recovery-v2 && OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/user/workspace/mcmc4qec/20261017-tile-production-v1/venv/bin/python -m pytest docs/wp/data_tile_validation_2026-10-17/test_analysis_recovery_helper_v2.py -q",
+  "scope": "Three-file isolated synthetic acceptance; no production gate, qsub, archive export, or collection."
+}

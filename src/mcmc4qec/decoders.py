@@ -9,6 +9,11 @@ from .adapter_composition import SectorDecoder
 from .adapters import DecoderAdapter, PyMatchingAdapter, matching_from_check_matrix
 from .core import CSSCode, gf2_rank
 
+# Explicit re-exports preserve the single decoder-construction entry point.
+from .bplsd_decoders import bplsd_decoder as bplsd_decoder, depolarizing_bplsd_decoder as depolarizing_bplsd_decoder
+from .union_find_decoders import union_find_decoder as union_find_decoder, depolarizing_union_find_decoder as depolarizing_union_find_decoder
+from .belief_find_decoders import belief_find_decoder as belief_find_decoder, depolarizing_belief_find_decoder as depolarizing_belief_find_decoder
+
 
 def _code(code: CSSCode) -> CSSCode:
     if not isinstance(code, CSSCode):

@@ -1,0 +1,15 @@
+# 重み層別reference全条件監査のqsub投入
+
+固定16条件の全監査runnerを、1ノード・96 CPU・340 GiB・24時間上限・16 workerで一度だけ実行する。
+これは初回の資源上限であり、完了予測や計測済み見積りではない。
+元referenceの条件・試行・seed・監査checkpointを変更しない。
+出力は新bundle配下の独立rootへ保存し、元referenceは読み取り専用とする。
+元referenceのmanifest・native環境・PBS証拠をrunnerのread_planで照合し、実投入時は元jobがqstatで終端Fであることも確認する。
+failed条件を持つreferenceも監査対象なので、元jobの終了コード0は条件にしない。
+同じ親ディレクトリの共有submission lock、稼働controller拒否、queued込み最大2ノードを適用する。
+qsub直前にsource・core package・Python・manifest・scriptと元referenceの証拠を再照合する。
+intentを排他的に保存してからqsubを一度だけ呼ぶ。
+timeout・非zero終了・不明なjob IDではintentとlockを保持し、自動再投入しない。
+既存のexecution・condition出力・summary・submissionを再利用しない。
+受入ではqsubを置き換え、投入順序、2ノード上限、実行元job未完了、path逸脱、証拠の変更、曖昧応答を確認する。
+実qsubと本番全監査は未実施である。

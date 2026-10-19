@@ -1,0 +1,102 @@
+{
+  "observed": "2026-10-19T02:26:59.754120+00:00",
+  "head": "d78377e0f965f6aacc8a5e5b610c9153ebff9c3b",
+  "candidate_manifest_sha256": "b10eece1274929ca7f7155874a99c9da2960cbc1eb6b7cfdbd3e4402ac4c0a48",
+  "scope": "Candidate bytes and all blobs reachable from local Git refs. Pattern review only; binary content, encoded secrets, external storage, and provider-side dangling objects are not covered.",
+  "rules": {
+    "private_key": "-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----",
+    "github_token": "\\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})\\b",
+    "aws_access_key": "\\b(?:AKIA|ASIA)[A-Z0-9]{16}\\b",
+    "slack_token": "\\bxox[baprs]-[A-Za-z0-9-]{20,}\\b",
+    "openai_key": "\\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{40,}\\b",
+    "credential_url": "https?://[^\\s/:@]{2,}:[^\\s/@]{4,}@"
+  },
+  "totals": {
+    "candidate_files": 896,
+    "candidate_bytes": 140023217,
+    "reachable_blobs": 977,
+    "reachable_blob_bytes": 18481636
+  },
+  "findings": [],
+  "skipped_binary": [
+    {
+      "location": "candidate:docs/wp/data_calibration_2026-10-17/results/coverage_dispersed.pdf",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_calibration_2026-10-17/results/coverage_dispersed.png",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_calibration_2026-10-17/results/coverage_rows.csv.gz",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_calibration_2026-10-17/results/coverage_stationary.pdf",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_calibration_2026-10-17/results/coverage_stationary.png",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_calibration_2026-10-17/results/inventory.jsonl.gz",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_decoder_survey_2026-10-18/linux_artifacts.tar.gz",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_decoder_survey_2026-10-18/windows_artifacts.tar.gz",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_tile_validation_2026-10-17/figures_low_case2_target0_v1/trace_length_comparison.png",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_tile_validation_2026-10-17/figures_low_case2_target1_v1/trace_length_comparison.png",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_tile_validation_2026-10-17/figures_low_case2_target2_v1/trace_length_comparison.png",
+      "reason": "binary content"
+    },
+    {
+      "location": "candidate:docs/wp/data_tile_validation_2026-10-17/figures_main_calibration_v1/main_calibration_comparison.png",
+      "reason": "binary content"
+    },
+    {
+      "location": "git:9bb3b298df0088bdae3e802c31039a06753e9cd0:docs/wp/data_calibration_2026-10-17/results/coverage_dispersed.pdf",
+      "reason": "binary content"
+    },
+    {
+      "location": "git:884c4563eda2dce8ad8f240c7f93d107574604ba:docs/wp/data_calibration_2026-10-17/results/coverage_dispersed.png",
+      "reason": "binary content"
+    },
+    {
+      "location": "git:e837b3a959487675eaab05e3156ecefaf19f7064:docs/wp/data_calibration_2026-10-17/results/coverage_rows.csv.gz",
+      "reason": "binary content"
+    },
+    {
+      "location": "git:790b14b538174dfcc7cbc64e1292af26278a7b5b:docs/wp/data_calibration_2026-10-17/results/coverage_stationary.pdf",
+      "reason": "binary content"
+    },
+    {
+      "location": "git:b99c5f58b2b71297e8a1dae6cf61b873a893a1b8:docs/wp/data_calibration_2026-10-17/results/coverage_stationary.png",
+      "reason": "binary content"
+    },
+    {
+      "location": "git:5c883c5c38ca59f0373181c2bfcf97e5dec657f9:docs/wp/data_calibration_2026-10-17/results/inventory.jsonl.gz",
+      "reason": "binary content"
+    }
+  ],
+  "large_candidate_files": [
+    {
+      "path": "docs/wp/data_tile_validation_2026-10-17/mixing_comparison_four_case_v1/cohorts.json",
+      "bytes": 74208154,
+      "exceeds_100_mib": false
+    }
+  ]
+}

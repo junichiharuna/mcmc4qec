@@ -1,0 +1,33 @@
+# 層別referenceと固定BAR cohortの比較：小仕様
+
+本校正のsamplingと並行して実装する後処理であり、稼働中のbundle・manifest・seedを変更しない。
+入力は固定replicate群のBAR結果と、`tile_weight_reference.aggregate_condition` が出力する1条件分のreferenceである。
+caseとphysical decoder priorの完全一致を必須とする。
+元artifact・native環境・seedの監査は呼出し側の責任で、集計JSONの算術検査をraw監査とは呼ばない。
+
+## 統計契約
+
+層別referenceの`partial_estimate`は評価済みweight層の和であり、完全な論理誤り率の点推定として渡さない。
+全体に対するreference区間は、各MC層のClopper–Pearson区間をBonferroni配分して合成し、上端に未評価尾部の確率質量を加えたものである。
+保存された各層のmode・試行数・失敗数から合成値を再計算して比較し、合成値だけの改変を拒否する。
+浮動小数点の合成値比較には相対許容誤差1e-12・絶対許容誤差0を用い、極小確率を絶対誤差でゼロと同一視しない。
+この区間内の全reference値に対するempirical bias・RMSE・relative bias・relative RMSEの範囲を返す。
+点referenceを用いたbias・RMSE・被覆は返さず、区間全体を含むBAR区間の割合と、区間に交差するBAR区間の割合を別々に返す。
+referenceの区間は条件ごとの区間であり、多条件同時保証やBARの名目95%被覆保証ではない。
+relative RMSEの範囲と固定閾値の比較は有限cohortの経験的分類であり、母集団RMSEの信頼区間ではない。
+
+全replicateを分母に残し、欠落replicateと重複は入力不備として拒否する。
+推定値未取得・区間未取得・診断未定義・未収束フラグは明示的な行として残す。
+点推定が1個でも未取得なら全cohortのbias/RMSE範囲と精度達成判定を未取得にする。
+reference区間下端が0なら相対量を未定義にし、正の精度達成判定を行わない。
+reference自体が未取得ならreference依存量をすべて未取得とし、BARの件数と診断フラグは保持する。
+尾部上限は統計SEへ吸収せず、partial estimateとplugin SEとともに独立した欄に保存する。
+
+## 受入
+
+小さい状態空間で全列挙し、既知の完全確率に対するbias/RMSEが計算した範囲内に入ることを確認する。
+未評価尾部だけに失敗がある例で、partial estimate=0を全体のexact zeroや点referenceに変換しないことを確認する。
+0失敗MC層、reference下端0、全cohort未取得、単一replicate未取得、区間未取得と診断フラグを検査する。
+reference未取得、case/prior不一致、count不整合、合成値改変、重複・欠落replicateを検査する。
+区間内の密な数値格子により絶対・相対RMSE範囲を独立に照合し、極値が端点に限られない例も含める。
+この段階は比較関数の実装と受入であり、未実施の層別本番・低ノイズBARの検証結果とは扱わない。

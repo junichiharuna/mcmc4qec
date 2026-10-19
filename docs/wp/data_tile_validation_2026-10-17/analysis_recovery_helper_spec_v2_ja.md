@@ -1,0 +1,27 @@
+# 主BAR解析の完了後回収helper小仕様
+
+対象は固定production bundleのcase0〜3とし、既存sampling helper、production source、controllerを変更しない。
+既存の完成済みanalysis回収helperは見つからなかったため、sampling回収の排他出力・PBS終端確認・binary転送とartifact_archiveのproduction-analysis検証を再利用する。
+既定動作は計画の表示だけとし、実gate・stage・worker・collectは明示操作に分ける。
+
+gateはanalysis_submission-{case}.jsonのjob IDとqsubコマンド、PBSのF／Exit_status=0、analyze-{case}.shのhashとSubmit_argumentsを照合する。
+固定manifest、analysis_manifest、reference_summaryのbytes hashと相互digest、resource planとsubmissionのbinding、analysis sourceとsummary sourceを照合する。
+固定planから全groupを生成し、本番では768 groupのmarkerとjson／npz集合に欠落・重複・余分なartifactがないことを確認する。
+analysis_summary-{case}.json、summary-{case}.json、rows-{case}.jsonlを必須とし、context・予定group／row数・raw_rows_sha256を照合する。
+失敗行や区間未取得を理由に出力やgroupを取り除かず、その件数を保存する。
+gateは解析の再計算、trace再復号、bootstrap、被覆統計の再集計を行わない。
+
+archiveにはmanifest、analysis_manifest、reference_summary、analysis_resource_plan、対象caseのsubmission、analyze脚本／stdout／stderr、analysis_summary、summary、rowsと全analysis artifactを含める。
+stageはgate成功後だけ新しいrootへhelperと脚本を置き、既存rootを上書きせず、qsubを実行しない。
+Windowsからのstdin転送はbinaryに統一し、PBS脚本のLFを保持する。
+workerはPBS_JOBIDを必須とし、全選択入力とpayload hashを検証してgzip level1で圧縮し、全入力hashと集合の前後一致、archive hash、wall time、CPU time、peak RSSを保存する。
+全controllerの終端と最大2ノードの確認は、親がlogin側でqsub直前に行う責任であり、compute nodeのprocess確認で代用しない。
+collectはexport.jsonを読んだ後、export jobのF／exit0、export脚本binding、取得したworker本体hashを確認してからarchiveを取得する。
+collect開始時にローカルの固定stage記録のtarget／case／pinned inputと受入済みworker／脚本hashを読み、export.jsonの申告値と取得bytesの双方をこの記録に照合する。
+stage記録自体のhashと回収中の不変性も保存し、workerとexport.jsonを一緒に変更した自己整合pairを受理しない。
+export脚本とworker本体も実行前後のhash一致を確認し、collectでは双方のbytesをexport記録と照合する。
+archive.verifyのproduction-analysis照合に加え、保存manifestとanalysis_manifest、reference_summaryのhash、全入力hash mapを検証する。
+検証記録にはstage、case、manifest_sha256、analysis_manifest_sha256を付け、既存の監査済み結果readerの入力形式に合わせる。
+
+受入は合成小artifactだけを用い、正常回収と失敗行保持、元job未終了／異常終了／submission不整合、marker欠落／余分、context／reference／raw rows改変、PBS必須、export job未終了、worker改変、入力改変、排他root、LF転送を確認する。
+本番データは未回収であり、合成受入は実job成功や数値的正しさを保証しない。

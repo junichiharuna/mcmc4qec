@@ -1,0 +1,4457 @@
+{
+  "purpose": "independent_scientific_interpretation_of_saved_timing_report",
+  "input_snapshots": {
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\main_timing_report_result_evidence_v1\\collection_verification.json": {
+      "sha256": "5d0b56050ba65a772e17a327a0ee74bfc0bfed92ab9f5e7ae7c9dbc9700ecb7d",
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\main_timing_report_result_evidence_v1\\collection_verification.json"
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\main_timing_report_result_evidence_v1\\results\\report.json": {
+      "sha256": "b29d1a097d904cd1156a79ea5a5f00139fba3294cac82579905bbc0433d228aa",
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\main_timing_report_result_evidence_v1\\results\\report.json"
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\main_timing_report_result_evidence_v1\\results\\report_ja.md": {
+      "sha256": "f8b3ab9eaf9c63312032135ed036691a3d1e0360764f492d6272c889f4f4a182",
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\main_timing_report_result_evidence_v1\\results\\report_ja.md"
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\main_timing_report_result_evidence_v1\\terminal.json": {
+      "sha256": "134c9ad8376608597956ff6ee0764adfe0a8e4e7a44221f17ab54d41e6ea865b",
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\main_timing_report_result_evidence_v1\\terminal.json"
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\timing_mc_achieved_precision_v1.json": {
+      "sha256": "98d50713cd9913b1a11c5c53249b67fe0d987431f9391b01c153cf2a3618cc09",
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\timing_mc_achieved_precision_v1.json"
+    },
+    "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\review_main_timing_science_v1.py": {
+      "sha256": "6dcb098fc71bdd6ee0de789734692c4267dfb57be1e9c0bc45f5d44e71776b38",
+      "resolved_path": "A:\\dev\\mcmc4qec\\docs\\wp\\data_tile_validation_2026-10-17\\review_main_timing_science_v1.py"
+    }
+  },
+  "report_sha256": "b29d1a097d904cd1156a79ea5a5f00139fba3294cac82579905bbc0433d228aa",
+  "source_sha256": "6dcb098fc71bdd6ee0de789734692c4267dfb57be1e9c0bc45f5d44e71776b38",
+  "records": [
+    {
+      "case": 0,
+      "label": "tile72 bit-flip",
+      "target_p": 0.03,
+      "epsilon": 0.2,
+      "replicates": 192,
+      "selection_flagged": 192,
+      "bar_diagnostics": "not_collected",
+      "selected_block": null,
+      "selected_burn": 600,
+      "selected_chains": 4,
+      "selected_init": "logical",
+      "selected_kernel": "ZH",
+      "selected_ladder": "coarse",
+      "selected_method": "cross_chain",
+      "selected_samples": 600,
+      "mc_classification": "empirical_above_target",
+      "mc_rrmse_min": 0.20768575282201757,
+      "mc_rrmse_max": 0.21068775455358416,
+      "mc_rrmse_reference_point": 0.2090903552833814,
+      "mc_relative_bias_min": 0.0007598775728206216,
+      "mc_relative_bias_max": 0.013228942478826925,
+      "mc_relative_bias_reference_point": 0.006974243634892951,
+      "mc_point_estimates": 192,
+      "mc_unavailable_intervals": 0,
+      "mc_failed_tasks": 0,
+      "mc_covered_reference_point": 180,
+      "mc_covered_reference_entire": 180,
+      "mc_covered_reference_possible": 180,
+      "mc_mean_task_wall_seconds": 0.2874182384693995,
+      "mc_mean_cpu_seconds": 0.27970728836458464,
+      "bar_classification": "empirical_within_target",
+      "bar_rrmse_min": 0.11962948297892183,
+      "bar_rrmse_max": 0.12114064211947129,
+      "bar_rrmse_reference_point": 0.12022330294568061,
+      "bar_relative_bias_min": -0.0059550972538145825,
+      "bar_relative_bias_max": 0.0064303017710628865,
+      "bar_relative_bias_reference_point": 0.00021757118167871695,
+      "bar_point_estimates": 192,
+      "bar_unavailable_intervals": 0,
+      "bar_failed_tasks": 0,
+      "bar_covered_reference_point": 172,
+      "bar_covered_reference_entire": 171,
+      "bar_covered_reference_possible": 174,
+      "bar_mean_task_wall_seconds": 18.116091272192232,
+      "bar_mean_cpu_seconds": 17.22333251046875,
+      "ratio_mc_over_bar_task_wall_seconds": null,
+      "ratio_reason_task_wall_seconds": "precision_not_confirmed",
+      "ratio_mc_over_bar_cpu_seconds": null,
+      "ratio_reason_cpu_seconds": "precision_not_confirmed"
+    },
+    {
+      "case": 0,
+      "label": "tile72 bit-flip",
+      "target_p": 0.03,
+      "epsilon": 0.1,
+      "replicates": 192,
+      "selection_flagged": 192,
+      "bar_diagnostics": "not_collected",
+      "selected_block": null,
+      "selected_burn": 600,
+      "selected_chains": 4,
+      "selected_init": "logical",
+      "selected_kernel": "ZH",
+      "selected_ladder": "fine",
+      "selected_method": "cross_chain",
+      "selected_samples": 600,
+      "mc_classification": "empirical_within_target",
+      "mc_rrmse_min": 0.09133281743152592,
+      "mc_rrmse_max": 0.09186346519228002,
+      "mc_rrmse_reference_point": 0.09140578406956026,
+      "mc_relative_bias_min": -0.010847682135704242,
+      "mc_relative_bias_max": 0.0014767572525834765,
+      "mc_relative_bias_reference_point": -0.004705394927643411,
+      "mc_point_estimates": 192,
+      "mc_unavailable_intervals": 0,
+      "mc_failed_tasks": 0,
+      "mc_covered_reference_point": 185,
+      "mc_covered_reference_entire": 181,
+      "mc_covered_reference_possible": 185,
+      "mc_mean_task_wall_seconds": 1.1047589234610011,
+      "mc_mean_cpu_seconds": 1.071236026588541,
+      "bar_classification": "empirical_within_target",
+      "bar_rrmse_min": 0.09846964987247948,
+      "bar_rrmse_max": 0.09984852317652718,
+      "bar_rrmse_reference_point": 0.09896340488818339,
+      "bar_relative_bias_min": -0.004951092837995869,
+      "bar_relative_bias_max": 0.00744681567742705,
+      "bar_relative_bias_reference_point": 0.0012278101109982735,
+      "bar_point_estimates": 192,
+      "bar_unavailable_intervals": 0,
+      "bar_failed_tasks": 0,
+      "bar_covered_reference_point": 158,
+      "bar_covered_reference_entire": 155,
+      "bar_covered_reference_possible": 162,
+      "bar_mean_task_wall_seconds": 24.286321072630624,
+      "bar_mean_cpu_seconds": 22.806773280682293,
+      "ratio_mc_over_bar_task_wall_seconds": 0.045488936762266764,
+      "ratio_reason_task_wall_seconds": null,
+      "ratio_mc_over_bar_cpu_seconds": 0.04697008267696927,
+      "ratio_reason_cpu_seconds": null
+    },
+    {
+      "case": 1,
+      "label": "tile288 bit-flip",
+      "target_p": 0.05,
+      "epsilon": 0.2,
+      "replicates": 192,
+      "selection_flagged": 192,
+      "bar_diagnostics": "not_collected",
+      "selected_block": null,
+      "selected_burn": 600,
+      "selected_chains": 4,
+      "selected_init": "logical",
+      "selected_kernel": "ZH",
+      "selected_ladder": "coarse",
+      "selected_method": "cross_chain",
+      "selected_samples": 6000,
+      "mc_classification": "reference_sensitive",
+      "mc_rrmse_min": 0.19930261521646567,
+      "mc_rrmse_max": 0.20207333214005066,
+      "mc_rrmse_reference_point": 0.2005387227059015,
+      "mc_relative_bias_min": -0.01119486619826402,
+      "mc_relative_bias_max": 0.003945466812572553,
+      "mc_relative_bias_reference_point": -0.003654315410010418,
+      "mc_point_estimates": 192,
+      "mc_unavailable_intervals": 0,
+      "mc_failed_tasks": 0,
+      "mc_covered_reference_point": 176,
+      "mc_covered_reference_entire": 176,
+      "mc_covered_reference_possible": 184,
+      "mc_mean_task_wall_seconds": 1.6283062427828554,
+      "mc_mean_cpu_seconds": 1.5843222087760422,
+      "bar_classification": "empirical_within_target",
+      "bar_rrmse_min": 0.12537950292396097,
+      "bar_rrmse_max": 0.1283487639221188,
+      "bar_rrmse_reference_point": 0.12663166394087932,
+      "bar_relative_bias_min": 0.0010886403981552092,
+      "bar_relative_bias_max": 0.0164170553414708,
+      "bar_relative_bias_reference_point": 0.00872286424916085,
+      "bar_point_estimates": 192,
+      "bar_unavailable_intervals": 0,
+      "bar_failed_tasks": 0,
+      "bar_covered_reference_point": 170,
+      "bar_covered_reference_entire": 167,
+      "bar_covered_reference_possible": 173,
+      "bar_mean_task_wall_seconds": 269.0487554712163,
+      "bar_mean_cpu_seconds": 265.10063253603124,
+      "ratio_mc_over_bar_task_wall_seconds": null,
+      "ratio_reason_task_wall_seconds": "precision_not_confirmed",
+      "ratio_mc_over_bar_cpu_seconds": null,
+      "ratio_reason_cpu_seconds": "precision_not_confirmed"
+    },
+    {
+      "case": 1,
+      "label": "tile288 bit-flip",
+      "target_p": 0.05,
+      "epsilon": 0.1,
+      "replicates": 192,
+      "selection_flagged": 192,
+      "bar_diagnostics": "not_collected",
+      "selected_block": null,
+      "selected_burn": 600,
+      "selected_chains": 4,
+      "selected_init": "logical",
+      "selected_kernel": "ZH",
+      "selected_ladder": "fine",
+      "selected_method": "cross_chain",
+      "selected_samples": 6000,
+      "mc_classification": "empirical_within_target",
+      "mc_rrmse_min": 0.09445317439402753,
+      "mc_rrmse_max": 0.09497972840396035,
+      "mc_rrmse_reference_point": 0.09448304536162509,
+      "mc_relative_bias_min": -0.014074961459959031,
+      "mc_relative_bias_max": 0.0010212722638953855,
+      "mc_relative_bias_reference_point": -0.006556374053420799,
+      "mc_point_estimates": 192,
+      "mc_unavailable_intervals": 0,
+      "mc_failed_tasks": 0,
+      "mc_covered_reference_point": 185,
+      "mc_covered_reference_entire": 184,
+      "mc_covered_reference_possible": 187,
+      "mc_mean_task_wall_seconds": 5.525721497707612,
+      "mc_mean_cpu_seconds": 5.441126075166667,
+      "bar_classification": "reference_sensitive",
+      "bar_rrmse_min": 0.09942061613435768,
+      "bar_rrmse_max": 0.10338671520592638,
+      "bar_rrmse_reference_point": 0.1011181141139918,
+      "bar_relative_bias_min": 0.008519458962804672,
+      "bar_relative_bias_max": 0.023961652712242914,
+      "bar_relative_bias_reference_point": 0.016210349656315074,
+      "bar_point_estimates": 192,
+      "bar_unavailable_intervals": 0,
+      "bar_failed_tasks": 0,
+      "bar_covered_reference_point": 172,
+      "bar_covered_reference_entire": 167,
+      "bar_covered_reference_possible": 172,
+      "bar_mean_task_wall_seconds": 423.40517948421865,
+      "bar_mean_cpu_seconds": 416.42086856608336,
+      "ratio_mc_over_bar_task_wall_seconds": null,
+      "ratio_reason_task_wall_seconds": "precision_not_confirmed",
+      "ratio_mc_over_bar_cpu_seconds": null,
+      "ratio_reason_cpu_seconds": "precision_not_confirmed"
+    },
+    {
+      "case": 2,
+      "label": "tile72 depolarizing",
+      "target_p": 0.03,
+      "epsilon": 0.2,
+      "replicates": 192,
+      "selection_flagged": 192,
+      "bar_diagnostics": "not_collected",
+      "selected_block": null,
+      "selected_burn": 600,
+      "selected_chains": 4,
+      "selected_init": "logical",
+      "selected_kernel": "ZH",
+      "selected_ladder": "coarse",
+      "selected_method": "cross_chain",
+      "selected_samples": 600,
+      "mc_classification": "empirical_within_target",
+      "mc_rrmse_min": 0.1704941576667758,
+      "mc_rrmse_max": 0.17257128643839087,
+      "mc_rrmse_reference_point": 0.1713675576708164,
+      "mc_relative_bias_min": -0.012814558091113525,
+      "mc_relative_bias_max": 0.0019807067698531587,
+      "mc_relative_bias_reference_point": -0.005445293363356199,
+      "mc_point_estimates": 192,
+      "mc_unavailable_intervals": 0,
+      "mc_failed_tasks": 0,
+      "mc_covered_reference_point": 188,
+      "mc_covered_reference_entire": 188,
+      "mc_covered_reference_possible": 188,
+      "mc_mean_task_wall_seconds": 0.6461923364355849,
+      "mc_mean_cpu_seconds": 0.6282725400937489,
+      "bar_classification": "empirical_within_target",
+      "bar_rrmse_min": 0.1336858508937426,
+      "bar_rrmse_max": 0.13813713282455092,
+      "bar_rrmse_reference_point": 0.13570469588022951,
+      "bar_relative_bias_min": 0.014647130992068139,
+      "bar_relative_bias_max": 0.02985397299575437,
+      "bar_relative_bias_reference_point": 0.022221395153704873,
+      "bar_point_estimates": 192,
+      "bar_unavailable_intervals": 0,
+      "bar_failed_tasks": 0,
+      "bar_covered_reference_point": 166,
+      "bar_covered_reference_entire": 164,
+      "bar_covered_reference_possible": 167,
+      "bar_mean_task_wall_seconds": 31.016037924734217,
+      "bar_mean_cpu_seconds": 30.12437902520833,
+      "ratio_mc_over_bar_task_wall_seconds": 0.02083413548834582,
+      "ratio_reason_task_wall_seconds": null,
+      "ratio_mc_over_bar_cpu_seconds": 0.02085594991246144,
+      "ratio_reason_cpu_seconds": null
+    },
+    {
+      "case": 2,
+      "label": "tile72 depolarizing",
+      "target_p": 0.03,
+      "epsilon": 0.1,
+      "replicates": 192,
+      "selection_flagged": 192,
+      "bar_diagnostics": "not_collected",
+      "selected_block": null,
+      "selected_burn": 600,
+      "selected_chains": 8,
+      "selected_init": "logical",
+      "selected_kernel": "ZH",
+      "selected_ladder": "fine",
+      "selected_method": "cross_chain",
+      "selected_samples": 600,
+      "mc_classification": "empirical_within_target",
+      "mc_rrmse_min": 0.09623359330552649,
+      "mc_rrmse_max": 0.09722474839123575,
+      "mc_rrmse_reference_point": 0.09644403816427417,
+      "mc_relative_bias_min": -0.010310682038277043,
+      "mc_relative_bias_max": 0.004522109216220242,
+      "mc_relative_bias_reference_point": -0.002922726064989251,
+      "mc_point_estimates": 192,
+      "mc_unavailable_intervals": 0,
+      "mc_failed_tasks": 0,
+      "mc_covered_reference_point": 182,
+      "mc_covered_reference_entire": 181,
+      "mc_covered_reference_possible": 182,
+      "mc_mean_task_wall_seconds": 2.425824368818818,
+      "mc_mean_cpu_seconds": 2.3743366667395827,
+      "bar_classification": "empirical_within_target",
+      "bar_rrmse_min": 0.08597551473438024,
+      "bar_rrmse_max": 0.08703155998450883,
+      "bar_rrmse_reference_point": 0.0861869066694845,
+      "bar_relative_bias_min": -0.008780780320359016,
+      "bar_relative_bias_max": 0.006074940061905868,
+      "bar_relative_bias_reference_point": -0.0013814037463530896,
+      "bar_point_estimates": 192,
+      "bar_unavailable_intervals": 0,
+      "bar_failed_tasks": 0,
+      "bar_covered_reference_point": 168,
+      "bar_covered_reference_entire": 163,
+      "bar_covered_reference_possible": 172,
+      "bar_mean_task_wall_seconds": 69.5795636894424,
+      "bar_mean_cpu_seconds": 66.6153599475,
+      "ratio_mc_over_bar_task_wall_seconds": 0.034864035360240395,
+      "ratio_reason_task_wall_seconds": null,
+      "ratio_mc_over_bar_cpu_seconds": 0.03564248048214125,
+      "ratio_reason_cpu_seconds": null
+    },
+    {
+      "case": 3,
+      "label": "tile288 depolarizing",
+      "target_p": 0.05,
+      "epsilon": 0.2,
+      "replicates": 192,
+      "selection_flagged": 192,
+      "bar_diagnostics": "not_collected",
+      "selected_block": null,
+      "selected_burn": 600,
+      "selected_chains": 4,
+      "selected_init": "logical",
+      "selected_kernel": "ZH",
+      "selected_ladder": "coarse",
+      "selected_method": "cross_chain",
+      "selected_samples": 6000,
+      "mc_classification": "empirical_above_target",
+      "mc_rrmse_min": 0.20957316042457053,
+      "mc_rrmse_max": 0.21371529027350575,
+      "mc_rrmse_reference_point": 0.21149935518701465,
+      "mc_relative_bias_min": 0.005020350249411155,
+      "mc_relative_bias_max": 0.020466562446815422,
+      "mc_relative_bias_reference_point": 0.012713920860498017,
+      "mc_point_estimates": 192,
+      "mc_unavailable_intervals": 0,
+      "mc_failed_tasks": 0,
+      "mc_covered_reference_point": 182,
+      "mc_covered_reference_entire": 178,
+      "mc_covered_reference_possible": 182,
+      "mc_mean_task_wall_seconds": 20.29016255607712,
+      "mc_mean_cpu_seconds": 20.060597059604167,
+      "bar_classification": "empirical_within_target",
+      "bar_rrmse_min": 0.18709573867771562,
+      "bar_rrmse_max": 0.1901907396789774,
+      "bar_rrmse_reference_point": 0.18848313848747594,
+      "bar_relative_bias_min": -0.004894375296649064,
+      "bar_relative_bias_max": 0.010399456946831412,
+      "bar_relative_bias_reference_point": 0.002723296710932686,
+      "bar_point_estimates": 192,
+      "bar_unavailable_intervals": 0,
+      "bar_failed_tasks": 0,
+      "bar_covered_reference_point": 166,
+      "bar_covered_reference_entire": 164,
+      "bar_covered_reference_possible": 167,
+      "bar_mean_task_wall_seconds": 423.8131369603361,
+      "bar_mean_cpu_seconds": 418.7286159553073,
+      "ratio_mc_over_bar_task_wall_seconds": null,
+      "ratio_reason_task_wall_seconds": "precision_not_confirmed",
+      "ratio_mc_over_bar_cpu_seconds": null,
+      "ratio_reason_cpu_seconds": "precision_not_confirmed"
+    },
+    {
+      "case": 3,
+      "label": "tile288 depolarizing",
+      "target_p": 0.05,
+      "epsilon": 0.1,
+      "replicates": 192,
+      "selection_flagged": 192,
+      "bar_diagnostics": "not_collected",
+      "selected_block": null,
+      "selected_burn": 600,
+      "selected_chains": 4,
+      "selected_init": "logical",
+      "selected_kernel": "ZH",
+      "selected_ladder": "fine",
+      "selected_method": "cross_chain",
+      "selected_samples": 12000,
+      "mc_classification": "reference_sensitive",
+      "mc_rrmse_min": 0.09920466701426818,
+      "mc_rrmse_max": 0.10004807805568337,
+      "mc_rrmse_reference_point": 0.09934642623669772,
+      "mc_relative_bias_min": -0.012124736767153185,
+      "mc_relative_bias_max": 0.0030579716592726114,
+      "mc_relative_bias_reference_point": -0.004562414182598768,
+      "mc_point_estimates": 192,
+      "mc_unavailable_intervals": 0,
+      "mc_failed_tasks": 0,
+      "mc_covered_reference_point": 183,
+      "mc_covered_reference_entire": 181,
+      "mc_covered_reference_possible": 183,
+      "mc_mean_task_wall_seconds": 79.55893156345216,
+      "mc_mean_cpu_seconds": 78.89136574851041,
+      "bar_classification": "empirical_above_target",
+      "bar_rrmse_min": 0.10096851490091463,
+      "bar_rrmse_max": 0.1042351743038967,
+      "bar_rrmse_reference_point": 0.10231531442604898,
+      "bar_relative_bias_min": 0.003792012645704626,
+      "bar_relative_bias_max": 0.019219346455947684,
+      "bar_relative_bias_reference_point": 0.011476180161534752,
+      "bar_point_estimates": 192,
+      "bar_unavailable_intervals": 0,
+      "bar_failed_tasks": 0,
+      "bar_covered_reference_point": 171,
+      "bar_covered_reference_entire": 169,
+      "bar_covered_reference_possible": 174,
+      "bar_mean_task_wall_seconds": 1228.186654769054,
+      "bar_mean_cpu_seconds": 1214.702722519677,
+      "ratio_mc_over_bar_task_wall_seconds": null,
+      "ratio_reason_task_wall_seconds": "precision_not_confirmed",
+      "ratio_mc_over_bar_cpu_seconds": null,
+      "ratio_reason_cpu_seconds": "precision_not_confirmed"
+    }
+  ],
+  "saved_assessments": [
+    {
+      "identity": [
+        0,
+        0.2
+      ],
+      "selection": {
+        "calibration_assessment": {
+          "metrics": {
+            "available_only_bias": 0.0005753133004769914,
+            "available_only_mean_interval_width": 0.019896503847035816,
+            "available_only_rmse": 0.005684796316782393,
+            "bias": 0.0005753133004769914,
+            "bias_reference_range": [
+              0.00030850040585715666,
+              0.0008405530961661523
+            ],
+            "coverage_reference_entire": 0.8333333333333334,
+            "coverage_reference_entire_wilson95": [
+              0.7741919449134089,
+              0.8793979577087552
+            ],
+            "coverage_reference_point": 0.84375,
+            "coverage_reference_point_wilson95": [
+              0.7857096789622484,
+              0.8883049081168581
+            ],
+            "coverage_reference_possible": 0.8645833333333334,
+            "coverage_reference_possible_wilson95": [
+              0.8089792852613452,
+              0.9058846707316467
+            ],
+            "covered_reference_entire": 160,
+            "covered_reference_point": 162,
+            "covered_reference_possible": 166,
+            "failures": {},
+            "flagged": 192,
+            "high_rhat": 192,
+            "low_ess": 192,
+            "point_estimates": 192,
+            "reference": 0.04296747843424479,
+            "reference_interval_999": [
+              0.04270223863855563,
+              0.043234291328864624
+            ],
+            "reference_standard_error": 8.084584414410644e-05,
+            "replicates": 192,
+            "rmse": 0.005684796316782393,
+            "rmse_reference_range": [
+              0.005664017679175354,
+              0.005717731479972755
+            ],
+            "unavailable_intervals": 0,
+            "undefined": 0
+          },
+          "nominal_coverage_certified": false,
+          "population_rmse_certified": false,
+          "precision": [
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.2
+            },
+            {
+              "classification": "empirical_above_target",
+              "epsilon": 0.1
+            }
+          ],
+          "relative_bias_reference_point": 0.013389505771380551,
+          "relative_bias_reference_range": [
+            0.007135549037002258,
+            0.019684052240933798
+          ],
+          "relative_rmse_minimizer": 0.043234291328864624,
+          "relative_rmse_reference_point": 0.13230462954632333,
+          "relative_rmse_reference_range": [
+            0.13100752909517152,
+            0.13389769862815215
+          ],
+          "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+        },
+        "case": 0,
+        "classification_counts": {
+          "empirical_within_target": 352
+        },
+        "condition": {
+          "block": null,
+          "burn": 600,
+          "case": 0,
+          "chains": 4,
+          "init": "logical",
+          "kernel": "ZH",
+          "ladder": "coarse",
+          "method": "cross_chain",
+          "samples": 600
+        },
+        "eligible_conditions": 352,
+        "epsilon": 0.2,
+        "precision_independently_confirmed": false,
+        "recommended": false,
+        "status": "selected",
+        "total_proposed_steps": 19200
+      },
+      "mc": {
+        "assessment": {
+          "costs": {
+            "construction_wall_seconds": {
+              "available_only_max": 0.023374434560537338,
+              "available_only_mean": 0.011004197702277452,
+              "available_only_min": 0.00999938603490591,
+              "mean": 0.011004197702277452,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.1128059588372707
+            },
+            "cpu_seconds": {
+              "available_only_max": 0.34118696699999873,
+              "available_only_mean": 0.27970728836458464,
+              "available_only_min": 0.2553379770000106,
+              "mean": 0.27970728836458464,
+              "missing": 0,
+              "records": 192,
+              "sum": 53.703799366000254
+            },
+            "direct_mc_elapsed_seconds": {
+              "available_only_max": 0.3317635841667652,
+              "available_only_mean": 0.27297079924028367,
+              "available_only_min": 0.24574189446866512,
+              "mean": 0.27297079924028367,
+              "missing": 0,
+              "records": 192,
+              "sum": 52.410393454134464
+            },
+            "task_wall_seconds": {
+              "available_only_max": 0.3463908853009343,
+              "available_only_mean": 0.2874182384693995,
+              "available_only_min": 0.2591661587357521,
+              "mean": 0.2874182384693995,
+              "missing": 0,
+              "records": 192,
+              "sum": 55.184301786124706
+            }
+          },
+          "diagnostics_status": "not_applicable",
+          "method": "mc",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 0.00029966566297742747,
+              "available_only_mean_interval_width": 0.03348310982759399,
+              "available_only_rmse": 0.00898408533144727,
+              "bias": 0.00029966566297742747,
+              "bias_reference_range": [
+                3.285276835759271e-05,
+                0.0005649054586665883
+              ],
+              "coverage_reference_entire": 0.9375,
+              "coverage_reference_entire_wilson95": [
+                0.8939473959630463,
+                0.9638893512285439
+              ],
+              "coverage_reference_point": 0.9375,
+              "coverage_reference_point_wilson95": [
+                0.8939473959630463,
+                0.9638893512285439
+              ],
+              "coverage_reference_possible": 0.9375,
+              "coverage_reference_possible_wilson95": [
+                0.8939473959630463,
+                0.9638893512285439
+              ],
+              "covered_reference_entire": 180,
+              "covered_reference_point": 180,
+              "covered_reference_possible": 180,
+              "failures": {},
+              "flagged": 0,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.04296747843424479,
+              "reference_interval_999": [
+                0.04270223863855563,
+                0.043234291328864624
+              ],
+              "reference_standard_error": 8.084584414410644e-05,
+              "replicates": 192,
+              "rmse": 0.00898408533144727,
+              "rmse_reference_range": [
+                0.008979146342361676,
+                0.008996838773168587
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 0
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_above_target",
+                "epsilon": 0.2
+              }
+            ],
+            "relative_bias_reference_point": 0.006974243634892951,
+            "relative_bias_reference_range": [
+              0.0007598775728206216,
+              0.013228942478826925
+            ],
+            "relative_rmse_minimizer": 0.043234291328864624,
+            "relative_rmse_reference_point": 0.2090903552833814,
+            "relative_rmse_reference_range": [
+              0.20768575282201757,
+              0.21068775455358416
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "bar": {
+        "assessment": {
+          "costs": {
+            "analysis_cpu_seconds": {
+              "available_only_max": 0.015971266000001094,
+              "available_only_mean": 0.013936807041666777,
+              "available_only_min": 0.013091932000001805,
+              "mean": 0.013936807041666777,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.675866952000021
+            },
+            "analysis_wall_seconds": {
+              "available_only_max": 0.02979661151766777,
+              "available_only_mean": 0.014125866485604396,
+              "available_only_min": 0.013186989352107048,
+              "mean": 0.014125866485604396,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.712166365236044
+            },
+            "anchor_cpu_seconds": {
+              "available_only_max": 11.186219588,
+              "available_only_mean": 9.769387592625,
+              "available_only_min": 9.496309554,
+              "mean": 9.769387592625,
+              "missing": 0,
+              "records": 192,
+              "sum": 1875.722417784
+            },
+            "anchor_wall_seconds": {
+              "available_only_max": 11.27022751327604,
+              "available_only_mean": 9.889378899039002,
+              "available_only_min": 9.570720069110394,
+              "mean": 9.889378899039002,
+              "missing": 0,
+              "records": 192,
+              "sum": 1898.7607486154884
+            },
+            "compact_cpu_seconds": {
+              "available_only_max": 1.6026798999999947,
+              "available_only_mean": 1.4551463466510421,
+              "available_only_min": 1.369529154000002,
+              "mean": 1.4551463466510421,
+              "missing": 0,
+              "records": 192,
+              "sum": 279.3880985570001
+            },
+            "compact_wall_seconds": {
+              "available_only_max": 1.628190147690475,
+              "available_only_mean": 1.4707726704800734,
+              "available_only_min": 1.3893625419586897,
+              "mean": 1.4707726704800734,
+              "missing": 0,
+              "records": 192,
+              "sum": 282.3883527321741
+            },
+            "construction_cpu_seconds": {
+              "available_only_max": 0.0163711339999999,
+              "available_only_mean": 0.01193305793229151,
+              "available_only_min": 0.010349541000000073,
+              "mean": 0.01193305793229151,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.29114712299997
+            },
+            "construction_wall_seconds": {
+              "available_only_max": 0.03047055471688509,
+              "available_only_mean": 0.013832412272070846,
+              "available_only_min": 0.010537838563323021,
+              "mean": 0.013832412272070846,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.6558231562376022
+            },
+            "cpu_seconds": {
+              "available_only_max": 18.730302130000002,
+              "available_only_mean": 17.22333251046875,
+              "available_only_min": 16.674137532000003,
+              "mean": 17.22333251046875,
+              "missing": 0,
+              "records": 192,
+              "sum": 3306.87984201
+            },
+            "initialization_cpu_seconds": {
+              "available_only_max": 0.007263809000001231,
+              "available_only_mean": 0.006026868593749429,
+              "available_only_min": 0.005374831999983343,
+              "mean": 0.006026868593749429,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.1571587699998904
+            },
+            "initialization_wall_seconds": {
+              "available_only_max": 0.007271510548889637,
+              "available_only_mean": 0.006071238589356653,
+              "available_only_min": 0.005378483794629574,
+              "mean": 0.006071238589356653,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.1656778091564775
+            },
+            "sampling_cpu_seconds": {
+              "available_only_max": 6.388058151000013,
+              "available_only_mean": 5.909130274671875,
+              "available_only_min": 5.600259811999996,
+              "mean": 5.909130274671875,
+              "missing": 0,
+              "records": 192,
+              "sum": 1134.553012737
+            },
+            "sampling_wall_seconds": {
+              "available_only_max": 7.1999384025111794,
+              "available_only_mean": 6.663513384997107,
+              "available_only_min": 6.137620608322322,
+              "mean": 6.663513384997107,
+              "missing": 0,
+              "records": 192,
+              "sum": 1279.3945699194446
+            },
+            "task_wall_seconds": {
+              "available_only_max": 19.620642157271504,
+              "available_only_mean": 18.116091272192232,
+              "available_only_min": 17.31657691206783,
+              "mean": 18.116091272192232,
+              "missing": 0,
+              "records": 192,
+              "sum": 3478.2895242609084
+            }
+          },
+          "diagnostics_status": "not_collected",
+          "method": "bar",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 9.348485056695499e-06,
+              "available_only_mean_interval_width": 0.020329660617848133,
+              "available_only_rmse": 0.00516569217661221,
+              "bias": 9.348485056695499e-06,
+              "bias_reference_range": [
+                -0.00025746440956313926,
+                0.00027458828074585634
+              ],
+              "coverage_reference_entire": 0.890625,
+              "coverage_reference_entire_wilson95": [
+                0.8385842176755814,
+                0.927341449459767
+              ],
+              "coverage_reference_point": 0.8958333333333334,
+              "coverage_reference_point_wilson95": [
+                0.8445869253283719,
+                0.9315510840354478
+              ],
+              "coverage_reference_possible": 0.90625,
+              "coverage_reference_possible_wilson95": [
+                0.8566878302149447,
+                0.9398748636058177
+              ],
+              "covered_reference_entire": 171,
+              "covered_reference_point": 172,
+              "covered_reference_possible": 174,
+              "failures": {},
+              "flagged": 192,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.04296747843424479,
+              "reference_interval_999": [
+                0.04270223863855563,
+                0.043234291328864624
+              ],
+              "reference_standard_error": 8.084584414410644e-05,
+              "replicates": 192,
+              "rmse": 0.00516569217661221,
+              "rmse_reference_range": [
+                0.0051656837175092065,
+                0.005172976608613526
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 192
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.2
+              }
+            ],
+            "relative_bias_reference_point": 0.00021757118167871695,
+            "relative_bias_reference_range": [
+              -0.0059550972538145825,
+              0.0064303017710628865
+            ],
+            "relative_rmse_minimizer": 0.043234291328864624,
+            "relative_rmse_reference_point": 0.12022330294568061,
+            "relative_rmse_reference_range": [
+              0.11962948297892183,
+              0.12114064211947129
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "diagnostic_observation": {
+        "bar": "not_collected",
+        "mc": "not_applicable"
+      },
+      "ratios_mc_over_bar": {
+        "cpu_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        },
+        "task_wall_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        }
+      }
+    },
+    {
+      "identity": [
+        0,
+        0.1
+      ],
+      "selection": {
+        "calibration_assessment": {
+          "metrics": {
+            "available_only_bias": 0.0002684976640435696,
+            "available_only_mean_interval_width": 0.014854912893843136,
+            "available_only_rmse": 0.003911281130797987,
+            "bias": 0.0002684976640435696,
+            "bias_reference_range": [
+              1.6847694237348554e-06,
+              0.0005337374597327305
+            ],
+            "coverage_reference_entire": 0.8177083333333334,
+            "coverage_reference_entire_wilson95": [
+              0.7570457669581838,
+              0.8659071089785664
+            ],
+            "coverage_reference_point": 0.859375,
+            "coverage_reference_point_wilson95": [
+              0.8031305442687525,
+              0.9015210694957679
+            ],
+            "coverage_reference_possible": 0.8802083333333334,
+            "coverage_reference_possible_wilson95": [
+              0.8266650028526277,
+              0.9188359798257781
+            ],
+            "covered_reference_entire": 157,
+            "covered_reference_point": 165,
+            "covered_reference_possible": 169,
+            "failures": {},
+            "flagged": 192,
+            "high_rhat": 192,
+            "low_ess": 192,
+            "point_estimates": 192,
+            "reference": 0.04296747843424479,
+            "reference_interval_999": [
+              0.04270223863855563,
+              0.043234291328864624
+            ],
+            "reference_standard_error": 8.084584414410644e-05,
+            "replicates": 192,
+            "rmse": 0.003911281130797987,
+            "rmse_reference_range": [
+              0.0039020548339288538,
+              0.003938388599981149
+            ],
+            "unavailable_intervals": 0,
+            "undefined": 0
+          },
+          "nominal_coverage_certified": false,
+          "population_rmse_certified": false,
+          "precision": [
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.2
+            },
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.1
+            }
+          ],
+          "relative_bias_reference_point": 0.006248857829869277,
+          "relative_bias_reference_range": [
+            3.8968359881731814e-05,
+            0.012499051027522051
+          ],
+          "relative_rmse_minimizer": 0.043234291328864624,
+          "relative_rmse_reference_point": 0.09102887284353,
+          "relative_rmse_reference_range": [
+            0.09025370172596572,
+            0.09222908975140236
+          ],
+          "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+        },
+        "case": 0,
+        "classification_counts": {
+          "empirical_above_target": 30,
+          "empirical_within_target": 322
+        },
+        "condition": {
+          "block": null,
+          "burn": 600,
+          "case": 0,
+          "chains": 4,
+          "init": "logical",
+          "kernel": "ZH",
+          "ladder": "fine",
+          "method": "cross_chain",
+          "samples": 600
+        },
+        "eligible_conditions": 322,
+        "epsilon": 0.1,
+        "precision_independently_confirmed": false,
+        "recommended": false,
+        "status": "selected",
+        "total_proposed_steps": 33600
+      },
+      "mc": {
+        "assessment": {
+          "costs": {
+            "construction_wall_seconds": {
+              "available_only_max": 0.028366410173475742,
+              "available_only_mean": 0.011472342409736788,
+              "available_only_min": 0.009967938996851444,
+              "mean": 0.011472342409736788,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.202689742669463
+            },
+            "cpu_seconds": {
+              "available_only_max": 1.3268626400000016,
+              "available_only_mean": 1.071236026588541,
+              "available_only_min": 1.0324192600000117,
+              "mean": 1.071236026588541,
+              "missing": 0,
+              "records": 192,
+              "sum": 205.67731710499987
+            },
+            "direct_mc_elapsed_seconds": {
+              "available_only_max": 1.323951899074018,
+              "available_only_mean": 1.0897559001508246,
+              "available_only_min": 1.029119472950697,
+              "mean": 1.0897559001508246,
+              "missing": 0,
+              "records": 192,
+              "sum": 209.23313282895833
+            },
+            "task_wall_seconds": {
+              "available_only_max": 1.3385488390922546,
+              "available_only_mean": 1.1047589234610011,
+              "available_only_min": 1.043053176254034,
+              "mean": 1.1047589234610011,
+              "missing": 0,
+              "records": 192,
+              "sum": 212.1137133045122
+            }
+          },
+          "diagnostics_status": "not_applicable",
+          "method": "mc",
+          "precision": {
+            "metrics": {
+              "available_only_bias": -0.000202178955078125,
+              "available_only_mean_interval_width": 0.016560433759974978,
+              "available_only_rmse": 0.003927476055774066,
+              "bias": -0.000202178955078125,
+              "bias_reference_range": [
+                -0.00046899184969795976,
+                6.306084061103584e-05
+              ],
+              "coverage_reference_entire": 0.9427083333333334,
+              "coverage_reference_entire_wilson95": [
+                0.9003376167838831,
+                0.9677114726361785
+              ],
+              "coverage_reference_point": 0.9635416666666666,
+              "coverage_reference_point_wilson95": [
+                0.9266691049105195,
+                0.9822293534234273
+              ],
+              "coverage_reference_possible": 0.9635416666666666,
+              "coverage_reference_possible_wilson95": [
+                0.9266691049105195,
+                0.9822293534234273
+              ],
+              "covered_reference_entire": 181,
+              "covered_reference_point": 185,
+              "covered_reference_possible": 185,
+              "failures": {},
+              "flagged": 0,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.04296747843424479,
+              "reference_interval_999": [
+                0.04270223863855563,
+                0.043234291328864624
+              ],
+              "reference_standard_error": 8.084584414410644e-05,
+              "replicates": 192,
+              "rmse": 0.003927476055774066,
+              "rmse_reference_range": [
+                0.0039222687106829045,
+                0.003950208246901073
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 0
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.1
+              }
+            ],
+            "relative_bias_reference_point": -0.004705394927643411,
+            "relative_bias_reference_range": [
+              -0.010847682135704242,
+              0.0014767572525834765
+            ],
+            "relative_rmse_minimizer": 0.04312503487272557,
+            "relative_rmse_reference_point": 0.09140578406956026,
+            "relative_rmse_reference_range": [
+              0.09133281743152592,
+              0.09186346519228002
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "bar": {
+        "assessment": {
+          "costs": {
+            "analysis_cpu_seconds": {
+              "available_only_max": 0.029938897999997494,
+              "available_only_mean": 0.025580454270833403,
+              "available_only_min": 0.018188542000004304,
+              "mean": 0.025580454270833403,
+              "missing": 0,
+              "records": 192,
+              "sum": 4.911447220000014
+            },
+            "analysis_wall_seconds": {
+              "available_only_max": 0.04385051503777504,
+              "available_only_mean": 0.02583266925648786,
+              "available_only_min": 0.018233329989016056,
+              "mean": 0.02583266925648786,
+              "missing": 0,
+              "records": 192,
+              "sum": 4.959872497245669
+            },
+            "anchor_cpu_seconds": {
+              "available_only_max": 11.301920676000002,
+              "available_only_mean": 9.755577791291666,
+              "available_only_min": 9.498727451,
+              "mean": 9.755577791291666,
+              "missing": 0,
+              "records": 192,
+              "sum": 1873.070935928
+            },
+            "anchor_wall_seconds": {
+              "available_only_max": 11.61259245686233,
+              "available_only_mean": 9.904343001117619,
+              "available_only_min": 9.581462570466101,
+              "mean": 9.904343001117619,
+              "missing": 0,
+              "records": 192,
+              "sum": 1901.633856214583
+            },
+            "compact_cpu_seconds": {
+              "available_only_max": 2.7012966950000035,
+              "available_only_mean": 2.5422480428437493,
+              "available_only_min": 2.4339514599999816,
+              "mean": 2.5422480428437493,
+              "missing": 0,
+              "records": 192,
+              "sum": 488.11162422599983
+            },
+            "compact_wall_seconds": {
+              "available_only_max": 2.7652975264936686,
+              "available_only_mean": 2.56978717847475,
+              "available_only_min": 2.461318612098694,
+              "mean": 2.56978717847475,
+              "missing": 0,
+              "records": 192,
+              "sum": 493.399138267152
+            },
+            "construction_cpu_seconds": {
+              "available_only_max": 0.013543501000000902,
+              "available_only_mean": 0.011333297833333292,
+              "available_only_min": 0.01019802500000111,
+              "mean": 0.011333297833333292,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.175993183999992
+            },
+            "construction_wall_seconds": {
+              "available_only_max": 0.0310652581974864,
+              "available_only_mean": 0.013535852034692653,
+              "available_only_min": 0.010406340472400188,
+              "mean": 0.013535852034692653,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.5988835906609893
+            },
+            "cpu_seconds": {
+              "available_only_max": 24.488446357,
+              "available_only_mean": 22.806773280682293,
+              "available_only_min": 22.152342052,
+              "mean": 22.806773280682293,
+              "missing": 0,
+              "records": 192,
+              "sum": 4378.900469891
+            },
+            "initialization_cpu_seconds": {
+              "available_only_max": 0.011925930999993284,
+              "available_only_mean": 0.010287036578124539,
+              "available_only_min": 0.009472017999989646,
+              "mean": 0.010287036578124539,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.9751110229999114
+            },
+            "initialization_wall_seconds": {
+              "available_only_max": 0.011983984149992466,
+              "available_only_mean": 0.010360254668436633,
+              "available_only_min": 0.009503285400569439,
+              "mean": 0.010360254668436633,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.9891688963398337
+            },
+            "sampling_cpu_seconds": {
+              "available_only_max": 11.012503213999999,
+              "available_only_mean": 10.365219256302082,
+              "available_only_min": 9.886560857999996,
+              "mean": 10.365219256302082,
+              "missing": 0,
+              "records": 192,
+              "sum": 1990.1220972099995
+            },
+            "sampling_wall_seconds": {
+              "available_only_max": 12.732258350588381,
+              "available_only_mean": 11.664939141192008,
+              "available_only_min": 10.731312790885568,
+              "mean": 11.664939141192008,
+              "missing": 0,
+              "records": 192,
+              "sum": 2239.6683151088655
+            },
+            "task_wall_seconds": {
+              "available_only_max": 26.356031687930226,
+              "available_only_mean": 24.286321072630624,
+              "available_only_min": 23.27818365767598,
+              "mean": 24.286321072630624,
+              "missing": 0,
+              "records": 192,
+              "sum": 4662.97364594508
+            }
+          },
+          "diagnostics_status": "not_collected",
+          "method": "bar",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 5.275590446567058e-05,
+              "available_only_mean_interval_width": 0.014777385223661762,
+              "available_only_rmse": 0.004252207965312455,
+              "bias": 5.275590446567058e-05,
+              "bias_reference_range": [
+                -0.00021405699015416418,
+                0.0003179957001548314
+              ],
+              "coverage_reference_entire": 0.8072916666666666,
+              "coverage_reference_entire_wilson95": [
+                0.7456952572426925,
+                0.8568329342371148
+              ],
+              "coverage_reference_point": 0.8229166666666666,
+              "coverage_reference_point_wilson95": [
+                0.7627445738226889,
+                0.8704206443425323
+              ],
+              "coverage_reference_possible": 0.84375,
+              "coverage_reference_possible_wilson95": [
+                0.7857096789622484,
+                0.8883049081168581
+              ],
+              "covered_reference_entire": 155,
+              "covered_reference_point": 158,
+              "covered_reference_possible": 162,
+              "failures": {},
+              "flagged": 192,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.04296747843424479,
+              "reference_interval_999": [
+                0.04270223863855563,
+                0.043234291328864624
+              ],
+              "reference_standard_error": 8.084584414410644e-05,
+              "replicates": 192,
+              "rmse": 0.004252207965312455,
+              "rmse_reference_range": [
+                0.004251880689155176,
+                0.004263755464391415
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 192
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.1
+              }
+            ],
+            "relative_bias_reference_point": 0.0012278101109982735,
+            "relative_bias_reference_range": [
+              -0.004951092837995869,
+              0.00744681567742705
+            ],
+            "relative_rmse_minimizer": 0.043234291328864624,
+            "relative_rmse_reference_point": 0.09896340488818339,
+            "relative_rmse_reference_range": [
+              0.09846964987247948,
+              0.09984852317652718
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "diagnostic_observation": {
+        "bar": "not_collected",
+        "mc": "not_applicable"
+      },
+      "ratios_mc_over_bar": {
+        "cpu_seconds": {
+          "reason": null,
+          "value": 0.04697008267696927
+        },
+        "task_wall_seconds": {
+          "reason": null,
+          "value": 0.045488936762266764
+        }
+      }
+    },
+    {
+      "identity": [
+        1,
+        0.2
+      ],
+      "selection": {
+        "calibration_assessment": {
+          "metrics": {
+            "available_only_bias": -0.00016390137571524813,
+            "available_only_mean_interval_width": 0.013833577640619614,
+            "available_only_rmse": 0.00346498663205455,
+            "bias": -0.00016390137571524813,
+            "bias_reference_range": [
+              -0.000384666178826102,
+              5.52420779744954e-05
+            ],
+            "coverage_reference_entire": 0.875,
+            "coverage_reference_entire_wilson95": [
+              0.8207453583387585,
+              0.9145432821111759
+            ],
+            "coverage_reference_point": 0.8958333333333334,
+            "coverage_reference_point_wilson95": [
+              0.8445869253283719,
+              0.9315510840354478
+            ],
+            "coverage_reference_possible": 0.9114583333333334,
+            "coverage_reference_possible_wilson95": [
+              0.8627904693526963,
+              0.9439845666965373
+            ],
+            "covered_reference_entire": 168,
+            "covered_reference_point": 172,
+            "covered_reference_possible": 175,
+            "failures": {},
+            "flagged": 192,
+            "high_rhat": 192,
+            "low_ess": 192,
+            "point_estimates": 192,
+            "reference": 0.028949260711669922,
+            "reference_interval_999": [
+              0.02873011725798018,
+              0.029170025514780776
+            ],
+            "reference_standard_error": 6.684425980368345e-05,
+            "replicates": 192,
+            "rmse": 0.00346498663205455,
+            "rmse_reference_range": [
+              0.003461108016135206,
+              0.0034824182357218463
+            ],
+            "unavailable_intervals": 0,
+            "undefined": 0
+          },
+          "nominal_coverage_certified": false,
+          "population_rmse_certified": false,
+          "precision": [
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.2
+            },
+            {
+              "classification": "empirical_above_target",
+              "epsilon": 0.1
+            }
+          ],
+          "relative_bias_reference_point": -0.005661677420631982,
+          "relative_bias_reference_range": [
+            -0.013187036076851883,
+            0.001922793334898384
+          ],
+          "relative_rmse_minimizer": 0.029170025514780776,
+          "relative_rmse_reference_point": 0.11969171394617885,
+          "relative_rmse_reference_range": [
+            0.1193834483949034,
+            0.12048502312257237
+          ],
+          "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+        },
+        "case": 1,
+        "classification_counts": {
+          "empirical_above_target": 96,
+          "empirical_within_target": 256
+        },
+        "condition": {
+          "block": null,
+          "burn": 600,
+          "case": 1,
+          "chains": 4,
+          "init": "logical",
+          "kernel": "ZH",
+          "ladder": "coarse",
+          "method": "cross_chain",
+          "samples": 6000
+        },
+        "eligible_conditions": 256,
+        "epsilon": 0.2,
+        "precision_independently_confirmed": false,
+        "recommended": false,
+        "status": "selected",
+        "total_proposed_steps": 79200
+      },
+      "mc": {
+        "assessment": {
+          "costs": {
+            "construction_wall_seconds": {
+              "available_only_max": 0.14134727604687214,
+              "available_only_mean": 0.11386803618612855,
+              "available_only_min": 0.10932451952248812,
+              "mean": 0.11386803618612855,
+              "missing": 0,
+              "records": 192,
+              "sum": 21.86266294773668
+            },
+            "cpu_seconds": {
+              "available_only_max": 1.669196295000006,
+              "available_only_mean": 1.5843222087760422,
+              "available_only_min": 1.5285755879999954,
+              "mean": 1.5843222087760422,
+              "missing": 0,
+              "records": 192,
+              "sum": 304.1898640850001
+            },
+            "direct_mc_elapsed_seconds": {
+              "available_only_max": 1.6195692839100957,
+              "available_only_mean": 1.467382059704202,
+              "available_only_min": 1.3880457216873765,
+              "mean": 1.467382059704202,
+              "missing": 0,
+              "records": 192,
+              "sum": 281.73735546320677
+            },
+            "task_wall_seconds": {
+              "available_only_max": 1.7803787719458342,
+              "available_only_mean": 1.6283062427828554,
+              "available_only_min": 1.543721023015678,
+              "mean": 1.6283062427828554,
+              "missing": 0,
+              "records": 192,
+              "sum": 312.63479861430824
+            }
+          },
+          "diagnostics_status": "not_applicable",
+          "method": "mc",
+          "precision": {
+            "metrics": {
+              "available_only_bias": -0.00010578972952706225,
+              "available_only_mean_interval_width": 0.022123692992790715,
+              "available_only_rmse": 0.005805447766398424,
+              "bias": -0.00010578972952706225,
+              "bias_reference_range": [
+                -0.00032655453263791615,
+                0.00011335372416268127
+              ],
+              "coverage_reference_entire": 0.9166666666666666,
+              "coverage_reference_entire_wilson95": [
+                0.868931374051098,
+                0.9480560042266069
+              ],
+              "coverage_reference_point": 0.9166666666666666,
+              "coverage_reference_point_wilson95": [
+                0.868931374051098,
+                0.9480560042266069
+              ],
+              "coverage_reference_possible": 0.9583333333333334,
+              "coverage_reference_possible_wilson95": [
+                0.9199480120522677,
+                0.9787381040532078
+              ],
+              "covered_reference_entire": 176,
+              "covered_reference_point": 176,
+              "covered_reference_possible": 184,
+              "failures": {},
+              "flagged": 0,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.028949260711669922,
+              "reference_interval_999": [
+                0.02873011725798018,
+                0.029170025514780776
+              ],
+              "reference_standard_error": 6.684425980368345e-05,
+              "replicates": 192,
+              "rmse": 0.005805447766398424,
+              "rmse_reference_range": [
+                0.0058044838100822565,
+                0.005813662371026838
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 0
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "reference_sensitive",
+                "epsilon": 0.2
+              }
+            ],
+            "relative_bias_reference_point": -0.003654315410010418,
+            "relative_bias_reference_range": [
+              -0.01119486619826402,
+              0.003945466812572553
+            ],
+            "relative_rmse_minimizer": 0.029170025514780776,
+            "relative_rmse_reference_point": 0.2005387227059015,
+            "relative_rmse_reference_range": [
+              0.19930261521646567,
+              0.20207333214005066
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "bar": {
+        "assessment": {
+          "costs": {
+            "analysis_cpu_seconds": {
+              "available_only_max": 0.019178969999984474,
+              "available_only_mean": 0.017316975203127544,
+              "available_only_min": 0.016736223000066275,
+              "mean": 0.017316975203127544,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.3248592390004887
+            },
+            "analysis_wall_seconds": {
+              "available_only_max": 0.025376607663929462,
+              "available_only_mean": 0.017479895822665032,
+              "available_only_min": 0.01684588845819235,
+              "mean": 0.017479895822665032,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.3561399979516864
+            },
+            "anchor_cpu_seconds": {
+              "available_only_max": 39.394763444,
+              "available_only_mean": 37.92942313800521,
+              "available_only_min": 37.467054345,
+              "mean": 37.92942313800521,
+              "missing": 0,
+              "records": 192,
+              "sum": 7282.449242497
+            },
+            "anchor_wall_seconds": {
+              "available_only_max": 40.03213836438954,
+              "available_only_mean": 38.25383107654731,
+              "available_only_min": 37.75141910556704,
+              "mean": 38.25383107654731,
+              "missing": 0,
+              "records": 192,
+              "sum": 7344.735566697083
+            },
+            "compact_cpu_seconds": {
+              "available_only_max": 86.27328843799978,
+              "available_only_mean": 84.09798441641145,
+              "available_only_min": 80.55869051099995,
+              "mean": 84.09798441641145,
+              "missing": 0,
+              "records": 192,
+              "sum": 16146.813007951
+            },
+            "compact_wall_seconds": {
+              "available_only_max": 86.97126524429768,
+              "available_only_mean": 84.82339518345059,
+              "available_only_min": 81.09334166813642,
+              "mean": 84.82339518345059,
+              "missing": 0,
+              "records": 192,
+              "sum": 16286.091875222512
+            },
+            "construction_cpu_seconds": {
+              "available_only_max": 0.123247259,
+              "available_only_mean": 0.11222787029687427,
+              "available_only_min": 0.1089341969999964,
+              "mean": 0.11222787029687427,
+              "missing": 0,
+              "records": 192,
+              "sum": 21.54775109699986
+            },
+            "construction_wall_seconds": {
+              "available_only_max": 0.15237167943269014,
+              "available_only_mean": 0.11638923307085254,
+              "available_only_min": 0.11026419326663017,
+              "mean": 0.11638923307085254,
+              "missing": 0,
+              "records": 192,
+              "sum": 22.34673274960369
+            },
+            "cpu_seconds": {
+              "available_only_max": 269.907949275,
+              "available_only_mean": 265.10063253603124,
+              "available_only_min": 259.05741331,
+              "mean": 265.10063253603124,
+              "missing": 0,
+              "records": 192,
+              "sum": 50899.321446918
+            },
+            "initialization_cpu_seconds": {
+              "available_only_max": 0.006899381999978971,
+              "available_only_mean": 0.00583127637499492,
+              "available_only_min": 0.005264023999984602,
+              "mean": 0.00583127637499492,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.1196050639990247
+            },
+            "initialization_wall_seconds": {
+              "available_only_max": 0.006946830078959465,
+              "available_only_mean": 0.005868595234157207,
+              "available_only_min": 0.005305624566972256,
+              "mean": 0.005868595234157207,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.1267702849581838
+            },
+            "sampling_cpu_seconds": {
+              "available_only_max": 145.31248363599985,
+              "available_only_mean": 142.4183859217396,
+              "available_only_min": 139.902559177,
+              "mean": 142.4183859217396,
+              "missing": 0,
+              "records": 192,
+              "sum": 27344.330096974
+            },
+            "sampling_wall_seconds": {
+              "available_only_max": 149.9730648091063,
+              "available_only_mean": 145.29994442820316,
+              "available_only_min": 141.5449614385143,
+              "mean": 145.29994442820316,
+              "missing": 0,
+              "records": 192,
+              "sum": 27897.589330215007
+            },
+            "task_wall_seconds": {
+              "available_only_max": 275.74167947564274,
+              "available_only_mean": 269.0487554712163,
+              "available_only_min": 262.8161661317572,
+              "mean": 269.0487554712163,
+              "missing": 0,
+              "records": 192,
+              "sum": 51657.361050473526
+            }
+          },
+          "diagnostics_status": "not_collected",
+          "method": "bar",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 0.00025252047130146227,
+              "available_only_mean_interval_width": 0.013482029213665815,
+              "available_only_rmse": 0.003665893053777086,
+              "bias": 0.00025252047130146227,
+              "bias_reference_range": [
+                3.175566819060838e-05,
+                0.0004716639249912058
+              ],
+              "coverage_reference_entire": 0.8697916666666666,
+              "coverage_reference_entire_wilson95": [
+                0.8148505229649732,
+                0.91022577525649
+              ],
+              "coverage_reference_point": 0.8854166666666666,
+              "coverage_reference_point_wilson95": [
+                0.832610794613997,
+                0.92310253029288
+              ],
+              "coverage_reference_possible": 0.9010416666666666,
+              "coverage_reference_possible_wilson95": [
+                0.8506207684360072,
+                0.9357295831562837
+              ],
+              "covered_reference_entire": 167,
+              "covered_reference_point": 170,
+              "covered_reference_possible": 173,
+              "failures": {},
+              "flagged": 192,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.028949260711669922,
+              "reference_interval_999": [
+                0.02873011725798018,
+                0.029170025514780776
+              ],
+              "reference_standard_error": 6.684425980368345e-05,
+              "replicates": 192,
+              "rmse": 0.003665893053777086,
+              "rmse_reference_range": [
+                0.0036573232993224714,
+                0.003687475037399289
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 192
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.2
+              }
+            ],
+            "relative_bias_reference_point": 0.00872286424916085,
+            "relative_bias_reference_range": [
+              0.0010886403981552092,
+              0.0164170553414708
+            ],
+            "relative_rmse_minimizer": 0.029170025514780776,
+            "relative_rmse_reference_point": 0.12663166394087932,
+            "relative_rmse_reference_range": [
+              0.12537950292396097,
+              0.1283487639221188
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "diagnostic_observation": {
+        "bar": "not_collected",
+        "mc": "not_applicable"
+      },
+      "ratios_mc_over_bar": {
+        "cpu_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        },
+        "task_wall_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        }
+      }
+    },
+    {
+      "identity": [
+        1,
+        0.1
+      ],
+      "selection": {
+        "calibration_assessment": {
+          "metrics": {
+            "available_only_bias": -0.00030430807825813574,
+            "available_only_mean_interval_width": 0.010314889159443424,
+            "available_only_rmse": 0.0025813665261961954,
+            "bias": -0.00030430807825813574,
+            "bias_reference_range": [
+              -0.0005250728813689896,
+              -8.516462456839222e-05
+            ],
+            "coverage_reference_entire": 0.8697916666666666,
+            "coverage_reference_entire_wilson95": [
+              0.8148505229649732,
+              0.91022577525649
+            ],
+            "coverage_reference_point": 0.890625,
+            "coverage_reference_point_wilson95": [
+              0.8385842176755814,
+              0.927341449459767
+            ],
+            "coverage_reference_possible": 0.90625,
+            "coverage_reference_possible_wilson95": [
+              0.8566878302149447,
+              0.9398748636058177
+            ],
+            "covered_reference_entire": 167,
+            "covered_reference_point": 171,
+            "covered_reference_possible": 174,
+            "failures": {},
+            "flagged": 192,
+            "high_rhat": 192,
+            "low_ess": 192,
+            "point_estimates": 192,
+            "reference": 0.028949260711669922,
+            "reference_interval_999": [
+              0.02873011725798018,
+              0.029170025514780776
+            ],
+            "reference_standard_error": 6.684425980368345e-05,
+            "replicates": 192,
+            "rmse": 0.0025813665261961954,
+            "rmse_reference_range": [
+              0.002564781228360604,
+              0.00261659153610612
+            ],
+            "unavailable_intervals": 0,
+            "undefined": 0
+          },
+          "nominal_coverage_certified": false,
+          "population_rmse_certified": false,
+          "precision": [
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.2
+            },
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.1
+            }
+          ],
+          "relative_bias_reference_point": -0.01051177373021694,
+          "relative_bias_reference_range": [
+            -0.018000425851630707,
+            -0.002964297841309162
+          ],
+          "relative_rmse_minimizer": 0.02887434207664685,
+          "relative_rmse_reference_point": 0.08916865103762751,
+          "relative_rmse_reference_range": [
+            0.0891313870495174,
+            0.08970137975300242
+          ],
+          "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+        },
+        "case": 1,
+        "classification_counts": {
+          "empirical_above_target": 156,
+          "empirical_within_target": 188,
+          "reference_sensitive": 8
+        },
+        "condition": {
+          "block": null,
+          "burn": 600,
+          "case": 1,
+          "chains": 4,
+          "init": "logical",
+          "kernel": "ZH",
+          "ladder": "fine",
+          "method": "cross_chain",
+          "samples": 6000
+        },
+        "eligible_conditions": 188,
+        "epsilon": 0.1,
+        "precision_independently_confirmed": false,
+        "recommended": false,
+        "status": "selected",
+        "total_proposed_steps": 132000
+      },
+      "mc": {
+        "assessment": {
+          "costs": {
+            "construction_wall_seconds": {
+              "available_only_max": 0.1554815722629428,
+              "available_only_mean": 0.11494910712644923,
+              "available_only_min": 0.10843884386122227,
+              "mean": 0.11494910712644923,
+              "missing": 0,
+              "records": 192,
+              "sum": 22.070228568278253
+            },
+            "cpu_seconds": {
+              "available_only_max": 5.714429867999996,
+              "available_only_mean": 5.441126075166667,
+              "available_only_min": 5.288598452999992,
+              "mean": 5.441126075166667,
+              "missing": 0,
+              "records": 192,
+              "sum": 1044.696206432
+            },
+            "direct_mc_elapsed_seconds": {
+              "available_only_max": 5.652516004629433,
+              "available_only_mean": 5.3638258879558025,
+              "available_only_min": 5.213337054476142,
+              "mean": 5.3638258879558025,
+              "missing": 0,
+              "records": 192,
+              "sum": 1029.8545704875141
+            },
+            "task_wall_seconds": {
+              "available_only_max": 5.826493168249726,
+              "available_only_mean": 5.525721497707612,
+              "available_only_min": 5.37228901963681,
+              "mean": 5.525721497707612,
+              "missing": 0,
+              "records": 192,
+              "sum": 1060.9385275598615
+            }
+          },
+          "diagnostics_status": "not_applicable",
+          "method": "mc",
+          "precision": {
+            "metrics": {
+              "available_only_bias": -0.0001898021817957063,
+              "available_only_mean_interval_width": 0.011279697187884593,
+              "available_only_rmse": 0.0027352143130062196,
+              "bias": -0.0001898021817957063,
+              "bias_reference_range": [
+                -0.0004105669849065602,
+                2.9341271894037235e-05
+              ],
+              "coverage_reference_entire": 0.9583333333333334,
+              "coverage_reference_entire_wilson95": [
+                0.9199480120522677,
+                0.9787381040532078
+              ],
+              "coverage_reference_point": 0.9635416666666666,
+              "coverage_reference_point_wilson95": [
+                0.9266691049105195,
+                0.9822293534234273
+              ],
+              "coverage_reference_possible": 0.9739583333333334,
+              "coverage_reference_possible_wilson95": [
+                0.9404967518070468,
+                0.9888263909838426
+              ],
+              "covered_reference_entire": 184,
+              "covered_reference_point": 185,
+              "covered_reference_possible": 187,
+              "failures": {},
+              "flagged": 0,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.028949260711669922,
+              "reference_interval_999": [
+                0.02873011725798018,
+                0.029170025514780776
+              ],
+              "reference_standard_error": 6.684425980368345e-05,
+              "replicates": 192,
+              "rmse": 0.0027352143130062196,
+              "rmse_reference_range": [
+                0.0027286209831817385,
+                0.002759336463527951
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 0
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.1
+              }
+            ],
+            "relative_bias_reference_point": -0.006556374053420799,
+            "relative_bias_reference_range": [
+              -0.014074961459959031,
+              0.0010212722638953855
+            ],
+            "relative_rmse_minimizer": 0.029018342836132128,
+            "relative_rmse_reference_point": 0.09448304536162509,
+            "relative_rmse_reference_range": [
+              0.09445317439402753,
+              0.09497972840396035
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "bar": {
+        "assessment": {
+          "costs": {
+            "analysis_cpu_seconds": {
+              "available_only_max": 0.03848377500003153,
+              "available_only_mean": 0.03253325923957936,
+              "available_only_min": 0.023263660999873537,
+              "mean": 0.03253325923957936,
+              "missing": 0,
+              "records": 192,
+              "sum": 6.246385773999236
+            },
+            "analysis_wall_seconds": {
+              "available_only_max": 0.06290764175355434,
+              "available_only_mean": 0.03287434877226284,
+              "available_only_min": 0.02329720091074705,
+              "mean": 0.03287434877226284,
+              "missing": 0,
+              "records": 192,
+              "sum": 6.311874964274466
+            },
+            "anchor_cpu_seconds": {
+              "available_only_max": 39.75368593199994,
+              "available_only_mean": 37.9339988195625,
+              "available_only_min": 37.401900279000074,
+              "mean": 37.9339988195625,
+              "missing": 0,
+              "records": 192,
+              "sum": 7283.327773356
+            },
+            "anchor_wall_seconds": {
+              "available_only_max": 40.39214750286192,
+              "available_only_mean": 38.39980034807619,
+              "available_only_min": 37.782935719937086,
+              "mean": 38.39980034807619,
+              "missing": 0,
+              "records": 192,
+              "sum": 7372.761666830629
+            },
+            "compact_cpu_seconds": {
+              "available_only_max": 145.32289762699997,
+              "available_only_mean": 139.85537665200522,
+              "available_only_min": 135.17714449899984,
+              "mean": 139.85537665200522,
+              "missing": 0,
+              "records": 192,
+              "sum": 26852.232317185
+            },
+            "compact_wall_seconds": {
+              "available_only_max": 146.316101282835,
+              "available_only_mean": 140.93009987236778,
+              "available_only_min": 135.9864420760423,
+              "mean": 140.93009987236778,
+              "missing": 0,
+              "records": 192,
+              "sum": 27058.57917549461
+            },
+            "construction_cpu_seconds": {
+              "available_only_max": 0.12184588699994947,
+              "available_only_mean": 0.11137366863020819,
+              "available_only_min": 0.10899835800000801,
+              "mean": 0.11137366863020819,
+              "missing": 0,
+              "records": 192,
+              "sum": 21.38374437699997
+            },
+            "construction_wall_seconds": {
+              "available_only_max": 0.1663495870307088,
+              "available_only_mean": 0.11701321222062688,
+              "available_only_min": 0.11100777331739664,
+              "mean": 0.11701321222062688,
+              "missing": 0,
+              "records": 192,
+              "sum": 22.46653674636036
+            },
+            "cpu_seconds": {
+              "available_only_max": 431.9702862690001,
+              "available_only_mean": 416.42086856608336,
+              "available_only_min": 408.786267331,
+              "mean": 416.42086856608336,
+              "missing": 0,
+              "records": 192,
+              "sum": 79952.80676468801
+            },
+            "initialization_cpu_seconds": {
+              "available_only_max": 0.010162007000303674,
+              "available_only_mean": 0.009190359447897478,
+              "available_only_min": 0.008691392000514497,
+              "mean": 0.009190359447897478,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.7645490139963158
+            },
+            "initialization_wall_seconds": {
+              "available_only_max": 0.010244312696158886,
+              "available_only_mean": 0.009251953684724867,
+              "available_only_min": 0.008729991503059864,
+              "mean": 0.009251953684724867,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.7763751074671745
+            },
+            "sampling_cpu_seconds": {
+              "available_only_max": 246.856842688999,
+              "available_only_mean": 237.63202410639062,
+              "available_only_min": 233.9895840829996,
+              "mean": 237.63202410639062,
+              "missing": 0,
+              "records": 192,
+              "sum": 45625.348628427
+            },
+            "sampling_wall_seconds": {
+              "available_only_max": 251.6031901575625,
+              "available_only_mean": 243.05386943829458,
+              "available_only_min": 236.98110649827868,
+              "mean": 243.05386943829458,
+              "missing": 0,
+              "records": 192,
+              "sum": 46666.34293215256
+            },
+            "task_wall_seconds": {
+              "available_only_max": 437.7442577416077,
+              "available_only_mean": 423.40517948421865,
+              "available_only_min": 413.5308744441718,
+              "mean": 423.40517948421865,
+              "missing": 0,
+              "records": 192,
+              "sum": 81293.79446096998
+            }
+          },
+          "diagnostics_status": "not_collected",
+          "method": "bar",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 0.0004692776384279951,
+              "available_only_mean_interval_width": 0.010996393510811345,
+              "available_only_rmse": 0.002927294648158338,
+              "bias": 0.0004692776384279951,
+              "bias_reference_range": [
+                0.0002485128353171412,
+                0.0006884210921177386
+              ],
+              "coverage_reference_entire": 0.8697916666666666,
+              "coverage_reference_entire_wilson95": [
+                0.8148505229649732,
+                0.91022577525649
+              ],
+              "coverage_reference_point": 0.8958333333333334,
+              "coverage_reference_point_wilson95": [
+                0.8445869253283719,
+                0.9315510840354478
+              ],
+              "coverage_reference_possible": 0.8958333333333334,
+              "coverage_reference_possible_wilson95": [
+                0.8445869253283719,
+                0.9315510840354478
+              ],
+              "covered_reference_entire": 167,
+              "covered_reference_point": 172,
+              "covered_reference_possible": 172,
+              "failures": {},
+              "flagged": 192,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.028949260711669922,
+              "reference_interval_999": [
+                0.02873011725798018,
+                0.029170025514780776
+              ],
+              "reference_standard_error": 6.684425980368345e-05,
+              "replicates": 192,
+              "rmse": 0.002927294648158338,
+              "rmse_reference_range": [
+                0.0029001019093344393,
+                0.002970312450783667
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 192
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "reference_sensitive",
+                "epsilon": 0.1
+              }
+            ],
+            "relative_bias_reference_point": 0.016210349656315074,
+            "relative_bias_reference_range": [
+              0.008519458962804672,
+              0.023961652712242914
+            ],
+            "relative_rmse_minimizer": 0.029170025514780776,
+            "relative_rmse_reference_point": 0.1011181141139918,
+            "relative_rmse_reference_range": [
+              0.09942061613435768,
+              0.10338671520592638
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "diagnostic_observation": {
+        "bar": "not_collected",
+        "mc": "not_applicable"
+      },
+      "ratios_mc_over_bar": {
+        "cpu_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        },
+        "task_wall_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        }
+      }
+    },
+    {
+      "identity": [
+        2,
+        0.2
+      ],
+      "selection": {
+        "calibration_assessment": {
+          "metrics": {
+            "available_only_bias": 0.00026823519483157657,
+            "available_only_mean_interval_width": 0.0167762682389677,
+            "available_only_rmse": 0.004327217119605555,
+            "bias": 0.00026823519483157657,
+            "bias_reference_range": [
+              4.302937322663014e-05,
+              0.0004918238637330527
+            ],
+            "coverage_reference_entire": 0.8802083333333334,
+            "coverage_reference_entire_wilson95": [
+              0.8266650028526277,
+              0.9188359798257781
+            ],
+            "coverage_reference_point": 0.8854166666666666,
+            "coverage_reference_point_wilson95": [
+              0.832610794613997,
+              0.92310253029288
+            ],
+            "coverage_reference_possible": 0.890625,
+            "coverage_reference_possible_wilson95": [
+              0.8385842176755814,
+              0.927341449459767
+            ],
+            "covered_reference_entire": 169,
+            "covered_reference_point": 170,
+            "covered_reference_possible": 171,
+            "failures": {},
+            "flagged": 192,
+            "high_rhat": 192,
+            "low_ess": 192,
+            "point_estimates": 192,
+            "reference": 0.030168533325195312,
+            "reference_interval_999": [
+              0.029944944656293836,
+              0.03039373914680026
+            ],
+            "reference_standard_error": 6.819454752058793e-05,
+            "replicates": 192,
+            "rmse": 0.004327217119605555,
+            "rmse_reference_range": [
+              0.0043191097933974005,
+              0.004346809012758483
+            ],
+            "unavailable_intervals": 0,
+            "undefined": 70
+          },
+          "nominal_coverage_certified": false,
+          "population_rmse_certified": false,
+          "precision": [
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.2
+            },
+            {
+              "classification": "empirical_above_target",
+              "epsilon": 0.1
+            }
+          ],
+          "relative_bias_reference_point": 0.008891224241503392,
+          "relative_bias_reference_range": [
+            0.0014157314774205117,
+            0.01642427025256445
+          ],
+          "relative_rmse_minimizer": 0.03039373914680026,
+          "relative_rmse_reference_point": 0.14343478593941691,
+          "relative_rmse_reference_range": [
+            0.14210524649620482,
+            0.1451600282669038
+          ],
+          "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+        },
+        "case": 2,
+        "classification_counts": {
+          "empirical_within_target": 352
+        },
+        "condition": {
+          "block": null,
+          "burn": 600,
+          "case": 2,
+          "chains": 4,
+          "init": "logical",
+          "kernel": "ZH",
+          "ladder": "coarse",
+          "method": "cross_chain",
+          "samples": 600
+        },
+        "eligible_conditions": 352,
+        "epsilon": 0.2,
+        "precision_independently_confirmed": false,
+        "recommended": false,
+        "status": "selected",
+        "total_proposed_steps": 19200
+      },
+      "mc": {
+        "assessment": {
+          "costs": {
+            "construction_wall_seconds": {
+              "available_only_max": 0.034768713638186455,
+              "available_only_mean": 0.016362597336410545,
+              "available_only_min": 0.01398258376866579,
+              "mean": 0.016362597336410545,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.1416186885908246
+            },
+            "cpu_seconds": {
+              "available_only_max": 0.7975378970000122,
+              "available_only_mean": 0.6282725400937489,
+              "available_only_min": 0.6093464540000184,
+              "mean": 0.6282725400937489,
+              "missing": 0,
+              "records": 192,
+              "sum": 120.6283276979998
+            },
+            "direct_mc_elapsed_seconds": {
+              "available_only_max": 0.7849044231697917,
+              "available_only_mean": 0.6225699070443321,
+              "available_only_min": 0.5976487956941128,
+              "mean": 0.6225699070443321,
+              "missing": 0,
+              "records": 192,
+              "sum": 119.53342215251178
+            },
+            "task_wall_seconds": {
+              "available_only_max": 0.813925227150321,
+              "available_only_mean": 0.6461923364355849,
+              "available_only_min": 0.6195069411769509,
+              "mean": 0.6461923364355849,
+              "missing": 0,
+              "records": 192,
+              "sum": 124.06892859563231
+            }
+          },
+          "diagnostics_status": "not_applicable",
+          "method": "mc",
+          "precision": {
+            "metrics": {
+              "available_only_bias": -0.00016427651429787651,
+              "available_only_mean_interval_width": 0.023444199409385528,
+              "available_only_rmse": 0.005169907874449355,
+              "bias": -0.00016427651429787651,
+              "bias_reference_range": [
+                -0.00038948233590282294,
+                5.931215460359962e-05
+              ],
+              "coverage_reference_entire": 0.9791666666666666,
+              "coverage_reference_entire_wilson95": [
+                0.947666268951536,
+                0.9918692160678246
+              ],
+              "coverage_reference_point": 0.9791666666666666,
+              "coverage_reference_point_wilson95": [
+                0.947666268951536,
+                0.9918692160678246
+              ],
+              "coverage_reference_possible": 0.9791666666666666,
+              "coverage_reference_possible_wilson95": [
+                0.947666268951536,
+                0.9918692160678246
+              ],
+              "covered_reference_entire": 188,
+              "covered_reference_point": 188,
+              "covered_reference_possible": 188,
+              "failures": {},
+              "flagged": 0,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.030168533325195312,
+              "reference_interval_999": [
+                0.029944944656293836,
+                0.03039373914680026
+              ],
+              "reference_standard_error": 6.819454752058793e-05,
+              "replicates": 192,
+              "rmse": 0.005169907874449355,
+              "rmse_reference_range": [
+                0.005167297229417288,
+                0.005181954954177419
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 0
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.2
+              }
+            ],
+            "relative_bias_reference_point": -0.005445293363356199,
+            "relative_bias_reference_range": [
+              -0.012814558091113525,
+              0.0019807067698531587
+            ],
+            "relative_rmse_minimizer": 0.03039373914680026,
+            "relative_rmse_reference_point": 0.1713675576708164,
+            "relative_rmse_reference_range": [
+              0.1704941576667758,
+              0.17257128643839087
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "bar": {
+        "assessment": {
+          "costs": {
+            "analysis_cpu_seconds": {
+              "available_only_max": 0.016207351000005588,
+              "available_only_mean": 0.013967841984375303,
+              "available_only_min": 0.013040283999998792,
+              "mean": 0.013967841984375303,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.681825661000058
+            },
+            "analysis_wall_seconds": {
+              "available_only_max": 0.02875804342329502,
+              "available_only_mean": 0.014143157988049401,
+              "available_only_min": 0.013138930313289165,
+              "mean": 0.014143157988049401,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.715486333705485
+            },
+            "anchor_cpu_seconds": {
+              "available_only_max": 17.968492162,
+              "available_only_mean": 15.528837775307293,
+              "available_only_min": 15.03189137,
+              "mean": 15.528837775307293,
+              "missing": 0,
+              "records": 192,
+              "sum": 2981.536852859
+            },
+            "anchor_wall_seconds": {
+              "available_only_max": 18.276229429990053,
+              "available_only_mean": 15.709294672070731,
+              "available_only_min": 15.184003818780184,
+              "mean": 15.709294672070731,
+              "missing": 0,
+              "records": 192,
+              "sum": 3016.1845770375803
+            },
+            "compact_cpu_seconds": {
+              "available_only_max": 3.1674390179999996,
+              "available_only_mean": 2.9570433111562497,
+              "available_only_min": 2.801679121999989,
+              "mean": 2.9570433111562497,
+              "missing": 0,
+              "records": 192,
+              "sum": 567.752315742
+            },
+            "compact_wall_seconds": {
+              "available_only_max": 3.251067333854735,
+              "available_only_mean": 2.989589479965313,
+              "available_only_min": 2.8295489121228456,
+              "mean": 2.989589479965313,
+              "missing": 0,
+              "records": 192,
+              "sum": 574.0011801533401
+            },
+            "construction_cpu_seconds": {
+              "available_only_max": 0.018726014000002067,
+              "available_only_mean": 0.016089495609374994,
+              "available_only_min": 0.014985436000000019,
+              "mean": 0.016089495609374994,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.089183156999999
+            },
+            "construction_wall_seconds": {
+              "available_only_max": 0.0430625956505537,
+              "available_only_mean": 0.019949301985131267,
+              "available_only_min": 0.015442663803696632,
+              "mean": 0.019949301985131267,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.830265981145203
+            },
+            "cpu_seconds": {
+              "available_only_max": 33.03387349300001,
+              "available_only_mean": 30.12437902520833,
+              "available_only_min": 29.353197123,
+              "mean": 30.12437902520833,
+              "missing": 0,
+              "records": 192,
+              "sum": 5783.88077284
+            },
+            "initialization_cpu_seconds": {
+              "available_only_max": 0.011044133999995154,
+              "available_only_mean": 0.008980000692706788,
+              "available_only_min": 0.008315977999984625,
+              "mean": 0.008980000692706788,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.7241601329997032
+            },
+            "initialization_wall_seconds": {
+              "available_only_max": 0.011167194694280624,
+              "available_only_mean": 0.009050793329758259,
+              "available_only_min": 0.008353136479854584,
+              "mean": 0.009050793329758259,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.7377523193135858
+            },
+            "sampling_cpu_seconds": {
+              "available_only_max": 12.070211367000002,
+              "available_only_mean": 11.487634198104168,
+              "available_only_min": 11.143969891000001,
+              "mean": 11.487634198104168,
+              "missing": 0,
+              "records": 192,
+              "sum": 2205.625766036
+            },
+            "sampling_wall_seconds": {
+              "available_only_max": 14.662765075452626,
+              "available_only_mean": 12.158668372658818,
+              "available_only_min": 11.59853282943368,
+              "mean": 12.158668372658818,
+              "missing": 0,
+              "records": 192,
+              "sum": 2334.464327550493
+            },
+            "task_wall_seconds": {
+              "available_only_max": 36.15641660336405,
+              "available_only_mean": 31.016037924734217,
+              "available_only_min": 29.967526208609343,
+              "mean": 31.016037924734217,
+              "missing": 0,
+              "records": 192,
+              "sum": 5955.079281548969
+            }
+          },
+          "diagnostics_status": "not_collected",
+          "method": "bar",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 0.0006703869002268777,
+              "available_only_mean_interval_width": 0.01623968049001478,
+              "available_only_rmse": 0.004094011640048198,
+              "bias": 0.0006703869002268777,
+              "bias_reference_range": [
+                0.00044518107862193124,
+                0.0008939755691283538
+              ],
+              "coverage_reference_entire": 0.8541666666666666,
+              "coverage_reference_entire_wilson95": [
+                0.7973032959743978,
+                0.8971359755616515
+              ],
+              "coverage_reference_point": 0.8645833333333334,
+              "coverage_reference_point_wilson95": [
+                0.8089792852613452,
+                0.9058846707316467
+              ],
+              "coverage_reference_possible": 0.8697916666666666,
+              "coverage_reference_possible_wilson95": [
+                0.8148505229649732,
+                0.91022577525649
+              ],
+              "covered_reference_entire": 164,
+              "covered_reference_point": 166,
+              "covered_reference_possible": 167,
+              "failures": {},
+              "flagged": 192,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.030168533325195312,
+              "reference_interval_999": [
+                0.029944944656293836,
+                0.03039373914680026
+              ],
+              "reference_standard_error": 6.819454752058793e-05,
+              "replicates": 192,
+              "rmse": 0.004094011640048198,
+              "rmse_reference_range": [
+                0.004063212879682447,
+                0.004136508797410288
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 192
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.2
+              }
+            ],
+            "relative_bias_reference_point": 0.022221395153704873,
+            "relative_bias_reference_range": [
+              0.014647130992068139,
+              0.02985397299575437
+            ],
+            "relative_rmse_minimizer": 0.03039373914680026,
+            "relative_rmse_reference_point": 0.13570469588022951,
+            "relative_rmse_reference_range": [
+              0.1336858508937426,
+              0.13813713282455092
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "diagnostic_observation": {
+        "bar": "not_collected",
+        "mc": "not_applicable"
+      },
+      "ratios_mc_over_bar": {
+        "cpu_seconds": {
+          "reason": null,
+          "value": 0.02085594991246144
+        },
+        "task_wall_seconds": {
+          "reason": null,
+          "value": 0.02083413548834582
+        }
+      }
+    },
+    {
+      "identity": [
+        2,
+        0.1
+      ],
+      "selection": {
+        "calibration_assessment": {
+          "metrics": {
+            "available_only_bias": -2.7395274946290932e-05,
+            "available_only_mean_interval_width": 0.009058567401131416,
+            "available_only_rmse": 0.0024156583876502056,
+            "bias": -2.7395274946290932e-05,
+            "bias_reference_range": [
+              -0.00025260109655123736,
+              0.0001961933939551852
+            ],
+            "coverage_reference_entire": 0.875,
+            "coverage_reference_entire_wilson95": [
+              0.8207453583387585,
+              0.9145432821111759
+            ],
+            "coverage_reference_point": 0.890625,
+            "coverage_reference_point_wilson95": [
+              0.8385842176755814,
+              0.927341449459767
+            ],
+            "coverage_reference_possible": 0.921875,
+            "coverage_reference_possible_wilson95": [
+              0.8751136305885575,
+              0.9520860899176188
+            ],
+            "covered_reference_entire": 168,
+            "covered_reference_point": 171,
+            "covered_reference_possible": 177,
+            "failures": {},
+            "flagged": 192,
+            "high_rhat": 192,
+            "low_ess": 192,
+            "point_estimates": 192,
+            "reference": 0.030168533325195312,
+            "reference_interval_999": [
+              0.029944944656293836,
+              0.03039373914680026
+            ],
+            "reference_standard_error": 6.819454752058793e-05,
+            "replicates": 192,
+            "rmse": 0.0024156583876502056,
+            "rmse_reference_range": [
+              0.0024155030417566045,
+              0.0024286750006360046
+            ],
+            "unavailable_intervals": 0,
+            "undefined": 139
+          },
+          "nominal_coverage_certified": false,
+          "population_rmse_certified": false,
+          "precision": [
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.2
+            },
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.1
+            }
+          ],
+          "relative_bias_reference_point": -0.0009080744712045286,
+          "relative_bias_reference_range": [
+            -0.008310958231601212,
+            0.00655180352500491
+          ],
+          "relative_rmse_minimizer": 0.03033471584200354,
+          "relative_rmse_reference_point": 0.08007211890651522,
+          "relative_rmse_reference_range": [
+            0.07988363159184825,
+            0.08093044214536171
+          ],
+          "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+        },
+        "case": 2,
+        "classification_counts": {
+          "empirical_above_target": 69,
+          "empirical_within_target": 283
+        },
+        "condition": {
+          "block": null,
+          "burn": 600,
+          "case": 2,
+          "chains": 8,
+          "init": "logical",
+          "kernel": "ZH",
+          "ladder": "fine",
+          "method": "cross_chain",
+          "samples": 600
+        },
+        "eligible_conditions": 283,
+        "epsilon": 0.1,
+        "precision_independently_confirmed": false,
+        "recommended": false,
+        "status": "selected",
+        "total_proposed_steps": 67200
+      },
+      "mc": {
+        "assessment": {
+          "costs": {
+            "construction_wall_seconds": {
+              "available_only_max": 0.0354135874658823,
+              "available_only_mean": 0.01767746982416914,
+              "available_only_min": 0.013992253690958023,
+              "mean": 0.01767746982416914,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.394074206240475
+            },
+            "cpu_seconds": {
+              "available_only_max": 3.052429550999989,
+              "available_only_mean": 2.3743366667395827,
+              "available_only_min": 2.3185129599999925,
+              "mean": 2.3743366667395827,
+              "missing": 0,
+              "records": 192,
+              "sum": 455.87264001399984
+            },
+            "direct_mc_elapsed_seconds": {
+              "available_only_max": 3.1577859222888947,
+              "available_only_mean": 2.400915534007557,
+              "available_only_min": 2.3203200977295637,
+              "mean": 2.400915534007557,
+              "missing": 0,
+              "records": 192,
+              "sum": 460.97578252945095
+            },
+            "task_wall_seconds": {
+              "available_only_max": 3.1903692558407784,
+              "available_only_mean": 2.425824368818818,
+              "available_only_min": 2.3429384231567383,
+              "mean": 2.425824368818818,
+              "missing": 0,
+              "records": 192,
+              "sum": 465.7582788132131
+            }
+          },
+          "diagnostics_status": "not_applicable",
+          "method": "mc",
+          "precision": {
+            "metrics": {
+              "available_only_bias": -8.817435869204471e-05,
+              "available_only_mean_interval_width": 0.011750344408213995,
+              "available_only_rmse": 0.0029095751793753143,
+              "bias": -8.817435869204471e-05,
+              "bias_reference_range": [
+                -0.00031338018029699113,
+                0.00013541431020943143
+              ],
+              "coverage_reference_entire": 0.9427083333333334,
+              "coverage_reference_entire_wilson95": [
+                0.9003376167838831,
+                0.9677114726361785
+              ],
+              "coverage_reference_point": 0.9479166666666666,
+              "coverage_reference_point_wilson95": [
+                0.9067948899639535,
+                0.9714665416845791
+              ],
+              "coverage_reference_possible": 0.9479166666666666,
+              "coverage_reference_possible_wilson95": [
+                0.9067948899639535,
+                0.9714665416845791
+              ],
+              "covered_reference_entire": 181,
+              "covered_reference_point": 182,
+              "covered_reference_possible": 182,
+              "failures": {},
+              "flagged": 0,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.030168533325195312,
+              "reference_interval_999": [
+                0.029944944656293836,
+                0.03039373914680026
+              ],
+              "reference_standard_error": 6.819454752058793e-05,
+              "replicates": 192,
+              "rmse": 0.0029095751793753143,
+              "rmse_reference_range": [
+                0.0029082388153152307,
+                0.002925074382696808
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 0
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.1
+              }
+            ],
+            "relative_bias_reference_point": -0.002922726064989251,
+            "relative_bias_reference_range": [
+              -0.010310682038277043,
+              0.004522109216220242
+            ],
+            "relative_rmse_minimizer": 0.030361534234934224,
+            "relative_rmse_reference_point": 0.09644403816427417,
+            "relative_rmse_reference_range": [
+              0.09623359330552649,
+              0.09722474839123575
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "bar": {
+        "assessment": {
+          "costs": {
+            "analysis_cpu_seconds": {
+              "available_only_max": 0.040217834999992874,
+              "available_only_mean": 0.034196383869791104,
+              "available_only_min": 0.024174104999985957,
+              "mean": 0.034196383869791104,
+              "missing": 0,
+              "records": 192,
+              "sum": 6.565705702999892
+            },
+            "analysis_wall_seconds": {
+              "available_only_max": 0.04051946196705103,
+              "available_only_mean": 0.034418535850515276,
+              "available_only_min": 0.024211705662310123,
+              "mean": 0.034418535850515276,
+              "missing": 0,
+              "records": 192,
+              "sum": 6.6083588832989335
+            },
+            "anchor_cpu_seconds": {
+              "available_only_max": 18.219102512000006,
+              "available_only_mean": 15.474699592182292,
+              "available_only_min": 15.046726921000001,
+              "mean": 15.474699592182292,
+              "missing": 0,
+              "records": 192,
+              "sum": 2971.142321699
+            },
+            "anchor_wall_seconds": {
+              "available_only_max": 18.445061498321593,
+              "available_only_mean": 15.688716006018998,
+              "available_only_min": 15.188477786257863,
+              "mean": 15.688716006018998,
+              "missing": 0,
+              "records": 192,
+              "sum": 3012.2334731556475
+            },
+            "compact_cpu_seconds": {
+              "available_only_max": 10.95783976300008,
+              "available_only_mean": 10.35793081778126,
+              "available_only_min": 10.072596413,
+              "mean": 10.35793081778126,
+              "missing": 0,
+              "records": 192,
+              "sum": 1988.7227170140018
+            },
+            "compact_wall_seconds": {
+              "available_only_max": 11.144671427085996,
+              "available_only_mean": 10.46560419658393,
+              "available_only_min": 10.161967417225242,
+              "mean": 10.46560419658393,
+              "missing": 0,
+              "records": 192,
+              "sum": 2009.3960057441145
+            },
+            "construction_cpu_seconds": {
+              "available_only_max": 0.01815310199998521,
+              "available_only_mean": 0.01537776009895834,
+              "available_only_min": 0.014115468999996494,
+              "mean": 0.01537776009895834,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.9525299390000015
+            },
+            "construction_wall_seconds": {
+              "available_only_max": 0.05015165079385042,
+              "available_only_mean": 0.02073976090468932,
+              "available_only_min": 0.014393698424100876,
+              "mean": 0.02073976090468932,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.9820340937003493
+            },
+            "cpu_seconds": {
+              "available_only_max": 69.87181420600001,
+              "available_only_mean": 66.6153599475,
+              "available_only_min": 64.62691058000001,
+              "mean": 66.6153599475,
+              "missing": 0,
+              "records": 192,
+              "sum": 12790.14910992
+            },
+            "initialization_cpu_seconds": {
+              "available_only_max": 0.0334247320000145,
+              "available_only_mean": 0.030853573531248363,
+              "available_only_min": 0.028768745999997236,
+              "mean": 0.030853573531248363,
+              "missing": 0,
+              "records": 192,
+              "sum": 5.923886117999686
+            },
+            "initialization_wall_seconds": {
+              "available_only_max": 0.03850587550550699,
+              "available_only_mean": 0.031129309990016434,
+              "available_only_min": 0.02894572913646698,
+              "mean": 0.031129309990016434,
+              "missing": 0,
+              "records": 192,
+              "sum": 5.976827518083155
+            },
+            "sampling_cpu_seconds": {
+              "available_only_max": 41.92593377799997,
+              "available_only_mean": 40.29670165152083,
+              "available_only_min": 38.50539598499989,
+              "mean": 40.29670165152083,
+              "missing": 0,
+              "records": 192,
+              "sum": 7736.966717091998
+            },
+            "sampling_wall_seconds": {
+              "available_only_max": 46.2193148676306,
+              "available_only_mean": 42.92061096367737,
+              "available_only_min": 40.56568083819002,
+              "mean": 42.92061096367737,
+              "missing": 0,
+              "records": 192,
+              "sum": 8240.757305026054
+            },
+            "task_wall_seconds": {
+              "available_only_max": 73.72627228032798,
+              "available_only_mean": 69.5795636894424,
+              "available_only_min": 66.93971392791718,
+              "mean": 69.5795636894424,
+              "missing": 0,
+              "records": 192,
+              "sum": 13359.276228372939
+            }
+          },
+          "diagnostics_status": "not_collected",
+          "method": "bar",
+          "precision": {
+            "metrics": {
+              "available_only_bias": -4.16749249574043e-05,
+              "available_only_mean_interval_width": 0.008784382008964748,
+              "available_only_rmse": 0.002600132566053841,
+              "bias": -4.16749249574043e-05,
+              "bias_reference_range": [
+                -0.0002668807465623507,
+                0.00018191374394407184
+              ],
+              "coverage_reference_entire": 0.8489583333333334,
+              "coverage_reference_entire_wilson95": [
+                0.7914966218282098,
+                0.8927303074793682
+              ],
+              "coverage_reference_point": 0.875,
+              "coverage_reference_point_wilson95": [
+                0.8207453583387585,
+                0.9145432821111759
+              ],
+              "coverage_reference_possible": 0.8958333333333334,
+              "coverage_reference_possible_wilson95": [
+                0.8445869253283719,
+                0.9315510840354478
+              ],
+              "covered_reference_entire": 163,
+              "covered_reference_point": 168,
+              "covered_reference_possible": 172,
+              "failures": {},
+              "flagged": 192,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.030168533325195312,
+              "reference_interval_999": [
+                0.029944944656293836,
+                0.03039373914680026
+              ],
+              "reference_standard_error": 6.819454752058793e-05,
+              "replicates": 192,
+              "rmse": 0.002600132566053841,
+              "rmse_reference_range": [
+                0.0025997985617511846,
+                0.0026134609035853595
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 192
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.1
+              }
+            ],
+            "relative_bias_reference_point": -0.0013814037463530896,
+            "relative_bias_reference_range": [
+              -0.008780780320359016,
+              0.006074940061905868
+            ],
+            "relative_rmse_minimizer": 0.030351208130697364,
+            "relative_rmse_reference_point": 0.0861869066694845,
+            "relative_rmse_reference_range": [
+              0.08597551473438024,
+              0.08703155998450883
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "diagnostic_observation": {
+        "bar": "not_collected",
+        "mc": "not_applicable"
+      },
+      "ratios_mc_over_bar": {
+        "cpu_seconds": {
+          "reason": null,
+          "value": 0.03564248048214125
+        },
+        "task_wall_seconds": {
+          "reason": null,
+          "value": 0.034864035360240395
+        }
+      }
+    },
+    {
+      "identity": [
+        3,
+        0.2
+      ],
+      "selection": {
+        "calibration_assessment": {
+          "metrics": {
+            "available_only_bias": 3.705755152475388e-06,
+            "available_only_mean_interval_width": 0.0019526714658985977,
+            "available_only_rmse": 0.0005135686570026323,
+            "bias": 3.705755152475388e-06,
+            "bias_reference_range": [
+              -1.8880561380466617e-05,
+              2.6120987737038564e-05
+            ],
+            "coverage_reference_entire": 0.8645833333333334,
+            "coverage_reference_entire_wilson95": [
+              0.8089792852613452,
+              0.9058846707316467
+            ],
+            "coverage_reference_point": 0.875,
+            "coverage_reference_point_wilson95": [
+              0.8207453583387585,
+              0.9145432821111759
+            ],
+            "coverage_reference_possible": 0.8958333333333334,
+            "coverage_reference_possible_wilson95": [
+              0.8445869253283719,
+              0.9315510840354478
+            ],
+            "covered_reference_entire": 166,
+            "covered_reference_point": 168,
+            "covered_reference_possible": 172,
+            "failures": {},
+            "flagged": 192,
+            "high_rhat": 192,
+            "low_ess": 192,
+            "point_estimates": 192,
+            "reference": 0.0029504776000976564,
+            "reference_interval_999": [
+              0.0029280623675130932,
+              0.0029730639166305984
+            ],
+            "reference_standard_error": 6.837997599305955e-06,
+            "replicates": 192,
+            "rmse": 0.0005135686570026323,
+            "rmse_reference_range": [
+              0.0005135552870278304,
+              0.0005142191544804568
+            ],
+            "unavailable_intervals": 0,
+            "undefined": 3
+          },
+          "nominal_coverage_certified": false,
+          "population_rmse_certified": false,
+          "precision": [
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.2
+            },
+            {
+              "classification": "empirical_above_target",
+              "epsilon": 0.1
+            }
+          ],
+          "relative_bias_reference_point": 0.0012559848454205692,
+          "relative_bias_reference_range": [
+            -0.006350540018616224,
+            0.00892091235038281
+          ],
+          "relative_rmse_minimizer": 0.0029730639166305984,
+          "relative_rmse_reference_point": 0.1740628896778047,
+          "relative_rmse_reference_range": [
+            0.17285273733424494,
+            0.17561755520842995
+          ],
+          "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+        },
+        "case": 3,
+        "classification_counts": {
+          "empirical_above_target": 108,
+          "empirical_within_target": 240,
+          "reference_sensitive": 4
+        },
+        "condition": {
+          "block": null,
+          "burn": 600,
+          "case": 3,
+          "chains": 4,
+          "init": "logical",
+          "kernel": "ZH",
+          "ladder": "coarse",
+          "method": "cross_chain",
+          "samples": 6000
+        },
+        "eligible_conditions": 240,
+        "epsilon": 0.2,
+        "precision_independently_confirmed": false,
+        "recommended": false,
+        "status": "selected",
+        "total_proposed_steps": 79200
+      },
+      "mc": {
+        "assessment": {
+          "costs": {
+            "construction_wall_seconds": {
+              "available_only_max": 0.2912513818591833,
+              "available_only_mean": 0.1494429065787699,
+              "available_only_min": 0.13886016048491,
+              "mean": 0.1494429065787699,
+              "missing": 0,
+              "records": 192,
+              "sum": 28.693038063123822
+            },
+            "cpu_seconds": {
+              "available_only_max": 21.24674471199998,
+              "available_only_mean": 20.060597059604167,
+              "available_only_min": 19.669749561000003,
+              "mean": 20.060597059604167,
+              "missing": 0,
+              "records": 192,
+              "sum": 3851.6346354439997
+            },
+            "direct_mc_elapsed_seconds": {
+              "available_only_max": 21.313494286499918,
+              "available_only_mean": 20.046702459760127,
+              "available_only_min": 19.599608616903424,
+              "mean": 20.046702459760127,
+              "missing": 0,
+              "records": 192,
+              "sum": 3848.9668722739443
+            },
+            "task_wall_seconds": {
+              "available_only_max": 21.55971108749509,
+              "available_only_mean": 20.29016255607712,
+              "available_only_min": 19.83802769612521,
+              "mean": 20.29016255607712,
+              "missing": 0,
+              "records": 192,
+              "sum": 3895.711210766807
+            }
+          },
+          "diagnostics_status": "not_applicable",
+          "method": "mc",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 3.751213870831346e-05,
+              "available_only_mean_interval_width": 0.0023403384409951943,
+              "available_only_rmse": 0.0006240241099143848,
+              "bias": 3.751213870831346e-05,
+              "bias_reference_range": [
+                1.4925822175371455e-05,
+                5.9927371292876636e-05
+              ],
+              "coverage_reference_entire": 0.9270833333333334,
+              "coverage_reference_entire_wilson95": [
+                0.8813408114839218,
+                0.9560712512507259
+              ],
+              "coverage_reference_point": 0.9479166666666666,
+              "coverage_reference_point_wilson95": [
+                0.9067948899639535,
+                0.9714665416845791
+              ],
+              "coverage_reference_possible": 0.9479166666666666,
+              "coverage_reference_possible_wilson95": [
+                0.9067948899639535,
+                0.9714665416845791
+              ],
+              "covered_reference_entire": 178,
+              "covered_reference_point": 182,
+              "covered_reference_possible": 182,
+              "failures": {},
+              "flagged": 0,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.0029504776000976564,
+              "reference_interval_999": [
+                0.0029280623675130932,
+                0.0029730639166305984
+              ],
+              "reference_standard_error": 6.837997599305955e-06,
+              "replicates": 192,
+              "rmse": 0.0006240241099143848,
+              "rmse_reference_range": [
+                0.0006230744011525264,
+                0.0006257716988119891
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 0
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_above_target",
+                "epsilon": 0.2
+              }
+            ],
+            "relative_bias_reference_point": 0.012713920860498017,
+            "relative_bias_reference_range": [
+              0.005020350249411155,
+              0.020466562446815422
+            ],
+            "relative_rmse_minimizer": 0.0029730639166305984,
+            "relative_rmse_reference_point": 0.21149935518701465,
+            "relative_rmse_reference_range": [
+              0.20957316042457053,
+              0.21371529027350575
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "bar": {
+        "assessment": {
+          "costs": {
+            "analysis_cpu_seconds": {
+              "available_only_max": 0.019132232000004024,
+              "available_only_mean": 0.017325548848954615,
+              "available_only_min": 0.016759320999994998,
+              "mean": 0.017325548848954615,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.3265053789992862
+            },
+            "analysis_wall_seconds": {
+              "available_only_max": 0.019243300892412663,
+              "available_only_mean": 0.017457074092817493,
+              "available_only_min": 0.016858871094882488,
+              "mean": 0.017457074092817493,
+              "missing": 0,
+              "records": 192,
+              "sum": 3.3517582258209586
+            },
+            "anchor_cpu_seconds": {
+              "available_only_max": 58.80630873000001,
+              "available_only_mean": 56.19645443048438,
+              "available_only_min": 55.50989972800005,
+              "mean": 56.19645443048438,
+              "missing": 0,
+              "records": 192,
+              "sum": 10789.719250653001
+            },
+            "anchor_wall_seconds": {
+              "available_only_max": 59.69101750757545,
+              "available_only_mean": 56.69670759138535,
+              "available_only_min": 55.98459315486252,
+              "mean": 56.69670759138535,
+              "missing": 0,
+              "records": 192,
+              "sum": 10885.767857545987
+            },
+            "compact_cpu_seconds": {
+              "available_only_max": 130.679183503,
+              "available_only_mean": 126.13225805785417,
+              "available_only_min": 121.39555981500024,
+              "mean": 126.13225805785417,
+              "missing": 0,
+              "records": 192,
+              "sum": 24217.393547108
+            },
+            "compact_wall_seconds": {
+              "available_only_max": 131.51347267534584,
+              "available_only_mean": 127.05681346953497,
+              "available_only_min": 122.21283129323274,
+              "mean": 127.05681346953497,
+              "missing": 0,
+              "records": 192,
+              "sum": 24394.908186150715
+            },
+            "construction_cpu_seconds": {
+              "available_only_max": 0.1607140420000519,
+              "available_only_mean": 0.14531393801041612,
+              "available_only_min": 0.1390509409999936,
+              "mean": 0.14531393801041612,
+              "missing": 0,
+              "records": 192,
+              "sum": 27.900276097999896
+            },
+            "construction_wall_seconds": {
+              "available_only_max": 0.20654984470456839,
+              "available_only_mean": 0.15328363296672856,
+              "available_only_min": 0.14074779767543077,
+              "mean": 0.15328363296672856,
+              "missing": 0,
+              "records": 192,
+              "sum": 29.430457529611886
+            },
+            "cpu_seconds": {
+              "available_only_max": 431.549954696,
+              "available_only_mean": 418.7286159553073,
+              "available_only_min": 407.26301861999997,
+              "mean": 418.7286159553073,
+              "missing": 0,
+              "records": 192,
+              "sum": 80395.894263419
+            },
+            "initialization_cpu_seconds": {
+              "available_only_max": 0.010542935000046327,
+              "available_only_mean": 0.009140274250005484,
+              "available_only_min": 0.008580082000037237,
+              "mean": 0.009140274250005484,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.7549326560010527
+            },
+            "initialization_wall_seconds": {
+              "available_only_max": 0.010611544363200665,
+              "available_only_mean": 0.009206389950122684,
+              "available_only_min": 0.008614576421678066,
+              "mean": 0.009206389950122684,
+              "missing": 0,
+              "records": 192,
+              "sum": 1.7676268704235554
+            },
+            "sampling_cpu_seconds": {
+              "available_only_max": 244.07652194,
+              "available_only_mean": 235.17050605110936,
+              "available_only_min": 227.12631069600013,
+              "mean": 235.17050605110936,
+              "missing": 0,
+              "records": 192,
+              "sum": 45152.737161813
+            },
+            "sampling_wall_seconds": {
+              "available_only_max": 249.54794261138886,
+              "available_only_mean": 238.80552864544734,
+              "available_only_min": 230.20539095811546,
+              "mean": 238.80552864544734,
+              "missing": 0,
+              "records": 192,
+              "sum": 45850.66149992589
+            },
+            "task_wall_seconds": {
+              "available_only_max": 439.45437283907086,
+              "available_only_mean": 423.8131369603361,
+              "available_only_min": 411.6410059072077,
+              "mean": 423.8131369603361,
+              "missing": 0,
+              "records": 192,
+              "sum": 81372.12229638454
+            }
+          },
+          "diagnostics_status": "not_collected",
+          "method": "bar",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 8.035025944026861e-06,
+              "available_only_mean_interval_width": 0.002056499929232763,
+              "available_only_rmse": 0.0005561152781034022,
+              "bias": 8.035025944026861e-06,
+              "bias_reference_range": [
+                -1.4551290588915144e-05,
+                3.0450258528590037e-05
+              ],
+              "coverage_reference_entire": 0.8541666666666666,
+              "coverage_reference_entire_wilson95": [
+                0.7973032959743978,
+                0.8971359755616515
+              ],
+              "coverage_reference_point": 0.8645833333333334,
+              "coverage_reference_point_wilson95": [
+                0.8089792852613452,
+                0.9058846707316467
+              ],
+              "coverage_reference_possible": 0.8697916666666666,
+              "coverage_reference_possible_wilson95": [
+                0.8148505229649732,
+                0.91022577525649
+              ],
+              "covered_reference_entire": 164,
+              "covered_reference_point": 166,
+              "covered_reference_possible": 167,
+              "failures": {},
+              "flagged": 192,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.0029504776000976564,
+              "reference_interval_999": [
+                0.0029280623675130932,
+                0.0029730639166305984
+              ],
+              "reference_standard_error": 6.837997599305955e-06,
+              "replicates": 192,
+              "rmse": 0.0005561152781034022,
+              "rmse_reference_range": [
+                0.0005560572280782826,
+                0.000556890347503493
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 192
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_within_target",
+                "epsilon": 0.2
+              }
+            ],
+            "relative_bias_reference_point": 0.002723296710932686,
+            "relative_bias_reference_range": [
+              -0.004894375296649064,
+              0.010399456946831412
+            ],
+            "relative_rmse_minimizer": 0.0029730639166305984,
+            "relative_rmse_reference_point": 0.18848313848747594,
+            "relative_rmse_reference_range": [
+              0.18709573867771562,
+              0.1901907396789774
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "diagnostic_observation": {
+        "bar": "not_collected",
+        "mc": "not_applicable"
+      },
+      "ratios_mc_over_bar": {
+        "cpu_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        },
+        "task_wall_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        }
+      }
+    },
+    {
+      "identity": [
+        3,
+        0.1
+      ],
+      "selection": {
+        "calibration_assessment": {
+          "metrics": {
+            "available_only_bias": -6.518329495582356e-07,
+            "available_only_mean_interval_width": 0.0011136544293754518,
+            "available_only_rmse": 0.0002689842882126401,
+            "bias": -6.518329495582356e-07,
+            "bias_reference_range": [
+              -2.323814948250024e-05,
+              2.176339963500494e-05
+            ],
+            "coverage_reference_entire": 0.8697916666666666,
+            "coverage_reference_entire_wilson95": [
+              0.8148505229649732,
+              0.91022577525649
+            ],
+            "coverage_reference_point": 0.9010416666666666,
+            "coverage_reference_point_wilson95": [
+              0.8506207684360072,
+              0.9357295831562837
+            ],
+            "coverage_reference_possible": 0.90625,
+            "coverage_reference_possible_wilson95": [
+              0.8566878302149447,
+              0.9398748636058177
+            ],
+            "covered_reference_entire": 167,
+            "covered_reference_point": 173,
+            "covered_reference_possible": 174,
+            "failures": {},
+            "flagged": 192,
+            "high_rhat": 192,
+            "low_ess": 192,
+            "point_estimates": 192,
+            "reference": 0.0029504776000976564,
+            "reference_interval_999": [
+              0.0029280623675130932,
+              0.0029730639166305984
+            ],
+            "reference_standard_error": 6.837997599305955e-06,
+            "replicates": 192,
+            "rmse": 0.0002689842882126401,
+            "rmse_reference_range": [
+              0.0002689834984140598,
+              0.0002699854329597016
+            ],
+            "unavailable_intervals": 0,
+            "undefined": 0
+          },
+          "nominal_coverage_certified": false,
+          "population_rmse_certified": false,
+          "precision": [
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.2
+            },
+            {
+              "classification": "empirical_within_target",
+              "epsilon": 0.1
+            }
+          ],
+          "relative_bias_reference_point": -0.0002209245545658258,
+          "relative_bias_reference_range": [
+            -0.007816229362749798,
+            0.007432696747333835
+          ],
+          "relative_rmse_minimizer": 0.0029730639166305984,
+          "relative_rmse_reference_point": 0.09116635496698472,
+          "relative_rmse_reference_range": [
+            0.09081050408955844,
+            0.09216419065490318
+          ],
+          "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+        },
+        "case": 3,
+        "classification_counts": {
+          "empirical_above_target": 280,
+          "empirical_within_target": 60,
+          "reference_sensitive": 12
+        },
+        "condition": {
+          "block": null,
+          "burn": 600,
+          "case": 3,
+          "chains": 4,
+          "init": "logical",
+          "kernel": "ZH",
+          "ladder": "fine",
+          "method": "cross_chain",
+          "samples": 12000
+        },
+        "eligible_conditions": 60,
+        "epsilon": 0.1,
+        "precision_independently_confirmed": false,
+        "recommended": false,
+        "status": "selected",
+        "total_proposed_steps": 252000
+      },
+      "mc": {
+        "assessment": {
+          "costs": {
+            "construction_wall_seconds": {
+              "available_only_max": 0.2473164824768901,
+              "available_only_mean": 0.15048361265022928,
+              "available_only_min": 0.14086956810206175,
+              "mean": 0.15048361265022928,
+              "missing": 0,
+              "records": 192,
+              "sum": 28.892853628844023
+            },
+            "cpu_seconds": {
+              "available_only_max": 83.263079184,
+              "available_only_mean": 78.89136574851041,
+              "available_only_min": 77.63160078800001,
+              "mean": 78.89136574851041,
+              "missing": 0,
+              "records": 192,
+              "sum": 15147.142223714
+            },
+            "direct_mc_elapsed_seconds": {
+              "available_only_max": 83.65596511308104,
+              "available_only_mean": 79.31396056033554,
+              "available_only_min": 78.02404609601945,
+              "mean": 79.31396056033554,
+              "missing": 0,
+              "records": 192,
+              "sum": 15228.280427584425
+            },
+            "task_wall_seconds": {
+              "available_only_max": 83.90986839588732,
+              "available_only_mean": 79.55893156345216,
+              "available_only_min": 78.27108786907047,
+              "mean": 79.55893156345216,
+              "missing": 0,
+              "records": 192,
+              "sum": 15275.314860182814
+            }
+          },
+          "diagnostics_status": "not_applicable",
+          "method": "mc",
+          "precision": {
+            "metrics": {
+              "available_only_bias": -1.3461300848125694e-05,
+              "available_only_mean_interval_width": 0.001152490082458702,
+              "available_only_rmse": 0.00029311940526113075,
+              "bias": -1.3461300848125694e-05,
+              "bias_reference_range": [
+                -3.60476173810677e-05,
+                8.953931736437482e-06
+              ],
+              "coverage_reference_entire": 0.9427083333333334,
+              "coverage_reference_entire_wilson95": [
+                0.9003376167838831,
+                0.9677114726361785
+              ],
+              "coverage_reference_point": 0.953125,
+              "coverage_reference_point_wilson95": [
+                0.9133280073164382,
+                0.975145766560566
+              ],
+              "coverage_reference_possible": 0.953125,
+              "coverage_reference_possible_wilson95": [
+                0.9133280073164382,
+                0.975145766560566
+              ],
+              "covered_reference_entire": 181,
+              "covered_reference_point": 183,
+              "covered_reference_possible": 183,
+              "failures": {},
+              "flagged": 0,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.0029504776000976564,
+              "reference_interval_999": [
+                0.0029280623675130932,
+                0.0029730639166305984
+              ],
+              "reference_standard_error": 6.837997599305955e-06,
+              "replicates": 192,
+              "rmse": 0.00029311940526113075,
+              "rmse_reference_range": [
+                0.00029281014176444655,
+                0.0002950206939164897
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 0
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "reference_sensitive",
+                "epsilon": 0.1
+              }
+            ],
+            "relative_bias_reference_point": -0.004562414182598768,
+            "relative_bias_reference_range": [
+              -0.012124736767153185,
+              0.0030579716592726114
+            ],
+            "relative_rmse_minimizer": 0.002966208435208063,
+            "relative_rmse_reference_point": 0.09934642623669772,
+            "relative_rmse_reference_range": [
+              0.09920466701426818,
+              0.10004807805568337
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "bar": {
+        "assessment": {
+          "costs": {
+            "analysis_cpu_seconds": {
+              "available_only_max": 0.03821119500025816,
+              "available_only_mean": 0.032734497593753055,
+              "available_only_min": 0.023243800999807718,
+              "mean": 0.032734497593753055,
+              "missing": 0,
+              "records": 192,
+              "sum": 6.285023538000587
+            },
+            "analysis_wall_seconds": {
+              "available_only_max": 0.03846095222979784,
+              "available_only_mean": 0.03293752413689314,
+              "available_only_min": 0.023303164169192314,
+              "mean": 0.03293752413689314,
+              "missing": 0,
+              "records": 192,
+              "sum": 6.324004634283483
+            },
+            "anchor_cpu_seconds": {
+              "available_only_max": 58.73885859300026,
+              "available_only_mean": 56.16824183388542,
+              "available_only_min": 55.183503363,
+              "mean": 56.16824183388542,
+              "missing": 0,
+              "records": 192,
+              "sum": 10784.302432106
+            },
+            "anchor_wall_seconds": {
+              "available_only_max": 59.58293829951435,
+              "available_only_mean": 56.798971307721025,
+              "available_only_min": 55.6762236719951,
+              "mean": 56.798971307721025,
+              "missing": 0,
+              "records": 192,
+              "sum": 10905.402491082437
+            },
+            "compact_cpu_seconds": {
+              "available_only_max": 428.3710113320002,
+              "available_only_mean": 415.7463001609428,
+              "available_only_min": 402.4867170250002,
+              "mean": 415.7463001609428,
+              "missing": 0,
+              "records": 192,
+              "sum": 79823.28963090101
+            },
+            "compact_wall_seconds": {
+              "available_only_max": 431.06037515122443,
+              "available_only_mean": 418.5881665310687,
+              "available_only_min": 405.02584263589233,
+              "mean": 418.5881665310687,
+              "missing": 0,
+              "records": 192,
+              "sum": 80368.92797396518
+            },
+            "construction_cpu_seconds": {
+              "available_only_max": 0.15861004700036574,
+              "available_only_mean": 0.14312969354687213,
+              "available_only_min": 0.13942817900010596,
+              "mean": 0.14312969354687213,
+              "missing": 0,
+              "records": 192,
+              "sum": 27.48090116099945
+            },
+            "construction_wall_seconds": {
+              "available_only_max": 0.23791599553078413,
+              "available_only_mean": 0.15319949276939346,
+              "available_only_min": 0.1421508016064763,
+              "mean": 0.15319949276939346,
+              "missing": 0,
+              "records": 192,
+              "sum": 29.414302611723542
+            },
+            "cpu_seconds": {
+              "available_only_max": 1249.290089397,
+              "available_only_mean": 1214.702722519677,
+              "available_only_min": 1188.55220268,
+              "mean": 1214.702722519677,
+              "missing": 0,
+              "records": 192,
+              "sum": 233222.922723778
+            },
+            "initialization_cpu_seconds": {
+              "available_only_max": 0.01674824000008357,
+              "available_only_mean": 0.014775697651042327,
+              "available_only_min": 0.014118916000370518,
+              "mean": 0.014775697651042327,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.8369339490001266
+            },
+            "initialization_wall_seconds": {
+              "available_only_max": 0.016857745125889778,
+              "available_only_mean": 0.014886814436370818,
+              "available_only_min": 0.014212542213499546,
+              "mean": 0.014886814436370818,
+              "missing": 0,
+              "records": 192,
+              "sum": 2.858268371783197
+            },
+            "sampling_cpu_seconds": {
+              "available_only_max": 764.6961234639992,
+              "available_only_mean": 740.8576997834166,
+              "available_only_min": 727.8239179240006,
+              "mean": 740.8576997834166,
+              "missing": 0,
+              "records": 192,
+              "sum": 142244.678358416
+            },
+            "sampling_wall_seconds": {
+              "available_only_max": 778.0061093028635,
+              "available_only_mean": 750.8408284922237,
+              "available_only_min": 738.0654364749789,
+              "mean": 750.8408284922237,
+              "missing": 0,
+              "records": 192,
+              "sum": 144161.43907050695
+            },
+            "task_wall_seconds": {
+              "available_only_max": 1266.6485569225624,
+              "available_only_mean": 1228.186654769054,
+              "available_only_min": 1203.4264814071357,
+              "mean": 1228.186654769054,
+              "missing": 0,
+              "records": 192,
+              "sum": 235811.83771565836
+            }
+          },
+          "diagnostics_status": "not_collected",
+          "method": "bar",
+          "precision": {
+            "metrics": {
+              "available_only_bias": 3.386021250129361e-05,
+              "available_only_mean_interval_width": 0.001144141546331035,
+              "available_only_rmse": 0.0003018790433610061,
+              "bias": 3.386021250129361e-05,
+              "bias_reference_range": [
+                1.1273895968351606e-05,
+                5.627544508585679e-05
+              ],
+              "coverage_reference_entire": 0.8802083333333334,
+              "coverage_reference_entire_wilson95": [
+                0.8266650028526277,
+                0.9188359798257781
+              ],
+              "coverage_reference_point": 0.890625,
+              "coverage_reference_point_wilson95": [
+                0.8385842176755814,
+                0.927341449459767
+              ],
+              "coverage_reference_possible": 0.90625,
+              "coverage_reference_possible_wilson95": [
+                0.8566878302149447,
+                0.9398748636058177
+              ],
+              "covered_reference_entire": 169,
+              "covered_reference_point": 171,
+              "covered_reference_possible": 174,
+              "failures": {},
+              "flagged": 192,
+              "high_rhat": 0,
+              "low_ess": 0,
+              "point_estimates": 192,
+              "reference": 0.0029504776000976564,
+              "reference_interval_999": [
+                0.0029280623675130932,
+                0.0029730639166305984
+              ],
+              "reference_standard_error": 6.837997599305955e-06,
+              "replicates": 192,
+              "rmse": 0.0003018790433610061,
+              "rmse_reference_range": [
+                0.0003001858483676881,
+                0.0003052070912504077
+              ],
+              "unavailable_intervals": 0,
+              "undefined": 192
+            },
+            "nominal_coverage_certified": false,
+            "population_rmse_certified": false,
+            "precision": [
+              {
+                "classification": "empirical_above_target",
+                "epsilon": 0.1
+              }
+            ],
+            "relative_bias_reference_point": 0.011476180161534752,
+            "relative_bias_reference_range": [
+              0.003792012645704626,
+              0.019219346455947684
+            ],
+            "relative_rmse_minimizer": 0.0029730639166305984,
+            "relative_rmse_reference_point": 0.10231531442604898,
+            "relative_rmse_reference_range": [
+              0.10096851490091463,
+              0.1042351743038967
+            ],
+            "warning": "Empirical fixed-cohort relative RMSE over a finite reference interval. Reference coverage is not certain; replicate sampling uncertainty is not a population-RMSE confidence interval. Missing points never qualify through available-only statistics. Precision, diagnostics and interval coverage remain separate. No recommendation or nominal coverage certification."
+          },
+          "raw_records_audited_here": false,
+          "replicates": 192,
+          "status_counts": {
+            "ok": 192
+          },
+          "warning": "Full fixed cohorts, including failed tasks. Ratios are MC mean cost / BAR mean cost; values above one favor BAR for that clock only. Both empirical precision targets must pass over the finite reference interval. No population-RMSE, population-time-ratio or nominal coverage certification. BAR timing does not collect mixing diagnostics. Task clocks exclude artifact writes; job phase clocks cannot be apportioned to conditions. Inputs still require artifact, native-environment, selection and independent-reference audits."
+        },
+        "observed_tasks": 192,
+        "planned_replicates": 192,
+        "status": "completed"
+      },
+      "diagnostic_observation": {
+        "bar": "not_collected",
+        "mc": "not_applicable"
+      },
+      "ratios_mc_over_bar": {
+        "cpu_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        },
+        "task_wall_seconds": {
+          "reason": "precision_not_confirmed",
+          "value": null
+        }
+      }
+    }
+  ],
+  "precision_classification_counts": {
+    "mc": {
+      "empirical_above_target": 2,
+      "empirical_within_target": 4,
+      "reference_sensitive": 2
+    },
+    "bar": {
+      "empirical_within_target": 6,
+      "reference_sensitive": 1,
+      "empirical_above_target": 1
+    }
+  },
+  "ratio_eligible_identities": [
+    [
+      0,
+      0.1
+    ],
+    [
+      2,
+      0.2
+    ],
+    [
+      2,
+      0.1
+    ]
+  ],
+  "execution_environments": {
+    "mc": {
+      "job_id": "265237.node-PRISM",
+      "hostname": "node011",
+      "phase_scope": "all_eight_conditions",
+      "phase_wall_seconds": 226.89798345416784,
+      "pbs_resources": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "00:30:00"
+      },
+      "pbs_resources_used": {
+        "cpupercent": 7707,
+        "cput": "05:54:25",
+        "mem": "8895924kb",
+        "ncpus": 96,
+        "vmem": "40238596kb",
+        "walltime": "00:03:50"
+      },
+      "unknown_hardware": {
+        "cpu_model": "unknown",
+        "frequency": "unknown",
+        "affinity": "unknown",
+        "numa": "unknown",
+        "concurrent_load": "unknown"
+      },
+      "native_ldpc_sha256": {
+        "belief_find_decoder/_belief_find_decoder.cpython-311-x86_64-linux-gnu.so": "c8f8cf5d31d72ab693863ff96f74dc433e1c2b760eeda8a2d1bc9107a6fa9b49",
+        "bp_decoder/_bp_decoder.cpython-311-x86_64-linux-gnu.so": "5b128e424b9e77ae6cfd87624c39cd2f3eefba2ce0c26c13ad65cb00ca5c4264",
+        "bp_flip/_bp_flip.cpython-311-x86_64-linux-gnu.so": "331e9c0ca0a0309dba9263d9c4d3b26930d67a61eae989dcf2ce5f901290d88f",
+        "bplsd_decoder/_bplsd_decoder.cpython-311-x86_64-linux-gnu.so": "8adb27738d412bda0df30a80179e98a44a3edac1dfccc62cf070214ef8dcd977",
+        "bposd_decoder/_bposd_decoder.cpython-311-x86_64-linux-gnu.so": "625f6d5e006969be220e91a020bcb6cd050ada53a11b6557db440e473f2410cf",
+        "lsd_decoder/_lsd_decoder.cpython-311-x86_64-linux-gnu.so": "f63007a4b023039df9d0e1b04a0fdc234f1341132594acd4bb67e71b8b433f8e",
+        "mod2/_mod2.cpython-311-x86_64-linux-gnu.so": "d192d9b5c7efa068a19a8a530ba1a6256c9beadd8beb983f419af540392075e3",
+        "union_find_decoder/_union_find_decoder.cpython-311-x86_64-linux-gnu.so": "719876ac30cb0a9ffb743d14fb2075cb03d4accf44ab7fd245d03bf8bd77b06d"
+      },
+      "native_runtime": {
+        "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+        "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+        "packages": {
+          "bposd": "2.1",
+          "ldpc": "2.4.1",
+          "numpy": "2.4.6",
+          "pymatching": "2.4.0"
+        },
+        "python": "3.11.9",
+        "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838"
+      },
+      "thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "native_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c"
+    },
+    "bar_case0": {
+      "job_id": "265263.node-PRISM",
+      "hostname": "node012",
+      "phase_scope": "selected_conditions_for_case",
+      "phase_wall_seconds": 89.13691500294954,
+      "pbs_resources": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "00:30:00"
+      },
+      "pbs_resources_used": {
+        "cpupercent": 6694,
+        "cput": "02:09:22",
+        "mem": "8691628kb",
+        "ncpus": 96,
+        "vmem": "43042328kb",
+        "walltime": "00:01:31"
+      },
+      "unknown_hardware": {
+        "cpu_model": "unknown",
+        "frequency": "unknown",
+        "affinity": "unknown",
+        "numa": "unknown",
+        "concurrent_load": "unknown"
+      },
+      "native_ldpc_sha256": {
+        "belief_find_decoder/_belief_find_decoder.cpython-311-x86_64-linux-gnu.so": "c8f8cf5d31d72ab693863ff96f74dc433e1c2b760eeda8a2d1bc9107a6fa9b49",
+        "bp_decoder/_bp_decoder.cpython-311-x86_64-linux-gnu.so": "5b128e424b9e77ae6cfd87624c39cd2f3eefba2ce0c26c13ad65cb00ca5c4264",
+        "bp_flip/_bp_flip.cpython-311-x86_64-linux-gnu.so": "331e9c0ca0a0309dba9263d9c4d3b26930d67a61eae989dcf2ce5f901290d88f",
+        "bplsd_decoder/_bplsd_decoder.cpython-311-x86_64-linux-gnu.so": "8adb27738d412bda0df30a80179e98a44a3edac1dfccc62cf070214ef8dcd977",
+        "bposd_decoder/_bposd_decoder.cpython-311-x86_64-linux-gnu.so": "625f6d5e006969be220e91a020bcb6cd050ada53a11b6557db440e473f2410cf",
+        "lsd_decoder/_lsd_decoder.cpython-311-x86_64-linux-gnu.so": "f63007a4b023039df9d0e1b04a0fdc234f1341132594acd4bb67e71b8b433f8e",
+        "mod2/_mod2.cpython-311-x86_64-linux-gnu.so": "d192d9b5c7efa068a19a8a530ba1a6256c9beadd8beb983f419af540392075e3",
+        "union_find_decoder/_union_find_decoder.cpython-311-x86_64-linux-gnu.so": "719876ac30cb0a9ffb743d14fb2075cb03d4accf44ab7fd245d03bf8bd77b06d"
+      },
+      "native_runtime": {
+        "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+        "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+        "packages": {
+          "bposd": "2.1",
+          "ldpc": "2.4.1",
+          "numpy": "2.4.6",
+          "pymatching": "2.4.0"
+        },
+        "python": "3.11.9",
+        "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838"
+      },
+      "thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "native_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c"
+    },
+    "bar_case1": {
+      "job_id": "265266.node-PRISM",
+      "hostname": "node010",
+      "phase_scope": "selected_conditions_for_case",
+      "phase_wall_seconds": 1407.9728788239881,
+      "pbs_resources": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "01:00:00"
+      },
+      "pbs_resources_used": {
+        "cpupercent": 9414,
+        "cput": "36:23:02",
+        "mem": "11287856kb",
+        "ncpus": 96,
+        "vmem": "45623768kb",
+        "walltime": "00:23:30"
+      },
+      "unknown_hardware": {
+        "cpu_model": "unknown",
+        "frequency": "unknown",
+        "affinity": "unknown",
+        "numa": "unknown",
+        "concurrent_load": "unknown"
+      },
+      "native_ldpc_sha256": {
+        "belief_find_decoder/_belief_find_decoder.cpython-311-x86_64-linux-gnu.so": "c8f8cf5d31d72ab693863ff96f74dc433e1c2b760eeda8a2d1bc9107a6fa9b49",
+        "bp_decoder/_bp_decoder.cpython-311-x86_64-linux-gnu.so": "5b128e424b9e77ae6cfd87624c39cd2f3eefba2ce0c26c13ad65cb00ca5c4264",
+        "bp_flip/_bp_flip.cpython-311-x86_64-linux-gnu.so": "331e9c0ca0a0309dba9263d9c4d3b26930d67a61eae989dcf2ce5f901290d88f",
+        "bplsd_decoder/_bplsd_decoder.cpython-311-x86_64-linux-gnu.so": "8adb27738d412bda0df30a80179e98a44a3edac1dfccc62cf070214ef8dcd977",
+        "bposd_decoder/_bposd_decoder.cpython-311-x86_64-linux-gnu.so": "625f6d5e006969be220e91a020bcb6cd050ada53a11b6557db440e473f2410cf",
+        "lsd_decoder/_lsd_decoder.cpython-311-x86_64-linux-gnu.so": "f63007a4b023039df9d0e1b04a0fdc234f1341132594acd4bb67e71b8b433f8e",
+        "mod2/_mod2.cpython-311-x86_64-linux-gnu.so": "d192d9b5c7efa068a19a8a530ba1a6256c9beadd8beb983f419af540392075e3",
+        "union_find_decoder/_union_find_decoder.cpython-311-x86_64-linux-gnu.so": "719876ac30cb0a9ffb743d14fb2075cb03d4accf44ab7fd245d03bf8bd77b06d"
+      },
+      "native_runtime": {
+        "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+        "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+        "packages": {
+          "bposd": "2.1",
+          "ldpc": "2.4.1",
+          "numpy": "2.4.6",
+          "pymatching": "2.4.0"
+        },
+        "python": "3.11.9",
+        "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838"
+      },
+      "thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "native_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c"
+    },
+    "bar_case2": {
+      "job_id": "265267.node-PRISM",
+      "hostname": "node010",
+      "phase_scope": "selected_conditions_for_case",
+      "phase_wall_seconds": 212.3629931025207,
+      "pbs_resources": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "00:30:00"
+      },
+      "pbs_resources_used": {
+        "cpupercent": 7435,
+        "cput": "05:11:01",
+        "mem": "9237240kb",
+        "ncpus": 96,
+        "vmem": "43578716kb",
+        "walltime": "00:03:35"
+      },
+      "unknown_hardware": {
+        "cpu_model": "unknown",
+        "frequency": "unknown",
+        "affinity": "unknown",
+        "numa": "unknown",
+        "concurrent_load": "unknown"
+      },
+      "native_ldpc_sha256": {
+        "belief_find_decoder/_belief_find_decoder.cpython-311-x86_64-linux-gnu.so": "c8f8cf5d31d72ab693863ff96f74dc433e1c2b760eeda8a2d1bc9107a6fa9b49",
+        "bp_decoder/_bp_decoder.cpython-311-x86_64-linux-gnu.so": "5b128e424b9e77ae6cfd87624c39cd2f3eefba2ce0c26c13ad65cb00ca5c4264",
+        "bp_flip/_bp_flip.cpython-311-x86_64-linux-gnu.so": "331e9c0ca0a0309dba9263d9c4d3b26930d67a61eae989dcf2ce5f901290d88f",
+        "bplsd_decoder/_bplsd_decoder.cpython-311-x86_64-linux-gnu.so": "8adb27738d412bda0df30a80179e98a44a3edac1dfccc62cf070214ef8dcd977",
+        "bposd_decoder/_bposd_decoder.cpython-311-x86_64-linux-gnu.so": "625f6d5e006969be220e91a020bcb6cd050ada53a11b6557db440e473f2410cf",
+        "lsd_decoder/_lsd_decoder.cpython-311-x86_64-linux-gnu.so": "f63007a4b023039df9d0e1b04a0fdc234f1341132594acd4bb67e71b8b433f8e",
+        "mod2/_mod2.cpython-311-x86_64-linux-gnu.so": "d192d9b5c7efa068a19a8a530ba1a6256c9beadd8beb983f419af540392075e3",
+        "union_find_decoder/_union_find_decoder.cpython-311-x86_64-linux-gnu.so": "719876ac30cb0a9ffb743d14fb2075cb03d4accf44ab7fd245d03bf8bd77b06d"
+      },
+      "native_runtime": {
+        "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+        "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+        "packages": {
+          "bposd": "2.1",
+          "ldpc": "2.4.1",
+          "numpy": "2.4.6",
+          "pymatching": "2.4.0"
+        },
+        "python": "3.11.9",
+        "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838"
+      },
+      "thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "native_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c"
+    },
+    "bar_case3": {
+      "job_id": "265268.node-PRISM",
+      "hostname": "node010",
+      "phase_scope": "selected_conditions_for_case",
+      "phase_wall_seconds": 3361.570382261649,
+      "pbs_resources": {
+        "mem": "32gb",
+        "ncpus": 96,
+        "nodect": 1,
+        "place": "free",
+        "select": "1:ncpus=96:mem=32gb",
+        "walltime": "02:30:00"
+      },
+      "pbs_resources_used": {
+        "cpupercent": 9510,
+        "cput": "87:09:48",
+        "mem": "14271092kb",
+        "ncpus": 96,
+        "vmem": "48632080kb",
+        "walltime": "00:56:04"
+      },
+      "unknown_hardware": {
+        "cpu_model": "unknown",
+        "frequency": "unknown",
+        "affinity": "unknown",
+        "numa": "unknown",
+        "concurrent_load": "unknown"
+      },
+      "native_ldpc_sha256": {
+        "belief_find_decoder/_belief_find_decoder.cpython-311-x86_64-linux-gnu.so": "c8f8cf5d31d72ab693863ff96f74dc433e1c2b760eeda8a2d1bc9107a6fa9b49",
+        "bp_decoder/_bp_decoder.cpython-311-x86_64-linux-gnu.so": "5b128e424b9e77ae6cfd87624c39cd2f3eefba2ce0c26c13ad65cb00ca5c4264",
+        "bp_flip/_bp_flip.cpython-311-x86_64-linux-gnu.so": "331e9c0ca0a0309dba9263d9c4d3b26930d67a61eae989dcf2ce5f901290d88f",
+        "bplsd_decoder/_bplsd_decoder.cpython-311-x86_64-linux-gnu.so": "8adb27738d412bda0df30a80179e98a44a3edac1dfccc62cf070214ef8dcd977",
+        "bposd_decoder/_bposd_decoder.cpython-311-x86_64-linux-gnu.so": "625f6d5e006969be220e91a020bcb6cd050ada53a11b6557db440e473f2410cf",
+        "lsd_decoder/_lsd_decoder.cpython-311-x86_64-linux-gnu.so": "f63007a4b023039df9d0e1b04a0fdc234f1341132594acd4bb67e71b8b433f8e",
+        "mod2/_mod2.cpython-311-x86_64-linux-gnu.so": "d192d9b5c7efa068a19a8a530ba1a6256c9beadd8beb983f419af540392075e3",
+        "union_find_decoder/_union_find_decoder.cpython-311-x86_64-linux-gnu.so": "719876ac30cb0a9ffb743d14fb2075cb03d4accf44ab7fd245d03bf8bd77b06d"
+      },
+      "native_runtime": {
+        "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+        "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+        "packages": {
+          "bposd": "2.1",
+          "ldpc": "2.4.1",
+          "numpy": "2.4.6",
+          "pymatching": "2.4.0"
+        },
+        "python": "3.11.9",
+        "tile_driver_sha256": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838"
+      },
+      "thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "native_fixture": "20754ee4c511de96277db0971d8cb441f72dff4f6a64530f7a46d2d1c991ba7c"
+    }
+  },
+  "report_runtime": {
+    "driver_sha256": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+    "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+    "packages": {
+      "bposd": "2.1",
+      "ldpc": "2.4.1",
+      "numpy": "2.4.6",
+      "pymatching": "2.4.0"
+    },
+    "python": "3.11.9",
+    "python_binary_sha256": "7c4b0f4c2b37f9aae938c7f6e62f5b7a2a002154762f3b66f19a89d402c96989",
+    "scipy": "1.17.1"
+  },
+  "report_source_sha256": {
+    "audit_tile_low_noise_traces.py": "7628202a5dacdc809a34bb29793dc3a4724e0e1e6e3e43897949211774fc1c7b",
+    "audit_tile_traces.py": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+    "calibration.py": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+    "package/__init__.py": "ba1a4a91aea42a3f9e38675ed23e8210218baab0f2590475902fa25e39778bdc",
+    "package/adapter_composition.py": "69f1b5bfbd29eca3b0cc04e90a2239f3c983ccf4b6dc5dbd05895f9df68d8b6a",
+    "package/adapters.py": "8bd338a581d5520ad475c74c3ceef0b50a7dd8354b9ea709943cfd2340d36ad7",
+    "package/circuit/__init__.py": "37c841b1592144e0688c0275e9db9ffc012f5111373e3e40e614e594600beb41",
+    "package/circuit/baselines.py": "f8e18d9c255274ce18e92c73ed459229379928d4b8480162b5ecd236dfe1905b",
+    "package/circuit/cluster.py": "2d47add827b210abc9758ed277e4672d93eb6bf4f69e5332785320763d37c087",
+    "package/circuit/faststep.py": "9213444b51128fc954e22a1ce0e1340e92f3ded3c08145de84d7c9927f929854",
+    "package/circuit/model.py": "d5983f8afbb41969ae0692c1d0f4143c002335edd243367641de9c04a09e9684",
+    "package/circuit/proposal.py": "803987ef724fa4b5010557baab8a7996aabeca2ded1e9259add8c7bf73c68435",
+    "package/codes.py": "2ff9e36fc0b8601b770413e0e4a57e7007a4a9e300e700f7d0672ac5919c81fc",
+    "package/convergence.py": "762ebde09542f4b0c5fef59becfcc57bddf10628bfb5912768768ad27994a47d",
+    "package/core.py": "17931113f94dda0b15db876a062edca6099eb3aa7af337c105c04a9f6dc206ca",
+    "package/decode_cache.py": "807ab712dc69c43417e4a55c4280acc54a38b7a2c1561cbc636909296770e628",
+    "package/decoders.py": "94cffd7674e43765bdc7bf64fd54bc9e398ad7b306e647142efd645dc3f0ef2c",
+    "package/diagnostics.py": "a7ecb368459a5b278cfb879f11c7f0946bdc045f13dc6ffa87153d91a57817fe",
+    "package/estimation.py": "7b02dc0f6c449f0baa997faabbc0bf4c98d2e0a9e2454daa9dc9dc1bdd3940c9",
+    "package/fastpath.py": "e1af542a96beffcd2768a68b4e3bdc53559916c22fbbfe83292e815ce5eddf9a",
+    "package/faststep.py": "e5c9d8bc39af675675ba3a201df37b039295ab2e02b4f8c8e8b5fff8b919865c",
+    "package/initial_states.py": "d9b663a3b9d022b00dba1b17494264a48d83c7f488ed98c56696a6c438a27e59",
+    "package/kernels.py": "d2796a45fd39bf2aa02566ed4b369658014ba60e034ed4f13a71c4e5f528b6a6",
+    "package/models.py": "34c15684824ebdb49ce16067c2d86c27b77327c9ffc13eb501476e7ed75b645a",
+    "package/noise.py": "980f1cf411c46a697d44aa39527b6e2be09e5e0303ca467561b59d991ec02c03",
+    "package/noise_categorical.py": "9b77e3e9397175bd5bc79470a0ded3c3a3570910df7a7727769b0ff38e3cb56f",
+    "package/reporting.py": "de7deb480ff115f698e6e79dab7153a2d3a18f3d80ab8943a52bcce2565ec16c",
+    "package/results.py": "ba00fadc802dadd2624c7da075944d29356c67525c9137c3b58edf36f4e57574",
+    "package/sampling.py": "b6002366adcc376e6d681fe6a07c77e77da452355fae81302a1bfc9d65683a40",
+    "package/stim_dem.py": "6edb4cf438eaa30cfe4bba504bf5ba5eaaa816c14b12eb0c1dce018c92a511da",
+    "package/trace_stats.py": "261ed5263356f4a9355557feb23aad6565c4ea44dd0bfb7b85293c28ab5a3131",
+    "probe_tile_decoder_platform.py": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6",
+    "submit.py": "dd5d6f97fbedb3b9a4254715612e51b0e89cada009af8700bd96ac9cb96ee0ba",
+    "submit_tile_bar_time.py": "b2e7af97f34f031262e004e7704f5baab32ef7cc8209fbc62ee9ae9d3e823489",
+    "submit_tile_capacity.py": "470496ebea42dc1697941c43a987de85cd6ec220f36470603546ae9a96685b88",
+    "submit_tile_mc_time.py": "3e81e7d96ae6b4913889e33886330c0787fa53cecf2e7c7c199f2fbd439fc39a",
+    "tile_bar_analysis.py": "7d22afe9b4ee554e255ca1556510b2c76d892d7817ad44ae7a423971a58505de",
+    "tile_bar_study.py": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb",
+    "tile_bar_time_benchmark.py": "15a9a8c254bd2570decd635e73844c4c6d3bccf1fc9ba679569851495765f41a",
+    "tile_low_noise_analysis.py": "4b2e4fa26ab54180dbdf4bc9cdfadd2cbe0781087037c84ac343def481080f7e",
+    "tile_low_noise_analysis_capacity.py": "9908043898bd57bd6346728f4b88a160dad43ab05f5ca879e65eed78339114a6",
+    "tile_low_noise_analysis_partitions.py": "8b6d420f1025fb7893b38a133eef751955f549c5c25f4e9c6882defc21cd2c78",
+    "tile_low_noise_audited_collection.py": "0992af2ed784db964bbb9cca52678af17793c7b952c3b2342920850c5f4b8e6e",
+    "tile_low_noise_study.py": "6ce8ef25b06646c46b8c59ba02d59e6841c766cd28ad270d356e462326082f22",
+    "tile_low_noise_trace_audit_run.py": "6f4412200b9cd0e7eb7ac593efad63f4cdb37c7f874f9bfd643da9d5184ad49e",
+    "tile_mc_precision_budget.py": "72a2bbc75097b0c7372de51f596ea7b7d3ad8c39dd21053cb0c47ae79261b587",
+    "tile_mc_time_benchmark.py": "4b7d35dcd661b67237a2614d1375d14c6d02c9f03e05dc083bbfe7e054787501",
+    "tile_precision_assessment.py": "17683c69be40c80fa8754811deb67ea90a872bce0131cf9b9bcd34637a94e193",
+    "tile_reference.py": "566a3d10901dbb823e0c6cc4de66d012593ac8f14524c6a5b6d5dd13eb705e81",
+    "tile_study.py": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+    "tile_summary.py": "f8f324eac24d748639a4e55bf0f410d04800bb5b2452699379c9a4eda8769574",
+    "tile_timing_comparison.py": "66113d5341fdcdb49f7154225ee038520017add6dce9d9eeef340761f1ff43f1",
+    "tile_timing_evaluation_report.py": "0b6c393f0b77237110cee090dc7a464c247e3b83df55174760ff971f7efcdf98",
+    "tile_timing_metrics.py": "045fb6b7121a2031da1c7d0d2127466834983b4eb09d14ae586358f38cc565cc"
+  },
+  "all_192_denominators_retained": true,
+  "all_points_and_intervals_obtained": true,
+  "failed_tasks": 0,
+  "pre_bar_mc_assessments_exactly_unchanged": true,
+  "ratios_direction": "mean(MC task cost)/mean(BAR task cost)",
+  "source_numerical_helpers_reexecuted": false,
+  "raw_task_payloads_read": false,
+  "new_jobs": false,
+  "checks": "Saved values extracted; saved range classification and mean-ratio arithmetic checked only.",
+  "limitations": [
+    "Finite reference is shared by selection, MC budgeting and evaluation; not simultaneous truth bounds.",
+    "Finite 192-cohort empirical RMSE ranges are not population-RMSE confidence intervals.",
+    "Selection flags 192/192 are measured calibration diagnostics; independent BAR diagnostics are not collected.",
+    "Different hosts and unknown hardware/load prevent calibrated hardware speedup claims.",
+    "MC pool covers all eight conditions; BAR pools cover two conditions per case; phase clocks are not apportioned.",
+    "Both within is a threshold qualification, not equal achieved precision, minimum time-to-accuracy or coverage guarantee.",
+    "Main p=.03/.05 results do not evaluate low-noise independent timing."
+  ]
+}

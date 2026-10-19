@@ -45,10 +45,11 @@ Continue with the [tutorial for this example](docs/tutorial_en.md) to inspect th
 | --- | --- |
 | Codes | Toric, surface, asymmetric toric, Hamming HGP, BB72/108/144, Steane, concatenated Steane, open-boundary tile |
 | Noise | Bit-flip, phase-flip, depolarising, phenomenological data and measurement faults, Stim DEM, physical circuit faults |
-| Decoders | PyMatching, BP-OSD, custom decoders |
+| Decoders | PyMatching, BP-OSD, BP-LSD (order 0), BeliefFind, Union-Find, custom decoders |
 | Methods | Exact enumeration (`exact`), direct MC (`direct_mc`), BAR (`estimate_logical_error`), failure-conditioned MCMC (`sample_faulty`) |
 
 Optional dependency groups include `codes` for code factories, `matching` and `bposd` for decoders, and `stim` for Stim support.
+The `bposd` extra also installs `ldpc` for BP-LSD, BeliefFind, and Union-Find; see the [decoder examples and restrictions](docs/wp/basic_decoders_usage_2026-10-18_ja.md) (Japanese).
 Use `plot` for plotting and `notebooks` for notebook execution.
 For an example with only core dependencies, install with `python -m pip install -e .` and run `python examples/steane_exact.py --quick`.
 
@@ -68,6 +69,11 @@ Standard BAR requires a positive anchor, a common decoder and failure definition
 Samples from `sample_faulty` alone do not estimate the absolute logical error probability.
 
 Statistical error estimates and healthy MCMC diagnostics do not guarantee convergence or nominal interval coverage.
+Tile72/288 code-capacity studies have completed four main bit-flip/depolarizing conditions; low-noise calibration and independent timing remain in progress.
+Some tested settings have poor mixing diagnostics or undercoverage, so this experimental implementation does not establish a generally reliable 95% interval or a speed advantage over direct MC.
+Keep the decoder settings, target prior, and native environment fixed throughout a BAR ladder and its reference calculation: saved BP-OSD inputs have produced different logical failure decisions on Windows and Linux.
+See the [tile validation report](docs/wp/tile_validation_report_2026-10-18_ja.md), [current study status](docs/wp/tile_validation_status_2026-10-17_ja.md), and [additional decoder validation](docs/wp/basic_decoders_validation_2026-10-18_ja.md) (Japanese).
+The additional decoder tests cover their interfaces and selected small problems; their logical error rates, BAR coverage, and comparative speed have not been calibrated.
 For validation conditions and limitations, see the [BAR sensitivity study](docs/bar_sensitivity_ja.md), [performance record](docs/performance_ja.md), and [circuit validation record](docs/circuit_baseline_ja.md).
 
 ## License and citation

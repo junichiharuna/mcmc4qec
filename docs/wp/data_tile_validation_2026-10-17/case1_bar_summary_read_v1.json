@@ -1,0 +1,1032 @@
+{
+  "binding": {
+    "analysis_context": "d1c7cccdc80796821c60f787ea88cc9d26ef7ac8d821c6ed883923701119f462",
+    "raw_rows_hash_independently_checked": false,
+    "reference_manifest": "c3b77e1360971dbb1608593e9f29abd26aae0c0b06c73ea7f247290bd78cb7c9",
+    "reference_summary_sha256": "72afbc93f9fb33d46cc967e542856a6a42031f6a0e1d2f2423c90aaf2e0a5d15",
+    "reported_raw_rows_sha256": "6b25467b1cb0ba5953348fd689725bd847cbba62978998b296d4d19472d9e50c",
+    "sampling_manifest": "d2f5d5a3e806732514eecb9dca5432f296d914607d9a81bb2f15ca8616ace8fd"
+  },
+  "case": 1,
+  "checks_passed": [
+    "input_file_hashes_and_sizes_match_saved_completion_record",
+    "saved_PBS_F_exit0_and_qsub_script_binding",
+    "sampling_manifest_digest_and_analysis_context_digest",
+    "analysis_context_byte_hash_matches_submission_and_receipt",
+    "reference_summary_bytes_and_reference_manifest_digest",
+    "all_four_context_references_equal_saved_reference_records",
+    "case1_fixed_target_noise_size",
+    "source_hashes_match_existing_BAR_and_summary_files",
+    "exact_352_planned_setting_keys_without_duplicates",
+    "192_denominator_in_every_summary_record",
+    "768_reported_groups_and_67584_reported_rows_match_plan",
+    "finite_counts_and_diagnostic_union_bounds",
+    "coverage_counts_order_fractions_and_Wilson95_arithmetic",
+    "reference_count_point_SE_Wilson999_arithmetic",
+    "complete_cohort_bias_RMSE_available_only_equality",
+    "bias_reference_range_arithmetic",
+    "RMSE_reference_range_arithmetic_from_bias_and_RMSE",
+    "same_point_estimates_and_flags_across_paired_error_methods",
+    "total_unavailable_intervals_matches_phase_summary",
+    "fixed_16_setting_display_without_outcome_selection",
+    "input_bytes_unchanged_before_report"
+  ],
+  "cohort": {
+    "counts": {
+      "flagged": {
+        "max": 192,
+        "min": 192,
+        "sum_across_paired_settings": 67584
+      },
+      "high_rhat": {
+        "max": 192,
+        "min": 181,
+        "sum_across_paired_settings": 67288
+      },
+      "low_ess": {
+        "max": 192,
+        "min": 192,
+        "sum_across_paired_settings": 67584
+      },
+      "point_estimates": {
+        "max": 192,
+        "min": 192,
+        "sum_across_paired_settings": 67584
+      },
+      "unavailable_intervals": {
+        "max": 0,
+        "min": 0,
+        "sum_across_paired_settings": 0
+      },
+      "undefined": {
+        "max": 9,
+        "min": 0,
+        "sum_across_paired_settings": 381
+      }
+    },
+    "replicates_per_setting": 192,
+    "reported_failures": 0,
+    "reported_groups": 768,
+    "reported_rows": 67584,
+    "setting_rows_are_not_independent_replicates": true,
+    "settings": 352
+  },
+  "fixed_display_records": [
+    {
+      "available_only_bias": 0.00012700246747118435,
+      "available_only_mean_interval_width": 0.002530108926257504,
+      "available_only_rmse": 0.001393921528164722,
+      "bias": 0.00012700246747118435,
+      "bias_reference_range": [
+        -9.376233563966954e-05,
+        0.0003461459211609279
+      ],
+      "block": 32,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.5520833333333334,
+      "coverage_reference_entire_wilson95": [
+        0.48140813449710274,
+        0.6207152877876104
+      ],
+      "coverage_reference_point": 0.6458333333333334,
+      "coverage_reference_point_wilson95": [
+        0.5759294707009958,
+        0.710016111696201
+      ],
+      "coverage_reference_possible": 0.71875,
+      "coverage_reference_possible_wilson95": [
+        0.6513435611045405,
+        0.7775748124912546
+      ],
+      "covered_reference_entire": 106,
+      "covered_reference_point": 124,
+      "covered_reference_possible": 138,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "rejection",
+      "kernel": "ZH",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.001393921528164722,
+      "rmse_reference_range": [
+        0.0013881237696752064,
+        0.0014306308394109399
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": 0.00012700246747118435,
+      "available_only_mean_interval_width": 0.004063151834367177,
+      "available_only_rmse": 0.001393921528164722,
+      "bias": 0.00012700246747118435,
+      "bias_reference_range": [
+        -9.376233563966954e-05,
+        0.0003461459211609279
+      ],
+      "block": 128,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.8020833333333334,
+      "coverage_reference_entire_wilson95": [
+        0.7400425989893723,
+        0.8522732502619638
+      ],
+      "coverage_reference_point": 0.84375,
+      "coverage_reference_point_wilson95": [
+        0.7857096789622484,
+        0.8883049081168581
+      ],
+      "coverage_reference_possible": 0.8854166666666666,
+      "coverage_reference_possible_wilson95": [
+        0.832610794613997,
+        0.92310253029288
+      ],
+      "covered_reference_entire": 154,
+      "covered_reference_point": 162,
+      "covered_reference_possible": 170,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "rejection",
+      "kernel": "ZH",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.001393921528164722,
+      "rmse_reference_range": [
+        0.0013881237696752064,
+        0.0014306308394109399
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": 0.00012700246747118435,
+      "available_only_mean_interval_width": 0.005131990048871622,
+      "available_only_rmse": 0.001393921528164722,
+      "bias": 0.00012700246747118435,
+      "bias_reference_range": [
+        -9.376233563966954e-05,
+        0.0003461459211609279
+      ],
+      "block": 1024,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.890625,
+      "coverage_reference_entire_wilson95": [
+        0.8385842176755814,
+        0.927341449459767
+      ],
+      "coverage_reference_point": 0.9270833333333334,
+      "coverage_reference_point_wilson95": [
+        0.8813408114839218,
+        0.9560712512507259
+      ],
+      "coverage_reference_possible": 0.9479166666666666,
+      "coverage_reference_possible_wilson95": [
+        0.9067948899639535,
+        0.9714665416845791
+      ],
+      "covered_reference_entire": 171,
+      "covered_reference_point": 178,
+      "covered_reference_possible": 182,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "rejection",
+      "kernel": "ZH",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.001393921528164722,
+      "rmse_reference_range": [
+        0.0013881237696752064,
+        0.0014306308394109399
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": 0.00012700246747118435,
+      "available_only_mean_interval_width": 0.005523700039402695,
+      "available_only_rmse": 0.001393921528164722,
+      "bias": 0.00012700246747118435,
+      "bias_reference_range": [
+        -9.376233563966954e-05,
+        0.0003461459211609279
+      ],
+      "block": null,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.9010416666666666,
+      "coverage_reference_entire_wilson95": [
+        0.8506207684360072,
+        0.9357295831562837
+      ],
+      "coverage_reference_point": 0.9166666666666666,
+      "coverage_reference_point_wilson95": [
+        0.868931374051098,
+        0.9480560042266069
+      ],
+      "coverage_reference_possible": 0.9479166666666666,
+      "coverage_reference_possible_wilson95": [
+        0.9067948899639535,
+        0.9714665416845791
+      ],
+      "covered_reference_entire": 173,
+      "covered_reference_point": 176,
+      "covered_reference_possible": 182,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "rejection",
+      "kernel": "ZH",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "cross_chain",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.001393921528164722,
+      "rmse_reference_range": [
+        0.0013881237696752064,
+        0.0014306308394109399
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": -8.983813541315819e-05,
+      "available_only_mean_interval_width": 0.0025138216080192624,
+      "available_only_rmse": 0.0014681112179812696,
+      "bias": -8.983813541315819e-05,
+      "bias_reference_range": [
+        -0.0003106029385240121,
+        0.00012930531827658534
+      ],
+      "block": 32,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.546875,
+      "coverage_reference_entire_wilson95": [
+        0.476230851164372,
+        0.6156802288918697
+      ],
+      "coverage_reference_point": 0.6041666666666666,
+      "coverage_reference_point_wilson95": [
+        0.5336024517148253,
+        0.6706443928546008
+      ],
+      "coverage_reference_possible": 0.671875,
+      "coverage_reference_possible_wilson95": [
+        0.6026576051055519,
+        0.7343496884340015
+      ],
+      "covered_reference_entire": 105,
+      "covered_reference_point": 116,
+      "covered_reference_possible": 129,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "logical",
+      "kernel": "ZH",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014681112179812696,
+      "rmse_reference_range": [
+        0.0014653599072541647,
+        0.0014979165007461817
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": -8.983813541315819e-05,
+      "available_only_mean_interval_width": 0.00403041490856517,
+      "available_only_rmse": 0.0014681112179812696,
+      "bias": -8.983813541315819e-05,
+      "bias_reference_range": [
+        -0.0003106029385240121,
+        0.00012930531827658534
+      ],
+      "block": 128,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.7708333333333334,
+      "coverage_reference_entire_wilson95": [
+        0.7064173963445911,
+        0.8246243995359172
+      ],
+      "coverage_reference_point": 0.8177083333333334,
+      "coverage_reference_point_wilson95": [
+        0.7570457669581838,
+        0.8659071089785664
+      ],
+      "coverage_reference_possible": 0.8489583333333334,
+      "coverage_reference_possible_wilson95": [
+        0.7914966218282098,
+        0.8927303074793682
+      ],
+      "covered_reference_entire": 148,
+      "covered_reference_point": 157,
+      "covered_reference_possible": 163,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "logical",
+      "kernel": "ZH",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014681112179812696,
+      "rmse_reference_range": [
+        0.0014653599072541647,
+        0.0014979165007461817
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": -8.983813541315819e-05,
+      "available_only_mean_interval_width": 0.005087765496600066,
+      "available_only_rmse": 0.0014681112179812696,
+      "bias": -8.983813541315819e-05,
+      "bias_reference_range": [
+        -0.0003106029385240121,
+        0.00012930531827658534
+      ],
+      "block": 1024,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.859375,
+      "coverage_reference_entire_wilson95": [
+        0.8031305442687525,
+        0.9015210694957679
+      ],
+      "coverage_reference_point": 0.8802083333333334,
+      "coverage_reference_point_wilson95": [
+        0.8266650028526277,
+        0.9188359798257781
+      ],
+      "coverage_reference_possible": 0.953125,
+      "coverage_reference_possible_wilson95": [
+        0.9133280073164382,
+        0.975145766560566
+      ],
+      "covered_reference_entire": 165,
+      "covered_reference_point": 169,
+      "covered_reference_possible": 183,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "logical",
+      "kernel": "ZH",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014681112179812696,
+      "rmse_reference_range": [
+        0.0014653599072541647,
+        0.0014979165007461817
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": -8.983813541315819e-05,
+      "available_only_mean_interval_width": 0.00530146550350306,
+      "available_only_rmse": 0.0014681112179812696,
+      "bias": -8.983813541315819e-05,
+      "bias_reference_range": [
+        -0.0003106029385240121,
+        0.00012930531827658534
+      ],
+      "block": null,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.8541666666666666,
+      "coverage_reference_entire_wilson95": [
+        0.7973032959743978,
+        0.8971359755616515
+      ],
+      "coverage_reference_point": 0.8802083333333334,
+      "coverage_reference_point_wilson95": [
+        0.8266650028526277,
+        0.9188359798257781
+      ],
+      "coverage_reference_possible": 0.9010416666666666,
+      "coverage_reference_possible_wilson95": [
+        0.8506207684360072,
+        0.9357295831562837
+      ],
+      "covered_reference_entire": 164,
+      "covered_reference_point": 169,
+      "covered_reference_possible": 173,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "logical",
+      "kernel": "ZH",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "cross_chain",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014681112179812696,
+      "rmse_reference_range": [
+        0.0014653599072541647,
+        0.0014979165007461817
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": -0.00019829569224360036,
+      "available_only_mean_interval_width": 0.002528867994262531,
+      "available_only_rmse": 0.0014437274018476508,
+      "bias": -0.00019829569224360036,
+      "bias_reference_range": [
+        -0.00041906049535445425,
+        2.084776144614317e-05
+      ],
+      "block": 32,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.53125,
+      "coverage_reference_entire_wilson95": [
+        0.4607442027555418,
+        0.6005298506152861
+      ],
+      "coverage_reference_point": 0.640625,
+      "coverage_reference_point_wilson95": [
+        0.5706096650476453,
+        0.70512357512108
+      ],
+      "coverage_reference_possible": 0.6979166666666666,
+      "coverage_reference_possible_wilson95": [
+        0.6296100295550389,
+        0.7584589751268709
+      ],
+      "covered_reference_entire": 102,
+      "covered_reference_point": 123,
+      "covered_reference_possible": 134,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "rejection",
+      "kernel": "ZHS",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014437274018476508,
+      "rmse_reference_range": [
+        0.001430044624927278,
+        0.0014901809715769825
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": -0.00019829569224360036,
+      "available_only_mean_interval_width": 0.004137500757459824,
+      "available_only_rmse": 0.0014437274018476508,
+      "bias": -0.00019829569224360036,
+      "bias_reference_range": [
+        -0.00041906049535445425,
+        2.084776144614317e-05
+      ],
+      "block": 128,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.8177083333333334,
+      "coverage_reference_entire_wilson95": [
+        0.7570457669581838,
+        0.8659071089785664
+      ],
+      "coverage_reference_point": 0.8645833333333334,
+      "coverage_reference_point_wilson95": [
+        0.8089792852613452,
+        0.9058846707316467
+      ],
+      "coverage_reference_possible": 0.890625,
+      "coverage_reference_possible_wilson95": [
+        0.8385842176755814,
+        0.927341449459767
+      ],
+      "covered_reference_entire": 157,
+      "covered_reference_point": 166,
+      "covered_reference_possible": 171,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "rejection",
+      "kernel": "ZHS",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014437274018476508,
+      "rmse_reference_range": [
+        0.001430044624927278,
+        0.0014901809715769825
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": -0.00019829569224360036,
+      "available_only_mean_interval_width": 0.005444836664855176,
+      "available_only_rmse": 0.0014437274018476508,
+      "bias": -0.00019829569224360036,
+      "bias_reference_range": [
+        -0.00041906049535445425,
+        2.084776144614317e-05
+      ],
+      "block": 1024,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.9270833333333334,
+      "coverage_reference_entire_wilson95": [
+        0.8813408114839218,
+        0.9560712512507259
+      ],
+      "coverage_reference_point": 0.9375,
+      "coverage_reference_point_wilson95": [
+        0.8939473959630463,
+        0.9638893512285439
+      ],
+      "coverage_reference_possible": 0.9427083333333334,
+      "coverage_reference_possible_wilson95": [
+        0.9003376167838831,
+        0.9677114726361785
+      ],
+      "covered_reference_entire": 178,
+      "covered_reference_point": 180,
+      "covered_reference_possible": 181,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "rejection",
+      "kernel": "ZHS",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014437274018476508,
+      "rmse_reference_range": [
+        0.001430044624927278,
+        0.0014901809715769825
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": -0.00019829569224360036,
+      "available_only_mean_interval_width": 0.0059970413004315146,
+      "available_only_rmse": 0.0014437274018476508,
+      "bias": -0.00019829569224360036,
+      "bias_reference_range": [
+        -0.00041906049535445425,
+        2.084776144614317e-05
+      ],
+      "block": null,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.8958333333333334,
+      "coverage_reference_entire_wilson95": [
+        0.8445869253283719,
+        0.9315510840354478
+      ],
+      "coverage_reference_point": 0.921875,
+      "coverage_reference_point_wilson95": [
+        0.8751136305885575,
+        0.9520860899176188
+      ],
+      "coverage_reference_possible": 0.9479166666666666,
+      "coverage_reference_possible_wilson95": [
+        0.9067948899639535,
+        0.9714665416845791
+      ],
+      "covered_reference_entire": 172,
+      "covered_reference_point": 177,
+      "covered_reference_possible": 182,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "rejection",
+      "kernel": "ZHS",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "cross_chain",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014437274018476508,
+      "rmse_reference_range": [
+        0.001430044624927278,
+        0.0014901809715769825
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": 0.00012333777679432792,
+      "available_only_mean_interval_width": 0.0025572295772160456,
+      "available_only_rmse": 0.0014469510446719,
+      "bias": 0.00012333777679432792,
+      "bias_reference_range": [
+        -9.742702631652597e-05,
+        0.00034248123048407145
+      ],
+      "block": 32,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.5,
+      "coverage_reference_entire_wilson95": [
+        0.42997295867531937,
+        0.5700270413246806
+      ],
+      "coverage_reference_point": 0.59375,
+      "coverage_reference_point_wilson95": [
+        0.5231014194080397,
+        0.660720740704444
+      ],
+      "coverage_reference_possible": 0.65625,
+      "coverage_reference_possible_wilson95": [
+        0.5865946346920546,
+        0.7197756321620846
+      ],
+      "covered_reference_entire": 96,
+      "covered_reference_point": 114,
+      "covered_reference_possible": 126,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "logical",
+      "kernel": "ZHS",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014469510446719,
+      "rmse_reference_range": [
+        0.0014416848194014305,
+        0.0014818058279431954
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": 0.00012333777679432792,
+      "available_only_mean_interval_width": 0.004180359158023555,
+      "available_only_rmse": 0.0014469510446719,
+      "bias": 0.00012333777679432792,
+      "bias_reference_range": [
+        -9.742702631652597e-05,
+        0.00034248123048407145
+      ],
+      "block": 128,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.8020833333333334,
+      "coverage_reference_entire_wilson95": [
+        0.7400425989893723,
+        0.8522732502619638
+      ],
+      "coverage_reference_point": 0.84375,
+      "coverage_reference_point_wilson95": [
+        0.7857096789622484,
+        0.8883049081168581
+      ],
+      "coverage_reference_possible": 0.8854166666666666,
+      "coverage_reference_possible_wilson95": [
+        0.832610794613997,
+        0.92310253029288
+      ],
+      "covered_reference_entire": 154,
+      "covered_reference_point": 162,
+      "covered_reference_possible": 170,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "logical",
+      "kernel": "ZHS",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014469510446719,
+      "rmse_reference_range": [
+        0.0014416848194014305,
+        0.0014818058279431954
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": 0.00012333777679432792,
+      "available_only_mean_interval_width": 0.005463111389557063,
+      "available_only_rmse": 0.0014469510446719,
+      "bias": 0.00012333777679432792,
+      "bias_reference_range": [
+        -9.742702631652597e-05,
+        0.00034248123048407145
+      ],
+      "block": 1024,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.9322916666666666,
+      "coverage_reference_entire_wilson95": [
+        0.8876170905942516,
+        0.9600073143688671
+      ],
+      "coverage_reference_point": 0.9479166666666666,
+      "coverage_reference_point_wilson95": [
+        0.9067948899639535,
+        0.9714665416845791
+      ],
+      "coverage_reference_possible": 0.9739583333333334,
+      "coverage_reference_possible_wilson95": [
+        0.9404967518070468,
+        0.9888263909838426
+      ],
+      "covered_reference_entire": 179,
+      "covered_reference_point": 182,
+      "covered_reference_possible": 187,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "logical",
+      "kernel": "ZHS",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "block",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014469510446719,
+      "rmse_reference_range": [
+        0.0014416848194014305,
+        0.0014818058279431954
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    },
+    {
+      "available_only_bias": 0.00012333777679432792,
+      "available_only_mean_interval_width": 0.005984132208406063,
+      "available_only_rmse": 0.0014469510446719,
+      "bias": 0.00012333777679432792,
+      "bias_reference_range": [
+        -9.742702631652597e-05,
+        0.00034248123048407145
+      ],
+      "block": null,
+      "burn": 6000,
+      "case": 1,
+      "chains": 8,
+      "coverage_reference_entire": 0.8958333333333334,
+      "coverage_reference_entire_wilson95": [
+        0.8445869253283719,
+        0.9315510840354478
+      ],
+      "coverage_reference_point": 0.9270833333333334,
+      "coverage_reference_point_wilson95": [
+        0.8813408114839218,
+        0.9560712512507259
+      ],
+      "coverage_reference_possible": 0.9479166666666666,
+      "coverage_reference_possible_wilson95": [
+        0.9067948899639535,
+        0.9714665416845791
+      ],
+      "covered_reference_entire": 172,
+      "covered_reference_point": 178,
+      "covered_reference_possible": 182,
+      "failures": {},
+      "flagged": 192,
+      "high_rhat": 192,
+      "init": "logical",
+      "kernel": "ZHS",
+      "ladder": "fine",
+      "low_ess": 192,
+      "method": "cross_chain",
+      "point_estimates": 192,
+      "reference": 0.028949260711669922,
+      "reference_interval_999": [
+        0.02873011725798018,
+        0.029170025514780776
+      ],
+      "reference_standard_error": 6.684425980368345e-05,
+      "replicates": 192,
+      "rmse": 0.0014469510446719,
+      "rmse_reference_range": [
+        0.0014416848194014305,
+        0.0014818058279431954
+      ],
+      "samples": 12000,
+      "unavailable_intervals": 0,
+      "undefined": 0
+    }
+  ],
+  "fixed_display_selection": {
+    "burn": 6000,
+    "chains": 8,
+    "ladder": "fine",
+    "samples": 12000
+  },
+  "input_sha256": {
+    "production_analysis_manifest.json": "e372d911a475e15dd86c0c9aa53839ceeab033fdabd59f8cfab44b56c76f0d72",
+    "production_bar_analysis_submission-1.json": "3bad981d5c0ab81eaa87e6c63d4cb3c46d0a926e6d92539d2ab64155519daed7",
+    "production_bar_analysis_summary-1.json": "6159752739063d97fafe54803bd462072d146861a7680cc60bf9fd12d7427fd7",
+    "production_bar_analyze-1.err": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "production_bar_analyze-1.out": "4e5c1c23720b78cc2f8c32787b01d6f295f8afa15a859cc6a01f11d104af978c",
+    "production_bar_analyze-1.sh": "9d6f5941754aea59c6476cd9e2deb88899cd62df8f7a8fcd65493667e26ee2a5",
+    "production_bar_case1_completion_v1.json": "7364f7a7f03ad87a19ff1e51db287e8474d373afc29cffcfbc483353533e429c",
+    "production_bar_summary-1.json": "1abde772e54ffae4aff2e7d4cd3185ac88b9680c95703c1703607747cd318dcc",
+    "production_manifest.json": "eea71716f1e66f230ff526adfa633717f5e9dc8ce2b9b2586eae40d74494cbce",
+    "reference_manifest.json": "95225cdb6b1f729f7aab7e47658bc3d0fe163b82aeadce18dc6697ba47e19c16",
+    "reference_summary.json": "72afbc93f9fb33d46cc967e542856a6a42031f6a0e1d2f2423c90aaf2e0a5d15"
+  },
+  "observed_utc": "2026-10-18T04:50:04.648514+00:00",
+  "original_all_settings": {
+    "file": "production_bar_summary-1.json",
+    "preserved_unmodified": true,
+    "records": 352,
+    "sha256": "1abde772e54ffae4aff2e7d4cd3185ac88b9680c95703c1703607747cd318dcc"
+  },
+  "purpose": "provisional_saved_summary_read_only",
+  "reference": {
+    "case": 1,
+    "chunks": 96,
+    "conditional_weight": 20.498492859613577,
+    "estimate": 0.028949260711669922,
+    "failures": 182133,
+    "interval_95": [
+      0.028818535709776046,
+      0.029080560944770236
+    ],
+    "interval_999": [
+      0.02873011725798018,
+      0.029170025514780776
+    ],
+    "noise": "bit",
+    "size": 12,
+    "standard_error": 6.684425980368345e-05,
+    "target_p": 0.05,
+    "trials": 6291456,
+    "worker_seconds": 9753.837515810505
+  },
+  "schema": 1,
+  "scope": {
+    "bootstrap_recomputed": false,
+    "full_analysis_archive_verified": false,
+    "full_trace_scientific_audit_completed": false,
+    "native_runtime_reverified": false,
+    "nominal_95_coverage_guaranteed": false,
+    "raw_rows_read": false,
+    "raw_rows_reaggregated": false,
+    "recommendation_finalized": false
+  },
+  "warning": "Saved-summary arithmetic and binding only. Aggregated setting rows reuse traces and seeds. No outcome-based setting selection. Bias/RMSE reference ranges describe finite-reference uncertainty, not confidence intervals for estimated bias/RMSE. Raw rows, complete artifacts and full trace audit have not been checked by this reading."
+}

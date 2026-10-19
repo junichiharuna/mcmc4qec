@@ -1,0 +1,29 @@
+# tile72 depolarizing p=.001の最終比較準備
+
+2026-10-19 04:29 JST、case2 target2用の最終比較metadata adapterを準備した。
+実装は`output/low_final_case2_target2_config_assembler_v1.py`、SHAは`960d4b3e228421b720f29e67820b825d9b0086ac2d28018a361b7b3ee941d308`である。
+受理済みtarget1で使ったassemblerの固定sourceから、対象条件・root・job ID・計画hash・copy summary hashだけを置き換えた。
+実際のtarget2 authority、readiness r8、collection投入receipt、固定sampling manifestとの対応を確認し、置換回数と定数以外のAST一致を記録した。
+統計計算、reader、完了検証、資源算定の式は変更していない。
+条件に対応するWSSは固定reference内のindex11であり、実行時にも既存`compatible_condition`で確認する。
+
+対応する実jobはsampling265287、copy265304、analysis265306、full trace audit265311、collection265314である。
+最終比較は固定final wrapper v3とsource binding `f59cc3e90867f81770cea35c348e1db1654f3922c272c73abeb569fd32bf19b3`を使う。
+後段timing用の別source bindingとは混同しない。
+collectionがまだ実行中なので、assemblerの実行、最終比較config作成、prepare、qsubは未実施である。
+資源要求はcollection完了時の実wall/RSSと受理済みcopy実測から既存式で算定し、現時点で値を仮置きしていない。
+
+実target2の投入receiptを完了receiptの代わりに渡す場合と、別target1の受理済み完了receiptを渡す場合の2件を確認した。
+どちらも既存の完了・job照合で拒否され、subprocess呼出は0回だった。
+この確認は早すぎる実行や別jobの取り違えを防ぐ入口の確認であり、target2の実完了受理ではない。
+独立サブエージェントレビューは利用上限により未実施である。
+
+作成スクリプトは`data_tile_validation_2026-10-17/prepare_low_target2_final_assembler_v1.py`である。
+置換記録は`low_final_case2_target2_config_adapter_review_v1.json`、SHAは`5b5cccb27a0a022f0277af3100b56cfb5c84515ec8f6962dc1495b67a8f9bc28`である。
+拒否確認は`check_low_target2_final_assembler_gate_v1.py`と`low_target2_final_assembler_gate_v1.json`に保存した。
+拒否確認receiptのSHAは`3bf2e732288aaadf43cb258caae3ab6a689bcf098920f1e95a6354a694dc9d6a`である。
+assemblerのbyte一致保管コピーも同じdata directoryに置き、再現時はhash確認後に`output/`へ復元する。
+
+次は265314の実F/exit0/run_count1を確認し、既存phase入口のcollection completionを最新r8で一度だけ受理する。
+その実completion receiptと外部hashをassemblerへ渡してconfigを作り、既存final wrapperのprepare・preflight・qsub・sealへ進む。
+結果の回収、全設定・全seedの再集計照合、報告が完了するまでは低ノイズ正式比較を2/12条件のままとする。

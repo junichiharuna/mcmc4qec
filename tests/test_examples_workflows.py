@@ -20,6 +20,9 @@ CASES = (
     ('conditional_weight.py', {'code', 'ps', 'ew_direct', 'ew_chain'}, 'matching'),
     ('convergence_check.py', {'code', 'p', 'checks', 'verdict', 'warnings'}, 'matching'),
     ('p_dependent_decoder.py', {'code', 'ladder', 'fixed', 'approx'}, 'codes'),
+    ('tile_capacity_fixed_prior.py', {'code', 'noise', 'target_p', 'sector_decoder_prior',
+     'kernel', 'initialization', 'bar', 'bar_interval', 'independent_mc', 'mc_interval',
+     'mc_trials', 'mc_failures', 'uncertainty', 'purpose'}, 'bposd'),
 )
 
 
@@ -69,6 +72,12 @@ def test_workflow_quick(script, keys, extra_name, tmp_path):
             assert 'WARNING: d=' in output
         if any(row['intervals_overlap'] == '' for row in rows):
             assert 'BAR interval is unavailable' in output
+    if script == 'tile_capacity_fixed_prior.py':
+        saved=json.loads((directory/'bar.json').read_text(encoding='utf-8'))
+        decoders=[r['metadata']['decoder'] for r in saved['metadata']['rungs']]
+        assert all(d==decoders[0] for d in decoders)
+        assert decoders[0]['settings']['error_rate']==summary['target_p']
+        assert saved['metadata']['mode']=='fixed_failure'
 
 
 @pytest.mark.parametrize('script', ('pl_curve.py', 'conditional_weight.py'))

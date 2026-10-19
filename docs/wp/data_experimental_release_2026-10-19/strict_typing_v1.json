@@ -1,0 +1,13 @@
+{
+  "observed": "2026-10-19T09:31:13.525399+09:00",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-dev5-source\\Scripts\\python.exe",
+    "-m",
+    "mypy",
+    "--strict",
+    "src/mcmc4qec"
+  ],
+  "seconds": 2.919285399984801,
+  "returncode": 0,
+  "log_sha256": "5b3e3905d4d9e175f9dd86715f6d5a9643abecae88f3e6e7b2349e013c8e9006"
+}

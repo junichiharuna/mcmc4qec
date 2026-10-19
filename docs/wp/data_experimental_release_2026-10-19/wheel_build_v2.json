@@ -1,0 +1,19 @@
+{
+  "observed": "2026-10-19T09:29:28.024411+09:00",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-dev5-source\\Scripts\\python.exe",
+    "-m",
+    "build",
+    "--wheel",
+    "--outdir",
+    "A:\\dev\\mcmc4qec\\output\\experimental_release_20261019\\dist_isolated"
+  ],
+  "seconds": 10.789113199978601,
+  "returncode": 0,
+  "timeout": false,
+  "scope": "Local isolated experimental wheel build; not installed or published.",
+  "wheel": "output/experimental_release_20261019/dist_isolated/mcmc4qec-0.1.0.dev5-py3-none-any.whl",
+  "wheel_sha256": "707868b21308028f5a76033f763663b449531b003e9c338c6ee90931c8fb7a2e",
+  "wheel_bytes": 93481,
+  "matched_python_sources": 32
+}

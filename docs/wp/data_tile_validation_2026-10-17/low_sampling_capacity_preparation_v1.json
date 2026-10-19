@@ -1,0 +1,533 @@
+{
+  "anchors_executed": false,
+  "bundle": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2",
+  "evidence_sha256": {
+    "low_sampling_capacity_preparation_0_1_v1.json": "a450dd8d2a366dbd41e3c3cbc53ac68f89cbeb258a9887c0ffd104945b88e2e5",
+    "low_sampling_capacity_preparation_0_2_v1.json": "0a5073c11eb1f6b70cd39c1f1b4e64d2a14ddce928b115269ec0fb77d76aa0f2",
+    "low_sampling_capacity_preparation_1_0_v1.json": "378b5313937d89817fee41ec84c1371d27a5af9665a401430236a22719241a7e",
+    "low_sampling_capacity_preparation_1_1_v1.json": "c1d418901f1a1287ee303c007ee491f07095bc03d8ee28b1a2192d7f256228fb",
+    "low_sampling_capacity_preparation_1_2_v1.json": "90050b5eafd5cb3b0892ae80a21ee215c615ab6eb7e596d2ed3beb04ffd9ad99",
+    "low_sampling_capacity_preparation_2_0_v1.json": "2592f7cf622f59121031cb473cfb3391e1a2c22e1701460d8d9f734dba0479d3",
+    "low_sampling_capacity_preparation_2_1_v1.json": "e5c38a743979f47b8a2b478f3a831deacb6c22171abcb10beaf0147b32887dff",
+    "low_sampling_capacity_preparation_2_2_v1.json": "3e02825a476160f00ddc1137aab2513e84fbc936bc7d38c06e2210eee48c1455",
+    "low_sampling_capacity_preparation_3_0_v1.json": "408642148dc60b7986e3d02b40744a7a4be6db326ae383001a4ab69da21392ca",
+    "low_sampling_capacity_preparation_3_1_v1.json": "f20d9faf4ff6c28c508d8bfd237ad521c48de9b3357e19fa20a8c53ebaf6a5d7",
+    "low_sampling_capacity_preparation_3_2_v1.json": "e9f7355ce0334f01f8119814b0aecb2c68fc917cd25323b0d155bccc66485fc6",
+    "low_sampling_capacity_preparation_inventory_v1.json": "ec7d9ee3ae675a4db32b9cdf8b2fc7f5d09b8067d099ca88bb8e53feac74f329",
+    "low_sampling_capacity_preparation_setup_attempt_v1.json": "358152e360d5ae722b4d8771dc3983070d8d88e2c312c1a24a42508fe8707e87"
+  },
+  "final_inventory": {
+    "bundle": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2",
+    "input_sha256": {
+      "cluster_scripts/artifact_archive.py": "8a6c213cf4b19ed916d79e0d485168d1f6131244f6465ed7c50084da03ff0384",
+      "cluster_scripts/audit_calibration.py": "2490bc2ab3533d77b536dfbd6a372049a67d970e74e0cfeb04af10138a5e8b82",
+      "cluster_scripts/audit_tile_anchors.py": "15fd06d35ae14c2172b9694ca4c2b9e96966c69adc6a127fd8e80f1056c0e419",
+      "cluster_scripts/audit_tile_reference.py": "647263528c10f0e2d24000e0ee583d967deca21f5ab60a51cd00c515d327eeef",
+      "cluster_scripts/audit_tile_structure.py": "2e6d9ae98e485fa51e06f58a379f73e86f85099690eb8a5ff0e703f86cb574a1",
+      "cluster_scripts/audit_tile_traces.py": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+      "cluster_scripts/audit_tile_weight_pilot.py": "3b1cf0a2d08db9fb34d3995e14ded1a690e313c73fa6ff1b93faa86f9195669e",
+      "cluster_scripts/calibration.py": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+      "cluster_scripts/package_bundle.py": "1dc9ff49770fa7b10fbb9b8291010bb11e4a8994cc73eed97c6baa11cf258f88",
+      "cluster_scripts/package_tile_study.py": "c22ffabb1c8198d386a096897b441404681cdeadfd69b6c3ab743290046ffe53",
+      "cluster_scripts/probe_tile_decoder_platform.py": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6",
+      "cluster_scripts/probe_tile_decoder_stages.py": "3ff742e448ac91dc0e867081673611617c5e385e4eb2b700403f27526f51e8fb",
+      "cluster_scripts/requirements.txt": "57dc951ab024291269f998463528c5493547f2b3af9e71442f3fd45d42edc1a9",
+      "cluster_scripts/steane_components.py": "a63941d3eb77565042b564dc0319a2627458a1df2d510dd53b3467fd91a803cd",
+      "cluster_scripts/submit.py": "dd5d6f97fbedb3b9a4254715612e51b0e89cada009af8700bd96ac9cb96ee0ba",
+      "cluster_scripts/submit_tile_analysis.py": "d851acec71c02aef8b5a4bcacd12b079fff4d6d182e8c69f67a5699c6fef4c0e",
+      "cluster_scripts/submit_tile_analysis_capacity.py": "9abe7b93f4048993f278246c41142bfeb61ac05e87262adce32439c231ea5bb6",
+      "cluster_scripts/submit_tile_bar_time.py": "b2e7af97f34f031262e004e7704f5baab32ef7cc8209fbc62ee9ae9d3e823489",
+      "cluster_scripts/submit_tile_capacity.py": "470496ebea42dc1697941c43a987de85cd6ec220f36470603546ae9a96685b88",
+      "cluster_scripts/submit_tile_low_noise.py": "617515186afde4248f5bb1b0ae193c491c7fd8c1b65457f123a8d8883a402020",
+      "cluster_scripts/submit_tile_mc_time.py": "3e81e7d96ae6b4913889e33886330c0787fa53cecf2e7c7c199f2fbd439fc39a",
+      "cluster_scripts/submit_tile_pilot.py": "df464052fddec0fe62b1d1c83f00a06711e1f869eb4a51582ce0f5298792b9e3",
+      "cluster_scripts/submit_tile_production.py": "06517a2ccb36b6e9b61f57db8673febfb0bb1ca7d3d62f836ba9af9a34b9d82d",
+      "cluster_scripts/submit_tile_reference.py": "7d9b7e7f9fd38fcb89cc5778f6803052ece644bbc3720ff10cde55c40781acec",
+      "cluster_scripts/submit_tile_trace_audit.py": "31fddab5214373358dde2f68da9905ad0fc7b046f20f8069a2191526b479f711",
+      "cluster_scripts/submit_tile_weight_pilot.py": "888aceaa08c7ff5acfc06136fb5a85308af6cfdb8d8014f694319c5cb190a6b9",
+      "cluster_scripts/submit_tile_weight_reference.py": "d1d4e80661e94fa8e4b04b376a6aa5f5720c502e6c9c3756e23cfb4304f1af93",
+      "cluster_scripts/summarize_calibration.py": "45d8031f514f03962ce149ac99269c3f9bd0fd9fa2deb40f38766f478397b6c9",
+      "cluster_scripts/summarize_tile_pilot.py": "cd549e6400ff791ceec87212f492fdeb41adb4d7955399069f8d6c6681d1438e",
+      "cluster_scripts/tile_analysis_capacity.py": "68ae808e4fc333e8736304a215b5d308a0f5d9ca54fa26bac031b141a4964f39",
+      "cluster_scripts/tile_bar_analysis.py": "7d22afe9b4ee554e255ca1556510b2c76d892d7817ad44ae7a423971a58505de",
+      "cluster_scripts/tile_bar_study.py": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb",
+      "cluster_scripts/tile_bar_time_benchmark.py": "15a9a8c254bd2570decd635e73844c4c6d3bccf1fc9ba679569851495765f41a",
+      "cluster_scripts/tile_comparisons.py": "b8faac8a7c55809a89eddf1ffb2a9c0b5065781ee8da189388279404dba62ad4",
+      "cluster_scripts/tile_coordinator.py": "4617da6ebc30b501a924e4660009f31aaf0481c5c658b036c362dbf16519bb2c",
+      "cluster_scripts/tile_initialization_strata.py": "ca1bc5b501f6239fb27cf3a67d93330eba417862b344b3f2a485b34e1ea20704",
+      "cluster_scripts/tile_low_noise_study.py": "6ce8ef25b06646c46b8c59ba02d59e6841c766cd28ad270d356e462326082f22",
+      "cluster_scripts/tile_mc_precision_budget.py": "72a2bbc75097b0c7372de51f596ea7b7d3ad8c39dd21053cb0c47ae79261b587",
+      "cluster_scripts/tile_mc_time_benchmark.py": "4b7d35dcd661b67237a2614d1375d14c6d02c9f03e05dc083bbfe7e054787501",
+      "cluster_scripts/tile_precision_assessment.py": "17683c69be40c80fa8754811deb67ea90a872bce0131cf9b9bcd34637a94e193",
+      "cluster_scripts/tile_prior_effect.py": "2a8bc858b3e033eac36dc5d2fc83180994fb700f5c873c5ddfe5ff0858555c52",
+      "cluster_scripts/tile_reference.py": "566a3d10901dbb823e0c6cc4de66d012593ac8f14524c6a5b6d5dd13eb705e81",
+      "cluster_scripts/tile_select_timing.py": "c07644797d0b76aba4dac8ae4dbb434bb1573fd82651e4b20529963fe79fc0a3",
+      "cluster_scripts/tile_study.py": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+      "cluster_scripts/tile_summary.py": "f8f324eac24d748639a4e55bf0f410d04800bb5b2452699379c9a4eda8769574",
+      "cluster_scripts/tile_timing_comparison.py": "66113d5341fdcdb49f7154225ee038520017add6dce9d9eeef340761f1ff43f1",
+      "cluster_scripts/tile_timing_metrics.py": "045fb6b7121a2031da1c7d0d2127466834983b4eb09d14ae586358f38cc565cc",
+      "cluster_scripts/tile_trace_audit_run.py": "8b59e4cc8cf1f77dc64d5154dbf2b65a899e0d22dba9b4713f583021e623a119",
+      "cluster_scripts/tile_weight_allocation.py": "377d4fe0d961f4a134c81535e6bdbee2fb591be2ec941cc6e76149a7ca87d9a5",
+      "cluster_scripts/tile_weight_comparison.py": "288f8d2457e1ec760c420d08957fcf122ecce9cc85d2a117e021883ef7076127",
+      "cluster_scripts/tile_weight_pilot.py": "bfdc2c4b245cb685eda95c7705e8f9be491a23c04f26608501d093418898154b",
+      "cluster_scripts/tile_weight_reference.py": "90821b35f32e8a90770f9d32021c9698191cdb2e04b0eff6d02528943d613393",
+      "cluster_scripts/tile_weight_reference_comparison.py": "b0c03ca5b9eb2e7adfcb913c43fe810e371f51c530f6893f040b2eade0f262a2",
+      "cluster_scripts/tile_weight_reference_driver.py": "8b99a9f23ca01f2fca4d05a4b7fcb48eb87f9014b26df86d4dfabc7c7e1dce63",
+      "cluster_scripts/tile_weight_stratified.py": "65eaa6833a1978dfb85c7718db03def0ebf478d59988cfb0aea4ca920673d585",
+      "cluster_scripts/verify_recovery.py": "ce3baba14339ac69ecd99c6510740b7a3e2f9ca7e3045110c624566a783283d7",
+      "cluster_scripts/verify_tile_workflow_examples.py": "5709fe8dc919a3822c512b7df26acae08f6e9ce03a06625ff3172eff717ab0fb",
+      "dist/mcmc4qec-0.1.0.dev5-py3-none-any.whl": "f321f735cd5129ff71bf4da367bda9ec9e8d049c56bba984fa512916814219dc",
+      "docs/wp/data_tile_validation_2026-10-17/decoder_platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+      "docs/wp/data_tile_validation_2026-10-17/decoder_platform_linux.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+      "docs/wp/data_tile_validation_2026-10-17/direct_mc_precision_budget.json": "a1e15398fe3d9bba9fb59ea34581394f605d17e97584f9203bca713a13dce14e",
+      "docs/wp/data_tile_validation_2026-10-17/reference_audit.json": "de21132dc1a757c97a9c2a8c9efce3ae4f5e6946dada1ab82f20aff89a34f46e",
+      "docs/wp/tile_decoder_platform_2026-10-17_ja.md": "ac2039a32abfe4bf1a160c2a62bce02d75e7428ca1cd8d527ee27bff237dbe4e",
+      "docs/wp/tile_decoder_prior_effect_2026-10-18_ja.md": "b524d856813c04a7e5fd547fee299fedc03a06b98c24429ca61523a586dccde9",
+      "docs/wp/tile_kernel_support_2026-10-17_ja.md": "9a27589bd0aaf8fd016553872069ad140a662c8596bca8a5aa45640a7b9e9fb2",
+      "docs/wp/tile_low_noise_plan_2026-10-18_ja.md": "605236a638ffb540355a8db1287ef8ab900a25f6f6f88fd95ab29127f6f99f97",
+      "docs/wp/tile_time_to_accuracy_plan_2026-10-17_ja.md": "3c92ca5d701a3bdd5d654fef3874e848ae7eab5c6cdba652fdf1dda20078de40",
+      "docs/wp/tile_trace_audit_execution_2026-10-18_ja.md": "8989cfd4e3362a9d862f9a89db7b56f1176bf2a648fee5fc3645ff98b85136e7",
+      "docs/wp/tile_validation_plan_2026-10-17_ja.md": "02ede1eeef053882f6fcee45ed796d2c4a7d157dc8d17334bc0e4ee18ea9004f",
+      "docs/wp/tile_validation_report_2026-10-18_ja.md": "e5e1dccabb03ab6a38695ac736d8edb331d7933917e0cf34f535a98ccac72e2b",
+      "docs/wp/tile_weight_reference_comparison_spec_2026-10-18_ja.md": "1f22868811faf92d9312cd202aad24b647f1adc7da0cab6dc46848c9b4d68d3e",
+      "docs/wp/tile_weight_stratified_spec_2026-10-17_ja.md": "58e44781f3f8d987022f6ebcc5550b6eeac3477926f1e1624b1ee81009cc50a1",
+      "tests/test_artifact_archive.py": "ac4b312a8899f8fafa23525d3890418d260bb34d5c67fd7aa81ab0f55028557d",
+      "tests/test_steane_components.py": "afb46cf8d4d64f552f929f96b5a1ea807d08e68024480f4b538ad0af67b7643b",
+      "tests/test_submit_tile_analysis.py": "3b180a660b0757fad6c8fbd68ad4d576626962ecbf14a6e38e8d283adbb0624d",
+      "tests/test_submit_tile_bar_time.py": "9364e7de64cc44745516e9af9638dc4eb99cc042faab04f894670d9a6428456a",
+      "tests/test_submit_tile_low_noise.py": "93a2bcb8cd1a40755748a3d66c896c31aba063b6e5fd318b03f0ed576f025551",
+      "tests/test_submit_tile_mc_time.py": "24d48173673c32ace71b1c6ad5158a0ac119c04fe9b4d2823e749c5d4425c6ec",
+      "tests/test_submit_tile_production.py": "074b5ceb5d2f41085f15d412bc9b3880e58cb5cf28e6a1561db304e3a69b65eb",
+      "tests/test_submit_tile_trace_audit.py": "dc53821e73d08e127a9580af72c33617a158a3f1f87b0982949ceb77e81dc761",
+      "tests/test_submit_tile_weight_reference.py": "69ce1bd5fb6481ac29f6b36b7bc4b33e96883eac4014192ed5344994cae11dee",
+      "tests/test_tile_analysis_capacity.py": "07b5f7977b709fd18681b2b7be59088e0e60c81991f3fe3a3b696b78afcdfa0a",
+      "tests/test_tile_anchor_audit.py": "fd003608a6559da2f77018dd59e7707adb23c423665aa7bdcbdfabacf64f7610",
+      "tests/test_tile_bar_analysis.py": "a6d268b8e2fe487993017f365873c84affee11c8d2a91e4f7847af4800631d1e",
+      "tests/test_tile_bar_study.py": "580005793269dde8a04c24534cccc91c6a42c0a179d9ca5fa5fcfa822f380f3b",
+      "tests/test_tile_bar_time_benchmark.py": "8d7653ec3a510f087c2f7fa585725500ec8111c43ae37d12962f57d2536d56a6",
+      "tests/test_tile_codes.py": "fc55719632d873d205f9400be5b20dd7ef77bac07321947c056661018abae654",
+      "tests/test_tile_comparisons.py": "8786072e83924fcd396b43e8db6a40d3df2e54d9f3792944883a21244bde5443",
+      "tests/test_tile_coordinator.py": "f478fbb64c92b9d594e8f8d1ac06a40c34d64cc91ede1c058cdfe7219912f9ac",
+      "tests/test_tile_decoder_stages.py": "f6c33fd0c7247d366392202eb84b9d7d337abf45c9713e6c5efb233d29b6b1d2",
+      "tests/test_tile_initialization_strata.py": "cf5ac741a091e67398157c36885bc545c2f864df4183e83da5bd29c373acd5c9",
+      "tests/test_tile_low_noise_study.py": "b3f8df4776e29e53c3fc0ddd73c4ecd7d8bf5cab201c73056329408cdabc4415",
+      "tests/test_tile_mc_precision_budget.py": "e8e0065bc9b8903994259130705b182d6d78a3d8ac5b226f9786c172faeaaf59",
+      "tests/test_tile_mc_time_benchmark.py": "fa3cba2795ed05993257868d21055818aee5f06912c359f7a3e0c20bf67d0af3",
+      "tests/test_tile_precision_assessment.py": "826211d1c8f0bfe970fb5a6cdd8d81123f8dcb94e5b752bd2478bc44d9803505",
+      "tests/test_tile_prior_effect.py": "586ddf3cefe8cb15c81e49f2451d74a1567464c77782fa93f02317e077354c40",
+      "tests/test_tile_reference.py": "e3ad1eacbb8f5ced1e0673f44a73e6264e4c837b2edc1a768b40708f22554ea9",
+      "tests/test_tile_reference_audit.py": "d805ac5c460bd7a6570736efd4647e48504b36770f2e652ee10ee39b4aa85364",
+      "tests/test_tile_select_timing.py": "ee1f48f02fa9f42f05bb676ea7a2e04d0e5c1971f570b6fd9dbfdf8f2bc22da2",
+      "tests/test_tile_structure_audit.py": "dcc373c8421c61ebb1eaed515f93da6aabcb6cb1b3fd111432ba36f4e3768491",
+      "tests/test_tile_study.py": "bdd92fee9068356d956dc438e63aedab1db24603966dd60b70337cc0e4eafd04",
+      "tests/test_tile_summary.py": "147aa5c02a3da7d016674d3da13e4441171a6fff407af63450342a82149b09ff",
+      "tests/test_tile_timing_comparison.py": "2fd569550adbdb25fe3df2cde08b9967ec4b22cb74ea1d1354907eff701b8084",
+      "tests/test_tile_timing_metrics.py": "21bfaa5dc1552f3fe612d0a9f44724c083d8716166c8f179c34629ce396e562a",
+      "tests/test_tile_trace_audit.py": "45977ce2cd8daed0022720198f566b4312f1650c7e86953940d79af94595fe1e",
+      "tests/test_tile_trace_audit_run.py": "fcd2a09d201c0418951900a5441b53bed96843804d59c009ae7c622561315804",
+      "tests/test_tile_weight_allocation.py": "a96acf6389d804374207a0d3d0f6f53674515d5352231fc91a52ce3a84d3cc39",
+      "tests/test_tile_weight_comparison.py": "6e8ab61ce824f78eb25ae5df97947376efb7486c936eda28e0a391df21fa6266",
+      "tests/test_tile_weight_pilot.py": "493c5e1e8390c918eabd71849cd960691e6f9bc0be4d260a74ffca25764a86df",
+      "tests/test_tile_weight_pilot_audit.py": "1c170c01790c069865cdb313dfca4231ae674a86a95973c4a239f05609e15782",
+      "tests/test_tile_weight_reference.py": "77bb452374f939b0311512103d35a574a0a337c3cc09c11e83fd19d37b243980",
+      "tests/test_tile_weight_reference_comparison.py": "f82bf9ff59e93d21135225f2a59d8e7d198fff8c449caacded019cc54fd19316",
+      "tests/test_tile_weight_reference_driver.py": "ac0f162d76f57f5eff6ec2fd7ddc8d36be60bca323a1724164a5f70f332453c3",
+      "tests/test_tile_weight_stratified.py": "a66aabb84bab8a47c3ac97783c8192a91684fc098af6f1508102d4adc57eaf18"
+    },
+    "observed": "2026-10-18T10:52:27.656953+09:00",
+    "python_executable": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/venv/bin/python",
+    "python_resolved": "/home/user/miniconda3/envs/py311/bin/python3.11",
+    "python_sha256": "7c4b0f4c2b37f9aae938c7f6e62f5b7a2a002154762f3b66f19a89d402c96989",
+    "python_version": "3.11.9 (main, Apr 19 2024, 16:48:06) [GCC 11.2.0]",
+    "read_only": true,
+    "roots": {
+      "0-0": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "dc66cfa5e7682e09a4c37041a3fef8ab138b3a6d849fc9cce571a1f6340ed0e5",
+          "low-noise.sh": "5f46a6302525e1463dfbb734974ddd2de8ae58e354d40e1deb16eb6afb4d8548",
+          "manifest.json": "7cd6364d98877c14174c38684b77c3ca460b02f2db3828e41ffd1b7a33012b0e",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "2fde7b8d1177b37f6420ef4b9167710a817b5fc5e3585f16721ce9e4e95d705a",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "0-1": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "36459ba0b4b4fe6437786cceace375712768feada1e367cf2fae71288fd7e151",
+          "low-noise.sh": "f0188e04e823ba318933e443435d3959c2c5d59a6411e7950ac3e24c1b5db305",
+          "manifest.json": "ec5b2873647e9ec68b8af868ff9089c51ad9b8ba1daf4ab65d0342f533f46759",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "68c231070d93694f7119dd37dcab2abcd1f7c469859b0d178adffda666542f01",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "0-2": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "d29e6dda1363af4cdb37b3621fc905e120a32255ce20c6ea2a504259771ddb39",
+          "low-noise.sh": "783c0e57e7b58392394ea2ef39015db0662d95386ea2b8503ef300a38e441c1a",
+          "manifest.json": "de283b8810841d3c0d7bd40a5b1ade20e1803f66e9fd809c39eb5b4df862ddb9",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "f823b226bbbd14f50f2fc5fe08b150f7b6758ad5af542e249cbe4e4e11451254",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "1-0": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "4009d395a19ced7f8a24d239033837bc204f5b4c25ad8b4519f222f0a1a9e18a",
+          "low-noise.sh": "de5addfc3b400351b29791568defdd536a9fd325fd7a9f5d6f20acd59b8f5888",
+          "manifest.json": "0df96eb92acbf0e27b5ff8da28599e33bc776296a30b545af095103ff6c3d46f",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "29711692227d29659c8c88a0149f0faf7125d4a1d3ef5ced1ea67434a157b0af",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "1-1": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "10c668abda28bbd3026bd7716542f82abc02ea64c370c8cb2e838cc778c00b6b",
+          "low-noise.sh": "e13a570bc6e978e87663a19726bcb42b2f8be564daf40f61090c497ba214af2a",
+          "manifest.json": "b1aad41d340a3b3799be355b6d7046e7e5559bbdc0983ca46b2b27b31ecbaf04",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "033e8f0c903c7401b937af6970678f08c710c0daa11ef0c3232c83bc8d84afe7",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "1-2": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "b521e7cb6a9335e65ad5dc85d0fa31af3032269fc7b8cdde4a25265544e37398",
+          "low-noise.sh": "1ec18da4f51040f806b79ee5d6b9a0f8566b1f38ec605239d915790f5a23b6e4",
+          "manifest.json": "20dd836415261b0c369c4e065cd60218eeeba04eb7d07908e0c2ff6e9439ce74",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "eafc012bfa3e828c3e429ea73898965d353e9f58ac1fcbbf68a984180c91cd20",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "2-0": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "744f1132a09bf54c15db9d6e652f77a32436116d00fb62044adbb2fb94068451",
+          "low-noise.sh": "5247d6cf0e3a802448bb2f0e27e5853dd6199311ce4d5ab00cc27fc90691a1e3",
+          "manifest.json": "dcc99e94d31171d1b31296c0f5e3f837f18359ac78354604d495ef8b6edc502d",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "88422f82c3ffd57192f5a8922684faa54a01541b2c978a749aab494a3f4feeec",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "2-1": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "1ebf0a3171f9c6f9cd72b75f870ef39042061886fee0a3d54dd4977b773e9ce3",
+          "low-noise.sh": "62fdf023c35de929389d000a6e5abec4cfe388c0603b91640e11b344913e175e",
+          "manifest.json": "878a6a0cbc91e3b5694fcfae2505d52ec4e2f51d93d4173df2184c814a5e0ced",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "c55d30cffdf0bed327d5b5f92cc906e0bfd4ec5dc13cae7c8d77987579a98840",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "2-2": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "30263581f4d496be7efebbaf0fce71fa628cd4a9fab8707b251107800ee07ee5",
+          "low-noise.sh": "042c4087fd1b211fd068e474928921ff61cffd69accb7f46f2bf575685a36ec4",
+          "manifest.json": "0485361186ddfcc1c350a3ddee286eb575db5a00e669711d2fed1afb9feb2efa",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "fff102527546d74117c270e58746711427ae523485b96c090f991e0f377fee92",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "3-0": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "18f574c77f89b2a1124d3509e1cc464187644a275015993f0657b2600600d214",
+          "low-noise.sh": "cf8865c4c298b02f41be40725083e3ac1ef0b951eeba51cefa5cdf911c1896fa",
+          "manifest.json": "8bd3938a5bbf09e2fb548dd674a3ac56a01f73a4ca2cbff723060419d79491da",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "dfc67016c943fb10e5f677d4a49cae1660d85b1f41f5ab01f9680e504e62adef",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "3-1": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "da915f53af2a97e68802e2e79cffb9b6d54a1933c6ea31fed50357a2dec7bdd7",
+          "low-noise.sh": "366024134d3f04eac50fe4ab69345a6210a4efb3e567978f6307db7503fd33cc",
+          "manifest.json": "6b7b72013d71d80751a99e62c8fba7de052637ce4cb49ed87460a80c51c129fe",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "6d9666bc33b052b3f0f03fd0f2be335abe10eef2871b6e3e96674bcd2604818a",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      },
+      "3-2": {
+        "exists": true,
+        "files": {
+          "dry_run.json": "c079ee6125d5505e23e1a645487c7805587331a7bbaa5399a68b694802e6cde0",
+          "low-noise.sh": "530139e8659e1f5c2d47a67806db9c8c90060e5e344b8826f6ed7824756c1409",
+          "manifest.json": "e8b73d31704735deba74cd9a43dbaffcc7c241c57f0496892caf1fcfc042f445",
+          "platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12",
+          "preflight-plan/native_preflight.json": "c3b9e659a71e655a5c2b85eaf78ae005d36dc0947adc1ae5ad8cc70279327a6d",
+          "preflight-plan/platform_fixture.json": "fbb54b4b0d58122636072445a73fdf558128c1e81902e43f81013b329bb61ce3",
+          "preflight-plan/platform_profile.json": "9e5a4e8ce07fa5fcfd153f7f2eaf87ada30d92b51e5d4a72280034fd4bf70d12"
+        }
+      }
+    }
+  },
+  "helper_sha256": "f5093b99a7305da84930c98207bad0c3f5fb32fa779f9bed7e4a772e3e567a0b",
+  "initial_inventory_sha256": "ec7d9ee3ae675a4db32b9cdf8b2fc7f5d09b8067d099ca88bb8e53feac74f329",
+  "new_conditions_added": 0,
+  "new_plans_created": 11,
+  "original_capacity_0_0_preserved": true,
+  "qsub_submitted": false,
+  "records": [
+    {
+      "anchor_tasks": 2,
+      "case": 0,
+      "created": true,
+      "manifest": "cc8db62f6bf3779ea34c53862fe499daa59e00e22657fb4ac9a8215420fe9644",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-0-1",
+      "sampling_tasks": 104,
+      "strict_native_profile_match": true,
+      "target_index": 1
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 0,
+      "created": true,
+      "manifest": "0146a408d354270f2c9c7d807083bf6529b85a133bdee4dbc7e9871e4a2f8f70",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-0-2",
+      "sampling_tasks": 120,
+      "strict_native_profile_match": true,
+      "target_index": 2
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 1,
+      "created": true,
+      "manifest": "3b2a0d6248f47f89176b5d0955566cdb6ab094d42d71560b619c508229acbb12",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-1-0",
+      "sampling_tasks": 80,
+      "strict_native_profile_match": true,
+      "target_index": 0
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 1,
+      "created": true,
+      "manifest": "77a5f9fda2e727c607a34813f3c09085f723f7988993ed7cb7363746909c27d8",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-1-1",
+      "sampling_tasks": 104,
+      "strict_native_profile_match": true,
+      "target_index": 1
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 1,
+      "created": true,
+      "manifest": "0fba9caf8e074beb894fac8859293f686ac32438b38604d3de0db7a7355c3278",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-1-2",
+      "sampling_tasks": 120,
+      "strict_native_profile_match": true,
+      "target_index": 2
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 2,
+      "created": true,
+      "manifest": "a27098afdd75606ee81c36e3dc271238133686f70e2de03dedb18f9483476487",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-2-0",
+      "sampling_tasks": 80,
+      "strict_native_profile_match": true,
+      "target_index": 0
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 2,
+      "created": true,
+      "manifest": "f31d3da95af5afe87144b5e0b331d5a20c881b1a2dc574f3a0cdebebcf4e7493",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-2-1",
+      "sampling_tasks": 104,
+      "strict_native_profile_match": true,
+      "target_index": 1
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 2,
+      "created": true,
+      "manifest": "9437eb36eb2d2684045d46817edb4af383a5e2d5f042a069ea4de047c2119463",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-2-2",
+      "sampling_tasks": 120,
+      "strict_native_profile_match": true,
+      "target_index": 2
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 3,
+      "created": true,
+      "manifest": "e4922a9fd3aac8b23f06fb7fd4b3fd0593765921ae01f18d1a0ed639cf94fa51",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-3-0",
+      "sampling_tasks": 80,
+      "strict_native_profile_match": true,
+      "target_index": 0
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 3,
+      "created": true,
+      "manifest": "aece3adf613becb8b0533dfa4365d4b5f5ea8740e1c01496a4c38f58b07417b4",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-3-1",
+      "sampling_tasks": 104,
+      "strict_native_profile_match": true,
+      "target_index": 1
+    },
+    {
+      "anchor_tasks": 2,
+      "case": 3,
+      "created": true,
+      "manifest": "f0fe6179be82d976d8187bf4518b309fb7f34b58f972680e69d72c6bccaf2d93",
+      "resource": {
+        "cpus": 96,
+        "max_nodes": 2,
+        "memory_gb": 340,
+        "requested_nodes": 1,
+        "stage": "capacity",
+        "wall_seconds": 86400,
+        "walltime": "24:00:00",
+        "warning": "Initial resource ceiling, not measured consumption or a completion prediction."
+      },
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-3-2",
+      "sampling_tasks": 120,
+      "strict_native_profile_match": true,
+      "target_index": 2
+    }
+  ],
+  "sampling_executed": false,
+  "total_conditions_prepared": 12,
+  "warning": "Plans and login-node native preflights only. Initial 96 CPU / 340 GiB / 24 h ceiling is not a measured prediction. No production, capacity simulation, or scheduler submission was executed."
+}

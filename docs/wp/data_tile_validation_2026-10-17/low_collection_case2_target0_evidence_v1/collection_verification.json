@@ -1,0 +1,80 @@
+{
+  "acceptance_receipt": {
+    "path": "low_noise_staged_2_0_collection_completion_v2_receipt.json",
+    "sha256": "5e6b3d1ac756c693df97ca287cdc4562cf5f7182ea36349cb817ab14701314a4"
+  },
+  "all_trace_payloads_recovered": false,
+  "collector_sha256": "0e82556901b2be46c6954f63e1f0c85349d9d657042f97b280a7adfd9aff1d8e",
+  "files": {
+    "evidence.json": {
+      "bytes": 84672940,
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-low-staging-control-v2/runs/collection-2-0-v1/evidence.json",
+      "sha256": "ed3eeae50b4420c60631ecb216392c0abf8ce0e91c0090c837b6c6bc2fc91894"
+    },
+    "rows.jsonl": {
+      "bytes": 185144123,
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-low-staging-control-v2/runs/collection-2-0-v1/rows.jsonl",
+      "sha256": "0fae2028ada19a8727bbfebb1d02d8de7be8d5216e1e281bee53007147f6912d"
+    },
+    "sampling.json": {
+      "bytes": 2313,
+      "path": "/home/user/workspace/mcmc4qec/20261018-tile-low-staging-control-v2/runs/collection-2-0-v1/sampling.json",
+      "sha256": "5fbf67491ed338c0b1e72befad88f847185d7a57dacf5f5e6cc99b308692fa91"
+    }
+  },
+  "files_verified": 4,
+  "job_id": "265284.node-PRISM",
+  "new_acf_or_bar": false,
+  "new_sampling": false,
+  "pbs_after": {
+    "Exit_status": 0,
+    "Resource_List": {
+      "mem": "32gb",
+      "ncpus": 1,
+      "nodect": 1,
+      "place": "free",
+      "select": "1:ncpus=1:mem=32gb",
+      "walltime": "24:00:00"
+    },
+    "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-low-staging-control-v2/runs/collection-2-0-v1/collection.sh",
+    "exec_host": "node008/1",
+    "job_state": "F",
+    "resources_used": {
+      "cpupercent": 93,
+      "cput": "00:30:37",
+      "mem": "1293860kb",
+      "ncpus": 1,
+      "vmem": "2057852kb",
+      "walltime": "00:34:26"
+    },
+    "run_count": 1
+  },
+  "pbs_before": {
+    "Exit_status": 0,
+    "Resource_List": {
+      "mem": "32gb",
+      "ncpus": 1,
+      "nodect": 1,
+      "place": "free",
+      "select": "1:ncpus=1:mem=32gb",
+      "walltime": "24:00:00"
+    },
+    "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-low-staging-control-v2/runs/collection-2-0-v1/collection.sh",
+    "exec_host": "node008/1",
+    "job_state": "F",
+    "resources_used": {
+      "cpupercent": 93,
+      "cput": "00:30:37",
+      "mem": "1293860kb",
+      "ncpus": 1,
+      "vmem": "2057852kb",
+      "walltime": "00:34:26"
+    },
+    "run_count": 1
+  },
+  "producer_completion_sha256": "73712ed091c42a728363e8795c709f0d83df02a9a599a2914a5c995ad36bfe59",
+  "reference_comparison_complete": false,
+  "scope": "Byte-preserving collection outputs only, checked against the previously accepted producer completion. No numerical reanalysis, no full source trace recovery, no accuracy or coverage claim.",
+  "total_bytes": 269835386,
+  "verified": true
+}

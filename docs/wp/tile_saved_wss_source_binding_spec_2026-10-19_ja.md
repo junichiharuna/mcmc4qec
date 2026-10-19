@@ -1,0 +1,40 @@
+# 保存済みWSS監査sourceの配置対応
+
+## 目的
+
+元WSS監査はv7配置、低ノイズ結果を読む現moduleはv11配置である。
+同一内容の11監査sourceでも絶対pathが異なるため、final v2は265294で停止した。
+final v3の限定修正に加え、設定選択と最終計時評価にも同じ配置対応が必要である。
+入力・native・元監査report・算術を変えず、保存されたproducer sourceと現reader sourceの対応を検証する。
+
+## 変更範囲
+
+標準ライブラリだけに依存する`cluster_scripts/tile_reference_source_binding.py`を追加する。
+旧rootは固定監査runのbundleの`cluster_scripts`、現rootは実loadされた監査moduleの親`cluster_scripts`とする。
+両root直下の通常のPythonファイルだけを許し、source辞書の空・追加欠落・相対path・別root・nested path・symlink・hash差を拒否する。
+旧・現両側を実bytesで照合してcallerのEvidenceへ登録し、読み取り前後のidentity・size・mtime・mode・解決先を照合する。
+現在実行するmodule全体のsource/import固定は従来どおり厳密に維持し、この対応を保存済みWSS監査source以外へ適用しない。
+
+selectorでは既存の現native fixtureを含むread_evidenceとmake_planでplanを再構成し、検証済みsource辞書だけを旧辞書へ戻してcanonical比較する。
+source以外の全field差を拒否し、全16監査の成功記録、選択条件のartifact・raw入力・終端記録・保存算術の検査を維持する。
+選択した監査reportのsource対応を検証し、sourceだけ現辞書へ差し替えた一時コピーを既存report_bindingへ渡す。
+元reportと最終比較reportの一致、selectorが保存する元report digestを変えない。
+
+最終計時評価のmetadata準備では新しいnative probeやraw payload scanを加えない。
+現監査source辞書と旧planの対応、既存のreference context・入力・native・PBS照合を維持し、全16reportのsourceを個別に検証する。
+compute内のfull検査で全消費raw入力をhash照合する従来の範囲を維持する。
+保存結果の被覆・bias・RMSE・設定順位・採否・時間比・分母・seedは変更しない。
+
+## 受入
+
+実ファイルを用いて、許可root間の同内容移動と同rootを受理し、内容差・追加欠落・root escape・相対path・nested path・非Python・symlink・途中変更を拒否する。
+再構成planではsource配置だけが違う場合を受理し、native・入力・元job・条件・worker・thread・resourceの差を拒否する。
+selectorと最終評価の既存metadata fixtureに加え、異なる実source rootを持つ接続テストで、元reportの保持とsource破損の拒否を確認する。
+stage2の計画、seed監査、stage3実行、stage4評価の既存テストを必要な範囲で通し、新しいimport closureを固定した別Linux配置で検証する。
+旧配置・稼働中job・旧準備記録は上書きせず、修正版で正式計時planを作成したとは試験だけで主張しない。
+
+## 別の残課題
+
+selector親のprepareからcompute、computeからsealに保存したdevice/inodeをホストをまたいで比較する箇所も別途確認する。
+final v2で確定したホスト間identity問題と同様の箇所は、内容・解決先・modeを維持し、同一ホスト中の厳密検査とは分けた小仕様・受入で修正する。
+この文書だけでその別修正が完了したとは扱わない。

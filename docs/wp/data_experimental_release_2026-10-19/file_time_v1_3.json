@@ -1,0 +1,21 @@
+{
+  "observed": "2026-10-19T00:52:58.361957+00:00",
+  "file": "tests/test_tile_low_noise_timing_plan.py",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-experimental-optional\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "--override-ini",
+    "pythonpath=",
+    "tests/test_tile_low_noise_timing_plan.py",
+    "-q",
+    "--durations=5",
+    "--junitxml=A:\\dev\\mcmc4qec\\docs\\wp\\data_experimental_release_2026-10-19\\file_time_v1_3.xml"
+  ],
+  "seconds": 27.502844500006177,
+  "returncode": 0,
+  "timeout": false,
+  "file_sha256": "2eeeb4e2b0433be95c72bda6fb4f0098648170b77ad25bac2dd24e1607d61ed2",
+  "file_unchanged": true,
+  "log_sha256": "05a3f878f0d23c6e503fd617a9226b0ac297d3a0d2552bfde4f665bee97390b8"
+}

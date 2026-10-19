@@ -1,0 +1,8 @@
+.............                                                            [100%]
+============================= slowest 5 durations =============================
+6.00s call     tests/test_tile_weight_reference_audit_run.py::test_all_sixteen_real_audits_are_preserved
+5.83s call     tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[raw_chunk]
+5.78s call     tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[condition_summary]
+5.54s call     tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[audit_source]
+5.38s call     tests/test_tile_weight_reference_audit_run.py::test_failed_task_still_writes_complete_summary
+13 passed in 35.95s

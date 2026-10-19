@@ -1,0 +1,18 @@
+{
+  "observed": "2026-10-19T00:57:38.885937+00:00",
+  "assets": {
+    "mcmc4qec-0.1.0.dev5-experimental-source.zip": {
+      "bytes": 30925709,
+      "sha256": "034fa1df8dbf2bc27f1c1f9f6833c73d39c4c5287263a61bc94fcc4cb38ebdd8"
+    },
+    "mcmc4qec-0.1.0.dev5-py3-none-any.whl": {
+      "bytes": 93481,
+      "sha256": "707868b21308028f5a76033f763663b449531b003e9c338c6ee90931c8fb7a2e"
+    }
+  },
+  "archive_members": 810,
+  "archive_bytes_verified": true,
+  "scope": "Local candidates only, no tag/release/upload/publication. Source snapshot includes declared test fixtures, not all raw study data.",
+  "candidate_export_sha256": "dd80e5ba89815c720ffb1f5e7c73120c4b2cce5d349cf13db2373a018bb3b161",
+  "output": "A:\\dev\\mcmc4qec\\output\\experimental_release_20261019\\assets_v1"
+}

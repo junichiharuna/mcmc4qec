@@ -1,0 +1,976 @@
+# 低ノイズ投入台帳の更新
+
+2026-10-19のT0最終比較受理、T1全trace監査受理、T2解析capacity受理・copy投入後の状態である。
+qsubは親だけが行い、queuedを含む最大2要求node・共有lock・一回投入を維持する。
+過去のv1〜v4台帳は変更しない。
+
+## 完了済み
+
+case2 target0のfinal v3・265299はF/exit0/run_count1・30分40秒で終了し、sealは消費済みである。
+`low_final_case2_target0_evidence_v4/`の14ファイル回収と`low_final_case2_target0_scientific_review_v1/`の全352設定・67,584行の別算術照合を完了した。
+最初の回収v3は86 MBのreportが60 MB上限を超えて停止したため、その失敗記録を保持し、v4は同じ固定hashのreportだけscpで回収した。
+この条件を再投入しない。
+
+後段selector・計時評価の保存WSS source対応とselector親のホスト間snapshot比較はWindows・Linux各307件で受入済みである。
+新配置は`20261019-tile-low-timing-portability-v3`、bindingは`low_noise_timing_portability_source_binding_v1.json`、SHAは`d61b03b550dbbfd2c33141d8acc038eda585a9459ab06d80cc91ba05d263dd8d`である。
+24 source/test/spec等は`local_orchestration_sources_v12.zip`に保存した。
+全12条件の正式selector・低ノイズ独立計時は未実施であり、旧selector bindingを新コードの実行根拠に使わない。
+
+target1の全trace監査265302はF/exit0/run_count1・9分42秒、768group・79,872予定task・失敗0で正式completionを受理済みである。
+summary SHAは`cbda4409900fd0beb53a357d0579d4ee81616cae4539630fc56dd55dc851f9d1`、completion SHAは`a45119b7b74434a624a734eb659c2bc1200b470029963ff18b824a4784c09f5a`である。
+trace-fullのprepare・dry-run・execute・completionは全て消費済みである。
+
+target2のsampling265287はF/exit0、92,160 sample・192 anchor・失敗0を受理した。
+自身の解析capacity265303もF/exit0/run_count1・6分10秒で、35成果物と全8group・88設定を固定observerで照合した。
+profile SHAは`ca1ea25404847dd5b673675dcb337b0f9fd77f7292c3a708d76d5e48f3b443f0`、PBS stability SHAは`2617d5c1188d5573bb353d04e948756f79554b006bdbd2206826879361dcf107`である。
+本解析の基礎要求は96 workers・51 GiB・2時間で、copy実測による追加時間は未算入である。
+
+## 現在の投入と次工程
+
+target2のcopyは265304としてqsub済みで、1 CPU・8 GiB・24時間の初回上限である。
+authorityは`low_noise_case2_target2_authority_v1.json`、SHAは`733e1eeb522c4c8952f160c1b79f25faf44454b943c84670e0afee21cec68109`である。
+copyのprepare・preflight・executeは消費済みで、再実行しない。
+準備stdoutは`low_noise_case2_copy_2_2_prepare_v1_stdout.txt`、SHAは`61be1c4e8422d33d95e8a5c249627ebf8be664917bab7c78de2bbe2378096626`である。
+投入stdoutは`low_noise_case2_copy_2_2_execute_v1_stdout.txt`、SHAは`4c5c683134652ca1db817feb0ea403eedcca22dfa76ceb557f17f72ce0082959`である。
+copy plan SHAは`2dd85f576711f00d8b19d9d5bacbdead5931d0b1db151669816d5e49fb6cc75a`、script SHAは`04b79007a7b095addfc8cb0c5c767378d6a35d11f1aafc62d30d35582782db37`である。
+F/exit0を確認したら、既存`build_low_noise_case2_readiness.py initial`へこの準備stdoutと投入stdoutを渡し、target2 r0を作る。
+その後target2自身のcopy elapsedを用いてanalysisを準備・投入し、trace-capacity・trace-full・collectionへ進む。
+
+target1のcollection prepareは消費済みで、planは`collection-2-1-v1/collection-plan.json`である。
+prepared SHAは`25e893d339a70fa0f3f4e010b5dd0e88e6379e0418464840f28ea0045f678f39`、script SHAは`498831f046012b6a2f146aacfd32f8d525b2c307bd01ad7974e0d448d69935b1`である。
+要求は1 CPU・32 GiB・24時間の初回上限で、ETAではない。
+この台帳作成時点ではr6からr7へのcollection prepared追加を実行中で、dry-run・executeは未実施である。
+r7の成功とhashを確認してから、同じphase入口でcollection dry-run・executeを各1回行う。
+r6 SHAは`f2a5d2fa57a6d7e2bc86ff864bc82292dd3779d38e9a14195a28b524e1b3d626`、prepare receipt SHAは`a5e64beb7fa2e7e17554490f8e8344e5ea015b11f26e0bdfac16549a5a9ad318`である。
+target1 authority SHAは`57259d7fdeefa23ac308631c37574ee3bbd15d64cbe8a797e85aad052c6eff87`である。
+
+## その他
+
+case0/1/3の9条件・26分割本計算は引き続き未投入である。
+main校正・混合比較・独立計時と基本decoderの受入済み成果は再実行しない。
+サブエージェント利用上限の間は親が処理を引き継ぎ、独立レビュー未実施の箇所を明記する。
+
+## 02:05 JSTの追記
+
+target1 collectionのr7作成・dry-run・executeは全て消費済みとなり、qsub265305を取得した。
+remote receipt SHAは`e5e5316b16d15d56196efc20c747b099fc88ab23aff9e6280d6b147dd80aed69`、local execute receipt SHAは`892bc53f5d17747e72ca67b32e115c7c8a871112cb8bc45a0b879986195fb67b`である。
+最新readinessは`low_noise_case2_target1_readiness_r8_v1.json`、SHAは`7904e99ee2a701fb5a12696cb9ca18e3efb69b6ff6e2829d49174de7934413d2`である。
+F/exit0後は同じphase入口へr8を渡し、`--action completion --phase collection`を1回実行する。
+正式受理後に`output/assemble_low_final_case2_target1_config_v1.py`へcompletion receiptとそのSHAを渡して最終比較のconfigを組み立てる。
+この新adapterのSHAは`3b8fda8cbcc5e4d57fcac6016f45df2bad54e2671e08a55cfeaaed1dc2937285`、review SHAは`976a07b21b1dca1a6c7582b90dc96881b3e8b86482af2e9139c3a370df3c547d`である。
+adapterはT1固有のjob・manifest・copy summary・準備planを固定し、T0 adapterとliteral以外のASTが同じことを確認した。
+実assembly、最終比較のprepare・qsubは未実施であり、265305の完了前に実行しない。
+最終比較wrapperには受入済みfinal v3 bindingを使い、selector用portability bindingへ置き換えない。
+
+02:04のPBS観測ではcopy265304とcollection265305がともにR、要求node数の合計は2である。
+`watch_low_copy_265304_v1.py`はcopy終端を待っており、その後に両jobを改めて確認する。
+
+## 02:26 JSTの追記
+
+target2 copy265304はF/exit0/run_count1・19分33秒で終了し、転送elapsedは1167.6727478774264秒である。
+summary SHAは`299996fb2bc5fb3686e74da4069583e36d216913a669856871d7af15988b1f69`、seal SHAは`14fd81cda1d7f66554549046ab9371d4e85143258a4e2c63975c2bd399774d91`である。
+initial readiness r0から解析preparedのr1、解析submittedのr2を作成済みである。
+analysis:0のprepare・dry-run・executeは消費済みで、jobは265306.node-PRISM、要求は96 workers・51 GiB・5時間である。
+prepared SHAは`ffc8df2e62b4a4c50a3ba4129759d381a43c9b9fed932c05bdb3245155b2299f`、script SHAは`aa22d8df982e25641e74a4eba2956810800cca91430c5b28b8a9f6f11366d8fc`である。
+remote receipt SHAは`7145fc3894b3761d1aa8f9f0bf995003e101aca4e0bd69ca06729195e19e4c4d`、local execute receipt SHAは`886673501655464f69ed319ebc020745ad350de6cf02d124f4ddbd098fad5bf6`である。
+analysis completionは未実施で、F/exit0を観測してから実行する。
+
+target2 trace-capacityのprepare・dry-runは消費済みで、executeは未実施である。
+planは`20261018-tile-low-analysis-v11/runs/staged-trace-capacity-2-2-v1/staging-control-plan.json`、prepared SHAは`751dd6b835951b1a53478d8f433c6284b139b5002df0bcc619627b2e32446dfd`である。
+script SHAは`74e049c619058e76258f7d30434e1271455f85e8932663f5d14ee6779069e130`、local prepare receipt SHAは`17052fede53a80be00ba888dc9f6238921a5892f046d469effc528404ffc8436`である。
+初回capacity要求は96 CPU・8 workers・340 GiB・24時間で、実測値やETAではない。
+最新readinessは`low_noise_case2_target2_readiness_r3_v1.json`、SHAは`3709f7fb04b0fd69aa377cca655a8196f151acdbd6917c3fe36c479cde35a961`、binding SHAは`1790ba37a514a6afb7b25cc02cb481237539229c7d40ca82fc21490ebcfb6c3e`である。
+空き枠を確認したら既存phase入口へtarget2 authorityとr3を渡し、`--action execute --phase trace-capacity`を1回行う。
+投入後はactual execute receiptのSHAを計算してr4へsubmittedを追記する。
+
+02:25のPBS観測でcollection265305とanalysis265306がともにR、要求node数は合計2である。
+target1 collectionのcompletion・最終config assemblyは引き続き未実施であり、265305のF/exit0確認後に02:05の手順で進める。
+最新の残工程には低ノイズ全raw traceのarchive回収も含め、クラスタ上の保存元・転送先とローカル集計回収を混同しない。
+
+## 02:35 JSTの追記
+
+低ノイズsamplingのarchive export/verify componentを小仕様・受入・実装の順で追加した。
+sourceは`cluster_scripts/tile_low_noise_archive.py`、SHAは`17fc7ec2a0373481b049b1528414e76c79d70f9b026edf58084c351f3428e6cf`である。
+Windows36件4.05秒、隔離Linux v3同36件1.15秒・skipなしで、Linux receipt SHAは`18583673ff954b0a2553e6d7fe3b395f1b5de1bf0626cdf2f0f4dc69b867e7b0`である。
+検査用配置は`20261019-tile-low-archive-v3`であり、source/testを含む4ファイルのexact snapshotは`low_noise_archive_linux_acceptance_v3.remote.py`に保存されている。
+worker APIは`export_sampling(root=...,output=...,manifest_sha256=...,case=...,target_index=...)`で、PBS割当と新規出力directoryを要求する。
+archiveに含めるのは固定manifestと全sampling/anchor artifactで、解析artifactはまだ対象外である。
+元jobの成功・固定source/Python・共通lock・最大2ノードを結合する正式export投入入口、export qsub、実回収は未実施である。
+この準備を、元traceの再復号や実データ回収の完了として数えない。
+受入と未実施事項の詳細は`../tile_low_noise_archive_review_2026-10-19_ja.md`にある。
+
+## 02:51 JSTの追記
+
+target1 collection265305はF/exit0/run_count1、42分41秒で終了し、completionを正式受理した。
+completion SHAは`806f89e52bb660f61fc0d2536e117a3fbdc575791658940cf4f48091f7602cd6`、local receipt SHAは`fad9fb266322031cb4e7386e73a7e5470dc30070711d8edbfdf265194dde5058`である。
+`recover_low_collection_case2_target1_v1.py`を実行済みで、`low_collection_case2_target1_evidence_v1/`の4ファイル377,887,333 bytesを照合した。
+verification SHAは`3be061a257c984356e2d38322b01aed80f970700266e838fdf09b57371c646c5`で、全raw trace回収とは区別する。
+
+target1の最終config assemblyは消費済みで、config SHAは`d7da040f52d36435fbcd19c1ac1e4f20cfc496645761aabd71d07425d2fff3de`、assembly receipt SHAは`52747b67646410420956e7a33816d100edfb9cbb5eabeb5b7196c1cfdd30078b`である。
+`invoke_low_final_case2_target1_once_v3.py`のprepare・preflightは消費済みで、execute・sealは未実施である。
+同入口のsource SHAは`6249cdd6f1c88f615c89334f4e23a1849ab73b799ea6f600632e0553bff2029a`で、target0 v3からliteralだけを変更した。
+rootは`20261018-tile-low-final-reference-parent-v3/runs/case2-target1-final-v3`、control SHAは`22d4670880e2422154ead7f2bd4be0a1c88c87e4372e312c3a86854b87eebfe7`である。
+prepared SHAは`dee915cbaf2f4681fdd30889697819f9c2d551528eafc290d2a04f6b7ae8f4f1`、script SHAは`dd6422bb81b3b69c767911aa0ede3ff902357dbdc0fcb3efdcca1e077a67daec`である。
+要求は1 CPU・32 GiB・7時間15分で、T1自身のcollection/copy実測を使った資源予算であり、ETAではない。
+空き枠を確認後、同入口へ`execute --control-sha256 22d4670880e2422154ead7f2bd4be0a1c88c87e4372e312c3a86854b87eebfe7`を1回渡す。
+最終wrapperのbindingは引き続きfinal v3の`f59cc3e90867f81770cea35c348e1db1654f3922c272c73abeb569fd32bf19b3`で、selector用portability bindingへ置き換えない。
+
+target2 trace-capacityのexecuteは消費済みで、jobは265307.node-PRISMである。
+remote receipt SHAは`4f675af1c0ef0ed230c41082a924041ef317d8337663de7e9dfd668f1ed749c7`、local execute receipt SHAは`be9195a759e3cbfb2b746f2d62fcb0dfac5216314889f09637708d7da7318689`である。
+最新readinessは`low_noise_case2_target2_readiness_r4_v1.json`、SHAは`e9bd8f35078745adfed57b511dc421dacd394ea2c5b1c5e9524bb1dc9aa2a8ae`である。
+binding SHAは`d189d5b2356321588120fac30c255d07f402f41ddcc2c17e99d07da231d718f4`である。
+capacity completionは未実施で、F/exit0後に既存phase入口へr4とtarget2 authorityを渡して`--action completion --phase trace-capacity`を実行する。
+その後に同条件のtrace-fullを準備する。
+解析265306のcompletionも未実施であり、終了を観測してから同じ入口で受理する。
+`watch_low_trace_capacity_265307_v1.py`が45秒ごとに監視し、ログは`low_trace_capacity_265307_watch_v1.jsonl`である。
+
+target0 sampling exportはstageとpreflightまで完了し、executeは未実施である。
+入口は`output/submit_low_sampling_export_case2_target0_once.py`、SHAは`66b9855f60ffd49868c8b99766fd7db394aea3e35e4a4f083592e03088547603`である。
+同名のデータdirectory内コピーは保存用なので、実行時は元の`output/`配置を使う。
+stage rootは`20261019-tile-low-sampling-recovery-case2-target0-v1`、stage SHAは`bf74ad9bf1d76f7eca77ee6e1ddbf7db3f1dcdf1d0ba58788248fde4920b8740`である。
+preflight stdout SHAは`85a469aecfc21302fd4005f7e9c511c4b56fe5b37cb3deec21619d987125d41b`で、空き枠は当時の観測に限る。
+このarchiveはsampling/anchorsのみで、解析archive対応は未実装である。
+
+02:51の観測では265306・265307がともにR、要求node数は合計2である。
+まず監査capacityの終了後にtarget1最終比較を投入し、他のprepared入口はそれぞれ新たな空き枠を確認して使う。
+case0/1/3の9条件26分割job、低ノイズ独立計時、target0 sampling exportの実投入は引き続き未実施である。
+
+## 02:58 JSTの追記
+
+target1最終比較のexecuteを消費し、qsub265308.node-PRISMを取得した。
+local execute receipt SHAは`ef02eca8863ca054931882670eaa88a6c3d639de4ac75869dabf0b4d2fd6ab8a`、stdout SHAは`f2d3e3293c706df079ab504e0d24d31a1524fa0ffc0347078b99ed8a2550551e`である。
+controlは既存の`22d4670880e2422154ead7f2bd4be0a1c88c87e4372e312c3a86854b87eebfe7`で、sealは未実施である。
+F/exit0後に同じ`invoke_low_final_case2_target1_once_v3.py`へ`seal --control-sha256 22d4670880e2422154ead7f2bd4be0a1c88c87e4372e312c3a86854b87eebfe7`を渡す。
+最終reportの回収・別算術照合はまだ未実施である。
+`watch_low_final_265308_v1.py`が45秒ごとに監視し、ログは`low_final_265308_watch_v1.jsonl`に保存する。
+
+target2 trace-capacity265307はF/exit0/run_count1・5分54秒となり、8group・960予定task・失敗0で正式completionを受理した。
+summary SHAは`2c7234ad235a06b1cbbb285df6a39cbe873a618a29a4f96ed40d67efc230b3de`、completion SHAは`569e87ef05a021b5f251beac27a981903af94f5d5159ee9425156abfcffe2cff`である。
+local completion receipt SHAは`171baeef5fd0ab55f3c0b2074b4a2cf174ecdd62f19ec81a2910ba9052d2dc2b`である。
+trace-capacityの全actionは消費済みである。
+
+target2 trace-fullのprepareとdry-runは消費済み、execute・completionは未実施である。
+planは`20261018-tile-low-analysis-v11/runs/staged-trace-full-2-2-v1/staging-control-plan.json`である。
+prepared SHAは`0fb0b0ac6ee056f8e6180b3fda68350430bb7ded6ad958a9a14f08a530c287b0`、script SHAは`713e135cb60775af1fc13443f894ba142f82006d90a0b79e6b933e87e1d6d633`である。
+local prepare receipt SHAは`93285d901b08e63ca95b743546723400e0ed0f7ba3eaefdc76a0bc6b34f4a869`である。
+要求は96 workers・87 GiB・3時間30分で、copy由来のI/O予算を含む資源外挿であり、ETAではない。
+最新readinessは`low_noise_case2_target2_readiness_r5_v1.json`、SHAは`a0fe65f9fd47e12470e2b05a6292832470dc1b5ce1817db1d919c1f0ae6a4823`、binding SHAは`af12bf89516d344d64242692c2dcf7be653a8b321f84f5d5ebcacbba109ea40f`である。
+次に空き枠を確認後、既存phase入口へtarget2 authorityとr5を渡し、`--action execute --phase trace-full`を1回行う。
+投入後はactual execute receiptを使ってr6へsubmittedを追記する。
+
+20 sourceと17参照hashを`local_orchestration_sources_v14/`とZIPへ保存した。
+index SHAは`9ac34cc82fb0e56a95d69a29a5a39a928cc7b7d32f79b4cee4c42dfaf84471c5`、ZIP SHAは`e94ceab858a2ff98342417cf78a26afe05dd019b1706cc419d67d721b4e91d98`である。
+このsnapshotの状態文はtarget1実投入前の記録であり、現在の投入状態は本追記を優先する。
+
+02:57の観測ではanalysis265306とfinal265308がともにR、要求node数は合計2である。
+target0 sampling exportはpreflight済み・execute未実施のままで、解析archive対応・残り9条件26分割job・独立計時も残る。
+
+## 03:15 JSTの追記
+
+03:14の観測でanalysis265306とfinal265308はR、要求node数は合計2である。
+両jobのcompletion・seal、target2 trace-fullのexecuteは未実施で、02:58追記の次操作と最新readiness r5を維持する。
+次の空き枠はtarget2 trace-fullを優先し、既存の投入済みactionを再実行しない。
+
+target0解析archiveと専用workerを実装し、Linux v8の関連62テストを0.95秒で通した。
+receiptは`low_noise_archive_linux_acceptance_v8.json`、SHAは`045c2b820520a279227228a95938d0d79414369775a87d7268d0f4d4dc652b6b`である。
+sourceは`cluster_scripts/tile_low_noise_analysis_export_worker.py`、SHAは`a4b0bde3aaf158bdd37e657a0a077be0571fef2b82a22edaf994f530b94dab27`である。
+解析archive・外部indexの詳細と限界は`../tile_low_noise_archive_review_2026-10-19_ja.md`の追記にある。
+
+解析exportはstage・preflight済み、execute未実施である。
+入口は`output/submit_low_analysis_export_case2_target0_once.py`、SHAは`05aeea52e8d40baf81bab7a58e3862cc69b24d91f4f9ca66fc388f0053b10407`である。
+同名の本directory内コピーは保存用であり、元のoutput配置へ戻してhashを確認して使う。
+stage rootは`20261019-tile-low-analysis-recovery-case2-target0-v1`、stage SHAは`77f56dbff067a2b06c37aaf52cc2add6e442e061a59c2a78cba13bae618be170`である。
+prepared SHAは`f3a57af815b7e7fdb11826645e0724534453f008b74f3be68aca930bca61560f`、script SHAは`3a0c648821fdbeaab834c2566ea3e68ff1c364c3d54b121d5ce2ef37577bb56f`である。
+preflight stdout SHAは`1f7141fb2a0d4b43c95798c23b3b954d0117c11ebed510107217cb1f602cf660`で、観測時の空き枠はfalseだった。
+1 CPU・32 GiB・24時間はsampling export同様の初回要求上限であり、ETAではない。
+今後のexecuteは同入口の`--execute`を使い、共有lockとqsub直前の最大2ノード検査を保つ。
+実行後はF/exit0と固定worker/scriptを受理してから転送し、全memberを外部固定indexで照合する。
+現時点でsampling・解析どちらのarchiveも実回収は未実施である。
+
+解析回収の21 sourceと11参照hashを`local_orchestration_sources_v15/`とZIPへ保存し、22 member全てのbytes一致を確認した。
+index SHAは`f421bd0677ba1b4bd663d46ee137fc9830050fd344995ef5aa6dd78103bfc261`、ZIP SHAは`e78dcd6d4aa8e60ed6168b00f0145f81a04727d754ec04e0bfa8cce52e9dc70f`である。
+これはsource snapshotであり、解析payloadやraw traceのarchiveではない。
+
+## 03:22 JSTの追記：target2 trace-full投入待機が稼働中
+
+`low_trace_full_dispatch_waiter_v1.py`をexec session58846で起動した。
+source SHAは`a2dc64a8e1667d029aea26e33f99c49950312537b9d08eb376c8e34eee36695a`、9テスト・0.32秒の成功を確認した。
+テストsourceは`output/test_low_trace_full_dispatch_waiter_v1.py`で、同名の本directory内コピーは保存用である。
+テストSHAは`3182d53bc1fd3304f97908219828dbff8e8491495f8af41143556ca26972bd20`である。
+仕様は`low_trace_full_dispatch_waiter_spec_v1_ja.md`、intent・observations・子処理出力・最終resultは`low_trace_full_dispatch_waiter_v1/`に保存する。
+初回の実PBS観測03:21:17では265306・265308がともにR/run_count1で、各固定脚本pathも一致した。
+
+この待機はどちらかのF/exit0を確認後、既存phase入口へtarget2 authority・readiness r5を渡し、trace-full executeを1回だけ呼ぶ。
+実receiptが取れたら既存builderでr6へsubmittedを1回追記する。
+execute失敗・曖昧応答・r6作成失敗は自動再試行しない。
+最大3時間の観測期限をjob終了や失敗とは扱わない。
+新たな科学計算controllerや全26jobの投入loopではなく、既存の固定1jobへの待機付きtransportである。
+共有lockと最大2nodeは既存qsub入口で再確認する。
+
+親は同じtrace-full executeを手動で並行実行しない。
+次のturnではsession58846と実PBSを観測し、`result.json`があればactual receiptとr6を確認してから次へ進む。
+waiterの再起動は禁止し、失敗時は既存intent・receipt・PBS状態を調べる。
+265308の正式sealや265306のcompletionは別途、実F/exit0を確認してから行う。
+現時点で両jobの受理、trace-full execute、r6作成は未実施である。
+
+## 03:39 JSTの追記：target1正式比較完了、target2全trace監査投入済み
+
+最終比較265308はF/exit0/run_count1・42分19秒で終了し、既存入口のsealを消費した。
+seal receipt SHAは`cbd356b92e11badb34308513e92f180e536c25dfbf822c790af251d239e3fce6`である。
+report SHAは`20a0b9feda08bc488454ecc03af6b38a554fcf2fc30f433632a4aa4f5b445685`、completion SHAは`9cd725ef38147b73b44b36477dbe36fd227f45da2b5f37cabd9ca1a069d4bdd4`である。
+target1 finalのprepare・preflight・execute・sealは全て消費済みである。
+
+`recover_low_final_case2_target1_v1.py`で14ファイル110,996,144 bytesを回収し、全hashを照合した。
+回収script SHAは`3247bfdca4b3120b782f081575c1b89831c323179ccca12c9ebf4a24fbc5accd`、回収記録SHAは`9e93f1b3895f9cfba293e202861e4be2c51a988841c8122846093ac5daedb704`である。
+`review_low_final_case2_target1_v1.py`で全352設定・67,584行・10,208 scalarを別算術照合し、最大絶対差2.12×10^-16未満で一致した。
+review script SHAは`9a44a6aa071d38d7cb58129b7a182f22e7f97c45f5909ccb2607c34e1340b1e0`、review JSON SHAは`21b4c92d53c7598e9feaa0a81ad18190aefeff573a32d9804824fa971c51257a`である。
+結果・全設定CSV・日本語報告は`low_final_case2_target1_scientific_review_v1/`に保存した。
+両scriptは消費済みであり、再現時は別の空の出力先と変更記録を使う。
+`prepare_low_target1_final_recovery_review_v1.py`とadapter記録には、実seal・実測reportサイズ・collection hashへの変更と算術関数ASTが不変である確認を保存した。
+低ノイズ正式比較は2/12条件完了で、全raw trace回収や独立計時の完了ではない。
+
+投入待機session58846は265308の正常終了を観測して、target2 trace-fullをqsub265311.node-PRISMとして1回投入した。
+待機のresult SHAは`7d74a9f63c9d0749993839bf3cbfc9a5aed2965d1b43e044d3920b636d14b742`で、sessionはexit0となった。
+waiterは再起動しない。
+local execute receipt SHAは`bd689cbfe5c2e2fb9bb6cd765af01a37d105bb9dd06e992a058b34316c98a7cb`である。
+最新readinessは`low_noise_case2_target2_readiness_r6_v1.json`、SHAは`0ff44a6dd700a776133233ed3b966be24792b9d053b750f83f5fe9206d0ba6fd`、binding SHAは`943575c3c9ec73819682befa113a567f4d057385ce3eb23edf47374cb0a45cff`である。
+target2 trace-fullのprepare・dry-run・executeは消費済み、completionは未実施である。
+target2 analysis265306もcompletionは未実施である。
+各F/exit0を確認後、既存phase入口へtarget2 authorityとr6を渡し、それぞれ`--action completion --phase analysis --index 0`と`--action completion --phase trace-full`で受理する。
+両方の正式completionを受理してからtarget2 collectionをprepareする。
+03:39の実PBS観測は265306・265311がともにR、要求node数合計2である。
+残り9条件26分割job・sampling/解析export・低ノイズ独立計時は未投入のままである。
+
+target1の照合済み12行からtrace長比較PNG・SVG・CSV・日本語captionを`figures_low_case2_target1_v1/`へ保存した。
+生成scriptは`plot_low_case2_target1_trace_length_v1.py`、provenance SHAは`cac7d17dec9da61e38193b6706c3ed137c29821eb73f90aabe630629c40faf65`である。
+PNGを目視確認し、全系列が表示範囲内であることを確認した。
+これは保存済み比較の可視化であり、新たな校正や推奨設定の決定ではない。
+
+## 03:43 JSTの追記：最初の分割samplingのpreflight
+
+既存`output/submit_low_partition_once.py`でcase0・target0・sample index0のpreflightを1回実行し、source・native・固定plan・controller終了の照合を通した。
+receiptは`low_partition_0_0_sample_0_preflight_once_v1_receipt.json`、SHAは`375cbff338520d576f95ce05b6cc523e8750c8877564c662592b1c4305ee226e`である。
+stdout SHAは`21577a01364ed27c98d2fd18870c507bfe27d9a21cc5c522f1fa812345f5b4a1`である。
+その観測では265306・265311の要求node数が合計2で、slot_availableはfalseだった。
+当該preflightは消費済みだが、sample index0のexecuteは未実施である。
+case0・target0のanchors index0も過去のpreflightは消費済み・execute未実施のままである。
+両executeはそれぞれ既存入口へ`--case 0 --target-index 0 --phase sample --index 0 --execute`、`--phase anchors --index 0 --execute`を渡す。
+実投入時は入口が現時点の全job・共有lock・最大2ノードを再確認する。
+
+## 03:48 JSTの追記：target2監査受理、case0 target0 anchorを投入
+
+target2 trace-full265311はF/exit0/run_count1・7分54秒で終了し、既存phase入口のcompletionを消費した。
+全768group・92,160予定task・failed_sampling0・failed_audit_groups0・context_error nullを正式受理した。
+summary SHAは`a6fb2b2a86e0ec408a78a7dacf381aea6e04281dda2b1af6731c341d440d4d07`、completion SHAは`c005a497a139e81c2f8f96315eb659f6127dedc85514c06128a0ac70d1b3ffd5`である。
+local completion receipt SHAは`7a7d34df71a1ca9b90c79e9edb34fb690af2575a49e52ba5cf3207c68688354c`である。
+trace-fullの全actionは消費済みで、最新readinessは引き続きtarget2 r6である。
+analysis265306のcompletionは未実施で、実F/exit0を確認してから既存入口へr6とauthorityを渡して受理する。
+その後にtarget2 collectionをprepareし、prepared pinをr7へ追加する。
+
+空いた枠に`output/submit_low_partition_once.py --case 0 --target-index 0 --phase anchors --index 0 --execute`を1回実行し、qsub265312.node-PRISMを取得した。
+local receiptは`low_partition_0_0_anchors_0_submission_once_v1_receipt.json`、SHAは`7e5386ed17ae311dc56ed749a300b0056f59af3fa79ef71f53c68f9343de7816`である。
+stdout SHAは`11a360957f1620574a2b111994213bd31a391a8fd38bceb521961bd79c7291e1`である。
+固定rootは`20261018-tile-low-analysis-v11/runs/partitioned-full-0-0-v1`で、phaseはanchors・index0、要求は96 workers・32 GiB・1時間である。
+partition manifest digestは`11774cd436c19eb6e0869bb9358fff2b08c081d7380e9a2a3c85bfada43954b9`、script SHAは`3223789478060aee3e818a9662f08889c869b2a2d3736a0a91f64cbbd5985742`である。
+anchors index0のexecuteは消費済みであり、再投入しない。
+現在の分割26jobの投入数は1で、sample17jobと残るanchor8jobは未投入である。
+
+03:48のPBS観測では265306と265312がともにR、要求node数は合計2である。
+次の空き枠ではtarget2の解析が正式受理済みならcollectionを優先し、解析がまだ稼働中ならcase0 target0 sample index0を既存入口で投入できる。
+case0 target0のsample index0はpreflight消費済み・execute未実施、sample index1はexecute未実施である。
+case0 target0はanchorsとsample全分割の終端・記録を検証してから専用collectorを準備する。
+単独anchorのPBS終了をcase0 target0全体の完了とは扱わない。
+
+## 03:51 JSTの追記：case0 target0 sample partition0投入
+
+anchor265312はF/exit0/run_count1・30秒で終了した。
+`sampling-partitions/anchors/0/summary.json`のmetadata観測ではtasks192・observed_tasks192・missing_tasks0・failed0・records192・complete trueだった。
+同summary SHAは`d5d54afc0f4931111524c856fe38334496aeba732d1bceeed24fdda16f327bfe`である。
+この観測はraw payload再走査や`partition_evidence`による正式終端受理ではなく、それらは全分割後のcollector準備・実行で行う。
+
+既存入口へ`--case 0 --target-index 0 --phase sample --index 0 --execute`を1回渡し、qsub265313.node-PRISMを取得した。
+local receiptは`low_partition_0_0_sample_0_submission_once_v1_receipt.json`、SHAは`3fcc0de8d725da3607e3ce3233d2c76f7560efe5d52aee0f8f4a34a8f24fc1cf`である。
+stdout SHAは`b0144ec457e3921a6f00d77ace6415be0b6c9a5b1a7a5491adaea0d1b4b10ed9`、script SHAは`a35c83bf64b00a51af97b2fdcea128518b72274f76deeddb53e5709d12c3f993`である。
+固定rootとpartition manifest digestは03:48追記と同じで、phase sample・index0、要求は96 workers・32 GiB・15時間30分である。
+要求時間は資源上限であってETAではない。
+sample index0はpreflight・executeとも消費済みであり、再実行しない。
+case0 target0 sample index1と他8条件の全jobはまだ未投入で、26分割jobの投入数は2となった。
+
+03:50の実PBS観測は265306・265313がともにR、要求node数合計2である。
+target2全trace監査は正式受理済みなので、265306がF/exit0となったらr6とauthorityを用いてanalysis completionを受理し、collectionのprepare→r7追加→dry-run→execute→r8追加を行う。
+case0 target0 sample index1はその後の空き枠で進め、p=.001の結果集約を優先する。
+
+## 04:03 JSTの追記：target2解析受理、collection265314投入
+
+解析265306はF/exit0/run_count1・1時間32分6秒となり、全768group・67,584行の正式completionを受理した。
+summary SHAは`aa7722f69e65a8abdec50d6d3b897010a64fdfc7f9642bac8b7776b4e424b813`、completion SHAは`065717962da7cda569336fa8c72ad867eaf64f8ca77cc2c51718298ad3b4f5e9`である。
+local completion receipt SHAは`cd0428b7654c141bffe680ab2c2463f2d7249b57e405bff91683e659695f8501`である。
+target2 analysis0の全actionは消費済みである。
+
+collectionのprepareとdry-runを消費した。
+planは`20261018-tile-low-staging-control-v2/runs/collection-2-2-v1/collection-plan.json`、prepared SHAは`95bbdb7bc54b2006ab98571d14444b7747f3fcd33fdb16771925fee5db178793`、script SHAは`c12fd44789298a537aa51b8a6a3c4e3274087e4dcf87b770e34bb047c7f12127`である。
+local prepare receipt SHAは`378de88b56e8d3c48b5f453c3bc498a04cdd5abb2deafa94da863ec477124756`である。
+prepared pinを追加したr7 SHAは`d829ff4959fb55e34b0eedddcfcb6ead8a7b10a4071eeb8ed9758a200160e554`で、既に後続r8へ進んだ。
+
+collection executeを1回行い、qsub265314.node-PRISMを取得した。
+remote submission receipt SHAは`094d78ff6d3f6bc3393b76c1a3821b81237d4d463e3eea455c133cd01bab04bf`、local execute receipt SHAは`b5105957817426647bb0161d7326415c9842abc88540869183b2154ae9834bbd`である。
+execute stdout SHAは`d0c9254f9d65db69d94d5c54d5b1a6ae95b9505826c05900499a7f001a204164`である。
+実receiptによりr8へsubmittedを追記した。
+最新readinessは`low_noise_case2_target2_readiness_r8_v1.json`、SHAは`ebc0be880797037df36df976474dc60d2178572ff634d4707c976039126502e8`、binding SHAは`4bd490ce5ea276e94bdd86b4abc1719b45054fd6d571922f432fc260bab5d3b6`である。
+collectionのprepare・dry-run・executeは消費済み、completionは未実施である。
+実F/exit0を確認後、既存phase入口へtarget2 authorityとr8を渡し、`--action completion --phase collection`を1回行う。
+その後にtarget2自身のcollection出力を回収し、最終比較v3のconfig assembly・prepare・preflight・executeへ進む。
+target2 finalのconfig・control・投入・sealはまだ存在せず、他targetのhashやjob IDを流用しない。
+
+04:02の実PBS観測は265313と265314がともにR、要求node数合計2である。
+case0 target0 sample index1と他8条件、sampling/解析export、低ノイズ独立計時は未投入である。
+固定samplingのcollectorは全分割終端後に既存`submit_tile_low_noise_sampling_partitions.py --phase collect`で準備できるが、現在の親一回投入入口はanchors/sample専用で、collector用の具体的な投入・保存手順は未作成である。
+旧`tile_coordinator.py`は主4条件専用であり、26分割jobへそのまま転用しない。
+
+## 04:11 JSTの追記：分割collectorの入力検証
+
+分割collector用の小仕様を`../low_partition_collection_transport_spec_2026-10-19_ja.md`に追加した。
+全generator投入receiptを結ぶ`output/low_partition_collection_inputs.py`を実装し、全9条件・改変・欠落・job重複等の25テストが2.55秒で成功した。
+実装SHAは`5e7294f1cc5bf4a84fac6940f01120aa1a67a9d7bf10caf711533537f0483d7c`、テストSHAは`e582c8960f139e5c076713bbdc22b38d1a1a4f111f42c1f509c4faef50c0cd5c`で、同名のbyte一致コピーを本directoryに保存した。
+保管コピーをその場で実行せず、必要なら元のoutput配置へhash確認後に復元する。
+本番case0 target0のローカル入力検査はsample index1の未投入を検出して停止し、remote接続・qsubは行わなかった。
+
+remote prepare・preflight・execute adapterはまだ未実装である。
+詳細と制約は`../low_partition_collection_transport_review_2026-10-19_ja.md`に保存した。
+次の実装では既存generator guardのREMOTEを変更せず再利用し、collector phase/indexへ束縛する。
+prepareでは全分割の実receiptとの一致、`partition_evidence`、実qstatのrun_count1を確認して終端を封印し、既存submitterのdry-runでcollector脚本・資源を固定する。
+prepared記録には全upstream metadataとcollector脚本・dry-runのhashを含め、preflight・executeは外部prepared hashを必須にする。
+既存`selected_job`はrun_countを保存しないため、親側で追加確認する。
+記録済みtask失敗のexit2を削除せず、collectorへ渡す。
+local authorityの全入力hashを前後確認し、曖昧な実投入の再試行を禁止する。
+
+04:09の実PBS観測では265313と265314がともにR、要求node数合計2である。
+target2 collection completionは未実施で、最新readinessはr8のままである。
+
+## 2026-10-19 04:22 JST: 分割collector入口の受入
+
+全9条件向けのremote prepare・preflight・executeを実装した。
+入口はoutput/submit_low_partition_collection_once.py、SHAは470971246d312f53fa1d30b6792c2ce62f9056ad168c131bed2ee8f0aa8f7d0fである。
+remote拡張SHAは9e4face4a4950ffc3a6c6d4ce3a76c2f43deb731d85d1fee121ed56950158800で、固定generator REMOTE・元のqsub guard・科学計算sourceは変更していない。
+全generatorの受理済み実receipt、実PBS終端、run_count1、脚本、metadataを確認し、exit2の記録済みtask失敗も保持する。
+外部prepared hashとローカルprepare成功記録を要求し、元の共有lock・最大2node・一回qsub・曖昧応答保持を再利用する。
+Windowsで27件2.55秒とguard10件0.71秒、Linuxで28件0.34秒が成功した。
+Linux受入receipt SHAは1373960c33f1f448993bf7573298d4bb2aa5ef2d14e35c770c86573760f44907である。
+9 sourceの保管先はpartition_collection_transport_v1/、manifest SHAは24d7029a77638d6ca1892f2e15eef07e257ac014aff71cbcd21019cabd5acdbeである。
+保管コピーは元のoutput配置へhash確認後に復元する。
+実collector prepare・preflight・executeは全9条件で未実施である。
+case0 target0のsample index1が未投入のため、現時点ではローカル入力検証を通らない。
+collector完了のsealと後段解析接続は別工程として残る。
+04:20の実PBS観測では265313と265314がR/run_count1、要求node数合計2である。
+低ノイズ正式比較2/12完了という状態を維持する。
+
+## 2026-10-19 04:23 JST: 分割collector完了受理入口
+
+output/complete_low_partition_collection_once.pyを追加した。
+SHAは4abd853e3ea6a9f702855a35011ef7fc6c52d170bda61fa43000c95676fcddb2であり、既存投入入口・科学計算sourceは変更していない。
+実prepare・executeのローカル証拠、固定source、prepared hash、remote ledger、F/exit0/run_count1、全task indexと失敗数を確認する。
+既存collector_terminalとcompleted_partition_evidenceを使い、metadata/PBSの前後一致と一回だけの完了記録作成を要求する。
+qsubを呼ばず、親でraw payloadを再走査したとは扱わない。
+Windows21件1.55秒、Linux remote11件0.09秒が成功した。
+Linux受入receipt SHAはb9bc5431d68f72c792b4011c2710715bc7e474229c99744414bd2112d9cb2373である。
+source2本の保管先はpartition_collection_completion_v1/、manifest SHAはed2e325e1d31da3d245a29804a4a2fa16fab2c59423f1bf00ce7ba2d10488976である。
+transport_v1のsourceと併せて元のoutput配置へhash確認後に復元する。
+実collector完了受理は全9条件で未実施で、後段解析・監査への接続は残る。
+04:23観測では265313と265314がR/run_count1、要求node数合計2だった。
+低ノイズ正式比較は2/12条件完了のままである。
+
+## 2026-10-19 04:26 JST: samplingと解析capacityの接続確認
+
+全9条件の固定v11 samplingと固定v3 analysis capacityのproduction設定が、外部hashで確認した実remote manifest上で一致した。
+case0 target0の受理済みcapacity265276の全artifact・実PBS F/exit0/run_count1・脚本・Python/nativeを再照合した。
+v11側のmeasured_profileも既存受理値と完全一致し、1 partition・96 workers・96 CPU・226 GiB・6時間だった。
+これは資源上限でありETAではなく、未測定のほか8条件へ流用しない。
+receiptはlow_partition_analysis_bridge_v1.json、SHAはb1c673cddd08cdc31961cc4d71f856a7c9a05d36e67524fc33ba4f286cc9a3fdである。
+全消費入力の前後hash、全9条件の対応、受理済みcapacityの実PBSと資源を保存した。
+全9条件のsampling completionとanalysis prepareは未実施であり、今回のqsubとremoteファイル変更はない。
+実行順と並行可能な後段工程は../low_partition_analysis_bridge_2026-10-19_ja.mdに記録した。
+
+## 2026-10-19 04:29 JST: case2 target2最終比較adapter準備
+
+output/low_final_case2_target2_config_assembler_v1.pyを固定target1 assemblerから対象条件・実job ID・root・hashだけの置換で作成した。
+source SHAは960d4b3e228421b720f29e67820b825d9b0086ac2d28018a361b7b3ee941d308である。
+定数以外のAST一致と、実authority/readiness r8/collection投入receipt/manifestの対応を確認した。
+置換記録SHAは5b5cccb27a0a022f0277af3100b56cfb5c84515ec8f6962dc1495b67a8f9bc28である。
+実target2投入receiptの誤用と別target1完了receiptの2件はsubprocess呼出0回で拒否され、証拠SHAは3bf2e732288aaadf43cb258caae3ab6a689bcf098920f1e95a6354a694dc9d6aである。
+実assembler実行・final config・prepare・qsubは未実施で、collection265314の正式completion待ちである。
+固定final v3 binding f59cc3e90867f81770cea35c348e1db1654f3922c272c73abeb569fd32bf19b3を使用し、後段timingのbindingとは混同しない。
+詳細と実行順は../low_target2_final_adapter_2026-10-19_ja.mdにある。
+sourceの保管コピーは元のoutput配置へhash確認後に復元する。
+低ノイズ正式比較は2/12条件完了のままである。
+
+## 2026-10-19 04:34 JST: case0 target0 sample1 preflight
+
+固定入口output/submit_low_partition_once.pyでcase0 target0 sample index1のpreflightを一度実行し、returncode0・ambiguous=falseだった。
+実source・manifest・Python/native・fixture・脚本・旧controller終了を確認した。
+receiptはlow_partition_0_0_sample_1_preflight_once_v1_receipt.json、SHAは0510781453c6b26608e1820498585c90d7432a8cc9587c22ce3e0a68867e697dである。
+stdout SHAはd85eccce8febf26235e038b5bebe07ccacf42df7d6b8647990a01177ce3788edである。
+04:34:08の観測ではactive job265313・265314、要求node数2、slot_available=falseだった。
+qsub_executed=falseであり、sample1のpreflightは消費済み、executeは未実施である。
+execute時は固定入口が最新の共有lock・source・controller・node数を再確認する。
+case2 target2 collection終了後の正式受理・final比較を先に進め、その後の空き枠でsample1を投入する。
+低ノイズ正式比較は2/12条件完了のままである。
+
+## 2026-10-19 04:53 JST: target2 collection受理・回収・final投入
+
+collection265314は46分23秒でF/exit0/run_count1となった。
+r8を用いた既存phase completionを一度実行し、768group・192 replicate・67,584行を正式受理した。
+completion SHAは3f8df69bbd465c0126564c903c5bb95bd0bc727d67bb21447813eb6b4b700919、local receipt SHAは0c3aa733dcf89bd2966fb8a39547982aec132abaed9e580ff38d91d392977f62である。
+target2の全phase actionはこれで消費済みである。
+low_collection_case2_target2_evidence_v1/へ4files・455,697,306 bytesを回収し、producer hash・転送前後PBS/metadataを確認した。
+回収verification SHAは524ce774dcfe144854aeba93a3169d24954073c07eadd7f0d513d30816064570、rows.jsonl SHAはab3f614ec1222cfe07eec24c019035ce75d9b9c188d5b3e56fcf30faf7864e69である。
+元trace全体のlocal回収ではない。
+
+final v3 metadata config SHAは7d6e3536b4884583ce3d3d8befe54ea1774cf63f7277f0fbfd5c33de22f11702、assembly local receipt SHAは3cd440ab65abd4844afd17afa8c2817930cbda14df2604aa88c66a13432f309cである。
+親transport invoke_low_final_case2_target2_once_v3.pyのSHAは59095d3ac2ab22b9341ee4753464714c3b97652f66cf97b66029c4cd863aad1dである。
+prepare・preflight後にqsub265315.node-PRISMとして投入した。
+control SHAは7e69a9a702945274e0093b4136d42a7a0d0364cbedbd2d618caf9cf98298a6be、prepared SHAは0b8986f7ec0cfc57d0fc08d5aaa9d4ba9b97a9b4d79c773f1d3434cc08adf3e6、script SHAは08dd15c16c76d3983a826a932cfd54672de2909dcd5af9096a9b774479ec6d1fである。
+実execute local receipt SHAはbd4d5d6622d5a760ec652cd658d4f886496985736e4e11d6d41d28aa934f38f4、stdout SHAは7982862c69226c146476379f9ad835ddbcc39f49e4ccd41d89fbf55cd90cd931である。
+要求1CPU・32GiB・8時間30分は既存の保守的資源式による上限であり、ETAではない。
+rootは20261018-tile-low-final-reference-parent-v3/runs/case2-target2-final-v3である。
+prepare・preflight・executeは消費済み、sealは未実施である。
+
+04:53の実PBS観測ではsample265313とfinal265315がR/run_count1、要求node数合計2だった。
+次は265315の実F/exit0を確認してseal・最終結果回収・全352設定/67,584行の算術照合を行う。
+次に空く枠でcase0 target0 sample index1を投入する。
+同sample1のpreflightは消費済み、executeは未実施である。
+低ノイズ正式比較は結果検証を終えた2/12条件のままとする。
+
+## 2026-10-19 05:03 JST: target2保存行の独立診断件数
+
+受理・回収済みの67,584行を標準ライブラリで集計し、全352設定それぞれ192 seedの重複・欠落がないことを確認した。
+点推定・区間は全設定192/192、task失敗と区間未取得は0だった。
+全設定でflag・high R-hat・low ESSが各192/192、未定義診断を含むseedは190〜192/192だった。
+最大予定8chains・burn6000・保存12000・fineの固定16設定は未定義も各192/192だった。
+全てseed単位の保存集約指標であり、全chain/全観測量が一律に未定義という意味ではない。
+分母からの除外は0であり、区間取得を混合確認・精度保証とは扱わない。
+low_case2_target2_row_diagnostics_v1/に全352設定CSV・固定16設定CSV・日本語報告・reviewを保存した。
+review SHAは3bec0e68ba335ec5668c3a1d101787ac8768cb5ddc9ebef56a1e7a311d53d48e、再現script summarize_low_target2_row_diagnostics_v1.pyのSHAはb3f54ee2be88bc9e4008c993fde607e6b21c708ab4b636ec5146710f9a99d8b9である。
+入力はrows SHA ab3f614ec1222cfe07eec24c019035ce75d9b9c188d5b3e56fcf30faf7864e69ほかproducer completion/回収verificationと前後照合した。
+実行は7.28秒で、診断再計算・decoder再実行・新しいqsubはない。
+最終比較265315出力との全統計量照合は未実施で、正式比較2/12条件を維持する。
+
+## 2026-10-19 05:19 JST: target2最終結果回収adapterの準備
+
+prepare_low_target2_final_recovery_review_v1.pyを追加し、構文と流用元2scriptの固定hash、対象名の置換を確認した。
+SHAは5512464f6249f1ae843252d1ef48c91a22c2514723746fbd0f98ff743e57cc3fである。
+実seal receiptと実report byte数を受け取ってから、target2用回収・算術照合scriptを作る。
+回収は実reportのhashとbyte数を再確認し、算術照合関数はtarget1版とASTで一致することを生成時に確認する。
+adapter本実行・回収・算術照合は未実施であり、生成予定scriptはまだ存在しない。
+実PBSでは265313と265315がともにR/run_count1であることを確認した。
+sealとsample1 executeは未消費のままで、正式比較は2/12条件である。
+
+## 2026-10-19 05:44 JST: target2正式比較完了・次のsample投入
+
+最終比較265315はF/exit0/run_count1・47分24秒、CPU40分52秒で終了した。
+既存のsealを一度実行し、local seal receipt SHAは0ce63f661984d3cf2378388d6827235b41f57708932b1adbd08b327e5191e94aとなった。
+target2 finalのprepare・preflight・execute・sealは全て消費済みである。
+report SHAは14f6fd9c4b9319c0c372b615d0797b78dc5cf74487f6490e08a80229e5f1d2ab、実reportサイズは127,140,854 bytesだった。
+completion SHAはf68e1c498afb88d2e36f779afa9981a479a4d4dd61372b058a15ecb59aec5b36、terminal SHAは9b45522211520840aefa56dd86250a60288fcbc0f11e40e42c9714878271e1f9である。
+prepare_low_target2_final_recovery_review_v1.pyを実byte数と実seal receiptで実行し、adapter receipt SHAは737ec0c6331532f21bdff1fb12d0b2e22ac50c1dd77671dbedb26d7d030ead44となった。
+生成したrecovery script SHAはd4b1cf1a0a58f102d470dd7a5b7d4e703318da313499449984f381973e5c83db、review script SHAは66dcdce51073e2ccf8875cca8862324f31d73a7dc3920a80a68f32c151b4efcdである。
+low_final_case2_target2_evidence_v1/へ14files・127,333,574 bytesを回収し、全hashと転送前後PBSを照合した。
+回収collection SHAは4b9f4e5457298043061604ef36f5aa16691ad4bccee392dff6b1437bd53747b5である。
+全352設定・67,584行の10,208 scalarを独立算術照合し、最大絶対差は2.1402150884863858e-16だった。
+review SHAはe3be5afb78dac787a1b4e998f6cc5c51f77b5623e29f5e70be72980186928c11で、日本語報告も同reviewディレクトリに保存した。
+事前の診断件数CSVとも全352設定・5種類の1,760項目が一致した。
+trace長比較PNG・SVG・12行CSVはfigures_low_case2_target2_v1/に保存し、PNGを目視確認した。
+図provenance SHAは234ac12b36eefdbe24918824db30cd259157ef5b08abef026f03dadabb481374である。
+固定long sliceは相対RMSE約4.34〜4.86%、block1024全体包含173〜174/192、cross-chain174〜181/192で、全seedの診断flagと未定義診断が残る。
+名目95%被覆・収束・推奨設定を保証せず、低ノイズ正式比較は3/12条件完了とする。
+
+空いた枠へ固定submit_low_partition_once.pyでcase0 target0 sample index1を一度だけexecuteし、qsub265316.node-PRISMとなった。
+local submission receipt SHAはa90fac9257983f7b09b135e889354e4d78afa7fb9437b01d843975565ae00909、stdout SHAは621f59a7231abadcdc2e09e61ec39fc8dff56f4ab4ae7dfbb52f7dff8d892230である。
+実PBS script SHAはdc66f1d64e42ab4d71838c97b42b2fbfcf69b2a6b569d87470c5f9010a95644bで、96workers・96CPU・32GiB・15時間30分上限である。
+sample1のpreflight・executeは全て消費済みで、再投入しない。
+実PBSで265313と265316がR/run_count1、要求node数合計2であることを確認した。
+case0 target0の全generatorは投入済みで、両sample分割の終了後にcollector prepare・preflight・executeへ進む。
+collector全actionは依然未実施である。
+残る9条件の26generatorjobは3投入済み・23未投入となった。
+
+## 2026-10-19 05:47 JST: 完了3条件の横断整理
+
+受理済み3review JSONを固定hashで読み、同じ8chain・burn6000・保存12000・fineの12設定断面をlow_case2_three_targets_v1/に整理した。
+各行のcross-chainとblock1024で点推定統計と診断件数が一致すること、全行で点推定192・区間未取得0・high R-hat/low ESS各192であることを確認した。
+再現script summarize_low_case2_three_targets_v1.pyのSHAはec8fb8c4cf6d0e02f90a0227f812808c2087fa91538099acde58b479557a4083である。
+provenance SHAは55f7a0a98b133e37742f86eff999cb48296df28e214dc535d42b1a8af0a6ad46で、全入力・全出力hashを確認した。
+日本語報告では各targetのdecoder prior差、failure集合の同一性を仮定しないこと、参照区間の有限性、共有seed・anchor・trace窓と独立計時未完了を明記した。
+新たなBAR・診断計算・qsubはなく、正式比較は3/12条件を維持する。
+
+## 2026-10-19 05:50 JST: case0 target1のgenerator preflight
+
+次のtile72 bit-flip p=.003について、固定submit_low_partition_once.pyからanchors index0・sample index0・sample index1のpreflightをそれぞれ一度実行し、全て成功した。
+実source・manifest・Python/native・fixture・脚本・旧controller終了を確認した。
+各観測で265313と265316が稼働し、要求node数合計2、slot_available=false、qsub_executed=falseだった。
+これら3preflightは消費済みで、3executeは未実施である。
+各receipt SHAはanchors0 cd6035b48dc5173bbee2281fc810be3ff7d355d8057c9f4e836d45f5af8eb860、sample0 1dee83f69497701b4a8ba462c632f5375051677d54c7bf5a129d812949550fe9、sample1 e19b4a6ab710012e791224902ac5c83a0bd473788c22dbcb734492aa9435a3bfである。
+partition manifest SHAは4d63fc803e18a565cda2ed7e5e6a4a195f5563bdf2b9490877eece023b522a63である。
+同case/targetのanalysis capacity固定入口もローカルdry-runで確認したが、remote実行・qsubは未実施である。
+capacity script SHAは9b2d0494d264e0d2773201372a2e1e6da519d0af327f4223fc07ce7e582c33a2、初回要求は96CPU・340GiB・24時間上限・8workersで、実測資源やETAではない。
+
+次に枠が空いた時点でcase0 target0の両sampleが終端なら、そのcollectorを優先して準備・投入する。
+片方がまだ実行中なら、case0 target1のanchorと同条件のanalysis capacityは独立に進められる。
+実execute入口はsource・PBS・共有lock・待機中を含む最大2nodeを再検証するため、今回のpreflight時点の状態を投入可否の根拠として使い回さない。
+この事前確認ではgenerator投入数3/26、正式比較3/12という数は変わらない。
+
+## 2026-10-19 05:54 JST: 分割sampling後の解析remote prepare部品
+
+output/low_partition_analysis_prepare_remote.pyを追加し、既存generator REMOTEとcollector REMOTEへ連結してanalysis_prepare(request)を呼ぶ構成とした。
+SHAは934465273c8773d361768d92c96f8afcd5b05e0005c28dfdb7c6c5998c6f2882である。
+人工fixtureの22件がWindows0.66秒・Linux0.12秒で成功し、未完了・別条件・入力変化を拒否してqsubを行わないことを確認した。
+Linux receipt SHAはdc32f4d85906340254076ec518a7888293bff20b449082db00567b70526d0447である。
+同じ実装とテスト2ファイルはpartition_analysis_prepare_transport_v1/に保存し、manifest SHAは4049e2430e8690f4834d7d90b204f4928a9632669906e4c35e1c363514ed3e8bである。
+実データ用local入口・一回実行記録・解析qsub guard・完了回収は未実装で、実prepare/qsubは未実施である。
+local入口は固定collector completion sourceと実local完了receiptの全source/intent/出力hashを検証し、全capacity artifact hashと実measured profileを受理証拠から渡す必要がある。
+case0 target0の受理済みcapacity collection_binding SHAは311fa4f5f8c86f92597f2ffa2f46853fc766bdf16cab38075c8e903ef0f02254、measured_profile SHAは22d609acc37fd2ec801c6fa90c209ec497657c3447bec6a35fac9df76ce412dcである。
+既存check_low_partition_analysis_bridge_v1.pyが両ファイルの位置とbinding形式を示す。
+specとreviewは上位docs/wpのlow_partition_analysis_parent_spec/review_2026-10-19_ja.mdに保存した。
+05:54のPBSで265313と265316がR/run_count1、要求2nodeを確認した。
+
+## 2026-10-19 06:00 JST: 解析local prepare入口の接続
+
+output/low_partition_analysis_inputs.pyとoutput/prepare_low_partition_analysis_once.pyを実装し、Windowsで入力helper13件とtransport10件が2.21秒で成功した。
+入力helper SHAは0f41e54aa12fd32276eb236e91e18fc15332e50b52dbee0bd57d74443a6664ff、local入口SHAは20b25888eb5074f793982a925cd218b0a361de117e1b7e8b6c1f805d2a26d32cである。
+実C0T0capacityの全35artifact・4派生ファイル・外部binding/profile hash・case/target・job/script/PBSも検証した。
+実collectorが未完了のC0T0入力構築はSSH前に拒否され、remote呼出0を記録した。
+gate SHAは2994482f6dff14e8be6060ce647276634aa258f0527ebce810e6d86596f260fdで、0を置いたprepared hashは負例専用であり投入authorityではない。
+新旧source/test13ファイルはpartition_analysis_local_prepare_transport_v1/に保管し、manifest SHAはd5580f2c0776e5a5edf9d330e6ab5f996e8dee997673cd29f071b323e1776564である。
+remote prepare部品のSHA934465273c8773d361768d92c96f8afcd5b05e0005c28dfdb7c6c5998c6f2882とLinux22件の受入は変更していない。
+
+実collector completion受理後にprepare_low_partition_analysis_once.pyへ--case・--target-index・--collector-prepared-sha256・--capacity-directory・--capacity-binding-sha256・--capacity-profile-sha256を渡す。
+C0T0のcapacityディレクトリはlow_analysis_capacity_case0_target0_terminal_v1、binding SHA311fa4f5f8c86f92597f2ffa2f46853fc766bdf16cab38075c8e903ef0f02254、profile SHA22d609acc37fd2ec801c6fa90c209ec497657c3447bec6a35fac9df76ce412dcを使う。
+collector prepared SHAは今後の実prepare成功receiptから取得し、仮の値を実行に使わない。
+全case/targetの解析local prepareは未実施で、解析qsub guard・完了回収も未実装である。
+
+## 2026-10-19 06:07 JST: 解析preflight・一回qsub入口を接続
+
+output/low_partition_analysis_submit_remote.pyのSHAは51b985737d7cdf6b347ed40530fa762898c69646f031d2ed7b242dd59fb224baである。
+output/submit_low_partition_analysis_once.pyのSHAは4eeda8bd8892824ce1b9f40fa1413540217969deb549d4917b7d1ba4974d5d73である。
+remote側はWindows22件・1.12秒、Linux22件・0.24秒、local側はWindows14件・1.75秒で成功した。
+Linux receipt SHAはa8994f77fab9ab2b3281d61a522ef513faa7b6d67672fda0fe4e3ded62f8e755である。
+全依存を含む18source/testはpartition_analysis_submit_transport_v1/に保存し、manifest SHAはd9cbd669204ff7cf9ba5839c89a4bfb5d40b2c849975640ef156f3e9a336b66bである。
+解析用lock ownerのroot・partition・pid、prepared台帳とsubmission-intentの一致、source/native・全入力・upstream実終端・旧controller終了・待機中を含む最大2nodeをguard保存前後に確認する。
+既存科学submitterが共有lockを取得し、親guardは期待qsubを一度だけ呼び、不明な応答ではlock/intent/receiptを保持する。
+local入口はprepareと同じcollector/capacity引数に--prepared-sha256・--partition・--action preflightまたはexecuteを加えて使う。
+実prepare・preflight・executeは全条件で未実施であり、実collector正式完了後に進める。
+解析結果の親側完了受理・回収は未実装である。
+実PBSでは265313と265316がR/run_count1、要求node数合計2だった。
+
+## 2026-10-19 06:17 JST: 解析partition完了受理
+
+output/low_partition_analysis_complete_remote.pyのSHAはa049e235b323bccff9dbca77827c0e81c7bf6b481be9f88d6c441826a676ef17である。
+output/complete_low_partition_analysis_once.pyのSHAは48bdb4e620ed263538e3f42f349570987fea8bd98cbf18e79041e7345caa4db0である。
+remote側Windows13件・1.70秒とLinux13件・0.26秒、local側Windows11件・2.85秒が成功した。
+Linux receipt SHAは88e0e813d43ee7b9f40165a669e5023c35169f5731a8775a84686cadad539a7aである。
+全依存を含む22source/testはpartition_analysis_completion_transport_v1/に保存し、manifest SHAはa778accf91342775f25f416363d26b59317f7af56af4fb90dc3feeb155cad776である。
+local入口はprepareと同じ引数に--prepared-sha256と--partitionを加え、実executeの成功記録を再構成してから正式完了を受理する。
+remoteでは実PBS・全metadata・全group done markerを確認するが、JSON/NPZ本体の全走査は後続のPBS collectorに残す。
+解析prepare・preflight・execute・completionは全条件で未実施であり、本番で呼ぶのは実collector正式完了と実解析終了の後である。
+残る親側接続は解析collectorと分割sampling対応trace監査である。
+直近PBSは265313がR/run_count1・02:24:39、265316がR/run_count1・00:32:20で、要求node数合計2だった。
+generator投入3/26と正式比較3/12は変わらない。
+
+## 2026-10-19 06:21 JST: trace capacity prepareを接続
+
+output/low_partition_trace_prepare_remote.pyのSHAは4efca84efa37d2517553d30177696608dc8bf7f8a8b4042026d66169e6d39fa6である。
+output/prepare_low_partition_trace_once.pyのSHAは8061bd24d73d3f51d7c45721de2f7559024ee20b28cd3eaae2f1c33a07a36f71である。
+remote側Windows15件・0.63秒とLinux15件・0.11秒、local側Windows12件・1.03秒が成功した。
+Linux receipt SHAはe3ebeb71ed8c6b60e80ca21682bacfbfd1a8e5972a1f4528ba635a1b328d1f89である。
+全依存17ファイルのpartition_trace_local_prepare_transport_v1/manifest.json SHAはa24a792c271c0d499079db445492c06b454b55b192424d96e744251d2491c66bである。
+実collector未完了でのSSH前拒否も確認し、gate SHAは7142feae339e330328b8b3ccb4a9cba564903da552db88218d0dc094ce1fc7d3、remote呼出0だった。
+gateの0のprepared hashは負例専用であり、実行authorityではない。
+実collector正式受理後にlocal入口へ--case・--target-index・--collector-prepared-sha256を渡し、BAR capacityへの依存なく準備できる。
+trace rootは固定bundle内runs/partitioned-trace-capacity-{case}-{target}-v1である。
+全条件の実trace prepare・qsubは未実施で、qsub guard・capacity完了受理・実測full準備と完了受理は未接続である。
+BAR側の解析collector・監査済み集約の親側接続も残る。
+06:19前後のPBSでは265313がR/run_count1・02:28:39、265316がR/run_count1・00:36:21で、要求node数は合計2だった。
+正式比較3/12とgenerator投入3/26は変わらない。
+
+## 2026-10-19 06:26 JST: trace capacityのpreflight・qsub入口
+
+output/low_partition_trace_submit_remote.pyのSHAは18705b13f6a12b69e5928c779c7b82fcdea60961b6a0356ce89a719fe02c2e0cである。
+output/submit_low_partition_trace_once.pyのSHAはa496f2fcd69b1b7a0e1b726d8d65e16cf42e3d464428486194fd6730db4e3467である。
+remote側Windows28件・1.31秒とLinux28件・0.28秒、local側Windows13件・2.02秒が成功した。
+Linux receipt SHAはb50439df874d4b2ba6c008d019ce21764c04547de72eb8febb92c16613c83a5aである。
+全依存23ファイルのpartition_trace_submit_transport_v1/manifest.json SHAは347945a8789fa9807f3960ffabbc73a3bb3c3e4785228c904e9c65d86cde90edである。
+trace用lock ownerのroot・pid、実upstream jobのexit・run_count・脚本、全source/input、旧controller、待機中を含む最大2nodeを確認してqsubする。
+local入口はprepareと同じcase・target・collector prepared SHAに--prepared-sha256と--action preflightまたはexecuteを追加する。
+traceのproduction prepare・preflight・executeは全条件で未実施であり、実collector正式完了後に進める。
+capacity完了受理と実測full監査、BAR collectorと監査済み集約の親側接続は未実装である。
+
+## 2026-10-19 06:31 JST: trace capacity完了受理
+
+output/low_partition_trace_complete_remote.pyのSHAはf00ab0d70180329bfcf2372dd546b58a293ad39307fd28a5254b0be7c83b2e70である。
+output/complete_low_partition_trace_once.pyのSHAはb0b06a5a69ef60b6d8d79c6ab1aea68ac9dc2a4ac2936c55e453eead7ec86dbaである。
+remote側Windows16件・2.06秒とLinux16件・0.31秒、local側Windows11件・3.57秒が成功した。
+Linux receipt SHAは0213634ab1f33aecfb2988e0396d11a7f87ab25859775bd8aafd4c3a32d63943である。
+全依存27ファイルのpartition_trace_completion_transport_v1/manifest.json SHAはee5470dab56e92094d5e7625747c9f677f8fe19032867b4290bdc73907a8c143である。
+capacityの実execute台帳・guardとPBS終端を確認し、既存read_terminal・measured_capacityで2 replicate・8 groupの保存artifactと参照trace hashを検証する。
+resource_for_provisional_full_planはworkers=1の仮full計画に対応する推定であり、full投入用の計画ではない。
+full準備は既存prepare_fullを使い、選択workerで再検証する必要がある。
+local入口は--case・--target-index・--collector-prepared-sha256・--prepared-sha256を受け取る。
+traceのproduction prepare・preflight・execute・completionは全条件で未実施である。
+実測full監査の準備・投入・完了受理、BAR collectorと監査済み集約の親側接続は残る。
+06:30 JSTでは265313がR/run_count1・02:40:41、265316がR/run_count1・00:48:23で、要求node数合計2だった。
+正式比較3/12とgenerator投入3/26は変わらない。
+
+## 2026-10-19 06:34 JST: full trace remote prepare
+
+output/low_partition_trace_full_prepare_remote.pyのSHAは2850e0dc8c2fd152470107cad3019b1922dc3c331f46624c0e2a4d5b433e6688である。
+Windows13件・2.24秒とLinux13件・0.33秒が成功した。
+Linux receipt SHAは069fed76a85696580ec3eb93f25a36c85d9dd6bf8239b11517a641b294607064である。
+全依存29ファイルのpartition_trace_full_prepare_transport_v1/manifest.json SHAはe1cbe1abf84374d56510e1be91e16411f798b870577225aaa21c7fe772c82883である。
+入力はcapacity_request・capacity_prepared_sha256・capacity_completion_sha256・capacity_accepted・full_rootである。
+full_rootは固定bundle内runs/partitioned-trace-full-{case}-{target}-v1である。
+既存prepare_fullでcapacity artifactと参照traceを再検証し、worker選択後の192 replicate計画を固定してdry-runする。
+full prepare用local入口とcompletion証拠の構築、full qsub・完了受理は未実装である。
+production full prepareは全条件で未実施で、BAR collector・監査済み集約の親側接続も残る。
+
+## 2026-10-19 06:40 JST: full local prepareとremote qsub
+
+output/prepare_low_partition_trace_full_once.pyのSHAはc7a58daac4419bc5e29d4622bb282985e931873b62d334557682ae9d241e0b68である。
+local12件・7.32秒がWindowsで成功し、実未完了collectorの入力構築はSSH前に拒否された。
+gate SHAはfe22357e65721da3aac51a30611b47c2bcd259f6904b9eb994e092aab4596240であり、0のprepared hashは負例専用である。
+partition_trace_full_local_prepare_transport_v1/manifest.json SHAはd060df4de3b9f165c7cdee1944efabbe79a528b40d0b07147c5df66b4badd0a6である。
+実capacity正式受理後、入口へ--case・--target-index・--collector-prepared-sha256・--capacity-prepared-sha256を渡す。
+
+output/low_partition_trace_full_submit_remote.pyのSHAは0b88c0b74793597f8d4d3b42088abdd57d167619783be7bba7b652d66e775ce4である。
+remote20件がWindows3.07秒・Linux0.56秒で成功した。
+Linux receipt SHAは318e628133ef2c2a0efcced8e3696156c0ab2734911f30c8fd90646fd3bfa630である。
+全依存33ファイルのpartition_trace_full_submit_transport_v1/manifest.json SHAは7f730baf406dfe27850b709e45da80c7bcd5f087843b1694292758fd578aca9eである。
+full qsub local入口とfull完了受理、BAR collector・監査済み集約の親側接続は残る。
+fullの実prepare・preflight・executeは全条件で未実施である。
+直近PBSでは265313がR/run_count1・02:48:43、265316がR/run_count1・00:56:25で、要求node数は合計2だった。
+
+## 2026-10-19 06:43 JST: full local qsub入口
+
+output/submit_low_partition_trace_full_once.pyのSHAは389493ac7b2f924540dc67b070bf13e727a65243f72bce0b8f7e974eb7789d47である。
+Windows13件・10.00秒が成功し、remote guardのLinux20件の受理は変更していない。
+全依存35ファイルのpartition_trace_full_local_submit_transport_v1/manifest.json SHAは03c0e7ed4d6baea057e50104e32e76de3eb6374a680246ad46582e12724ac152である。
+実full prepare成功後、入口へ--case・--target-index・--collector-prepared-sha256・--capacity-prepared-sha256・--prepared-sha256・--action preflightまたはexecuteを渡す。
+fullのproduction prepare・preflight・executeは全条件で未実施である。
+full完了受理とBAR collector・監査済み集約の親側接続は残る。
+最新観測では265313がR/run_count1・02:48:43、265316がR/run_count1・00:58:25で、要求node数は合計2だった。
+
+## 2026-10-19 06:48 JST: full trace完了受理
+
+output/low_partition_trace_full_complete_remote.pyのSHAはa40ed2135b567475582eaea4875815067d9bdf8c11f1340d9001dcd9d5cc2aa4である。
+output/complete_low_partition_trace_full_once.pyのSHAは2127af0dc3525cbcb687af1a937137496bd4988c15c574a547e699d16bb7ddb7である。
+remote側Windows18件・9.00秒とLinux18件・2.29秒、local側Windows11件・11.30秒が成功した。
+Linux receipt SHAは0d13b35267a542717e233756e3f9479199875b9171396cea9bb3893c9c865e5bである。
+全依存39ファイルのpartition_trace_full_completion_transport_v1/manifest.json SHAは1626d5cc5bef875eb6e70da21a979ace93ca6259d5fac169de2fe668c19dd064である。
+local入口は--case・--target-index・--collector-prepared-sha256・--capacity-prepared-sha256・--prepared-sha256を受け取る。
+768 groupのmeasurement artifact・done marker・metadataと実PBSを確認するが、大きなaudit group payloadとraw trace全体は後続PBS集約で検証する。
+sampling失敗数は分母を維持して合計する。
+fullのproduction prepare・preflight・execute・completionは全条件で未実施である。
+残る親側接続はBAR collectorと既存submit_low_noise_final_report_once_v3.pyへ渡すpartitioned collector・監査の正式証拠構築である。
+既存final v3のcollection_provenanceはpartitioned producerのjob・hostname・groups768・rows67584とrows hashを要求し、collectはpartitioned.read_audited_collectionを使う。
+WSS source配置差を検証する既存v3入口を維持し、直接partitioned_collection.runで代用しない。
+最新PBSでは265313がR/run_count1・02:56:44、265316がR/run_count1・01:04:26で、要求node数は合計2だった。
+
+## 2026-10-19 06:59 JST: BAR collector入力検証・worker
+
+output/low_partition_bar_collection_inputs_remote.pyのSHAはae1cd7d2ec6bb0354494d56f2a6ed720ab2e6e44d383c799c1c06dde98cc4e12である。
+output/low_partition_bar_collection_worker.pyのSHAはd50e04b77da486f41100771aa3b7f7ee8731c22b25df56e1db6155117c0b86ddである。
+入力検証はanalysis_request・analysis_prepared_sha256・計画順のpartitionsを受け取り、各partitionにはindex・completion_sha256・acceptedを要求する。
+実analysis completionの全metadata・scope・PBS終端と計画順を確認し、全768 group・67584行を要求する。
+workerは固定controlからPBS脚本を再構成し、実PBS_JOBID・台帳・sourceを確認して既存collectを呼ぶ。
+Windowsの入力検証21件・8.88秒、worker13件・1.02秒と、Linux合計34件・4.06秒が成功した。
+全依存26ファイルのpartition_bar_collection_components_v1/manifest.json SHAは1e519db996bb0b1403a0ed0572141c4e51b670698180ad598fc035693aa18ff6である。
+Linux receipt SHAはee63c504d803a6295b476b2b756ad26c5a6ed5f6763b9fe7272b70863d6bbaa1である。
+check_low_partition_bar_collection_components_linux_v1.pyは実行済みであり再実行しない。
+collector prepare・qsub入口・親側完了受理・final v3証拠構築は未実装である。
+全条件でproduction collector prepare・preflight・execute・completionは未実施である。
+06:59の実PBSは265313がR/run_count1・03:08:47、265316がR/run_count1・01:16:28で、要求node数は合計2だった。
+
+## 2026-10-19 07:05 JST: BAR collector prepare
+
+output/low_partition_bar_collection_prepare_remote.pyのSHAは75d2447884c0013bc15fd87dffffa0b7e7833768db537bfec08429a57882e408である。
+output/prepare_low_partition_bar_collection_once.pyのSHAはe80a240ec95739fddd88e1aee3874f90287f8ddf947de9dac607346ab7b9fd46である。
+remote準備18件がWindows0.86秒・Linux0.12秒、local準備16件がWindows7.54秒で成功した。
+local入口は--case・--target-index・--collector-prepared-sha256・--capacity-directory・--capacity-binding-sha256・--capacity-profile-sha256・--analysis-prepared-sha256を受け取る。
+全partitionの実completion記録が揃ってからprepareを一回実行し、返却された外部prepared SHAを次段へ渡す。
+実C0T0ではsampling collector completion intentがなく、SSHを含むprocess呼出し0件で拒否した。
+negative gateで使ったzero SHAは意図的な不正値であり、authorityとして使わない。
+全依存30ファイルのpartition_bar_collection_prepare_transport_v1/manifest.json SHAはb885cca568784e457ac936c09ece6d4e37cb5c80f49977076d792bd4046ee6d9である。
+Linux receipt SHAはf2b91a36240854990c97af1064eefadbd5fa40c4623ca35131ac85388ea53566である。
+negative gate SHAは5f82bc8a439ca9b8e582c945439afd05a1e3832ebd9b72afc93bcd5f09d7f523である。
+check_low_partition_bar_collection_prepare_linux_v1.pyは実行済みであり再実行しない。
+production collector prepare・preflight・execute・completionは全条件で未実施である。
+collector qsub入口・親側完了受理・final v3証拠構築は未実装である。
+07:05の実PBSは265313がR/run_count1・03:14:48、265316がR/run_count1・01:22:30で、要求node数は合計2だった。
+
+## 2026-10-19 07:09 JST: BAR collector qsub入口
+
+output/low_partition_bar_collection_submit_remote.pyのSHAは7bfc466084388f7c95ed9aa7eaf03d24fd4126ca0b90d689bd25d7b1b22b2d53である。
+output/submit_low_partition_bar_collection_once.pyのSHAは8436d41ab0ed8e1f952e9325f6296bdd86bb43bd7f0ae005795a83d0cf5b2ad5である。
+remote23件はWindows2.06秒・Linux0.38秒、local14件はWindows9.17秒で成功した。
+全依存34ファイルのpartition_bar_collection_submit_transport_v1/manifest.json SHAはf2aebe7e2fd93129a96c9595ee1239d26d7c71410b540c35278b4805d43079acである。
+Linux receipt SHAはc06bb03b1597389c57492fcadc7313f2283cb9fe89f201e493b5ea3e5726e8dbである。
+check_low_partition_bar_collection_submit_linux_v1.pyは実行済みであり再実行しない。
+local入口はprepareと同じ7引数に加えて、--prepared-sha256へBAR collectorのprepared SHA、--actionへpreflightまたはexecuteを渡す。
+共有lockの所有者はroot・phase=bar_collection・pidであり、待機中を含む最大2nodeをguard intent保存の前後に確認する。
+qsub応答が曖昧な場合はlockと記録を保持して自動再投入しない。
+production collector prepare・preflight・execute・completionは全条件で未実施である。
+collectorの親側完了受理とfinal v3証拠構築は未実装である。
+07:09の実PBSは265313がR/run_count1・03:18:48、265316がR/run_count1・01:26:30で、要求node数は合計2だった。
+
+## 2026-10-19 07:14 JST: BAR collector完了受理
+
+output/low_partition_bar_collection_complete_remote.pyのSHAは6e59f04f2dfb2c45b5cda38119b4de6d91432a636ff91ebf934d2685ab2d2e0bである。
+output/complete_low_partition_bar_collection_once.pyのSHAは21c5c3fb77f2d94804b601a86bde6d15be635f5c5d5b9d096b20fc37ddc73ef5である。
+remote17件はWindows2.60秒・Linux0.53秒、local11件はWindows10.05秒で成功した。
+全依存38ファイルのpartition_bar_collection_completion_transport_v1/manifest.json SHAは5174292255eb91922221e9ef4a178627a99bd4ce3614ee30f02634435002bc58である。
+Linux receipt SHAはdd5cdc8b987b4d223a1c51997c3ec89ae9e6664f0bbd2d195097717366a777adである。
+check_low_partition_bar_collection_complete_linux_v1.pyは実行済みであり再実行しない。
+local完了入口はprepareと同じ7引数に加えて、--prepared-sha256へBAR collectorのprepared SHAを渡す。
+実PBS終端・host・台帳・worker入力と全768 group・67584行を確認し、未取得区間・未定義診断・flag・sampling失敗数を保持する。
+親処理でrows payloadは再hashせず、その内容・raw group・trace・anchorは後続final v3のPBS readerへ残す。
+production collector prepare・preflight・execute・completionは全条件で未実施である。
+残る親側接続はcollectorとfull trace監査の完了証拠からfinal v3用の正式入力を構築する処理である。
+07:14の実PBSは265313がR/run_count1・03:22:50、265316がR/run_count1・01:32:32で、要求node数は合計2だった。
+
+## 2026-10-19 07:19 JST: final v3 source結合
+
+既存final v3はpartitioned readerとcoreをanalysis-v11から参照しており、source配置の変更は不要である。
+実環境でfinal bootstrap・science・native/runtimeを検証し、元の環境とanalysis24・trace24・collection42ファイルの絶対パス・bytes一致を確認した。
+v1 receipt SHAは654be4d7fcd9ddf4f4b45263334aa53da18ece4bf3b5fc55889964bbcbea6555で、全reader sourceが静的report closureのsubsetという仮定で拒否された。
+v2では凍結acceptance manifest ff79cc15a5b653db5e68dc8edd145c4cae26530fc7068d6dbd05b5dd94229025から全sourceを検証し、追加submit_tile_low_noise_partitioned_analysis.pyも検証した。
+成功したlow_partition_final_source_bridge_v2.jsonのSHAは1be74aef4adc31ef4e1ce92ce0318834664529d5b7796c9002a128a85c0701dcである。
+check_low_partition_final_source_bridge_v1.pyとv2.pyは実行済みであり、どちらも同じ出力先へ再実行しない。
+final entry.input_sha256へ追加submitterとacceptance manifestを含め、既存report source closureを変更しない。
+接続仕様はdocs/wp/low_partition_final_join_spec_2026-10-19_ja.mdに保存した。
+local completion結合・remote metadata組立・resource decision・final transportは未実装であり、本番final接続も未実施である。
+07:19の実PBSは265313がR/run_count1・03:28:50、265316がR/run_count1・01:36:32で、要求node数は合計2だった。
+
+## 2026-10-19 07:24 JST: final local入力結合
+
+output/low_partition_final_join_inputs.pyのSHAは8bc630d6535e976149bf988d7784ce95bd05a1f475908c3c1385126f326eb0d8である。
+WindowsはBAR記録6件・8.69秒、trace記録6件・9.36秒、結合条件17件・0.45秒、Linuxは結合条件17件・0.04秒が成功した。
+実C0T0の未完了sampling collectorをprocess呼出し0件で拒否した。
+依存66ファイルと外部証拠2件のpartition_final_join_inputs_v1/manifest.json SHAは531a14ad56949bbd7b92685eb350ee0ffb9c2eb426ed957d07234dbd8fedba76である。
+Linux receipt SHAはd604f2cffc1c11add0613e0373a7116b3fdd142aa5c410294cc6b1d60087dfb0である。
+negative gate SHAは7b684dc37464db8a7acc35f9f0695c0cd999690db5f470110dc5dfe450b6a8c5である。
+preserve_low_partition_final_join_inputs_v1.pyは実行済みであり、同じ出力先へ再実行しない。
+build_requestはcase・target・sampling collector prepared SHA・analysis capacity directory/binding/profile SHA・analysis prepared SHA・BAR collector prepared SHA・trace capacity prepared SHA・full trace prepared SHAを受け取る。
+実completionの両連鎖を再構成し、同一sampling authority・条件・固定root・cohort・scopeを確認してfinal metadata assembly用requestとlocal pinsを返す。
+既存final source binding f59cc3e90867f81770cea35c348e1db1654f3922c272c73abeb569fd32bf19b3とsource bridge v2をそのまま固定する。
+本番入力結合・final接続は全9条件で未実施であり、remote metadata組立・resource decision・final transportは未実装である。
+07:24の実PBSは265313がR/run_count1・03:32:52、265316がR/run_count1・01:40:32で、要求node数は合計2だった。
+
+## 2026-10-19 07:29 JST: final remote入力照合
+
+output/low_partition_final_assemble_remote.pyのSHAは2c111b4ba0e2ffd421e399c3e001f60e022384a42ca10de46dea78b0780cc2fcである。
+final_join_completed_inputs(request,w,api,proof)がcompletion・prepared・metadataを固定し、既存readerと実PBSを使って同一cohortを照合する。
+raw payloads_read=False・final_comparison_completed=Falseを返し、最終computeの検証範囲を先取りしない。
+Windows19件・2.17秒とLinux19件・0.17秒が成功した。
+全依存69ファイルのpartition_final_assemble_inputs_v1/manifest.json SHAはe7040779b4c13e0d728f67877d9795f008b2207dfda9abc6383821572e107b31である。
+Linux receipt SHAはd0bc620e2645d5082d906e11421a615ffcf537a5a937bdae0b4d8a2dba4c81baである。
+check_low_partition_final_assemble_inputs_linux_v1.pyは実行済みであり、同じ出力先へ再実行しない。
+全上流job census・resource decision・config保存・final transportは未実装であり、本番final接続は全9条件で未実施である。
+07:29の実PBSは265313がR/run_count1・03:38:52、265316がR/run_count1・01:46:32で、要求node数は合計2だった。
+
+## 2026-10-19 07:40 JST: final upstream censusとresource policy
+
+output/low_partition_final_upstream.pyのSHAは8a40162ad9ef30448ce627a86e3da00ba8e2e939632db17a0b5f85b9fe5a4c13である。
+既存selector_jobsを正として全role・台帳集合を照合し、check_terminal・check_pbsで現在の実PBSを前後検証する。
+失敗samplingの終了codeとreference未取得を保持し、terminal保存・qsubは行わない。
+Windows26件・5.01秒とLinux26件・0.65秒が成功した。
+partition_final_upstream_v1/manifest.json SHAは6aa94a933602ddf4e4e688735db4cde8c16e64574ade73783d1d1102c8777297で、71 sourceを保存する。
+Linux receipt SHAは2dad25cda6859383593ceab3a1fd1e909a6c06d4881e7fcaf0d4c38db744f46dである。
+output/low_partition_final_resource.pyのSHAはedadc066ca75db83d7bbb1989a6f20ddcde51261cb37244b415cb4bc62f2cd4bである。
+初回1 CPU・24時間、memoryはmax(16 GiB,実collector RSS)の2倍切上げとし、340 GiBを超える場合は拒否する。
+実collector walltimeと30分の余裕を引いた残りを追加hash予算とし、未測定・完了保証なしと記録する。
+実trace監査とWSS監査のwall/RSSは別の観測値として保持する。
+Windows13件・0.65秒とLinux13件・0.06秒が成功した。
+partition_final_resource_v1/manifest.json SHAは40d9abf71d229c4457945eb6459ba7f78f7e38b0c2cebf4104b8616423c78965で、73 sourceと外部証拠を保存する。
+Linux receipt SHAは389b886510344bb6f122f11643f6fbce94148a9e79e8bcf3b768397353101c4aである。
+check_low_partition_final_upstream_linux_v1.pyとcheck_low_partition_final_resource_linux_v1.pyは実行済みであり、同じ出力先へ再実行しない。
+config保存とfinal transportは未実装であり、本番資源確定・final接続は全9条件で未実施である。
+07:40の実PBSは265313がR/run_count1・03:48:52、265316がR/run_count1・01:58:32で、要求node数は合計2だった。
+
+## 2026-10-19 07:45 JST: final config構築
+
+output/low_partition_final_config.pyのSHAは54776f623aa1e9c37096a2f66f0c8a1aab86a0ea0cf3fa218f9beec56c46ecf7である。
+final_join_entryはjoin済みplanとmetadataを再照合し、completion・prepared・追加source・全WSS markerとpayload hashを固定する。
+final_join_writeは新規outputへrequest・実terminal・acceptance・resource decisionを保存し、既存final v3検証と実PBS再照合後だけconfig.jsonを作る。
+sampling-submissions/anchorsの台帳は一般metadataに重複登録せず、専用upstreamに固定する。
+Windows21件・6.46秒とLinux21件・0.96秒が成功した。
+既存validate・collection_provenance・upstream・confirmed_resource・selector検査を実際に呼ぶが、native bootstrap/controller状態とplan/PBSは合成fixtureである。
+partition_final_config_v1/manifest.json SHAは4ac11fbe00c4079d6685ebc232ab727360ad61980fcc376c464208f50c491964で、75 sourceと外部証拠を保存する。
+Linux receipt SHAはe454cf139520bcac1aa4bbb80b9ca241e63a2cb839c82ae51bbbefefc62c594eである。
+check_low_partition_final_config_linux_v1.pyは実行済みであり、同じ出力先へ再実行しない。
+全helperを結ぶ実assembly入口とfinal一回実行transport、本番config生成・投入は未実施である。
+次は既存f59 source bindingでbootstrap/scienceを行い、completed_inputs→entry→upstream→writeを実requestに接続する。
+07:45の実PBSは265313がR/run_count1・03:54:53、265316がR/run_count1・02:02:33で、要求node数は合計2だった。
+
+## 2026-10-19 07:50 JST: final assembly transport
+
+output/low_partition_final_assembly_remote.pyのSHAはae3e43376dd043c288395c44700e473ac70e2e171fbcbcd2e5054f9e485561e7である。
+output/assemble_low_partition_final_once.pyのSHAは331fd82ec973189ebbaa42101c20515dd2a6fe1217313eb6d545ca42ff546261である。
+CLIはcase・targetとcollector/analysis/BAR/traceのprepared SHA、analysis capacity directory/binding/profile SHAを受け取り、既存build_requestを呼ぶ。
+固定f59 bindingでremote bootstrap・scienceを行い、completed_inputs→entry→upstream→writeを接続する。
+local記録名はlow_partition_final_C_T_assembly_once_v1で、成功・失敗を問わず同じintentへ再実行しない。
+Windows17件・1.28秒、Linux17件・0.28秒が成功した。
+実Linux bootstrap・science通過後の不正root拒否も確認した。
+partition_final_assembly_transport_v1/manifest.json SHAはe3b0536b2019c6bb661aa2bd15c82db6190ed0d5d7256dcb356755f98487c5fbで、78 sourceを保存する。
+Linux receipt SHAはe3014bfc43e271b8118a5162548ff7df551bbc00d65296c0c5ac37703d223770である。
+実C0T0の未完了CLI gateはprocess呼出し0件で、receipt SHAはf590b7c357dfb9b1f1bf94b82ac3720c436a59feafee2d6c63f8ef390e4f840dである。
+check_low_partition_final_assembly_linux_v1.pyとcheck_low_partition_final_assembly_incomplete_gate_v1.pyは実行済みであり、同じ出力先へ再実行しない。
+本番assembly・config生成は全9条件で未実施である。
+次はこの実assembly receiptを再構成し、既存final v3のprepare/preflight/execute/sealへ渡す一回実行transportを接続する。
+C2の既存invoke_low_final_case2_target2_once_v3.pyは実行済みの固定条件用であり、再実行・書換えず参照する。
+07:50の実PBSは265313がR/run_count1・03:58:53、265316がR/run_count1・02:06:33で、要求node数は合計2だった。
+
+## 2026-10-19 07:54 JST: final phase invocation
+
+output/invoke_low_partition_final_once.pyのSHAは197f537b989080f6466d5046b7aeb965dec59691ddb519dd7efb1a4744aba556である。
+assemblyと同じ共通引数に加えて、位置引数prepare・preflight・execute・sealを順に使用する。
+実assembly receiptと全前段phaseを固定sourceから再構成し、control SHAやjob IDを仮値で渡さない。
+local記録名はlow_partition_final_C_T_ACTION_once_v1であり、同じ記録へ再実行しない。
+既存final v3のprepare/submit/sealをそのまま呼び、executeだけに--executeを付ける。
+Windows24件・5.07秒、Linux24件・1.42秒が成功した。
+partition_final_invocation_transport_v1/manifest.json SHAは77fc6722f16d362140e097249d84fb27b7d38653f040dd15843cdfe5affa59c9で、80 sourceを保存する。
+Linux receipt SHAは85c6039be3205245301b1fa89cc7b77dac7eedf28d72624b9e52a9fca331f7ddである。
+check_low_partition_final_invocation_linux_v1.pyは実行済みであり、同じ出力先へ再実行しない。
+日本語手順はdocs/wp/low_partition_final_runbook_2026-10-19_ja.mdにある。
+本番assembly・final各phaseは全9条件で未実施である。
+sampling2jobの完了後はsampling collectorを優先し、その実completionからanalysis・traceの準備へ進む。
+片方のみ完了し空き1nodeとなった場合は既存C0T1のanchorまたはanalysis capacityを進められるが、合計2nodeを超えない。
+07:54の実PBSは265313がR/run_count1・04:02:54、265316がR/run_count1・02:10:34で、要求node数は合計2だった。
+
+## 2026-10-19 07:57 JST: sampling marker観測と接続前提の確認
+
+observe_low_partition_sampling_20261019_0758.pyを一度実行した。
+low_partition_sampling_observation_20261019_0758.json SHAは824c30ee4034a7eda790de32d6df3009c6ea1a6bb267634261e0e5d33a9c3b23である。
+内部の実観測timestampは07:57であり、ファイル名の0758と区別する。
+実planの予定task数は各61,440件、合計122,880件である。
+sample0のmarker名58,016件、sample1のmarker名30,173件を観測し、期待外の名前は0件だった。
+両partition summaryは未生成で、markerの内容・raw payload・record statusは未読である。
+観測前後とも265313・265316はR/run_count1で、後のwalltimeは04:06:55・02:14:35だった。
+両方とも1node・96CPU・32GiB要求で、合計2nodeを維持する。
+凍結readerのanalysis SHAは5ae94aaec62506d7b54d946530c3988f4b3ba5dbac844905915c574fdc7e0491、trace SHAは2998e22daaa402d64e0de1094388122f8c9b7b5ba0a08fff07ab3e162d802296で、読んだlocal sourceとsource bridge v2が一致した。
+analysis_manifest=context、collect summaryの実pbs_job_id/hostname、trace read_planがplanとsamplingを返す契約を静的に確認した。
+実未完了cohortの検証済み扱い、marker割合からのETA、追加qsubは行っていない。
+次の独立作業候補は実seal証拠に基づく残り9条件のreport回収入口である。
+既存recover_low_final_case2_target2_v1.pyは14ファイルの回収例として参照できるが、固定C2用の実行済み入口なので再実行・書換えない。
+
+## 2026-10-19: 残り9条件のfinal回収入口
+
+output/recover_low_partition_final_once.pyのSHAは102f77c5b8b6f9c7d9281c34915cf3ff48d365ee636f90a93bdac34533bc01dfである。
+remote helperのSHAは07f18bc9bcea2f27c635e7b7bdf704d50111e0ef858a426ad81fddcaee4ceb3eである。
+実assemblyからsealまでを既存入口で再構成してから、14件の証拠と現在のPBSを読み取り、reportのみscpで回収する。
+入口はfinalと同じ10引数を受け取り、low_partition_final_caseC_targetT_evidence_v1へ新規保存する。
+collection.jsonは全ファイルSHA・byte数・local authorityの再確認成功後だけ作る。
+Windowsはremote24件・1.96秒とlocal22件・2.18秒、Linuxは46件・0.54秒で成功した。
+partition_final_recovery_transport_v1の84 source archive manifest SHAは024bb8fc40a775c59dde8d1532779047f7ee35162dd4a7a7002e9543a5419cbeである。
+Linux受入receipt SHAは0974338274f335ca7ac34cc187d5578adca619166d3ff2aa36a5436a57315fe0である。
+check_low_partition_final_recovery_linux_v1.pyは実行済みで、再実行しない。
+check_low_partition_final_recovery_existing_v1.pyも実行済みで、既存C2T2の実14ファイル・現在PBS・保存済みbytesの一致を確認した。
+そのverification SHAはa0d656265f1e57598372fda3233f86312a560daf930009bda9afeda55463d078である。
+この確認で新規qsub・数値再計算・raw scan・report再転送は行っていない。
+残り9条件の本番回収入口は未使用で、正式比較は3/12条件完了のままである。
+08:09のqstatでは265313がR/run_count1・04:18:57、265316がR/run_count1・02:26:37であり、合計2nodeを維持した。
+次の投入は実node枠解放後に既定順で進め、両sampling終了後はsampling collectorを優先する。
+
+## 2026-10-19: 独立算術レビューの一般化
+
+output/review_low_final_arithmetic.py SHAは825f7f97d405e2ab92a557ea85b73301de84e399919aaab332297c28848e68deである。
+外部seal report SHAとreport内evidence SHAからproduction plan・rowsを固定し、全352設定・各192replicateを標準ライブラリだけで再集計する。
+最長traceのsliceをplanから選び、case0の16chain・60,000保存にも対応する。
+Windows17件・0.37秒、Linux17件・0.04秒の受入が成功した。
+low_final_arithmetic_sources_v1/manifest.json SHAは115c93c373f643b3b9f5827b16b33de95eb9426effc66c1cc2a10eb6e47fe73bである。
+Linux受入receipt SHAは7eac80025ccff334a28a3813a07c68e63346e944267b07bc037dbb6c8cecab6bである。
+check_low_final_arithmetic_linux_v1.pyは実行済みで、再実行しない。
+既存C2T2の実67,584row・352設定で11,968scalarを照合し、最大算術差1.6940658945086007e-21を確認した。
+low_final_case2_target2_arithmetic_general_v1/review.json SHAは696f28c88ff0fdb14f98cebce660c9a319273c6ad142da1b9a1ca34790feb861である。
+このreview出力先は使用済みで、元のC2レビューも上書きしていない。
+残り9条件は本番report・production plan・rowsの回収後にレビューし、現時点で本番レビュー済みとは扱わない。
+14件のfinal回収にproduction planとrowsは含めていないため、別途reportが固定するpath/hashを用いて取得する。
+08:14時点で265313・265316はR/run_count1、要求node数は合計2であり、新規qsubは行っていない。
+
+## 2026-10-19 08:18 JST: 算術入力の回収
+
+output/recover_low_review_inputs.py SHAは933f4f6ae30457bdb4cc0d1ee90f17fce454b5bf1aa574a1abf2da9db0414389である。
+seal済みreportの外部SHAを指定し、そのevidence_sha256で固定した同rootのproduction planとrowsをscpで取得する。
+引数は--report、--report-sha256、--outputであり、回収先は新規directoryだけを許可する。
+source archive low_review_input_sources_v1のmanifest SHAは052362bea3178969263b11a03da38b5e663bc2465985a0d47411599f505d9a20である。
+Windows15件・0.74秒、Linux15件・0.05秒が成功し、Linux receipt SHAは64082882f2a3824dfc460ceafc95d725add1d3c5db22e149eb22ee94ecb9a2d5である。
+check_low_review_inputs_linux_v1.pyは実行済みで、再実行しない。
+実C2T2の2ファイルをlow_final_case2_target2_review_inputs_v1へ取得し、collection SHAはc598ab0bbfa2f75452216521d3fd0a239ecc13e41fdd29a8662a6eec29a02e6dである。
+plan 2,362byteとrows 330,061,028byteが既存算術レビューと同じSHAであることを確認し、同一算術は再実行していない。
+この回収先は使用済みで、残り9条件の本番回収は未実施である。
+08:18時点で265313はR/run_count1・04:26:59、265316はR/run_count1・02:34:39、要求node数は合計2だった。
+新規qsubは行っておらず、次は実node枠解放後の既定投入順に従う。
+
+## 2026-10-19 08:22 JST: C0T0 sample0完了、C0T1 anchor完了・capacity投入
+
+C0T0 sample0の265313はF/exit0/run_count1・04:28:24となった。
+凍結p.partition_evidenceで61,440task・失敗0と実summary・native metadata・PBSの一致を確認した。
+low_partition_0_0_sample_0_terminal_acceptance_v2.json SHAは0659c7ad6a3a6a1a04a9cd1192710cf731a8b774e4ef1cbb6d1027f1d4eb468bである。
+v1はreaderの縮約terminalからrun_countを読もうとしてKeyErrorとなり、receipt SHA094a650461cb77231a59d217141145feca0c408e4e6efbcef39b805048d21fc0を保持した。
+v2は実qstatでrun_count1を確認し、既存縮約terminalとの一致も確認した。
+accept_low_partition_0_0_sample_0_terminal_v1.pyとv2.pyは実行済みで、再実行しない。
+sample1の265316は引き続きRで、C0T0のsampling collector全phaseは未使用である。
+
+C0T1 anchorはsubmit_low_partition_once.pyの固定入口からqsub265317を取得し、F/exit0/run_count1・00:00:30で終了した。
+実anchor metadataの192task・失敗0を凍結readerで受理した。
+local execute receipt low_partition_0_1_anchors_0_submission_once_v1_receipt.json SHAは109945fa1ff4c097665dfc9255458c40a3bbaf695cf40735859f1e09ff2380fbである。
+stdout SHAは498825ddec5e14b31a6fae6195101e7e84f381359490492dec3b2a01ed523d0e、remote script SHAはb3b7750f67782ffad2c1530ceeb4983bd042eed3c62cfd0e4561f6d27f6a22f1である。
+C0T1 anchorのpreflight・executeは消費済みで、sample0・sample1のexecuteは未使用である。
+
+C0T1 analysis capacityはsubmit_low_analysis_capacity_once.pyの固定入口からqsub265318を取得し、実R/run_count1を確認した。
+local receipt low_analysis_capacity_0_1_submission_once_v1_receipt.json SHAは4d5749a11d47d4eb3a3712677f2628592f7efd5062fc632db500679a2a021d7dである。
+stdout SHAは6d57b28db3a45b2454032b4d6d138eecd4a1f40e6c34213265bb4f46a2e44e2aである。
+要求は1node・96CPU・340GiB・8worker・24時間上限で、人工データの資源計測であり科学的精度の証拠ではない。
+このcapacity executeは消費済みで、終了後に当該条件の実成果物を回収してprofileを作る。
+
+低ノイズ本sampling用26generatorのうち4件を投入済み、22件が未投入である。
+analysis capacityは12条件中4件完了・C0T1が実行中・7件未投入である。
+record_low_partition_dispatch_20261019_0822.pyは実行済みで、receipt SHAは442440d91a6552a2db593b81423d30e0e568aca3ef9b6ce2107ac25a72fc4c86である。
+この実観測で265316と265318の要求node数合計2を確認した。
+正式比較は3/12条件完了のままである。
+次はC0T1 capacity終了後の回収とC0T1 sample0投入を候補とし、それ以前にC0T0 sample1が終了した場合はC0T0 sampling collectorを優先する。
+
+## 2026-10-19 08:24 JST: C0T1 capacity observer
+
+prepare_low_analysis_capacity_case0_target1_observer_v1.pyを実行済みで、再実行しない。
+既受入C2T1 observerからcase・target・job・path・外部SHAだけを変更し、literal以外のAST一致と16件・0.91秒の受入を確認した。
+observe_low_analysis_capacity_case0_target1_v1.py SHAはdae17146741f4515ad893528bac257431c0157673e2364428ce215b54b83c2c4である。
+派生受入receipt SHAは57f8158ec9534c8bb51b077f1a49f4403883f3cab477801e6ec49105e5a3d31bである。
+--label running1の実観測を行い、stdout SHAはadd624b669c14fe3e352e0cc4413d7eff290bbd93b83e5a9e8cde36434c4f78d、attempt SHAはd40bd308839aeb4c6df616d9de0247ef98ffb4c486409273d9ad2cfee5dc85d3である。
+source・小artifact snapshotの検査に成功したが、実R/run_count1でmeasured_profileはnullだった。
+running1 labelは消費済みで再利用せず、実F/exit0/run_count1確認後に新規labelと--collectでlow_analysis_capacity_case0_target1_terminal_v1へ回収する。
+その回収先は未使用で、35artifactと4派生JSON・binding・profileのhashは未取得である。
+08:24のqstatで265316と265318がR/run_count1、要求node合計2を確認した。
+
+## 2026-10-19 08:51 JST: C0T1 capacity回収・sample0投入
+
+265318はF/exit0/run_count1・00:26:53で終了し、固定observerの--label terminal1 --collectを実行した。
+terminal1 labelとlow_analysis_capacity_case0_target1_terminal_v1は使用済みで再実行しない。
+35artifact・4派生JSONのlocal hashを再照合し、collection_binding SHAは8f641269eb41579a939057d536ab5cbea7f8157dd7c78f691ad2cccbe354526e、measured_profile SHAは7e91444c099b9c33aecdda62c98a0736639b57082ac967d6af3777bb073f878dだった。
+資源案は96worker・234GiB・768groupの1partition・要求07:30:00であり、人工データによる外挿でETAではない。
+C0T1 sample0のexecuteを使用し、qsub265319を取得した。
+low_partition_0_1_sample_0_submission_once_v1_receipt.json SHAはcf8e5ba30343fc869571236483ffc384bcbc557e8364de630aedabfaed22a3f0である。
+本番generatorは26件中5件投入済み・21件未投入、analysis capacityは12条件中5件完了・7件未投入となった。
+qstat -f -F jsonの実ownerで確認したactive jobは265316と265319の2本で、両方R、要求node数合計2だった。
+qstat -u user -f -F jsonはJSONを返さなかったため、その失敗を完了判定には使わず、上記コマンドで確認し直した。
+low_partition_dispatch_20261019_0851.json SHAは8b269a30957141e483e78da1d7c74042a8c5623ca52dfe7856b262260fa0499fである。
+次はC0T0 sample1終了後のsampling collectorを優先する。
+正式比較は3/12条件完了であり、capacity回収とsample0投入によって科学的完了数は増えていない。
+
+## 2026-10-19 11:19 JST: C0T0 collector投入
+
+265316は10:14:06にF/exit0/run_count1、wall04:32:08で終了した。
+submit_low_partition_collection_once.pyのcase0/target0についてprepare・preflight・executeを順に使用済みとした。
+prepared SHAは45c9015ab98bd1468a7305630106c4161602516737f705df2445e67470de4db6である。
+prepare時に265312・265313・265316の実PBS、run_count1、script、metadataを確認し、3phaseともexit0のsuccessだった。
+qsubで265323.node-PRISMを取得し、実R/run_count1・1node/1CPU/32GiBを確認した。
+実記録はlow_partition_collection_0_0_execute_once_v1_receipt.jsonに保存し、同入口を再実行しない。
+265319もRで、active要求node合計は2である。
+次は265323のterminalを確認してcomplete_low_partition_collection_once.pyに同prepared SHAを渡す。
+collector完了受理は未実施であり、以後のanalysis/trace/final pipelineも未実施である。

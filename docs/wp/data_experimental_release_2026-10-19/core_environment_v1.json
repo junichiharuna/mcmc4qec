@@ -1,0 +1,46 @@
+{
+  "observed": "2026-10-19T00:39:29.310697+00:00",
+  "mode": "core",
+  "wheel_sha256": "707868b21308028f5a76033f763663b449531b003e9c338c6ee90931c8fb7a2e",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-m",
+        "venv",
+        "A:\\dev\\mcmc4qec\\.venv-experimental-core"
+      ],
+      "seconds": 17.389830999978585,
+      "returncode": 0,
+      "timeout": false
+    },
+    {
+      "command": [
+        "A:\\dev\\mcmc4qec\\.venv-experimental-core\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "A:\\dev\\mcmc4qec\\output\\experimental_release_20261019\\dist_isolated\\mcmc4qec-0.1.0.dev5-py3-none-any.whl",
+        "pytest>=8,<10",
+        "pytest-xdist>=3,<4"
+      ],
+      "seconds": 30.677746400004253,
+      "returncode": 0,
+      "timeout": false
+    }
+  ],
+  "success": true,
+  "freeze": [
+    "colorama==0.4.6",
+    "execnet==2.1.2",
+    "iniconfig==2.3.1",
+    "mcmc4qec @ file:///A:/dev/mcmc4qec/output/experimental_release_20261019/dist_isolated/mcmc4qec-0.1.0.dev5-py3-none-any.whl#sha256=707868b21308028f5a76033f763663b449531b003e9c338c6ee90931c8fb7a2e",
+    "numpy==2.4.6",
+    "packaging==26.3",
+    "pluggy==1.7.0",
+    "Pygments==2.21.0",
+    "pytest==9.1.1",
+    "pytest-xdist==3.8.0"
+  ],
+  "log_sha256": "8631ecb1797ab436d77dfaab570bce691e895235c2f3947a11af71b69b5923df"
+}

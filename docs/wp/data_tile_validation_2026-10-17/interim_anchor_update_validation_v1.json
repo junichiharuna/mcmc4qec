@@ -1,0 +1,60 @@
+{
+  "anchors": 768,
+  "cases": [
+    {
+      "case": 0,
+      "replicates": 192,
+      "successful_replicates": 192,
+      "trials_available": 3145728,
+      "failures_available": 1838748,
+      "failed_replicates": [],
+      "zero_failure_replicates": [],
+      "all_recorded_seeds_verified": true,
+      "phase_summary_reproduced": true
+    },
+    {
+      "case": 1,
+      "replicates": 192,
+      "successful_replicates": 192,
+      "trials_available": 3145728,
+      "failures_available": 2114117,
+      "failed_replicates": [],
+      "zero_failure_replicates": [],
+      "all_recorded_seeds_verified": true,
+      "phase_summary_reproduced": true
+    },
+    {
+      "case": 2,
+      "replicates": 192,
+      "successful_replicates": 192,
+      "trials_available": 3145728,
+      "failures_available": 1480773,
+      "failed_replicates": [],
+      "zero_failure_replicates": [],
+      "all_recorded_seeds_verified": true,
+      "phase_summary_reproduced": true
+    },
+    {
+      "case": 3,
+      "replicates": 192,
+      "successful_replicates": 192,
+      "trials_available": 3145728,
+      "failures_available": 743334,
+      "failed_replicates": [],
+      "zero_failure_replicates": [],
+      "all_recorded_seeds_verified": true,
+      "phase_summary_reproduced": true
+    }
+  ],
+  "input_sha256": {
+    "production_anchor_audit-0.json": "ab0e798aee54eee2b6450bc63407f7ce19f4a3bb3b405ddb4ab0d905db1df09c",
+    "production_anchors-0.json": "6fe10ea3b7f690fd898248a2fa5c277bb352b14c5638adea80d5c945bf06af12",
+    "production_anchor_audit-1.json": "1a6f758489ef8d2c5a25e04af68740a91e78ae99ebdaedc0ef3a9ab83e09a1ab",
+    "production_anchors-1.json": "1abb5ffdb064ab0b0df681faeccf6957ddc2046a67809eaad4e1d7615c759b54",
+    "production_anchor_audit-2.json": "6415ea2b5aa1d52ffc5149c0c33d49d19fb56aad8ad97711725e60c5948dc730",
+    "production_anchors-2.json": "e58fc9d32f92699568085646f5f0df66fae6459a442bb7c5360b4b0599c9e1ae",
+    "production_anchor_audit-3.json": "c7ebff5dda470ce299d9a60c4f730a0722a4dc8cd2e77ff11ca78736a68616da",
+    "production_anchors-3.json": "81d37bd3bb12e509a416f9ac750012fe8b4dcbc62bc6632ba6cd30371781efda"
+  },
+  "scope": "Saved audit and phase summary bindings only; no new trial redecoding."
+}

@@ -1,0 +1,21 @@
+# 正式比較済み低ノイズsamplingのexport投入
+
+最初の対象はtile72 depolarizing・target .01のstaged sourceとする。
+受理済み最終比較265299のreportから、sampling/anchor全artifactとmanifestの検証済みhashを抜き出し、外部固定の回収indexとする。
+抽出前後に元reportのSHAを照合し、全予定taskの3ファイル組とmanifest以外を混ぜない。
+自己生成indexだけで転送元を同定せず、この外部indexとの一致を正式export完了の条件にする。
+
+stageはworker・archive helper・stream verifier・accepted index・PBS脚本・metadataを新規配置へ保存する。
+投入前とworker実行前後に、元samplingと最終比較のF/exit0/run_count1・脚本path、最終受理記録とcompletionのhash、source manifestと実行Pythonのhashを照合する。
+このmetadata gateではtrace全走査を行わない。
+workerは割当jobのPBS identityを確認し、既存export componentで圧縮した後、accepted indexを用いてarchiveを再検証し、成功時だけcompletionを書く。
+metadata検査や生成側の自己整合性だけを正式回収完了とは扱わない。
+
+投入は既存WSS exportの一回投入制御を再利用する。
+共有lock、終了controllerの照合、待機を含む最大2ノード、intent先行、qsub一回、曖昧応答時のintent・lock保持は変更しない。
+初回exportは1 CPU・32 GiB・24時間を要求上限とし、実測値やETAではないと記録する。
+科学条件・decoder・sampling・BARを再実行しない。
+実exportのF/exit0と固定script/workerを正式受理した後に、archiveと外部indexを回収して全memberをstream照合する。
+
+受入にはmetadata gateの正常系、source/accepted index/最終completionの改変、別case・別manifest・不正なPBS終端、export後の外部index不一致を含む。
+投入制御は既存受入をこのadapterでも実行し、上限2ノード・曖昧応答・重複投入・共有lockを確認する。

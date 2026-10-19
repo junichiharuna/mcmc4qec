@@ -1,0 +1,71 @@
+# 分割sampling後のBAR解析：親側prepareの小仕様
+
+既存の`tile_low_noise_partitioned_analysis.create_plan`と`submit_tile_low_noise_partitioned_analysis.submit(execute=False)`を使う。
+科学計算コード、seed、trace、burn-in、ladder、誤差法、資源算定式は変更しない。
+本仕様のprepareはqsubを行わず、未投入の解析計画・PBS脚本と入力証拠だけを作成する。
+実collector完了後の親側実行入口と、後続の一回qsub入口は別工程とする。
+
+## 入力
+
+固定済みcollector入力とprepared hash、正式completionの期待JSONと外部hashを必須とする。
+collectorのlocal正式受理receiptから期待JSONを取り出す処理は、既存completion入口のsource・intent・stdout/stderr・receipt・全入力hashを確認する。
+同case・targetの受理済みanalysis capacityについて、root、全artifact hash、実job ID、PBS脚本、measured profileと外部受理証拠を必要とする。
+未測定条件へ別条件の資源値を流用しない。
+
+## remote prepare
+
+1. 固定generator・collectorの既存guardで全source、Python/native、fixture、upstream実終端、prepared metadataを確認してから科学計算helperをimportする。
+2. collectorのparent-completion.jsonを外部hashと期待JSONで照合し、実PBSがF・exit0・run_count1・期待脚本であることを確認する。
+3. capacityの全artifactを外部hashで照合し、実PBSがF・exit0・run_count1・期待脚本であること、production manifestがsamplingと完全一致すること、既存measured_profileが受理済み値と一致することを確認する。
+4. sampling completionから取得したmetadata証拠が受理済みcompletionの証拠と完全一致することを確認する。
+5. 既存解析計画・intent・出力・親prepare記録があれば拒否し、上書き・自動再試行をしない。
+6. 既存create_planを呼び、全partitionに対して既存submitのdry-runとbash構文確認を行う。
+7. source・全入力hash・PBS終端を再確認し、生成した計画・全脚本・dry-run台帳のhashと期待投入台帳をparent-prepared.jsonに保存する。
+
+処理途中で入力変化や失敗を検出した場合、作成済みの証拠を保持して停止する。
+raw traceの再走査・再復号・BAR実行はprepareの範囲外である。
+collectorが実行したraw走査と、親側のmetadata照合を区別する。
+解析資源は同条件capacityから既存式で得る要求上限であり、ETAではない。
+
+## 受入条件
+
+正常な人工fixtureで1回だけ計画を生成し、全partitionの脚本と期待台帳を保存する。
+collectorの未完了・別job・別脚本・run_count2、capacityの未完了・別条件・artifact不一致・profile不一致、completion不一致、既存出力、処理途中の入力変化を拒否する。
+拒否前にqsubを呼ばず、既存計画を上書きしない。
+実データのprepareはcase0 target0のsample両分割とcollectorの正式受理後に行い、fixtureテストを実データの準備完了と扱わない。
+
+## local入力構築と一回prepare transport
+
+固定completion入口を読み、既存accepted_submissionでcollectorのprepare/execute実記録を再検証する。
+completionの実行script・intentを同じ固定sourceから再構成し、全local入力・source・stdout/stderr hashと、成功receipt・response・remote completion hashを照合する。
+capacityの外部指定binding/profile hash、binding内の全artifactと派生ファイル、production条件、実job・保存PBS終端・script・manifest/profile対応を照合する。
+不足・改変を検出した場合はSSHを呼ぶ前に停止する。
+remoteへ渡す入力とlocal再照合用hashを分け、成功前後に全local入力を再確認する。
+一回prepareはintent・実行script・stdout/stderr・receiptを作り、失敗や応答不明でも証拠を残して自動再試行しない。
+成功時はremoteのauthority digest、qsub未実行、prepared JSONとそのhashを照合して受理する。
+実ジョブ投入を伴わないprepareであり、最大2nodeの確認とqsubの一回性は後続のexecute入口で別途確認する。
+
+## 分割解析のpreflightと一回qsub
+
+受理済みlocal prepare receiptと外部prepared hashから、全partitionのうち1つを明示して選ぶ。
+remoteではprepared JSON・生成済み計画と脚本・全source/native・collector/capacity終端を再照合し、既存解析intent・出力・guard記録があれば拒否する。
+preflightはqsubせず、現在の空き枠を記録するだけで、その結果を将来の投入許可として流用しない。
+executeは既存`submit_tile_low_noise_partitioned_analysis.submit`を呼び、共有lockを取得した後のrunnerで期待するqsubコマンドだけを一度実行する。
+解析submitterのlock ownerは`root・partition・pid`であり、generatorの`phase・index`形式と混同しない。
+lock owner、実submission-intentと期待台帳の一致、source/入力、旧controller終了、待機中を含む最大2要求nodeをguard intent保存前後に再検証する。
+qsub応答のtimeout・非0終了・不正job ID・割込みは不明状態としてreceiptを残し、既存submitterがlockとintentを保持する。
+成功後も実submission台帳がprepared台帳と一致することを確認する。
+local側も一回ごとのintent・script・stdout/stderr・receiptを保持し、応答不明や中断後に自動再投入しない。
+
+## 解析partitionの正式完了受理
+
+localの実execute receiptと全intent・script・出力hashを固定入口から再構成して検証し、実際に受理したjob IDだけをremoteへ渡す。
+remoteはprepared/source/nativeとcollector/capacityを再照合し、実submission台帳・guard記録が受理済みlocal executeと一致することを確認する。
+実PBSのF・exit0・run_count1・期待脚本を確認し、後続の既存readerが使うterminal.jsonを保存する。
+保存するPBS項目は状態・実行回数・脚本・資源・実測時間・実行hostに限定し、環境変数一覧は保存しない。
+既存`tile_low_noise_partitioned_analysis.partition_evidence`でgroup census・行数・実行intent・native証拠・manifest・資源・PBS結合を確認する。
+全groupのdone markerをsummaryに記録されたhashで照合するが、groupのJSON/NPZやraw sampling payloadの再走査は行わない。
+全metadata・source・実PBSを前後確認してからparent-completion.jsonを作り、localでも応答hash・job・partition・execute receiptとの結合を確認する。
+未完了・異常終了・再実行・別job・guard不明・marker不一致・途中変更を拒否し、既存記録を上書きしない。
+この受理はmetadataとmarkerまでであり、全group payloadの検証と集約は後続のPBS collectorで別途実行する。
+診断未定義・区間未取得・sampling失敗を分母から除外する処理は追加しない。

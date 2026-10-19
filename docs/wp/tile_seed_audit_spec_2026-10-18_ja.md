@@ -1,0 +1,26 @@
+# 拡張seed namespace監査
+
+固定manifestから予定する全RNG入力を列挙し、64 bit seedの一致と同一入力を異なる用途に割り当てた場合を区別する。
+本監査は実行済みmetadataの全照合や乱数streamの統計的独立性の証明ではない。
+生成元sourceと入力manifestのhash、予定数、監査済み数、未監査数を保存し、途中までの検査を全数検査とは呼ばない。
+既存reference、production/capacity、bootstrap、合成解析capacity、重み層別pilot/reference、MC計時と低ノイズsampling/anchorを対象とする。
+低ノイズbootstrapは専用analysisの座標helperを直接利用し、未実装なら未監査とする。
+stage155は専用synthetic解析capacityのplan・groups・compute_planから生成し、全12条件の各2 replicate・2 kernel・2初期化を列挙する。
+合成arrayのRNGはstage155・group・rung・chain・purpose2、解析bootstrapはstage155・group・chain数・burn・保存長・ladder・block・purpose0で区別する。
+専用helperが未取得の場合はstage155を予約として記録し、全数監査に含めたと主張しない。
+BAR計時stage140/141は選択済みmanifestが未取得なら予約として記録し、恣意的な設定を生成しない。
+選択済みmanifestは`--bar-timing-manifest PATH`を繰り返して渡し、実際のselected condition・replicate・chain・rungだけを列挙する。
+合成解析capacityは既存analysisを呼び、stage33のproductionと同じbootstrap入力を使う。
+この一致は合成資源測定と本校正の用途を明示した既知の共有としてのみ許可し、独立cohortとは扱わない。
+同じtraceからのburn・保存長・ladder比較で共通traceを使うことは追加seed使用ではない。
+cross-chain解析も現driverがRNGを構築するのでseed入力を監査するが、この誤差法はbootstrap乱数を消費しない。
+SQLiteに逐次追加して全seedをPythonメモリに保持せず、同一seedの入力・役割を照合する。
+1000件以下のpilotで単位時間を測り、全数予測が60秒を超えるときは既定で全数を実行しない。
+出力は新規pathのみとし、旧監査証拠は変更しない。
+
+受入では小さな既知衝突、同一入力の異なるrole、許可された合成bootstrap共有、partialの分母、low target分離、各driverとの実seed一致を検査する。
+
+実行時は`PYTHONPATH=src:cluster_scripts`の環境で`python cluster_scripts/tile_seed_audit.py --output NEW_PATH`を使う。
+WindowsではPYTHONPATH区切りに`;`を使い、指定Python 3.11の絶対pathで起動する。
+`--full`は1000件pilot後の全数時間予測が既定60秒以内の場合だけ全数検査を実行する。
+より長い全数検査は承認済み計算環境で`--full --max-seconds SECONDS`を指定し、同時ノード数とqsub管理は通常のクラスタ規約に従う。

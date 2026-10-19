@@ -1,0 +1,31 @@
+{
+  "change": "Collector binds exported worker/script to independently accepted local stage evidence; stage proof copied and hash retained. Self-consistent changed worker/script pairs rejected.",
+  "command": [
+    "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-m",
+    "pytest",
+    "docs\\wp\\data_tile_validation_2026-10-17\\test_analysis_recovery_helper_v2.py",
+    "-q"
+  ],
+  "input_sha256": {
+    "cluster_scripts\\artifact_archive.py": "8a6c213cf4b19ed916d79e0d485168d1f6131244f6465ed7c50084da03ff0384",
+    "docs\\wp\\data_tile_validation_2026-10-17\\analysis_recovery_helper_spec_v2_ja.md": "9de97d6fee65c67c2d2793dbd91a51aac03da7d7f43e3cfcdee9a4659ff685d3",
+    "docs\\wp\\data_tile_validation_2026-10-17\\recover_completed_tile_analysis_v2.py": "b303aaf1d915443da4f99b13405c51bcc0f6dba9a2ec0771421c8ff500506d05",
+    "docs\\wp\\data_tile_validation_2026-10-17\\test_analysis_recovery_helper_v2.py": "4252a7ecc486bef5a51fd5720ba14b8ebef2007ccdcdbf6f8132d613f9e65148",
+    "output\\recover_completed_tile_analysis.py": "b303aaf1d915443da4f99b13405c51bcc0f6dba9a2ec0771421c8ff500506d05"
+  },
+  "log_sha256": "35efbb11e22eac822960eaf7c426846a092a290794198b682deb4f7a8a97b74e",
+  "observed_utc": "2026-10-18T02:48:45.695541+00:00",
+  "platform": "Windows-10-10.0.22631-SP0",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "qsub_executed": false,
+  "real_collect_executed": false,
+  "real_compression_executed": false,
+  "real_gate_executed": false,
+  "real_stage_executed": false,
+  "red_before_fix": "self_consistent_worker: 1 failed, 26 deselected in 0.72s",
+  "remote_actions": false,
+  "returncode": 0,
+  "scope": "Local synthetic artifacts and mocked PBS/SSH/SCP only. No production numerical or completion claim.",
+  "wall_seconds": 3.4998463000083575
+}

@@ -1,0 +1,8 @@
+...................                                                      [100%]
+============================= slowest 5 durations =============================
+3.76s call     tests/test_submit_tile_low_noise_timing_selection_review.py::test_compute_or_seal_rejects_changes[report]
+3.76s call     tests/test_submit_tile_low_noise_timing_selection_review.py::test_compute_or_seal_rejects_changes[execution]
+3.48s call     tests/test_submit_tile_low_noise_timing_selection_review.py::test_compute_or_seal_rejects_changes[input]
+3.40s call     tests/test_submit_tile_low_noise_timing_selection_review.py::test_compute_or_seal_rejects_changes[native]
+3.40s call     tests/test_submit_tile_low_noise_timing_selection_review.py::test_compute_or_seal_rejects_changes[source]
+19 passed in 36.93s

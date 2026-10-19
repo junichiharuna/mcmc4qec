@@ -1,0 +1,34 @@
+# 残る9条件のsamplingからBAR解析への接続確認
+
+2026-10-19 04:26 JST、固定v11のpartitioned samplingと固定v3のanalysis capacityの対応を実remoteファイルで確認した。
+対象はcase0・1・3、各target0・1・2の全9条件である。
+双方のacceptance manifestとそこに列挙された全sourceを外部hashで照合し、全9条件でcapacityのproduction計画とsamplingのproduction計画が一致した。
+入力hashを処理前後に確認し、remoteファイルの作成・変更とqsubは行っていない。
+
+case0 target0の受理済みcapacity265276については、保存済み全artifactを受理hashで照合し、実PBSのF/exit0/run_count1と脚本を前後確認した。
+実Pythonとnative binaryも固定hashで照合した上で、v11側の既存`measured_profile`から資源を読み直し、既にv3で受理した結果と完全一致した。
+資源は1 partition・96 workers・96 CPU・226 GiB・6時間である。
+これは合成資源計測からの要求上限であり、本番ETA・混合・被覆の保証ではない。
+ほか8条件のcapacity本測定は未投入であり、今回の計画一致だけから資源値を流用しない。
+
+検査時点では全9条件のsampling completionとpartition analysis manifestが未作成だった。
+従って解析prepareも未実施であり、実collector終了前に先行作成しない。
+次の順に、各条件の実終端証拠を用いて既存の科学計算入口を呼ぶ。
+
+1. 全anchor/sample分割を終端まで実行し、分割collectorをqsubで実行する。
+2. `complete_low_partition_collection_once.py`で実receipt・終端・全task indexを受理する。
+3. 同じcase・targetのanalysis capacityが実際に完了し、artifactと資源値を受理済みであることを確認する。
+4. `tile_low_noise_partitioned_analysis.create_plan(root, capacity_root)`で解析計画を作り、各partitionを`submit_tile_low_noise_partitioned_analysis.submit(..., execute=False)`で準備する。
+5. 脚本・資源・全入力を固定した親側投入記録から、共有lock・旧controller終了・待機中を含む最大2要求nodeを確認し、一度だけqsubする。
+6. 同じ完了samplingからtrace監査のcapacityとfull auditを準備し、BAR解析と独立に進める。
+7. 全解析partitionとfull auditの実終端を受理して集約し、WSSとの正式比較へ渡す。
+
+BAR解析とtrace監査は完了samplingを共有する独立工程なので、空き枠がある場合は並行できる。
+実行中samplingの未完了結果を解析へ渡したり、失敗taskを除外したりしない。
+後段の親側prepare・一回投入・完了回収の具体的な証拠作成は、sampling completionとcapacityの実受理後に行う。
+既存科学計算コードと事前固定されたseed・trace長・burn-in・ladder・誤差法は変更しない。
+
+再現スクリプトは`data_tile_validation_2026-10-17/check_low_partition_analysis_bridge_v1.py`である。
+実行receiptは`data_tile_validation_2026-10-17/low_partition_analysis_bridge_v1.json`、SHAは`b1c673cddd08cdc31961cc4d71f856a7c9a05d36e67524fc33ba4f286cc9a3fd`である。
+receiptには全9条件のmanifest hash、受理済みcapacityの実PBS・資源、全消費remote入力hashを保存した。
+この検査は読取と既存の小さい資源計算に限り、科学結果の再計算・解析ジョブ・新たな独立referenceの取得ではない。

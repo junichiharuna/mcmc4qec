@@ -1,0 +1,783 @@
+{"kind": "process", "pid": 1848, "executable": "A:\\dev\\mcmc4qec\\.venv-experimental-optional\\Scripts\\python.exe"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/decoder_platform_linux.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/decoder_platform_fixture.json"}
+{"kind": "start", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[bit]"}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[bit]", "phase": "setup", "outcome": "passed", "seconds": 0.0004668000037781894}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[bit]", "phase": "call", "outcome": "passed", "seconds": 0.0727873999858275}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[bit]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003566000086721033}
+{"kind": "finish", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[bit]", "seconds": 0.07537430000957102}
+{"kind": "start", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.0004067000118084252}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[depolarizing]", "phase": "call", "outcome": "passed", "seconds": 0.12917030000244267}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.000371300004189834}
+{"kind": "finish", "nodeid": "tests/test_tile_study.py::test_initialization_and_seed_identity[depolarizing]", "seconds": 0.1309588000003714}
+{"kind": "start", "nodeid": "tests/test_tile_study.py::test_pilot_artifact_resume_and_corruption"}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_pilot_artifact_resume_and_corruption", "phase": "setup", "outcome": "passed", "seconds": 0.0033220000041183084}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_pilot_artifact_resume_and_corruption", "phase": "call", "outcome": "passed", "seconds": 0.7048470999870915}
+{"kind": "report", "nodeid": "tests/test_tile_study.py::test_pilot_artifact_resume_and_corruption", "phase": "teardown", "outcome": "passed", "seconds": 0.00028490001568570733}
+{"kind": "finish", "nodeid": "tests/test_tile_study.py::test_pilot_artifact_resume_and_corruption", "seconds": 0.7096013000118546}
+{"kind": "start", "nodeid": "tests/test_tile_summary.py::test_missing_interval_and_diagnostics_stay_in_denominator"}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_missing_interval_and_diagnostics_stay_in_denominator", "phase": "setup", "outcome": "passed", "seconds": 0.00023370000417344272}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_missing_interval_and_diagnostics_stay_in_denominator", "phase": "call", "outcome": "passed", "seconds": 0.0006501000025309622}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_missing_interval_and_diagnostics_stay_in_denominator", "phase": "teardown", "outcome": "passed", "seconds": 0.00022449999232776463}
+{"kind": "finish", "nodeid": "tests/test_tile_summary.py::test_missing_interval_and_diagnostics_stay_in_denominator", "seconds": 0.0018271000008098781}
+{"kind": "start", "nodeid": "tests/test_tile_summary.py::test_missing_point_does_not_turn_available_subset_into_full_rmse"}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_missing_point_does_not_turn_available_subset_into_full_rmse", "phase": "setup", "outcome": "passed", "seconds": 0.00022369998623616993}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_missing_point_does_not_turn_available_subset_into_full_rmse", "phase": "call", "outcome": "passed", "seconds": 0.0002895000216085464}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_missing_point_does_not_turn_available_subset_into_full_rmse", "phase": "teardown", "outcome": "passed", "seconds": 0.0002541000139899552}
+{"kind": "finish", "nodeid": "tests/test_tile_summary.py::test_missing_point_does_not_turn_available_subset_into_full_rmse", "seconds": 0.0018336999928578734}
+{"kind": "start", "nodeid": "tests/test_tile_summary.py::test_duplicate_missing_and_nonfinite_replicates_rejected"}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_duplicate_missing_and_nonfinite_replicates_rejected", "phase": "setup", "outcome": "passed", "seconds": 0.00029910000739619136}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_duplicate_missing_and_nonfinite_replicates_rejected", "phase": "call", "outcome": "passed", "seconds": 0.0003023000026587397}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_duplicate_missing_and_nonfinite_replicates_rejected", "phase": "teardown", "outcome": "passed", "seconds": 0.0002306999813299626}
+{"kind": "finish", "nodeid": "tests/test_tile_summary.py::test_duplicate_missing_and_nonfinite_replicates_rejected", "seconds": 0.0016399000014644116}
+{"kind": "start", "nodeid": "tests/test_tile_summary.py::test_rmse_reference_range_can_have_interior_minimum"}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_rmse_reference_range_can_have_interior_minimum", "phase": "setup", "outcome": "passed", "seconds": 0.00025460001779720187}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_rmse_reference_range_can_have_interior_minimum", "phase": "call", "outcome": "passed", "seconds": 0.0004298999847378582}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_rmse_reference_range_can_have_interior_minimum", "phase": "teardown", "outcome": "passed", "seconds": 0.00025359998107887805}
+{"kind": "finish", "nodeid": "tests/test_tile_summary.py::test_rmse_reference_range_can_have_interior_minimum", "seconds": 0.0018214999872725457}
+{"kind": "start", "nodeid": "tests/test_tile_summary.py::test_artifact_aggregation_requires_every_condition_and_keeps_failures"}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_artifact_aggregation_requires_every_condition_and_keeps_failures", "phase": "setup", "outcome": "passed", "seconds": 0.002154600020730868}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_artifact_aggregation_requires_every_condition_and_keeps_failures", "phase": "call", "outcome": "passed", "seconds": 0.13565750000998378}
+{"kind": "report", "nodeid": "tests/test_tile_summary.py::test_artifact_aggregation_requires_every_condition_and_keeps_failures", "phase": "teardown", "outcome": "passed", "seconds": 0.0003341000119689852}
+{"kind": "finish", "nodeid": "tests/test_tile_summary.py::test_artifact_aggregation_requires_every_condition_and_keeps_failures", "seconds": 0.13909250000142492}
+{"kind": "start", "nodeid": "tests/test_tile_timing_comparison.py::test_complete_artifacts_comparison_and_corruption_rejection"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_complete_artifacts_comparison_and_corruption_rejection", "phase": "setup", "outcome": "passed", "seconds": 0.002070799993816763}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/direct_mc_precision_budget.json"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_complete_artifacts_comparison_and_corruption_rejection", "phase": "call", "outcome": "passed", "seconds": 51.77907580000465}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_complete_artifacts_comparison_and_corruption_rejection", "phase": "teardown", "outcome": "passed", "seconds": 0.0002803000097628683}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_comparison.py::test_complete_artifacts_comparison_and_corruption_rejection", "seconds": 51.78247999999439}
+{"kind": "start", "nodeid": "tests/test_tile_timing_comparison.py::test_capacity_and_incomplete_root_rejected"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_capacity_and_incomplete_root_rejected", "phase": "setup", "outcome": "passed", "seconds": 0.0023138000105973333}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_capacity_and_incomplete_root_rejected", "phase": "call", "outcome": "passed", "seconds": 0.24188689998118207}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_capacity_and_incomplete_root_rejected", "phase": "teardown", "outcome": "passed", "seconds": 0.0003679999790620059}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_comparison.py::test_capacity_and_incomplete_root_rejected", "seconds": 0.24589689998538233}
+{"kind": "start", "nodeid": "tests/test_tile_timing_comparison.py::test_actual_mc_metadata_binding"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_actual_mc_metadata_binding", "phase": "setup", "outcome": "passed", "seconds": 0.012615099985850975}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_actual_mc_metadata_binding", "phase": "call", "outcome": "passed", "seconds": 0.2190085000183899}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_actual_mc_metadata_binding", "phase": "teardown", "outcome": "passed", "seconds": 0.0003479000006336719}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_comparison.py::test_actual_mc_metadata_binding", "seconds": 0.2331803000124637}
+{"kind": "start", "nodeid": "tests/test_tile_timing_comparison.py::test_all_unmet_case_needs_no_compute_run"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_all_unmet_case_needs_no_compute_run", "phase": "setup", "outcome": "passed", "seconds": 0.0019617000070866197}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_all_unmet_case_needs_no_compute_run", "phase": "call", "outcome": "passed", "seconds": 1.0092679999943357}
+{"kind": "report", "nodeid": "tests/test_tile_timing_comparison.py::test_all_unmet_case_needs_no_compute_run", "phase": "teardown", "outcome": "passed", "seconds": 0.0003426999901421368}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_comparison.py::test_all_unmet_case_needs_no_compute_run", "seconds": 1.0125893999938853}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_fixed_eight_rows_and_diagnostic_scope"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_fixed_eight_rows_and_diagnostic_scope", "phase": "setup", "outcome": "passed", "seconds": 0.00024009999469853938}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_fixed_eight_rows_and_diagnostic_scope", "phase": "call", "outcome": "passed", "seconds": 0.06831239999155514}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_fixed_eight_rows_and_diagnostic_scope", "phase": "teardown", "outcome": "passed", "seconds": 0.00029850000282749534}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_fixed_eight_rows_and_diagnostic_scope", "seconds": 0.06983900000341237}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[above]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[above]", "phase": "setup", "outcome": "passed", "seconds": 0.000521400012075901}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[above]", "phase": "call", "outcome": "passed", "seconds": 0.06248650001361966}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[above]", "phase": "teardown", "outcome": "passed", "seconds": 0.00032289998489432037}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[above]", "seconds": 0.06445309999980964}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[sensitive]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[sensitive]", "phase": "setup", "outcome": "passed", "seconds": 0.00041409998084418476}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[sensitive]", "phase": "call", "outcome": "passed", "seconds": 0.06702410001889803}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[sensitive]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003482000029180199}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[sensitive]", "seconds": 0.06888989999424666}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[failed]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[failed]", "phase": "setup", "outcome": "passed", "seconds": 0.00041459998465143144}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[failed]", "phase": "call", "outcome": "passed", "seconds": 0.07092250001733191}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[failed]", "phase": "teardown", "outcome": "passed", "seconds": 0.00034339999547228217}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[failed]", "seconds": 0.07282349999877624}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[interval_missing]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[interval_missing]", "phase": "setup", "outcome": "passed", "seconds": 0.0005254000134300441}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[interval_missing]", "phase": "call", "outcome": "passed", "seconds": 0.06505059998016804}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[interval_missing]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002978999982587993}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[interval_missing]", "seconds": 0.06693689999519847}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[cost_missing]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[cost_missing]", "phase": "setup", "outcome": "passed", "seconds": 0.0005247999797575176}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[cost_missing]", "phase": "call", "outcome": "passed", "seconds": 0.13776089999009855}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[cost_missing]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003656000189948827}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[cost_missing]", "seconds": 0.13998979999450967}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[incomplete]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[incomplete]", "phase": "setup", "outcome": "passed", "seconds": 0.00043819998973049223}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[incomplete]", "phase": "call", "outcome": "passed", "seconds": 0.05612269998528063}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[incomplete]", "phase": "teardown", "outcome": "passed", "seconds": 0.00041920001967810094}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[incomplete]", "seconds": 0.05841779999900609}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_started]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_started]", "phase": "setup", "outcome": "passed", "seconds": 0.000606999994488433}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_started]", "phase": "call", "outcome": "passed", "seconds": 0.050955899991095066}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_started]", "phase": "teardown", "outcome": "passed", "seconds": 0.00035680001019500196}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_started]", "seconds": 0.053302799991797656}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_prepared]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_prepared]", "phase": "setup", "outcome": "passed", "seconds": 0.00044329999946057796}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_prepared]", "phase": "call", "outcome": "passed", "seconds": 0.05429759999969974}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_prepared]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003771000192500651}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_failures_and_unobserved_remain_in_denominator[not_prepared]", "seconds": 0.056294100009836257}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_ratio_is_ratio_of_means"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_ratio_is_ratio_of_means", "phase": "setup", "outcome": "passed", "seconds": 0.00026710002566687763}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_ratio_is_ratio_of_means", "phase": "call", "outcome": "passed", "seconds": 0.06626859999960288}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_ratio_is_ratio_of_means", "phase": "teardown", "outcome": "passed", "seconds": 0.0004036999889649451}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_ratio_is_ratio_of_means", "seconds": 0.06882910002605058}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-0-True]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-0-True]", "phase": "setup", "outcome": "passed", "seconds": 0.002891299984185025}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-0-True]", "phase": "call", "outcome": "passed", "seconds": 0.08188449998851866}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-0-True]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003586999955587089}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-0-True]", "seconds": 0.08631320000858977}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-1-True]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-1-True]", "phase": "setup", "outcome": "passed", "seconds": 0.0029743000050075352}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-1-True]", "phase": "call", "outcome": "passed", "seconds": 0.04011139998328872}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-1-True]", "phase": "teardown", "outcome": "passed", "seconds": 0.00027809999301098287}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-1-True]", "seconds": 0.04436520001036115}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-1-False]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-1-False]", "phase": "setup", "outcome": "passed", "seconds": 0.0030048000044189394}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-1-False]", "phase": "call", "outcome": "passed", "seconds": 0.030893300019670278}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-1-False]", "phase": "teardown", "outcome": "passed", "seconds": 0.0005601000157184899}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[0-1-False]", "seconds": 0.035864500008756295}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-0-False]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-0-False]", "phase": "setup", "outcome": "passed", "seconds": 0.0024880999990273267}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-0-False]", "phase": "call", "outcome": "passed", "seconds": 0.033096800005296245}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-0-False]", "phase": "teardown", "outcome": "passed", "seconds": 0.00035260000731796026}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-0-False]", "seconds": 0.0371482000045944}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-271-False]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-271-False]", "phase": "setup", "outcome": "passed", "seconds": 0.0024880999990273267}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-271-False]", "phase": "call", "outcome": "passed", "seconds": 0.04374690001714043}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-271-False]", "phase": "teardown", "outcome": "passed", "seconds": 0.00041039998177438974}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-271-False]", "seconds": 0.04789009998785332}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-2-False]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-2-False]", "phase": "setup", "outcome": "passed", "seconds": 0.002758399990852922}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-2-False]", "phase": "call", "outcome": "passed", "seconds": 0.03988029999891296}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-2-False]", "phase": "teardown", "outcome": "passed", "seconds": 0.0004659999976865947}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_recorded_failure_terminal_distinct_from_crash[1-2-False]", "seconds": 0.04437870002584532}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[job_state-R]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[job_state-R]", "phase": "setup", "outcome": "passed", "seconds": 0.003273800015449524}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[job_state-R]", "phase": "call", "outcome": "passed", "seconds": 0.04853559998446144}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[job_state-R]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002767999831121415}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[job_state-R]", "seconds": 0.05315150000387803}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Submit_arguments-/wrong/script]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Submit_arguments-/wrong/script]", "phase": "setup", "outcome": "passed", "seconds": 0.0028765000170096755}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Submit_arguments-/wrong/script]", "phase": "call", "outcome": "passed", "seconds": 0.0479732999810949}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Submit_arguments-/wrong/script]", "phase": "teardown", "outcome": "passed", "seconds": 0.0005643000185955316}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Submit_arguments-/wrong/script]", "seconds": 0.0530709000013303}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[exec_host-other/0*96]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[exec_host-other/0*96]", "phase": "setup", "outcome": "passed", "seconds": 0.003031200001714751}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[exec_host-other/0*96]", "phase": "call", "outcome": "passed", "seconds": 0.04855239999596961}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[exec_host-other/0*96]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003388000186532736}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[exec_host-other/0*96]", "seconds": 0.0531024000083562}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Resource_List-value3]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Resource_List-value3]", "phase": "setup", "outcome": "passed", "seconds": 0.0028557000041473657}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Resource_List-value3]", "phase": "call", "outcome": "passed", "seconds": 0.045973499974934384}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Resource_List-value3]", "phase": "teardown", "outcome": "passed", "seconds": 0.00039090000791475177}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_terminal_rejects_wrong_execution[Resource_List-value3]", "seconds": 0.050432899995939806}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_external_pin_and_mutation"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_external_pin_and_mutation", "phase": "setup", "outcome": "passed", "seconds": 0.0027233000146225095}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_external_pin_and_mutation", "phase": "call", "outcome": "passed", "seconds": 0.021740500000305474}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_external_pin_and_mutation", "phase": "teardown", "outcome": "passed", "seconds": 0.00033439998514950275}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_external_pin_and_mutation", "seconds": 0.025908299983711913}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_root_state_tracks_execution_not_operator_label"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_root_state_tracks_execution_not_operator_label", "phase": "setup", "outcome": "passed", "seconds": 0.0022390999947674572}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_root_state_tracks_execution_not_operator_label", "phase": "call", "outcome": "passed", "seconds": 0.008263700001407415}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_root_state_tracks_execution_not_operator_label", "phase": "teardown", "outcome": "passed", "seconds": 0.0003414000093471259}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_root_state_tracks_execution_not_operator_label", "seconds": 0.012136599980294704}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_saved_mc_fixed_gate_counts"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_saved_mc_fixed_gate_counts", "phase": "setup", "outcome": "passed", "seconds": 0.00034229998709633946}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/mc-benchmark/summary.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/reference_summary.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_timing_selected_settings_v1.json"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_saved_mc_fixed_gate_counts", "phase": "call", "outcome": "passed", "seconds": 0.060199700004886836}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_saved_mc_fixed_gate_counts", "phase": "teardown", "outcome": "passed", "seconds": 0.0003299999807495624}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_saved_mc_fixed_gate_counts", "seconds": 0.06215350001002662}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_pbs_guard_and_source_closure"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_pbs_guard_and_source_closure", "phase": "setup", "outcome": "passed", "seconds": 0.006117999990237877}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_pbs_guard_and_source_closure", "phase": "call", "outcome": "passed", "seconds": 0.3251363999734167}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_pbs_guard_and_source_closure", "phase": "teardown", "outcome": "passed", "seconds": 0.0004217000096105039}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_pbs_guard_and_source_closure", "seconds": 0.3330184999795165}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_prepare_run_and_render_exclusive_fixed_eight"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_prepare_run_and_render_exclusive_fixed_eight", "phase": "setup", "outcome": "passed", "seconds": 0.0029134000069461763}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_prepare_run_and_render_exclusive_fixed_eight", "phase": "call", "outcome": "passed", "seconds": 3.3280140999995638}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_prepare_run_and_render_exclusive_fixed_eight", "phase": "teardown", "outcome": "passed", "seconds": 0.001057399989804253}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_prepare_run_and_render_exclusive_fixed_eight", "seconds": 3.3331712000072002}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[metadata]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[metadata]", "phase": "setup", "outcome": "passed", "seconds": 0.003013000008650124}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[metadata]", "phase": "call", "outcome": "passed", "seconds": 2.03427949998877}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[metadata]", "phase": "teardown", "outcome": "passed", "seconds": 0.0009580999903846532}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[metadata]", "seconds": 2.0393551999877673}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[new_execution]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[new_execution]", "phase": "setup", "outcome": "passed", "seconds": 0.002601399988634512}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[new_execution]", "phase": "call", "outcome": "passed", "seconds": 2.1720384000218473}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[new_execution]", "phase": "teardown", "outcome": "passed", "seconds": 0.0010193000198341906}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[new_execution]", "seconds": 2.176783900009468}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[source]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[source]", "phase": "setup", "outcome": "passed", "seconds": 0.002908700000261888}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[source]", "phase": "call", "outcome": "passed", "seconds": 2.4767211000144016}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[source]", "phase": "teardown", "outcome": "passed", "seconds": 0.0009265000117011368}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[source]", "seconds": 2.481580000021495}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_task]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_task]", "phase": "setup", "outcome": "passed", "seconds": 0.002369199995882809}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_task]", "phase": "call", "outcome": "passed", "seconds": 1.8627877999970224}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_task]", "phase": "teardown", "outcome": "passed", "seconds": 0.0011172999802511185}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_task]", "seconds": 1.8674058000033256}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_source]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_source]", "phase": "setup", "outcome": "passed", "seconds": 0.0036226999945938587}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_source]", "phase": "call", "outcome": "passed", "seconds": 2.5237197000242304}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_source]", "phase": "teardown", "outcome": "passed", "seconds": 0.0010951999865937978}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_no_success_publication_after_end_mutation[extra_source]", "seconds": 2.5297237999911886}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_same_bytes_symlink_retarget_rejected"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_same_bytes_symlink_retarget_rejected", "phase": "setup", "outcome": "passed", "seconds": 0.002473100001225248}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_same_bytes_symlink_retarget_rejected", "phase": "call", "outcome": "passed", "seconds": 0.004262700007529929}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_same_bytes_symlink_retarget_rejected", "phase": "teardown", "outcome": "passed", "seconds": 0.0003595999733079225}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_same_bytes_symlink_retarget_rejected", "seconds": 0.008426399988820776}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_cohort_loader_payload_and_terminal_binding"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_cohort_loader_payload_and_terminal_binding", "phase": "setup", "outcome": "passed", "seconds": 0.0029759999888483435}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_cohort_loader_payload_and_terminal_binding", "phase": "call", "outcome": "passed", "seconds": 13.866784400015604}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_cohort_loader_payload_and_terminal_binding", "phase": "teardown", "outcome": "passed", "seconds": 0.00028390000807121396}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_cohort_loader_payload_and_terminal_binding", "seconds": 13.871092099987436}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_case0_saved_pbs_metadata_only"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_case0_saved_pbs_metadata_only", "phase": "setup", "outcome": "passed", "seconds": 0.00018999999156221747}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/recovered/benchmark-0/manifest.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/recovered/benchmark-0/summary.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/terminal.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/recovered/benchmark-0/submission.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/recovered/benchmark-0/submission_intent.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/recovered/benchmark-0/execution_intent.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/recovered/benchmark-0/native_preflight.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/recovered/benchmark-0/timing.sh"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_case0_saved_pbs_metadata_only", "phase": "call", "outcome": "passed", "seconds": 0.0593630000075791}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_case0_saved_pbs_metadata_only", "phase": "teardown", "outcome": "passed", "seconds": 0.0003546999942045659}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_case0_saved_pbs_metadata_only", "seconds": 0.061093299998901784}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[mc]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[mc]", "phase": "setup", "outcome": "passed", "seconds": 0.00047470000572502613}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/local_verification.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/benchmark_verification.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_submission_v1_stdout.txt"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/mc-benchmark/manifest.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/mc_timing_main_evidence_v1/mc-benchmark/submission.json"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[mc]", "phase": "call", "outcome": "passed", "seconds": 0.08873819999280386}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[mc]", "phase": "teardown", "outcome": "passed", "seconds": 0.0005412999889813364}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[mc]", "seconds": 0.09107210001093335}
+{"kind": "start", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[bar]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[bar]", "phase": "setup", "outcome": "passed", "seconds": 0.0005806999979540706}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/independent_payload_verification.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/verification.json"}
+{"kind": "data_open", "path": "A:/dev/mcmc4qec/docs/wp/data_tile_validation_2026-10-17/bar_main_case0_evidence_v1/transfer_verification.json"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[bar]", "phase": "call", "outcome": "passed", "seconds": 0.04024370000115596}
+{"kind": "report", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[bar]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003502999898046255}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_evaluation_report.py::test_real_accepted_inventory_metadata_chain_only[bar]", "seconds": 0.04248619999270886}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_cost_ratio_is_ratio_of_complete_means_not_mean_of_task_ratios"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_cost_ratio_is_ratio_of_complete_means_not_mean_of_task_ratios", "phase": "setup", "outcome": "passed", "seconds": 0.00026890001026913524}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_cost_ratio_is_ratio_of_complete_means_not_mean_of_task_ratios", "phase": "call", "outcome": "passed", "seconds": 0.0006188999977894127}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_cost_ratio_is_ratio_of_complete_means_not_mean_of_task_ratios", "phase": "teardown", "outcome": "passed", "seconds": 0.0002838000073097646}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_cost_ratio_is_ratio_of_complete_means_not_mean_of_task_ratios", "seconds": 0.001984800008358434}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[above_target]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[above_target]", "phase": "setup", "outcome": "passed", "seconds": 0.0004087999986950308}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[above_target]", "phase": "call", "outcome": "passed", "seconds": 0.0006216999900061637}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[above_target]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002902999985963106}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[above_target]", "seconds": 0.0022117999906186014}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[failed]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[failed]", "phase": "setup", "outcome": "passed", "seconds": 0.00038910002331249416}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[failed]", "phase": "call", "outcome": "passed", "seconds": 0.0005551000067498535}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[failed]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003158999898005277}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[failed]", "seconds": 0.0021766000136267394}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[missing_point]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[missing_point]", "phase": "setup", "outcome": "passed", "seconds": 0.0004351999959908426}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[missing_point]", "phase": "call", "outcome": "passed", "seconds": 0.0006427000043913722}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[missing_point]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003034999826923013}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_precision_failure_suppresses_ratio_and_keeps_all_costs[missing_point]", "seconds": 0.002426399994874373}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_missing_cost_cannot_pass_through_available_only_mean"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_missing_cost_cannot_pass_through_available_only_mean", "phase": "setup", "outcome": "passed", "seconds": 0.000381499994546175}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_missing_cost_cannot_pass_through_available_only_mean", "phase": "call", "outcome": "passed", "seconds": 0.0010576000204309821}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_missing_cost_cannot_pass_through_available_only_mean", "phase": "teardown", "outcome": "passed", "seconds": 0.00030789998709224164}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_missing_cost_cannot_pass_through_available_only_mean", "seconds": 0.002909000002546236}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_interval_missing_is_retained_separately_from_point_precision"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_interval_missing_is_retained_separately_from_point_precision", "phase": "setup", "outcome": "passed", "seconds": 0.0002565000031609088}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_interval_missing_is_retained_separately_from_point_precision", "phase": "call", "outcome": "passed", "seconds": 0.0006647999980486929}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_interval_missing_is_retained_separately_from_point_precision", "phase": "teardown", "outcome": "passed", "seconds": 0.0002625000197440386}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_interval_missing_is_retained_separately_from_point_precision", "seconds": 0.002090099995257333}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[-1.0]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[-1.0]", "phase": "setup", "outcome": "passed", "seconds": 0.0008419000077992678}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[-1.0]", "phase": "call", "outcome": "passed", "seconds": 0.0006566999945789576}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[-1.0]", "phase": "teardown", "outcome": "passed", "seconds": 0.00029949998133815825}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[-1.0]", "seconds": 0.002829999983077869}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[nan]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[nan]", "phase": "setup", "outcome": "passed", "seconds": 0.0004206000012345612}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[nan]", "phase": "call", "outcome": "passed", "seconds": 0.0006128000095486641}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[nan]", "phase": "teardown", "outcome": "passed", "seconds": 0.00030610000248998404}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[nan]", "seconds": 0.0023313999990932643}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[inf]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[inf]", "phase": "setup", "outcome": "passed", "seconds": 0.00041390000842511654}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[inf]", "phase": "call", "outcome": "passed", "seconds": 0.0006200000061653554}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[inf]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003175000019837171}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[inf]", "seconds": 0.002355900011025369}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[True]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[True]", "phase": "setup", "outcome": "passed", "seconds": 0.0004239999980200082}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[True]", "phase": "call", "outcome": "passed", "seconds": 0.0006372999923769385}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[True]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003005000180564821}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_invalid_cost_rejected[True]", "seconds": 0.0023472000029869378}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_duplicate_replicate_and_unknown_status_rejected"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_duplicate_replicate_and_unknown_status_rejected", "phase": "setup", "outcome": "passed", "seconds": 0.00030449999030679464}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_duplicate_replicate_and_unknown_status_rejected", "phase": "call", "outcome": "passed", "seconds": 0.000683299993397668}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_duplicate_replicate_and_unknown_status_rejected", "phase": "teardown", "outcome": "passed", "seconds": 0.0002796000044327229}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_duplicate_replicate_and_unknown_status_rejected", "seconds": 0.002227999997558072}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_zero_reference_and_zero_time_do_not_produce_nonfinite_ratios"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_zero_reference_and_zero_time_do_not_produce_nonfinite_ratios", "phase": "setup", "outcome": "passed", "seconds": 0.0002801000082399696}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_zero_reference_and_zero_time_do_not_produce_nonfinite_ratios", "phase": "call", "outcome": "passed", "seconds": 0.0012231000000610948}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_zero_reference_and_zero_time_do_not_produce_nonfinite_ratios", "phase": "teardown", "outcome": "passed", "seconds": 0.00030709998100064695}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_zero_reference_and_zero_time_do_not_produce_nonfinite_ratios", "seconds": 0.0030043000006116927}
+{"kind": "start", "nodeid": "tests/test_tile_timing_metrics.py::test_short_actual_mc_record_can_be_assessed"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_short_actual_mc_record_can_be_assessed", "phase": "setup", "outcome": "passed", "seconds": 0.0029387999966274947}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_short_actual_mc_record_can_be_assessed", "phase": "call", "outcome": "passed", "seconds": 0.297911200003}
+{"kind": "report", "nodeid": "tests/test_tile_timing_metrics.py::test_short_actual_mc_record_can_be_assessed", "phase": "teardown", "outcome": "passed", "seconds": 0.0003823999722953886}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_metrics.py::test_short_actual_mc_record_can_be_assessed", "seconds": 0.30273809999926016}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_saved_final_matches_unchanged_policy_and_no_raw_scan"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_saved_final_matches_unchanged_policy_and_no_raw_scan", "phase": "setup", "outcome": "passed", "seconds": 1.9410414999874774}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_saved_final_matches_unchanged_policy_and_no_raw_scan", "phase": "call", "outcome": "passed", "seconds": 1.8533586999983527}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_saved_final_matches_unchanged_policy_and_no_raw_scan", "phase": "teardown", "outcome": "passed", "seconds": 0.0004797999863512814}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_saved_final_matches_unchanged_policy_and_no_raw_scan", "seconds": 3.796759099990595}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_semantic_metrics_mismatch_rejected_after_rebinding_phase_hashes"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_semantic_metrics_mismatch_rejected_after_rebinding_phase_hashes", "phase": "setup", "outcome": "passed", "seconds": 1.0533302999974694}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_semantic_metrics_mismatch_rejected_after_rebinding_phase_hashes", "phase": "call", "outcome": "passed", "seconds": 0.5793782999971882}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_semantic_metrics_mismatch_rejected_after_rebinding_phase_hashes", "phase": "teardown", "outcome": "passed", "seconds": 0.00043429998913779855}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_semantic_metrics_mismatch_rejected_after_rebinding_phase_hashes", "seconds": 1.6352206000010483}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_case]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_case]", "phase": "setup", "outcome": "passed", "seconds": 1.0729408000188414}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_case]", "phase": "call", "outcome": "passed", "seconds": 0.0005375999899115413}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_case]", "phase": "teardown", "outcome": "passed", "seconds": 0.00044529998558573425}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_case]", "seconds": 1.0756146000057925}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[duplicate_case]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[duplicate_case]", "phase": "setup", "outcome": "passed", "seconds": 1.0406878000067081}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[duplicate_case]", "phase": "call", "outcome": "passed", "seconds": 0.0006199000054039061}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[duplicate_case]", "phase": "teardown", "outcome": "passed", "seconds": 0.00040630000876262784}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[duplicate_case]", "seconds": 1.0434665999782737}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pin]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pin]", "phase": "setup", "outcome": "passed", "seconds": 1.0585431999934372}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pin]", "phase": "call", "outcome": "passed", "seconds": 0.003407799988053739}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pin]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003664999967440963}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pin]", "seconds": 1.0640080999874044}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_phase]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_phase]", "phase": "setup", "outcome": "passed", "seconds": 1.0672027000109665}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_phase]", "phase": "call", "outcome": "passed", "seconds": 0.07824040000559762}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_phase]", "phase": "teardown", "outcome": "passed", "seconds": 0.00032560000545345247}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[missing_phase]", "seconds": 1.14737970000715}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[payload]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[payload]", "phase": "setup", "outcome": "passed", "seconds": 1.0687703000148758}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[payload]", "phase": "call", "outcome": "passed", "seconds": 0.09390070001245476}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[payload]", "phase": "teardown", "outcome": "passed", "seconds": 0.00048809999134391546}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[payload]", "seconds": 1.1651630999986082}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pbs]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pbs]", "phase": "setup", "outcome": "passed", "seconds": 1.3252800999907777}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pbs]", "phase": "call", "outcome": "passed", "seconds": 0.33814589999383315}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pbs]", "phase": "teardown", "outcome": "passed", "seconds": 0.0004199999966658652}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[pbs]", "seconds": 1.6659010000003036}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[summary]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[summary]", "phase": "setup", "outcome": "passed", "seconds": 1.1721684000222012}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[summary]", "phase": "call", "outcome": "passed", "seconds": 0.3449347999994643}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[summary]", "phase": "teardown", "outcome": "passed", "seconds": 0.0004011999990325421}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[summary]", "seconds": 1.5193502999900375}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[source]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[source]", "phase": "setup", "outcome": "passed", "seconds": 1.1667130000132602}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[source]", "phase": "call", "outcome": "passed", "seconds": 0.30075170000782236}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[source]", "phase": "teardown", "outcome": "passed", "seconds": 0.00041229999624192715}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[source]", "seconds": 1.4699188000231516}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[input]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[input]", "phase": "setup", "outcome": "passed", "seconds": 1.0094486000016332}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[input]", "phase": "call", "outcome": "passed", "seconds": 0.29872180000529625}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[input]", "phase": "teardown", "outcome": "passed", "seconds": 0.00039010000182315707}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[input]", "seconds": 1.3103927999909502}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[metrics]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[metrics]", "phase": "setup", "outcome": "passed", "seconds": 1.0662577000039164}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[metrics]", "phase": "call", "outcome": "passed", "seconds": 0.3461051000049338}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[metrics]", "phase": "teardown", "outcome": "passed", "seconds": 0.00039179998566396534}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[metrics]", "seconds": 1.4145612999855075}
+{"kind": "start", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[escape]"}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[escape]", "phase": "setup", "outcome": "passed", "seconds": 1.0695294000033755}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[escape]", "phase": "call", "outcome": "passed", "seconds": 0.020867700019152835}
+{"kind": "report", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[escape]", "phase": "teardown", "outcome": "passed", "seconds": 0.0006010999786667526}
+{"kind": "finish", "nodeid": "tests/test_tile_timing_selection_from_final.py::test_rejects_incomplete_or_changed_evidence[escape]", "seconds": 1.0934638000035193}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[0]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[0]", "phase": "setup", "outcome": "passed", "seconds": 3.9691095000016503}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[0]", "phase": "call", "outcome": "passed", "seconds": 0.007234899996547028}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[0]", "phase": "teardown", "outcome": "passed", "seconds": 0.00030849999166093767}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[0]", "seconds": 3.977845999994315}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[1]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[1]", "phase": "setup", "outcome": "passed", "seconds": 0.0006227999983821064}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[1]", "phase": "call", "outcome": "passed", "seconds": 0.07071470000664704}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[1]", "phase": "teardown", "outcome": "passed", "seconds": 0.0005823999817948788}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[1]", "seconds": 0.07316150001133792}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[2]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[2]", "phase": "setup", "outcome": "passed", "seconds": 0.0005872999900020659}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[2]", "phase": "call", "outcome": "passed", "seconds": 0.016538099996978417}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[2]", "phase": "teardown", "outcome": "passed", "seconds": 0.0005734000005759299}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[2]", "seconds": 0.018988600000739098}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[3]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[3]", "phase": "setup", "outcome": "passed", "seconds": 0.0005991999933030456}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[3]", "phase": "call", "outcome": "passed", "seconds": 0.14376069998252206}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[3]", "phase": "teardown", "outcome": "passed", "seconds": 0.0004771999956574291}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_actual_small_sampler_checkpoint_audit[3]", "seconds": 0.14620610000565648}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[weight]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[weight]", "phase": "setup", "outcome": "passed", "seconds": 0.0006687000277452171}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[weight]", "phase": "call", "outcome": "passed", "seconds": 0.008655699988594279}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[weight]", "phase": "teardown", "outcome": "passed", "seconds": 0.0005855999770574272}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[weight]", "seconds": 0.011250399984419346}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[syndrome_weight]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[syndrome_weight]", "phase": "setup", "outcome": "passed", "seconds": 0.0005728999967686832}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[syndrome_weight]", "phase": "call", "outcome": "passed", "seconds": 0.007639300019945949}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[syndrome_weight]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002902999985963106}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[syndrome_weight]", "seconds": 0.009569799993187189}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sector]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sector]", "phase": "setup", "outcome": "passed", "seconds": 0.0006377999961841851}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sector]", "phase": "call", "outcome": "passed", "seconds": 0.006961200007935986}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sector]", "phase": "teardown", "outcome": "passed", "seconds": 0.00038240000139921904}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sector]", "seconds": 0.009245699999155477}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoint_indices]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoint_indices]", "phase": "setup", "outcome": "passed", "seconds": 0.0006013000092934817}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoint_indices]", "phase": "call", "outcome": "passed", "seconds": 0.006173000001581386}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoint_indices]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003611999854911119}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoint_indices]", "seconds": 0.00831470001139678}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoints]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoints]", "phase": "setup", "outcome": "passed", "seconds": 0.000680800003465265}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoints]", "phase": "call", "outcome": "passed", "seconds": 0.005601000011665747}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoints]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003470999945420772}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[checkpoints]", "seconds": 0.007787899987306446}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[final]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[final]", "phase": "setup", "outcome": "passed", "seconds": 0.0005486999871209264}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[final]", "phase": "call", "outcome": "passed", "seconds": 0.0055133000132627785}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[final]", "phase": "teardown", "outcome": "passed", "seconds": 0.00029559998074546456}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[final]", "seconds": 0.0073345999990124255}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[initial]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[initial]", "phase": "setup", "outcome": "passed", "seconds": 0.0004939000064041466}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[initial]", "phase": "call", "outcome": "passed", "seconds": 0.004828000004636124}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[initial]", "phase": "teardown", "outcome": "passed", "seconds": 0.0004903000080958009}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[initial]", "seconds": 0.006969800015212968}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sample_seed]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sample_seed]", "phase": "setup", "outcome": "passed", "seconds": 0.0005842999962624162}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sample_seed]", "phase": "call", "outcome": "passed", "seconds": 0.006386699998984113}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sample_seed]", "phase": "teardown", "outcome": "passed", "seconds": 0.00043559999903663993}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[sample_seed]", "seconds": 0.008627900009742007}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[config]"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[config]", "phase": "setup", "outcome": "passed", "seconds": 0.0006254000181797892}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[config]", "phase": "call", "outcome": "passed", "seconds": 0.004788199992617592}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[config]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003318999952170998}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_corruption_rejected[config]", "seconds": 0.006835699983639643}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_dtype_shape_and_failed_task_retention"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_dtype_shape_and_failed_task_retention", "phase": "setup", "outcome": "passed", "seconds": 0.0005367999838199466}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_dtype_shape_and_failed_task_retention", "phase": "call", "outcome": "passed", "seconds": 0.010049199976492673}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_dtype_shape_and_failed_task_retention", "phase": "teardown", "outcome": "passed", "seconds": 0.0003229999856557697}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_dtype_shape_and_failed_task_retention", "seconds": 0.01214170001912862}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_group_retains_failure_checks_input_markers_and_rejects_missing"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_group_retains_failure_checks_input_markers_and_rejects_missing", "phase": "setup", "outcome": "passed", "seconds": 0.003399300010642037}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_group_retains_failure_checks_input_markers_and_rejects_missing", "phase": "call", "outcome": "passed", "seconds": 0.5760109999973793}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_group_retains_failure_checks_input_markers_and_rejects_missing", "phase": "teardown", "outcome": "passed", "seconds": 0.0003826999745797366}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_group_retains_failure_checks_input_markers_and_rejects_missing", "seconds": 0.5810293000249658}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_full_audit_cannot_start_outside_qsub"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_full_audit_cannot_start_outside_qsub", "phase": "setup", "outcome": "passed", "seconds": 0.002914200013037771}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_full_audit_cannot_start_outside_qsub", "phase": "call", "outcome": "passed", "seconds": 0.0018536999996285886}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_full_audit_cannot_start_outside_qsub", "phase": "teardown", "outcome": "passed", "seconds": 0.00038129999302327633}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_full_audit_cannot_start_outside_qsub", "seconds": 0.0062796999991405755}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit.py::test_platform_guard_rejects_same_versions_with_different_native_or_failure_response"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_platform_guard_rejects_same_versions_with_different_native_or_failure_response", "phase": "setup", "outcome": "passed", "seconds": 0.00025749998167157173}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_platform_guard_rejects_same_versions_with_different_native_or_failure_response", "phase": "call", "outcome": "passed", "seconds": 0.0009935999987646937}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit.py::test_platform_guard_rejects_same_versions_with_different_native_or_failure_response", "phase": "teardown", "outcome": "passed", "seconds": 0.0006884000031277537}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit.py::test_platform_guard_rejects_same_versions_with_different_native_or_failure_response", "seconds": 0.002788499987218529}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit_run.py::test_cohorts_fixed_before_outcomes_and_native_binding"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_cohorts_fixed_before_outcomes_and_native_binding", "phase": "setup", "outcome": "passed", "seconds": 0.00026439997600391507}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_cohorts_fixed_before_outcomes_and_native_binding", "phase": "call", "outcome": "passed", "seconds": 0.986044099990977}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_cohorts_fixed_before_outcomes_and_native_binding", "phase": "teardown", "outcome": "passed", "seconds": 0.00039239999023266137}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit_run.py::test_cohorts_fixed_before_outcomes_and_native_binding", "seconds": 0.9881519000045955}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit_run.py::test_measured_real_group_and_corrupt_input_are_distinct"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_measured_real_group_and_corrupt_input_are_distinct", "phase": "setup", "outcome": "passed", "seconds": 0.004300200002035126}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_measured_real_group_and_corrupt_input_are_distinct", "phase": "call", "outcome": "passed", "seconds": 0.573326099984115}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_measured_real_group_and_corrupt_input_are_distinct", "phase": "teardown", "outcome": "passed", "seconds": 0.00040010001976042986}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit_run.py::test_measured_real_group_and_corrupt_input_are_distinct", "seconds": 0.5792297000007238}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit_run.py::test_saved_input_tamper_rejected"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_saved_input_tamper_rejected", "phase": "setup", "outcome": "passed", "seconds": 0.0025816999841481447}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_saved_input_tamper_rejected", "phase": "call", "outcome": "passed", "seconds": 0.8221890999993775}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_saved_input_tamper_rejected", "phase": "teardown", "outcome": "passed", "seconds": 0.0004409999819472432}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit_run.py::test_saved_input_tamper_rejected", "seconds": 0.8264834999863524}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_mismatch_stops_before_workers_and_preserves_intent"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_mismatch_stops_before_workers_and_preserves_intent", "phase": "setup", "outcome": "passed", "seconds": 0.003744599991478026}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_mismatch_stops_before_workers_and_preserves_intent", "phase": "call", "outcome": "passed", "seconds": 0.9106719999981578}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_mismatch_stops_before_workers_and_preserves_intent", "phase": "teardown", "outcome": "passed", "seconds": 0.0004999999946448952}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_mismatch_stops_before_workers_and_preserves_intent", "seconds": 0.916142400004901}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_evidence_bound_to_summary"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_evidence_bound_to_summary", "phase": "setup", "outcome": "passed", "seconds": 0.003647300007287413}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_evidence_bound_to_summary", "phase": "call", "outcome": "passed", "seconds": 0.6090101999870967}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_evidence_bound_to_summary", "phase": "teardown", "outcome": "passed", "seconds": 0.0004853999998886138}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit_run.py::test_native_evidence_bound_to_summary", "seconds": 0.6146203000098467}
+{"kind": "start", "nodeid": "tests/test_tile_trace_audit_run.py::test_run_requires_qsub_before_writes"}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_run_requires_qsub_before_writes", "phase": "setup", "outcome": "passed", "seconds": 0.003722800000105053}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_run_requires_qsub_before_writes", "phase": "call", "outcome": "passed", "seconds": 0.000659500015899539}
+{"kind": "report", "nodeid": "tests/test_tile_trace_audit_run.py::test_run_requires_qsub_before_writes", "phase": "teardown", "outcome": "passed", "seconds": 0.00045059999683871865}
+{"kind": "finish", "nodeid": "tests/test_tile_trace_audit_run.py::test_run_requires_qsub_before_writes", "seconds": 0.006302399997366592}
+{"kind": "start", "nodeid": "tests/test_tile_weight_allocation.py::test_tail_cut_is_minimal_and_includes_zero_without_distance_assumptions"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_tail_cut_is_minimal_and_includes_zero_without_distance_assumptions", "phase": "setup", "outcome": "passed", "seconds": 0.00031820000731386244}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_tail_cut_is_minimal_and_includes_zero_without_distance_assumptions", "phase": "call", "outcome": "passed", "seconds": 0.0025547999830450863}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_tail_cut_is_minimal_and_includes_zero_without_distance_assumptions", "phase": "teardown", "outcome": "passed", "seconds": 0.0003195999888703227}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_allocation.py::test_tail_cut_is_minimal_and_includes_zero_without_distance_assumptions", "seconds": 0.0043206000118516386}
+{"kind": "start", "nodeid": "tests/test_tile_weight_allocation.py::test_cost_weighted_allocation_ratio_and_zero_failure_floor"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_cost_weighted_allocation_ratio_and_zero_failure_floor", "phase": "setup", "outcome": "passed", "seconds": 0.0003003999881912023}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_cost_weighted_allocation_ratio_and_zero_failure_floor", "phase": "call", "outcome": "passed", "seconds": 0.0004440000047907233}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_cost_weighted_allocation_ratio_and_zero_failure_floor", "phase": "teardown", "outcome": "passed", "seconds": 0.00030089999199844897}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_allocation.py::test_cost_weighted_allocation_ratio_and_zero_failure_floor", "seconds": 0.0020941999973729253}
+{"kind": "start", "nodeid": "tests/test_tile_weight_allocation.py::test_all_sixteen_conditions_are_reproducible_and_match_driver"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_all_sixteen_conditions_are_reproducible_and_match_driver", "phase": "setup", "outcome": "passed", "seconds": 0.0008242999901995063}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_all_sixteen_conditions_are_reproducible_and_match_driver", "phase": "call", "outcome": "passed", "seconds": 0.6721804999979213}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_all_sixteen_conditions_are_reproducible_and_match_driver", "phase": "teardown", "outcome": "passed", "seconds": 0.00033209999673999846}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_allocation.py::test_all_sixteen_conditions_are_reproducible_and_match_driver", "seconds": 0.6745969000039622}
+{"kind": "start", "nodeid": "tests/test_tile_weight_allocation.py::test_unmeasured_layer_uses_worst_positive_cost_and_maximum_variance"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_unmeasured_layer_uses_worst_positive_cost_and_maximum_variance", "phase": "setup", "outcome": "passed", "seconds": 0.0002899000246543437}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_unmeasured_layer_uses_worst_positive_cost_and_maximum_variance", "phase": "call", "outcome": "passed", "seconds": 0.11713090000557713}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_unmeasured_layer_uses_worst_positive_cost_and_maximum_variance", "phase": "teardown", "outcome": "passed", "seconds": 0.00028700000257231295}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_allocation.py::test_unmeasured_layer_uses_worst_positive_cost_and_maximum_variance", "seconds": 0.11877460000687279}
+{"kind": "start", "nodeid": "tests/test_tile_weight_allocation.py::test_missing_or_altered_pilot_rejected_before_allocation"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_missing_or_altered_pilot_rejected_before_allocation", "phase": "setup", "outcome": "passed", "seconds": 0.000238799984799698}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_missing_or_altered_pilot_rejected_before_allocation", "phase": "call", "outcome": "passed", "seconds": 0.5091347000270616}
+{"kind": "report", "nodeid": "tests/test_tile_weight_allocation.py::test_missing_or_altered_pilot_rejected_before_allocation", "phase": "teardown", "outcome": "passed", "seconds": 0.0004182000120636076}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_allocation.py::test_missing_or_altered_pilot_rejected_before_allocation", "seconds": 0.5110837999964133}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_mean_uncertainty_and_reference_difference"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_mean_uncertainty_and_reference_difference", "phase": "setup", "outcome": "passed", "seconds": 0.0003124999930150807}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_mean_uncertainty_and_reference_difference", "phase": "call", "outcome": "passed", "seconds": 0.0005606999911833555}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_mean_uncertainty_and_reference_difference", "phase": "teardown", "outcome": "passed", "seconds": 0.0003218000056222081}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_mean_uncertainty_and_reference_difference", "seconds": 0.002276400016853586}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_points_keep_full_denominator_and_undefined_diagnostics"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_points_keep_full_denominator_and_undefined_diagnostics", "phase": "setup", "outcome": "passed", "seconds": 0.000315699988277629}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_points_keep_full_denominator_and_undefined_diagnostics", "phase": "call", "outcome": "passed", "seconds": 0.0003612999862525612}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_points_keep_full_denominator_and_undefined_diagnostics", "phase": "teardown", "outcome": "passed", "seconds": 0.0003026000049430877}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_points_keep_full_denominator_and_undefined_diagnostics", "seconds": 0.002060600003460422}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[duplicate]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[duplicate]", "phase": "setup", "outcome": "passed", "seconds": 0.00048719998449087143}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[duplicate]", "phase": "call", "outcome": "passed", "seconds": 0.0003813000221271068}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[duplicate]", "phase": "teardown", "outcome": "passed", "seconds": 0.00031430000672116876}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[duplicate]", "seconds": 0.0022458999883383512}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[absent]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[absent]", "phase": "setup", "outcome": "passed", "seconds": 0.0004588000010699034}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[absent]", "phase": "call", "outcome": "passed", "seconds": 0.0003336999798193574}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[absent]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003239999932702631}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[absent]", "seconds": 0.002125500002875924}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[nan]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[nan]", "phase": "setup", "outcome": "passed", "seconds": 0.00042359999497421086}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[nan]", "phase": "call", "outcome": "passed", "seconds": 0.00039000000106170774}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[nan]", "phase": "teardown", "outcome": "passed", "seconds": 0.00041360000614076853}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[nan]", "seconds": 0.0024209999828599393}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[negative_se]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[negative_se]", "phase": "setup", "outcome": "passed", "seconds": 0.000664100021822378}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[negative_se]", "phase": "call", "outcome": "passed", "seconds": 0.0003671000013127923}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[negative_se]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003446000046096742}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_invalid_cohort_is_not_a_successful_subset[negative_se]", "seconds": 0.0026148000033572316}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_diagnostic_requires_target_sampling_failure"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_diagnostic_requires_target_sampling_failure", "phase": "setup", "outcome": "passed", "seconds": 0.000298700004350394}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_diagnostic_requires_target_sampling_failure", "phase": "call", "outcome": "passed", "seconds": 0.0006760999967809767}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_diagnostic_requires_target_sampling_failure", "phase": "teardown", "outcome": "passed", "seconds": 0.00040359998820349574}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_missing_diagnostic_requires_target_sampling_failure", "seconds": 0.0026871000009123236}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_json_only_reader_checks_identity_and_metadata_hash"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_json_only_reader_checks_identity_and_metadata_hash", "phase": "setup", "outcome": "passed", "seconds": 0.004088899993803352}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_json_only_reader_checks_identity_and_metadata_hash", "phase": "call", "outcome": "passed", "seconds": 0.0447876000253018}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_json_only_reader_checks_identity_and_metadata_hash", "phase": "teardown", "outcome": "passed", "seconds": 0.0004175999783910811}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_json_only_reader_checks_identity_and_metadata_hash", "seconds": 0.050686400005361065}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_persisted_comparison_binds_reference_and_keeps_missing_replicate"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_persisted_comparison_binds_reference_and_keeps_missing_replicate", "phase": "setup", "outcome": "passed", "seconds": 0.003195899975253269}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_persisted_comparison_binds_reference_and_keeps_missing_replicate", "phase": "call", "outcome": "passed", "seconds": 0.13423289998900145}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_persisted_comparison_binds_reference_and_keeps_missing_replicate", "phase": "teardown", "outcome": "passed", "seconds": 0.00040099999750964344}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_persisted_comparison_binds_reference_and_keeps_missing_replicate", "seconds": 0.13909260000218637}
+{"kind": "start", "nodeid": "tests/test_tile_weight_comparison.py::test_real_small_analysis_weight_matches_saved_target_traces"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_real_small_analysis_weight_matches_saved_target_traces", "phase": "setup", "outcome": "passed", "seconds": 0.003503099986119196}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_real_small_analysis_weight_matches_saved_target_traces", "phase": "call", "outcome": "passed", "seconds": 2.0554841999837663}
+{"kind": "report", "nodeid": "tests/test_tile_weight_comparison.py::test_real_small_analysis_weight_matches_saved_target_traces", "phase": "teardown", "outcome": "passed", "seconds": 0.00038660000427626073}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_comparison.py::test_real_small_analysis_weight_matches_saved_target_traces", "seconds": 2.060818099998869}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot.py::test_pilot_has_full_fixed_task_set_and_small_task_resumes"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot.py::test_pilot_has_full_fixed_task_set_and_small_task_resumes", "phase": "setup", "outcome": "passed", "seconds": 0.0047181999834720045}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot.py::test_pilot_has_full_fixed_task_set_and_small_task_resumes", "phase": "call", "outcome": "passed", "seconds": 0.5561912000121083}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot.py::test_pilot_has_full_fixed_task_set_and_small_task_resumes", "phase": "teardown", "outcome": "passed", "seconds": 0.0004481000069063157}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot.py::test_pilot_has_full_fixed_task_set_and_small_task_resumes", "seconds": 0.5627701999910641}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_complete_raw_layers_and_failed_tasks_remain_explicit"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_complete_raw_layers_and_failed_tasks_remain_explicit", "phase": "setup", "outcome": "passed", "seconds": 0.000302400003420189}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_complete_raw_layers_and_failed_tasks_remain_explicit", "phase": "call", "outcome": "passed", "seconds": 3.55532640000456}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_complete_raw_layers_and_failed_tasks_remain_explicit", "phase": "teardown", "outcome": "passed", "seconds": 0.0003650000144261867}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_complete_raw_layers_and_failed_tasks_remain_explicit", "seconds": 3.5572189000085928}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[missing]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[missing]", "phase": "setup", "outcome": "passed", "seconds": 0.0004896000027656555}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[missing]", "phase": "call", "outcome": "passed", "seconds": 0.002802300004987046}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[missing]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003653000167105347}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[missing]", "seconds": 0.005491500021889806}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[duplicate]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[duplicate]", "phase": "setup", "outcome": "passed", "seconds": 0.0006422000005841255}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[duplicate]", "phase": "call", "outcome": "passed", "seconds": 0.0031868000223767012}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[duplicate]", "phase": "teardown", "outcome": "passed", "seconds": 0.0004228000179864466}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[duplicate]", "seconds": 0.00578710000263527}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[seed]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[seed]", "phase": "setup", "outcome": "passed", "seconds": 0.0005731999990530312}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[seed]", "phase": "call", "outcome": "passed", "seconds": 0.0034463999909348786}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[seed]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003963000199291855}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[seed]", "seconds": 0.005814799980726093}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[prior]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[prior]", "phase": "setup", "outcome": "passed", "seconds": 0.0005342999938875437}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[prior]", "phase": "call", "outcome": "passed", "seconds": 0.0032893000170588493}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[prior]", "phase": "teardown", "outcome": "passed", "seconds": 0.00038029998540878296}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[prior]", "seconds": 0.005522499996004626}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[count]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[count]", "phase": "setup", "outcome": "passed", "seconds": 0.0005709999823011458}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[count]", "phase": "call", "outcome": "passed", "seconds": 0.0034820000000763685}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[count]", "phase": "teardown", "outcome": "passed", "seconds": 0.00047480000648647547}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[count]", "seconds": 0.005929199978709221}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[weight]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[weight]", "phase": "setup", "outcome": "passed", "seconds": 0.0004474000015761703}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[weight]", "phase": "call", "outcome": "passed", "seconds": 0.0029095999780111015}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[weight]", "phase": "teardown", "outcome": "passed", "seconds": 0.00033580002491362393}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[weight]", "seconds": 0.004902899992885068}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[draw]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[draw]", "phase": "setup", "outcome": "passed", "seconds": 0.00043960000039078295}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[draw]", "phase": "call", "outcome": "passed", "seconds": 0.002869699994334951}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[draw]", "phase": "teardown", "outcome": "passed", "seconds": 0.00034909998066723347}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[draw]", "seconds": 0.004809799982467666}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[contradiction]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[contradiction]", "phase": "setup", "outcome": "passed", "seconds": 0.00044910001452080905}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[contradiction]", "phase": "call", "outcome": "passed", "seconds": 0.0020240999874658883}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[contradiction]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003231999871786684}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_reject_incomplete_or_inconsistent_pilot[contradiction]", "seconds": 0.003937100002076477}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_checked_artifact_roundtrip_and_corruption"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_checked_artifact_roundtrip_and_corruption", "phase": "setup", "outcome": "passed", "seconds": 0.004388599976664409}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_checked_artifact_roundtrip_and_corruption", "phase": "call", "outcome": "passed", "seconds": 0.16226360001019202}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_checked_artifact_roundtrip_and_corruption", "phase": "teardown", "outcome": "passed", "seconds": 0.00036869998439215124}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_checked_artifact_roundtrip_and_corruption", "seconds": 0.16830679998383857}
+{"kind": "start", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_real_pilot_records_match_seed_and_fixed_problem"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_real_pilot_records_match_seed_and_fixed_problem", "phase": "setup", "outcome": "passed", "seconds": 0.0034499999892432243}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_real_pilot_records_match_seed_and_fixed_problem", "phase": "call", "outcome": "passed", "seconds": 0.7438603000191506}
+{"kind": "report", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_real_pilot_records_match_seed_and_fixed_problem", "phase": "teardown", "outcome": "passed", "seconds": 0.0003958999877795577}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_pilot_audit.py::test_real_pilot_records_match_seed_and_fixed_problem", "seconds": 0.7489869999990333}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference.py::test_fixed_chunk_partition_seed_namespace_and_invalid_enumeration"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_fixed_chunk_partition_seed_namespace_and_invalid_enumeration", "phase": "setup", "outcome": "passed", "seconds": 0.0003065000055357814}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_fixed_chunk_partition_seed_namespace_and_invalid_enumeration", "phase": "call", "outcome": "passed", "seconds": 0.1451046000001952}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_fixed_chunk_partition_seed_namespace_and_invalid_enumeration", "phase": "teardown", "outcome": "passed", "seconds": 0.00033809998421929777}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference.py::test_fixed_chunk_partition_seed_namespace_and_invalid_enumeration", "seconds": 0.1469851000001654}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[0]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[0]", "phase": "setup", "outcome": "passed", "seconds": 0.061109300004318357}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[0]", "phase": "call", "outcome": "passed", "seconds": 1.3792009000026155}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[0]", "phase": "teardown", "outcome": "passed", "seconds": 0.00039870000910013914}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[0]", "seconds": 1.4419883999798913}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[1]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[1]", "phase": "setup", "outcome": "passed", "seconds": 0.004445800004759803}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[1]", "phase": "call", "outcome": "passed", "seconds": 5.554850700020324}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[1]", "phase": "teardown", "outcome": "passed", "seconds": 0.00041710000368766487}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[1]", "seconds": 5.561190300009912}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[2]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[2]", "phase": "setup", "outcome": "passed", "seconds": 0.004703400016296655}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[2]", "phase": "call", "outcome": "passed", "seconds": 2.051611500006402}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[2]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003665999975055456}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[2]", "seconds": 2.058138099993812}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[3]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[3]", "phase": "setup", "outcome": "passed", "seconds": 0.0037232000031508505}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[3]", "phase": "call", "outcome": "passed", "seconds": 7.239051000011386}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[3]", "phase": "teardown", "outcome": "passed", "seconds": 0.0004126999992877245}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference.py::test_actual_small_raw_chunks_reproduce_stratified_sum[3]", "seconds": 7.244466900010593}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference.py::test_full_small_enumeration_chunks_cover_layer_exactly"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_full_small_enumeration_chunks_cover_layer_exactly", "phase": "setup", "outcome": "passed", "seconds": 0.003688299999339506}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_full_small_enumeration_chunks_cover_layer_exactly", "phase": "call", "outcome": "passed", "seconds": 0.5917745000042487}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_full_small_enumeration_chunks_cover_layer_exactly", "phase": "teardown", "outcome": "passed", "seconds": 0.0003691999881993979}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference.py::test_full_small_enumeration_chunks_cover_layer_exactly", "seconds": 0.596836999990046}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference.py::test_failed_chunk_is_recorded_and_not_replaced_by_a_new_draw"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_failed_chunk_is_recorded_and_not_replaced_by_a_new_draw", "phase": "setup", "outcome": "passed", "seconds": 0.0030149999947752804}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_failed_chunk_is_recorded_and_not_replaced_by_a_new_draw", "phase": "call", "outcome": "passed", "seconds": 0.15499339997768402}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference.py::test_failed_chunk_is_recorded_and_not_replaced_by_a_new_draw", "phase": "teardown", "outcome": "passed", "seconds": 0.00039239999023266137}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference.py::test_failed_chunk_is_recorded_and_not_replaced_by_a_new_draw", "seconds": 0.15956579998601228}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[0]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[0]", "phase": "setup", "outcome": "passed", "seconds": 0.0029005999967921525}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[0]", "phase": "call", "outcome": "passed", "seconds": 0.44592940001166426}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[0]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003986999799963087}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[0]", "seconds": 0.45034969999687746}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[1]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[1]", "phase": "setup", "outcome": "passed", "seconds": 0.0031512000132352114}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[1]", "phase": "call", "outcome": "passed", "seconds": 1.757163500005845}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[1]", "phase": "teardown", "outcome": "passed", "seconds": 0.0005663000047206879}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[1]", "seconds": 1.7625034999800846}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[2]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[2]", "phase": "setup", "outcome": "passed", "seconds": 0.005684399977326393}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[2]", "phase": "call", "outcome": "passed", "seconds": 0.7957944000081625}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[2]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003893999964930117}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[2]", "seconds": 0.803169999999227}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[3]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[3]", "phase": "setup", "outcome": "passed", "seconds": 0.0046759000106249005}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[3]", "phase": "call", "outcome": "passed", "seconds": 2.4849645999784116}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[3]", "phase": "teardown", "outcome": "passed", "seconds": 0.00043819998973049223}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_actual_small_reference_audit_first16_and_last[3]", "seconds": 2.491415800002869}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_corrupt_payload_missing_marker_and_input_count_rejected"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_corrupt_payload_missing_marker_and_input_count_rejected", "phase": "setup", "outcome": "passed", "seconds": 0.004583099973388016}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_corrupt_payload_missing_marker_and_input_count_rejected", "phase": "call", "outcome": "passed", "seconds": 0.8625384999904782}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_corrupt_payload_missing_marker_and_input_count_rejected", "phase": "teardown", "outcome": "passed", "seconds": 0.0003056999994441867}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_corrupt_payload_missing_marker_and_input_count_rejected", "seconds": 0.8684932000178378}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_last_label_tampering_is_redecoded_even_with_rehashed_artifact"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_last_label_tampering_is_redecoded_even_with_rehashed_artifact", "phase": "setup", "outcome": "passed", "seconds": 0.0032506999850738794}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_last_label_tampering_is_redecoded_even_with_rehashed_artifact", "phase": "call", "outcome": "passed", "seconds": 0.4892524000024423}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_last_label_tampering_is_redecoded_even_with_rehashed_artifact", "phase": "teardown", "outcome": "passed", "seconds": 0.0003567000094335526}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_last_label_tampering_is_redecoded_even_with_rehashed_artifact", "seconds": 0.4939926999795716}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_recorded_failure_retained_without_redecoding"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_recorded_failure_retained_without_redecoding", "phase": "setup", "outcome": "passed", "seconds": 0.004874000005656853}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_recorded_failure_retained_without_redecoding", "phase": "call", "outcome": "passed", "seconds": 0.5338099999935366}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_recorded_failure_retained_without_redecoding", "phase": "teardown", "outcome": "passed", "seconds": 0.0003656999906525016}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_recorded_failure_retained_without_redecoding", "seconds": 0.54037440000684}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_rehashed_changed_draw_is_not_accepted"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_rehashed_changed_draw_is_not_accepted", "phase": "setup", "outcome": "passed", "seconds": 0.00489229999948293}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_rehashed_changed_draw_is_not_accepted", "phase": "call", "outcome": "passed", "seconds": 0.45231199997942895}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_rehashed_changed_draw_is_not_accepted", "phase": "teardown", "outcome": "passed", "seconds": 0.0003169999981764704}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_rehashed_changed_draw_is_not_accepted", "seconds": 0.45855850001680665}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit.py::test_saved_condition_native_pbs_summary_binding_and_corruptions"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_saved_condition_native_pbs_summary_binding_and_corruptions", "phase": "setup", "outcome": "passed", "seconds": 0.004345099994679913}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_saved_condition_native_pbs_summary_binding_and_corruptions", "phase": "call", "outcome": "passed", "seconds": 13.222072099975776}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit.py::test_saved_condition_native_pbs_summary_binding_and_corruptions", "phase": "teardown", "outcome": "passed", "seconds": 0.0007046000100672245}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit.py::test_saved_condition_native_pbs_summary_binding_and_corruptions", "seconds": 13.228615300002275}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_prepare_preserves_full_reference_and_resource_ceiling"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_prepare_preserves_full_reference_and_resource_ceiling", "phase": "setup", "outcome": "passed", "seconds": 8.39496040000813}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_prepare_preserves_full_reference_and_resource_ceiling", "phase": "call", "outcome": "passed", "seconds": 0.9320361000136472}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_prepare_preserves_full_reference_and_resource_ceiling", "phase": "teardown", "outcome": "passed", "seconds": 0.00033939999411813915}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_prepare_preserves_full_reference_and_resource_ceiling", "seconds": 9.328457399999024}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_actual_condition_task_keeps_original_audit_report"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_actual_condition_task_keeps_original_audit_report", "phase": "setup", "outcome": "passed", "seconds": 0.005169899988686666}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_actual_condition_task_keeps_original_audit_report", "phase": "call", "outcome": "passed", "seconds": 1.6971803000196815}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_actual_condition_task_keeps_original_audit_report", "phase": "teardown", "outcome": "passed", "seconds": 0.00037730002077296376}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_actual_condition_task_keeps_original_audit_report", "seconds": 1.7041703999857418}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_corrupt_condition_is_retained_as_failed"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_corrupt_condition_is_retained_as_failed", "phase": "setup", "outcome": "passed", "seconds": 0.0053425000223796815}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_corrupt_condition_is_retained_as_failed", "phase": "call", "outcome": "passed", "seconds": 0.3686419999867212}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_corrupt_condition_is_retained_as_failed", "phase": "teardown", "outcome": "passed", "seconds": 0.0003848000196740031}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_corrupt_condition_is_retained_as_failed", "seconds": 0.3756752999906894}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_run_requires_pbs"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_run_requires_pbs", "phase": "setup", "outcome": "passed", "seconds": 0.005383999989135191}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_run_requires_pbs", "phase": "call", "outcome": "passed", "seconds": 0.001088000019080937}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_run_requires_pbs", "phase": "teardown", "outcome": "passed", "seconds": 0.00034260001848451793}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_run_requires_pbs", "seconds": 0.008076700003584847}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_all_sixteen_real_audits_are_preserved"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_all_sixteen_real_audits_are_preserved", "phase": "setup", "outcome": "passed", "seconds": 0.005080900009488687}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_all_sixteen_real_audits_are_preserved", "phase": "call", "outcome": "passed", "seconds": 18.395471700001508}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_all_sixteen_real_audits_are_preserved", "phase": "teardown", "outcome": "passed", "seconds": 0.0005535000236704946}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_all_sixteen_real_audits_are_preserved", "seconds": 18.402473699999973}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_failed_task_still_writes_complete_summary"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_failed_task_still_writes_complete_summary", "phase": "setup", "outcome": "passed", "seconds": 0.005639300012262538}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_failed_task_still_writes_complete_summary", "phase": "call", "outcome": "passed", "seconds": 16.472751599998446}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_failed_task_still_writes_complete_summary", "phase": "teardown", "outcome": "passed", "seconds": 0.00047130000893957913}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_failed_task_still_writes_complete_summary", "seconds": 16.480188600020483}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[plan]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[plan]", "phase": "setup", "outcome": "passed", "seconds": 0.0069657999847549945}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[plan]", "phase": "call", "outcome": "passed", "seconds": 0.7329304999730084}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[plan]", "phase": "teardown", "outcome": "passed", "seconds": 0.00039629999082535505}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[plan]", "seconds": 0.7416799000056926}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[source]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[source]", "phase": "setup", "outcome": "passed", "seconds": 0.0042507000034675}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[source]", "phase": "call", "outcome": "passed", "seconds": 0.8200287999934517}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[source]", "phase": "teardown", "outcome": "passed", "seconds": 0.00045530000352300704}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[source]", "seconds": 0.8260132999857888}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[native]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[native]", "phase": "setup", "outcome": "passed", "seconds": 0.00677100001485087}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[native]", "phase": "call", "outcome": "passed", "seconds": 0.8217098999884911}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[native]", "phase": "teardown", "outcome": "passed", "seconds": 0.00041569999302737415}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_changed_binding_rejected[native]", "seconds": 0.8302488000190351}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_terminal_binding_error_preserves_every_failed_outcome"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_terminal_binding_error_preserves_every_failed_outcome", "phase": "setup", "outcome": "passed", "seconds": 0.00664199999300763}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_terminal_binding_error_preserves_every_failed_outcome", "phase": "call", "outcome": "passed", "seconds": 1.8796743999992032}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_terminal_binding_error_preserves_every_failed_outcome", "phase": "teardown", "outcome": "passed", "seconds": 0.0007973999890964478}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_terminal_binding_error_preserves_every_failed_outcome", "seconds": 1.8888724999851547}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[audit_source]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[audit_source]", "phase": "setup", "outcome": "passed", "seconds": 0.007049600011669099}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[audit_source]", "phase": "call", "outcome": "passed", "seconds": 22.217140599997947}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[audit_source]", "phase": "teardown", "outcome": "passed", "seconds": 0.0006301000248640776}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[audit_source]", "seconds": 22.226413800002774}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[raw_chunk]"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[raw_chunk]", "phase": "setup", "outcome": "passed", "seconds": 0.009499000007053837}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[raw_chunk]", "phase": "call", "outcome": "passed", "seconds": 19.836997000005795}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[raw_chunk]", "phase": "teardown", "outcome": "passed", "seconds": 0.0005595000111497939}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[raw_chunk]", "seconds": 19.848546099994564}
+{"kind": "start", "nodeid": "tests/test_tile_weight_reference_comparison.py::test_full_small_enumeration_matches_known_probability"}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_comparison.py::test_full_small_enumeration_matches_known_probability", "phase": "setup", "outcome": "passed", "seconds": 0.00025770001229830086}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_comparison.py::test_full_small_enumeration_matches_known_probability", "phase": "call", "outcome": "passed", "seconds": 0.0006040000007487833}
+{"kind": "report", "nodeid": "tests/test_tile_weight_reference_comparison.py::test_full_small_enumeration_matches_known_probability", "phase": "teardown", "outcome": "passed", "seconds": 0.0005133999802637845}
+{"kind": "finish", "nodeid": "tests/test_tile_weight_reference_comparison.py::test_full_small_enumeration_matches_known_probability", "seconds": 0.0022535999887622893}

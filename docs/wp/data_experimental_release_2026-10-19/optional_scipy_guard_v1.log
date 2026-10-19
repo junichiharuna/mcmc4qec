@@ -1,0 +1,6 @@
+.....................                                                    [100%]
+============================= slowest 5 durations =============================
+1.35s call     tests/test_tile_weight_reference_comparison.py::test_zero_mc_failures_keep_positive_bound
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+21 passed in 1.70s

@@ -1,0 +1,16 @@
+{
+  "observed": "2026-10-19T09:28:52.601039+09:00",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-dev5-source\\Scripts\\python.exe",
+    "-m",
+    "build",
+    "--wheel",
+    "--no-isolation",
+    "--outdir",
+    "A:\\dev\\mcmc4qec\\output\\experimental_release_20261019\\dist"
+  ],
+  "seconds": 2.7096520999912173,
+  "returncode": 1,
+  "timeout": false,
+  "scope": "Local experimental wheel build only; not installed or published."
+}

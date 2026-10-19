@@ -1,0 +1,6 @@
+# Source fingerprints and archived validation receipts bind exact file bytes.
+# Preserve them across Windows/Linux checkouts instead of applying core.autocrlf.
+src/** -text
+cluster_scripts/** -text
+tests/** -text
+docs/wp/data_*/** -text

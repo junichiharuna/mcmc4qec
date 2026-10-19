@@ -1,0 +1,354 @@
+{
+  "schema": 1,
+  "purpose": "accepted_main_full_mixing_collections",
+  "created_utc": "2026-10-18T09:45:03.421983+00:00",
+  "cases": [
+    {
+      "case": 0,
+      "job_id": "265271.node-PRISM",
+      "verification": "mixing_execution_full_case0_evidence_v1\\verification.json",
+      "verification_sha256": "35a1d9353c1d0b467b1bb8f86fd51060b4aa8c99402e443c989dd03b5daab926",
+      "groups": 768,
+      "files": 12,
+      "collection_seconds": 78.12870510001085,
+      "pbs": {
+        "job_state": "F",
+        "Exit_status": 0,
+        "run_count": 1,
+        "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case0-v1/inventory.sh",
+        "Resource_List": {
+          "mem": "4gb",
+          "ncpus": 1,
+          "nodect": 1,
+          "place": "free",
+          "select": "1:ncpus=1:mem=4gb",
+          "walltime": "01:30:00"
+        },
+        "resources_used": {
+          "cpupercent": 91,
+          "cput": "00:02:19",
+          "mem": "159788kb",
+          "ncpus": 1,
+          "vmem": "924872kb",
+          "walltime": "00:02:22"
+        },
+        "exec_host": "node008/1",
+        "stime": "Sun Oct 18 18:30:57 2026",
+        "mtime": "Sun Oct 18 18:33:21 2026",
+        "obittime": "Sun Oct 18 18:33:20 2026"
+      },
+      "census": {
+        "cohorts": 4560,
+        "rows": 875520,
+        "replicates": 192,
+        "sector_cohorts": 336,
+        "observables": {
+          "coarse_bennett_edge_0": 96,
+          "fine_bennett_edge_0": 96,
+          "logical_bit_0": 336,
+          "logical_bit_1": 336,
+          "logical_bit_2": 336,
+          "logical_bit_3": 336,
+          "logical_bit_4": 336,
+          "logical_bit_5": 336,
+          "logical_bit_6": 336,
+          "logical_bit_7": 336,
+          "syndrome_weight": 336,
+          "weight": 336,
+          "fine_bennett_edge_1": 96,
+          "coarse_bennett_edge_1": 96,
+          "fine_bennett_edge_2": 96,
+          "fine_bennett_edge_3": 96,
+          "coarse_bennett_edge_2": 96,
+          "fine_bennett_edge_4": 96,
+          "fine_bennett_edge_5": 96,
+          "sector": 336
+        },
+        "status_counts": {
+          "stored": 875520
+        },
+        "undefined": 2,
+        "nonfinite": 0,
+        "stored_missing_fields": 0,
+        "failed_sampling": 0,
+        "inventory_complete": true
+      },
+      "jsonl": {
+        "sha256": "a9cb4a142df496155abe6ad1700324327fd5d84c7e16443a6c1195c946bf3724",
+        "bytes": 914460277,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case0-v1/inventory/rows.jsonl"
+      },
+      "inventory_summary": {
+        "sha256": "82a254693cb0205385532489a1d41341b12e2333d300915fce8d93db15ded141",
+        "bytes": 13814932,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case0-v1/inventory/summary.json"
+      },
+      "all_payload_bytes": 928299286
+    },
+    {
+      "case": 1,
+      "job_id": "265272.node-PRISM",
+      "verification": "mixing_execution_full_case1_evidence_v1\\verification.json",
+      "verification_sha256": "cd788a7b5289b15d9b5330fd06ba294d4963bb1d91151185df6288b11fded7cb",
+      "groups": 768,
+      "files": 12,
+      "collection_seconds": 55.814377100003185,
+      "pbs": {
+        "job_state": "F",
+        "Exit_status": 0,
+        "run_count": 1,
+        "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case1-v1/inventory.sh",
+        "Resource_List": {
+          "mem": "4gb",
+          "ncpus": 1,
+          "nodect": 1,
+          "place": "free",
+          "select": "1:ncpus=1:mem=4gb",
+          "walltime": "01:30:00"
+        },
+        "resources_used": {
+          "cpupercent": 100,
+          "cput": "00:01:28",
+          "mem": "147080kb",
+          "ncpus": 1,
+          "vmem": "911080kb",
+          "walltime": "00:01:30"
+        },
+        "exec_host": "node008/1",
+        "stime": "Sun Oct 18 18:34:02 2026",
+        "mtime": "Sun Oct 18 18:35:33 2026",
+        "obittime": "Sun Oct 18 18:35:33 2026"
+      },
+      "census": {
+        "cohorts": 3216,
+        "rows": 617472,
+        "replicates": 192,
+        "sector_cohorts": 240,
+        "observables": {
+          "coarse_bennett_edge_0": 96,
+          "fine_bennett_edge_0": 96,
+          "logical_bit_0": 240,
+          "logical_bit_1": 240,
+          "logical_bit_2": 240,
+          "logical_bit_3": 240,
+          "logical_bit_4": 240,
+          "logical_bit_5": 240,
+          "logical_bit_6": 240,
+          "logical_bit_7": 240,
+          "syndrome_weight": 240,
+          "weight": 240,
+          "fine_bennett_edge_1": 96,
+          "coarse_bennett_edge_1": 96,
+          "fine_bennett_edge_2": 96,
+          "fine_bennett_edge_3": 96,
+          "sector": 240
+        },
+        "status_counts": {
+          "stored": 617472
+        },
+        "undefined": 290,
+        "nonfinite": 0,
+        "stored_missing_fields": 0,
+        "failed_sampling": 0,
+        "inventory_complete": true
+      },
+      "jsonl": {
+        "sha256": "f6784a1e0a8b8997b45b910ae92784142a9f8ad28a82d23f4568fa7286bb47c0",
+        "bytes": 519992499,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case1-v1/inventory/rows.jsonl"
+      },
+      "inventory_summary": {
+        "sha256": "335410a636ecd7f4e4510cb65ba6203c229e55c8aa06b0adc5363e65ad4236f9",
+        "bytes": 9781772,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case1-v1/inventory/summary.json"
+      },
+      "all_payload_bytes": 529798345
+    },
+    {
+      "case": 2,
+      "job_id": "265273.node-PRISM",
+      "verification": "mixing_execution_full_case2_evidence_v1\\verification.json",
+      "verification_sha256": "89560ab3a345ecfbd97c97b68fbc33fc73e39fc5e7006e4901cb67045d55722f",
+      "groups": 768,
+      "files": 12,
+      "collection_seconds": 87.59197929999209,
+      "pbs": {
+        "job_state": "F",
+        "Exit_status": 0,
+        "run_count": 1,
+        "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case2-v1/inventory.sh",
+        "Resource_List": {
+          "mem": "4gb",
+          "ncpus": 1,
+          "nodect": 1,
+          "place": "free",
+          "select": "1:ncpus=1:mem=4gb",
+          "walltime": "01:30:00"
+        },
+        "resources_used": {
+          "cpupercent": 92,
+          "cput": "00:03:19",
+          "mem": "218588kb",
+          "ncpus": 1,
+          "vmem": "985208kb",
+          "walltime": "00:03:23"
+        },
+        "exec_host": "node008/1",
+        "stime": "Sun Oct 18 18:36:11 2026",
+        "mtime": "Sun Oct 18 18:39:35 2026",
+        "obittime": "Sun Oct 18 18:39:35 2026"
+      },
+      "census": {
+        "cohorts": 7248,
+        "rows": 1391616,
+        "replicates": 192,
+        "sector_cohorts": 336,
+        "observables": {
+          "coarse_bennett_edge_0": 96,
+          "fine_bennett_edge_0": 96,
+          "logical_bit_0": 336,
+          "logical_bit_1": 336,
+          "logical_bit_10": 336,
+          "logical_bit_11": 336,
+          "logical_bit_12": 336,
+          "logical_bit_13": 336,
+          "logical_bit_14": 336,
+          "logical_bit_15": 336,
+          "logical_bit_2": 336,
+          "logical_bit_3": 336,
+          "logical_bit_4": 336,
+          "logical_bit_5": 336,
+          "logical_bit_6": 336,
+          "logical_bit_7": 336,
+          "logical_bit_8": 336,
+          "logical_bit_9": 336,
+          "syndrome_weight": 336,
+          "weight": 336,
+          "fine_bennett_edge_1": 96,
+          "coarse_bennett_edge_1": 96,
+          "fine_bennett_edge_2": 96,
+          "fine_bennett_edge_3": 96,
+          "coarse_bennett_edge_2": 96,
+          "fine_bennett_edge_4": 96,
+          "fine_bennett_edge_5": 96,
+          "sector": 336
+        },
+        "status_counts": {
+          "stored": 1391616
+        },
+        "undefined": 4140,
+        "nonfinite": 0,
+        "stored_missing_fields": 0,
+        "failed_sampling": 0,
+        "inventory_complete": true
+      },
+      "jsonl": {
+        "sha256": "ba555b6539893cf2662d69d0d33103a1eddd8f2c73dd36ca36ee51de60acb1d3",
+        "bytes": 1192884488,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case2-v1/inventory/rows.jsonl"
+      },
+      "inventory_summary": {
+        "sha256": "dd526858c647a4fc97557835a1c36d36eca6a78fa0204a0451cd67d643261111",
+        "bytes": 22098049,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case2-v1/inventory/summary.json"
+      },
+      "all_payload_bytes": 1215006609
+    },
+    {
+      "case": 3,
+      "job_id": "265274.node-PRISM",
+      "verification": "mixing_execution_full_case3_evidence_v1\\verification.json",
+      "verification_sha256": "61058ca7283051a2ce51e3ca0767112b158ac918c4be42872cfe211719ee0e62",
+      "groups": 768,
+      "files": 12,
+      "collection_seconds": 71.61694550000539,
+      "pbs": {
+        "job_state": "F",
+        "Exit_status": 0,
+        "run_count": 1,
+        "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case3-v1/inventory.sh",
+        "Resource_List": {
+          "mem": "4gb",
+          "ncpus": 1,
+          "nodect": 1,
+          "place": "free",
+          "select": "1:ncpus=1:mem=4gb",
+          "walltime": "01:30:00"
+        },
+        "resources_used": {
+          "cpupercent": 91,
+          "cput": "00:02:13",
+          "mem": "174332kb",
+          "ncpus": 1,
+          "vmem": "940044kb",
+          "walltime": "00:02:15"
+        },
+        "exec_host": "node008/1",
+        "stime": "Sun Oct 18 18:40:13 2026",
+        "mtime": "Sun Oct 18 18:42:29 2026",
+        "obittime": "Sun Oct 18 18:42:29 2026"
+      },
+      "census": {
+        "cohorts": 5136,
+        "rows": 986112,
+        "replicates": 192,
+        "sector_cohorts": 240,
+        "observables": {
+          "coarse_bennett_edge_0": 96,
+          "fine_bennett_edge_0": 96,
+          "logical_bit_0": 240,
+          "logical_bit_1": 240,
+          "logical_bit_10": 240,
+          "logical_bit_11": 240,
+          "logical_bit_12": 240,
+          "logical_bit_13": 240,
+          "logical_bit_14": 240,
+          "logical_bit_15": 240,
+          "logical_bit_2": 240,
+          "logical_bit_3": 240,
+          "logical_bit_4": 240,
+          "logical_bit_5": 240,
+          "logical_bit_6": 240,
+          "logical_bit_7": 240,
+          "logical_bit_8": 240,
+          "logical_bit_9": 240,
+          "syndrome_weight": 240,
+          "weight": 240,
+          "fine_bennett_edge_1": 96,
+          "coarse_bennett_edge_1": 96,
+          "fine_bennett_edge_2": 96,
+          "fine_bennett_edge_3": 96,
+          "sector": 240
+        },
+        "status_counts": {
+          "stored": 986112
+        },
+        "undefined": 76653,
+        "nonfinite": 0,
+        "stored_missing_fields": 0,
+        "failed_sampling": 0,
+        "inventory_complete": true
+      },
+      "jsonl": {
+        "sha256": "051c119be17633308245a96949f38a63ac6a5003b6d81bdcee4564ee1f53aa4e",
+        "bytes": 839897337,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case3-v1/inventory/rows.jsonl"
+      },
+      "inventory_summary": {
+        "sha256": "da35a54554a9b0d2f9644c5fc1e0309e1588bb7465c27d9d19b9b68ceaa48b15",
+        "bytes": 15620348,
+        "resolved_path": "/home/user/workspace/mcmc4qec/20261018-tile-mixing-execution-v2/runs/full-case3-v1/inventory/summary.json"
+      },
+      "all_payload_bytes": 855541760
+    }
+  ],
+  "case_count": 4,
+  "total_groups": 3072,
+  "total_files": 48,
+  "total_rows": 3870720,
+  "total_jsonl_bytes": 3467234601,
+  "total_payload_bytes": 3528646000,
+  "limits": "Indexes the fixed collector verification and current local sizes. Complete JSONL transferred and hash-verified by each collector. No new numeric statistics, ACF/FFT/bootstrap/decoder/native probe/raw-trace audit. Undefined diagnostics remain in the planned denominators; complete inventory does not establish mixing or coverage.",
+  "numerical_comparison_handoff": "All four evidence roots and verification SHA256 values sent to union_find.",
+  "qsub_by_this_agent": false
+}

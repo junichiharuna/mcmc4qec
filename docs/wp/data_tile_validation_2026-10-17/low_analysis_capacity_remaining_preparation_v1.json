@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "scope": "Prepare the remaining eleven synthetic low-noise BAR analysis capacity plans only.",
+  "bundle": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3",
+  "before_inventory": "low_analysis_capacity_remaining_inventory_before_v1.json",
+  "after_inventory": "low_analysis_capacity_remaining_inventory_after_v1.json",
+  "started": "2026-10-18T10:50:46.519157+09:00",
+  "finished": "2026-10-18T10:53:10.620291+09:00",
+  "existing_preserved": {
+    "case": 0,
+    "target_index": 2,
+    "evidence": "low_analysis_capacity_plan_validation_v3_case0_target2.json",
+    "all_file_hashes_unchanged": true
+  },
+  "new_conditions": [
+    {
+      "case": 0,
+      "target_index": 0,
+      "physical_decoder_prior": 0.01,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-0-0",
+      "evidence": "low_analysis_capacity_preparation_v1_case0_target0.json",
+      "manifest_digest": "5017b9b7254e06d63f5b73c07a022c781b9020d5d0fbb4297552acd0a20c0b3f",
+      "rungs": 10,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.781711678020656,
+        0.561653133481741,
+        0.002548379823565483
+      ]
+    },
+    {
+      "case": 0,
+      "target_index": 1,
+      "physical_decoder_prior": 0.003,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-0-1",
+      "evidence": "low_analysis_capacity_preparation_v1_case0_target1.json",
+      "manifest_digest": "8a02e8bcd631c8ec5c0ee87da41ce77722df9f2f38cc36f9dbf2050036fa5b09",
+      "rungs": 13,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.8642740454524755,
+        0.5681094080209732,
+        0.0025847991928458214
+      ]
+    },
+    {
+      "case": 1,
+      "target_index": 0,
+      "physical_decoder_prior": 0.01,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-1-0",
+      "evidence": "low_analysis_capacity_preparation_v1_case1_target0.json",
+      "manifest_digest": "16743266a53fff6222edc428ebe5659c2ffff380008a2762b34c505f11f6319c",
+      "rungs": 10,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.7755229901522398,
+        0.5517660789191723,
+        0.0026752594858407974
+      ]
+    },
+    {
+      "case": 1,
+      "target_index": 1,
+      "physical_decoder_prior": 0.003,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-1-1",
+      "evidence": "low_analysis_capacity_preparation_v1_case1_target1.json",
+      "manifest_digest": "7dc6b972b5aa47e40c187fae7ecf032a27b088bf71804dabd2812b8ef43d45a4",
+      "rungs": 13,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.6835495112463832,
+        0.5414770627394319,
+        0.0024050837382674217
+      ]
+    },
+    {
+      "case": 1,
+      "target_index": 2,
+      "physical_decoder_prior": 0.001,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-1-2",
+      "evidence": "low_analysis_capacity_preparation_v1_case1_target2.json",
+      "manifest_digest": "6ba80ee8188814e799801b5cd6e68e3dd0ce60adfc863d7547d84b6fe5c9bc9b",
+      "rungs": 15,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.7384566627442837,
+        0.5484389569610357,
+        0.0025552138686180115
+      ]
+    },
+    {
+      "case": 2,
+      "target_index": 0,
+      "physical_decoder_prior": 0.01,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-2-0",
+      "evidence": "low_analysis_capacity_preparation_v1_case2_target0.json",
+      "manifest_digest": "8d2f5d614331c0acb1c23cbbb258f29eba91cee13b16388d97e93411027faa6d",
+      "rungs": 10,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.7199969114735723,
+        0.5220799967646599,
+        0.0027485378086566925
+      ]
+    },
+    {
+      "case": 2,
+      "target_index": 1,
+      "physical_decoder_prior": 0.003,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-2-1",
+      "evidence": "low_analysis_capacity_preparation_v1_case2_target1.json",
+      "manifest_digest": "a331608ec07c9a5be12795d27b8300da5e1d6de5fb9007b74373b2bffed2b978",
+      "rungs": 13,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.6771265352144837,
+        0.522951627150178,
+        0.0028040679171681404
+      ]
+    },
+    {
+      "case": 2,
+      "target_index": 2,
+      "physical_decoder_prior": 0.001,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-2-2",
+      "evidence": "low_analysis_capacity_preparation_v1_case2_target2.json",
+      "manifest_digest": "3120d5013b11fd0c015ea1e1bed8e6519fb565d8227e0a7cc5c03303054192e0",
+      "rungs": 15,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.710540745407343,
+        0.525400229729712,
+        0.0025685112923383713
+      ]
+    },
+    {
+      "case": 3,
+      "target_index": 0,
+      "physical_decoder_prior": 0.01,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-3-0",
+      "evidence": "low_analysis_capacity_preparation_v1_case3_target0.json",
+      "manifest_digest": "b58d11e579bbe7a1655cd04318a9e8ce3769f51126c668a486dc56bee5d47a9a",
+      "rungs": 10,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.62636211887002,
+        0.5146506186574697,
+        0.0024873418733477592
+      ]
+    },
+    {
+      "case": 3,
+      "target_index": 1,
+      "physical_decoder_prior": 0.003,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-3-1",
+      "evidence": "low_analysis_capacity_preparation_v1_case3_target1.json",
+      "manifest_digest": "d78cb4095bad4fc322abd066c768d6e75e3ab5545cb6bf2dce3e1fa77691e2b6",
+      "rungs": 13,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.6542784003540874,
+        0.5166075518354774,
+        0.0025665760040283203
+      ]
+    },
+    {
+      "case": 3,
+      "target_index": 2,
+      "physical_decoder_prior": 0.001,
+      "root": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v3/runs/capacity-3-2",
+      "evidence": "low_analysis_capacity_preparation_v1_case3_target2.json",
+      "manifest_digest": "ea40810293058403889925a814a30eae382ecbcdadfcfa0114c5921fdf86a74c",
+      "rungs": 15,
+      "groups": 8,
+      "workers": 8,
+      "strict_native_preflight_passed": true,
+      "dry_run_passed": true,
+      "bash_n_passed": true,
+      "step_seconds": [
+        1.647076872177422,
+        0.526949723251164,
+        0.0025330455973744392
+      ]
+    }
+  ],
+  "prepared_new_roots": 11,
+  "total_prepared_roots": 12,
+  "immutable_file_count": 118,
+  "immutable_file_hashes_unchanged": true,
+  "python": {
+    "path": "/home/user/miniconda3/envs/py311/bin/python3.11",
+    "sha256": "7c4b0f4c2b37f9aae938c7f6e62f5b7a2a002154762f3b66f19a89d402c96989"
+  },
+  "venv_link": "/home/user/workspace/mcmc4qec/20261017-tile-production-v1/venv",
+  "binding": {
+    "source_sha256": {
+      "submit_tile_low_noise_analysis_capacity.py": "b7cc0b53133a1709f863babed2ac06028a990d1a9de3810fae62c8c097a7d7e7",
+      "calibration.py": "98a98a4c651f7d120abb5d8f7f990b04ffac39c5db329931893c22dc97000b43",
+      "tile_low_noise_analysis_capacity.py": "9908043898bd57bd6346728f4b88a160dad43ab05f5ca879e65eed78339114a6",
+      "tile_low_noise_analysis.py": "4b2e4fa26ab54180dbdf4bc9cdfadd2cbe0781087037c84ac343def481080f7e",
+      "tile_low_noise_study.py": "6ce8ef25b06646c46b8c59ba02d59e6841c766cd28ad270d356e462326082f22",
+      "tile_mc_time_benchmark.py": "4b7d35dcd661b67237a2614d1375d14c6d02c9f03e05dc083bbfe7e054787501",
+      "probe_tile_decoder_platform.py": "83c3ebfcb5782b46788985591b4d4ad6bc65e490d541d83d180c177fd50be3a6",
+      "tile_study.py": "4e6b967e13c83dd23d749df8a17a8b149a48741c828c07e2e5761e04401f0838",
+      "audit_tile_traces.py": "d865dbacfab2b5236a2831c2767293e68baf31095fdff4ba22fd69cc738658bb",
+      "tile_bar_study.py": "e40e3dff7ff923b8fd46500229482e7efef73f62fc86163ecd49acdbcd31e8cb",
+      "tile_mc_precision_budget.py": "72a2bbc75097b0c7372de51f596ea7b7d3ad8c39dd21053cb0c47ae79261b587",
+      "tile_bar_analysis.py": "7d22afe9b4ee554e255ca1556510b2c76d892d7817ad44ae7a423971a58505de"
+    },
+    "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+    "python_path": "/home/user/miniconda3/envs/py311/bin/python3.11",
+    "python_sha256": "7c4b0f4c2b37f9aae938c7f6e62f5b7a2a002154762f3b66f19a89d402c96989"
+  },
+  "all_new_dry_bindings_match_previously_validated_bundle": true,
+  "no_existing_root_modified": true,
+  "maximum_step_seconds": 1.8642740454524755,
+  "qsub_executed": false,
+  "profile_execution": false,
+  "only_plan_preflight_dryrun_and_bash_n": true,
+  "note": "Native preflight is a finite deterministic fixture check on the login host, not a scientific sampling or synthetic profiling run; all actual job submissions remain pending."
+}

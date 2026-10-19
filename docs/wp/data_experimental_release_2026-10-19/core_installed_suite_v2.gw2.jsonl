@@ -1,0 +1,406 @@
+{"kind": "process", "pid": 11588, "executable": "A:\\dev\\mcmc4qec\\.venv-experimental-core\\Scripts\\python.exe"}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel1]"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel1]", "phase": "setup", "outcome": "passed", "seconds": 0.000394799979403615}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel1]", "phase": "call", "outcome": "passed", "seconds": 2.477135699999053}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel1]", "phase": "teardown", "outcome": "passed", "seconds": 0.000222100003156811}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel1]", "seconds": 2.479352900001686}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel2]"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel2]", "phase": "setup", "outcome": "passed", "seconds": 0.00028550002025440335}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel2]", "phase": "call", "outcome": "passed", "seconds": 0.5274976999789942}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel2]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002271000121254474}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel2]", "seconds": 0.5288394000090193}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel3]"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel3]", "phase": "setup", "outcome": "passed", "seconds": 0.000302400003420189}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel3]", "phase": "call", "outcome": "passed", "seconds": 0.5143447000009473}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel3]", "phase": "teardown", "outcome": "passed", "seconds": 0.00030410001636482775}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel3]", "seconds": 0.5159239999775309}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel4]"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel4]", "phase": "setup", "outcome": "passed", "seconds": 0.0003963999915868044}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel4]", "phase": "call", "outcome": "passed", "seconds": 0.5680695000046398}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel4]", "phase": "teardown", "outcome": "passed", "seconds": 0.000219000008655712}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_actual_proposal_frequencies_and_reported_hastings_ratio[kernel4]", "seconds": 0.5694825999962632}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_same_custom_failure_for_exact_direct_mc_and_correlated_mcmc"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_same_custom_failure_for_exact_direct_mc_and_correlated_mcmc", "phase": "setup", "outcome": "passed", "seconds": 0.0001514999894425273}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_same_custom_failure_for_exact_direct_mc_and_correlated_mcmc", "phase": "call", "outcome": "passed", "seconds": 7.723158599983435}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_same_custom_failure_for_exact_direct_mc_and_correlated_mcmc", "phase": "teardown", "outcome": "passed", "seconds": 0.0001928000128827989}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_same_custom_failure_for_exact_direct_mc_and_correlated_mcmc", "seconds": 7.724282199982554}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_rejected_single_flips_remain_in_recorded_trace"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_rejected_single_flips_remain_in_recorded_trace", "phase": "setup", "outcome": "passed", "seconds": 0.00015700000221841037}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_rejected_single_flips_remain_in_recorded_trace", "phase": "call", "outcome": "passed", "seconds": 0.059716700023273006}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_rejected_single_flips_remain_in_recorded_trace", "phase": "teardown", "outcome": "passed", "seconds": 0.00018190001719631255}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_rejected_single_flips_remain_in_recorded_trace", "seconds": 0.060744999995222315}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_cluster_uses_density_ratio_for_equal_weight_correlated_states"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_cluster_uses_density_ratio_for_equal_weight_correlated_states", "phase": "setup", "outcome": "passed", "seconds": 0.00014980000560171902}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_cluster_uses_density_ratio_for_equal_weight_correlated_states", "phase": "call", "outcome": "passed", "seconds": 1.91955289998441}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_cluster_uses_density_ratio_for_equal_weight_correlated_states", "phase": "teardown", "outcome": "passed", "seconds": 0.0002905000001192093}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_cluster_uses_density_ratio_for_equal_weight_correlated_states", "seconds": 1.9209057999833021}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state0]"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state0]", "phase": "setup", "outcome": "passed", "seconds": 0.00041890001739375293}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state0]", "phase": "call", "outcome": "passed", "seconds": 0.0009911000088322908}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state0]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002846999850589782}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state0]", "seconds": 0.0026085000135935843}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state1]"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state1]", "phase": "setup", "outcome": "passed", "seconds": 0.00036410000757314265}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state1]", "phase": "call", "outcome": "passed", "seconds": 0.0010409000096842647}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state1]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002710999979171902}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state1]", "seconds": 0.002558000007411465}
+{"kind": "start", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state2]"}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state2]", "phase": "setup", "outcome": "passed", "seconds": 0.00036520001594908535}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state2]", "phase": "call", "outcome": "passed", "seconds": 0.0010059999767690897}
+{"kind": "report", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state2]", "phase": "teardown", "outcome": "passed", "seconds": 0.00027799999224953353}
+{"kind": "finish", "nodeid": "tests/test_independent.py::test_initial_state_rejects_wrong_size_and_nonbinary_values[state2]", "seconds": 0.0025950999988708645}
+{"kind": "start", "nodeid": "tests/test_initial_states.py::test_exact_minimum_for_each_coset_by_enumeration"}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_exact_minimum_for_each_coset_by_enumeration", "phase": "setup", "outcome": "passed", "seconds": 0.0002525000018067658}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_exact_minimum_for_each_coset_by_enumeration", "phase": "call", "outcome": "passed", "seconds": 0.002240399975562468}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_exact_minimum_for_each_coset_by_enumeration", "phase": "teardown", "outcome": "passed", "seconds": 0.00025110002025030553}
+{"kind": "finish", "nodeid": "tests/test_initial_states.py::test_exact_minimum_for_each_coset_by_enumeration", "seconds": 0.003677500004414469}
+{"kind": "start", "nodeid": "tests/test_initial_states.py::test_random_sector_is_nonzero_and_reproducible"}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_random_sector_is_nonzero_and_reproducible", "phase": "setup", "outcome": "passed", "seconds": 0.00015800000983290374}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_random_sector_is_nonzero_and_reproducible", "phase": "call", "outcome": "passed", "seconds": 0.0010263000149279833}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_random_sector_is_nonzero_and_reproducible", "phase": "teardown", "outcome": "passed", "seconds": 0.0001571999746374786}
+{"kind": "finish", "nodeid": "tests/test_initial_states.py::test_random_sector_is_nonzero_and_reproducible", "seconds": 0.0019302000000607222}
+{"kind": "start", "nodeid": "tests/test_initial_states.py::test_observable_sector_uses_crossing_matrix"}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_observable_sector_uses_crossing_matrix", "phase": "setup", "outcome": "passed", "seconds": 0.00014829999417997897}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_observable_sector_uses_crossing_matrix", "phase": "call", "outcome": "passed", "seconds": 0.0005502999993041158}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_observable_sector_uses_crossing_matrix", "phase": "teardown", "outcome": "passed", "seconds": 0.000155999994603917}
+{"kind": "finish", "nodeid": "tests/test_initial_states.py::test_observable_sector_uses_crossing_matrix", "seconds": 0.0014306000084616244}
+{"kind": "start", "nodeid": "tests/test_initial_states.py::test_independent_crossing_matrix_and_sample_faulty_input"}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_independent_crossing_matrix_and_sample_faulty_input", "phase": "setup", "outcome": "passed", "seconds": 0.00014929997269064188}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_independent_crossing_matrix_and_sample_faulty_input", "phase": "call", "outcome": "passed", "seconds": 0.01051639998331666}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_independent_crossing_matrix_and_sample_faulty_input", "phase": "teardown", "outcome": "passed", "seconds": 0.00019339998834766448}
+{"kind": "finish", "nodeid": "tests/test_initial_states.py::test_independent_crossing_matrix_and_sample_faulty_input", "seconds": 0.011589700006879866}
+{"kind": "start", "nodeid": "tests/test_initial_states.py::test_nonbinary_coset_and_invalid_sector_rejected"}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_nonbinary_coset_and_invalid_sector_rejected", "phase": "setup", "outcome": "passed", "seconds": 0.00015889998758211732}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_nonbinary_coset_and_invalid_sector_rejected", "phase": "call", "outcome": "passed", "seconds": 0.00042389999725855887}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_nonbinary_coset_and_invalid_sector_rejected", "phase": "teardown", "outcome": "passed", "seconds": 0.00015869998605921865}
+{"kind": "finish", "nodeid": "tests/test_initial_states.py::test_nonbinary_coset_and_invalid_sector_rejected", "seconds": 0.0013228000025264919}
+{"kind": "start", "nodeid": "tests/test_initial_states.py::test_exact_milp_branch_for_thirteen_stabilizers"}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_exact_milp_branch_for_thirteen_stabilizers", "phase": "setup", "outcome": "passed", "seconds": 0.00015239999629557133}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_exact_milp_branch_for_thirteen_stabilizers", "phase": "call", "outcome": "skipped", "seconds": 0.0036145999911241233}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_exact_milp_branch_for_thirteen_stabilizers", "phase": "teardown", "outcome": "passed", "seconds": 0.00016419999883510172}
+{"kind": "finish", "nodeid": "tests/test_initial_states.py::test_exact_milp_branch_for_thirteen_stabilizers", "seconds": 0.004660999984480441}
+{"kind": "start", "nodeid": "tests/test_initial_states.py::test_nontrivial_milp_matches_full_coset_enumeration"}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_nontrivial_milp_matches_full_coset_enumeration", "phase": "setup", "outcome": "passed", "seconds": 0.00015070001245476305}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_nontrivial_milp_matches_full_coset_enumeration", "phase": "call", "outcome": "skipped", "seconds": 0.0034665999992284924}
+{"kind": "report", "nodeid": "tests/test_initial_states.py::test_nontrivial_milp_matches_full_coset_enumeration", "phase": "teardown", "outcome": "passed", "seconds": 0.00016230001347139478}
+{"kind": "finish", "nodeid": "tests/test_initial_states.py::test_nontrivial_milp_matches_full_coset_enumeration", "seconds": 0.004440899996552616}
+{"kind": "start", "nodeid": "tests/test_logical_basis.py::test_independent_logicals_require_explicit_opt_in"}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_independent_logicals_require_explicit_opt_in", "phase": "setup", "outcome": "passed", "seconds": 0.00015619999612681568}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_independent_logicals_require_explicit_opt_in", "phase": "call", "outcome": "passed", "seconds": 0.02397989999735728}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_independent_logicals_require_explicit_opt_in", "phase": "teardown", "outcome": "passed", "seconds": 0.0001939999929163605}
+{"kind": "finish", "nodeid": "tests/test_logical_basis.py::test_independent_logicals_require_explicit_opt_in", "seconds": 0.025002600013976917}
+{"kind": "start", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[paired]"}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[paired]", "phase": "setup", "outcome": "passed", "seconds": 0.0002893000200856477}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[paired]", "phase": "call", "outcome": "passed", "seconds": 0.00036120001459494233}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[paired]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016859997413121164}
+{"kind": "finish", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[paired]", "seconds": 0.0013701999851036817}
+{"kind": "start", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[independent]"}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[independent]", "phase": "setup", "outcome": "passed", "seconds": 0.000222400005441159}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[independent]", "phase": "call", "outcome": "passed", "seconds": 0.0003273999900557101}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[independent]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001601999974809587}
+{"kind": "finish", "nodeid": "tests/test_logical_basis.py::test_dependent_logicals_rejected[independent]", "seconds": 0.0013136999914422631}
+{"kind": "start", "nodeid": "tests/test_logical_basis.py::test_unknown_basis_rejected"}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_unknown_basis_rejected", "phase": "setup", "outcome": "passed", "seconds": 0.0001441999920643866}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_unknown_basis_rejected", "phase": "call", "outcome": "passed", "seconds": 0.0001671000209171325}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_unknown_basis_rejected", "phase": "teardown", "outcome": "passed", "seconds": 0.00014739998732693493}
+{"kind": "finish", "nodeid": "tests/test_logical_basis.py::test_unknown_basis_rejected", "seconds": 0.0009760000102687627}
+{"kind": "start", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[False]"}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[False]", "phase": "setup", "outcome": "passed", "seconds": 0.00021749999723397195}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[False]", "phase": "call", "outcome": "passed", "seconds": 0.003325900004711002}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[False]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016240001423284411}
+{"kind": "finish", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[False]", "seconds": 0.004257499997038394}
+{"kind": "start", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[True]"}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[True]", "phase": "setup", "outcome": "passed", "seconds": 0.00021830000332556665}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[True]", "phase": "call", "outcome": "passed", "seconds": 0.21777270000893623}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[True]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002060999977402389}
+{"kind": "finish", "nodeid": "tests/test_logical_basis.py::test_full_failure_observable_and_stabilizers[True]", "seconds": 0.2189088000159245}
+{"kind": "start", "nodeid": "tests/test_logical_basis.py::test_nonzero_correction_predictions_follow_logical_coordinates"}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_nonzero_correction_predictions_follow_logical_coordinates", "phase": "setup", "outcome": "passed", "seconds": 0.00015390000771731138}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_nonzero_correction_predictions_follow_logical_coordinates", "phase": "call", "outcome": "passed", "seconds": 0.007464800000889227}
+{"kind": "report", "nodeid": "tests/test_logical_basis.py::test_nonzero_correction_predictions_follow_logical_coordinates", "phase": "teardown", "outcome": "passed", "seconds": 0.00017079999088309705}
+{"kind": "finish", "nodeid": "tests/test_logical_basis.py::test_nonzero_correction_predictions_follow_logical_coordinates", "seconds": 0.00840059999609366}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0]", "phase": "setup", "outcome": "passed", "seconds": 0.0002589999930933118}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0]", "phase": "call", "outcome": "passed", "seconds": 0.0011479000095278025}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016330002108588815}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0]", "seconds": 0.002130799985025078}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0.1]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0.1]", "phase": "setup", "outcome": "passed", "seconds": 0.0002238999877590686}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0.1]", "phase": "call", "outcome": "passed", "seconds": 0.00112599998828955}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0.1]", "phase": "teardown", "outcome": "passed", "seconds": 0.00017439998919144273}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[0.1]", "seconds": 0.002075399999739602}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[1]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[1]", "phase": "setup", "outcome": "passed", "seconds": 0.00022010001703165472}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[1]", "phase": "call", "outcome": "passed", "seconds": 0.001074999978300184}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[1]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016120000509545207}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_normalized_and_y_correlation[1]", "seconds": 0.00199129999964498}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_pauli_both_sectors_and_stabilizer_invariance"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_pauli_both_sectors_and_stabilizer_invariance", "phase": "setup", "outcome": "passed", "seconds": 0.0001422999775968492}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_pauli_both_sectors_and_stabilizer_invariance", "phase": "call", "outcome": "passed", "seconds": 0.005477300001075491}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_pauli_both_sectors_and_stabilizer_invariance", "phase": "teardown", "outcome": "passed", "seconds": 0.00014990000636316836}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_pauli_both_sectors_and_stabilizer_invariance", "seconds": 0.006300599983660504}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_y_flips_both_x_and_z_check_sectors"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_y_flips_both_x_and_z_check_sectors", "phase": "setup", "outcome": "passed", "seconds": 0.0001412999990861863}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_y_flips_both_x_and_z_check_sectors", "phase": "call", "outcome": "passed", "seconds": 0.000614399992628023}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_y_flips_both_x_and_z_check_sectors", "phase": "teardown", "outcome": "passed", "seconds": 0.0001480999926570803}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_y_flips_both_x_and_z_check_sectors", "seconds": 0.001441300002625212}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_two_round_unencoded_analytic_fault_probability"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_two_round_unencoded_analytic_fault_probability", "phase": "setup", "outcome": "passed", "seconds": 0.00014200000441633165}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_two_round_unencoded_analytic_fault_probability", "phase": "call", "outcome": "passed", "seconds": 0.0036644999927375466}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_two_round_unencoded_analytic_fault_probability", "phase": "teardown", "outcome": "passed", "seconds": 0.00015180002083070576}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_two_round_unencoded_analytic_fault_probability", "seconds": 0.004485200013732538}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-bit_flip]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-bit_flip]", "phase": "setup", "outcome": "passed", "seconds": 0.0003419000131543726}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-bit_flip]", "phase": "call", "outcome": "passed", "seconds": 0.0006871999939903617}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-bit_flip]", "phase": "teardown", "outcome": "passed", "seconds": 0.00017309997929260135}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-bit_flip]", "seconds": 0.0017413999885320663}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.0003260000084992498}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-depolarizing]", "phase": "call", "outcome": "passed", "seconds": 0.001495400007115677}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.00018779997481033206}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-perfect-depolarizing]", "seconds": 0.0025676999939605594}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-bit_flip]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-bit_flip]", "phase": "setup", "outcome": "passed", "seconds": 0.00032210000790655613}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-bit_flip]", "phase": "call", "outcome": "passed", "seconds": 0.000971500005107373}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-bit_flip]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001736000122036785}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-bit_flip]", "seconds": 0.002002199995331466}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.00032060002558864653}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-depolarizing]", "phase": "call", "outcome": "passed", "seconds": 0.00283429998671636}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.00021520000882446766}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p0-noisy-depolarizing]", "seconds": 0.004071800009114668}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-bit_flip]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-bit_flip]", "phase": "setup", "outcome": "passed", "seconds": 0.00036450001061894}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-bit_flip]", "phase": "call", "outcome": "passed", "seconds": 0.0007663000142201781}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-bit_flip]", "phase": "teardown", "outcome": "passed", "seconds": 0.00020810001296922565}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-bit_flip]", "seconds": 0.0019209999882150441}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.00033799998345784843}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-depolarizing]", "phase": "call", "outcome": "passed", "seconds": 0.0015997000155039132}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.00018470000941306353}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-perfect-depolarizing]", "seconds": 0.0026889000146184117}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-bit_flip]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-bit_flip]", "phase": "setup", "outcome": "passed", "seconds": 0.00034389999927952886}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-bit_flip]", "phase": "call", "outcome": "passed", "seconds": 0.0010602999827824533}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-bit_flip]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001821999903768301}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-bit_flip]", "seconds": 0.0021505999902728945}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.00033260000054724514}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-depolarizing]", "phase": "call", "outcome": "passed", "seconds": 0.0028805000183638185}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001841000048443675}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p1-noisy-depolarizing]", "seconds": 0.003980800014687702}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-bit_flip]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-bit_flip]", "phase": "setup", "outcome": "passed", "seconds": 0.0003267000138293952}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-bit_flip]", "phase": "call", "outcome": "passed", "seconds": 0.0007885000086389482}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-bit_flip]", "phase": "teardown", "outcome": "passed", "seconds": 0.00023109998437575996}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-bit_flip]", "seconds": 0.0019921000057365745}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.0004522999806795269}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-depolarizing]", "phase": "call", "outcome": "passed", "seconds": 0.001613699976587668}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.00018579998868517578}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-perfect-depolarizing]", "seconds": 0.002894800010835752}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-bit_flip]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-bit_flip]", "phase": "setup", "outcome": "passed", "seconds": 0.00033629999961704016}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-bit_flip]", "phase": "call", "outcome": "passed", "seconds": 0.0009945999772753567}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-bit_flip]", "phase": "teardown", "outcome": "passed", "seconds": 0.00019210000755265355}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-bit_flip]", "seconds": 0.002084099978674203}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.00032359999022446573}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-depolarizing]", "phase": "call", "outcome": "passed", "seconds": 0.0027120999875478446}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001773000112734735}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_normalized_small_exact[p2-noisy-depolarizing]", "seconds": 0.003771099989535287}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_history_difference_and_final_boundary"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_history_difference_and_final_boundary", "phase": "setup", "outcome": "passed", "seconds": 0.000149200001033023}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_history_difference_and_final_boundary", "phase": "call", "outcome": "passed", "seconds": 0.0016132000018842518}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_history_difference_and_final_boundary", "phase": "teardown", "outcome": "passed", "seconds": 0.00015360000543296337}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_history_difference_and_final_boundary", "seconds": 0.0024585000064689666}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[bit_flip]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[bit_flip]", "phase": "setup", "outcome": "passed", "seconds": 0.0002496000088285655}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[bit_flip]", "phase": "call", "outcome": "passed", "seconds": 0.010434099996928126}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[bit_flip]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001993000041693449}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[bit_flip]", "seconds": 0.011623699974734336}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.00025480001932010055}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[depolarizing]", "phase": "call", "outcome": "passed", "seconds": 0.2256958000070881}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.00020420001237653196}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_zero_measurement_limit_and_cumulative_observables[depolarizing]", "seconds": 0.2269457000074908}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_pauli_accumulates_by_product_not_integer_addition"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_pauli_accumulates_by_product_not_integer_addition", "phase": "setup", "outcome": "passed", "seconds": 0.00015300000086426735}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_pauli_accumulates_by_product_not_integer_addition", "phase": "call", "outcome": "passed", "seconds": 0.000740100018447265}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_pauli_accumulates_by_product_not_integer_addition", "phase": "teardown", "outcome": "passed", "seconds": 0.00015089998487383127}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_pauli_accumulates_by_product_not_integer_addition", "seconds": 0.0015835000085644424}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[0.1]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[0.1]", "phase": "setup", "outcome": "passed", "seconds": 0.00024090000079013407}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[0.1]", "phase": "call", "outcome": "passed", "seconds": 0.0005283000064082444}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[0.1]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001640999980736524}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[0.1]", "seconds": 0.0014779999910388142}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p1]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p1]", "phase": "setup", "outcome": "passed", "seconds": 0.00021630001720041037}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p1]", "phase": "call", "outcome": "passed", "seconds": 0.0003758000093512237}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p1]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016120000509545207}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p1]", "seconds": 0.0012875999964307994}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p2]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p2]", "phase": "setup", "outcome": "passed", "seconds": 0.00021310002193786204}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p2]", "phase": "call", "outcome": "passed", "seconds": 0.00037880000309087336}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p2]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016170000890269876}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p2]", "seconds": 0.0013328999921213835}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p3]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p3]", "phase": "setup", "outcome": "passed", "seconds": 0.00022709998302161694}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p3]", "phase": "call", "outcome": "passed", "seconds": 0.00040530000114813447}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p3]", "phase": "teardown", "outcome": "passed", "seconds": 0.00018419997650198638}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p3]", "seconds": 0.0014002999814692885}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p4]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p4]", "phase": "setup", "outcome": "passed", "seconds": 0.0002334000018890947}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p4]", "phase": "call", "outcome": "passed", "seconds": 0.00040920000174082816}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p4]", "phase": "teardown", "outcome": "passed", "seconds": 0.00018130001262761652}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p4]", "seconds": 0.0013744000170845538}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p5]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p5]", "phase": "setup", "outcome": "passed", "seconds": 0.0003586999955587089}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p5]", "phase": "call", "outcome": "passed", "seconds": 0.00040530000114813447}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p5]", "phase": "teardown", "outcome": "passed", "seconds": 0.00020199999562464654}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_phenomenological_probability_schema[p5]", "seconds": 0.001559700001962483}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state0]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state0]", "phase": "setup", "outcome": "passed", "seconds": 0.00022600000374950469}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state0]", "phase": "call", "outcome": "passed", "seconds": 0.0003734000201802701}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state0]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016190001042559743}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state0]", "seconds": 0.0013172999897506088}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state1]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state1]", "phase": "setup", "outcome": "passed", "seconds": 0.00021470000501722097}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state1]", "phase": "call", "outcome": "passed", "seconds": 0.0003744999994523823}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state1]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002175999979954213}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state1]", "seconds": 0.0013812000106554478}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state2]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state2]", "phase": "setup", "outcome": "passed", "seconds": 0.00021290002041496336}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state2]", "phase": "call", "outcome": "passed", "seconds": 0.0003696999920066446}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state2]", "phase": "teardown", "outcome": "passed", "seconds": 0.00017129999469034374}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state2]", "seconds": 0.0013058999902568758}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state3]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state3]", "phase": "setup", "outcome": "passed", "seconds": 0.0002111000067088753}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state3]", "phase": "call", "outcome": "passed", "seconds": 0.0003521000035107136}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state3]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016080000204965472}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state3]", "seconds": 0.0012704000109806657}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state4]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state4]", "phase": "setup", "outcome": "passed", "seconds": 0.0002161000156775117}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state4]", "phase": "call", "outcome": "passed", "seconds": 0.0003420000139158219}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state4]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001610000035725534}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state4]", "seconds": 0.0012691000010818243}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state5]"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state5]", "phase": "setup", "outcome": "passed", "seconds": 0.00022420001914724708}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state5]", "phase": "call", "outcome": "passed", "seconds": 0.00035069999285042286}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state5]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001598000235389918}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_depolarizing_invalid_state[state5]", "seconds": 0.0012826000165659934}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_measurement_coordinates_remain_binary"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_measurement_coordinates_remain_binary", "phase": "setup", "outcome": "passed", "seconds": 0.00014250000822357833}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_measurement_coordinates_remain_binary", "phase": "call", "outcome": "passed", "seconds": 0.0003856999974232167}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_measurement_coordinates_remain_binary", "phase": "teardown", "outcome": "passed", "seconds": 0.00015219999477267265}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_measurement_coordinates_remain_binary", "seconds": 0.001209300011396408}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_required_boundaries_and_invalid_options"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_required_boundaries_and_invalid_options", "phase": "setup", "outcome": "passed", "seconds": 0.000142400007462129}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_required_boundaries_and_invalid_options", "phase": "call", "outcome": "passed", "seconds": 0.000990999978967011}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_required_boundaries_and_invalid_options", "phase": "teardown", "outcome": "passed", "seconds": 0.00014719998580403626}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_required_boundaries_and_invalid_options", "seconds": 0.0018106000206898898}
+{"kind": "start", "nodeid": "tests/test_noise_models.py::test_seed_reproducibility_and_metadata"}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_seed_reproducibility_and_metadata", "phase": "setup", "outcome": "passed", "seconds": 0.0001799000019673258}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_seed_reproducibility_and_metadata", "phase": "call", "outcome": "passed", "seconds": 0.0032746999931987375}
+{"kind": "report", "nodeid": "tests/test_noise_models.py::test_seed_reproducibility_and_metadata", "phase": "teardown", "outcome": "passed", "seconds": 0.00015150001854635775}
+{"kind": "finish", "nodeid": "tests/test_noise_models.py::test_seed_reproducibility_and_metadata", "seconds": 0.004186199977993965}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[repetition3]"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[repetition3]", "phase": "setup", "outcome": "passed", "seconds": 0.00022419999004341662}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[repetition3]", "phase": "call", "outcome": "passed", "seconds": 0.0010602999827824533}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[repetition3]", "phase": "teardown", "outcome": "passed", "seconds": 0.00017499999376013875}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[repetition3]", "seconds": 0.002233899984275922}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_steane_code]"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_steane_code]", "phase": "setup", "outcome": "passed", "seconds": 0.00021399999968707561}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_steane_code]", "phase": "call", "outcome": "passed", "seconds": 0.0014860999945085496}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_steane_code]", "phase": "teardown", "outcome": "passed", "seconds": 0.00016880000475794077}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_steane_code]", "seconds": 0.002540799992857501}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_hgp_hamming]"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_hgp_hamming]", "phase": "setup", "outcome": "passed", "seconds": 0.00030169999809004366}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_hgp_hamming]", "phase": "call", "outcome": "skipped", "seconds": 0.0036841999972239137}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_hgp_hamming]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001768999791238457}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_hgp_hamming]", "seconds": 0.004960799997206777}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_bb_code_72]"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_bb_code_72]", "phase": "setup", "outcome": "passed", "seconds": 0.000225499999942258}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_bb_code_72]", "phase": "call", "outcome": "passed", "seconds": 0.015147500002058223}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_bb_code_72]", "phase": "teardown", "outcome": "passed", "seconds": 0.0003074000123888254}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_phase_model_is_dual_bit_model[make_bb_code_72]", "seconds": 0.016624100011540577}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_binary_sector_all_states_and_exact_duality"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_binary_sector_all_states_and_exact_duality", "phase": "setup", "outcome": "passed", "seconds": 0.0002445999998599291}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_binary_sector_all_states_and_exact_duality", "phase": "call", "outcome": "passed", "seconds": 0.033360600005835295}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_binary_sector_all_states_and_exact_duality", "phase": "teardown", "outcome": "passed", "seconds": 0.00018050000653602183}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_binary_sector_all_states_and_exact_duality", "seconds": 0.03455149999354035}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_repetition_code_has_distinct_x_and_z_failure_rates"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_repetition_code_has_distinct_x_and_z_failure_rates", "phase": "setup", "outcome": "passed", "seconds": 0.000146100006531924}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_repetition_code_has_distinct_x_and_z_failure_rates", "phase": "call", "outcome": "passed", "seconds": 0.020106199983274564}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_repetition_code_has_distinct_x_and_z_failure_rates", "phase": "teardown", "outcome": "passed", "seconds": 0.00019809999503195286}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_repetition_code_has_distinct_x_and_z_failure_rates", "seconds": 0.021135600021807477}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_asymmetric_toric_phase_exact_equals_dual_bit_exact"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_asymmetric_toric_phase_exact_equals_dual_bit_exact", "phase": "setup", "outcome": "passed", "seconds": 0.000166199984960258}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_asymmetric_toric_phase_exact_equals_dual_bit_exact", "phase": "call", "outcome": "skipped", "seconds": 0.0035829000116791576}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_asymmetric_toric_phase_exact_equals_dual_bit_exact", "phase": "teardown", "outcome": "passed", "seconds": 0.0001638999965507537}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_asymmetric_toric_phase_exact_equals_dual_bit_exact", "seconds": 0.0046787000028416514}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_z_decoder_selection_validation_and_existing_identifier"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_decoder_selection_validation_and_existing_identifier", "phase": "setup", "outcome": "passed", "seconds": 0.00015199999324977398}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_decoder_selection_validation_and_existing_identifier", "phase": "call", "outcome": "skipped", "seconds": 0.003243600018322468}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_decoder_selection_validation_and_existing_identifier", "phase": "teardown", "outcome": "passed", "seconds": 0.0001537000061944127}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_z_decoder_selection_validation_and_existing_identifier", "seconds": 0.004203899996355176}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_z_bposd_identifier_and_default_unchanged"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_bposd_identifier_and_default_unchanged", "phase": "setup", "outcome": "passed", "seconds": 0.0001453000004403293}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_bposd_identifier_and_default_unchanged", "phase": "call", "outcome": "skipped", "seconds": 0.0032875000033527613}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_bposd_identifier_and_default_unchanged", "phase": "teardown", "outcome": "passed", "seconds": 0.00015659999917261302}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_z_bposd_identifier_and_default_unchanged", "seconds": 0.004337199992733076}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_z_bposd_predictions_use_x_checks_on_nonselfdual_code"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_bposd_predictions_use_x_checks_on_nonselfdual_code", "phase": "setup", "outcome": "passed", "seconds": 0.00018100001034326851}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_bposd_predictions_use_x_checks_on_nonselfdual_code", "phase": "call", "outcome": "skipped", "seconds": 0.004085199994733557}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_bposd_predictions_use_x_checks_on_nonselfdual_code", "phase": "teardown", "outcome": "passed", "seconds": 0.00022810001973994076}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_z_bposd_predictions_use_x_checks_on_nonselfdual_code", "seconds": 0.005331299995305017}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[history]"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[history]", "phase": "setup", "outcome": "passed", "seconds": 0.00024870000197552145}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[history]", "phase": "call", "outcome": "passed", "seconds": 0.5947434999980032}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[history]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002043000131379813}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[history]", "seconds": 0.5959101000044029}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[difference]"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[difference]", "phase": "setup", "outcome": "passed", "seconds": 0.000249299977440387}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[difference]", "phase": "call", "outcome": "passed", "seconds": 0.6042889999807812}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[difference]", "phase": "teardown", "outcome": "passed", "seconds": 0.00020490001770667732}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_binary_and_dual[difference]", "seconds": 0.6054654000035953}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_check_history_and_fastpath"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_check_history_and_fastpath", "phase": "setup", "outcome": "passed", "seconds": 0.00015490001533180475}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_check_history_and_fastpath", "phase": "call", "outcome": "passed", "seconds": 0.471713799983263}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_check_history_and_fastpath", "phase": "teardown", "outcome": "passed", "seconds": 0.00018659999477677047}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_phenomenological_phase_flip_check_history_and_fastpath", "seconds": 0.47276720000081696}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_z_coset_initializer_is_faulty_and_chain_targets_exact_weight"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_coset_initializer_is_faulty_and_chain_targets_exact_weight", "phase": "setup", "outcome": "passed", "seconds": 0.00015460001304745674}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_coset_initializer_is_faulty_and_chain_targets_exact_weight", "phase": "call", "outcome": "passed", "seconds": 0.24278520001098514}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_z_coset_initializer_is_faulty_and_chain_targets_exact_weight", "phase": "teardown", "outcome": "passed", "seconds": 0.00018350000027567148}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_z_coset_initializer_is_faulty_and_chain_targets_exact_weight", "seconds": 0.24379209999460727}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_invalid_phenomenological_data_noise"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_invalid_phenomenological_data_noise", "phase": "setup", "outcome": "passed", "seconds": 0.00014799999189563096}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_invalid_phenomenological_data_noise", "phase": "call", "outcome": "passed", "seconds": 0.00044689999776892364}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_invalid_phenomenological_data_noise", "phase": "teardown", "outcome": "passed", "seconds": 0.00015169999096542597}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_invalid_phenomenological_data_noise", "seconds": 0.0012811000051442534}
+{"kind": "start", "nodeid": "tests/test_phase_flip.py::test_example_quick_cli"}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_example_quick_cli", "phase": "setup", "outcome": "passed", "seconds": 0.002261499990709126}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_example_quick_cli", "phase": "call", "outcome": "skipped", "seconds": 0.0034995999885722995}
+{"kind": "report", "nodeid": "tests/test_phase_flip.py::test_example_quick_cli", "phase": "teardown", "outcome": "passed", "seconds": 0.00020030001178383827}
+{"kind": "finish", "nodeid": "tests/test_phase_flip.py::test_example_quick_cli", "seconds": 0.006960800004890189}
+{"kind": "start", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[static]"}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[static]", "phase": "setup", "outcome": "passed", "seconds": 0.0002398999931756407}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[static]", "phase": "call", "outcome": "passed", "seconds": 2.084957899991423}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[static]", "phase": "teardown", "outcome": "passed", "seconds": 0.0001990000018849969}
+{"kind": "finish", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[static]", "seconds": 2.0861558000033256}
+{"kind": "start", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[bit_flip]"}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[bit_flip]", "phase": "setup", "outcome": "passed", "seconds": 0.0003887999919243157}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[bit_flip]", "phase": "call", "outcome": "passed", "seconds": 2.257407500001136}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[bit_flip]", "phase": "teardown", "outcome": "passed", "seconds": 0.00021399999968707561}
+{"kind": "finish", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[bit_flip]", "seconds": 2.2588240999903064}
+{"kind": "start", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[depolarizing]"}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[depolarizing]", "phase": "setup", "outcome": "passed", "seconds": 0.00039560001459904015}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[depolarizing]", "phase": "call", "outcome": "passed", "seconds": 3.600075399997877}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[depolarizing]", "phase": "teardown", "outcome": "passed", "seconds": 0.0002012000186368823}
+{"kind": "finish", "nodeid": "tests/test_pipeline.py::test_three_noise_end_to_end_shared_failure_and_categorical_json[depolarizing]", "seconds": 3.6016624000039883}
+{"kind": "start", "nodeid": "tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[static]"}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[static]", "phase": "setup", "outcome": "passed", "seconds": 0.00025759998243302107}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[static]", "phase": "call", "outcome": "passed", "seconds": 0.7418669000035152}
+{"kind": "report", "nodeid": "tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[static]", "phase": "teardown", "outcome": "passed", "seconds": 0.00022609997540712357}
+{"kind": "finish", "nodeid": "tests/test_pipeline.py::test_bar_full_density_against_exact_normalizers_for_each_noise[static]", "seconds": 0.7431091999751516}

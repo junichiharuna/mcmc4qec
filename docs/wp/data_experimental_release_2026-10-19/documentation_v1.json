@@ -1,0 +1,28 @@
+{
+  "observed": "2026-10-19T09:23:38.564725+09:00",
+  "results": [
+    {
+      "command": [
+        "A:\\dev\\mcmc4qec\\.venv-docs\\Scripts\\python.exe",
+        "-m",
+        "mkdocs",
+        "build",
+        "--strict"
+      ],
+      "seconds": 14.009282899991376,
+      "returncode": 0,
+      "timeout": false
+    },
+    {
+      "command": [
+        "A:\\dev\\mcmc4qec\\.venv-docs\\Scripts\\python.exe",
+        "docs/check_site.py"
+      ],
+      "seconds": 1.3129301000153646,
+      "returncode": 0,
+      "timeout": false
+    }
+  ],
+  "log_sha256": "1d5720d36db29b48fe66991984a69be6c71a1344530b0e0a4981f48c31f053e4",
+  "scope": "Local strict documentation build and generated HTML links; no publication."
+}

@@ -1,0 +1,64 @@
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [  3%]
+.............................ssss.................s..................... [  6%]
+........................................................................ [  9%]
+........................................................................ [ 12%]
+........................................................................ [ 15%]
+........................................................................ [ 18%]
+........................................................................ [ 21%]
+........................................................................ [ 24%]
+........................................................................ [ 28%]
+........................................................................ [ 31%]
+........................................................................ [ 34%]
+........................................................................ [ 37%]
+........................................................................ [ 40%]
+........................................................................ [ 43%]
+........................................................................ [ 46%]
+........................................................................ [ 49%]
+........................................................................ [ 52%]
+........................................................................ [ 56%]
+........................................................................ [ 59%]
+........................................................................ [ 62%]
+........................................................................ [ 65%]
+........................................................................ [ 68%]
+........................................................................ [ 71%]
+...........s.s.......................................................... [ 74%]
+........................................................................ [ 77%]
+........................................................................ [ 80%]
+........................................................................ [ 84%]
+........................................................................ [ 87%]
+........................................................................ [ 90%]
+........................................................................ [ 93%]
+........................................................................ [ 96%]
+........................................................................ [ 99%]
+.........                                                                [100%]
+============================== warnings summary ===============================
+tests/test_notebooks.py::test_notebook_executes_quickly[01_quickstart.ipynb]
+  A:\dev\mcmc4qec\.venv-experimental-optional\Lib\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement add_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via tornado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+    self._get_loop()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================ slowest 20 durations =============================
+55.93s call     tests/test_tile_timing_comparison.py::test_complete_artifacts_comparison_and_corruption_rejection
+26.67s call     tests/test_submit_tile_mc_time.py::test_capacity_loader_binds_raw_artifacts_native_and_execution
+22.10s call     tests/test_tile_low_noise_partitioned_trace_audit_resources.py::test_measured_partition_capacity_checks_terminal_payloads_and_plan
+19.93s call     tests/test_tile_low_noise_trace_audit_resources.py::test_actual_saved_capacity_binding_and_tampered_evidence
+19.20s call     tests/test_submit_tile_low_noise_trace_audit.py::test_real_capacity_reader_prepare_full_and_submission_boundary
+18.98s call     tests/test_circuit_surface.py::test_rotated_surface_d3_midpoint_direct_mc_matches_native_stim
+18.84s call     tests/test_tile_low_noise_timing_evaluation_report.py::test_actual_plan_builder_connects_metadata_without_payload_scan
+18.80s setup    tests/test_tile_mixing_inventory.py::test_complete_192_cohort_streams_only_json
+18.00s call     tests/test_decoders.py::test_depolarizing_sector_mwpm_all_syndromes[<lambda>1]
+17.26s call     tests/test_tile_weight_reference_audit_run.py::test_all_sixteen_real_audits_are_preserved
+16.34s call     tests/test_tile_weight_reference_audit_run.py::test_successful_conditions_remain_recorded_when_evidence_changes_at_phase_end[audit_source]
+16.23s call     tests/test_submit_tile_low_noise.py::test_actual_small_capacity_artifacts_are_bound_to_metadata_and_native_evidence
+15.79s call     tests/test_tile_low_noise_analysis.py::test_actual_short_trace_analysis_all_cases[3]
+15.27s call     tests/test_tile_weight_reference_audit_run.py::test_failed_task_still_writes_complete_summary
+15.08s call     tests/test_circuit_kernels.py::test_repetition_64_state_normalization_and_detailed_balance
+14.99s call     tests/test_steane_components.py::test_finite_default_components_and_stabilizer_bridge
+14.29s call     tests/test_tile_weight_reference_audit.py::test_saved_condition_native_pbs_summary_binding_and_corruptions
+13.66s call     tests/test_tile_low_noise_partitioned_trace_audit.py::test_prepare_run_read_bind_receipts_and_never_call_singleton
+12.51s call     tests/test_tile_timing_evaluation_report.py::test_real_cohort_loader_payload_and_terminal_binding
+12.43s call     tests/test_tile_low_noise_partitioned_trace_audit.py::test_source_closure_change_invalidates_prepared_plan
+2306 passed, 7 skipped, 1 warning in 250.79s (0:04:10)

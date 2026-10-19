@@ -1,0 +1,83 @@
+# 分割samplingのcollector transport：入力検証の進捗
+
+## 04:23 JSTのcollector完了受理入口
+
+既存の投入入口を変更せず、`output/complete_low_partition_collection_once.py`を追加した。
+SHAは`4abd853e3ea6a9f702855a35011ef7fc6c52d170bda61fa43000c95676fcddb2`である。
+ローカルのprepare・execute記録、固定source、外部prepared hash、実job IDとremote ledgerの一致を確認する。
+既存`collector_terminal`でF/exit0/run_count1・脚本・資源を確認し、既存`completed_partition_evidence`で全task index・分割summary・失敗数・source/native/intentの対応を確認する。
+task失敗の件数は保持し、独立referenceとの比較や後段解析の完了とは扱わない。
+元の完了readerはmetadataとtask indexの検証なので、`raw_payloads_rehashed=False`を保持する。
+raw payloadの全hash走査は先行collector jobの役割であり、この親側処理が再走査したとは記録しない。
+全消費metadataと実PBSを処理前後に確認し、完了記録は一度だけ新規作成する。
+実job未終了・rerun・他jobのreceipt・変更した証拠・不完全task indexを拒否し、qsubを呼ばない。
+
+Windowsの受入は21件・1.55秒で成功した。
+Linuxではremote処理の11件・0.09秒が成功し、Windows側のローカル証拠テスト10件は明示的に除外した。
+Linux受入receiptは`data_tile_validation_2026-10-17/low_partition_collection_completion_linux_acceptance_v1.json`、SHAは`b9bc5431d68f72c792b4011c2710715bc7e474229c99744414bd2112d9cb2373`である。
+受入はmock scheduler・合成metadataを使っており、全9条件の実collector完了受理は未実施である。
+独立したサブエージェントレビューは未実施である。
+
+実装とテストのbyte一致コピーを`data_tile_validation_2026-10-17/partition_collection_completion_v1/`へ保存した。
+manifestのSHAは`ed2e325e1d31da3d245a29804a4a2fa16fab2c59423f1bf00ce7ba2d10488976`である。
+前節のtransport保管sourceに追加して、hash確認後に元の`output/`配置へ復元する。
+collectorが実際に終了した後、同じcase・targetとprepareで得たhashを指定して`complete_low_partition_collection_once.py --case C --target-index T --prepared-sha256 SHA`を一度実行する。
+後段解析・全trace監査・独立reference比較への接続は別工程として残る。
+
+## 04:22 JSTの追加実装と受入
+
+remote prepare・preflight・execute adapterを追加し、下記の「未実装」は04:11時点の記録として保持する。
+新入口は`output/submit_low_partition_collection_once.py`、SHAは`470971246d312f53fa1d30b6792c2ce62f9056ad168c131bed2ee8f0aa8f7d0f`である。
+remote拡張は`output/low_partition_collection_remote.py`、SHAは`9e4face4a4950ffc3a6c6d4ce3a76c2f43deb731d85d1fee121ed56950158800`である。
+固定generatorのREMOTEをそのまま連結し、元の`remote_main`・`checked_qsub`・共有lock・上限2ノード・一回投入を再利用する。
+追加のbinding検査は元の各guard位置から呼ばれ、全upstreamの実PBS終端・run_count1・脚本・封印済みmetadataを再確認する。
+元のgenerator sourceと科学計算sourceは変更していない。
+
+prepareは全generatorの実投入証拠との一致を確認し、既存`partition_evidence`とcollector dry-runで終端・脚本・資源を封印する。
+記録済みtask失敗のexit2を保持し、準備記録には全upstream metadataとcollector脚本・dry-runのhashを保存する。
+preflight・executeでは外部指定のprepared hashと成功したローカルprepare記録の両方を要求する。
+各操作は保存先を一度だけ作り、曖昧な応答・中断・誤ったledgerでもintentとreceiptを保持して自動再実行を拒否する。
+準備上限は既存仕様の1 CPU・32 GiB・2時間で、ETAではない。
+
+追加テストはWindowsでremoteとlocal transportの27件が2.55秒、collector phaseに束縛した既存guardの10件が0.71秒で成功した。
+remoteのmock PBS脚本をWindowsパスのままPOSIX分割した初回テスト失敗は、fixtureで脚本引数をquoteして修正した。
+本番Linux用の脚本比較は変更していない。
+Linuxでもremoteとcollector guardの28件が0.34秒で成功し、sourceの前後一致を確認した。
+Linux受入receiptは`data_tile_validation_2026-10-17/low_partition_collection_linux_acceptance_v1.json`、SHAは`1373960c33f1f448993bf7573298d4bb2aa5ef2d14e35c770c86573760f44907`である。
+これらは合成入力・mock schedulerの受入であり、実PBS collectorの完了検証ではない。
+実collector prepare・preflight・executeは全9条件で未実施である。
+
+再現用の9 sourceを`data_tile_validation_2026-10-17/partition_collection_transport_v1/`へbyte一致で保存した。
+manifestのSHAは`24d7029a77638d6ca1892f2e15eef07e257ac014aff71cbcd21019cabd5acdbe`である。
+保管コピーを直接実行せず、manifestのhashを確認して元の`output/`配置へ復元する。
+全分割の投入・終端後に`--case C --target-index T --action prepare`を実行し、返された`prepared_sha256`を`--prepared-sha256`へ渡してpreflightとexecuteを一度ずつ実行する。
+現時点のcase0 target0はsample partition1が未投入なので、入口のローカル入力検証で停止する。
+collector完了後の`collector_terminal`・`read_completed_sampling`と後段解析接続は引き続き別工程である。
+独立したサブエージェントレビューは利用上限により未実施である。
+
+## 04:11 JSTの入力検証
+
+[仕様](low_partition_collection_transport_spec_2026-10-19_ja.md)に従い、最初に全generator投入receiptを結合する入力検証を実装した。
+本番のremote prepare・preflight・execute adapterはまだ未実装であり、この段階ではcollectorを投入できない。
+既存のgenerator入口・科学計算source・実行中jobは変更していない。
+
+実装は`output/low_partition_collection_inputs.py`、SHAは`5e7294f1cc5bf4a84fac6940f01120aa1a67a9d7bf10caf711533537f0483d7c`である。
+受入は`output/test_low_partition_collection_inputs.py`、SHAは`e582c8960f139e5c076713bbdc22b38d1a1a4f111f42c1f509c4faef50c0cd5c`である。
+同名のbyte一致コピーを`data_tile_validation_2026-10-17/`に保存した。
+コピーは保管用であり、再現時はhash確認後に元の`output/`配置へ復元する。
+
+全9条件の予定分割集合を実際の固定準備記録から読み、各分割のintent・receipt・remote script・stdout・stderrを検査する。
+source hash、固定selection、成功したqsub応答、準備済みledgerとの対応に加え、自己整合的でも重複したjob IDを拒否する。
+予定分割の一部だけでcollectorの入力authorityを作ることはできない。
+生成するauthorityには全消費ファイルのhashを含め、入力読み取り前後に確認する。
+
+Python 3.11で`python -m pytest output/test_low_partition_collection_inputs.py -q`を実行し、25件・2.55秒で成功した。
+実装途中にWindowsのaccess時刻更新をファイル変更と誤認する失敗を検出し、同一プロセス内のdevice・inode・size・mtime・modeと内容hashを比較するよう修正した。
+最終受入には全9条件、欠けたreceipt、曖昧な応答、改変したledger・source・stdout・script・intent、不正な条件、整合的に重複したjob IDを含む。
+本番のcase0 target0に対するローカル検査でも、未投入のsample partition1のintent欠落で予定どおり停止し、remote接続とqsubを行わないことを確認した。
+
+この受入はローカルの投入証拠結合だけであり、実PBS終端・raw payload・collectorの実行結果の検証ではない。
+次は固定generator guardを再利用するremote adapterを追加し、全分割終端後のprepareと外部prepared hashに基づくpreflight・executeを検証する。
+既存`partition_evidence`は記録済みtask失敗をexit2として保持するため、正常な分割だけを選び直さない。
+既存の保存済みterminal抽出にはrun_countが含まれないため、親側adapterでは実qstatのrun_count1も別途確認する。
+サブエージェント利用上限により、この追加の独立レビューは未実施である。

@@ -29,6 +29,7 @@ The [README](../README.md) gives a shorter overview and runnable example.
 | Look up arguments, return types, and class methods | [Sampling API](reference/sampling.md), [results API](reference/results.md) |
 | Run a complete script or notebook | [Examples and notebooks](../examples/README.md) |
 | Review evidence behind the numerical claims | [Validation records](../README.md#usage-notes) |
+| Check current tile results and unfinished validation | [Tile validation report](wp/tile_validation_report_2026-10-18_ja.md), [study status](wp/tile_validation_status_2026-10-17_ja.md) (Japanese) |
 
 API pages are generated from the current source signatures and docstrings.
 Use them alongside the API contracts: a signature alone does not explain the assumptions behind an estimator.

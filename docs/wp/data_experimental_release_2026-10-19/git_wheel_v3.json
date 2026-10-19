@@ -1,0 +1,20 @@
+{
+  "observed": "2026-10-19T02:27:49.576540+00:00",
+  "command": [
+    "A:\\dev\\mcmc4qec\\.venv-dev5-source\\Scripts\\python.exe",
+    "-m",
+    "build",
+    "--wheel",
+    "--outdir",
+    "A:\\dev\\mcmc4qec\\output\\experimental_release_20261019\\dist_git_v3"
+  ],
+  "returncode": 0,
+  "seconds": 9.378118500026176,
+  "scope": "Build from actual Git blob export; no publication.",
+  "member_set_difference": [],
+  "changed_members": [],
+  "all_members_equal_to_tested_wheel": true,
+  "wheel_sha256": "e8d38a6fba00d8c9c4eaaf0cb7f160575c2bb745c46bf003dc549aa76d60e45a",
+  "wheel_bytes": 93481,
+  "candidate_inputs_unchanged": true
+}

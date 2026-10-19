@@ -1,0 +1,8 @@
+.....................                                                    [100%]
+============================= slowest 5 durations =============================
+5.58s call     tests/test_tile_low_noise_timing_plan.py::test_partial_point_is_not_a_budget_input
+4.46s call     tests/test_tile_low_noise_timing_plan.py::test_external_registry_rejects_reselection_even_with_self_consistent_bundle
+4.05s call     tests/test_tile_low_noise_timing_plan.py::test_manifest_rebind_or_mutation_rejected
+3.83s call     tests/test_tile_low_noise_timing_plan.py::test_all_rows_four_roles_and_full_dimensions
+1.86s call     tests/test_tile_low_noise_timing_plan.py::test_coordinates_purposes_and_logical_stride
+21 passed in 26.24s

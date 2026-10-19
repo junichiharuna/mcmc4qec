@@ -1,0 +1,147 @@
+{
+  "seed": 7,
+  "quick": true,
+  "records": [
+    {
+      "case": 0,
+      "folder": "bit",
+      "summary": {
+        "code": "tile72",
+        "noise": "bit",
+        "target_p": 0.03,
+        "sector_decoder_prior": 0.03,
+        "kernel": "ZH",
+        "initialization": "rejection",
+        "bar": 0.05275767441505956,
+        "bar_interval": [
+          0.03978130337194967,
+          0.06996684305844093
+        ],
+        "independent_mc": 0.041015625,
+        "mc_interval": [
+          0.02698094895608158,
+          0.061886392039533444
+        ],
+        "mc_trials": 512,
+        "mc_failures": 21,
+        "uncertainty": "block_bootstrap",
+        "purpose": "workflow demonstration; precision settings not yet validated"
+      },
+      "all_rung_decoders_identical": true,
+      "sector_priors_verified": true,
+      "reference_interval95": [
+        0.04280930235039038,
+        0.043126212630733005
+      ],
+      "bar_reference_intervals_overlap": true,
+      "bar_seconds": 0.9304714999962016
+    },
+    {
+      "case": 1,
+      "folder": "bit288",
+      "summary": {
+        "code": "tile288",
+        "noise": "bit",
+        "target_p": 0.05,
+        "sector_decoder_prior": 0.05,
+        "kernel": "ZHS",
+        "initialization": "logical",
+        "bar": 0.036906435002316544,
+        "bar_interval": [
+          0.002169590572912592,
+          0.6278073667842632
+        ],
+        "independent_mc": 0.029296875,
+        "mc_interval": [
+          0.017833270017133897,
+          0.047771109471986185
+        ],
+        "mc_trials": 512,
+        "mc_failures": 15,
+        "uncertainty": "cross_chain",
+        "purpose": "workflow demonstration; precision settings not yet validated"
+      },
+      "all_rung_decoders_identical": true,
+      "sector_priors_verified": true,
+      "reference_interval95": [
+        0.028818535709776046,
+        0.029080560944770236
+      ],
+      "bar_reference_intervals_overlap": true,
+      "bar_seconds": 3.6420661000011023
+    },
+    {
+      "case": 2,
+      "folder": "depol72",
+      "summary": {
+        "code": "tile72",
+        "noise": "depolarizing",
+        "target_p": 0.03,
+        "sector_decoder_prior": 0.02,
+        "kernel": "ZH",
+        "initialization": "rejection",
+        "bar": 0.020976917588569923,
+        "bar_interval": [
+          0.015629061266335342,
+          0.02815467058571659
+        ],
+        "independent_mc": 0.029296875,
+        "mc_interval": [
+          0.017833270017133897,
+          0.047771109471986185
+        ],
+        "mc_trials": 512,
+        "mc_failures": 15,
+        "uncertainty": "block_bootstrap",
+        "purpose": "workflow demonstration; precision settings not yet validated"
+      },
+      "all_rung_decoders_identical": true,
+      "sector_priors_verified": true,
+      "reference_interval95": [
+        0.030035161072199324,
+        0.030302479320463326
+      ],
+      "bar_reference_intervals_overlap": false,
+      "bar_seconds": 1.713072499995178
+    },
+    {
+      "case": 3,
+      "folder": "depol288",
+      "summary": {
+        "code": "tile288",
+        "noise": "depolarizing",
+        "target_p": 0.05,
+        "sector_decoder_prior": 0.03333333333333333,
+        "kernel": "ZH",
+        "initialization": "rejection",
+        "bar": 0.004576709421577762,
+        "bar_interval": [
+          0.0013366947326133997,
+          0.01567019650672684
+        ],
+        "independent_mc": 0.001953125,
+        "mc_interval": [
+          0.00034485776154337486,
+          0.010979278212421853
+        ],
+        "mc_trials": 512,
+        "mc_failures": 1,
+        "uncertainty": "cross_chain",
+        "purpose": "workflow demonstration; precision settings not yet validated"
+      },
+      "all_rung_decoders_identical": true,
+      "sector_priors_verified": true,
+      "reference_interval95": [
+        0.002937105686142206,
+        0.002963910212090432
+      ],
+      "bar_reference_intervals_overlap": true,
+      "bar_seconds": 10.735305800000788
+    }
+  ],
+  "archive_path": "output\\tile_fixed_prior_example\\quick_examples.tar.gz",
+  "archive_sha256": "29d76ac0253031e1fe6e7916bbdfe3731ca64e74029bca36d4f5708ed0e8999b",
+  "example_source_sha256": "ffe05b5c1c874e8b5b71437528a9d566b693522042937f381bf95d135e023328",
+  "reference_summary_sha256": "72afbc93f9fb33d46cc967e542856a6a42031f6a0e1d2f2423c90aaf2e0a5d15",
+  "warning": "Workflow execution checks only. Four examples do not calibrate bias or coverage."
+}

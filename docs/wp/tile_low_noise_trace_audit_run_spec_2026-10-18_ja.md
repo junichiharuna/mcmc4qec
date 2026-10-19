@@ -1,0 +1,22 @@
+# 低ノイズtrace監査runner
+
+低ノイズproductionの固定7座標traceを対象とし、sampling capacityの1 chain計画は受け入れない。
+fullは2 kernel・2初期化・192 replicateの768 group、監査capacityは同じproductionのreplicate 0/1だけの8 groupとする。
+どちらも対象groupの全rung・全chain・全保存長を検査する。
+worker数は1〜96の整数をmanifestへ固定する。
+
+plan作成時に完成samplingとanchorのsummary・native preflight・PBS execution intentを既存completed_phase_evidenceで結合する。
+source manifest・profile・fixture・全source/runtimeを固定し、入力sampling rootとは独立した新規監査rootに保存する。
+実行入口ではPBSと固定thread環境、source/plan/完成証拠の不変を確認し、現在native profileをprobeする。
+再実行やcached監査を新しい容量測定として利用しない。
+
+groupごとにcode/Problemを一度構築し、全taskを既存audit_taskで検査する。
+marker・identity・全payload hashを復号前後で検査し、成功/失敗のraw reduced record列を完成sampling summaryのgroup digestと照合する。
+sampling failedは分母に残し、missing・corrupt・監査例外はaudit failedとして全予定taskの結果を保存する。
+初期状態と保存checkpointだけを再復号し、全compact entryの検査と全物理traceの再復号を区別する。
+全RNG軌道再生、独立decoderの正しさ、混合や被覆の証明とは扱わない。
+
+group監査artifactとwall/CPU/RSS測定artifactを別に保存する。
+測定はgroup入力読込・監査・group結果保存までを含み、測定record自身の書込みを除く。
+全group終了後に全入力payload hashと完成証拠を再照合し、変更や失敗を保持したsummaryを保存してから非零終了する。
+実測に基づく資源選択・qsub submitterは次工程とし、このrunnerはqsubを呼ばない。

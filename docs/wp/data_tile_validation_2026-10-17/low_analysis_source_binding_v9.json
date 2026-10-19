@@ -1,0 +1,51 @@
+{
+  "all_inherited_inputs_identical_to_v8": true,
+  "archive_sha256": "9db7e16db4f23c6e7504d2a7a4c1b17cc428d5e1673a762e3cb962bb6a3d4e95",
+  "baseline_core_identical_to_v8": true,
+  "core_files": 29,
+  "inherited_archive_sha256": "c5e709babb1d4aefeb5a00619b1d4391e6eb7976806fdf646e8535454d858702",
+  "local_inputs_unchanged_after_acceptance": true,
+  "new_input_sha256": {
+    "cluster_scripts/tile_audited_results.py": "3f9a5bfa85dd8fe722926296dfec2ba28bbf07a615fc13502217f63d0789a1ea",
+    "cluster_scripts/tile_low_noise_audited_collection.py": "0992af2ed784db964bbb9cca52678af17793c7b952c3b2342920850c5f4b8e6e",
+    "docs/wp/tile_audited_results_spec_2026-10-18_ja.md": "af583f1b105a38aab705db3b4f1d3bc2cd1baf590c1dd263ecc6e8a4871a823f",
+    "docs/wp/tile_low_noise_audited_collection_spec_2026-10-18_ja.md": "74344f71eea34d9635f2c4979afab57f9635ba8fb9b555e5e414672a7d9805f1",
+    "tests/test_tile_audited_results.py": "83c9e3e350e4dfee756d68648c0cadfed29f49b63260602a54cd95ffcd9599d6",
+    "tests/test_tile_low_noise_audited_collection.py": "d3121748cfee03c08920706a79022d9235a86d6e5a471eebb7768a13b3170268"
+  },
+  "observed_utc": "2026-10-18T01:04:41.899629+00:00",
+  "package_sha256": "da57e59c32fbf31ddc82b06b06d0c4fb5216f1dd98e0fb082c68dfa7d7b61339",
+  "qsub_executed": false,
+  "scope": "Isolated deployment and lightweight acceptance only; no full numerical audits or existing bundle/environment changes.",
+  "strict_linux_native_preflight_accepted": true,
+  "test_records": [
+    {
+      "command": [
+        "/home/user/workspace/mcmc4qec/20261017-tile-production-v1/venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-ra",
+        "tests/test_tile_audited_results.py"
+      ],
+      "returncode": 0,
+      "seconds": 13.595280389301479,
+      "test": "tests/test_tile_audited_results.py",
+      "timeout": false
+    },
+    {
+      "command": [
+        "/home/user/workspace/mcmc4qec/20261017-tile-production-v1/venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-ra",
+        "tests/test_tile_low_noise_audited_collection.py"
+      ],
+      "returncode": 0,
+      "seconds": 5.86344825476408,
+      "test": "tests/test_tile_low_noise_audited_collection.py",
+      "timeout": false
+    }
+  ]
+}
