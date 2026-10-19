@@ -82,8 +82,10 @@ jobs:
   optional-decoders-wheel:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python: ["3.11", "3.12"]
+        shard: [0, 1, 2, 3]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -103,8 +105,40 @@ jobs:
           PY
       - name: Test installed wheel with optional decoders
         timeout-minutes: 5
-        run: python -m pytest --override-ini pythonpath= tests/ -q -n auto --dist=worksteal
+        env:
+          TEST_SHARD: ${{ matrix.shard }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import subprocess
+          import sys
+
+          files = sorted(p.as_posix() for p in Path("tests").rglob("test_*.py"))
+          shard = int(os.environ["TEST_SHARD"])
+          selected = files[shard::4]
+          assert 0 <= shard < 4 and selected
+          Path("test-shard.json").write_text(json.dumps({
+              "shard": shard, "shards": 4, "all_files": files, "selected": selected,
+          }, indent=2), encoding="utf-8")
+          print(f"Shard {shard}: {len(selected)}/{len(files)} test files", flush=True)
+          subprocess.run([
+              sys.executable, "-m", "pytest", "--override-ini", "pythonpath=",
+              *selected, "-q", "-n", "auto", "--dist=worksteal",
+              "--junitxml=test-results.xml",
+          ], check=True)
+          PY
+      - name: Save shard inventory and test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: optional-tests-${{ matrix.python }}-${{ matrix.shard }}
+          path: |
+            test-shard.json
+            test-results.xml
       - name: Verify all quick examples and notebooks
+        if: matrix.shard == 0
         timeout-minutes: 5
         env:
           MCMC4QEC_QUICK: "1"
