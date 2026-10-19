@@ -1,0 +1,24 @@
+# sampling partitionに合わせた後続batchの組み方
+
+元samplingのpartition 0は、全kernel・初期化に対するreplicate 0〜95を生成し、96〜191はpartition 1で生成する。
+したがって、解析groupの通番で連続する44件だけを待つと、すでに完成した別初期化の入力を処理できず、追加PCが待機する。
+この変更は未準備のbatch 2以降に適用し、起動済み・配置済みのbatch 0と1を変更しない。
+
+元の全768 groupの順序と、通番mod 44によるDGX/Labo割当は維持する。
+各hostについて、全rung・chainの完了markerがそろい、まだ他batchへ予約していないgroupを元の順序で選ぶ。
+DGXは最大20 group、laboは最大24 groupを一つの受渡しbatchとする。
+数値結果・失敗数・diagnostics・推定値を選択の入力にしない。
+未生成groupは予定集合に残し、元のreplicate番号、seed、初期化、全解析設定は変えない。
+batch番号は受渡し単位の識別子であり、元の科学group identityを置き換えない。
+
+選択前に既存の予約・配置をhostごとに読んで、異なるbatchへの重複予約とhost割当変更を拒否する。
+新しい選択を保存してからexportし、export後にgroup集合・manifest・payload hashを確認する。
+同じbatchの選択と配置recordが両方ある場合は同一のgroup集合でなければならない。
+exportや転送が不明になった場合はその予約を保持し、別batchで同じgroupを再実行しない。
+
+前のbatchが稼働中なら、原則としてworker数分の完了入力がそろってから次batchを予約する。
+hostが空いた時点で不足する場合の部分batchは別途明示して扱い、暗黙に予定groupを消さない。
+引継ぎは従来どおり、前batchの終端・回収・親側検証を終えてから行う。
+
+受入では、partitionにより未生成の連番を飛ばして完了済みの別初期化を選べること、host割当、元の順序、全予定集合、重複拒否、同じbatchのrecord不一致拒否、入力不足時の未予約を確認する。
+この変更は実行順序の変更であり、新しい科学的な精度・被覆の主張を追加しない。

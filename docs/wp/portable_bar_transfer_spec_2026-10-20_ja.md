@@ -1,0 +1,11 @@
+# 最終cohortの転送仕様
+
+`portable_bar_distribution_v1.py` が全768群と両hostの全設定照合を確認して作成したtransfer-planを、独立に指定したSHA-256で固定して使う。
+転送前に全元ファイル・context・builder source・記録された入力hashを検証し、contextの入力一覧と転送一覧を完全一致させる。
+転送先はクラスタworkspace直下の新規directoryに限定し、既存directoryへの再投入や上書きは行わない。
+相対pathの脱出・重複・親子のfile衝突・symlinkを拒否する。
+全転送後にremote側で各ファイルのhash・サイズ・集合を検証し、受領記録を排他的に保存する。
+local側でも入力を再確認してから成功記録を保存する。
+途中失敗時はintentと途中ファイルを保持し、盲目的に再実行しない。
+転送成功は科学的受入を意味せず、providerの全archive・元trace監査・reference照合を引き続き必要とする。
+この処理はqsubを呼ばず、実データ転送は全群の固定planが揃うまで未実施とする。

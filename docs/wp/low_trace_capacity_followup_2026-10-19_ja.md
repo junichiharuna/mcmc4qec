@@ -1,0 +1,68 @@
+# C0T0 trace予備計測の完了と本監査への移行
+
+2026-10-19にtile72 bit-flipの低ノイズ条件C0T0について、trace予備計測job 265325.node-PRISMのF・Exit_status 0・run_count 1を実qstatで確認した。
+実walltimeは26秒で、2 replicate・8群の予備計測である。
+投入は既存の固定入口からqsubで行い、待機中を含む要求node数を最大2に制限した。
+
+完了入口の受理記録は[data_tile_validation_2026-10-17/low_partition_trace_capacity_0_0_completion_once_v1_receipt.json](data_tile_validation_2026-10-17/low_partition_trace_capacity_0_0_completion_once_v1_receipt.json)に保存した。
+remote parent-completion.jsonのSHA256はc4a96a1c6bc21418942a247474b64ff45d1b873fa69b17f60a0600265f6e17f9である。
+固定readerが予備計測artifactと入力traceのhash、native環境、投入と実終了記録を照合した。
+親側でcheckpointを再復号したという意味ではなく、全192 replicateの監査完了でもない。
+
+測定結果から選ばれた本監査の資源は1ノード、96 CPU・96 worker、62GB、walltime上限1時間である。
+外挿値は835.35秒だが、8 workerの予備計測では96 workerでのI/O競合を測っておらず、終了時刻の保証とは扱わない。
+本監査の準備では選択worker数で資源と入力を再検証する。
+
+最初の投入状況観測scriptは新jobがQまたはRであることを要求していたが、観測時には既にFであったため例外になった。
+これは観測条件の不一致であり、計算jobの失敗ではない。
+元scriptを保持し、新しいv2観測でF・exit 0・run_count 1を確認した。
+再投入はしていない。
+観測結果は[data_tile_validation_2026-10-17/low_partition_trace_capacity_dispatch_265325_v2.json](data_tile_validation_2026-10-17/low_partition_trace_capacity_dispatch_265325_v2.json)に保存した。
+
+同観測でC0T1のsampling job 265319.node-PRISMもF・exit 0・run_count 1、実walltime 04:59:38を確認した。
+この観測だけではsamplingのraw artifactを監査したことにはならない。
+C0T0のBAR解析265324.node-PRISMは引き続きRであり、この時点の要求node数は1である。
+低ノイズの最終比較が完了した条件数は3/12のままで、trace予備計測を科学cohortの結果へ加算しない。
+公開候補915ファイルが不変であることもv2観測で再確認した。
+
+## 本監査の準備と投入処理の観測
+
+本監査prepareとpreflightは受理済みで、prepared SHA256はb3e6fe004410d21f6ca3e0ee49b923ae87aec6b4b94418e0b6937680da35d0e1である。
+prepareとpreflightはqsubを行わず、測定値に基づく96 worker・62GB・1時間の設定と凍結入力を再確認した。
+14:05:36 JSTに固定execute入口を1回実行したが、SSHの約240秒の待機上限に達し、local receiptはaccepted=False・ambiguous=True・TimeoutExpiredとなった。
+このreceiptを成功として上書きせず、失敗記録を保持する。
+14:09:55 JSTのread-only観測では、remoteにsubmission-intent.jsonがあり、共有lockの所有者PID 4036913は引き続き稼働していた。
+同時点ではguard receiptとsubmission ledgerはまだなく、own queueはBAR 265324の1ノードのみだった。
+観測のtimeoutをremoteプロセスの終了やqsubの失敗とは解釈しない。
+再投入と共有lockの削除は行わず、同じremoteプロセスと実PBS・実投入記録を追跡する。
+qsubが実際に成功した場合は元のtimeout記録を保存したまま、別の照合記録で元intent・実guard・ledger・PBS・入力hashを結び付ける必要がある。
+通常の完了入口はlocal executeがaccepted=Trueであることを要求するため、timeout後の受理経路は未実装であり、記録の改ざんや検証の省略で通さない。
+
+14:12:28 JSTの観測では、remoteのguard receiptにreturncode 0・ambiguous False・job_id 265326.node-PRISMが記録され、submission.jsonにも同じjob IDが保存されていた。
+実PBSはjob 265326のR・run_count 1・1ノード96CPU/62GB・walltime上限1時間を返し、shared lockは解放済みだった。
+BAR 265324と合わせた要求node数は2である。
+元の投入処理からqsubが1回成功したものであり、別executeを行った結果ではない。
+
+remoteのprepare・script・submission intent・guard intent・guard receipt・submission ledgerの6ファイルを取得し、先行観測のhash、local prepareの期待ledger、guardの入力binding、実PBSのscriptと資源を照合した。
+記録は[data_tile_validation_2026-10-17/low_trace_full_dispatch_265326_evidence_v1/collection.json](data_tile_validation_2026-10-17/low_trace_full_dispatch_265326_evidence_v1/collection.json)に保存した。
+collection.jsonのSHA256はb35c15e800c5fe7e41824cd171436ca4bd827a2b98add0159a00a2ee26bce643である。
+この取得時点でもjobはRで、PBSのwalltimeは48秒だった。
+qsubの成功とSSHの待機失敗は区別し、元のlocal receiptはaccepted=Falseのまま保持した。
+この照合では現在のremote source treeの再hash、native probeの再実行、全traceの監査結果の検証は行っていない。
+今後はこの実投入証拠を使う独立の完了受理経路を実装し、元のtimeout記録とその後の実終了記録の両方を保存する。
+
+## その後の完了受理と次のsampling
+
+265326はF・exit 0・run_count 1、実walltime 00:05:14で終了した。
+元timeoutを保存する別経路を実装し、既存remote readerでの完了受理とlocal入力93件の再読込まで成功した。
+詳細は[trace_timeout_completion_spec_2026-10-19_ja.md](trace_timeout_completion_spec_2026-10-19_ja.md)に記録した。
+全192 replicate・768群・122880 sampling task・8232960 checkpointの監査metadataを受理し、failed_samplingは0である。
+BARとの最終比較と、そこでの群payload・現在のraw traceの再照合は未完了であり、低ノイズの最終比較完了数は3/12のままである。
+
+空いた枠にC0T1のsample partition 1をqsubで投入し、job 265327.node-PRISMの正常な投入応答と実Rを確認した。
+資源は1ノード96CPU・96 worker・32GB、walltime上限16時間である。
+16時間は要求上限でありETAではない。
+実投入と265326の終了、265324との合計2ノードを[data_tile_validation_2026-10-17/low_partition_sample1_dispatch_265327_v1.json](data_tile_validation_2026-10-17/low_partition_sample1_dispatch_265327_v1.json)に保存した。
+この時点でgeneratorは予定26本のうち6本を投入済みである。
+14:22:55 JSTのBARのdirectory観測では完了markerは288/768で、内容と数値payloadを監査した件数ではない。
+公開候補915ファイルは引き続き不変である。

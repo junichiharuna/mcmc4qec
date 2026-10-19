@@ -1,0 +1,20 @@
+# C0T1 trace資源計測の受理と全監査の投入
+
+C0T1 trace capacityをqsubで265335.node-PRISMとして投入し、F・exit 0・run_count 1、walltime 32秒の実終端を受理した。
+capacity completion SHA256は`5102bafdf7b8e398dd229c44f46e2902f982cf17161775188cbbb3ca4cd2859b`である。
+この結果から192 seedのfull trace監査を96 worker・96 CPU・75 GiB・1 node・上限1時間で準備した。
+full prepared SHA256は`002190261f38476d76ce98b35cc4e12788aa60f12428e118fe50803d04947a93`である。
+
+preflightの空き枠と旧controller終了を確認後、既存の共有lock・入力照合・最大2要求nodeの検査を通し、一度だけqsubした。
+job IDは265336.node-PRISMで、投入応答はaccepted true・ambiguous falseだった。
+投入後に実PBS脚本と要求資源を照合し、R状態を確認した。
+同時の所有者active jobはBAR解析265334と全監査265336で、合計2要求nodeだった。
+
+C0T0でSSHの240秒観測上限より投入処理が長くなった経緯を踏まえ、今回は同じ固定transportへ渡すSSH runnerの観測上限だけを900秒にした。
+科学設定、remote脚本、qsubの一回制限、PBS walltime、入力照合は変更していない。
+このラッパーは`output/run_low_c0t1_trace_full_transport_v1.py`で、preflightとexecuteをそれぞれ一度だけ実行した。
+
+投入後の確認では78入力ファイルを再照合した。
+観測スクリプトは[observe_c0t1_trace_full_dispatch_v1.py](data_tile_validation_2026-10-17/observe_c0t1_trace_full_dispatch_v1.py)、証拠は[c0t1_trace_full_dispatch_v1.json](data_tile_validation_2026-10-17/c0t1_trace_full_dispatch_v1.json)である。
+証拠のSHA256は`cbbf35c4fec466230acdd3e46ed7f6472e512e3aef5eb40f7863793cbf4b5a23`である。
+全監査の完了とC0T1の正式比較は、この投入確認時点では未完了である。

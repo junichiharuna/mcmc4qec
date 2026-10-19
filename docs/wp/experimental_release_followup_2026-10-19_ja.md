@@ -1,0 +1,34 @@
+# 公開候補固定後の確認
+
+2026-10-19 15:31 JSTにgitとghで現在の状態を確認した。
+repositoryはprivate、default branchはmainで、GitHub release一覧は空だった。
+remote mainは6f7528645ddf988ed8008bad5c81e321aa2aaaf8、local HEADはd78377e0f965f6aacc8a5e5b610c9153ebff9c3bだった。
+直近の[CI成功run 38681375502](https://github.com/junichiharuna/mcmc4qec/actions/runs/38681375502)はremote mainの旧commitに対するものであり、固定した915ファイルの公開候補のCI成功として扱わない。
+公開候補のcommit・push・remote CI・tag・Release・visibility変更は未実施である。
+
+## 公開本文
+
+固定候補の日英文書から、GitHub Releaseに使う[日英本文draft](data_experimental_release_2026-10-19/release_body_preparation_v1/output/experimental_release_20261019/release_body_preview_v1.md)を生成した。
+本文内の14個の文書リンクは候補tagへの絶対URLとし、対象ファイルが固定候補内に存在することを確認した。
+tagは未作成なので、これらのURLが現在アクセスできると確認したものではない。
+draftのSHA256は53aba2df4922de11226e8e655d0faa05ce2c44044b425570d0395a1c58b78a85である。
+decoderの制約、BP-OSDのWindows/Linux差、混合・被覆の未解決事項、全raw datasetを含まないことを維持した。
+
+最終commitのCI成功後は、同じrendererでcommit SHA向けリンクと実CI run URLを持つ本文を生成する。
+rendererは対象commitのtreeが固定候補と異なる場合に拒否する。
+CIの成功と対象headの一致は別途確認し、rendererが自動で保証したとは扱わない。
+生成手順はoutput/experimental_release_20261019/publish_runbook_ja.mdへ追記した。
+5ファイルのsource・draft・receipt・手順書は[保存manifest](data_experimental_release_2026-10-19/release_body_preparation_v1/manifest.json)に記録した。
+manifest SHA256は285277579e3cda21286ece23b6598259bf07358086b7a81581f3588c9dcda08cである。
+固定した公開候補と配布物には変更を加えていない。
+
+## 残る公開工程
+
+AGENTS.mdに従い、公開候補のcommit・pushはユーザーからの依頼後に行う。
+その対象commitのremote CIを確認し、必要な修正があれば候補と配布物の対応も更新する。
+GitHubの公開判断後に、確認済みcommitへtagとexperimental prereleaseを結び付け、本文・添付物・visibilityを確認する。
+PyPI公開と全生データの公開先は別途扱う。
+
+同時のPBS照会では元BAR 265324とsampling 265327はともにR/run_count 1で、計算は継続中だった。
+復旧の準備から回収までの経路は[専用runbook](low_bar_recovery_runbook_2026-10-19_ja.md)に接続済みだが、実際の復旧・最終比較・回収の完了を表すものではない。
+長期の数値検証は公開後も継続し、正式比較の完了数とソフトウェア公開準備の完了を区別する。

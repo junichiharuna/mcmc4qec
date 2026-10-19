@@ -1,0 +1,63 @@
+# SSH待機timeout後の本trace監査完了受理
+
+対象はC0T0の実job 265326.node-PRISMである。
+元のlocal executeはSSH待機上限によるTimeoutExpiredを保存したが、元のremoteプロセスはその後qsubを1回正常実行し、guard receiptとsubmission ledgerを保存した。
+元の失敗receipt・intent・script・stdout/stderrは変更せず、新しいcompletion_reconciled記録を別に保存する。
+
+## 受理する証拠
+
+既存のprepare受理連鎖から本監査のrequestとprepared hashを再構成する。
+元executeのscriptを固定sourceから再生成し、保存script・intent・全入力pinと一致することを要求する。
+元receiptにはaccepted=False・ambiguous=True・returncode=None・error_type=TimeoutExpiredを要求する。
+取得した6ファイルのhashと、元のprepare・失敗receipt・観測へのpinを確認する。
+保存prepare・script・submission intent・guard intent・guard receipt・ledgerを相互に照合し、正常なqsub応答のjob IDが元の期待command・資源・source/input bindingに対応することを確認する。
+保存されたqsub証拠だけで監査結果の完了とは扱わない。
+
+## 完了処理
+
+実PBSでF・exit 0・run_count 1を確認してから完了処理を一度だけ呼ぶ。
+科学的な検証本体は既存の固定full_trace_completeをそのまま使用し、現在のsource・native環境・入力とguardを再検証し、実PBSと全768群の監査metadata・measurementを照合する。
+親側では大きい群payload・現在のraw traceを再監査したとは主張しない。
+既存のlocal_execute_receipt_sha256には元のtimeout receiptのhashを渡し、新しいlocal記録にはremote_guard_after_ssh_timeoutという受理方法を明記する。
+完了記録を最終比較へ渡すreaderも元のtimeoutと取得証拠から同じscript・intent・responseを再構成する。
+既存の通常完了経路のsourceとreceiptは変更しない。
+
+## 実行と受入
+
+新入口はqsubを呼ばず、SSH transportの待機上限を900秒とする。
+これは計算jobのwalltime変更ではなく、既存の入力照合と完了処理を観測するための上限である。
+呼出側は非同期sessionで進行を確認し、観測中も状況を報告する。
+元script・intent・receipt・取得したguard/ledger・prepared hashの変更、誤ったjob、完了scopeの過大な主張、曖昧な通信結果、重複受理を拒否するテストを先に実装する。
+timeoutや通信エラーが起きた場合は新しい証拠を保持し、同じ入口を再実行しない。
+通常BARとの最終assembly、およびBAR復旧が必要な場合の最終比較には、この新しいtrace完了証拠を明示的に渡す。
+
+## 実装と検証記録
+
+output/reconcile_low_trace_full_completion.pyに元timeout記録と取得した投入証拠の照合、既存remote完了readerの呼出し、完了記録の再読込を実装した。
+15件の受入テストが15.96秒で成功した。
+SSH・native・PBSはmockで、固定sourceからのscript再生成と実ファイルのreceipt/hash連鎖を検証した。
+初回fixtureではWindowsの改行変換により取得prepareのbyte hashが一致しなかったため、LFのbyte列でfixtureを書き出すよう修正し、失敗ログも保存した。
+異なる証拠が同じpathへ別hashを割り当てる場合も拒否する。
+実際のC0T0についてlocal入力87件の照合が成功し、元のlocal execute receiptは変更していない。
+その後の実qstatで265326のF・exit 0・run_count 1、walltime 00:05:14を確認してから、本番completion呼出しを開始した。
+この時点では完了受理と最終比較はまだ完了と扱わない。
+
+通常BARとの接続入口output/low_partition_final_after_trace_timeout.pyも実装し、9件の受入テストが0.43秒で成功した。
+通常BARの完了readerと新しいtrace完了readerを明示的に呼び分け、既存のjoinが同じsampling authority・全群・全分母・scopeを要求する。
+assembly・prepare・preflight・execute・seal・recoverには既存の固定APIへ同じrequestと入力pinを渡し、既存sourceと過去の記録は変更しない。
+この接続試験では完了readerとSSH入口をmockし、既存の最終stage sourceをhash照合してimportできることも確認した。
+通常BAR collectorが完了するまではこの経路を実行せず、BARがtimeoutした場合の復旧report経路とは区別する。
+CLIには通常の最終処理引数に加え、取得したqsub証拠のcollection-pathとcollection-sha256を指定する。
+source・受入テスト・失敗を含むログ・元のtimeout・実qsub取得証拠は[data_tile_validation_2026-10-17/trace_timeout_completion_sources_v1/manifest.json](data_tile_validation_2026-10-17/trace_timeout_completion_sources_v1/manifest.json)に保存した。
+67ファイルを保存したarchive manifestのSHA256は9bf8836f4b530c35e74b05da9efd24b9d060949d6ec3b8939eaed6785dc08587である。
+
+## 実クラスタでの完了受理
+
+既存full_trace_completeによる実クラスタでの照合が正常終了し、completion_reconciledのlocal receiptを受理した。
+remote parent-completion.jsonのSHA256は8bbec7767d97c95359adf8fb6123c157d2a0ac19e985468f5ffb3f1b0d4aa297である。
+別のread呼出しで元timeoutから完了記録まで93件のlocal入力を再構成し、同じ完了SHAを確認した。
+全192 replicate・768群、planned_tasks 122880、failed_sampling 0、redecoded_checkpoints 8232960を受理した。
+親側は全measurement artifactと群markerを再hashしたが、群payloadと現在のraw traceの再hashは後続のPBS内最終collectorに残す。
+全物理状態を再復号したという意味でも、MCMC混合・名目95%被覆を保証する結果でもない。
+元executeのaccepted=False・TimeoutExpiredは保存したままで、新たなqsubは行っていない。
+実記録は[data_tile_validation_2026-10-17/low_trace_full_0_0_acceptance_summary_v1.json](data_tile_validation_2026-10-17/low_trace_full_0_0_acceptance_summary_v1.json)と、そこから参照するcompletion receiptに保存した。

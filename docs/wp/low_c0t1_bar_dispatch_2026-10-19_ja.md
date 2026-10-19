@@ -1,0 +1,26 @@
+# C0T1集約の受理とBAR解析の投入
+
+2026-10-19、C0T1のsampling集約265332.node-PRISMはF・exit 0・run_count 1、walltime 28分52秒で終了した。
+既存の`complete_low_partition_collection_once.py`を一度だけ実行し、投入記録、実PBS終端、脚本、samplingの完了indexと入力hashを照合して受理した。
+完了記録のSHA256は`ee941874cb23e0b6125313027bec2b7fc2f0fde67b08882fd28d779475e668b2`である。
+この親側受理は全raw traceの再hashやcheckpointの再復号を行う工程ではなく、full trace監査は別途必要である。
+
+受理した集約と同じ条件のcapacity265318を結び、既存の解析prepare、preflight、executeを各一度実行した。
+prepared SHA256は`e864856cec09582b5ee74f96315bf89d181d109650c4204f2ad1e244f3805c64`である。
+preflightでは旧controllerが全て終了しており、稼働中は最終比較265333の1要求nodeだけだった。
+executeは共有lock内で入力と要求node数を再確認し、`qsub`で265334.node-PRISMを投入した。
+投入応答はreturn code 0・accepted true・ambiguous falseとして保存した。
+
+解析要求は1 node・96 CPU・96 worker・234 GiB・walltime 7時間30分である。
+これは資源予算であり完了時刻の保証ではない。
+事前固定した科学設定と全groupを維持し、既存の科学計算コードは変更していない。
+
+投入後の読み取り専用照合で、実PBS脚本・要求資源と93入力ファイルのhashを確認した。
+265334はRであり、所有者の稼働・待機ジョブは265333と265334の合計2要求nodeだった。
+解析結果はまだ完成しておらず、正式比較の完了数には加えない。
+次は265334の実終端を確認して解析結果を受理し、空き枠ができればC0T1のtrace capacity・full auditを進める。
+
+実行証拠は`data_tile_validation_2026-10-17/low_partition_collection_0_1_completion_once_v1_*`、`low_partition_analysis_0_1_prepare_once_v1_*`、`low_partition_analysis_0_1_0_preflight_once_v1_*`、`low_partition_analysis_0_1_0_execute_once_v1_*`に保存した。
+これらは一回限りの実行記録であり、同じ入口で再投入しない。
+投入後確認は[observe_c0t1_bar_dispatch_265334.py](data_tile_validation_2026-10-17/observe_c0t1_bar_dispatch_265334.py)、観測結果は[c0t1_bar_dispatch_265334.json](data_tile_validation_2026-10-17/c0t1_bar_dispatch_265334.json)である。
+観測結果のSHA256は`ade90e37d13d700c4f5c08549391763fd284775a09c61d4fc352d0727b8cff3b`である。

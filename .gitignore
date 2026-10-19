@@ -10,3 +10,6 @@ dist/
 .coverage
 htmlcov/
 output/
+
+# Experiment evidence data (multi-GB); already-tracked files stay tracked
+docs/wp/data_*/

@@ -1,0 +1,24 @@
+# 移植BAR結果の回収仕様
+
+対象は既に投入したC0T2の初回20/24 groupとし、稼働中のdriver・入力・出力を書き換えない。
+回収helperは読み取り専用で検証し、別directoryへarchiveと検証記録を作る。
+親側で保存済みの投入記録から、host、archive hash、export manifest hash、driver hash、group集合を固定する。
+remote側の自己申告だけから受入条件を作らない。
+
+batchのcompletionがない場合は未完了として停止し、空結果や成功とみなさない。
+実行intentとcompletionのhash、元export manifestと全source・入力payload、全予定groupと実際の終端groupを照合する。
+既存のloaderによるtask・prior・seed・metadata・payload・trace support検証も保持する。
+各成功groupの全設定のidentityと順序、行数、診断とACFの対応、元入力marker、記録された失敗集合を確認する。
+推定値やACFを再計算したと称さず、保存結果の構造・provenance・完全性の検証として記録する。
+利用不能区間、未定義診断、sampling失敗、後処理のinfrastructure失敗は削除せず記録し、予定group・設定数を分母に残す。
+infrastructure失敗のgroupについて部分fileが存在する場合は保存し、成功結果へ変換しない。
+全groupの終端がそろっても、infrastructure失敗があるbatchを成功batchと表示しない。
+
+全入力と出力のhashを検証開始時と終了時で比較し、検証中に変わったものを受理しない。
+archiveの全memberのhashと集合を親側でも再検証し、元の投入記録・実行環境・元sampling環境へ結び付ける。
+原本の削除・上書き、稼働中processの再起動は行わない。
+
+受入テストは小さな実producer出力を使い、全設定がある正常結果、区間未取得、sampling失敗を確認する。
+設定の重複・欠落、groupすり替え、入力markerの変更、診断・ACFの欠落、metadata/payload改変、未完了batchの拒否を確認する。
+raw結果の回収完了と、元sampling全partition・trace audit・referenceとの正式な科学集約の完了は区別する。
+この回収の段階では、名目被覆や精度・収束の保証を追加しない。

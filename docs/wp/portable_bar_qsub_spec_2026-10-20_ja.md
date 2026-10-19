@@ -1,0 +1,16 @@
+# Portable BAR最終集計のPBS実行仕様
+
+既存の最終readerを変更せず、prepare・submit・compute・completeの四段階を追加する。
+実データのconfigurationは全768群と元環境のtrace監査が揃った後に固定し、この実装時点では作成も投入もしない。
+独立に指定したconfigurationのSHA-256、全Python sourceの一覧とhash、実行Python、必須入力metadataを各段階で照合する。
+prepareは新規directoryへconfigurationとPBS scriptを排他的に保存し、qsubを呼ばない。
+全群の親bindingの集合と重複、両hostのreplay、監査summaryの768群・失敗なし、転送完了記録とcontextの結び付きをmetadataで確認する。
+payload・native環境・referenceの科学的受入は既存readerがPBS内で再検証し、metadata検査の成功では代替しない。
+1ノード・1 CPUの集計とし、メモリ・walltimeは根拠文と固定した測定証拠をconfigurationに記録する。
+submitは既存の共有lockを排他的に取得し、controller不在と自分のqueued/running jobを含む要求ノード数をqsub直前に再確認する。
+投入後も最大2ノードとし、submission intentを保存してからqsubを一度だけ呼ぶ。
+qsubのtimeout・例外・不明な応答ではlockとintentを残し、再実行による二重投入を拒否する。
+computeは実PBS IDと投入receiptを照合し、既存readerを固定環境で呼び、成功時のみ出力hashと完了記録を保存する。
+completeは実qstatのF・exit 0・run_count 1・投入script・資源要求と結果のPBS ID・hashを照合する。
+fixtureテストでは上限超過、queued job、二重投入、入力変更、qsubの曖昧な結果、失敗したreader、異なるPBS ID、未終端の受入を拒否する。
+実cohortのqsubと科学的最終検証は別途実施し、fixture成功をその代替としない。

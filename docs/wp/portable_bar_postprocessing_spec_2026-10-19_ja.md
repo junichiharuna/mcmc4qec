@@ -1,0 +1,29 @@
+# 追加PCによるBAR後処理：実装仕様
+
+クラスタのsamplingを継続し、完了済みgroupの後処理をDGX SparkとLabo PCで並行して行う。
+最初の本計算対象はC0T2とし、現在クラスタで解析中のC0T1を重複計算しない。
+C0T2の全768 groupを保持し、group順序の通番を44で割った余りが0〜19ならDGX、20〜43ならLaboへ割り当てる。
+割当は科学結果や診断値に依存させず、未完了groupも予定集合に残す。
+初回は既存C0T0の完了済みgroupを用い、両PCで元の短いwindowの結果との一致を検証してから本計算へ進む。
+
+公開候補と稼働中bundleは変更せず、別driverと別出力先を用意する。
+元のsampling plan、全taskのmetadata・payload hash、clusterで確定したcode geometry・Problem metadata、source一式をexportへ結び付ける。
+完了markerがあるgroupだけをtransfer対象にし、元のfileを削除・上書きしない。
+各groupの全rung・chain、共有anchor、記録済み失敗を照合し、欠測を成功や空traceに変換しない。
+
+元の`analyze_arrays`の全数値処理・診断・bootstrap seedを保つ。
+固定source hashを確認してから、AST上のdecoderを構築する単一代入を除き、code.nとlen(code.lx)だけをexport済みgeometryへ置き換える。
+この変換以外のAST変更を認めず、未処理のcode参照や予期しないfactory呼出しを拒否する。
+出力に元sourceと変換内容、新driver、sampling環境と後処理環境を別々に記録する。
+追加PCでdecoderを作り直したり、failure labelやsectorを計算し直したりしない。
+
+小規模受入では、元関数との全数値・flag・欠測処理の一致、decoder factoryを禁止しても処理できること、改変source・geometry・入力metadata・payloadの拒否、出力の上書き拒否を確認する。
+実traceの移植確認では時間・memoryなどの実行費用を除き、離散値とflagsは完全一致、有限浮動小数点はrtol=1e-10・atol=1e-12、NaN/Noneの位置は一致を要求する。
+元の短いwindowを比較に使う場合は検証用planと明記し、その出力を本校正の科学行へ追加しない。
+
+本計算では元の全window・burn・chain数・ladder・bootstrap予算を変えない。
+full samplingとtrace auditが終わるまでは、移植したgroupの結果を暫定後処理と記録する。
+全768 groupと全192 seedのcensus、元sampling終端・trace監査・referenceとの対応を照合する集約経路を追加してから正式比較へ進む。
+元の固定runtimeを装うmarkerやPBS記録を作らない。
+後処理の所要時間はmachine別に記録し、sampling時間と分けて扱う。
+クラスタの計算jobは引き続きqsub・最大2nodeとし、個人機ではCPU workerを利用する。

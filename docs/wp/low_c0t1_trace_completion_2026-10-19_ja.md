@@ -1,0 +1,26 @@
+# C0T1 full trace監査の完了受理
+
+全監査265336.node-PRISMはF・exit 0・run_count 1で終了し、実walltimeは6分42秒だった。
+prepared SHA256は`002190261f38476d76ce98b35cc4e12788aa60f12428e118fe50803d04947a93`、completion SHA256は`7258dc00e6372b103e6ba668c1a7bb8cefc3e555019c259e2a497a31b0db9edd`である。
+完了受理は既存jobの証拠を照合する処理であり、追加のqsubは行っていない。
+
+192 seed・768 group・159744 sampling taskについて、failed sampling 0、再復号checkpoint 10702848を記録した。
+親側の受理ではmeasurement成果物とaudit groupの完了markerを再hashした。
+audit group payloadと現在のraw trace全体の再hashはこの受理には含まず、後続のPBS collectorで照合する。
+全物理状態を再復号したという意味ではなく、正式比較と被覆の結論は未完了である。
+
+証拠は[completion receipt](data_tile_validation_2026-10-17/low_partition_trace_full_0_1_completion_once_v1_receipt.json)と同名prefixのintent・script・stdout・stderrに保存した。
+[投入時の記録](low_c0t1_trace_dispatch_2026-10-19_ja.md)は、その時点の観測として保持する。
+この追記時のPBS照会ではBAR解析265334はR・run_count 1・walltime 1時間28秒で継続中だった。
+
+## 後続入力の事前確認
+
+BAR解析の実行記録に結び付く92個のlocal pinを再確認した。
+完了済みtrace監査の83個のlocal pinを、既存の最終集約readerで読み直し、受理記録の互換性を確認した。
+結果は[c0t1_followup_inputs_v1.json](data_tile_validation_2026-10-17/c0t1_followup_inputs_v1.json)、手順は[確認スクリプト](data_tile_validation_2026-10-17/check_c0t1_followup_inputs_v1.py)である。
+この確認はlocalの読み取りだけであり、実行中BARを完了扱いにせず、qsubや集約処理も行っていない。
+
+265334の実PBS終端がF・exit 0になった後、`complete_low_partition_analysis_once.py`でpartition 0を一度だけ受理する。
+全partitionの受理後に`prepare_low_partition_bar_collection_once.py`を使い、最大2要求nodeの空き確認を経てBAR collectorをqsubする。
+collector完了受理後、既存の`low_partition_final_join_inputs.py`でBARと上記normal trace completionを結び、final assemble・実行・回収へ進む。
+いずれの一回限り入口も、timeoutや曖昧応答を理由に再実行せず、先に保存済みintentと実remote状態を確認する。

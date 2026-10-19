@@ -1,0 +1,13 @@
+# 再開v2の開始時監査
+
+2026-10-19 18:12 JSTにjob 265331.node-PRISMが実行を開始したことをPBSで確認した。
+開始時の監査記録が生成され、全768群のうち672群が再利用可能、96群が未完了として分類された。
+元の解析payloadをhash照合した記録であり、raw sampling payloadの再hashや再開計算の完了を表すものではない。
+再利用群と未完了群の重複がなく、和集合が計画された768群に一致することを、取得した記録から確認した。
+取得前後のファイル識別子・サイズ・更新時刻が一致するsnapshotを保存し、転送後のbytesとSHA256を照合した。
+inventoryのSHA256は `468982e114cd87fe201cd35277e40f09afd6680d660517789184684897507d22` である。
+保存先は [low_bar_recovery_v2_inventory_observation_v1/receipt.json](data_tile_validation_2026-10-17/low_bar_recovery_v2_inventory_observation_v1/receipt.json) である。
+同ディレクトリにinventory本体、取得script、remote観測script、stdout、stderrを保存した。
+ローカル観測で解析payloadを再度hashしたわけではなく、compute jobが出力した監査記録の取得である。
+観測時点のjobはR・run_count 1であり、再開計算のsummary、成功終了の受理、最終比較、回収は未完了である。
+低ノイズの正式比較完了数は3/12のままで、今回の監査を被覆や精度の保証として扱わない。

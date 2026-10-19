@@ -1,0 +1,22 @@
+# 追加PCの次batchへの引継ぎ仕様
+
+固定割当の次の44 groupをbatch 1として事前配置し、batch 0の計算と並行に同じhostへ追加workerを起動しない。
+batch 1は通番44〜63をDGX、64〜87をlaboへ割り当てる。
+元の全768 groupの順序、数値設定、sourceは維持する。
+入力はsamplingの完了markerとpayloadを確認してから別archiveへexportする。
+
+引継ぎはhostごとに独立して行う。
+batch 0の終端、回収readerの受理、親側のarchive検証を順に確認し、その後にのみbatch 1を起動する。
+infrastructure失敗のあるbatchやprovenance不一致を自動的に再計算・成功扱いにしない。
+samplingの記録済み失敗や未定義診断を理由にgroupを選別しない。
+必要なarchive・binding・sourceのhashを起動直前にも照合する。
+
+各hostで一つのcontrollerを予約し、batch 1の起動intentも一度だけ作る。
+controllerは60秒間隔で元processの生存と同じbatchの終端を照会し、応答timeoutでは新しい計算を投入しない。
+元processが存在せず終端記録もない場合はcontrollerを止め、保存済みartifactを調べる。
+collector実行後の応答が曖昧なら同じ回収先を照会する手順へ戻し、collectorを重複実行しない。
+batch 1の計算はSSH接続を維持して実行し、終了code・ログ・親側SSH PIDを保存する。
+別のworker数、GPU実装、追加クラスタnodeは導入しない。
+
+受入では終端前・転送未検証・失敗batch・hash不一致・既存起動intentを拒否し、正常な先行batchを一度だけ次へ進められることを検証する。
+投入準備と実際の次batch開始を区別して記録する。

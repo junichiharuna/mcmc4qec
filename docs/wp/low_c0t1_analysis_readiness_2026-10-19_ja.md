@@ -1,0 +1,19 @@
+# C0T1の次段解析の資源確認
+
+2026-10-19 19:46 JST、C0T1の受理済みcapacityと現在のPBS状態を読み取り専用で確認した。
+capacity job 265318.node-PRISMはF・exit 0・run_count 1であり、投入脚本は受理済み記録と一致した。
+capacityのartifact、生成profile、sampling計画との対応を検証し、消費した60ファイルのhashを記録した。
+
+この条件の既存profileは768 groupを1 partitionにまとめ、96 CPU・96 worker・234 GiB・walltime 7時間30分を要求する。
+C0T0の6時間上限をそのまま流用する計画ではない。
+ただし合成配列による資源見積もりであり、この時間内の完了や科学的精度を保証しない。
+先行条件の時間超過を踏まえ、本実行でも実PBS状態と完了証拠を確認し、打ち切りを正常完了として扱わない。
+
+確認時点でC0T1集約265332とC0T0最終比較265333は稼働中だった。
+C0T1解析のprepare・qsubは未実施であり、集約が正常終了して受理されるまで開始しない。
+既定の科学設定、seed、trace長、burn-in、ladder、誤差法は変更していない。
+固定済み公開候補の内容も今回の作業では変更していない。
+
+再現用の確認スクリプトは[check_c0t1_analysis_readiness_20261019.py](data_tile_validation_2026-10-17/check_c0t1_analysis_readiness_20261019.py)、実行記録は[c0t1_analysis_readiness_20261019.json](data_tile_validation_2026-10-17/c0t1_analysis_readiness_20261019.json)である。
+記録のSHA256は`aad5f177a4765609015030594b0d546295b38c878897543eddebed3d3f66358b`である。
+スクリプトは既存記録を上書きしないため、同じ出力先へ再実行しない。
