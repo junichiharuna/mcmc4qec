@@ -18,3 +18,8 @@
 - [ ] 低ノイズ検証の完了後に、tile 検証の生データ（約 19,800 ファイル・13.5 GB）を識別子置換済みの束にして Zenodo の dataset 記録として公開する。
   置換後に新しい SHA-256 manifest を作り、リポジトリ内の証跡に記録された指紋（置換前の原本）とは別物であることを明記する。
   公開後にリリースノート日英の「公開download先は未確定」を記録の DOI に置き換える。
+- [ ] PyPI 公開の準備を進める（公開自体は所有者の指示を待つ）。
+  パッケージ名 `mcmc4qec` は 2026-10-22 時点で PyPI・TestPyPI ともに未登録である。
+  tag push で `python -m build` と Trusted Publishing による upload を行う `publish.yml` を書き、CI の core-wheel job の wheel 検証を流用する。
+  PyPI 側のアカウント作成と pending publisher の登録は所有者が Web UI で行い、最初は TestPyPI で試す。
+  最初の PyPI 版を `0.1.0a1` と `0.1.0` のどちらにするかは、低ノイズ検証の結果を見て決める。
