@@ -10,6 +10,10 @@
 `gh run list --limit 1` で最新のremote CIが success であることを確認する。
 文書中の公開日は 2026-10-22 と書いてあるので、別の日に公開する場合は README日英・リリースノート日英・`CITATION.cff`・`CONTRIBUTING.md`・`CHANGELOG.md`・`AGENTS.md` の日付を直してcommit・pushし、tagを付け直す。
 
+GitHubの Settings → Emails で「Keep my email addresses private」と「Block command line pushes that expose my email」をONにする。
+noreplyアドレスの `user.email` は研究室PCの `C:\dev\mcmc4qec` にしか設定していないので、この設定がないと自宅PC・クラスタ・Codex worktreeからのcommitで個人メールアドレスが公開履歴に戻る。
+各マシンで `git config --global user.email 29061066+junichiharuna@users.noreply.github.com` を実行してもよいが、GitHub側のブロックは1回で全マシンに効く。
+
 ## 2. public化
 
 ```sh
