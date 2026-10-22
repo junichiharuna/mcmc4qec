@@ -30,8 +30,11 @@ Zenodoの GitHub 設定（https://zenodo.org/account/settings/github/）で `jun
 この操作はWeb UIで所有者が行う。
 連携をONにした後に Release を作らないとZenodoはアーカイブしないので、順番を守る。
 
+リリースノートの相対リンクはReleasesページでは解決されないので、`.github/scripts/release_body.py` で `blob/v0.1.0.dev5` の絶対URLに変換した本文を使う。
+
 ```sh
-gh release create v0.1.0.dev5 --prerelease --title "mcmc4qec 0.1.0.dev5 (experimental)" --notes-file docs/experimental_release_notes_en.md
+python .github/scripts/release_body.py v0.1.0.dev5 > output/release_body.md
+gh release create v0.1.0.dev5 --prerelease --title "mcmc4qec 0.1.0.dev5 (experimental)" --notes-file output/release_body.md
 ```
 
 Zenodoの記録ができたら、concept DOI（版をまたぐDOI）を `CITATION.cff` の `doi` に書き、README日英の引用節にも載せてcommit・pushする。

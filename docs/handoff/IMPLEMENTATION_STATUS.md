@@ -491,3 +491,10 @@ force push後のcommit 6e09463に対するremote CI（run 39734392100）は12 jo
 前者はAPIの公開プロフィールで email が null になることで確認した。
 後者はAPIから読めないため所有者の申告による。
 リポジトリはprivateのままで、public化は所有者の指示待ちである。
+
+## 2026-10-22 Release本文の絶対リンク化とGitHubリポジトリ設定
+
+`docs/experimental_release_notes_en.md` の相対リンク7件はGitHubのReleasesページでは解決されないため、`.github/scripts/release_body.py` でリンクを `blob/<tag>` の絶対URLに変換した本文を `output/release_body.md` に生成し、それを `gh release create --notes-file` に渡す手順に手順書第3節を改めた。
+変換の単体テストと、生成した本文に相対リンクが残らず全リンク先がリポジトリ内に存在することの確認を `tests/test_release_body.py` に加えた。
+GitHubのリポジトリ設定は、descriptionをREADMEの表現に揃えてexperimental・PyPI未公開を明記し、topicsに quantum-error-correction・quantum-computing・mcmc・rare-event-simulation・monte-carlo・python を設定し、Projectsタブを無効にした。
+homepageはMkDocsサイトの公開先が決まるまで空のままとした。
