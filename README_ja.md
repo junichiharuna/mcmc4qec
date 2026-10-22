@@ -11,7 +11,14 @@ PyPI には公開していません。
 
 ## インストールと実行例
 
-リポジトリのディレクトリで、符号の生成と PyMatching に必要なパッケージをまとめてインストールします。
+Python 3.11 以上が必要です。
+GitHub の tag から、符号の生成と PyMatching に必要なパッケージをまとめてインストールします。
+
+```sh
+python -m pip install "mcmc4qec[codes,matching] @ git+https://github.com/junichiharuna/mcmc4qec.git@v0.1.0.dev5"
+```
+
+リポジトリを clone した場合は、そのディレクトリで editable install にします。
 
 ```sh
 python -m pip install -e ".[codes,matching]"
@@ -80,6 +87,6 @@ tile72/288のcode-capacity検証では、bit-flip・depolarizingの主4条件を
 ## ライセンスと引用
 
 コードのライセンスは [MIT License](LICENSE)、引用情報は [CITATION.cff](CITATION.cff) にあります。
-関連論文は準備中で、所属・DOI・リリースの詳細は未確定です。
+関連論文は準備中で、DOI はこのリリースの Zenodo 登録後に追記します。
 開発や貢献の手順は [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
 この日本語版と英語版に相違がある場合は、英語版を優先してください。

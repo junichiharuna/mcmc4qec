@@ -11,7 +11,14 @@ It is published on GitHub as an experimental release (0.1.0.dev5, 2026-10-22) an
 
 ## Install and run
 
-From a local checkout, install the package with code factories and PyMatching:
+The package requires Python 3.11 or later.
+Install the tagged release with code factories and PyMatching directly from GitHub:
+
+```sh
+python -m pip install "mcmc4qec[codes,matching] @ git+https://github.com/junichiharuna/mcmc4qec.git@v0.1.0.dev5"
+```
+
+From a local checkout, use an editable install instead:
 
 ```sh
 python -m pip install -e ".[codes,matching]"
@@ -80,5 +87,5 @@ For validation conditions and limitations, see the [BAR sensitivity study](docs/
 ## License and citation
 
 The code uses the [MIT License](LICENSE); citation metadata is in [CITATION.cff](CITATION.cff).
-The associated paper is in preparation, and affiliation and DOI remain pending.
+The associated paper is in preparation; a DOI will be added after the Zenodo archive of this release is created.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development and contribution guidance.
