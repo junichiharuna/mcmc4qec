@@ -1,0 +1,12 @@
+# 分割集約の証拠を受け取る最終報告
+
+最終報告のselector証拠に、従来の単一job descriptorと明示的な `kind=partition_merge` の経路を区別して対応する。
+分割経路では既に受入試験済みのbridgeとmerge runnerのsource SHA256を固定し、実際のmergeのpath・job・qsub台帳・terminal・completion・選択結果を再検証する。
+bridgeが追跡した入力のhashと解決先を報告側のEvidenceに引き継ぎ、prepareとrunの両方で変更を検出する。
+報告のselection pinはbridgeが受理したselectionと完全一致させる。
+単一selectorの実行証拠を捏造せず、出力の証拠にも分割種別とmerge jobを記録する。
+この証拠読取りで生traceの再集計やqsubを行わず、既存のPBS内の独立計時・reference検証を維持する。
+報告用overlayと元merge環境のimport元を混在させないよう、bridge検証は元環境のPython・PYTHONPATHを用いた別プロセスで行う。
+子プロセスから受け取った証拠のhashと解決先を親で再照合し、子の検証成功だけで報告入力を受理しない。
+受入試験では正しいmerge seal、変更されたhelper・selection・terminal・証拠入力、誤ったjob、不完全なdescriptorを調べる。
+全24組合せ・各192seedの分母、未選択・失敗・未取得の扱い、精度と被覆の限定表現は変更しない。

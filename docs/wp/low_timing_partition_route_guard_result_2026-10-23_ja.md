@@ -1,0 +1,17 @@
+# 通常経路と分割経路の切替待受
+
+全12条件の分割準備後に、通常経路が同じcandidate byte・環境で資源上限超過を報告し、投入前に停止していることを照合する待受を実装した。
+実processが生存する場合、sourceや入力が変わった場合、投入intentやjob記録がある場合、不明な失敗の場合は切り替えない。
+remoteでも通常経路のconfig・job rootと分割経路の既存実行がないことを確認し、排他的なintentを保存してflowを一度だけ起動する。
+開始したprocessのPIDとcommandを観測し、timeoutや不明な応答から再起動しない。
+flowのqsubには既存の共有lockと最大2要求nodeのgateを適用する。
+
+Windowsでguardの13 testが1.42秒、launcherの12 testが1.59秒、driverの9 testが0.88秒で成功した。
+実クラスタのLinuxではguardとlauncherの25 testが1.40秒で成功した。
+child processは人工fixtureであり、これらの試験では実flowや数値計算jobを起動していない。
+[保存sourceと結果](data_tile_validation_2026-10-17/low_timing_partition_route_guard_acceptance_v1/accepted.json)のSHA256は `bc4dd080d870b8b033e8a0b8374c77edf581f7ed2c155c2a38388baa0f09ce1d` である。
+[Linux結果](data_tile_validation_2026-10-17/low_timing_partition_route_guard_linux_v1/accepted.json)のSHA256は `f5f02d6286209b5a565979b1c7ff338c21bf653aa1493e451576d0860662325d` である。
+
+10月22日23:29に待受PID45920の実commandと生存を確認し、10月23日05:54にも同じPIDとcommandを確認した。
+最新inventoryは10/12条件で、待受は `waiting_for_front`、分割flowの本番起動は未実施である。
+seed census接続の本番待受への組込み、独立計時と最終報告への接続は引き続き残る。

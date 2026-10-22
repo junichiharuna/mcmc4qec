@@ -1,0 +1,27 @@
+# C3T2 generatorの監査経路再接続
+
+C3T2 generatorは旧C3T1 auditのerrorを検出して停止したが、投入済みsampling265448は実PBSでRのままである。
+anchor265444とsample0の265448の投入receiptを再利用し、これらを再投入しない。
+未投入sample1だけを、新しいC3T1 collector・full auditと既存native referenceの受理後にqsubで投入する。
+固定payload・seed・符号・prior・sampling設定と最大2要求nodeは維持する。
+
+新controllerは別保存先を使い、旧errorと全記録を保持する。
+旧停止理由がpriority失敗で、anchor/sample0の固定receiptだけが存在し、sample1とregistryが未作成であることを確認する。
+既存2jobの同一handleをqstatで照会し、script・資源を照合する。
+anchorは正常終了を要求し、sample0は実行中または正常終了のみを受理し、未知の観測や異常終了から再投入を判断しない。
+新C3T1 auditの元configとsource、再接続記録、full auditの正常終了を確認する。
+native referenceは既存job265455の完了結果を引き継ぎ、新しく作り直さない。
+
+受入では継続処理がsample1以外を投入しないこと、priority受理前に投入しないこと、既存receiptの欠落・重複やsample1の既存実行を拒否することを確認する。
+新controller開始と実PBSの確認は実行後に記録する。
+
+## 21:55〜21:58 JSTの再接続確認
+
+既存receiptと全固定payloadの実照合を行い、guardの10 testは19.52秒、保存sourceからの再実行は10 passed・12.38秒だった。
+[受入記録](data_tile_validation_2026-10-17/c3t2_generator_slot_resume_acceptance_v1/accepted.json)のSHA256は `131603fd23f78c9fde3e1e0cfcab973abadc04fa3b15717e3c2e7a702ca1baaa` である。
+旧intentが固定していた将来PC export仕様書にはLFからCRLFへの改行差だけがあり、LF正規化後のSHA256は元の固定値と一致した。
+この文書だけを明示して旧hash・現hashと本文不変を新intentに記録し、実行sourceや数値入力のhash照合は変更しなかった。
+新driver PID19608をhiddenで起動し、実processとcommandを確認した。
+実PBS照会でanchor265444はF・正常終了、sample0の265448はRであり、scriptと要求資源を照合した。
+既存2jobは再投入せず、新しいC3T1 full auditの受理を待っている。
+sample1の新規qsubはこの時点では未実施である。

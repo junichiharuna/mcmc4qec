@@ -1,5 +1,129 @@
 # mcmc4qec：2026-10-22の継続状態
 
+翌日の確認では低ノイズ検証作業が10/12条件まで進んだ。
+最新状況は [2026-10-23の状態](PROJECT_STATUS_2026-10-23_ja.md) を参照する。
+
+## 23:16 JST：分割集約からseed censusへの接続を検証
+
+[分割結果の再検証とseed census準備](low_timing_partition_census_bridge_result_2026-10-22_ja.md)を実装した。
+Windowsで実行証跡13 test・準備接続9 test・科学計算との接続1 test、Linuxで実行証跡と準備接続の22 testが成功した。
+全12条件・24行の実際の選択規則とseed割当数を維持し、単一selectorの証跡を作り替えず分割経路を明記する。
+本番待受への組込み、通常経路との投入前照合、censusと独立計時の実行、最終報告への接続は残っている。
+
+実PBSではcollector265457がR・経過1時間41分、sampling265448がR・経過6時間49分で、合計2要求nodeだった。
+全12条件準備待受PID46024とC3T0 cohort index PID16928は実commandで生存を確認した。
+inventoryは9/12条件で、新たな本番準備や追加qsubは行っていない。
+
+## 23:06〜23:07 JST：全12条件の分割準備待受を起動
+
+[分割準備と転送](low_timing_partition_front_result_2026-10-22_ja.md)を実装し、前段の11 testがWindows・Linuxの両方で、転送境界の8 testがWindowsで成功した。
+全12条件が揃うまで待つPID46024の実commandと生存を確認し、inventoryは9/12条件だった。
+この待受は準備だけを行い、qsubやflow起動は行わない。
+本番flow起動前の通常経路との照合、後続census・独立計時への接続は残っている。
+
+実PBSではcollector265457がR・経過1時間31分、sampling265448がR・経過6時間39分で、合計2要求nodeだった。
+DGXのC3T1 batch0は終了記録あり・旧PIDなしで、後続batch3のPID1102209が実稼働していることを確認した。
+laboのC3T1 batch0はPID7540が実稼働し、終了記録はまだなかった。
+C3T0のcohort index PID16928も生存し、CPU消費3483秒・working set約3.9 GBだった。
+全体の正式完了数は9/12条件で、数値検証・独立計時・最終報告は未完了である。
+
+## 22:49 JST：分割worker・結合jobの待受を接続
+
+[分割実行の待受](low_timing_partition_flow_result_2026-10-22_ja.md)を実装し、Windows・Linuxの両方で33 testが成功した。
+全workerの正常終了後だけ結合へ進み、投入済みjobの観測timeoutや異常終了から重複投入しない。
+本番configの生成、既存serial経路との切替、後続census・独立計時への接続は残っており、本flowは本番起動していない。
+
+実metadata inventoryを読み直し、正式完了は9/12条件、残りはtile288 depolarizingの3条件であることを確認した。
+実PBSでは265457がR・経過1時間15分、265448がR・経過6時間21分で、合計2要求nodeだった。
+今回の開発・Linux人工データ試験で追加の数値計算jobは投入していない。
+
+## 22:39 JST：結合jobの準備・qsub接続とLinux試験
+
+[結合jobの準備・投入処理](low_timing_merge_submission_result_2026-10-22_ja.md)を実装し、Windowsの28 testと、実クラスタLinuxの48 testが成功した。
+両者は重複する小さな人工データ試験を含み、本番traceや実qsubによる結合jobの実行ではない。
+共有lockと最大2要求nodeを維持し、投入応答が不明な場合はintentとlockを保持して重複投入を拒否する。
+本番requestの組立・分割処理全体の待受・後続censusへの接続は残っている。
+
+直近の実PBS照会ではcollector265457がR・経過1時間04分、sampling265448がR・経過6時間11分だった。
+要求nodeの合計は2で、新しい数値計算jobはこの追加開発では投入していない。
+低ノイズの正式完了数は9/12条件のままである。
+
+## 22:25 JST：分割結合jobの実行・正常終了受理を検証
+
+[結合job runner](low_timing_merge_execution_result_2026-10-22_ja.md)を実装し、22 testが成功した。
+未終了・異常終了・実行証跡不一致を拒否し、正常終了後にだけ既存計時planへ渡す選択結果を作る。
+PBS・native環境とraw入力は人工fixtureで、本番request作成・qsub接続・全12条件の実行・後続census接続は未実施である。
+結合jobの24時間枠は実行予算であり、終了時間の予測ではない。
+
+22:21の実PBS照会では265457・265448がともにRで、合計2要求nodeだった。
+22:25にはC3T1 collector監視、C3T2 generator、新native・PC launcherの実processとcommandを確認した。
+C3T0 cohort indexも22:21の実process照会で稼働中だった。
+低ノイズの正式完了は9/12条件のままで、全体の数値検証・独立計時・最終報告は未完了である。
+
+## 22:11 JST：C3T2 native・PC解析の開始待受を再接続
+
+旧launcherが子を1件も起動せず停止していたことと、C3T2 native・DGX・laboの実processと子保存先がないことを確認した。
+[native・PC開始待受](c3t2_pc_slot_reconnection_2026-10-22_ja.md)を新generatorへ接続し、6 testと実入力照合が成功した。
+新launcher PID49448の稼働を確認し、現在はregistry未完成のため子を起動せず待機している。
+先行C3T1 PC解析の完了待ち、native reference受理、固定群割当と回収検証を維持する。
+C3T0のindex・distribution、C3T1のcollector、C3T2のgenerator・auditにはerror記録はなく、いずれも未完了である。
+低ノイズ検証の正式完了は9/12条件のままである。
+
+## 22:07 JST：C3T1/C3T2の最終集約と後処理を再接続
+
+[最終集約の再接続](final_slot_reconnection_2026-10-22_ja.md)で、準備・qsub実行・算術確認と計時候補作成までの監視経路を更新した。
+旧記録の未着手状態と固定sourceを確認し、14 testが成功した。
+両条件の計6監視processは実commandで稼働を確認し、errorはなく、先行データと監査の完了を待っている。
+既存の科学設定・remote集約root・検証関数は保持し、local保存先を別にした。
+新たな集約jobはまだ投入していない。
+クラスタでは265457が回収処理、265448がsamplingを継続しており、直近の実照会で合計2要求nodeだった。
+低ノイズの正式完了数9/12条件、全12条件の集約・独立計時・最終報告が未完了という状態は変わらない。
+
+## 21:58 JST：C3T2の後続投入と回収・監査を再接続
+
+[generator再接続](c3t2_generator_slot_reconnection_2026-10-22_ja.md)と[回収・監査の再接続](c3t2_audit_slot_reconnection_2026-10-22_ja.md)を実装し、保存sourceから10 testと7 testが成功した。
+実入力の照合後、generator PID19608とaudit PID45828の起動・実生存を確認した。
+generatorは正常終了したanchor265444と実行中のsample0の265448を引き継ぎ、C3T1 full audit受理後に未投入sample1だけを投入する。
+auditは新generatorのregistry完成を待っており、既存の回収・capacity監査・full監査の手順を保持する。
+新規cluster jobのqsubはこの再接続ではまだ行っておらず、直近の実照会では265457・265448の2jobがRだった。
+C3T0のcohort index PID16928も引き続き実稼働している。
+
+現在の2jobが終わっても、C3T1の監査、C3T2の残りsampling・回収・監査、最終集約・独立計時は残る。
+条件の最終集約に進む停止済み経路の再接続も未完了である。
+低ノイズの正式完了数は9/12条件のままで、公開準備と全数値検証の完了は区別する。
+
+## 21:43〜21:44 JST：実稼働の再確認とnative経路の訂正
+
+低ノイズの正式完了は9/12条件で、C3T0は768/768群を回収済みだがcohort indexと後続集約は未完了である。
+cohort indexのPID16928とC3T1 collector監視のPID39268は稼働中である。
+クラスタではcollector265457とsampling265448がRで、合計2要求nodeである。
+DGXとlaboはC3T1 batch0を実行中であり、実PID1010955・7540の生存と未完了状態を照会した。
+
+21:37の「C3T1 native経路の再接続が必要」という記載は誤りだった。
+native job265455は正常完了し、21:11:08にreferenceの受入記録を回収済みである。
+nativeとPC計算は再起動せず、停止したC3T2 generatorと監査後の集約経路が再接続対象である。
+C3T2 generatorの再接続用guardは7 testが成功したが、新driverの実装・起動は未完了である。
+
+公開候補のZIP・wheel・Release本文・checksumは準備済みで、実GitHubのvisibilityはPRIVATEである。
+全12条件の集約、独立計時、最終報告は未完了であり、現時点で全工程の確実な完了時刻は提示できない。
+
+## 21:37 JST：新公開物の検証、C3T0全回収、C3T1 collector再接続
+
+公開tagの[新しいsource ZIP・wheel・Release本文・checksum](publication_artifacts_rebuilt_2026-10-22_ja.md)を別checkoutで作成し、984 Git blob、package 33ファイル、README metadata、licenseの一致を確認した。
+installed coreの利用例検証とRelease本文の2 testも成功し、GitHubは引き続きPRIVATEだった。
+旧履歴・旧配布物・稼働中の計算用sourceは上書きしていない。
+
+C3T0のDGX batch26〜32の終了と全回収を照合し、DGX 648群・labo 120群の計768/768群、67,584行となった。
+追加128群・11,264行は全行に診断flagと未定義項目があり、区間未取得は0で、分母から除外していない。
+[全回収観察](data_tile_validation_2026-10-17/c3t0_pc_collection_observation_20261022_v32.json)のSHA256は `db1703e9fdd32c775e72b3bd80a0637f2bdf0e005910f2ff6fce95b931c74b90` である。
+cohort indexの実process PID16928は20:58:57から稼働中で、21:37にCPU消費と約1.4 GBのworking setを確認した。
+条件全体の集約・最終比較は完了しておらず、低ノイズの正式完了数は9/12条件のままである。
+
+C3T1 sampling265438はF・exit 0、実walltime8時間00分20秒で終了した。
+後続collectorは投入直前の2node gateで停止していたため、remoteに台帳・実行記録・出力が存在しないことを確認し、[別controllerで再接続](c3t1_collection_slot_resume_2026-10-22_ja.md)した。
+qsubで投入したcollector265457とC3T2 sampling265448はともにRで、最大2要求nodeを維持している。
+C3T1 native経路とC3T2 generatorの新auditへの再接続が次の残作業である。
+
 ## 19:00 JST：worker証跡と設定選択規則の結合を受入
 
 [結合処理](low_timing_partition_merge_result_2026-10-22_ja.md)は19 testが47.41秒、保存sourceからの再実行も19 passed・48.91秒で成功した。

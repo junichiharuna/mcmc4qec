@@ -1,0 +1,10 @@
+# 分割経路のseed census準備待受
+
+分割flowの全12条件処理完了を待ち、結合受理記録を外部hashで固定して専用bridgeへ渡す。
+実際に使ったmerge runnerのpathとhashを使い、別pathの同名runnerに置き換えない。
+固定parent環境のbootstrap後に既存の科学計画とcensusを読み込む。
+通常経路が選ばれた場合、この分割専用待受は準備せず終了する。
+分割経路は通常経路と異なるconfig・census root・local journalを使用する。
+prepareは一度だけ呼び、転送したconfig・科学計画・receiptをhashと内容で照合する。
+観測timeoutをremote準備の失敗や未実行とみなして再呼出ししない。
+この待受によるqsubは行わず、census投入は既存の共有lock・最大2nodeの実行経路に別途接続する。

@@ -66,8 +66,70 @@ def runtime():
         python_sha256=c.file_hash(sys.executable))
 
 
+def partition_check(descriptor, proof):
+    """Keep the original merge imports separate from the report-only overlay."""
+    accepted=read_pin(descriptor['accepted'],proof)
+    request=read_pin(accepted['request'],proof)
+    environment=read_pin(request['environment'],proof)
+    executable=Path(environment['python_path'])
+    require(executable.is_absolute() and proof.track(executable)==environment['python_sha256'],
+        'original merge Python differs')
+    for key,checksum in (
+        ('bridge','1127168abb1a2b3049d6e18aba5d1fa1d46f437a002b32740fc81f8a8a190e57'),
+        ('runner','0d86e5600c7bc8423a9a73f335e1c126979cddf6012aa803ccc5fcbc56a95d2c')):
+        pin=descriptor[key]
+        require(set(pin)=={'path','sha256'} and Path(pin['path']).is_absolute()
+            and pin['sha256']==checksum and proof.track(pin['path'])==checksum,
+            'reviewed partition helper required')
+    program='DESCRIPTOR='+repr(descriptor)+'\n'+r'''
+import hashlib,importlib.util,json,pathlib
+def load(name,pin):
+    raw=pathlib.Path(pin['path']).read_bytes()
+    assert hashlib.sha256(raw).hexdigest()==pin['sha256']
+    spec=importlib.util.spec_from_file_location(name,pin['path'])
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    return module
+bridge=load('partition_report_child_bridge',DESCRIPTOR['bridge'])
+runner=load('partition_report_child_runner',DESCRIPTOR['runner'])
+value=bridge.verify(DESCRIPTOR['accepted'],expected_job_id=DESCRIPTOR['job_id'],runner=runner)
+value['proof'].finish()
+result={key:value[key] for key in ('selection_pin','job_id','environment','raw_payloads_rehashed','merge_execution_evidence_validated')}
+result['files']=value['proof'].files
+print(json.dumps(result))
+'''
+    env=dict(os.environ,PYTHONPATH=environment['pythonpath'],PYTHONDONTWRITEBYTECODE='1',PYTHONHASHSEED='0',
+        **{name:'1' for name in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS','VECLIB_MAXIMUM_THREADS')})
+    process=subprocess.run([str(executable),'-B','-'],input=program,env=env,cwd=environment['bundle'],
+        check=True,capture_output=True,text=True,timeout=120)
+    require(not process.stderr.strip(),'partition verification emitted unexpected stderr')
+    value=json.loads(process.stdout)
+    require(value['environment']==request['environment'] and isinstance(value['files'],dict)
+        and value['files'],'partition verification environment/evidence differs')
+    return value
+
+
+def partition_selector_evidence(descriptor, selection_pin, proof):
+    """Reopen a completed merge seal without claiming a single-selector run."""
+    require(set(descriptor)=={'kind','accepted','job_id','bridge','runner'}
+        and descriptor['kind']=='partition_merge','exact partition merge descriptor required')
+    result=partition_check(descriptor,proof)
+    require(result['selection_pin']==selection_pin and result['job_id']==descriptor['job_id']
+        and result['merge_execution_evidence_validated'] is True and result['raw_payloads_rehashed'] is False,
+        'report selection differs from accepted partition merge')
+    for path,record in result['files'].items():
+        require(str(Path(path).resolve())==record['target'] and proof.track(path)==record['sha256'],
+            'partition input changed during report adoption')
+    proof.finish()
+    return dict(kind='partition_merge',job_id=result['job_id'],report_sha256=selection_pin['sha256'],
+        descriptor=descriptor,merge_execution_evidence_validated=True,raw_payloads_rehashed_now=False,
+        fresh_native_probe_claimed=False,
+        scope='Pinned partition merge execution and recorded native bindings; no new raw recomputation.')
+
+
 def selector_evidence(descriptor, selection_pin, proof):
     """Bind the parent's one-shot selector envelope, not an invented native run."""
+    if descriptor.get('kind')=='partition_merge':
+        return partition_selector_evidence(descriptor,selection_pin,proof)
     require(set(descriptor) == {"prepared","intent","submission","script","execution","completion","terminal"},
         "exact selector execution descriptor required")
     values = {key:read_pin(pin,proof) for key,pin in descriptor.items() if key != "script"}

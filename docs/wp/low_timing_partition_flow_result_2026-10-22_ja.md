@@ -1,0 +1,20 @@
+# 分割workerから結合jobまでの待受：実装結果
+
+[小仕様](low_timing_partition_flow_spec_2026-10-22_ja.md)に従い、既存のworker投入・終端capture・結合準備・結合投入・結合終端受理を接続した。
+全workerを固定順序で監視し、1件でも未終了または観測不明なら結合へ進まない。
+投入済みjobの台帳と完了captureのhashを固定し、異常終了や変更された証跡を除外して部分集合で進めることはしない。
+観測timeoutは同じIDを追跡し続ける状態とし、qsubを再呼出ししない。
+結合jobの正常終了受理後に、全12条件を処理した結果とaccepted・selectionのpinを保存する。
+この完了は、全設定で診断が良好だったことや独立計時の完了を意味しない。
+
+Windowsで33 testが3.95秒、クラスタLinuxでも同じ33 testが0.46秒で成功した。
+固定scope、全workerの待機、異常終端と不明な観測、欠落・重複、台帳・capture変更の拒否を検証した。
+実controller・prepared生成・共有lock付き単発qsub経路を通す統合fixtureで、空き枠不足から投入、非終端待機、F/exit 0後の受理まで確認した。
+schedulerと結合結果の終端受理はdoubleであり、本番traceや本番qsubは実行していない。
+
+Linuxの転送archive・source hash・実行script・stdout/stderrは [low_timing_partition_flow_linux_v1](data_tile_validation_2026-10-17/low_timing_partition_flow_linux_v1/) に保存した。
+Linux accepted.jsonのSHA256は `65012bcfd02a4357377f07ca67185ecebeff1b11e359b08d5729357735c34c89` である。
+Windowsの観測要約と同一sourceは [low_timing_partition_flow_acceptance_v1](data_tile_validation_2026-10-17/low_timing_partition_flow_acceptance_v1/) に保存した。
+
+本番の全12条件からworker準備と本flowのconfigを生成する前段、既存serial経路との切替、後続census・独立計時への接続、本番全体の実行は未完了である。
+この待受はまだ本番configで起動していない。

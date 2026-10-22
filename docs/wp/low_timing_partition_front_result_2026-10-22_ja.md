@@ -1,0 +1,20 @@
+# 全12条件の分割準備と転送の検証
+
+全12条件の元byteとhashから、資源計画、worker入力、後続flow configまでを準備する前段を実装した。
+通常の1ジョブに収まる場合は分割用ファイルを作らず、分割が必要な場合もqsubとflow起動は行わない。
+入力との保存先重複、不完全な条件集合、条件順序の変更、sourceや転送byteの不一致を拒否し、途中失敗の記録を保持する。
+
+Windowsでは前段の11 testが3.15秒、実クラスタのLinuxでは同じ11 testが0.28秒で成功した。
+資源plannerとworker preparerは実コードを使い、native bootstrapと実資源読込は人工fixtureで置き換えた試験である。
+Linux側には全helperをhash照合して保存し、数値samplingやqsubは実行していない。
+転送境界の8 testもWindowsで1.01秒で成功した。
+保存sourceと観測結果は [acceptance](data_tile_validation_2026-10-17/low_timing_partition_front_acceptance_v1/accepted.json)、Linux実行結果は [Linux acceptance](data_tile_validation_2026-10-17/low_timing_partition_front_linux_v1/accepted.json) にある。
+前者のSHA256は `f781fd3be83684366d8b5e598ab79f2df69adab3996a4da56df5e5bdc579c87b`、後者は `fc58df3d3fcbfb65861361dcb967762689a8d60aaab639c11378342bf61c5b88` である。
+
+23:06 JSTに転送待受PID46024の実commandと生存を確認した。
+inventoryは9/12条件で、remote準備は未実行である。
+全12条件が揃ったときだけ固定環境で準備を一度呼び、SSHの不明な応答から自動再試行しない。
+待受の記録先は `data_tile_validation_2026-10-17/low_timing_partition_front_transfer_v1/` である。
+
+本番flowの起動、既存serial経路との投入前照合、後続censusと独立計時への接続は未完了である。
+この試験成功を、全12条件の本番集約や科学的な精度検証の完了として扱わない。

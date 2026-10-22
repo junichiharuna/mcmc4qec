@@ -1,0 +1,15 @@
+# 分割経路のseed census待受の接続記録
+
+分割flowからseed censusへの準備待受と、既存qsub制御を用いる実行待受を接続した。
+2026年10月23日06:09 JSTの照会では、PID41028とPID36092がそれぞれ対応するdriverのcommand lineで実稼働していた。
+両者は分割集約結果を待っており、この接続による数値jobの投入はまだない。
+通常経路選択時の無投入終了と、異なるmerge job・不完全な全12条件結果の拒否を試験した。
+Windowsでは準備remote試験6件、準備driver試験8件、実行controlと経路試験19件が成功した。
+Linuxではcontrol16件が0.08秒、remote6件が0.07秒で成功した。
+これらは制御の試験であり、本番seed censusの完了証拠ではない。
+
+Linuxの実行記録は [accepted.json](data_tile_validation_2026-10-17/low_timing_partition_census_wait_linux_v1/accepted.json) に保存した。
+そのSHA256は `5481a8c25d83df59600361da150b478456d9ba09b8f596fc05aec98006ac5a44` である。
+試験済みsource archiveは [accepted.json](data_tile_validation_2026-10-17/low_timing_partition_census_wait_acceptance_v1/accepted.json) に保存した。
+そのSHA256は `fe35de4aa483ba5615100256d8e29564798f90a82db5b99cccdfca55bf7dea63` である。
+独立計時への接続と最終報告は別途継続する。

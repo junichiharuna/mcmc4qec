@@ -1,0 +1,9 @@
+# 全12条件の分割準備への転送
+
+既存inventoryの全12条件が揃うまで待ち、元のcandidate byteと固定hashを再照合して転送する。
+一部だけ揃った状態ではrequestを作らず、remote準備を呼ばない。
+Linux試験で保存したhelper全体のhashを照合し、試験済みの前段を固定したPython・native環境で呼ぶ。
+呼出しは準備だけで、qsubとflow起動を含まない。
+通常経路の投入前照合と後続のcensus接続は別の工程として残す。
+SSHの観測が途切れた場合に同じ準備を再実行せず、intent・応答・保存先を確認する。
+sourceと入力のhash、stdout・stderr、開始と終了の記録を保存する。

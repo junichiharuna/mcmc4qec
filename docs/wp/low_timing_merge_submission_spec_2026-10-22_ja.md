@@ -1,0 +1,12 @@
+# 結合jobの準備・qsub接続
+
+全12条件manifestと、固定順序の全workerのprepared・terminal descriptor・qsub応答を含む結合requestを入力とする。
+準備と投入前検査ではworkerのF/exit 0、単一qsub応答、共通manifest・環境・資源計画、script、完了と値ファイルのhashを確認する。
+この検査はmetadataと出力の同一性を確認するもので、計算用nodeで行うraw再走査や科学的な選択規則の検証を代替しない。
+新規の出力rootにpreparedと固定PBS scriptを作り、既存出力先を上書きしない。
+
+投入は既存の単発qsub実装を使い、job目的と未着手検査の出力名だけを結合job用に接続する。
+共有lock、全非終端状態を含む要求nodeの合計検査、投入前後の入力照合、単一ID応答、曖昧な応答時のlock・intent保持を維持する。
+旧coordinator検査はLinuxの実argvを読み、ps表示をshell文字列として解析しない。
+既定はdry-runであり、明示したexecuteだけがqsubを呼ぶ。
+worker未完了・入力不一致・既存実行記録・不明なscheduler状態・要求node超過では投入しない。

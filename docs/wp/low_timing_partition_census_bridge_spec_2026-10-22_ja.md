@@ -1,0 +1,12 @@
+# 分割集約結果からのseed census準備
+
+既存の単一selector用の実行証跡を作り替えず、分割workerと結合jobの受理記録を専用の読み取り検証で扱う。
+外部hashで固定した結合受理記録から、prepared・request・script・qsub応答・実行identity・PBS開始と終了・正常terminal・結果・選択内容を照合する。
+保存した正常終了記録を使い、新しいqsubや受理ファイルの書換えは行わない。
+未受理の結果、失敗job、異なるselectionや環境、保存後に変更された入力を拒否する。
+大きなraw traceの再計算はせず、結合jobで検証した固定snapshotとその実行証跡を再確認する。
+
+検証したselectionを既存のmake_plansとvalidate_plansへ渡し、seed割当・分母・選択規則を変えない。
+固定census basisと一致する環境を要求し、既存bridgeで独立seedのcensus入力を準備する。
+新しいconfigとreceiptには分割経路の証跡を明示し、単一selectorの証跡に見せかけない。
+この工程は本番flowの起動、censusのqsub、独立計時の実行、最終報告への接続を含まない。

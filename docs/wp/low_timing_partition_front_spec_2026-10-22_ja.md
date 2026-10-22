@@ -1,0 +1,12 @@
+# 全12条件からの分割実行準備
+
+固定された全12条件のmetadata candidateを元byteのbase64とSHA256で受け取り、完全な条件順序と資源根拠を既存plannerで検証する。
+1ジョブで収まる場合は既存serial経路を選び、分割用のファイルやjobを作らない。
+分割が必要な場合だけ、新しいrootへ元byteのcandidateを保存し、既存worker preparerで全workerを準備する。
+Python・native環境、入力、計算時間とmemoryの根拠は既存preparerの実検証を維持する。
+worker準備が完了した後にだけ、固定helper pinと準備receiptを参照するflow configを保存する。
+この前段ではqsubもflow起動も行わない。
+途中で失敗したrootは保存し、自動で削除・上書き・再準備しない。
+
+通常経路との実際の切替には、既存の通常経路が投入前であることを別途照合する。
+未完了の3条件を省いた9条件のconfigや、推測した最終計算時間でのconfigは作らない。

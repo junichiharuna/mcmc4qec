@@ -1,0 +1,22 @@
+# 結合jobの準備・qsub接続：実装結果
+
+[小仕様](low_timing_merge_submission_spec_2026-10-22_ja.md)に従い、全12条件と完了workerの入力検査、prepared・PBS script作成、共有lock付きqsub接続を `output/low_timing_merge_submission_v1/control.py` に実装した。
+既存の単発qsub本体は保存し、目的名を結合jobへ変更したprivate namespaceと結合用preflightから呼ぶ。
+最大2要求node、待機状態を含むnode集計、投入直前と直後の入力照合、曖昧応答時の予約保持を維持する。
+結合用preflightでは追加のmerge-result・accepted・selection出力が存在する場合も再投入を拒否する。
+Linuxの旧coordinator検査は `/proc` の実argvを読み、ps表示のshell解析を避ける。
+
+Windowsで28 testが11.06秒で成功した。
+実worker出力形式を使う統合fixtureを含むが、schedulerとnative入力は人工fixtureである。
+クラスタLinuxでは実argv検査が成功し、旧coordinatorは0件だった。
+別の新規作業ディレクトリへ固定sourceを転送し、小さい人工データの実行・終了判定・準備・投入検査48 testが5.53秒で成功した。
+48件はWindows側と重複する試験を含み、実PBSのqsubや本番trace処理は行っていない。
+Linux転送archive、source hash、実行script、stdoutとstderrは [low_timing_merge_controls_linux_v1](data_tile_validation_2026-10-17/low_timing_merge_controls_linux_v1/) に保存した。
+Linux accepted.jsonのSHA256は `606bef02f85e248031b075ee3671208ed2a658cb7a9e2d2b7ef4e2def229a232` である。
+
+準備・投入sourceと受入要約は [low_timing_merge_submission_acceptance_v1](data_tile_validation_2026-10-17/low_timing_merge_submission_acceptance_v1/) に保存した。
+accepted.jsonのSHA256は `d49156eeb0a12eb500ffe2b29c31e53eb382bbbec31151b24c39289a19792306` である。
+Windowsの件数・時間は完了したtool出力から記録し、保存のための追加再実行はしていない。
+
+本番の全workerの終端記録からrequestを組み立てる待受、分割workerの順次投入から結合までの全体接続、後続censusへの接続、本番の全12条件での実行は未完了である。
+部品の受入を本番計時・精度・被覆の検証完了として扱わない。

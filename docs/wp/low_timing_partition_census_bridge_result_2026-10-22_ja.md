@@ -1,0 +1,20 @@
+# 分割集約からのseed census準備の検証
+
+結合jobの受理記録を読み取り専用で再検証し、選択結果を既存のseed計画とcensus準備へ渡す接続を実装した。
+prepared、request、qsub応答、script、実行identity、PBS開始・終了・正常terminal、completion、結合結果と選択内容を照合する。
+通常の単一selector用の証跡に置き換えず、receiptの `selection_evidence.kind` に `partition_merge` を記録する。
+元の選択規則、seed割当、baseline、選択行がない場合の未実行状態は維持する。
+保存済みの計算snapshotと実行証跡の検証であり、大きなraw traceの再計算や将来のファイル不変性の保証ではない。
+
+Windowsでは実行証跡の13 testが4.44秒、準備接続の9 testが3.72秒、科学計算との接続1 testが20.63秒で成功した。
+最後の試験では全12条件・24行の実際のcombine・make_plans・validate_plans・allocation_stateを用いて、選択内容とseed割当数の受渡しを検証した。
+raw読込、native環境、PBS、census実行には人工fixtureを用いており、研究データの本番censusを実行した結果ではない。
+実クラスタのLinuxでも実行証跡・準備接続の22 testが13.24秒で成功した。
+初回の試験で、terminalのpinが共通入力mapではなくsealに直接保存される構造への対応漏れを見つけ、直接pinとPBS正常終了の照合を維持して修正した。
+異常terminalを再pinした場合、入力mapから実行identityを除いた場合、source・選択結果・completion等を変更した場合を拒否することを確認した。
+
+保存sourceと観測結果は [acceptance](data_tile_validation_2026-10-17/low_timing_partition_census_bridge_acceptance_v1/accepted.json) にあり、SHA256は `5b1a3d74c4cf33efc4846007ab577efb33cc87400a089da773b3331151e0048c` である。
+Linux実行結果は [Linux acceptance](data_tile_validation_2026-10-17/low_timing_partition_census_bridge_linux_v1/accepted.json) にあり、SHA256は `86f5589bd9ca684458b70ab4a5b2ae81b42e822bdc9b301a6f98a2a11a0a40b9` である。
+
+この接続の本番待受への組込み、既存serial経路との投入前照合、censusのqsub、独立計時、最終報告への接続は未完了である。
+今回の作業では新たな数値計算jobを投入していない。

@@ -1,0 +1,20 @@
+# C3T2 native・PC開始経路の再接続
+
+旧launcherはgeneratorの停止を検出し、childrenが空のまま終了した。
+旧保存先がintent・error・観測だけで、native・DGX・laboの子保存先が存在しない場合だけ別launcherへ接続する。
+旧子processが存在しないことを実commandで確認してから起動する。
+新generatorのregistry受理後に元のnative driverを起動し、DGX・laboには既存のPC待受を使う。
+PC待受が行う先行C3T1の完了待ちとnative referenceの受理、固定batch割当、export・回収検証を維持する。
+registry未完成時は子を起動せず、子の実processが終了した後は終了codeと完了記録を照合する。
+異常終了や観測不明を理由に子を自動再起動しない。
+科学設定とqsub・最大2要求nodeの制約は変更しない。
+
+## 22:11 JSTの実稼働確認
+
+未起動状態とregistry待機の6 testは0.82秒、記録付き再実行は0.75秒で成功した。
+旧journalと固定source、native・PC受入資料、新generatorの実intentの照合も成功した。
+[受入記録](data_tile_validation_2026-10-17/c3t2_pc_slot_resume_acceptance_v1/accepted.json)のSHA256は `c3b4f9cd3175e1ae91fcc8fc4a093acc1b169be7d21b37d0ba4c669cb5c4a6d4` である。
+旧launcherとC3T2のnative・PC子processが存在しないことをcommandで確認し、新launcherをhiddenで起動した。
+PID49448の実commandと生存を確認し、registry_bound=false・children空の観測が保存された。
+新launcherはregistry待ちであり、この時点で新しいnative jobやPC計算は開始していない。
+既存のC3T1 PC計算とC3T2 samplingを再起動したものではない。

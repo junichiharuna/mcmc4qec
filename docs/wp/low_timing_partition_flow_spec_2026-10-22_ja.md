@@ -1,0 +1,14 @@
+# 分割workerから結合jobまでの実行順序
+
+独立に固定した全12条件のworker準備receiptとhelper pinを受け取り、全workerを固定順序で処理する。
+未投入workerだけを既存の共有lock付きqsub経路へ渡し、空き枠不足は待機とする。
+投入済みworkerには記録済みjob IDだけを使い、qstatの非終端・未知の観測・異常終了・正常終了を分ける。
+観測timeoutやjob不明から新しいqsubを呼ばず、同じIDの確認を続ける。
+正常終了したworkerは元のterminal captureを1回だけ実行し、既存captureがある場合は対応する元のprepared pinとjob IDを照合する。
+
+全workerの正常終了が揃った後だけ、共通manifest・資源計画・環境と固定順序のworker prepared・terminal descriptor・qsub応答から結合requestを作る。
+条件やworkerの欠落・重複・順序変更・共通入力の差異を拒否する。
+結合準備と投入には検証済みcontrolを使い、結合jobにも同じ終端判定と単発投入規則を適用する。
+結合jobのF/exit 0後にrunnerの正常終了受理を実行し、そのaccepted pinを後続へ返す。
+実行controllerの再起動による自動回復は行わず、途中のintent・例外・不明な投入応答を保持する。
+全workerの失敗や未収束は欠落条件として除外せず、ジョブ異常と科学的診断の状態を区別する。
