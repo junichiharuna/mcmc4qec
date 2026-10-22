@@ -28,6 +28,7 @@ The core package can be installed with `python -m pip install .` without optiona
 The source snapshot contains code, documentation, selected validation tables and reports, and the data fixtures needed by its tests.
 It does not contain the complete raw trace and weight-stratified sampling datasets.
 Those datasets are being preserved separately; a public download location for the complete datasets has not yet been established.
+The plan is a Zenodo dataset record after the low-noise validation completes, containing a redacted copy of the raw data with its own SHA-256 manifest.
 The operational runbooks and evidence records come from the author's cluster environment.
 User and host names were redacted before publication, so SHA-256 values recorded inside the evidence refer to the unredacted originals kept outside the repository.
 Some referenced transport archives are not included in this source snapshot.

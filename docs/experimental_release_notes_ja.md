@@ -27,6 +27,7 @@ optional decoderなしのcoreは`python -m pip install .`で導入できる。
 ソースsnapshotにはコード、文書、一部の検証表・報告、テストに必要なdata fixtureを含む。
 全raw traceと重み層別samplingの全データは含まない。
 これらは別途保存しており、完全なデータセットの公開download先はまだ確定していない。
+低ノイズ検証の完了後に、識別子を置換した生データと新しいSHA-256 manifestをZenodoのdataset記録として公開する予定である。
 運用手順書と証跡記録は著者のcluster環境のものである。
 公開前にユーザー名とホスト名を置換したため、証跡に記録されたSHA-256はリポジトリ外に保管した置換前の原本を指す。
 参照するtransport archiveの一部もこのソースsnapshotには含まれない。

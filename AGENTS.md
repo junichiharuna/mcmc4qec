@@ -58,7 +58,7 @@ installed wheelはcore 271 passed/76 skipped・78.84秒、optional 389 passed/5 
 - `docs/` — `api_en.md`・`tutorial_en.md`（英語の公開文書）と日本語の設計・検証記録。`initial_library_ja.md`（設計と制約）、`stage1_ja.md`・`validation_stage1_ja.md`・`validation_initial_ja.md`（dev0 / dev1 時点）、`crossval_research_ja.md`・`performance_ja.md`・`convergence_ja.md`・`circuit_baseline_ja.md`（dev2 の各分野）、`dev_request_2026-09-30.md`と`dev_request_2026-09-30_examples.md`（開発依頼書）、`bar_sensitivity_ja.md`（dev4のBAR exact被覆と感度）、`wp/`（WP-A〜Oの完了メモとレビュー、統合・検証記録、dev2の`final_report_ja.md`とdev3の`final_report_examples_ja.md`）
 - `docs/handoff/` — 2026-09-30 の Codex からの引き継ぎ。`HANDOFF.md`、`IMPLEMENTATION_PLAN.md`、`IMPLEMENTATION_STATUS.md`、`spec/RIMC_ライブラリ仕様書_v0.1.md`（ファイル名は v0.1、本文は v0.2。仕様の一次資料）
 - `.github/workflows/tests.yml` — installed wheelをPython 3.11 / 3.12で試すCI（coreと全optional、quick例とnotebookを含む）とPython 3.11の型検査job。dev5のrun36865462463で全5job成功し、coreは各267 passed /71 skipped、optionalは各365 passed /7 skipped、型テストは3 passed
-- `pyproject.toml`、`CHANGELOG.md`、`CITATION.cff`（著者名 `junichi haruna` はユーザー指定で確定、所属・DOI・リリース情報は未確定）、`CONTRIBUTING.md`
+- `pyproject.toml`、`CHANGELOG.md`、`CITATION.cff`（著者 Junichi Haruna、ORCID、所属は 2026-10-22 に所有者が RIMC の Zenodo 情報と揃えて確定。DOI は Zenodo 連携の Release 作成後に追記）、`CONTRIBUTING.md`
 - `build/`、`dist/`、`output/`、`.venv*/`、`*.egg-info/` は gitignore
 
 ## Run
@@ -82,7 +82,7 @@ installed wheelはcore 271 passed/76 skipped・78.84秒、optional 389 passed/5 
 ## Do not
 
 - 研究リポジトリ RIMC（`C:\dev\RIMC` または `A:\dev\RIMC`）を変更しない。読み取り専用で参照する。研究側の runner の既定（Z+PT）も変えない
-- ライセンスは MIT で確定済み（2026-10-01、`LICENSE`）。変更しない。リポジトリは所有者の判断で 2026-10-22 に public にした（experimental 版 0.1.0.dev5）。PyPI 等に publish しない、著者の所属・DOI などの引用情報を確定しない。これらは所有者（春名）が決める
+- ライセンスは MIT で確定済み（2026-10-01、`LICENSE`）。変更しない。リポジトリは所有者の判断で 2026-10-22 に public にした（experimental 版 0.1.0.dev5）。PyPI 等に publish しない、引用情報（著者・所属・DOI）を所有者の指示なしに変えない。これらは所有者（春名）が決める。公開後の手順は `docs/wp/publication_runbook_2026-10-22_ja.md`
 - コミットの author / committer に個人メールアドレスを使わない（GitHub の noreply アドレスを使う）。クラスタのユーザー名・ホスト名、Windows のユーザー名を含むパスを新たに追跡ファイルへ書かない。クラスタの証跡はホスト名を記録せず `$HOME` 相対のパスで書くようドライバ側を直してから生成する。識別子を含む証跡をやむを得ず取り込むときは置換し、記録された SHA-256 が置換前の原本を指すことを注記する（2026-10-22 の経緯は `docs/handoff/IMPLEMENTATION_STATUS.md`）
 - `docs/handoff/` の引き継ぎ文書と仕様書を書き換えない（過去時点の記録として保持）。更新は `IMPLEMENTATION_STATUS.md` に追記する
 - 引き継ぎ文書や仕様に書かれた研究上の主張を、独立に検証した事実として扱わない
