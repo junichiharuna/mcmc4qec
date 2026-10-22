@@ -480,3 +480,5 @@ GitHub上に残る旧コミットのキャッシュと、他のクローン（�
 このリポジトリのローカル `user.email` はnoreplyアドレスに設定した。
 置換後の全suiteとremote CIの結果はこの節の末尾に追記する。
 置換後の全suiteはWindowsのsource直列実行で2303 passed・10 skipped、1300.21秒で成功し、MkDocsのstrict buildも成功した。
+force push後のcommit 6e09463に対するremote CI（run 39734392100）は12 job全て成功した。
+リポジトリは所有者の指示でこの時点ではprivateのままとし、tag `v0.1.0.dev5` を付けて公開操作の直前で停止した。
