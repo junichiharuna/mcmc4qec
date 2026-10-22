@@ -70,19 +70,12 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
 | 別の符号やノイズで計算する・notebook を使う | [実行例と依存パッケージの一覧](examples/README.md) |
 | 引数・返り値・数式を確認する | [API 文書（英語）](docs/api_en.md) |
 
-## 利用上の注意
+## 現状と制約
 
 実行例の既定設定は、研究に必要な精度を保証するものではありません。
-通常の BAR では、正の基準値、ノイズ強度を通じて共通のデコーダーと失敗条件、隣接する分布のサンプルの重なりが必要です。
-`sample_faulty` のサンプルだけから、論理誤り率そのものは求められません。
-
+通常の BAR では、正の基準値、ノイズ強度を通じて共通のデコーダーと失敗条件、隣接する分布のサンプルの重なりが必要で、`sample_faulty` のサンプルだけから論理誤り率そのものは求められません。
 統計誤差や良好な MCMC 診断値だけで、収束や区間の名目被覆率が保証されるわけではありません。
-tile72/288のcode-capacity検証では、bit-flip・depolarizingの主4条件を完了し、低ノイズの校正と独立計時を継続しています。
-検証した設定には混合診断が悪い例や被覆不足があり、この実験的実装によって一般に信頼できる95%区間や直接MCに対する速度優位が確立したとは扱いません。
-保存済みのBP-OSD入力でWindowsとLinuxの論理失敗判定が異なる例があるため、BARのladderとreference計算ではdecoder設定・目標prior・native環境を固定してください。
-[tile検証報告](docs/wp/tile_validation_report_2026-10-18_ja.md)、[現在の検証状況](docs/wp/tile_validation_status_2026-10-17_ja.md)、[追加decoderの検証記録](docs/wp/basic_decoders_validation_2026-10-18_ja.md)を参照してください。
-追加decoderのテストは接続契約と選択した小問題を対象としており、論理誤り率・BAR被覆・比較速度の校正は未実施です。
-検証の条件と限界は、[BAR の感度検証](docs/bar_sensitivity_ja.md)、[性能記録](docs/performance_ja.md)、[回路モデルの検証記録](docs/circuit_baseline_ja.md)を参照してください。
+現在の検証状況、既知の制約、検証記録の一覧は[リリースノート](docs/experimental_release_notes_ja.md)にまとめています。
 
 ## ライセンスと引用
 

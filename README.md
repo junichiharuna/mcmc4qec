@@ -70,19 +70,12 @@ For an example with only core dependencies, install with `python -m pip install 
 | Try other codes, noise models, or notebooks | [Example and dependency index](examples/README.md) |
 | Look up arguments, result fields, or formulas | [API reference](docs/api_en.md) |
 
-## Usage notes
+## Status and limitations
 
-The example's default settings do not guarantee research accuracy.
-Standard BAR requires a positive anchor, a common decoder and failure definition across noise rates, and observed sample overlap between adjacent distributions.
-Samples from `sample_faulty` alone do not estimate the absolute logical error probability.
-
+The default settings in the example do not guarantee research-grade accuracy.
+Standard BAR requires a positive anchor, a common decoder and failure definition across noise rates, and observed sample overlap between adjacent distributions; samples from `sample_faulty` alone do not estimate the absolute logical error probability.
 Statistical error estimates and healthy MCMC diagnostics do not guarantee convergence or nominal interval coverage.
-Tile72/288 code-capacity studies have completed four main bit-flip/depolarizing conditions; low-noise calibration and independent timing remain in progress.
-Some tested settings have poor mixing diagnostics or undercoverage, so this experimental implementation does not establish a generally reliable 95% interval or a speed advantage over direct MC.
-Keep the decoder settings, target prior, and native environment fixed throughout a BAR ladder and its reference calculation: saved BP-OSD inputs have produced different logical failure decisions on Windows and Linux.
-See the [tile validation report](docs/wp/tile_validation_report_2026-10-18_ja.md), [current study status](docs/wp/tile_validation_status_2026-10-17_ja.md), and [additional decoder validation](docs/wp/basic_decoders_validation_2026-10-18_ja.md) (Japanese).
-The additional decoder tests cover their interfaces and selected small problems; their logical error rates, BAR coverage, and comparative speed have not been calibrated.
-For validation conditions and limitations, see the [BAR sensitivity study](docs/bar_sensitivity_ja.md), [performance record](docs/performance_ja.md), and [circuit validation record](docs/circuit_baseline_ja.md).
+The current validation status, known limitations, and the validation records are summarized in the [release notes](docs/experimental_release_notes_en.md).
 
 ## License and citation
 

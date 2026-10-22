@@ -28,7 +28,7 @@ python -m pip install -e ".[codes,matching]"
 | 前提条件・既定値・統計量の定義を確認する | [API の契約と統計上の取り決め（英語）](api_en.md) |
 | 引数・返り値・クラスのメソッドを調べる | [サンプリング API](reference/sampling.md)、[結果と診断の API](reference/results.md) |
 | スクリプトや notebook を動かす | [実行例一覧（英語）](../examples/README.md) |
-| 数値結果の検証記録を読む | [検証記録への案内](../README_ja.md#利用上の注意) |
+| 数値結果の検証記録を読む | [リリースノートと検証記録](experimental_release_notes_ja.md) |
 | tileの現時点の結果と未完了の検証を確認する | [tile検証報告](wp/tile_validation_report_2026-10-18_ja.md)、[検証状況](wp/tile_validation_status_2026-10-17_ja.md) |
 
 API リファレンスの引数・型・docstring は、現在のソースから生成します。
