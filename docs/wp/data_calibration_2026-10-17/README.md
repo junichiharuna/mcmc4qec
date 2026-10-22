@@ -106,3 +106,13 @@ From this original checkout, the final report checks can be repeated with
 the absolute Python 3.11 executable path above.
 For sampling reruns use the [PBS driver instructions](../../../cluster_scripts/README.md)
 and a new run directory, always qsub and at most two nodes.
+
+
+## Redaction notice (2026-10-22)
+
+The repository copies of these records are redacted: the cluster user name,
+other users' home paths, host names, and the Windows user name were replaced
+before publication. SHA-256 values recorded inside the records refer to the
+unredacted originals, which are kept outside the repository, so verifying a
+repository copy against a recorded hash fails by design. The hashes themselves
+were not rewritten.

@@ -4,7 +4,8 @@ mcmc4qec is a Python library for estimating logical error probabilities in quant
 It combines failure-conditioned MCMC with Bennett acceptance ratio (BAR) splitting to estimate rare failures that are costly to observe with direct Monte Carlo.
 It also provides exact enumeration for small problems and direct Monte Carlo, with support for custom codes, noise models, and decoders.
 
-The package is **pre-alpha** and under active validation; it has not been published as a public package.
+The package is **pre-alpha** and under active validation.
+It is published on GitHub as an experimental release (0.1.0.dev5, 2026-10-22) and is not on PyPI.
 
 [日本語版](README_ja.md) · [Documentation](docs/index.md) · [Tutorial](docs/tutorial_en.md) · [API reference](docs/api_en.md) · [All examples](examples/README.md)
 
@@ -79,5 +80,5 @@ For validation conditions and limitations, see the [BAR sensitivity study](docs/
 ## License and citation
 
 The code uses the [MIT License](LICENSE); citation metadata is in [CITATION.cff](CITATION.cff).
-The associated paper is in preparation, and affiliation, DOI, and release details remain pending.
+The associated paper is in preparation, and affiliation and DOI remain pending.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development and contribution guidance.

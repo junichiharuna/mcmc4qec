@@ -4,7 +4,7 @@ Think in English, interact with the user in Japanese.
 
 ## Project
 
-`mcmc4qec` は、量子誤り訂正の論理誤り率を希少事象サンプリングで求めるための Python ライブラリ。研究リポジトリ RIMC（`junichiharuna/RIMC`、論文 "Trustworthy rare-event splitting for general quantum codes"）から再利用できる中核を切り出し、他の研究者が自分の符号・ノイズ・デコーダーを持ち込めるようにするのが目的。
+`mcmc4qec` は、量子誤り訂正の論理誤り率を希少事象サンプリングで求めるための Python ライブラリ。研究リポジトリ RIMC（`junichiharuna/RIMC`、論文 "Fast and accurate rare-event simulation by Markov chain Monte Carlo for general quantum codes"）から再利用できる中核を切り出し、他の研究者が自分の符号・ノイズ・デコーダーを持ち込めるようにするのが目的。
 状態は 0.1.0.dev5 の pre-alpha（2026-09-30 に旧仮称 `rimc` から改名）。
 CSS 符号上の bit-flip、phase-flip、depolarising、phenomenological のノイズ、OBF / Zanella（Z）/ cluster exchange（H）/ stabilizer flip のカーネル、exact 列挙、direct MC、失敗条件付き MCMC、BAR による splitting、PyMatching / BP-OSD / Stim DEM の接続が入っている。
 公開既定は Z 0.7 / H 0.3 / cluster_k=2 / 1 chain / lazy 0.05。
@@ -64,7 +64,7 @@ installed wheelはcore 271 passed/76 skipped・78.84秒、optional 389 passed/5 
 ## Run
 
 - Python 3.11 を絶対パスで使う（`%USERPROFILE%\AppData\Local\Programs\Python\Python311\python.exe`）。`python3` は Windows Store のスタブなので使わない
-- テスト：`python -m pytest tests -q`（`pyproject.toml` の `pythonpath = ["src"]` で source を読む）
+- テスト：`python -m pytest tests -q`（`pyproject.toml` の `pythonpath = ["src"]` で source を読む）。直列だと約 23 分かかるので、pytest-xdist を入れて `python -m pytest tests -q -n 6 --dist worksteal` で回す（2026-10-22 に system Python へ導入済み）
 - installed wheel の検証：`python -m build --wheel` → 別 venv に install → `python -m pytest --override-ini pythonpath= tests -q`
 - optional 依存：`pymatching>=2.4,<3`、`ldpc>=2.4,<3`、`stim>=1.16,<2`。無い環境では該当テストが skip される
 - 計算は軽いものだけ。1 テストファイル 60 秒以内、全 suite 5 分以内。重い sweep やクラスタジョブはこのリポジトリではやらない
@@ -82,6 +82,7 @@ installed wheelはcore 271 passed/76 skipped・78.84秒、optional 389 passed/5 
 ## Do not
 
 - 研究リポジトリ RIMC（`C:\dev\RIMC` または `A:\dev\RIMC`）を変更しない。読み取り専用で参照する。研究側の runner の既定（Z+PT）も変えない
-- ライセンスは MIT で確定済み（2026-10-01、`LICENSE`）。変更しない。PyPI 等に publish しない、リポジトリを public にしない、著者の所属・DOI などの引用情報を確定しない。これらは所有者（春名）が決める
+- ライセンスは MIT で確定済み（2026-10-01、`LICENSE`）。変更しない。リポジトリは所有者の判断で 2026-10-22 に public にした（experimental 版 0.1.0.dev5）。PyPI 等に publish しない、著者の所属・DOI などの引用情報を確定しない。これらは所有者（春名）が決める
+- コミットの author / committer に個人メールアドレスを使わない（GitHub の noreply アドレスを使う）。クラスタのユーザー名・ホスト名、Windows のユーザー名を含むパスを新たに追跡ファイルへ書かない。クラスタの証跡はホスト名を記録せず `$HOME` 相対のパスで書くようドライバ側を直してから生成する。識別子を含む証跡をやむを得ず取り込むときは置換し、記録された SHA-256 が置換前の原本を指すことを注記する（2026-10-22 の経緯は `docs/handoff/IMPLEMENTATION_STATUS.md`）
 - `docs/handoff/` の引き継ぎ文書と仕様書を書き換えない（過去時点の記録として保持）。更新は `IMPLEMENTATION_STATUS.md` に追記する
 - 引き継ぎ文書や仕様に書かれた研究上の主張を、独立に検証した事実として扱わない

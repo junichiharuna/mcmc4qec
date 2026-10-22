@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Publish the repository on GitHub as the experimental 0.1.0.dev5 release
+  (2026-10-22). The package is not on PyPI.
+- Rewrite the full history before publication: commit authors use the
+  GitHub noreply address, and cluster user names, host names, and local
+  Windows user names are replaced in all tracked files. SHA-256 values
+  recorded in evidence records refer to the unredacted originals, and the
+  three tests that verified repository copies against them are skipped.
 - Add checked BP-LSD (order 0), BeliefFind, and Union-Find factories, including
   depolarizing sector adapters, small-code tests, and comparison examples.
   Reject unsupported native options and invalid corrections explicitly.

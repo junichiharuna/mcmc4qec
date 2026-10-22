@@ -1,17 +1,19 @@
-# Provisional citation metadata. Complete and validate before public release.
-# Release URL, DOI, affiliation, and publication date are unconfirmed.
-# The associated paper ("Trustworthy rare-event splitting for general quantum
-# codes") is in preparation and is not yet a citable reference.
+# Citation metadata for the experimental GitHub release 0.1.0.dev5 (2026-10-22).
+# DOI and affiliation are unconfirmed; cite the repository URL and version.
+# The associated paper ("Fast and accurate rare-event simulation by Markov chain
+# Monte Carlo for general quantum codes") is in preparation and is not yet a citable reference.
 cff-version: 1.2.0
 message: >-
-  Authorship is confirmed by the project owner. Publication details remain
-  provisional; confirm them before citing a public software release.
+  Authorship is confirmed by the project owner. Cite the GitHub repository
+  and version until a DOI is assigned.
 type: software
 title: "mcmc4qec"
 authors:
   - given-names: junichi
     family-names: haruna
 version: "0.1.0.dev5"
+date-released: "2026-10-22"
+repository-code: "https://github.com/junichiharuna/mcmc4qec"
 license: MIT
 abstract: >-
   Rare-event MCMC primitives for quantum error correction: exact enumeration,

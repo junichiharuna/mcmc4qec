@@ -92,17 +92,14 @@ Diagnostic quality does not prove correctness. Report the validation actually
 run, including limitations and missing checks; do not describe unrun CI or
 planned experiments as successful.
 
-## Before public release
+## Public release record
 
-- Confirm the final distribution destination and inspect the completed
-  three-noise acceptance evidence, including Y correlations and time boundaries.
-- Review third-party rights and dependency compatibility with the MIT License
-  (pymatching and stim are Apache-2.0, ldpc is MIT).
-- Review `CITATION.cff`, whose author was supplied by the project owner and
-  whose DOI and release metadata remain unconfirmed.
-- Review package contents, documentation, optional dependency versions, and
-  installed-wheel checks in supported Python environments.
-- Record actual verification in the changelog and obtain authorization for
-  publishing, pushing, or changing repository visibility.
-
-These are release preparation items, not claims that a public release exists.
+The repository was made public on GitHub on 2026-10-22 as the experimental
+0.1.0.dev5 release. Before publication, dependency licenses were reviewed
+(pymatching and stim are Apache-2.0, ldpc and bposd are MIT), the full test
+suite, the strict documentation build, the installed-wheel CI, and a secrets
+scan were run, and the whole history was rewritten so that commit authors use
+the GitHub noreply address and cluster or local user identifiers are replaced.
+`CITATION.cff` still lacks a DOI and affiliation, and the package is not on
+PyPI. Changing the repository visibility, publishing to PyPI, or finalizing
+citation metadata remains the owner's decision.

@@ -1,11 +1,11 @@
-# Experimental release candidate
+# Experimental release notes
 
-This is the candidate release note for mcmc4qec 0.1.0.dev5.
-The first release is planned for GitHub; a PyPI release will follow separately.
-Publication and final release checks are still pending.
+These are the release notes for mcmc4qec 0.1.0.dev5, published on GitHub on 2026-10-22 as an experimental release.
+A PyPI release will follow separately.
+The checks run before publication, and their limits, are recorded in the readiness record linked below.
 
 mcmc4qec provides direct Monte Carlo, failure-conditioned MCMC, and BAR splitting for logical error-rate estimation.
-This candidate adds tile code construction and BP-LSD, BeliefFind, and standalone Union-Find adapters alongside the existing BP-OSD and matching interfaces.
+This release adds tile code construction and BP-LSD, BeliefFind, and standalone Union-Find adapters alongside the existing BP-OSD and matching interfaces.
 See the [API](api_en.md), [tutorial](tutorial_en.md), and [runnable examples](../examples/README.md).
 
 ## Getting started from a checkout
@@ -23,12 +23,14 @@ python examples/workflows/tile_capacity_fixed_prior.py --help
 These short examples demonstrate the interface; their sample counts do not establish research precision.
 The core package can be installed with `python -m pip install .` without optional decoder dependencies.
 
-## Data included in the candidate
+## Data included in the release
 
 The source snapshot contains code, documentation, selected validation tables and reports, and the data fixtures needed by its tests.
 It does not contain the complete raw trace and weight-stratified sampling datasets.
 Those datasets are being preserved separately; a public download location for the complete datasets has not yet been established.
-The operational runbooks record the author's cluster environment, and some referenced transport archives are not included in this source snapshot.
+The operational runbooks and evidence records come from the author's cluster environment.
+User and host names were redacted before publication, so SHA-256 values recorded inside the evidence refer to the unredacted originals kept outside the repository.
+Some referenced transport archives are not included in this source snapshot.
 Use the runnable examples to check the installation; complete independent reanalysis of the reported scientific experiments requires the corresponding raw-data and execution bundles.
 
 ## Supported scope and limitations

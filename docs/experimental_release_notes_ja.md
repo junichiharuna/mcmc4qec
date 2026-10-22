@@ -1,11 +1,11 @@
-# Experimental版のリリース候補ノート
+# Experimental版のリリースノート
 
-mcmc4qec 0.1.0.dev5の公開候補の案内である。
-最初はGitHubで公開し、PyPI公開は後に行う予定である。
-公開操作と最終確認は未完了である。
+mcmc4qec 0.1.0.dev5のリリースノートである。
+2026-10-22にGitHubでexperimental版として公開し、PyPI公開は後に行う。
+公開前に実施した確認とその限界は末尾の公開準備記録に記す。
 
 直接MC、失敗条件付きMCMC、BAR splittingによる論理誤り率推定を提供する。
-今回の候補では既存BP-OSD・matching接続に加え、tile符号の構成とBP-LSD・BeliefFind・単独Union-Findを含む。
+今回の版では既存BP-OSD・matching接続に加え、tile符号の構成とBP-LSD・BeliefFind・単独Union-Findを含む。
 [API](api_en.md)、[チュートリアル](tutorial_ja.md)、[実行例一覧](../examples/README.md)から利用できる。
 
 ## checkoutからの利用
@@ -22,12 +22,14 @@ python examples/workflows/tile_capacity_fixed_prior.py --help
 短い例は接続方法の確認用であり、その標本数で研究精度を保証しない。
 optional decoderなしのcoreは`python -m pip install .`で導入できる。
 
-## 候補に含まれるデータ
+## この版に含まれるデータ
 
 ソースsnapshotにはコード、文書、一部の検証表・報告、テストに必要なdata fixtureを含む。
 全raw traceと重み層別samplingの全データは含まない。
 これらは別途保存しており、完全なデータセットの公開download先はまだ確定していない。
-運用手順書は著者のcluster環境の記録であり、参照するtransport archiveの一部もこのソースsnapshotには含まれない。
+運用手順書と証跡記録は著者のcluster環境のものである。
+公開前にユーザー名とホスト名を置換したため、証跡に記録されたSHA-256はリポジトリ外に保管した置換前の原本を指す。
+参照するtransport archiveの一部もこのソースsnapshotには含まれない。
 インストール確認には実行例を使い、報告した科学計測の完全な独立再解析には対応するraw dataと実行bundleが必要である。
 
 ## 対応範囲と制限

@@ -461,3 +461,22 @@ MC計時runで既存task・summary・実行intentを拒否し、再利用を新�
 未完了samplingの記録seed全件、bootstrap・計時用namespaceは未確認で、乱数列の統計的独立性の証明とは扱わない。
 Windowsで10.73秒の照合を実行し、結果・再現script・環境を docs/wp/data_tile_validation_2026-10-17/seed_namespace_audit.json、audit_seed_namespaces.py、seed_namespace_environment.json に保存した。
 05:53 JSTにcoordinatorと265209・265210の稼働を確認し、計2ノードを維持、追加qsub・commit・pushは行っていない。
+
+## 2026-10-22 公開前の履歴書き換えと識別子の置換
+
+GitHubでのexperimental版公開に先立ち、全218コミットのauthor・committerメールアドレスを個人アドレスからGitHubのnoreplyアドレス `29061066+junichiharuna@users.noreply.github.com` に書き換えた。
+同時に、追跡ファイルと全履歴のblobで、クラスタのユーザー名を `user`、別利用者のホームパスを `/home/other`、Windowsのユーザー名を `user`、クラスタのホスト名接頭辞 `CPUcluster` を `node` に置換した。
+この置換で128ファイル・1,572行が変わり、挿入と削除の行数は一致した。
+置換後の追跡ファイルと履歴に、個人メールアドレス・クラスタのユーザー名・ホスト名・Windowsのユーザー名は0件である。
+tile検証とcalibrationの証跡はファイル同士をSHA-256で束ねているため、置換したrepo内コピーは記録された指紋と一致しない。
+記録された指紋は置換前の原本を指し、原本は書き換え前の履歴 `C:\dev\mcmc4qec-pre-rewrite-2026-10-22.bundle` とクラスタ側の生データに残る。
+指紋そのものは書き換えていない。
+repo内コピーの指紋を実データで検証する `tests/test_tile_timing_evaluation_report.py` の3件（`test_real_case0_saved_pbs_metadata_only`、`test_real_accepted_inventory_metadata_chain_only[mc]`、同 `[bar]`）は、置換の理由を記したskipにした。
+`docs/wp/data_tile_validation_2026-10-17/README.md` と `docs/wp/data_calibration_2026-10-17/README.md` に同じ注記を加えた。
+`docs/wp/data_experimental_release_2026-10-19` の公開候補inventoryも書き換え前snapshotの指紋であり、置換後のファイルとは一致しない。
+履歴書き換えにより全commit SHAが変わったため、本文書やdocs/wpに記録された旧SHA（例: 886b44b、47ef1b6）は書き換え前の履歴を指す。
+GitHub上に残る旧コミットのキャッシュと、他のクローン（自宅PC、クラスタ、Codex worktree）の旧履歴は所有者の判断でそのままとした。
+他のクローンを使うときは旧履歴をmergeせず、`git fetch origin` の後に `git reset --hard origin/main` で置き換える。
+このリポジトリのローカル `user.email` はnoreplyアドレスに設定した。
+置換後の全suiteとremote CIの結果はこの節の末尾に追記する。
+置換後の全suiteはWindowsのsource直列実行で2303 passed・10 skipped、1300.21秒で成功し、MkDocsのstrict buildも成功した。

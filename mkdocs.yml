@@ -73,8 +73,8 @@ nav:
       - Choose a workflow: guide_en.md
       - 目的別ガイド: guide_ja.md
   - Experimental release:
-      - Candidate notes: experimental_release_notes_en.md
-      - 公開候補ノート: experimental_release_notes_ja.md
+      - Release notes: experimental_release_notes_en.md
+      - リリースノート: experimental_release_notes_ja.md
   - API reference:
       - Contracts and statistical conventions: api_en.md
       - Models and noise: reference/models.md

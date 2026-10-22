@@ -1495,3 +1495,13 @@ Later case-2 completion is recorded in `production_bar_case2_completion_v1.json`
 - `production_analysis_export_stage_case1_20261018-v2-tile-case1-analysis-recovery.json` and `production_analysis_export_script_validation_case1_v2.json`: staged recovery script for 2,315 files, 2,492,080,765 bytes; no export qsub or collection yet.
 - `production_bar_case2_submission_observation_v1.json`: replacement job 265215 and fixed source/runtime/context binding, with two total active nodes.
 
+
+
+## Redaction notice (2026-10-22)
+
+The repository copies of these records are redacted: the cluster user name,
+other users' home paths, host names, and the Windows user name were replaced
+before publication. SHA-256 values recorded inside the records refer to the
+unredacted originals, which are kept outside the repository, so verifying a
+repository copy against a recorded hash fails by design. The hashes themselves
+were not rewritten.
