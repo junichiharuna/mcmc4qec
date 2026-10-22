@@ -1,0 +1,12 @@
+# C3T2 generation・native・PC待機係の再接続
+
+旧C3T2 generationは先行C3T1監査の失敗を検出して投入前に停止した。
+旧native・PC起動係も子processを起動する前に停止した。
+失敗記録を保持し、旧PIDの消失、クラスタ上の3区分のsubmission記録の不在、新registryの不在を確認して別directoryへ再接続する。
+C3T1の新しい8時間版回収に続くfull監査と、既定native referenceの実成功終端を待つ。
+新監査のsource・config・script rootだけを参照先として変更し、C3T2の固定preflight・seed・payload・qsub helper・anchorから2 sampling区分への順序は維持する。
+投入は共有lockと最大2ノード検査を通る元helperだけで行い、曖昧な投入や失敗の自動再試行は行わない。
+native・PC起動係は同じ子driverと保存先を維持し、新generationの3 receipt registryを待つ。
+元の起動係に子process開始の証跡があれば再接続を拒否する。
+受入は前提未成立で待つこと、別条件・旧監査root・誤ったnative証跡を拒否すること、qsub順序と共通の制限が維持されることをfixtureで確認する。
+実sampling・回収・監査・科学的完了はこの待機係の受入とは別に確認する。

@@ -1,0 +1,24 @@
+# C3T0のPC続行記録と下流処理の再接続
+
+labo batch0の完了済みexportを回収し、別記録のserial係がparity段階へ進んだため、停止したcohort indexとdistributionを新しい記録へ接続する。
+旧index・distributionはPC export失敗で停止し、index作成・shared回収・転送をまだ実行していないことと旧PIDの消失を確認する。
+新indexはDGXの元serialとlaboの復旧serialの両方の完了を待つ。
+laboの旧handoffの失敗は復旧の経緯として固定し、新serialの失敗は引き続き実行を止める。
+両hostの固定assignment、全38 batch・768群・67,584行、失敗・未定義を含む全分母、各archive・receipt・parent・入力archiveの検証を維持する。
+新indexと新distributionには別の記録directoryを使い、既存の未使用な科学的出力先とremote転送先は維持する。
+distributionは両hostのparity、完全なindex、元の保存値再照合を待ち、一度だけ元の検証・転送を実行する。
+元sourceのhashを固定し、科学計算や選択規則は変えない。
+受入には復旧serialの固定source・intentの照合、旧未実行状態、片hostだけでは先に進まないこと、新serial失敗を拒否すること、元indexと転送の検証を保持することを含める。
+この接続は全PC batchの完了や最終集計・条件の科学的完了を意味しない。
+
+## 最終集計への続行
+
+旧8時間版の最終準備係は転送係の停止を検出し、request・prepare-intent・remote設定作成に進まず終了していることを確認する。
+新しい待機係は旧source・intent・errorを固定し、新distributionのsource・受入記録・intentを照合する。
+最終preparer・native controls・remote config/job rootは検証済みの8時間版をそのまま使い、既存の全入力・監査・reference・転送の完了検証を維持する。
+記録directoryだけを新しくし、旧失敗は上書きしない。
+受入では実固定入力で待機すること、旧準備が未着手であること、別のdistributionや新しい転送失敗を拒否すること、元の完了検証を維持することを確認する。
+投入係は新準備係のintentと受入記録に接続し、元のqsub lifecycle・最大2ノード・12時間32 GBの最終集計資源・回収器を維持する。
+最終結果の算術再確認と計時候補作成も新投入係・新準備係・新転送完了記録へ接続する。
+直前の算術係がreconnection・completedを作成せず停止したことを確認し、旧intent・errorとsourceを固定する。
+回収先・remote final root・監査root・native計時環境とcandidate出力先は維持し、全行の算術確認と元のsnapshot・転送・candidate検証を省略しない。

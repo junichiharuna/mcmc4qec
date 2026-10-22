@@ -1,0 +1,15 @@
+# C3T1のnative・PC起動係の再接続
+
+旧起動係は旧生成driverの停止を検出して終了し、errorのchildrenは空で、childのlaunch intent・started・完成記録はない。
+旧PIDの生存も実プロセス一覧で確認し、終了済みの場合だけ別の起動係を作る。
+旧失敗記録は保持する。
+
+既存起動係の隔離module内で、生成driverのpath・source hash、生成記録directory、起動係の出力directoryだけを変更する。
+新生成driverは `c3t1_parallel_generation_v1/driver.py`、固定hashは `cdac507d527ec2085dae626d304f72f9c137d4c5b06b90caff7aba102d926fed` とする。
+生成registry・native reference・PC割当・parity・収集処理・qsub helperは変更しない。
+registryの実作成とhash照合前にはchildを起動しない。
+native childの既存起動処理と、各PCの先行C3T0計算への待機を維持する。
+一度起動したchildは実handleで追跡し、異常終了または証跡不一致では自動再起動しない。
+
+受入では旧childの存在や曖昧な起動記録の拒否、新生成sourceの固定、既存3 childの引数・destination不変、registry未完成時の待機、一度限りの起動と実handleの終了確認を検証する。
+この再接続はC3T1 collection監査・final reader・次条件生成の再接続を含まない。

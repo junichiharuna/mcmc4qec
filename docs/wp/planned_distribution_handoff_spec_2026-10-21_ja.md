@@ -1,0 +1,33 @@
+# PC初回検証と全件indexから最終転送への引継ぎ
+
+## 小仕様
+
+受入済みplanned shared collector・保存replay verifier・distribution・transferを変更せず、順序制御だけを追加する。
+各hostの当該条件batch0 stagingとparity検証がそろった後、read-onlyで7ファイルを一度だけ回収する。
+両hostの回収後に保存replayとpredecessorを再検証する。
+同条件の全件index完了を待ち、外部pin付きregistry・snapshot・shared proof・native reference・初回recipeからtransfer planを作る。
+完全なcontextを新しいクラスタdirectoryへ一度だけ転送し、receiptを保存する。
+先行driverのerrorやstopped、曖昧な操作、入力hashの変更は停止理由として保存し、自動再試行しない。
+元の一度だけのchild起動と実終了検査を再利用し、qsubや数値workerは直接呼ばない。
+既存C1T0のsource・保存先・稼働中driverを変更しない。
+
+## 受入条件
+
+各hostの前提がそろうまで回収を呼ばず、両host回収前には保存replay検証を呼ばない。
+全件index未完了ならdistributionとtransferを呼ばない。
+indexのcondition・完了scope・path・hashが異なる場合は拒否する。
+native referenceと全件registryを明示的にrecipeへ結び、別の条件のmetadataを受理しない。
+childの非zero終了と既存起動intentで次段階を止める。
+実config・source・index開始intentのbindingsを操作なしで検査する。
+
+## 実施結果
+
+追加driverは元の一度だけのchild実行メソッドをそのまま継承し、元sourceのhashを起動時に固定確認する。
+Windowsで15件のテストが成功した。
+実configの起動前照合、順序と前提待ち、別条件・不完全indexの拒否、先行停止の拒否、実childの正常終了・非zero終了・再実行拒否を含む。
+sourceとred/greenログは [受入manifest](data_tile_validation_2026-10-17/planned_distribution_handoff_acceptance_v1/manifest.json) に保存した。
+manifest SHA-256は `fbc7168b1494d8fa66b2698a2ec51f64eb5d9621202ab8707eb93d7db51b3ccf` である。
+driver SHA-256は `f155c01ebf02cc947482d5bb6fb9de4171159a6cf92ea8d50cbb079e2ab88114` である。
+01:05 JSTにC1T1のPID46160とC1T2のPID44204で待機sessionの継続を確認した。
+本番shared回収・replay検証・転送はまだ始まっておらず、最終集計qsubへの接続も未実施である。
+新しい親driverのLinuxテストは未実施であり、Windows上の制御テストを科学的検証完了として扱わない。

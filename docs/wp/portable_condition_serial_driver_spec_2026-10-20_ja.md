@@ -1,0 +1,57 @@
+# C1T0固定batchの逐次実行制御
+
+## 範囲
+
+既存の固定割当てと検証済みのexport・転送・stage・launch・collection入口を順番に呼び、PCで次のbatchを起動するまでの手動待ちを減らす。
+科学計算、worker数、入力、seed、受入条件を変更しない。
+クラスタのqsubは呼ばず、元の正常終了済みsamplingからの入力exportのみ既存入口で行う。
+ホストごとに指定された連続batch範囲を一度だけ処理し、既存の数値実行を引き継いだり再実行したりしない。
+
+## 契約と停止条件
+
+開始時に全対象batchの固定割当てを確認し、stage・launch・collectionが未着手であることと、直前batchの回収記録があることを必須とする。
+先行配置済みのexportと転送は、それぞれ成功記録がある場合だけ再利用し、途中directoryがある場合は停止する。
+各入口の実行前後にdriver・直接呼出source・固定割当てのhashを確認し、入口自身による既存の深い検査も維持する。
+新しいdriver出力directoryを排他的に作成し、実行予定、各操作の開始・終了・成功記録のhashを保存する。
+同一ホストの同一範囲を重複して開始しないため、全対象batchのstage・launch・collection未着手条件に加え、ホスト単位の排他的driver directoryを用いる。
+各subprocessをforegroundで待ち、launchの成功と実terminal受理後にcollectionへ進む。
+入口が失敗、成功記録が欠落、sourceが変化した場合は停止し、同じ操作を自動再試行しない。
+通信の観測失敗から数値プロセスの停止を推測せず、失敗記録を保持して実プロセスを再確認する。
+各batchの回収受理まで確認してから次のbatchへ進む。
+全batchの回収は科学的校正の完了を意味せず、元collector復旧・全trace監査・独立reader・最終reportは別の要件として残す。
+
+## 受入
+
+合成入口で順序、先行配置の再利用、途中出力と既存launchの拒否、失敗後の後続操作禁止、source変更と成功記録欠落の拒否、排他的開始を検査する。
+試験中はSSH、qsub、実数値計算を呼ばない。
+実運用の開始・完了はfixtureの成功とは分けて記録する。
+
+## 実行中のLabo batch0からの接続
+
+既存batch0はその実行controllerを維持し、新しい接続処理は実remote PID・terminal・固定configを読み取るだけにする。
+観測timeoutやSSH失敗は状態不明として再観測し、計算を再起動しない。
+実PID不在かつterminalありを確認し、既存launcherの正常completed記録が作成されてからbatch0の回収を一度だけ呼ぶ。
+PID不在かつterminalなし、または既存launcherの異常終了は停止条件とする。
+回収後は上記driverをLabo batch1〜5に対して呼び、同じforeground接続を維持する。
+この接続処理は既存launcherが行わないbatch0の回収を担当し、元のlauncher・handoff sourceを変更しない。
+
+## 受入結果と実運用
+
+Windowsの逐次driver受入は11 passed・0.67秒、Labo引継ぎの状態判定受入は7 passed・0.36秒だった。
+これらの試験ではSSHと実数値計算を呼んでいない。
+DGX batch2の20群・1,760行は実terminalとPID終了を確認して回収・hash照合済みであり、batch0〜2の計60群をhost上で受理した。
+その後 `c1t0_serial_driver_v1.py dgx 3 31` を起動し、local実処理PID41548がstageを完了してbatch3をlaunchした。
+実remote観測でDGX batch3のPID1792734が生存し、terminalが未作成であることを確認した。
+Labo batch0は実remote PID14832が生存し、terminalが未作成だった。
+`handoff_labo_c1t0_serial_v1.py` をlocal実処理PID20712で起動し、元batch0のlauncherを維持したまま実remote状態を観測している。
+Windowsのvenv launcherには親PIDも存在するが、上記はPython本体の実処理PIDである。
+これらのdriverが稼働している間、対象batchのexport・転送・stage・launch・collectionを別途実行しない。
+sourceをhash固定しているため、driverと呼出先helperを途中で編集しない。
+独立readerには元sampling時の113 sourceを展開した既存bundleを使い、現在のcheckoutとの差を許容する例外を加えていない。
+回収済み40群の独立読取はsnapshot v3で完了し、batch2を含めたsnapshot v4は開始済みである。
+driver・受入テスト・引継ぎ・実起動intent・18:49 JSTの両PC実PID観測を [25ファイルのmanifest](data_tile_validation_2026-10-17/c1t0_serial_execution_20261020_v1/manifest.json) に保存した。
+manifest SHA-256は `c43b76fd5ca055b0abebe6404afa8fac84124c8df05b1a2b37dfba900741dbc7` であり、保存時点では両PCともlive・terminal未取得だった。
+
+19:05 JSTまでにsnapshot v4の独立読取が完了し、60群・5,280行・未回収708群、全行flag・診断未定義2,440行を保持した。
+DGXの逐次driverはbatch3を正常回収し、batch4の実PID1799928の稼働まで確認した。
+これによりhost回収は80群となったが、ローカル独立読取済みの60群とは区別する。

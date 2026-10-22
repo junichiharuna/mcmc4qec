@@ -1,0 +1,62 @@
+# 設定選択から独立計時seed監査への接続
+
+## 固定条件
+
+全12条件・24精度目標の設定選択がPBSで完了し、元wrapperのsealを通ったdescriptorからのみ科学planを作る。
+旧56区分と新しいMC/BARのcapacity・benchmarkの4区分を、既存census bridgeの同じstreamで検査する。
+seed番号、replicate数、選択されたtrace長、MC予算、科学的な失敗や未選択の扱いは既存planから変更しない。
+設定選択から計時用planを作る際は、既存make_plansとvalidate_plansを使用する。
+既存bridgeのprepareを使って1000割当のpilotと資源決定を行い、選択0件のno-opを通常の監査成功へ置き換えない。
+本番censusと独立計時はqsubで実行し、待機中を含む最大2ノードを維持する。
+
+## 元監査記録の実環境照合
+
+親環境v2の実processで、旧job265253のmanifest・result・独立verificationを外部pinから読み直した。
+旧56区分・3,963,562割当の保存結果と、現在のcatalogのmetadataが一致した。
+元producerの12ファイルは一対一のpath対応と同じbytesを確認し、元の絶対pathを保存した。
+bridgeの依存source61個とcore28個が固定親環境に含まれ、親bootstrapを前後に通した。
+この処理はseed streamの再生成、native decoder probe、本番pilot、全数監査、qsubを行っていない。
+入力の基礎資料はclusterの `/home/user/workspace/mcmc4qec/20261021-low-timing-census-inputs-v1/basis.json` に保存した。
+basisのSHA-256は `6ddac6d089ba54b7ea9e1328c7caee7a12d11b8b62878a732ee79e1056622147` である。
+回収記録は `data_tile_validation_2026-10-17/low_timing_census_preflight_v1/`、manifestのSHA-256は `1eb54e84223755ee7c8e8cd9b5ff877a517b5aae00944f685f60a7818d7060d8` である。
+
+## 接続の受入
+
+descriptor・selection・親環境・basisの変更を拒否し、保存したselectionのpinが科学bundleとcensus configへそのまま渡ることを確認する。
+元selector_evidenceとmake_plansを呼ぶ順序を確認し、準備directoryの再利用を拒否する。
+準備失敗時に成功receiptを作らず、自動的に再準備しない。
+mockで確認した接続と、本番のselectionが揃ってから行う実prepareを区別して記録する。
+
+## 接続テストと待機開始
+
+Windows9件・0.80秒、Linux9件・0.10秒で準備処理の接続テストが成功した。
+selectorの証拠readerと親wrapperではreadの引数契約が異なるため、それぞれ元moduleのEvidenceを使い、前後照合を分けた。
+本受入ではselectorのPBS証拠、科学plan、census prepareの境界をmock化しており、本番選択や1000割当pilotを実行したものではない。
+sourceと実行ログは `data_tile_validation_2026-10-17/low_timing_census_preparation_acceptance_v1/` に保存した。
+manifestのSHA-256は `5c8888bd552eac006f70770d0fe26ed14eafa8b056a461909fb6380f0d3ec741` で、保存した10ファイルを再照合した。
+元監査照合の保存manifestも11ファイルを再照合した。
+設定選択の完了を待つ準備driverをsession11507で開始した。
+本番科学bundle・census config・pilot・正式census投入と、独立計時は未実施である。
+後続のcensus投入・回収driverの接続はまだ残っている。
+
+## census実行driverの契約
+
+準備receiptとcensus config、親環境、科学bundleのpinが一致した場合にのみ後続へ進む。
+no-opでは既存read_planを実環境で再確認し、全数監査を実行したというdescriptorを作らない。
+readyでは共有lock、coordinator不在、待機中を含む要求ノード数を観察してから既存bridgeのsubmitを1回だけ呼ぶ。
+実際のqsub直前の再照会と最大2ノード制約は既存bridgeで強制する。
+投入応答が不明な場合は自動再投入せず、同じjob IDの観察時の通信エラーは終了扱いしない。
+F0後は既存sealとformal_censusの検査を通し、12要素のdescriptorを元の絶対path・hash付きで回収する。
+profileとfixtureは元入力のまま保持し、親run内の成果物とは別の既知pathから回収する。
+非ゼロ終了、seal不成立、転送hash不一致は成功とせず記録する。
+
+## census実行driverの受入と開始
+
+Windows16件・0.75秒、Linux16件・0.06秒で接続テストが成功した。
+最大2ノード待機、投入1回、観察時timeout後の同じjob IDへの再照会、非ゼロ終了時の停止、no-opで投入しない経路をmock transportで確認した。
+回収時の12 descriptor要素と、元profile・fixtureのpath/hashの取り違えも拒否した。
+実際のqsub、全数seed監査、native probe、sealの科学的な境界はこの受入では実行していない。
+sourceと実行ログは `data_tile_validation_2026-10-17/low_timing_census_execution_acceptance_v1/` に保存した。
+manifestのSHA-256は `7e95be3c260ff6b46ca9643c63f86c5b5af90bd6565c43449463d79d21ee232c` であり、保存した12ファイルを再照合した。
+census実行driverをsession74370で開始し、準備完了を待っている。
+この後の独立計時capacity・mainの実行連携と最終集計は残る。

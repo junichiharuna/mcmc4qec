@@ -1,0 +1,16 @@
+# C3T1・C3T2の8時間監査から最終集計への接続
+
+8時間版の回収・監査に対して、最終reader・qsub wrapper・回収器・preparer・待機係を別版で接続する。
+元の科学計算、192 seed・352設定・67,584行、失敗・未定義を残す集計、実PBS終端とsource・input hashの照合は維持する。
+元の実行中sourceと既存の失敗記録は変更しない。
+
+C3T1の監査workerは元のworkerとbyte hashが同じであり、C3T2のworkerはCRLFだけが異なることをbyte比較で確認した。
+最終CLIはこの検証済み2 hashだけを受け入れ、未知のworkerをconfig側のhash変更だけで受け入れない。
+任意sourceの改行を実行時に正規化して受理する処理は入れない。
+CLI・wrapper・回収器の変更されたhashと配置先を連鎖して固定し、WindowsとLinuxで既存guard・失敗時の挙動を再検証する。
+
+実クラスタの別directoryでC3T1・C3T2の新audit configをbootstrapし、sampling root・full audit root・元worker source・native Pythonと依存sourceを照合する。
+bootstrap成功だけで実監査authorityや最終reportの成功を主張しない。
+preparerの条件binding、native controls、audit configとroot、waiterの先行intentを同時に接続する。
+新しい最終job/config/output先を用い、全転送・full監査・native referenceが揃うまでprepareせず、受入後に共有lockと最大2ノード検査を経て一度だけqsubする。
+12時間・32 GBの最終集計枠は資源上限であり、完了時刻の予測として扱わない。

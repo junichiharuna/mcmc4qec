@@ -1,0 +1,14 @@
+# C3T2の初回回収と監査を8時間枠へ接続する仕様
+
+未投入のC3T2回収を、C3T1で検証した初回8時間・1 CPU・32 GBの手順に接続する。
+対象をcase 3・target 2に限定し、他条件の回収と元samplingの科学計算は変更しない。
+8時間は資源上限であり、終了時刻の保証ではない。
+元の回収directory、retry directory、4時間版directoryが存在した場合は初回回収として拒否する。
+768群・192 seedの全task、失敗と未定義を含む完全な検証を維持する。
+監査は新回収の実PBS成功終端、run_count 1と8時間資源を要求し、4時間の終端を拒否する。
+
+旧C3T2監査係は先行監査の失敗で終了していること、collector・capacity・fullの操作記録がないこと、旧PIDが消失していることを実観測する。
+新係は復旧したC3T2 generationの3 receiptとC3T1の8時間版full監査を待ち、実sampling成功終端と共有lock・最大2ノード検査を経てqsubする。
+元の数値sourceとseed割当、capacityからfullへの順序、資源推定、一度限りの投入・実終端照合を維持する。
+Windowsとクラスタで対象制限、資源、旧実行拒否、全task検証、誤ったterminal拒否を試験し、実configのbootstrapと未投入状態を確認する。
+これらのfixture試験と接続を実trace監査・条件の科学的完了とは扱わない。

@@ -1,0 +1,19 @@
+# C1T2生成の自動引継ぎ
+
+既存C1T1 pipelineのfull監査受理とnative reference回収を先行条件とする。
+両完了記録は固定済み開始intentのsourceと照合し、full監査とreferenceの実PBS正常終端を読み直す。
+同条件のanchor 0・sample 0/1のpreflightは使用済みの3receiptを外部hashで固定し、再実行しない。
+新規executeは既存 `submit_low_partition_once.py` のみを使用し、共有lock下のqsubと待機中を含む最大2ノード検査を維持する。
+anchorを一度だけ投入して正常終端を確認し、その後sample 0とsample 1を順に空き枠へ投入する。
+sample 1の投入前にsample 0の終了を必須とはせず、2ノードが利用可能なら並行実行を許す。
+各操作は開始intentを排他的に保存し、失敗・応答不明・競合時は停止して自動再試行しない。
+3件の実投入receiptが揃った時点で実generator registryを作り、既存export contextの条件・script・resource照合を通す。
+registryの作成をsampling正常終了や科学的なcohort完了とは扱わない。
+PCとreferenceへの次の引継ぎは、この実registryと各処理の既存検査を使って別途接続する。
+
+Windows14件・Linux14件の合成受入とCLI起動確認を通過し、[sourceとログ](data_tile_validation_2026-10-17/planned_c1t2_generation_handoff_acceptance_v1/manifest.json)へ保存した。
+実3preflight receipt、固定生成planと先行driverの開始intent・sourceを照合し、local PID44160で待機処理を起動した。
+起動時点ではC1T1 sampling265361がR、C1T0 capacity監査265367がQであり、C1T2の3 executeは未使用のままである。
+新しい生成のqsub、sampling正常終端、registry作成、後続reference・PC起動は未実施である。
+実開始intent・入力source・受入・PBS状態を[107ファイルのmanifest](data_tile_validation_2026-10-17/planned_c1t2_generation_started_v1/manifest.json)へ保存した。
+保存時点で3 executeの未使用を再確認し、既存7 sessionと新しい生成引継ぎsessionの継続もpollで確認した。

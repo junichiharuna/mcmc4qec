@@ -1,0 +1,15 @@
+# 次条件のPC driverへの引継ぎ
+
+固定済みgenerator registry、native referenceの回収、直前条件の各hostの全batch回収を前提にする。
+直前条件のserial driverは正常完了recordと既知のsource・開始intentを照合し、全割当てbatchの転送検査recordを要求する。
+native referenceは対応する自動引継ぎの完了recordとacceptedファイルのhashを照合する。
+必要な完了recordがない間は待ち、異常終了recordがある場合は停止して自動再試行しない。
+前条件の最終batchと新referenceを明示的なpath・hash付きregistryへ保存し、既存の独立archive readerで確認する。
+既存の検証済みserial driverを一度だけ子プロセスで起動し、その全実行期間のhandleを保持する。
+PC上の実process不在、runtime、前条件の実終端は既存parity処理がexecution lock内で再確認する。
+この引継ぎ自体はqsubや数値workerを直接呼ばず、科学的なcohort検証完了も宣言しない。
+
+Windows19件・Linux19件の合成受入とCLI起動確認を通過し、[検証sourceとログ](data_tile_validation_2026-10-17/planned_pc_handoff_acceptance_v1/manifest.json)を保存した。
+実C1T1 generator registryと既存C1T0 serial driverのsource・intentを照合し、DGX用local PID13260とLabo用local PID19728で待機処理を起動した。
+両者とも前条件とnative referenceの完了待ちであり、新しいPC数値処理はまだ起動していない。
+この起動確認は、条件間parityの成功や新条件の科学検証結果ではない。

@@ -1,0 +1,55 @@
+# DGX解析と並行する入力準備の初回結果
+
+DGXの計算設定や担当割当を変えず、解析中に十分先のbatchの入力archiveを用意する経路を確認した。
+[小仕様](c3t0_dgx_export_prefetch_spec_2026-10-22_ja.md)に従い、既存serialの完成済みexport再利用経路と、既存の受入済みexport helperを使う。
+稼働中のserialと後続controllerを停止・変更しておらず、数値workerを追加起動したものではない。
+
+## 受入範囲
+
+対象はC3T0・DGXの未着手batch9〜32で、元serialが着手した最大batchより3以上先に限定する。
+前回の先行準備が未完了・失敗・変更済みの場合、または対象のexport directory・archive・serial操作が存在する場合は新しい操作を拒否する。
+元serial49444の実commandとsource hash、固定assignment・generator registry、現在の数値batchの実PIDを確認してから開始する。
+この距離条件は所要時間の下限保証ではなく、先行準備中も元serialの進行確認が必要である。
+
+15テストで範囲・距離・既存操作の拒否、未完了先行処理の拒否、実際の受入済み入力recordの検査、および既存serialの実step実装による完成済みexportの再利用を確認した。
+再利用テストは隔離したrecordであり、本番serialによる実再利用の証拠ではない。
+[受入記録](data_tile_validation_2026-10-17/c3t0_dgx_export_prefetch_acceptance_v1/accepted.json)のSHA256は `4b915345e9872df25b9fa840d83a1793f7df9098fe021acd7781ba9257c36f7f` で、sourceと試験logを同じdirectoryに保存した。
+
+## 最初の実入力準備
+
+初回は末尾batch32の8群だけを先行し、helperは正常終了した。
+元helperによる全member・source・metadata・assignment・生成job終端の照合後、別の呼出しで入力archiveの全2,061 memberとmarker構成を再照合した。
+準備の実経過時間は116.207秒である。
+開始時のDGX batch11は実PID430743であり、準備完了後も同じPIDの稼働を確認した。
+クラスタの数値job265435と265438は各1nodeで継続している。
+
+[準備完了記録](data_tile_validation_2026-10-17/c3t0_dgx_export_prefetch_v1/batch32/completed.json)にaccepted recordとarchiveのpath/hashを保存した。
+prepared_input.jsonのSHA256は `55fafe2755b321dd1553f7be37287ee6d8605fa2b35ffb8214ae042adb856567`、入力archiveは `9eaa72b633e2b927269458698b5aad273b01aa87ca23614a66da0478239299e0` である。
+[独立照合](data_tile_validation_2026-10-17/c3t0_dgx_export_prefetch_v1/batch32/independent-verification.json)のSHA256は `62064f3112b5cf3116fc3f5e8394c1d149fc9926231625c034872de98db19629` である。
+最初の追加照合呼出しではimport path不足で処理開始前に停止したため、元helperと同じimport pathを明示した確認scriptで実行した。
+入力生成の再実行や原sourceの変更は行っていない。
+
+14:21 JSTにbatch31の入力準備を開始し、local wrapper41712と既存export helper21232の実commandを確認した。
+batch31は正常終了し、両processの終了と、20群・全4,977 memberの独立照合を14:28 JSTまでに確認した。
+準備の実経過時間は282.605秒で、[独立照合](data_tile_validation_2026-10-17/c3t0_dgx_export_prefetch_v1/batch31/independent-verification.json)のSHA256は `51d4aedf9d9a8149e3d4a7ea4850827ff978a6eeca3570e98b14ee727523de29` である。
+本番serialによる実再利用はまだ確認していない。
+先行準備は一度に一つとし、次の対象は準備終了後の照合を終えてから判断する。
+
+14:32 JSTに元serialがbatch12の入力準備・転送・stageを終え、DGX上の実PID486842で解析を開始したことを確認した。
+config SHA256は `a0f4a3ab89680f7d572e735bfe8343616051b4c427fa71b49db01d0a941d21ab` で、completionは未作成だった。
+batch31の独立照合と受入sourceのhashを確認してから、未着手batch30の先行準備を開始した。
+local wrapper43352とhelper43408の実commandを確認し、起動記録を同じ起動記録directoryへ保存した。
+batch30の完了・照合・本番再利用はまだ未確認である。
+
+## 適用限界と継続
+
+元serialがbatch32へ到達して入力を実再利用する工程は未実施であり、end-to-endの再利用受入や全体時間の短縮量は未確認である。
+116.207秒はarchive準備時間であり、BAR推定の費用、同精度での速度比較、全体の短縮量ではない。
+先行準備した入力を解析済み群や低ノイズ条件の完了数へ加算しない。
+14:28 JST時点で正式完了は低ノイズ8/12条件、C3T0解析結果の照合済み回収は360/768群である。
+回収数の増加は数値解析batch11の完了によるものであり、先行入力準備によるものではない。
+qsubによる数値計算と最大2要求nodeの規則は維持する。
+
+元source、全生成結果、固定割当とcurrent serialを保持した同じworkspaceでのみ継続する。
+先行準備を再試行せず、各batchのjournalと実processを確認する。
+検証用sourceも受入directoryに保存し、起動・stderr・stdoutは [起動記録directory](data_tile_validation_2026-10-17/c3t0_dgx_export_prefetch_launch_v1/) に保持した。

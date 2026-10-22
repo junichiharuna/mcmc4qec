@@ -1,0 +1,17 @@
+# 再割当てbatchの配置・実行・回収の接続
+
+固定planの264群を14 batchに分け、既存DGX batch 17の後から順番に処理する。
+配置だけを行う段階と、先行batchの実終端をhashで固定してexecution configを作る段階を分ける。
+配置段階では固定群・予約証拠・全保存値のparity・数値sourceを確認し、元クラスタの既存exporterで保存配列を新規archiveへ書き出す。
+exporter自体のhash、全archive memberとhash、production、群、geometry、元のsource・manifest・platform資料を照合する。
+既存の選択記録・配置先・結果を上書きせず、途中失敗は再投入せず照合する。
+新規配置にはplan・baseline・既存parity証明・runner七source・collection二sourceを含め、実行configは後から排他的に追加する。
+実行直前に、直前batchの実PIDが存在しないこと、completionとintentの対応、回収archiveの照合成功、全群の終端、同じruntimeを確認する。
+実行configはその先行intent/completionのhashを固定し、runner自身も先行PIDと全入力を再検査する。
+新runnerの共有lockと先行batch確認により、既存batchを含めてDGXの20 worker上限を守る。
+観測失敗・接続timeoutは終端として扱わず、次の計算を開始しない。
+collection parentは実際のexecution intent、config、四つのassignment資料、七つのrunner sourceと二つのcollection sourceをhashで固定する。
+回収は新collectionとarchive readerを使用し、固定planとの対応を付けたreceiptを混在indexへ渡す。
+失敗した群を削除せず、先行batchが不完全なときは次を自動実行しない。
+受入では配置対象の変更、source・archive・runtime・先行終端の不一致、既存予約・出力への再実行、回収時の混同を拒否し、数値関数は既存実装をそのまま呼ぶことを確認する。
+本番配置のhash確認と実行前検査が成功するまで再割当て計算を開始しない。

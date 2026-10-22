@@ -1,0 +1,29 @@
+# 混在portable BAR最終集計の資源設定
+
+最終readerは1 CPUで動かし、1ノード・32 GB・walltime上限4時間を選んだ。
+これは計算資源の割当てであり、終了時刻や速度の予測ではない。
+全入力が揃う前の資源準備であり、最終集計のqsubはまだ行っていない。
+
+根拠は、同じtile72・bit-flipのtarget 1で192 seed・768群・352設定・67,584行を処理したjob 265341の受理済み実測である。
+実walltimeは51分11秒、PBSの観測memoryは2,001,672 KiB、生成reportは454,663,531 bytesだった。
+既存jobが要求した251 GBと、実際の観測memoryは区別する。
+今回のtarget 2では混在archiveの照合が加わるため、同じ所要時間・memoryになるとは仮定しない。
+walltimeは実測の4倍に30分を加えて30分単位で切り上げ、memoryは追加検証用の余裕を含む32 GBの下限を採用した。
+入力件数が同じでも実行経路の差があるため、4時間以内・32 GB以内を保証する測定ではない。
+
+根拠receipt SHA-256は `ea3e1b1bccac86675d83fd0d80a206ab822cddac983aa33490bc0eae3a29a9d7` であり、jobのF・Exit_status 0・run_count 1とcohort件数を再確認して資源記録を作成した。
+[資源決定](data_portable_bar_2026-10-19/mixed_final_resource_v1/resource-decision.json) のSHA-256は `de7568c9cf797bd34c8bedb8059db297bfc28c7e6f730b634028dbc7f5f485a8` である。
+[保存manifest](data_portable_bar_2026-10-19/mixed_final_resource_v1/manifest.json) のSHA-256は `903c16f271b86df202d8659b98ed4ccb740293b8573c70a48543e23c2671d259` で、根拠receiptと資源記録作成sourceを含む。
+新たな数値計算や速度benchmarkは実行していない。
+
+配置先は `/home/user/workspace/mcmc4qec/20261020-portable-mixed-resource-v1` であり、全4ファイルのhashとfile censusを照合した。
+[配置receipt](data_portable_bar_2026-10-19/mixed-final-resource-stage-receipt-v1.json) のSHA-256は `a0fe9639fd96e7e3da3e608f9627074acf716a046ea4cac5427ac3332b9ec20b` で、accepted=true・qsub_executed=falseである。
+後の最終configでは、この配置先のresource-decision.jsonをresource_evidenceとして固定し、同じ場所のmeasured-report-completion-receipt.jsonとmanifest.jsonも外部hashで固定する。
+resourceとresource_reasonは資源決定の値をそのまま用い、実行直前にhashと全入力の準備状態を再確認する。
+全768群回収・全trace監査の正常受理・転送の完了が揃うまでは最終configの確定やqsubを行わない。
+最終readerの実測は、MCMCやBARの同精度到達時間を測る独立計時とは別の運用上の記録とする。
+
+資源記録を再現する場合は、保存したprepare_portable_mixed_final_resource_v1.pyをrepositoryのoutput/へ復元し、根拠receiptを元のdata_tile_validation_2026-10-17内のpathへ復元する。
+作成先が既に存在する場合は停止する設計であり、既存の記録を上書きして再実行しない。
+配置sourceはdata_portable_bar_2026-10-19/stage_portable_mixed_final_resource_v1.pyに保存し、こちらもoutput/へ復元する構成である。
+既存クラスタ配置先や使用済みstage intentがある場合は、新たな配置を繰り返さず保存hashを検査する。

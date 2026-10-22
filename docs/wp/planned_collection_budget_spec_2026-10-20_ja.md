@@ -1,0 +1,61 @@
+# 未投入tile288条件のcollector資源枠
+
+C1T0の旧collector265356は2時間33秒でwalltime上限に達し、保存tasks indexは57,237行だった。
+同条件の復旧collector265362は4時間枠で稼働しており、20:31 JST前後の観測では33,670行まで進んでいた。
+行数には未成功taskも含み得るため、検査の成功件数や科学的な受理数とは扱わない。
+この観測から、残るC1T1・C1T2・C3T0/T1/T2の初回collectorには、同じ2時間枠を無条件に再利用しない。
+
+本変更は上記5条件の初回collectorだけを対象とし、1ノード・1 CPU・32 GB・4時間上限を明示する。
+4時間は資源上限であり、所要時間や完了の保証ではない。
+元sampling plan・生成source・元sampling jobの証跡は変更せず、collectionの保存先とresourceだけを別namespaceで扱う。
+新保存先は `sampling-collection-budget4h-v1` と `sampling-collection-submission-budget4h-v1` とする。
+旧collectorまたは復旧collectorのdirectoryが存在するrootでは拒否し、既存試行の再投入として利用しない。
+新保存先にも実行・投入済み証跡があれば拒否し、自動再試行しない。
+
+元のtask検査、raw payload hash、marker、失敗を含む192 seed・768 group、native環境、source、入力の再照合を保持する。
+元samplingのread_plan・partition_evidence・artifact_recordは元moduleに結び、実行済みのsampling証跡に新collectorのsourceを混ぜない。
+collectorの終端は実job ID・固定script/resource・F・exit 0・run_count 1で検査する。
+後続のtrace監査・最終readerには、初回の拡張資源collectorであることを明示したauthorityを渡す。
+既存C1T0の復旧authorityを流用して、存在しない旧失敗jobを記録しない。
+
+実装は隔離backend、scheduler/worker、authorityと後続接続の順で受入を行う。
+qsubと待機中を含む最大2ノード・共有lockを維持し、接続と実native preflightを検証するまで本番collectorを投入しない。
+
+## backendの受入
+
+隔離backendのWindows受入は21 passed・11.57秒、クラスタLinux受入は21 passed・2.40秒だった。
+fixtureでは全768 sample group・192 anchorを意図的な失敗として保持し、元sourceの取り違え、taskの欠落・重複、旧collectorとの混在、2時間resource、再実行terminalを拒否した。
+元関数のASTはcollection directoryの2種類の文字列置換だけであることを照合し、元sampling関数への結合と2時間の元resourceが変わらないことも確認した。
+このfixtureは成功したraw payloadの本番検査や計算時間の実測ではない。
+
+実クラスタの元source・runtime・保存済みplanをread-onlyで確認し、5条件とも旧collectorと復旧collectorが存在せず、新collectorの初回実行候補であることを確認した。
+実保存planのsample task数はC1T1/C3T1が79,872、C1T2/C3T2が92,160、C3T0が61,440であり、各条件には別途192 anchorがある。
+検査件数とI/O負荷は条件で異なり、4時間以内の完了を保証する測定ではない。
+配置先は `/home/user/workspace/mcmc4qec/20261020-planned-collection-backend-fixtures-v1`、実検査の [receipt](data_tile_validation_2026-10-17/planned_collection_backend_native_v1/accepted.json) に元planのhashとresourceを保持する。
+この配置はfixtureとread-only検査用であり、scheduler・worker・authority・trace監査・最終readerとの本番接続は未完了である。
+qsub・本番collector・科学的な条件受理は実施していない。
+source・Windowsログ・Linux配置と実入力照合は [11ファイルのmanifest](data_tile_validation_2026-10-17/planned_collection_backend_sources_v1/manifest.json) に保存し、SHA-256は `8b030bb3add3bf952a4a87e2227dcd2f86c9d8fde4ca5173810e456027183682` である。
+
+## 投入・workerの契約
+
+configには対象condition、元bundleとsampling root、元production/partition manifest、control 3ファイルのhash、元bundle acceptance manifestのhashを固定する。
+workerはconfigとcontrol、元acceptance manifestとその全inputを照合してから科学moduleをimportする。
+元schedulerの変更点はworker起動commandとledger内のplanned_collection bindingとし、元の共有lock・2ノード上限・直前検査を保持する。
+元sampling partitionの完了証跡は元schedulerを通して照合する。
+workerの開始と完了は、実PBS job ID・config・投入ledger・summaryのhashを一度だけ保存する。
+正常終端後のcompleteは元のcollector終端検査と全task indexの照合を行い、full trace監査が未完了であることを返す。
+観測timeoutや曖昧なqsub応答、worker失敗、途中でのsource変更時には既存証跡を残し、自動再試行しない。
+初回のworker結合試験では、元のPBS縮約がrun_countを保存しないため、封印後の再検査で1件が失敗した。
+新collectorのnamespaceだけでrun_countを保存する修正を追加し、元samplingのterminal schemaは維持する。
+旧backendのsourceと最初の21件の受入は保存済みmanifestに保持し、修正版を同じnative配置へ上書きしない。
+
+修正後のbackend・scheduler・workerの統合受入はWindows51 passed・18.66秒、Linux51 passed・5.69秒だった。
+元のqsub制御を使い、PBS通信をfixtureで置き換えて、2ノード制限、既存試行拒否、曖昧応答時のlock保持、一度だけのworker開始、失敗時の証跡保持、正常終端の封印と全task index照合を確認した。
+最初のworker試験の1 failed・17 passedのログも保持し、成功したmetadata fixtureだけでは見えていなかった終端保存の問題として記録した。
+実クラスタの別配置 `/home/user/workspace/mcmc4qec/20261020-planned-collection-protocol-v2` に修正版controlを置き、5条件のconfigを固定した。
+各configで元acceptance manifestと全input、control、production/partition manifest、runtimeを読み取り照合した。
+この検査は上流jobの正常終端を要求するpreflightとは別であり、実preflight・qsub・collectorは未実施である。
+[実configとnative照合](data_tile_validation_2026-10-17/planned_collection_protocol_native_v2/accepted.json) に実path、hash、resourceとPythonを保存した。
+初回4時間collector用のauthority、trace監査、最終readerへの接続は引き続き未完了であり、既存C1T0復旧経路を代用しない。
+修正版のsource・失敗と成功のログ・native検証・5条件configを [26ファイルのmanifest](data_tile_validation_2026-10-17/planned_collection_protocol_sources_v2/manifest.json) に保存した。
+manifest SHA-256は `3b7b546a8600852cdf1f6ce695860e48c3ad4385b5f8af2886d7821771ec58c9` である。

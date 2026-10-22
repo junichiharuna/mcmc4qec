@@ -1,0 +1,92 @@
+# 独立計時の最終集計への接続
+
+## 契約
+
+独立計時driverの全48行と全taskの終端記録から、元reportが受け取る24 identity・各MC/BARのcapacityとpartition一覧を組み立てる。
+未選択行はcapacityなし・partitionなしとし、計時不能・非ゼロ終端も行を除外しない。
+capacity由来のreferenceをそのまま使い、main manifestのcapacity_referenceと一致する入力を維持する。
+mainのreplicate0〜191を重複・欠落なく保持し、terminal結果・manifest・submissionのjob IDとidentityを照合する。
+全taskが終端になるまでは最終入力を作らず、孤立したmain・余分なtask・異なるjob結果を拒否する。
+科学bundle・selection・seed census・WSSの参照区間と監査結果は元の固定入力を使い、設定や精度gateを変更しない。
+組立て成功はmetadataの接続確認であり、原本payloadを確認する元report.prepare・PBS内report.runの成功とは別に記録する。
+最終raw検証と日本語報告生成はqsubで実行し、待機中を含む最大2ノード制約を維持する。
+
+## 受入
+
+24 identity・MC/BARの全行、未選択、capacity失敗、分割main、非ゼロmain、入力の不足・余分・不一致を小fixtureで確認する。
+capacity referenceにsubmission情報以外の余計なfieldを足さず、元reportのpartition比較と互換であることを確認する。
+metadata組立ての試験、実固定referenceへの接続確認、本番raw検証の実行証拠を区別して保存する。
+
+## 実参照データとの接続修正
+
+既存WSS生成job265221は `submission_intent.json` を保存し、監査jobは `submission-intent.json` を保存する。
+元reportは双方に後者を要求していたため、生成側の実データへ接続できない。
+生成側と監査側の既定の保存名をそれぞれ明示し、ファイルの有無によるfallbackは行わない。
+生成側の実保存名を使うfixtureと、生成・監査のintentを取り違えた場合の拒否を受入へ加える。
+固定済みの元reportと実行環境は変更せず、修正版を別directoryで検証し、最終集計専用の環境で使う。
+
+## 受入と実参照への接続確認
+
+全24 identityの組立て14件、元report受入61件、実intent名の回帰3件を合わせ、Windows78件・18.53秒、Linux78件・11.38秒で成功した。
+元reportの61件は生成側intent名を実producerと一致させたfixtureで検証した。
+元のreport sourceと稼働中の親環境は変更せず、修正版は `20261021-low-independent-timing-report-v1` の別環境へ配置した。
+前後に元wrapperのbootstrapとsource closure検査を通し、selectorのsource hashが変わっていないことを確認した。
+環境JSONのSHA-256は `a2937b98d576386d4b0085b2c0787bbee6f53024688949d441bec249220f2ec0` である。
+受入source・ログは `data_tile_validation_2026-10-17/low_independent_timing_report_acceptance_v1/` に保存し、manifest `cd9265ca7d2feff655bc57644a5b0062eba02afb9aa88e167fd8cd3832279f75` の15ファイルを再照合した。
+
+旧job265221とWSS監査jobの保存済み終端・投入記録・全16条件の監査artifactを外部hashへ照合し、修正版の実reference_evidenceを通した。
+評価対象12条件の参照区間と監査結果への接続を確認した。
+ここでは監査結果から診断専用bindingを作ったものであり、正式selectorの実行結果や選択済み設定を作っていない。
+WSSの元chunk payload全数は再走査せず、科学的な再計測・本番report.prepare・qsubも行っていない。
+実参照configのSHA-256は `cdb93f3444f0b4b623eaaad9ef5c4d3bfc09fa89c24d48750ea8e5ed46bafe7e` である。
+記録は `data_tile_validation_2026-10-17/low_independent_timing_report_reference_v1/` に保存し、manifest `b18045910c98e30669bbf0b43ca6ea85f0c7f98d56c0928bf267d5524b51fa4c` の9ファイルを再照合した。
+正式selector・census・全計時終端から最終configを組み立てる待機処理、report.prepare・qsub・最終回収への接続は残る。
+
+## 計時実行環境との一致
+
+既存execution readerは保存snapshotのPYTHONPATHと現在の環境変数を厳密に比較する。
+修正版report環境の先頭に追加したdirectoryをPYTHONPATHへ含めると、元の計時環境と一致しない。
+最終集計用の環境ではPYTHONPATHを元の親環境v2と同一に保ち、固定した修正版reportのdirectoryだけを起動時のsys.pathへ明示的に追加する。
+report以外のsource・import origin・Python・native・runtimeは変更しない。
+元bootstrapのimport originと全source検査に加え、元execution.current_runtimeで元計時環境への一致を確認する。
+先に保存した環境JSONは変更せず、新しい環境JSONを別directoryへ保存する。
+
+## 最終configの準備
+
+正式selectorのseal済みdescriptor、元census config、census完了記録、全計時終端state、固定WSS reference configを入力とする。
+計時完了recordが指すstateのbytesと全task終端receiptを照合し、元cohorts組立てを通す。
+censusがno-opの場合は元bridge.read_planと保存済みstateを照合し、no-opのmanifestだけを渡す。
+元report.selector_evidence、report.prepare、入力の前後照合を通してから準備完了を保存する。
+準備処理ではraw payloadを全走査せず、PBS内で行う最終検証の成功を主張しない。
+
+## 最終報告job
+
+最終report.runは専用のfresh rootから1回だけqsubし、既存の共有lockと要求ノード数の直前再照会で最大2ノードを維持する。
+本処理は逐次readerなので1 CPU・32 GB・24時間を上限として要求し、これは実測完了時間の予測ではない。
+元科学設定・replicate・精度gateを変更せず、資源超過や非ゼロ終了時は証拠を残して再設計し、自動で再投入しない。
+script・helper・control・plan・環境・入力のbytesを投入前と計算時に照合し、実PBSのscript・host・run_count・資源へ結び付ける。
+qsub応答が不明なら共有lockと投入intentを保持し、同じ要求を自動再投入しない。
+終端観察は同じjob IDを使い、F0・計算完了記録・JSONと日本語報告のbytesが一致してから外部回収の完了を保存する。
+報告jobの完了は、全条件で精度gateや95%被覆を達成したことを意味しない。
+
+## 環境・準備・jobの受入と接続
+
+reportだけを明示的に読み替える環境の受入はWindows8件・0.58秒、Linux8件・0.02秒で成功した。
+実Linux環境で元wrapperのbootstrap・scienceと元execution.current_runtimeを通し、計時用のPYTHONPATH・Python・sourceを保つことを確認した。
+本番計時manifestはまだ作られていないため、そのmanifestを読んだという確認ではない。
+環境JSONのSHA-256は `33e6fb71702b8ab0ec83d53b497a6371c0fb31fc2de50191064426f0bb44a054` であり、以後の最終集計はこの環境と明示的import_prependを使う。
+証拠は `data_tile_validation_2026-10-17/low_independent_timing_report_environment_v1/` に保存し、manifest `b0f558135f28582ebcbb7f5c1b8dc7ab6207e3a459dad409a23175f84d12527f` の10ファイルを再照合した。
+
+最終config準備の接続テストはWindows10件・1.06秒、Linux10件・0.07秒で成功した。
+正常censusとno-op、state・task数・selector・終端receiptの不一致、元report.prepareが拒否した場合に準備完了を作らない経路を確認した。
+科学境界をmock化した受入であり、本番report.prepareの成功ではない。
+証拠は `data_tile_validation_2026-10-17/low_independent_timing_report_preparation_acceptance_v1/` に保存し、manifest `126647d754953f7af9ff5665c42d8368d342f32d0d89f7e6285a868b31153b9b` の10ファイルを再照合した。
+準備driverはsession41156で全独立計時の終端を待っている。
+
+report jobの接続テストはWindows16件・2.11秒、Linux16件・0.50秒で成功した。
+qsubの1回制限、共有lock、2ノード上限の直前再確認、応答不明時のlock保持、元PBS資源checker、報告bytesの変更拒否、非ゼロ終端と回収pathを確認した。
+報告の数値計算自体はmock化しており、本番raw検証の完了ではない。
+実Linuxでhelperから固定環境のbootstrapを前後に通した。
+証拠は `data_tile_validation_2026-10-17/low_independent_timing_report_job_acceptance_v1/` に保存し、manifest `1699ace27c35b5fdd88384ef2ef6a3229310357f15889d2fc2e92b8a1af4fd0b` を保存した。
+投入・回収driverは準備完了待ちとして起動し、実行handleは状態文書へ記録する。
+最終集計までの待機処理は接続済みだが、本番計時・report.prepare・qsub・最終回収の成功はまだ確認できていない。

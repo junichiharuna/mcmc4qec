@@ -1,0 +1,17 @@
+# C3T0復旧計時readerの実環境準備
+
+313件のWindows・Linux試験を通した別版readerと、C3T0用snapshot validatorを新しいhelpers directoryへ配置する。
+既存のC1T0環境、実行中の科学計算、元readerは変更しない。
+元のPython・venv・依存版・native binary・科学計算sourceを固定し、新processでimport origin・静的依存closure・bootstrapを確認する。
+新snapshot validatorはhelpersから読み込み、元の復旧final helperは既存CONTROLから読む。
+C3T0の新監査configは固定hashとfull root、control hashを照合する。
+まだfull監査が完了していないため、そのauthorityを要求するdependencies呼出しとraw reader実行は行わず、未検証としてreceiptに残す。
+この環境準備はproduction final configの受入や最終reportの読み取り成功を意味しない。
+candidate作成時には、完了した新final config・回収receipt・実PBS終端と対応するsourceを改めて検証する。
+
+下流の別版adapterはC3T0だけを受け取り、復旧kind・新final root・retry8h監査root・C3T0 snapshot validatorを元candidate検証へ渡す。
+算術確認は元のreadiness検証と全67,584行・352設定・192 seedの検証を再利用し、完了・receipt・配布先の参照だけを復旧先へ変更する。
+prepared-inputは固定preparerのcompleted.jsonとhash・内容が一致し、そのconfig hashが回収receiptにも一致することを要求する。
+元の失敗した係の記録と、実行中の新final係は変更しない。
+新待機係は既存finalが失敗したら停止し、成功した回収から算術確認とmetadata candidate作成を一度だけ行う。
+全12条件の親への新environmentの接続は別の確認事項として残す。

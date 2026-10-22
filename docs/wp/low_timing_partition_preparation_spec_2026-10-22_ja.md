@@ -1,0 +1,21 @@
+# 分割worker入力の準備：小仕様
+
+全12条件のmetadata候補から、資源計画・全体manifest・workerごとのpreparedとscriptを作る準備処理を追加する。
+条件数・固定順序・reader・共通reference・実測費用の規則は受入済み資源計画器を使う。
+候補が不足・重複・未完了の場合は準備せず、単一ジョブで収まる場合は新しい入力やdirectoryを作らず既存経路を維持する。
+
+科学的なentryは保持し、isolated readerの実行環境・親scriptと資源・専用directoryだけを新しいworkerへ結び付ける。
+全12条件のmanifestを全workerが共有し、各workerに重複しないrootを割り当てる。
+原候補、候補のhash、共通reference、元環境descriptor、helper source pin、全体manifest hash、prepared hash、script hashを保存する。
+scriptには固定prepared pinを渡すrunner呼出しを一回だけ含める。
+出力先を入力rootやその親に重ねず、既存directoryや途中まで作成済みのdirectoryを再利用しない。
+
+実保存の前に、固定parent環境のbootstrap、全体manifestの検査、共通reference auditの完了、各isolated templateと実費用根拠を確認する。
+実保存の後にもproofを確定し、入力やsourceが変わった場合は完了記録を作らず途中成果物を残す。
+準備処理自身はqsub・sampling・raw trace readerを呼ばず、投入intentや台帳を捏造しない。
+worker入力を作っても、全体の結合と後続censusが未接続なら `execution_ready=False` を維持する。
+
+受入テストでは全12条件の人工metadataから3workerを作り、全入力・設定の保持、親資源と割当、全体manifest・prepared・scriptのhash関係を確認する。
+条件不足、順序違い、reference違い、環境不足、出力重複、helper pin不一致、事前検査の失敗、保存後の入力変更を拒否する。
+単一ジョブで収まる場合に新規成果物を作らないことを確認する。
+実metadata全12件による準備、クラスタ投入、結合ジョブ、後続census接続は未完了として区別する。

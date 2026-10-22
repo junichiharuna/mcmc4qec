@@ -1,0 +1,32 @@
+# 独立計時capacityの実測から本計算へ
+
+## 契約
+
+固定manifestとqsub receiptに結び付いた同じjob IDの終端記録を保存する。
+capacityがF0で完了した場合だけ、元summaryとsubmissionのbyte pinを使って既存accepted_capacityを呼ぶ。
+受理の範囲はcomputeが保存した検証証拠と現在metadataの照合であり、この段階でraw payloadを再監査したとは記録しない。
+本計算開始時の再監査は元runnerのrevalidate_capacityで行う。
+本計算の資源・分割は既存resource_planの結果を使い、replicate0〜191の重複や欠落を拒否する。
+resource_planがready以外の場合は本計算を準備せず、192 replicateを未実行として記録する。
+capacityが非ゼロ終了した場合は、保存したPBS終端と消費資源を残して本計算を準備しない。
+非ゼロ終了をtimeout・OOMと決め付けず、full payloadの検証や科学的な不可能性を主張しない。
+本計算の分割ごとのprepare・read_plan・bundle_bindingが成功した場合だけ対応するmanifestを返す。
+準備途中の失敗では既存directoryを再利用せず、部分成果物を保持する。
+この処理自体はqsubを実行しない。
+
+## 受入範囲
+
+異なるjob・identity・manifest・task数、非終端PBS、分割の重複や欠落を拒否する。
+非ゼロ終端と資源計画不能ではmainを1件も準備せず、未実行192件を保持する。
+capacityの2件を本計算192件へ含めない。
+元accepted_capacity・resource_plan・prepareの境界をmockにした接続テストと、本番実測の検証を区別する。
+
+## 受入結果
+
+Windows12件・0.78秒、Linux12件・0.11秒で接続テストが成功した。
+F0から2分割でreplicate0〜191を準備する経路、非ゼロ終了、資源計画不能、分割の重複・欠落と入力変更の拒否を確認した。
+PBS・native・科学payloadに関する既存runnerの境界はmock化した受入であり、実capacityの受理や本計算の準備ではない。
+sourceと実行ログは `data_tile_validation_2026-10-17/low_independent_capacity_result_acceptance_v1/` に保存した。
+manifestのSHA-256は `4fce19badd41314a3981776d313dae968681223db3e56ff6a44dd4238500c286` で、保存した9ファイルを再照合した。
+helper sourceのSHA-256は `15aebb3f88d914fb8c548738bc09a990dd6707980ce38354af37e89dc2b6ae25` である。
+capacity・mainの投入監視driverへの接続と本番計測はまだ未実施である。

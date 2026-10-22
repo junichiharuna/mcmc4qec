@@ -1,0 +1,12 @@
+# C3T1/C3T2の8時間監査に対応する計時reader
+
+既存readerはplanned条件の回収を4時間版に固定し、旧snapshot sourceと旧最終wrapperだけを受理するため、新しいC3T1/C3T2の最終結果をそのまま読めない。
+case 3・target 1/2・plannedの組に限定して、受入済み8時間版のsnapshot sourceと最終wrapper、初回collectorのbudget8h ledger・8時間要求を照合する。
+他条件の4時間版とC3T0のretry8h経路、失敗した旧collectorの履歴検証は保持する。
+初回planned経路にrecovery_guardやprior_job_idを付けて受理しない。
+source hashの自己申告だけで任意のsnapshotやwrapperを受理しない。
+
+元の全192 seed・全行の算術再確認、WSS reference、実PBS終端、archive provider、source/inputの再照合、未定義と未収束を含む分母、選択規則と計時資源計算を維持する。
+meta情報だけのreaderと、生trace・reference・native authorityを読む子readerの役割を区別する。
+新rootへの少量のテストfixture配置と実venv bootstrapをクラスタで実行し、実本計算の完走や被覆・精度の保証とは扱わない。
+実行中の既存readerや環境は変更せず、新しい環境を後続のcandidateと全12条件の親処理へ明示的に接続する。

@@ -1,0 +1,25 @@
+# C1T0の全回収から最終入力転送への引継ぎ
+
+DGXのbatch0〜31、Laboのbatch0〜5の全38 batchと、両hostのserial driver正常完了を待つ。
+前段の異常終了記録や部分的な終端を完了と扱わない。
+全batchの保存物が揃ったら、既存の元source binding付きindex builderを未使用version 5で一度だけ実行する。
+indexは元input archive・output archive・保存値の独立検査であり、decoder・BAR・bootstrapの再実行は行わない。
+群失敗・診断未定義・区間未取得を保持した768群・67,584予定行を要求し、未回収群を除いて完成扱いしない。
+完成indexとregistry、既に照合した両hostの共有保存物・native referenceを外部hashで固定し、既存distribution builderへ渡す。
+新しいcontext・transfer planを、既存の転送wrapperでクラスタworkspace直下の未使用directoryへ転送する。
+各処理のintent・log・正常完了を保存し、失敗や応答不明時に同じ処理を自動再実行しない。
+処理の終端は最終入力の転送完了までであり、元環境full監査との結合、最終config・qsub・科学reportの受理は別段階とする。
+稼働時に固定するsourceは検査・転送で使う実装であり、過去受入に保存されたtest harnessはarchiveの記録として保持する。
+test harnessの後日の更新だけを実装変更とは判定せず、実装sourceのhash照合は維持する。
+
+## 受入と起動
+
+初回のWindows/Linux各10件の受入後、実入力の初期化で過去のintegration test harnessと現行fileのhash差を検出し、処理予約前に停止した。
+元index・検査・転送の実装sourceに差はなく、停止記録を[保存](data_tile_validation_2026-10-17/c1t0_collection_finalize_initial_refusal_v1.json)した。
+test harnessを実装の固定対象から除く受入を先に追加し、その失敗を確認してからsource選択を修正した。
+過去の試験sourceは元archiveに保持し、元index・検査・転送実装のhash照合は維持した。
+修正後はWindows11件・Linux11件で成功し、[sourceとログ](data_tile_validation_2026-10-17/c1t0_collection_finalize_acceptance_v2/manifest.json)を保存した。
+実開始入力を照合し、local PID40448で待機処理を起動した。
+23:09 JSTの観測ではDGX・Laboともserial driverは未完了で、新しいindex・context・転送は未実施である。
+転送先directoryは起動前のread-only確認で存在しないことを確認したが、実転送時にも既存wrapperが未使用directoryを要求する。
+使用source・旧受入・初回停止・修正後受入・実開始intent・待機観測とPBS状態を[194ファイルのmanifest](data_tile_validation_2026-10-17/c1t0_collection_finalize_started_v1/manifest.json)へ保存した。

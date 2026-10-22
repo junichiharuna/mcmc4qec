@@ -1,0 +1,28 @@
+# C3T0 DGX先行入力準備の逐次待受
+
+目的は、受入済みの単発先行準備を、元serialの数値解析中に一つずつ実行し、入力準備による待ち時間を減らすことである。
+元serial、export helper、verifier、assignment、科学的設定、qsubの規則は変更しない。
+対象は未着手のDGX batch29から9までの降順とし、元serialの最新着手batchとの差が3未満になった時点で正常に停止する。
+既存batch30の正常終了と独立照合を確認した後だけ起動する。
+
+## 契約
+
+新しい待受は別directoryへ一度だけ起動し、再開・自動再試行は行わない。
+各反復で受入済みhelperとverifier、固定serial sourceとassignmentのhashを検査する。
+元serialの実PID49444とcommandを確認し、起動記録だけを稼働証拠としない。
+入力準備・転送・回収中は待ち、数値解析の実PIDが生存してcompletionがない場合だけ単発helperを呼ぶ。
+単発helper自身も距離・未着手・実PID・固定入力を再検査する。
+その間に状態が変わってhelperが拒否した場合は停止し、例外を再試行へ変換しない。
+
+helperが正常終了した後に既存verifierでarchive全memberと固定metadataを照合し、その証拠hashを保存してから次のbatchへ進む。
+直前の独立照合記録とそのsource hashが変更されていた場合、未完了の先行準備があった場合、元serialのerrorや不明なprocess消失があった場合は停止する。
+同時に先行準備するbatchは一つだけで、数値workerは起動しない。
+起動済みhelperはtimeoutで打ち切らず、実終了を待つ。
+全てのinput準備完了と、元serialへの距離条件による停止を区別して記録する。
+入力準備の完了を数値解析・条件全体の完了として数えない。
+
+## 受入
+
+距離境界、serial終端・error、数値解析待ち、生存PIDとcompletionの判定、失敗後に後続を起動しないこと、verifier完了後だけ次へ進むことを隔離した試験で確認する。
+起動前にbatch30の独立照合と元serial・DGXの実稼働を確認する。
+本番serialでの実再利用、全体の時間短縮量、BARの精度や被覆はこの受入の対象外である。

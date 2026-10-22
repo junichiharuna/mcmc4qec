@@ -1,0 +1,23 @@
+# C3T0 DGXの未着手batch入力を先に準備する小仕様
+
+既存serialはexportとprepositionについて、完全な受入recordが既にあればそのhashを固定して再利用する。
+この既存経路を使い、解析中のbatchから十分離れた未着手batchの入力exportを先行する。
+数値計算のhost、固定割当、task、seed、元trace、decoder、BAR設定、出力先は変更しない。
+実行中のserial、cohort、後続controllerとそのsourceは変更・停止しない。
+
+対象はC3T0・DGXの9〜32に限定し、現在のserialが着手した最大batchより3以上先だけを許可する。
+既存の未完了または失敗したprefetchがある間は次を開始しない。
+対象に既存のexport directory、archive、serial操作recordがあれば上書きや再実行を拒否する。
+原serialの実PIDとcommand、source hash、元assignmentとgenerator registry、現在のbatchのlaunch intentを確認する。
+これらの確認は所要時間の下限を証明するものではないため、先行exportが終わるまで元serialの進行を観察する。
+同じbatchへの曖昧な操作が見つかった場合は追加操作を止め、既存の記録と実processを確認する。
+
+既存の受入済みexport helperをそのまま呼び、元の全member・source・metadata・assignment・生成job正常終端の照合を維持する。
+準備完了時にはaccepted recordと入力archiveのhash、固定割当、helper正常終了を確認して別のprefetch記録を保存する。
+この処理は入力archiveの準備であり、新しい数値workerやqsub jobを起動しない。
+クラスタの数値計算は引き続きqsub・最大2要求nodeを維持する。
+
+小さい受入で対象範囲・進行中batchとの距離・既存操作の拒否を確認する。
+既存serialの実step実装が完成済みexportを再実行せずに再利用することを、隔離したrecordで検証する。
+実データでの初回は末尾batch32だけを先行し、完了結果を検証してから次の先行準備を判断する。
+元serialによる実際の再利用が起きるまでは、実運用での時間短縮とend-to-endの受入を完了と記載しない。

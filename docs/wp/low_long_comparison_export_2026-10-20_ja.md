@@ -1,0 +1,25 @@
+# 低ノイズ5条件比較の再現用補足ZIP
+
+完了済み5条件の記述的比較を、別ディレクトリへ展開して再現できる補足ZIPを作成した。
+[補足ZIP](data_tile_validation_2026-10-17/low_long_comparison_export_v1/mcmc4qec_low_noise_comparison_20261020_v1.zip)は404,280 byte、38ファイルである。
+SHA-256は `0c1c66e21a8ff343baa82b9a3e858380b515e30010245377dacd4419396ca6ba` である。
+
+元の5レビュー、対応する各352設定と長い16設定のCSV、全80設定の比較表、日本語報告、PNG・PDF・SVG、実行sourceとファイルmanifestを含む。
+Python標準libraryだけで保存レビューの比較表を再現でき、図の再描画にはMatplotlibを用いる。
+展開先の `README_ja.md` に、ネットワーク接続を必要としない再現コマンドを記載した。
+
+ZIPを作成後、元の入力directoryと異なる場所に展開し、同梱sourceを使って実行した。
+2つのCSVは元の保存物とSHA-256が一致し、再描画した全80点も元の描画記録と一致した。
+本文のローカルリンク11件が展開したZIP内で解決することを確認した。
+元実行の絶対pathを保持するprovenanceは配置先によって変わるため、再実行後のprovenance JSON全体のbyte一致は要求しない。
+図のformat metadataやfontの差もあるため、PDFなどのbyte一致を数値一致の条件にしない。
+
+この補足は保存レビューの記述的比較を再現する範囲である。
+raw trace、全seedのBAR推定row、native decoder環境は同梱しておらず、sampling・BAR推定・WSSラベルの再検証を行うbundleではない。
+残る7条件と低ノイズ独立計時は含まず、全12条件の完了・精度・混合・名目被覆を保証しない。
+bit-flipの16 chain・保存60,000とdepolarizingの8 chain・保存12,000の違いを明示している。
+
+検証済みのmcmc4qec本体の公開候補とは別の補足資料として保存し、公開候補の配布物は変更していない。
+GitHubへの添付・公開は未実施である。
+[検証receipt](data_tile_validation_2026-10-17/low_long_comparison_export_v1/supplement-verification.json)と[保存manifest](data_tile_validation_2026-10-17/low_long_comparison_export_v1/manifest.json)に、再現・描画点・リンク・artifact hashの確認結果を保存した。
+保存manifestのSHA-256は `3232c4a1cd3637f2abb29e3170d0ab591805ff371d2fe966b057cb0bf4aa83c9` である。

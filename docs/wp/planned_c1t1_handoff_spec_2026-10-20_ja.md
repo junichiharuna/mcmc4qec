@@ -1,0 +1,34 @@
+# C1T1生成から初回collector・監査への引継ぎ
+
+## 小仕様
+
+対象は実行済みanchor265357、sampling前半265358、実行中後半265361を持つC1T1のみとする。
+固定した投入receiptのhash・condition・job ID・script・資源を確認し、実qstatがF・Exit_status 0・run_count 1になるまで同じjobを観測する。
+観測失敗を終了や再投入の根拠としない。
+先行するC1T0復旧full監査の受理記録と実PBS正常終端を確認してから、新しいcollectorを投入する。
+初回4時間collectorのpreflight、qsub、正常終端、complete、capacity/full監査のplan・preflight・qsub・completeを一度ずつ実行する。
+各投入直前に実要求ノード数を再観測し、既存schedulerの共有lockと最大2ノード検査を維持する。
+外部pin付きの既存collector/audit configと固定済みworkerを呼び出し、稼働中のhelperや公開候補は変更しない。
+変更操作のintentを排他的に保存し、失敗・応答不明・既存出力では自動再実行しない。
+成功時も監査受理までであり、PC parity・全群回収・最終BAR集計の完了とは扱わない。
+
+## 受入計画
+
+実qsubと科学計算を置換したfixtureで段階順序、先行監査待ち、実ノード数、元jobの異常終端、collector/監査の結果不一致と途中停止を検査する。
+共通の一度限り実行・PBS終端検査を検証済みhelperからhash確認後に読み込む。
+本番起動前に固定したlocal receipt/config/controlと実native configのbootstrapを確認する。
+本番起動後は実プロセスと対象PBS jobの観測を保存し、監視起動をcollector投入や監査完了と扱わない。
+
+## 実装・起動
+
+既存の一度限り実行・PBS終端判定をhash固定して再利用し、C1T1専用driverを別directoryへ追加した。
+受入はWindows25 passed・1.08秒で、段階順序、先行監査の実PBS終端、2ノード待ち、結果不一致、応答不明の再実行拒否を検証した。
+本番のread-only readinessで固定local source/receipt、collector/audit configと元bundleを含む197ファイルをbootstrapで照合した。
+実qstatはanchor265357と前半265358が正常終了、後半265361はRであり、本番collector preflightやqsubは行っていない。
+
+21:29 JSTまでにlocal PID13508でdriverを起動し、後半265361のRを観測して待機している。
+source SHA-256は `d2c1e4a577780c5c2b02b265b51ced13be4792841c3d83656d7729b794aef4d9` であり、起動後は変更しない。
+このdriverがC1T1のcollector・capacity/full監査を担当するため、同じ操作を手動で重複実行しない。
+C1T0復旧full監査は既存driver、C0T2最終集計のcompleteと回収も既存driverが引き続き担当する。
+監視中の生成・先行監査・collector/auditのいずれかが失敗した場合は証跡を保存して停止し、既存intentを消して再投入しない。
+実source・ログ・readiness・起動と実観測を [保存manifest](data_tile_validation_2026-10-17/planned_c1t1_handoff_progress_20261020_v1/manifest.json) に保存する。

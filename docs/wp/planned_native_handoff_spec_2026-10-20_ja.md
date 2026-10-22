@@ -1,0 +1,18 @@
+# 次条件のnative reference自動引継ぎ
+
+固定済みnative referenceのconfigと、外部pin付き実generator registryを入力とする。
+anchor 0・sample 0/1の実PBS正常終端を待ち、実script・資源・ownerを照合する。
+既存native reference controllerのpreflight後、所有jobの要求ノード数をQを含めて確認する。
+2ノード未満の場合だけ既存controllerのsubmitを呼び、共有lock下での再確認とqsubを維持する。
+submitが厳密に `qsub_executed=false, status=capacity_unavailable` を返した場合だけ、未投入の証跡を保存して再び空きを待つ。
+SSH応答不明、lock競合の例外、異常応答、実投入後の失敗は自動再試行しない。
+実qsub応答を独立JSONとして保存し、当該jobの正常終端後に固定済みreference collectorを一度だけ実行する。
+正常な観測失敗・timeoutはjob終了と扱わず、同じjob IDの読取を継続する。
+この引継ぎはnative referenceまでを担当し、PC起動と科学的な全cohort受理は別段階とする。
+
+Windows20件・Linux20件の受入とCLI起動確認を通過し、[検証sourceとログ](data_tile_validation_2026-10-17/planned_native_handoff_acceptance_v1/manifest.json)を保存した。
+未投入応答のbooleanと数値0を区別する追加試験の失敗を確認してから、型判定を修正した。
+実C1T1の37 source・input bindingと元reference controllerのread-only preflightを確認した。
+元referenceの投入記録がまだ存在しないこと、generator3件の実script・資源・ownerと状態F/F/Rを確認し、[事前確認記録](data_tile_validation_2026-10-17/planned_native_c1t1_readiness_v1.json)へ保存した。
+local PID46972で待機処理を起動し、job265361のRを観測している。
+この時点では新referenceのqsubと数値計算は未実施である。

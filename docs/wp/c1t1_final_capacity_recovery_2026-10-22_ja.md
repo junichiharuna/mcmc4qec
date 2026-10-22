@@ -1,0 +1,39 @@
+# C1T1最終集計の投入競合からの復旧仕様
+
+2026-10-21 23:54 JSTの最終集計driverは、共有lock取得後の最初のcapacity検査で停止した。
+remoteの旧rootにはconfig・report.sh・submission-error.jsonのみがあり、errorは `queued/running node budget exceeded`・`response_uncertain=false` だった。
+固定backendではこの検査はsubmission-intent作成とqsub呼出しより前にある。
+旧rootと旧driverの全証拠を保存し、同一configを別の新rootにprepareする。
+科学的設定・reader・入力・収集先・要求資源は変更せず、出力rootを含むPBS scriptだけを再生成する。
+
+復旧版は固定backendのsubmit関数だけを別namespaceで派生する。
+capacity超過を専用例外にし、submission-intentその他の実行記録が一つもない場合だけ未投入として待機へ戻す。
+共有lock競合も、そのlockの排他的作成失敗と実行記録なしを確認できた場合だけ待機へ戻す。
+intent作成後の容量超過、未知の例外、qsubの応答不明は停止し、自動再試行しない。
+Qを含む最大2要求ノード・共有lock・qsub・終了状態F/exit 0/run_count 1の検査を保つ。
+既存の稼働controllerと固定sourceは変更しない。
+
+受入試験は、容量競合時のqsub未呼出し、正常時の一回だけのqsub、intent後の拒否、曖昧な応答でのlock保持、lock競合、未知の例外、旧証拠の不変性、configと新rootの対応を検証する。
+ローカルの新driverは別の履歴ディレクトリを使い、元のcollectorによる同じ収集先の検証を行う。
+正常回収後に限り、元のerrorをhash付きの履歴名へ移し、元のcompletion待受先へ復旧の出典付き完了記録を置く。
+旧監視処理がC1T1をfailedとして固定したことを確認し、その条件だけの算術再集計と計時候補作成を別の復旧手順で接続する。
+正常な計算終了や回収は名目被覆・収束・推奨設定の保証を意味しない。
+
+## 出力rootを固定した後続処理への追加接続
+
+起動後の確認で、既存candidate helperの `binding` が旧final rootを固定していることが分かった。
+復旧版v1の最終集計・回収は継続できるが、その後の元candidate helperを使う算術検証と候補作成はroot不一致で拒否される。
+稼働中のsourceは変更せず、その後続失敗記録も保存する。
+別の接続ではC1T1だけについて旧rootと新rootの対応、および同一config hashを固定し、元のcandidate validatorの他の検査を保つ。
+元driverの実PID終了と保存された失敗がroot不一致によることを確認してから、算術再集計を別ディレクトリへ実行し、未作成の計時candidateを元の待受先に作成する。
+別条件への適用、旧rootを使うreceipt、config変更、別原因の失敗は受け入れない。
+
+## 追加の投入前検査失敗
+
+復旧版v1は新rootのprepareとpreflightを完了したが、最初の投入gateで既存 `controllers_absent` の `shlex.split(ps表示文字列)` が `No closing quotation` を送出した。
+新rootにもconfig・report.sh・response_uncertain=falseのsubmission-errorのみがあり、投入intent・qsub応答はないことを確認した。
+プロセスの表示文字列はshell入力とは限らないため、復旧版v2は同一UIDの `/proc/<pid>/cmdline` をNUL区切りの実argvとして読み、既存tile_coordinatorのrunを検出する。
+PID消失だけは終了競合として扱い、権限エラー等の未知の観察失敗は無視しない。
+新rootのhash固定された3ファイルとPBS履歴を共有lockの下で確認して、当該errorだけを履歴名に移す。
+configとscriptのbyteは変更せず、旧rootも変更しない。
+復旧版v1はqsub前に終了したため後続の算術・candidate操作も未着手であり、v2では最初から新rootを明示する追加接続を使う。

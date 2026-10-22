@@ -1,0 +1,17 @@
+# C3T0の8時間復旧回収と監査の引継ぎ
+
+旧265419はF・exit -29・run_count 1で終了し、その失敗記録と旧成果物は保持する。
+新265421のconfig `77f05d6d940cb9a602a40e9db60e29f4732d5c4640516e5ba10894d936fbd659` と、監査config `81beb3383044076259fb9a4831330edfd49fd1885e8a6e3c0fdd1a20853cd83c` を固定して別のlocal driverを起動する。
+旧driverの成功記録の作成・置換は行わない。
+
+新driverは265421の実qstat、正しいscript・1 CPU・32 GB・8時間要求、F・exit 0・run_count 1を確認してからcollectorのcomplete処理を行う。
+不明な観測は同じjobを再照会し、失敗終端は停止して記録し、自動再投入は行わない。
+その後capacityのplan・preflight・qsub・実成功終端・completeを経て、full監査に同じ順序で進む。
+旧C0T2優先待ちは完了済みの過去条件なので新driverの依存にはせず、各投入前に現在の所有jobとcontrollerを確認する。
+最終投入処理の共有lockと待機中jobを含む最大2ノードの検査を維持する。
+監査の全remote commandで既定の単一thread環境とPYTHONHASHSEED=0を明示し、実行中sourceのhash変更を拒否する。
+このdriverの完了は全trace監査の完了であり、BAR集計・独立算術確認・次条件の生成引継ぎ・科学的校正の完了ではない。
+
+受入では固定job・config・root・資源の不一致、旧失敗記録の欠落または旧成功の混在を拒否する。
+既存の観測再試行と一回限りの操作記録を再利用し、曖昧な投入応答の再実行禁止、capacity失敗時のfull未実行を確認する。
+slot待ちでは2ノード使用中・controller生存・観測不明を通過せず、1ノード使用中のみ通過できることを確認する。

@@ -1,0 +1,82 @@
+# C3T0先行入力準備の逐次待受：実行結果
+
+[小仕様](c3t0_prefetch_queue_spec_2026-10-22_ja.md)に従い、受入済み単発helperとverifierを一つずつ呼ぶ別controllerを追加した。
+距離・元serialの状態・数値PID・sourceと照合記録の変更検出、子processの実成功と実失敗、二重起動拒否、prepare後にverifyする順序を20テストで確認した。
+保存したsourceからのテストも20件成功し、実測0.148秒だった。
+[受入記録](data_tile_validation_2026-10-17/c3t0_prefetch_queue_acceptance_v1/accepted.json)のSHA256は `dbaf70d5f1261e7bb1856089ea4e23798cec1f169c1e4c716b31d9986c01be1d` である。
+稼働sourceは `output/c3t0_prefetch_queue_v1/driver.py`、SHA256は `164978184a03ef88d825cca99ba1156d5805b8ecd89b67ce5c8ba529493ed03f` である。
+sourceと試験logは同じ受入directoryへ保存した。
+
+## 起動前の確認
+
+前回batch30のwrapper43352とhelper43408は終了し、正常completionを確認した。
+全20群・4,977 memberを既存verifierで独立照合した。
+[照合記録](data_tile_validation_2026-10-17/c3t0_dgx_export_prefetch_v1/batch30/independent-verification.json)のSHA256は `1192f6d6b5dfbcd4242a6c99798d5a2fbd443b3320367097a37d63981a9671dc` で、入力準備の実経過時間は284.188秒である。
+DGX batch12の実PID486842が生存し、completionが未作成であることも確認した。
+
+## 実起動
+
+14:40 JSTに新controllerを実PID6992で起動し、最初のbatch29の単発wrapper25440とexport helper22252の実commandと親子関係を確認した。
+[起動台帳](data_tile_validation_2026-10-17/c3t0_prefetch_queue_launch_v1/)と[実行台帳](data_tile_validation_2026-10-17/c3t0_prefetch_queue_v1/)にintent・handle・stdout・stderr・観察を保存する。
+起動時点ではbatch29が準備中であり、準備完了・独立照合・次batchへの移行は未確認だった。
+未着手batch29から降順に進め、元serialの最新着手batchとの差が3未満になった時点で停止する。
+失敗後の自動再試行は行わない。
+
+## 最初の自動移行の確認
+
+14:45 JSTにbatch29のwrapper25440・helper22252の終了と、prepare・verifyの正常終了を確認した。
+20群・全4,977 memberの照合記録とsource hashを確認し、準備終了、verifier開始、verifier終了、次batch開始の時刻がこの順に並ぶことを検査した。
+照合記録のSHA256は `b3283819af7a17130805f93ed0ca8aa3c5eff2911a79cdcf72749a93f1ba5b3e`、入力準備の実経過時間は284.839秒である。
+controller6992が継続し、次batch28のwrapper21772とhelper34064の実commandと親子関係を確認した。
+[移行観察](data_tile_validation_2026-10-17/c3t0_prefetch_queue_first_transition_20261022_v1.json)のSHA256は `519eeb9766566977d6940f773a6f51d293276fa8a38fbd1b6d1eb4425777f8c1` である。
+これは新controllerによる入力準備・照合・次入力への実移行を確認したもので、本番serialがその入力を数値解析に再利用したことの証拠ではない。
+
+14:50 JSTにはbatch28も20群・全4,977 memberの照合を完了した。
+照合記録SHA256は `4fbd971c993718c74a097666ebc4594c8132ac3213678157b63d4086f0ce67bb`、準備の実経過時間は292.666秒である。
+元serialがbatch13のexport中のため、controller6992は次batch27を起動せず待機している。
+controllerと元serial49444、export helper21244の実稼働と、待機理由・未着手を確認した。
+[待機観察](data_tile_validation_2026-10-17/c3t0_prefetch_queue_wait_observation_20261022_v1.json)のSHA256は `82c54ccfe32660e88012f15d44982b470a9f7dc631840b05fe698e95e2f1c559` である。
+
+14:55 JSTにDGX batch13の実PID497289とconfig `50135293abca2bed153b5078269072a5bb87d4bd20aa9335d08b07ddfa05bd7b` の稼働を確認した。
+controllerの観察もwaitからreadyへ変わり、batch27のwrapper46732とhelper44920の実稼働を確認した。
+入力準備・転送中は待ち、数値解析の実起動後に先行準備を再開する経路を確認できた。
+この経路は同一controllerの継続であり、失敗した処理の再試行や元serialの再起動ではない。
+
+元serialと全ての科学的設定・割当・seedは変更していない。
+数値workerやqsubジョブは追加しておらず、入力準備と照合のcontrollerだけを追加した。
+本番serialによる入力の実再利用、全体時間の短縮量、BARの精度や被覆は未確認である。
+低ノイズの正式完了8/12条件とC3T0の解析結果回収数は、この入力準備処理では増えない。
+## 15:50 JSTの正常終了に関する追記
+
+queueはbatch29から18までの12本・240群の入力を準備し、各prepare・verifyがexit 0で終了した。
+元serialがbatch15を実行中のため、次batch17は先行距離3以上という条件を満たさず、reason=distanceで正常終了した。
+completed.jsonのremainingはこのqueueが先行準備しなかった番号の一覧であり、科学計算の未完了群数ではない。
+queue PID6992と最後のprepare・verifyのPIDが存在せず、元serial PID49444が元commandで稼働していることを実照会で確認した。
+12件の独立検証記録とsource/input hash、prepare終了からverify開始への順序、全stageの正常終了を照合した。
+この追加観察でarchive内容を再hashしたわけではなく、各verifyが保存した全member検査の記録を確認した。
+先に準備したbatch30〜32と合わせて後半15本・288群の入力準備が済んだが、科学的な完了数は増えていない。
+本番serialでの再利用と実時間短縮はまだ観察していない。
+[終端観察](data_tile_validation_2026-10-17/c3t0_prefetch_queue_terminal_observation_20261022_v1.json)のSHA256は `fc3b3786fab14f8376fdd19c7a042da16753269e74cae7a54a41c2f9565885ed` である。
+
+## 16:43 JST：最初の本番再利用を確認
+
+batch18のexport-reused記録が、先行prepareのprepared_input pathとhashに一致した。
+固定された独立検証記録、source/input hash、archive全体のhashを再照合し、元serialがこのbatchのexportを再実行した記録がないことを確認した。
+実DGX数値processが稼働しており、先行入力の準備だけでなく本番での再利用を確認した。
+[観察と照合source](data_tile_validation_2026-10-17/c3t0_prefetch_first_actual_reuse_20261022_v1.json)を保存し、観察SHA256は `2e30d1da121310313432ee7c1e3ef51e772ad6938a7e97b16652e2773f30dd89` である。
+同名 `.py` は実行したsourceの保存写しで、再観察時はrepositoryの `output/observe_c3t0_prefetch_reuse_v1.py` に置いて未使用の `--output` を指定する。
+未開始時の実行ではready=falseを返し、結果ファイルを作成しないことも確認した。
+今回の観察では全memberを再hashせず、先行verifyの記録を引き継ぐ。
+条件全体の実時間短縮量、sampling速度、精度、名目被覆を追加評価したものではない。
+
+## 最初の再利用時の工程間時間
+
+既存serialの前batch collect完了時刻と次batch launch-intent時刻を比較した。
+通常exportを挟んだbatch13〜17への移行は順に290.035秒、306.118秒、295.485秒、302.679秒、314.403秒だった。
+先行入力を再利用したbatch18への移行は11.486秒だった。
+各batchは20群だが入力群と実行時の負荷を揃えた比較ではなく、起動指示までの制御時間である。
+先行prepare自体の時間と資源をこの11.486秒に含めていないため、総作業量の削減や数値計算の高速化を意味しない。
+追加samplingは行わず、元時刻・完了artifactのhash・再利用記録を[工程間時間の観察](data_tile_validation_2026-10-17/c3t0_prefetch_first_handoff_elapsed_20261022_v1.json)に保存した。
+そのSHA256は `0df35adc1111ce65362fbdf71479ff8f3649135d4d74128a9bf2b9201c490307` である。
+全batchの所要時間や、直接MCと同じ精度に達するまでの計算効率の比較とは区別する。
+

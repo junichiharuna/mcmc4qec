@@ -1,0 +1,16 @@
+# C3T0の8時間復旧監査から最終集計への接続
+
+旧planned final準備・実行係の失敗記録を保持し、別config・job rootで最終集計を準備する。
+実績のあるC1T0復旧final reader・qsub adapter・collection adapterを再利用し、科学計算・192 seed・768群・67,584行・誤差法を変更しない。
+既存preparerの隔離moduleで、C3T0のsampling root・full監査root・監査config・portable転送先・出力先・条件識別・native terminal hashを固定する。
+対象はcase 3・target 0・production manifest `9d98b18eab4fd26afb9976a449754c4ff6da2d2ffbfc703e261601ad845b8c4e` に固定する。
+監査configの固定hashは `81beb3383044076259fb9a4831330edfd49fd1885e8a6e3c0fdd1a20853cd83c` とする。
+native referenceの終端hashは `17a34ba8cd1382fc4d2f4f1ef91864d236e10ef9ee12e47ac36454e465f66089` とする。
+先行条件の出力をこの条件の結果として扱わない。
+
+38 batchの全転送とnative reference、新full監査の実成功終端が揃うまでは最終configを作成しない。
+復旧authorityが旧時間切れ記録と新collectorの実成功を確認し、source・入力metadata・PBS script・worker・terminalの不一致を拒否する。
+本準備は12時間・1 CPU・32 GBの上限でpreflightまで行い、qsubしない。
+12時間は既存の資源上限であり、終了時刻の予測ではない。
+WindowsとLinuxの合成flow試験、実native環境でのsource/config bootstrap、未完成入力の非実行を区別して記録する。
+その後、実入力が揃うのを待つlocal waiterを起動し、実qsubと成果物回収への接続は別途行う。

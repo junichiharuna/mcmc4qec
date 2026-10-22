@@ -1,0 +1,16 @@
+# 全12条件の計時親への復旧経路接続
+
+全12条件の親metadata readerを、C3T0復旧を受け入れる検証済み別版へ更新した新環境を作る。
+元の数値source・runtime、親wrapperのsource closure照合、既存staged 3条件の互換性を維持する。
+候補ごとのenvironmentはcandidate内の固定descriptorから読む既存の契約を維持し、C3T0には新復旧環境を使う。
+全12条件が揃うまでprepareしないこと、条件順・reference共有・二重計上拒否・24時間と340 GBの上限は変更しない。
+原則として既存の未投入job root・出力先を使い、後続の既存qsub係と契約を保つ。
+稼働中の旧準備waiterはsourceを変更せず、新版の試験と実環境確認後に、実PID・command・pending・投入記録不在を照合した上で引き継ぐ。
+旧waiterの履歴は保存し、実行中の科学計算やqsub済みジョブは停止しない。
+この準備は全12条件のmetadata受入、raw readerの完走、計時完了を意味しない。
+
+親準備とcensus準備の未投入waiterを交代する際は、既存のcanonical出力directoryを維持する。
+既存のintentとobservationsは変更せず、旧PIDのcommand・開始時刻・pending状態・投入記録不在を確認して停止した後に、旧ファイルと新版sourceのhashを固定したhandover-ready.jsonを追加する。
+新版はこの証跡と旧ファイルの不変性を検証し、排他的なhandover-claim.jsonを取得した場合だけ起動する。
+新版のintentとobservationsには別名を用い、後続係が参照するaccepted・completed・errorの名前は維持する。
+同時起動、source差し替え、旧履歴の変更、未想定の出力があれば引継ぎを拒否する。

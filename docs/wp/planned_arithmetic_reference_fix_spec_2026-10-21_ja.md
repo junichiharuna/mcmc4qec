@@ -1,0 +1,51 @@
+# 独立算術readerのreference archive接続修正
+
+C1T0の実reference archiveを用いた事前接続確認で、v1 readerのhash対象の取り違えを検出した。
+context.reference.manifest_sha256はexport.jsonのbyte hashであり、inputs/manifest.jsonのbyte hashではない。
+実export.jsonのhashはfd8305e6c9353eec7e7e9973217ba0e1dbc0c7d308a7a25e7731019bd7b80903、sampling manifestのhashは685db122c0b38bc7244affd07cc04203d9721e993c7b51fce7ca76b8e65a3415である。
+後者はclusterの元sampling manifestとも一致し、保存書式の変更やデータ破損が原因ではない。
+
+## 修正契約
+
+凍結済みv1 reader・待機source・旧受入記録は保持し、別のv2 directoryで修正する。
+archive自体の外部hashと一意なmember名を検査した後、export.jsonをcontext.reference.manifest_sha256へ照合する。
+inputs/manifest.jsonのbyte hashはexport.input_sha256の対応する値と、最終reportの元sampling manifestのevidenceへ照合する。
+exportのorigin_rootとproduction_manifestをcontextのconditionへ照合し、plan内容のcanonical digestも従来どおり確認する。
+重複member・member一覧の不足や余分・export改変・sampling manifest改変・元reportとのhash不一致・originやproduction digestの違いを拒否する。
+全768群・67,584行・352設定・192 seedの分母、欠落や未収束の扱い、算術式と許容差は変更しない。
+旧待機処理がまだ全条件pendingで子レビュー未起動であることを確認して停止し、受入成功後に別の待機出力先で再接続する。
+本番sampling・BAR・最終検証job・元の回収経路は変更しない。
+
+## 受入
+
+実producerと同じexport.jsonを持つfixtureに旧試験を修正し、v1 readerで失敗することを先に確認する。
+修正後に全保存行の合成試験と、上記の拒否条件の小規模試験を実行する。
+C1T0のDGX・Laboそれぞれ先頭と末尾のbatchから先頭と末尾のgroupを選び、実入力形式の接続を追加確認する。
+実入力形式の事前確認は最終reportとの全数照合や数値校正の完了とは扱わない。
+
+実保存行の確認では、sampling planのkernelsが名前のlistではなく設定を持つmappingであることも確認した。
+既存算術のexpected_conditionsと同様にmappingの順序を読み、固定順ZH・ZHSとinitialization順を明示検査する。
+合成fixtureも実producerのmapping形式へ改め、順序の入替・不足・余分・list形式を拒否する受入を先に加える。
+
+## 実施結果
+
+旧hash比較の失敗とmapping形式の失敗を、実producerに合わせた合成fixtureで修正前に再現した。
+Windows Python 3.11で修正後34件が4.30秒で成功し、全67,584行の合成試験でも未取得区間と診断未定義を192の分母に保持した。
+実C1T0のDGX・Laboから4 batch・8 group・704行を確認し、元clusterのsampling manifestのbyte hashも一致した。
+実入力の事前確認は2.947秒で、最終reportとの全数照合はこの確認に含まない。
+記録は `data_tile_validation_2026-10-17/planned_arithmetic_real_input_preflight_20261021_v2.json`、SHA256は `6206f8ff336420d4856a9a8461e7ee799762bc553d910fcb21a30bb4159e2dd0` である。
+reader・算術source・受入と失敗ログ・仕様snapshotを `planned_condition_arithmetic_review_acceptance_v2/` に保存した。
+readerのSHA256は `79c3ef4e2a758dd48230876dbaa4c7c9f384142f1eae8ca7f198679bb469952d`、accepted.jsonは `788de70a888ef71cdcf3d559ad4b67c90478815b412b1de1e2b15ca5b4836eaf` である。
+
+旧待機PID27868は全6条件pending・子レビューdirectoryなし・実command一致を確認して停止し、停止理由と旧sourceを保存した。
+新待機処理はreaderと受入の参照先をv2へ変更したもので、元の回収validatorと一度だけの実行規則を維持する。
+待機処理の回帰22件は1.37秒で成功した。
+証拠は `planned_arithmetic_handoff_acceptance_v2/` に保存し、accepted.jsonのSHA256は `27aec601aa5ac7a3e43c3b482b2cfa1ff335ce2bba1212576d348d460eb4e40a` である。
+新sourceのSHA256は `7d547e1726d31f95edfee5bf1f8c406e650b7ed961cfd1f5cac84c3f23afe548`、実行PIDは33972、sessionは69708である。
+起動前の実入力検査ではC1T0がready、残る5条件がpendingとなり、回収済みC1T0の独立レビューを開始した。
+この時点では本番独立レビューの正常終了はまだ確認していない。
+
+その後C1T0の本番レビューは正常終了し、全67,584行・352設定について最終reportの11,968値を照合した。
+最大絶対差は1.1102230246251565e-16で既定許容差内、分母からの除外は0、実測は51.460秒だった。
+review manifestの全16ファイルを再照合し、詳細は[条件別報告](low_c1t0_recovered_result_2026-10-21_ja.md)へ保存した。
+残る5条件は修正版の待機処理で最終回収を待つ。

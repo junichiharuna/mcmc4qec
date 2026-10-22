@@ -1,0 +1,14 @@
+# C3T0 labo batch0の完了済み入力exportを回収する
+
+旧export係はSSHの300秒待機期限で終了したが、クラスタ側はその後にexportを完了した。
+実process一覧と対象directoryのopen fileを確認し、書き出しprocessが存在しないことを確認した。
+完成したreceipt・sampling-terminal・ZIPの全体hashとサイズ、保存済みと現在の3件のgenerator終端、固定source・inputを読み取り専用で照合した。
+書き出しや数値計算を再実行せず、この完成済みarchiveを転送して元の全member・assignment・metadata検証を実施する。
+対象はC3T0・labo・batch0だけとし、旧intent・stdout・stderr・timeout記録を保存する。
+復旧intentと読み取り専用の照合証跡を追加し、元exportの検証部分を維持した上でのみprepared_inputを作る。
+この回収はlabo上の計算開始、PC全群の完了、監査完了、科学的な条件の受入を意味しない。
+
+回収後は旧serial係の停止とbatch0のexport以外が未着手であることを確認し、新しい記録directoryで固定した全5 batchを続行する。
+元serialの全task順・source固定・parity・stage・launch・回収検証を維持し、batch0 exportは検証済みprepared_inputを再利用する。
+次のbatchのexportはSSH keepaliveを維持したまま300秒のローカル待機期限を外し、待機期限だけで完了済み書き出しを失敗扱いしないようにする。
+変更対象はC3T0・laboの未実行batchに限定し、通信失敗や曖昧な状態で自動再試行はしない。

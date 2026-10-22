@@ -1,0 +1,322 @@
+# 新条件のportable BAR全群処理
+
+最初の実対象はC1T0であり、case・target・production manifest・元rootは既存の事前固定identityに従う。
+既存C0T2のdriverと割当ては変更せず、新条件の制御を隔離directoryへ実装する。
+数値処理には固定済み `portable_bar_full_v1.initialize` と `process_group`、元のloader/analyzer変換を再利用し、decoderは構築しない。
+
+## 全設定parityの証拠
+
+各実行hostの新条件parityについて、acceptedの値だけで判断せず、元reference archiveと保存済み解析artifactの全row・診断・ACFを再照合する。
+case・target・production・元root・固定群、元source、archiveの全member、markerとpayloadの対応を確認する。
+parity実行のhost・Python・platform・依存version・thread・hash seed・control source・transformを後続実行の固定値と結び付ける。
+未定義位置、flag、sampling失敗、未取得区間も比較対象とし、所要時間やpeak RSSは既存比較器の規則に従って数値一致の対象から外す。
+この照合は元の推定計算やdecoderを再実行せず、実parityの保存結果を比較する。
+入力は外部hashで固定し、比較後に再確認する。
+実referenceも実parityもまだ存在しないC1T0について、架空のgateや成功configを作成しない。
+
+## 全群driverと分担
+
+全768群・192 seed・各88設定を維持し、hostごとの群・batchを一意な割当てplanへ固定する。
+割当ては全群を一度だけ含み、重複・欠落・未知の群・他条件・未予約の担当変更を拒否する。
+実行hostとworker数、実parityのruntime、archive、割当て、出力を同じ実行intentへ結び付ける。
+既存のPC処理が実終端になるまで新条件を同じhostで重複起動しない。
+科学上の未収束や未取得と、処理基盤の失敗を区別し、いずれも予定群から除外しない。
+全群driver・割当て・配置・回収・途中index・最終readerの各段階を接続するまで、本番全群計算は開始しない。
+元環境samplingのcollector、全trace監査、独立referenceとの結合は別の最終受理条件であり、PCのparity成功では代替しない。
+
+## 今回の実装範囲
+
+条件を明示した保存parityの再照合を受入テストから実装した。
+全768群の割当て契約と全群driverを隔離directoryへ実装し、下記のfixture受入を確認した。
+実際の割当てplan作成、配置・回収・途中index・最終readerの新条件への接続は未実施である。
+実hostの新条件parityと本番全群計算は未実施である。
+
+## 保存parityの再照合
+
+`output/portable_bar_condition_batch_v1/replay_gate.py` は明示されたConditionと外部hashに従って、reference archive、実行intent、completion、解析marker・JSON・npzの6入力を検査する。
+archiveの全member、元解析source、全88設定と全ACF、runtimeとhelper source、decoder factory呼出し0、未定義位置の一致を確認する。
+保存済みの全数値を既存比較器で再照合し、最後に入力hashを再確認する。
+入力のhashを観測した値から自動で補わず、未指定の入力は拒否する。
+呼出側には、元科学sourceとhelperの固定、実runtimeの取得、6入力の外部pinを求める。
+この関数自体は全群driverやjob起動器ではなく、native環境や全cohortの受理を代替しない。
+
+## 割当てとdriverの受入契約
+
+割当てplanはcondition identityと全batchを持ち、各batchのhost・連番・worker数・群順を明示する。
+DGXは20 worker、Laboは24 workerとし、同じhostの連番は0から連続させる。
+1 batchはそのhostのworker数以下の群を含み、全batchの和集合は元順序の768群と一致させる。
+この契約は分担割合を自動決定せず、本番の割当てplanは実parityと実運用状況に基づいて別途固定する。
+結果のcensusは基盤失敗や未取得を予定群・予定行数の分母から除外しない。
+新driverの起動前には、前batchの保存終端と実processの終了、host lock、元archiveとreferenceのsource・geometry・metadata一致、実runtime、保存parityの全値再照合を確認する。
+固定数値workerを呼び、全結果を保存してから入力pinを再確認する。
+新driverの出力・予約・回収経路が未接続の段階では、受入試験を本番起動の許可記録として使わない。
+
+Windowsは41 passed・5.46秒、Linuxは41 passed・0.76秒だった。
+4種類の符号・noiseと3 targetの12 identityについて、各88設定・小さいACF配列・未取得区間・sampling失敗を含む保存artifactを照合した。
+runtime・source・別条件・scope・decoder呼出し・markerの不一致、数値・未定義・flag・未取得・失敗記録の改変、row/ACFの欠落を拒否した。
+条件やmarkerのboolean座標を整数と同一視する2ケースは失敗する受入で確認し、canonical JSONによるidentity比較へ修正した。
+試験は保存値の比較とidentity契約を対象とするfixtureであり、実trace・native decoder・BAR/bootstrapを再計算したものではない。
+実C1T0のreferenceやhost parityが存在するとは扱わない。
+
+[保存manifest](data_tile_validation_2026-10-17/portable_condition_replay_gate_v1/manifest.json)は18ファイルを束ね、SHA-256は `921febdd905ae89a139aa7aa5bb430ab6717d6be65bdcb8458564aeaac1b0372` である。
+再照合sourceのSHA-256は `7bd4f088d830827fedac5e49928a55850e95162df2dc7c416f89fcb2690aeef0` である。
+[receipt](data_tile_validation_2026-10-17/portable_condition_replay_gate_v1/receipt.json)に実施範囲と再現手順を保存した。
+再現時は保存sourceを別checkoutへ復元し、optional依存のある環境で `python -B -m pytest output/portable_bar_condition_batch_v1/test_replay_gate.py -q` を実行する。
+追加の依存sourceはテスト後に保存したものであり、この保存物をnative環境全体の封印とは扱わない。
+
+## 割当て契約とdriverの実装結果
+
+`batch_contract.py` は全768群の重複・欠落・別条件・boolean座標を拒否し、hostごとの連番とworker数を確認する。
+基盤失敗の群もterminal件数と予定行数の分母へ残し、取得できた行数とは区別する。
+`condition_runner.py` は外部hashで固定したconfig・割当て・archive・元reference・保存parity・source・runtime・前batch終端を照合する。
+同じhostの実processと共通lockを確認してから、固定済み数値workerをspawnで起動する。
+worker終了後にも入力pinと保存parity全値を再照合し、基盤失敗を含む結果を保存する。
+公開packageと稼働中の既存driverは変更していない。
+
+統合受入はWindows 112 passed・18.47秒、Linux 112 passed・3.70秒だった。
+Windows統合試験後にfixture ZIPの古いmtimeへの対応だけを変更し、影響する結合試験をWindowsで再実行して1 passed・14.71秒を確認した。
+Linuxの112件はこのfixture修正後の結果である。
+実subprocessとspawn子workerを使った結合試験では、合成したsampling・anchor失敗入力から全88設定の未取得行を保持し、保存parityの再照合と子PIDの分離を確認した。
+実物理sampling、native decoderや実C1T0の成功parity、正常データでの統計校正を代替する試験ではない。
+
+初回試験でWindows venvの起動親processを別workerとして数える問題を検出し、現在の実行ファイルと引数が一致する自身の祖先だけを除外した。
+pytestのtestファイル名をdriver名と誤認する問題は、完全なファイル名の境界で照合して修正した。
+Linux初回では元sourceの1970年mtimeによりfixture ZIP作成が停止したため、本番exportと同じ `strict_timestamps=False` を使用した。
+これらの失敗ログ、実process観測、修正後のログを残した。
+
+[保存manifest](data_tile_validation_2026-10-17/portable_condition_batch_driver_v1/manifest.json)は51ファイルを束ね、SHA-256は `0f42a9d2df4263da38adaad1c7ef49e4f1e469d0e1d2ed4ca7c03d9ea9aa8fa5` である。
+[receipt](data_tile_validation_2026-10-17/portable_condition_batch_driver_v1/receipt.json)に実施範囲・source hash・再現コマンド・未完了項目を保存した。
+sourceを別checkoutへ復元し、optional依存のある環境で4つの受入testを実行できる。
+archiveをnative環境全体の封印、実際の割当てplan、本番投入や科学cohortの受理記録とは扱わない。
+
+## 入力転送の受入契約
+
+新条件のbatch archiveは、外部hashで固定した割当てplan、元reference archive、export receiptと照合してから各PCへ渡す。
+ZIP全体・manifest・全memberのhashを読み取りで検証し、重複member・非正規path・欠落・追加memberを拒否する。
+元production、source、native profileとfixture、geometryと問題metadataは固定referenceと一致させる。
+batchの群順・件数と各群のmarker一覧を割当てに結び付け、markerが指すJSONとnpzのhashも照合する。
+sourceとmetadataが共通でも、他群の入力やmarkerだけが差し替わったarchiveは拒否する。
+照合後にarchive・receipt・割当て・referenceのhashを再確認し、数値workerやdecoderは起動しない。
+最初は合成ZIPによる改変・欠落・別条件の拒否と、明示された全12条件の受理を確認する。
+この入力検査だけでは、元samplingの正常終端、trace全監査、実hostでのparity、配置と回収、最終科学評価を代替しない。
+
+## 入力転送前検査の実装結果
+
+`input_transfer.py` は外部pin付きの4入力を読み、割当て・export receipt・batch ZIP・固定reference ZIPを照合する。
+展開やdecoder構築をせず、ZIP全体と全memberのhash、元production・source・native metadata、全群のtraceと共有anchorのmarker・payload対応を確認する。
+固定referenceと共通するtaskは同じbyteであることも確認する。
+batch内部のpayloadとmarkerを一貫して差し替えた場合に、この共通task確認が欠ける受入失敗を検出し、修正後に拒否を確認した。
+改変拒否と全12条件を含む追加26件、既存112件を合わせた統合受入はWindows 138 passed・22.48秒、Linux 138 passed・4.43秒だった。
+追加試験のZIPは合成した失敗recordと数値配列として読まないpayload byteを使い、入力の結び付けと転送前検査を対象とする。
+実traceの範囲・shape・seed・復号labelを検証した結果とは扱わない。
+
+[保存manifest](data_tile_validation_2026-10-17/portable_condition_input_transfer_v1/manifest.json)は25ファイルを束ね、SHA-256は `40cb0570cb946e886cd15c429ef682da915418300024363f990c60f0f2d7e66d` である。
+[receipt](data_tile_validation_2026-10-17/portable_condition_input_transfer_v1/receipt.json)へsource・ログ・失敗履歴・再現手順を保存した。
+実reference未取得のため、新条件の実archive export・PCへの転送と配置・実parity・本番全群計算はまだ実施していない。
+
+## PC上の配置契約
+
+配置は転送済みのsource・割当て・batch ZIP・export receiptから、まだ存在しない実行directoryを作成する。
+外部hashで固定した配置manifestに、配置先、全ファイルの元pathとhash、最終pathを持つ実行config、配置helperのhashを記録する。
+配置前に転送前入力検査を実行し、実runtime、固定source、保存parityの6入力と前batch終端の2入力のbyteを照合する。
+保存parity全値の再比較や前batchの実process終了確認は、数値driverの起動前検査に残す。
+配置を実行許可や科学的受理とは扱わず、結果にもこの区別を記録する。
+既存directoryを上書きせず、配置途中の失敗ではintentと途中ファイルを残して自動再実行しない。
+全ファイルのコピー後にも元入力・配置先・外部入力のhashを確認してから配置receiptを保存する。
+fixtureでは実subprocess CLIによる新規配置と再配置拒否、input改変、source改変、配置先・runtime・外部parity pinの不一致を確認する。
+
+## 配置CLIとdriver接続の実装結果
+
+`stage_condition.py` は固定manifestに従い、7つのdriver/source、割当て、batch ZIP、export receiptを新しいdirectoryへ配置し、最終pathの実行configを保存する。
+配置前後の入力hash・source・実runtimeを確認し、保存parityと前batch終端の外部8入力もbyteとして照合する。
+配置receiptには `execution_preflight_performed=false` と `scientific_cohort_accepted=false` を明示し、起動時の実process検査と保存parity全値比較を省略しない。
+配置だけのfixtureはopaqueなparity・前batch終端を使い、配置成功をそれらの科学的受理と扱わないことを確認する。
+別の結合fixtureでは実parity subprocessから配置CLI、配置したdriverの実subprocess、spawn子workerまで通し、合成した失敗入力の全88設定・未取得行・診断flagの保持を確認した。
+従来の配置なし経路も併せて確認した。
+
+新しい配置拒否等10件と配置からdriverへの結合1件を加えた統合受入は、Windows 149 passed・36.41秒、Linux 149 passed・9.00秒だった。
+新規配置後に同じCLIを再実行すると既存directoryを拒否し、保存済みファイルが変わらないことを確認した。
+これらはfixtureによる制御経路の検証であり、実C1T0のparityや正常traceでの数値校正ではない。
+[27ファイルの保存manifest](data_tile_validation_2026-10-17/portable_condition_staging_v1/manifest.json)のSHA-256は `392646d593f732e92fe0785795d42f230d56a4dcbb3d584dde502efbaefce7a0` である。
+[receipt](data_tile_validation_2026-10-17/portable_condition_staging_v1/receipt.json)にsource・ログ・実施範囲・再現コマンドを保存した。
+実割当てと実reference、PCへの転送を含む運用接続、回収・途中index・最終readerへの接続は引き続き未完了である。
+
+## 新条件の結果回収契約
+
+collectorは実行config、実intent、completionとcollector sourceを外部hashで固定したparentを受け取り、実driverのprocess終了後に読む。
+条件・元production・割当て・runtime・source・入力archive・全768群と当該batchの関係を実intentと照合する。
+既存の固定済み `validate_group` を再利用し、保存traceの入力marker、全88設定、未取得理由、sampling失敗、診断とACFの構造を確認する。
+数値推定値やACFを再計算せず、decoderも構築しない。
+保存parityを再照合し、元sourceと全入力のhashを最後に再確認する。
+基盤失敗群の途中成果物は保持し、その群の予定88行を分母に残す。
+batch全体のcontext失敗では予定群と保存済み途中成果物を保持するが、科学的に利用できる検証済み行数は0として扱う。
+正常batchと失敗batchの両方について、元ファイルを変更せず、新しい回収先へ結果・config・割当て・source・検査reportをZIP化する。
+回収成功と科学検証完了を区別し、全cohortの監査と独立referenceとの結合を引き続き要求する。
+
+## 結果collectorの実装結果
+
+`condition_collection.py` は外部hashで固定した実config・intent・completionとcollector sourceを照合し、実driverのPIDが終了してから結果を回収する。
+元の `portable_bar_reassigned_collection_v1.py` の `validate_group` を固定hash `62ad7b4938435e7a260f435d911adb7ccbd00491f0dc3e3c86e9fee55db7f7c9` で再利用した。
+正常な制御経路では、元入力とsource、保存parityの全値、全88設定、sampling失敗と未取得理由、診断・ACF構造を検査する。
+推定値やACFの数値再計算は行わず、元decoderも構築しない。
+context失敗では予定群・途中ファイル・元summaryを保持し、検証済み行数を0、acceptedをfalseとして回収する。
+この経路では保存parityの全値再比較を行ったとは主張しない。
+
+終端bindingと基盤失敗・context失敗・改変拒否の17件を追加し、統合受入はWindows166 passed・52.76秒、Linux166 passed・11.45秒だった。
+配置あり・なしの実subprocess fixtureでは、driver・spawn worker・collectorを通した合成失敗入力の88行を保持し、ZIPの全memberとhashを確認した。
+成功出力のJSON改変では回収を拒否し、新しい回収先も作らなかった。
+context失敗へ切り替えたfixtureでは途中JSONをそのまま保存し、予定88行に対して検証済み0行、pending 1群を保持した。
+実物理samplingや正常traceの推定精度を検証した試験とは扱わない。
+
+[30ファイルの保存manifest](data_tile_validation_2026-10-17/portable_condition_collection_v1/manifest.json)のSHA-256は `df45eb455fb92dd69ffd9c7ef417bb9c57f7baca7f687bcccea11a9576240ccd` である。
+[receipt](data_tile_validation_2026-10-17/portable_condition_collection_v1/receipt.json)へsource・ログ・再現手順・適用範囲を保存した。
+実hostでの運用接続と新条件の回収、全群index・最終readerへの接続、元環境trace監査と独立referenceの結合は引き続き未完了である。
+
+## 転送先readerの契約
+
+回収ZIPは外部hash付きreceipt、独立保存したparentとそのhash、既知のcollector source pinを用いて転送先で検査する。
+ZIP全memberのbyte数とhash、重複とpath、report・config・assignment・intent・completionを照合する。
+元のproduction plan、input export manifestの実byte、native profileの実byte、元sourceから作ったtransformを呼出側から受け取り、保存値だけで自己認証しない。
+各群を読むときには、別途検証済みのsampling record・anchor・入力markerを要求し、既存validatorで88設定・診断・失敗の保持を再確認する。
+context失敗と基盤失敗は利用可能な数値行として返さず、予定群の分母と失敗理由を保持する。
+読取後にZIPのhashを再確認する。
+このreaderは全cohortの受理やnative trace監査、数値再計算を代替しない。
+
+## 転送先readerの実装結果
+
+`collection_archive.py` の `verify_archive` はZIPの全member、独立parent、既知のcollector source pinとreportを照合する。
+`PortableBatch` は呼出側が与えた元plan・input manifest・native profile・transformをconfigと結び付け、実intent・終端・割当てから予定群と行数を再確認する。
+各群の読取では独立に読み込んだsampling markerを要求し、固定済みvalidatorで全設定・診断・失敗の保持を確認する。
+context失敗と基盤失敗では理由と予定88行を返し、途中の数値行は利用可能な結果として返さない。
+最後に `finish()` でarchiveのhashを再確認することを呼出側の契約とする。
+
+転送検査の追加13件と既存の結合試験を含む統合受入は、Windows179 passed・59.40秒、Linux179 passed・11.62秒だった。
+配置あり・なしの実subprocess fixtureから作った回収ZIPを読み、88未取得行の保持、sampling marker不一致の拒否、context失敗の検証済み0行を確認した。
+Windowsで最も長いtestは22.22秒であり、全suiteの59.40秒と区別する。
+実C1T0の結果を読んだ証拠や正常traceの数値校正とは扱わない。
+[33ファイルの保存manifest](data_tile_validation_2026-10-17/portable_condition_archive_reader_v1/manifest.json)のSHA-256は `c5e4945772705b4ceed780660c8f14e76ceafe9ea6e929997bbe54c242646d56` である。
+[receipt](data_tile_validation_2026-10-17/portable_condition_archive_reader_v1/receipt.json)へsource・ログ・再現手順・呼出側の責任を保存した。
+新条件の実運用接続、全群indexと最終readerへの統合、元環境trace監査と独立referenceの結合は継続中である。
+
+## 全予定群への回収index接続
+
+条件と全768群の割当てを外部SHA-256で固定し、別途固定した回収registryからbatchごとのinput ZIP・output ZIP・receipt・parentを読む。
+registryにないbatchは未回収として残し、重複batch・別条件・異なる割当て・pin不一致の回収物はindex全体を拒否する。
+元input ZIPの全member hashとtask markerを照合し、元解析関数で保存recordのseed・prior・設定を検査した後、回収readerで全88行の構造と診断を検査する。
+このindexではdecoder・BAR・bootstrapを再実行せず、raw trace全状態の再復号や最終科学評価の代わりにはしない。
+全群の予定行数67,584を維持し、未回収、基盤失敗、driver全体のcontext失敗、sampling失敗、区間未取得、診断flag、診断未定義を区別する。
+context失敗のbatchは終了した試行として数えるが、部分的に残った数値行を観測済み行には加えず、元のdriver censusも保存する。
+出力は既存snapshotを上書きせず、読み取った外部ファイルと使用sourceを最後に再hashする。
+受入では空registry、部分回収、重複・外部pin・条件の不一致、および既存の実subprocess fixtureを通した正常回収とcontext失敗のindexを確認する。
+実C1T0の全群割当て・reference・parityは別の未完了作業であり、このfixture受入を本番実行と扱わない。
+
+`cohort_index.py --registry PATH --registry-sha256 SHA256 --destination FRESH_JSON` として実装した。
+registryはassignmentの外部pin、collector source pins、batch keyとinput ZIP・output ZIP・receipt・parentの外部pinを保持する。
+追加8件と既存の結合試験を含む統合受入はWindows187 passed・65.66秒、Linux187 passed・13.28秒だった。
+Windowsで最も長いtestは25.48秒、結合試験fileの2件合計は約46.2秒だった。
+実subprocess fixtureの正常回収は88未取得行・767未回収群、context失敗は観測0行・予定67,584行として集計できた。
+元sampling recordの検査とinput/output ZIPのhash照合を行ったが、fixtureのsamplingは全件意図的失敗であり、正常traceの数値一致や本校正の証拠ではない。
+source・失敗を含むログ・再現手順を[34ファイルのmanifest](data_tile_validation_2026-10-17/portable_condition_cohort_index_v1/manifest.json)と[receipt](data_tile_validation_2026-10-17/portable_condition_cohort_index_v1/receipt.json)へ保存した。
+manifest SHA-256は `c4d768c4c18501a9845ffa5bd08b8eaec1f0e9de2e7aa98fe676a95b940b9975` である。
+実C1T0のreference作成、各PCでの実parity、全群の実割当てと起動、最終PBS readerへの接続は継続中である。
+
+## C1T0の実割当て
+
+最初の実運用ではDGX624群・Labo144群とし、各kernel・初期化の192 seedをDGX156群・Labo36群に分ける。
+replicate index 0〜155をDGX、156〜191をLaboへ固定し、各hostの群を辞書順で20群・24群ずつbatchにする。
+これは新条件の結果を見る前の配置であり、成功率や診断値を使って分担しない。
+直近のC0T2実処理時間を配置の参考とし、異なる符号・noise・rung構成の時間予測やdecoder速度比較には使わない。
+元C1T0の実manifest・platform profile・fixtureを準備済みnative reference configのpinへ照合し、全768群が一度ずつ現れることを既存割当てvalidatorで確認する。
+この割当て保存だけではPC側の実parityやbatch起動を許容する実行configは完成せず、未取得のarchive hashやruntimeを仮値で補わない。
+
+15:44 JSTまでに、実C1T0のmanifest・platform profile・fixtureをread-only SSHで取得し、準備済みnative configの全3ファイルのpinとproduction digestへ照合した。
+[実割当て](data_tile_validation_2026-10-17/portable_condition_c1t0_assignment_v1/assignment.json)のSHA-256は `9e2f52087a92f7bdf246a935c932b2901f80882fb86f35ffb5a3de344d44e57d` である。
+DGXは31 batch ×20群と最終4群、Laboは6 batch ×24群で、各kernel・初期化内の156対36の分担を確認した。
+既存validatorに加えて座標の直積を直接列挙し、768群がすべて一度ずつ割り当てられたことを再確認した。
+配置の参考に用いた直近C0T2のwall timeはDGX20群で2,156.52秒・2,105.48秒、Labo24群で11,738.23秒であり、受理済み回収ZIPと保存completionのhashへ結び付けた。
+これらは保存配列の後処理時間であり、decoder比較やC1T0の処理時間測定ではない。
+実割当てに対する空registryと初期indexも保存し、未回収768群・予定67,584行・観測0行を確認した。
+source、実metadata、割当て、根拠、receiptとindexを含む[22ファイルのmanifest](data_tile_validation_2026-10-17/portable_condition_c1t0_assignment_v1/manifest.json)のSHA-256は `f4bbd0b4a72c4336c60be8dd3ec3375d76e32fb706728949d22759fe4f909fa9` である。
+稼働中のC0T2割当てとdriverを変更せず、新しいqsubやPCの数値プロセスは起動していない。
+
+## 実batch入力の先行export
+
+元sampling jobの正常終端を実qstatで再確認し、割当て・native config・元source・metadata・既存exporterを外部pinへ照合してから、選んだbatchの入力だけを新規directoryへexportする。
+既存exporterは元loaderで保存recordとcompact traceを確認し、全入力のhashをexport前後で照合する。
+collectorやraw trace監査の完了をこのexportで認定せず、manifestのprovisional表記を維持する。
+localへ転送後にZIP全member、実割当て群、task marker、source・metadataを再確認する。
+実referenceができるまでは共通taskのreference比較やPC側parityを未実施として保持し、実行configや成功gateを作らない。
+稼働中のexporterとdriverを変更せず、SSHや転送の応答が曖昧になった場合は残ったdirectoryと証跡を確認してから次の操作を決める。
+
+DGX batch 0の20群とLabo batch 0の24群について、元job265343のF・Exit_status 0・run_count 1と投入scriptを再確認して実exportを完了した。
+既存exporterのSHA-256 `348abd1f643ff30d2b978818a8f36aecc92213046bec479b10c8438e40275239` と元source・metadataを実行前後で照合した。
+DGX input ZIPは50,082,015 bytes・4,977 member、SHA-256 `649e316f786d39b212e608b49e52d83ea686e05098a7816d2fc11e2504f7cd22` である。
+Labo input ZIPは59,998,081 bytes・5,949 member、SHA-256 `96e77fa1cfe1e08f32fa9f317bb9502a9a34eb6bfd7249fb41d202024d81bbf5` である。
+転送後に全memberとmarker・割当てを検査し、各PCの新規 `c1t0-incoming-<host>-batch0-v1` directoryへ入力とcontrol計14ファイルを配置して全hashを照合した。
+実行configは作成せず、reference比較・数値parity・runtime受理・数値worker起動のflagはfalseのまま保持した。
+実操作に使ったsourceとexport・配置の証跡を[47ファイルのmanifest](data_tile_validation_2026-10-17/portable_condition_c1t0_initial_inputs_v1/manifest.json)と[receipt](data_tile_validation_2026-10-17/portable_condition_c1t0_initial_inputs_v1/receipt.json)へ保存した。
+manifest SHA-256は `ec4bae61a69eedcb3c113aeb47d8f50788cb4ffec308f3f3116811c63ea1c4c9` であり、大きなinput ZIPの実pathとhashはreceiptを参照する。
+これは実44群の入力準備であり、全768群の入力配置・解析・科学受理の完了ではない。
+
+## 元環境での最終監査接続
+
+既存C0T2用の最終joinを変更せず、tile72/288・bit-flip/depolarizing・低ノイズ3点を明示的に検査する別moduleを作る。
+case・target indexの整数型と範囲、size・noise・target pの対応、192 seedと768群・67,584行を確認し、元productionとfull trace auditの一致、実PBS ledger、native environment、元trace payloadとanchorの検査を維持する。
+新しいproviderのsource hashもjoin開始前後に含め、providerが全群のarchive・runtime・parityを検査する契約を維持する。
+driver全体のcontext失敗と群単位の基盤失敗を別に数え、どちらも元trace監査を実施し、88設定すべてを区間未取得・診断未定義として残す。
+context失敗の途中数値行を採用せず、その理由を行とcohort証跡に残す。
+独立referenceのnative profileとraw reference監査の一致を引き続き必須とし、名目被覆や母集団RMSEを保証するflagはfalseとする。
+受入では全12条件の768群処理を明示的なfake I/Oで試し、未回収・監査不一致・PBS不一致・失敗分母不一致・source変更・reference不一致を拒否する。
+このmoduleは監査と報告の関数層であり、実condition provider、CLI・qsub接続、実cohortの受理とは別に完成状況を記録する。
+
+`condition_final_join.py` を隔離directoryへ追加し、固定元joinのSHA-256 `8971e821e1d60ec1a02231e18149b28e50609c3170ee01e7dcfcfb7c3b117c11` が変更されていないことを確認した。
+新しい関数層のSHA-256は `cf615576c2b47431f868de874ca9ef857ecc27f75b21669fd894326e9571ec70` である。
+受入はWindows54 passed・31.44秒、Linux54 passed・16.72秒だった。
+全12条件のcontext失敗時の予定67,584行保持と、条件・監査・PBS・reference・source・失敗分母の不一致拒否を確認した。
+raw I/O・provider・native environment・referenceをfixtureで置き換えた制御試験であり、実raw trace監査や実reference結合を行った結果ではない。
+source、派生手順、実行ログと再現手順を[19ファイルのmanifest](data_tile_validation_2026-10-17/portable_condition_final_functions_v1/manifest.json)と[receipt](data_tile_validation_2026-10-17/portable_condition_final_functions_v1/receipt.json)へ保存した。
+manifest SHA-256は `152df1b0ed7360f4db6d5a276d330c36c8ed45323ab515a39c7b00face625f80` である。
+全群を認証する実condition provider、前batch終端との連鎖、現在のsampling markerの照合、CLI・PBS controllerへの接続と実データ受理は未完了である。
+
+## 全群providerの契約
+
+最終contextは独立したSHA-256で固定し、condition、全768群のassignment、各hostのruntimeとparity、初期predecessorのintentと終端、全batchの回収ZIP・receipt・parent・input export manifestを保持する。
+context内のlocal入力pathはroot内の相対pathに限定し、すべて外部pinへ登録する。
+元のPC上のpathはparityとpredecessorの同一性照合にだけ使い、最終readerがそのpathを開くことはない。
+全batchのcondition・assignment・worker source・collector source・runtime・parityを照合し、各host内の実predecessorのintent/completion hashが前batchへつながることを確認する。
+最初のbatchは別途保存した旧条件の正常終端へつながることを検査する。
+context失敗や基盤失敗は全群inventoryへ残し、それらの後に成功した次batchがある場合は、現行driverの起動契約と矛盾するため拒否する。
+各成功群を一度だけ読み、現在の元sampling recordとmarkerをexport manifestへ結び付け、固定済み回収readerで全88設定を検査する。
+全768群を消費するまではfinishを受理せず、source・context・archiveを最後に再hashする。
+元raw traceの全payload、checkpoint再復号の証跡、anchor、PBS、native environment、独立referenceの検査は、外側の最終監査関数の必須条件として維持する。
+# 完全cohort providerの受入とCLI接続
+
+2026-10-20の追加受入では、新providerの48件を含む関連235件がWindowsで66.37秒、Linuxで18.85秒で成功した。
+sourceと試験・ログ37ファイルを [provider証跡](data_tile_validation_2026-10-17/portable_condition_provider_v1/manifest.json) に保存した。
+全768群のprepare/read/finish試験はarchive/parityのcallbackを明示的に置換したfixtureであり、別の実subprocess結合試験では合成失敗recordの回収ZIPと現native record/markerの照合、改変拒否を確認した。
+実C1T0の全群受入やraw NPZの再監査を行った結果ではない。
+raw trace・PBS終端・anchor・独立referenceは外側のnative最終集計で再照合し、native parity referenceは実controllerの受理済み完了を確認してからcontextへ固定する。
+次のCLIは条件別providerを構築して既存の条件別run_reportに渡し、sampling/audit/portable/referenceの全4入力と外部context hashを必須にする。
+CLIはPBS実行制約と全群監査を迂回せず、独立referenceを省略した最終公開用reportは生成しない。
+CLIの接続試験では引数の受渡し、必須reference、実providerのcontext hash拒否、PBS環境外の拒否を確認し、実データの集計成功とは区別する。
+`condition_final_cli.py` を実装し、上記4件はWindowsで2.07秒、Linuxで0.51秒で成功した。
+固定sourceと試験・ログ41ファイルを [CLI証跡](data_tile_validation_2026-10-17/portable_condition_final_cli_v1/manifest.json) に保存した。
+CLIから実providerを構築して条件別最終監査へ接続できるが、実データcontextの作成、条件別qsub controller、実C1T0集計は未実施である。
+既存C0T2のqsub controllerや実行中driverは変更していない。
+
+## 条件別最終qsubの小仕様
+
+固定C0T2 controllerの投入・共有lock・待機を含む最大2ノード制限・曖昧応答時の予約保持・PBS終端受理を別sourceへ継承する。
+条件固有の準備検査を置き換え、実sampling manifestに一致する全768群の割当て、全batchのreceiptと元export manifest、元環境の全trace監査metadata、転送完了のhashを必須とする。
+全群contextのreference archiveは実native-reference controllerの受理済みterminalへ結び付け、その正常PBS終端と事前指定群のidentityを準備時にも照合する。
+この準備検査はmetadata検査であり、実行時にはCLIが全archive、現在のtrace payload、native環境、anchor、独立referenceを再照合する。
+新controllerのconfig・実投入は全入力が揃うまで作らず、fixtureを実投入の証拠に流用しない。
+受入では全12条件のmetadata、欠落・重複群、条件・reference・hashの不一致、失敗群の保持、元controllerから変更していない投入関数と2ノード制限を確認する。
+隔離した `condition_qsub.py` と `condition_qsub_context.py` を実装し、固定controllerの15関数のASTを維持した。
+変更した関数は `read_config` と、呼び出すCLI名だけを変更した `compute` である。
+metadata33件・投入制御12件はWindowsで成功し、Linuxでは実config/script/台帳ファイル操作を含むfixture結合1件を加えた46件が成功した。
+Windowsは45 passed・1 skipped・3.03秒、Linuxは46 passed・1.81秒で、Windowsの1件はLinux専用のpath/PBS契約のためskipした。
+結合試験ではqsub・qstat・数値readerを明示的に置換しており、実native referenceや実科学cohortを作成した結果ではない。
+sourceと派生記録・試験ログは [24ファイルのqsub証跡](data_tile_validation_2026-10-17/portable_condition_final_qsub_v1/manifest.json) に保存し、manifest SHA-256は `94a601578cc45406286aa617378d9ce10bd5561c075f2c629b02c42f3a68bfda` である。
+実condition contextの組立て・転送、実config作成とqsub投入は未実施である。
+

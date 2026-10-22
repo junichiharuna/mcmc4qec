@@ -1,0 +1,22 @@
+# C3T1生成の復旧と回収との並行実行
+
+旧C3T1 driverは旧C3T0 collectorの失敗を検出して投入前に停止した。
+そのerror・intentを保持し、別directoryに新driverの記録を作る。
+全3 partitionの既存preflight、sampling manifest、seed、native probe、資源要求と実qsub helperを固定し、科学計算を変更しない。
+C3T1の計画はC3T1自身のcapacityと固定productionから作られ、C3T0のBAR集計・回収・監査の出力を入力として使用しない。
+したがって先行条件のfull監査待ちは科学的依存ではなく、ここでは投入順序を変更する。
+
+最初にC3T0の固定3 generator receiptと実成功終端、native referenceの固定receiptと実成功終端を確認する。
+新C3T0復旧監査driverのsource・intentも固定する。
+C3T1 anchorを最大2ノードの共有枠で投入し、実F・exit 0・run_count 1を待つ。
+次にsample partition 0を投入し、C3T0の復旧回収と並行させる。
+sample partition 1は新C3T0復旧full監査の実成功終端とcompleteの照合後に投入し、回収後の監査が資源を取れる順序を維持する。
+両samplingの投入後に従来形式の3 receipt registryを作成する。
+registryはsamplingの成功・科学的受入を意味しない。
+
+空き枠の観測と実qsub直前の共有lock・待機jobを含む最大2ノード検査を維持する。
+観測不明は同じjobを再照会し、実行操作の失敗または曖昧な応答は証跡を残して停止する。
+既存投入の再実行や旧成功記録の捏造を行わない。
+後続のC3T1 collection・PC・final driverは別途新generation証跡に接続し、この仕様の受入だけで全経路を復旧したとは扱わない。
+
+受入では旧失敗の保存・未投入条件、固定C3T1 payload、anchor終端前のsample禁止、復旧full監査前のsample 1禁止、外部job・異なるscript・config・false scopeの拒否、一回限りの投入記録を確認する。

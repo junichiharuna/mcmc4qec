@@ -1,0 +1,46 @@
+# 復旧BAR最終reader用qsub wrapper
+
+## 方針
+
+既存condition qsub protocolの共有lock・最大2要求ノード・一度だけの投入・曖昧応答の保持を維持する。
+元venvのsymlink入口と実prefix/binaryの照合には、既に受入済みのvenv bindingをそのまま使う。
+元condition wrapperとvenv wrapperは変更せず、新しい別namespaceを作る。
+元関数のAST変更はPython bindingの2式とreader argvの生成だけに限定する。
+
+## metadataとreportの復旧binding
+
+final configには復旧audit configのpath/hashを明示し、独立metadata pinsにも同じhashを含める。
+配置済みの新CLIで復旧authorityを読み、元sampling rootとfull監査root、保存full plan、正常監査terminalを検査する。
+full planのsampling input、監査terminalのinput、復旧authorityのinput、保存旧成果物のhashがすべてfinal configのmetadata censusにあることを必須にする。
+新CLI・join・元condition wrapper・venv bindingのsourceも固定する。
+このmetadata検査は本番readerのraw trace・全provider・reference監査を置き換えない。
+
+computeは元venv入口から新CLIへ復旧configのpath/hashを渡す。
+reader正常終了後、report中の復旧authority・input evidence・新reader sourceが検査済みmetadataと一致することを確認する。
+不一致ならfailure記録を残し、completionだけを正常受理しない。
+completeは復旧reportを再検査してから、元protocolによる実PBS終端・resource・script・report hashの検査とterminal保存を行う。
+元reportの名目被覆・母RMSEを保証しないfieldは維持する。
+
+## 受入と本番条件
+
+ASTの逆変換、元module不変、既存qsubの最大2ノード・二重投入・曖昧応答・直前変化の検査を実施する。
+合成metadataで復旧authority、監査terminal、sampling input、sourceの欠落/混入を拒否する。
+明示venvと合成provider/referenceでprepare→qsub→compute→completeを検査し、実qsubと科学readerはfixtureに置き換える。
+実全群context・新監査の正常終端・resource根拠が揃うまで、本番config作成・preflight・qsubは行わない。
+
+## 実装受入
+
+`output/recovery_bar_final_v1/recovery_condition_qsub.py` に別namespaceのwrapperを実装した。
+既存protocolへのAST変更は仕様の3式に限定し、元submit・prepare・script・ledger・node集計・read_planのbytecodeと元module不変を確認した。
+復旧authorityと旧成果物、sampling入力、full監査terminal、reader sourceの欠落・変更・不一致を拒否する。
+compute後の追加検査に失敗するとfailureを保存し、completionが残っていてもterminalとして受理しない。
+
+Windowsでは30 passed・3 skipped・3.45秒、元クラスタvenvでLinuxでは33 passed・4.55秒だった。
+Linuxの3件は新しいimport配置と明示venvを使い、prepare→qsub→compute→complete、readerの復旧authority不一致、生成後report変更を検査した。
+qsub応答・科学reader・監査I/Oはfixtureであり、本番入力の科学検証や本番最終reportの実行を示す結果ではない。
+最初のWindows結合試験ではfixture依存module不足を修正した後、元符号条件のPOSIXパス契約により停止した。
+契約を変更せずLinux専用の結合試験とし、Windowsでは当該3件をskipした。
+別のargv比較1件もWindowsの区切り文字を固定していたため、Pathで生成する比較に修正した。
+失敗ログを保持し、修正後の両環境の結果とsource hashは [native受入](data_tile_validation_2026-10-17/recovery_bar_final_qsub_native_v1/accepted.json) に保存した。
+
+全38 batchのcontext生成・転送、本番final configの作成、実qsub、最終report回収の接続は未完了である。

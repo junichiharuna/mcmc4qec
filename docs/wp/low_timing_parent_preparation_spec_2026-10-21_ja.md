@@ -1,0 +1,36 @@
+# 全12条件からの親入力準備
+
+## 目的と範囲
+
+低ノイズ12条件のmetadata候補が揃った後、既存の全条件組立処理と修正済み親wrapperの実検査を接続する。
+候補が不足している間は、正式入力、資源決定、親ジョブdirectoryを作成しない。
+準備は設定選択、raw traceの再検証、独立計時の完了を意味しない。
+
+## 契約
+
+既存inventoryが返す順序付き12候補を元ファイルのSHA-256とともに保存する。
+親環境v2と、9条件のisolated reader環境を外部pinで読み、元のsourceとruntimeを維持する。
+既存assemblyが計算した資源を使い、input・acceptance・resource_decisionをcanonical JSONと改行で保存する。
+親configは親環境の内容を保ったまま、この3ファイルのpinを追加する。
+既存wrapperのprepareとread_planが成功した場合だけ準備完了を保存する。
+準備用directoryとPBSの出力directoryは分離し、既存directoryや失敗した試行を再利用しない。
+この処理はqsubを呼ばない。
+投入は別段階で既存wrapperの共有lockと待機中を含む最大2ノード制限を使う。
+
+## 受入
+
+12条件未満、候補改変、親環境改変、子環境改変、出力先の再利用、wrapper検査失敗では準備完了を返さない。
+保存したinputのSHA-256がacceptanceとconfigで一致することを確認する。
+修正済みwrapperのprepared_valueを使い、9条件すべての子directory・親script・資源が実際の親と一致することを確認する。
+模擬wrapperによる接続テストと、本番12条件に対するprepareの実検査を区別する。
+本番候補が不足している時点では後者を未実施と記録する。
+
+## 受入結果と開始
+
+親入力準備の接続テストはWindows10件・1.22秒、Linux10件・0.08秒で成功した。
+WindowsではPOSIXのPBSパスを使うprepared_valueの検査を行わず、Linuxで実wrapperによる9条件の親bindingを確認した。
+sourceと実行ログは `data_tile_validation_2026-10-17/low_timing_parent_preparation_acceptance_v1/` に保存した。
+manifestのSHA-256は `396b2caa971edeca157553e238ae4c73c87733ee3be78358ad91aeb811bf0051` である。
+実inventoryは6/12で、正式入力を生成しないことを確認した。
+準備待機処理はsession51497で開始した。
+本番12条件のprepare、設定選択、独立計時は未実施である。

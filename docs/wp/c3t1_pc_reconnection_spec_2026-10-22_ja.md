@@ -1,0 +1,14 @@
+# C3T1のPC待機先の再接続
+
+C3T0のlabo serialは完了済みexportの回収後、別記録の復旧係で続行している。
+C3T1の未起動labo待機係と、その起動を管理するlauncherをこの復旧記録へ接続する。
+DGXの待機先、native reference、全batch割当、元serial、seed・decoder・統計処理と出力先は維持する。
+laboの旧停止記録を成功とは扱わず、新serialのsource・受入記録・intentと全batch完了を検証する。
+新serialの停止は引き続き後続の失敗として扱う。
+
+launcherの切替は旧processの実PID・command・生成時刻とregistry未取得・children空を確認した後に行う。
+generator registry・child起動intent・child実processがないことを再確認し、計算を持たない待機processだけを停止する。
+旧intent・観測履歴を保存し、切替証跡を別directoryに置く。
+新launcherには別の記録directoryを使い、排他的な作成で重複起動を拒否する。
+受入テストではlaboだけの待機先変更、全completion検証の保持、未完了の先行処理では起動しないこと、新しい先行失敗の拒否、元の子process所有と一度限りの起動手順を確認する。
+実C3T1 generator registry・native referenceはまだ未作成であり、実入力でのPC待機係の起動受入は後続で確認する。

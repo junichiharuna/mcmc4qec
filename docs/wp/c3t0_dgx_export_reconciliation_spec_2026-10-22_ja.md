@@ -1,0 +1,27 @@
+# C3T0 DGX batch8の完了済み入力exportの回収と継続
+
+DGXの旧serialはbatch0〜7の回収後、batch8の入力exportを待つSSHが300秒を超えて停止した。
+クラスタ側の対象directoryにはinputs.zip・receipt.json・sampling-terminal.jsonがあり、読み取り専用の実process・open file照会では書き出しprocessは存在しなかった。
+観測を固定し、archive全体hash・サイズ・receipt・保存済みと現在のgenerator終端・元のsource/inputを確認してから、完成済みexportだけを回収する。
+書き出し・sampling・BARを再実行せず、元exportの全member・metadata・assignment検証を維持してprepared_inputを生成する。
+復旧対象はC3T0・DGX・batch8に限定し、旧intent・timeout log・serial停止記録は変更しない。
+
+継続serialは新しい記録directoryを用い、完了済みbatch0〜7の全actionの記録とartifact hashを検証して再利用する。
+batch8の回収済み入力からpreposition・stage・launch・collectを順に実行し、残る固定割当を省略せず処理する。
+未実行の後続exportだけはSSH keepaliveを維持してローカル待機上限を外し、scpとqstatの期限・全検証・失敗時停止を維持する。
+受入テストで別条件・別host・別batch・変更された旧記録の拒否、既存artifactの非再実行、残りtask順、source固定、全分母保持を確認してから継続を起動する。
+
+cohort index・distribution・final preparation・final execution・downstreamは旧DGX serialの停止を検知する可能性がある。
+各実processと出力を確認し、停止した段階だけ新しい復旧記録と固定sourceで接続し直す。
+稼働中のlabo serial・クラスタjob・科学的source・既定設定は変更しない。
+全768群・67,584行と独立照合の要件は維持し、回収や復旧の成功を科学的受理とは扱わない。
+
+## C3T1への後続接続の追加
+
+C3T1のfuture launcherも旧DGX serialの停止を検知して終了したことを実記録で確認した。
+native reference controller PID10120は生存しており、再起動しない。
+PC用handoffとserialが両hostとも未作成であることを確認した上で、既存のC3T0復旧serialを前提に待つC3T1専用waiterを別sourceとして作成する。
+全33/5 batchの前条件完了、native reference完了、元の全転送検証を維持し、未完了なら待機する。
+後続のexportは検証済みfuture_pc_export_wait_v1の無期限SSH待機adapterを使用し、C3T2の稼働中launcherは変更しない。
+別条件拒否、前条件失敗の伝播、待機中に計算を開始しないこと、元のprepare/run検証を維持することを受入テストで確認する。
+

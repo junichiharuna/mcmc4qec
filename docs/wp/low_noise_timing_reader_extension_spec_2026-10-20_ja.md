@@ -1,0 +1,121 @@
+# 低ノイズ独立計時への回復済み・portable結果の接続仕様
+
+## 確認した不足
+
+現行 `cluster_scripts/tile_low_noise_timing_selection.py` の `load_complete` は、`single`・`partitioned`・`staged` の3 readerだけを受け付ける。
+readerを選ぶ前にsampling root内の `analysis_manifest.json`・`partition_analysis_manifest.json`・`partition-collection/summary.json` を必須とし、後段でも全analysis partitionのPBS ledgerを列挙する。
+このため、別形式の結果をreader名だけ変更して渡すことはできない。
+
+C0T0/C0T1は元BAR解析の時間切れ後に検証済み群と再計算群を結合した結果であり、`low_bar_recovery_trace_join.read_audited` と対応する固定版のreport sourceが復旧履歴を保持する。
+C0T2のportable経路は `portable_bar_mixed_final_join_v1.read_audited_portable_collection` と `PortableCohort` が元クラスタのtrace監査と両PCのarchiveを結合し、元クラスタのanalysis markerを生成しない。
+どちらも従来readerの結果へ読み替えず、その経路に対応するreaderと証拠を明示する必要がある。
+C0T2の最終reportは未取得であり、現時点では接続不備をsourceから確認した段階である。
+
+`tile_low_noise_timing_plan.read_selection` はselectorのsource closureを照合し、`tile_low_noise_timing_evaluation_report.selector_evidence` はselectorの実path・argv・PBS script・実行前後の記録を照合する。
+したがって、別の簡易集計を既存selectorの出力と偽って渡したり、保存source hashだけを変更したりして解決しない。
+
+## 変更範囲
+
+固定公開候補、稼働中のDGX/Labo driver、既存の回復readerとportable readerは変更しない。
+新しいselectorと接続用moduleを別配置で検証し、selectorから計画・seed census・実行・最終評価までの実import closureとPython/native環境を固定する。
+既存3 readerの契約を保ったまま、回復済み結果とportable結果を明示的に選択できる入口を追加する。
+source pathやreportの形からreaderを推測しない。
+回復v1/v2は同名の `low_bar_recovery_inventory` に異なるbytesを持つため、同じPythonのimport cacheで切り替えない。
+各条件のreaderは固定Python・PYTHONPATH・sourceと入力pinを持つ子プロセスで読み、同じselector PBS job内で逐次実行する。
+子プロセスは新しいqsubを行わず、その実PID・stdout/stderr・終了code・出力hashを保存する。
+開始先は排他作成し、既存directory、曖昧な開始、未終端のhandle、入力変更があれば再実行せず証拠を保持する。
+子プロセスの正常終了は数値・監査の受理とは区別し、親が専用の返り値検証を通すまでは科学的な完了と扱わない。
+親の返り値検証は、保存されたintent・実handle・正常completion・stdout/stderr・結果hashを同じspecへ結び、子PID・親PID/PBS・元入力pin・entry・環境・2行と全候補を再照合する。
+子が検証した全入力のhashと解決先を親Evidenceへ引き継ぎ、親の最終finishで変更を検出する。
+この受理も単一条件の読取に限り、全12条件の選択や独立計時の完了flagはfalseを維持する。
+子CLIの入力は外部SHAで固定し、entry、Python/source/native/importのbootstrap、親PBSの実行identityを持つ。
+科学importの前に全core Python file、明示したtop-level moduleとその推移的なlocal import、native binaryの宣言root内の全数、実解決先を検査する。
+親PBSのR・run_count・script・resource・hostと実親PIDを確認し、同じidentityを終了前にも確認する。
+返り値は当該conditionの2 epsilon行、全候補、監査binding、source/input/nativeのhashと解決先、実PIDと親PBSを記録する。
+単一conditionの読取完了を全12条件の設定選択や独立計時の完了と扱わず、名目被覆・母集団RMSEの非保証を保持する。
+対応する経路を指定したのに証拠が不足・不一致ならvalidation failureとし、未完了や科学的な不適格へ変換しない。
+
+## 保持する科学条件
+
+全12条件が揃うまで24行はselection_pendingとし、部分集合から正式設定を選ばない。
+全352設定・各192 seed、失敗・未定義診断・区間未取得の記録、既存の有限reference区間と候補順位を維持する。
+選択段階で新しいsampling、BAR solve、ACF計算、seed割当て、独立計時は行わない。
+固定readerから取得した全rowを既存 `compare_rows` で再集約し、保存reportと照合してから既存 `choose` に渡す。
+選択は独立評価候補であり、推奨設定・収束・名目95%被覆・母集団RMSEの保証ではない。
+選択結果のspeed_ratioは引き続きnullとする。
+
+## 経路ごとの証拠
+
+共通して、外部pinしたsampling plan・report・submission・script・終端、元環境のnative profile、referenceと全16条件の保存WSS監査を確認する。
+現存trace、anchor、reference artifactとsourceの照合は各readerの既存範囲を維持し、全復号labelやanchor MCを再実行したとは主張しない。
+readerが読んだ全inputのhashと解決先をselectorのEvidenceへ引き継ぎ、読取中の変更も検査する。
+
+回復経路では元解析の時間切れを保持し、再利用した群・再計算した群の完全な対応、元jobと回復jobの実終端、回復controlの受理、trace監査、最終report jobを結ぶ。
+異常終了した元解析を成功へ書き換えず、回復readerが認めた再利用範囲と最終全768群の照合を必須にする。
+
+portable経路では固定assignment・全38 batch・全768群・両hostのparity・転送前後hash・各実行と回収の履歴を既存providerで確認する。
+PCの計算に架空のPBS jobを割り当てず、元sampling・collector・trace監査・最終report・referenceの実PBS証拠と区別して記録する。
+本番final config、wrapperの実submission・execution・completion・terminal、実report hashも結合する。
+全ての回収失敗を除いた部分集合ではなく、既存readerが明示するinfrastructure failureを含めた予定分母を維持する。
+
+## 受入と導入順
+
+共通の `reconcile_report(route, plan, saved, reader_result, reference, report_sources, proof)` は、既存readerの返り値と保存reportの数値・provenanceを照合する内部部品とする。
+この部品だけでreaderの実行、正式plan、参照監査、PBS終端を認定せず、それらは各経路の入口が検証する。
+全192 seedと予定設定のrowを既存compare_rowsで再集約し、reportの各科学フィールド、source closure、監査evidence、保証していない範囲を照合する。
+経路は明示指定とし、回復履歴を持つ結果とportable結果を相互に読み替えない。
+部分的な成功や未定義診断を削除せず、reader側のhashと解決先を親Evidenceへ取り込んで終了時まで変更を検出する。
+
+まず縮小fixtureで新readerの明示選択、既存3 readerの維持、全12/24/192の分母、source/input/reference/reportの改変拒否を試験する。
+回復元の異常終端を保持した成功例、群の欠落・重複・誤った回復元の拒否、portableのhost混同・未知batch・部分cohort・偽PBS ledgerの拒否を分けて検証する。
+数値部分は実 `compare_rows` と `choose` を用い、縮小fixtureやmockを実768群の監査と表現しない。
+selector親入口、計画、seed census、実行、stage4評価までの実descriptor接続を検査し、source closureや実argvの検査を迂回しない。
+小仕様、失敗する受入テスト、実装、Windows/Linuxの軽量受入、別rootへの配置の順に進める。
+正式実行には全12条件の実reportと全source/input pin、実測に基づく資源設定が必要であり、qsub・待機中を含む最大2ノードを維持する。
+新経路のentryには、固定environment・input roots・未使用の子directory・親script/resourceを持つ `reader_process` templateを明示する。
+templateのparentは `script_path` と `resource` を固定し、親のscript hash・PID・host・PBS IDをselector実行時に記録する。
+親のscriptは入力manifestのhashを含むため、そのscript hashを同じ入力manifestへ埋め込む循環を作らない。
+親wrapperのbegin/finishが固定control・prepared・実submission/scriptの結合を検証し、その内側のselectorが現scriptのhashを子入力へ固定する。
+この外側のparent wrapper検証を省略した単独selector実行を、正式な受理とは扱わない。
+親の新経路metadata readerは、回復済みreportのparent-completion/prepared/internal-completionと、portable reportのconfig/execution/completion/terminalを、それぞれ固有schemaで照合する。
+同じ最終PBS job・qsub script・実行回数1・正常終端・外部pin済みreport bytesへ結び、実 `resources_used.walltime` と `resources_used.mem` を返す。
+要求walltimeや要求memを実測値の代わりに使わず、実測が欠ける場合は資源根拠として受理しない。
+この部品は最終report payloadのhashを照合するが、trace・WSS・portable archiveの再監査や数値再計算を行ったとは扱わない。
+元解析の異常終端と回復範囲、全群監査は引き続き子の固有readerで検証し、親metadataの受理で省略しない。
+親wrapperの新経路accepted行は、元の最終metadata readerの返り値を外部pin済みacceptanceへ保持し、同じentry・report・terminalへ照合する。
+資源行では `collection=null`・`staged_copy=null` として、最終reader内の監査済みcollection読取を最終jobへ一度だけ計上し、追加hash費用は別の正の予算として明記する。
+この計上をPC上の計算時間や元のsampling時間へ読み替えず、全12条件の実績が揃うまで正式な資源決定を作らない。
+parent scriptのパスと子templateの資源は実際に生成する親PBS scriptと一致させ、wrapper自身のlocal import closureもbootstrap後の実source照合へ含める。
+親wrapperでの再検査は子の作業directoryが作成された後にも行うため、templateの静的整合性と起動時の未使用directory検査を分ける。
+子directoryは親rootの `readers/case{case}-target{target}` に固定し、未使用検査は実際の起動時に必ず行う。
+selectorは子directoryの隣へ入力JSONを排他保存してから、同じPBS割当て内で子を逐次起動する。
+待機のtimeoutは同じ実handleへの観測として扱い、新しい子を起動せず、正常終端後だけtransportと親側の返り値検査へ進む。
+全12条件が未完了の場合は24行のpendingを維持し、新経路の固定metadata/templateの照合だけを行って子を起動しない。
+
+実装と縮小受入の現在状態は [段階的な実装記録](low_noise_timing_reference_refactor_2026-10-20_ja.md) に記録する。
+隔離selector内の起動・受理と全reader部品のLinux fixture受入は完了した。
+外側のqsub用wrapperの新経路metadata・資源接続と、fixtureによるbegin/finish/sealからstage4 descriptor受理までの接続試験は完了した。
+全12条件の実descriptor、実データによる後段plan/stage4、本番配置・正式選択は未実施である。
+既存の計時runnerや307件のLinux受入を、この新経路の接続検証済みという意味には使わない。
+
+実descriptorの準備に先立ち、完了済みC0T0/C0T1の保存preparedに記録された元source・Python・package bindingを、別プロセスから読み取り専用で照合する。
+新しいreader部品だけを別directoryへ置き、元sourceを上書きせず、ASTで到達するlocal importと全core source・native binaryを列挙して子environment案を保存する。
+各conditionは元のhelper rootを使い、source hashが等しくても異なる絶対pathを統合しない。
+この事前確認では子bootstrapと元report helperのsource/runtime bindingだけを実行し、raw traceの読取・再集約・decoder replay・PBS jobの作成を行わない。
+実際のraw readerと全12条件の親descriptorが未検証であることをreceiptに明記する。
+完了済みconditionのentry候補では、保存preparedの元解析authorityにある相対input pinを元sampling rootへ解決し、既存の絶対pinと競合しないことを確認する。
+WSS監査conditionのpayload pinは、既に外部pinされたdone markerの `.json`・`.npz` のhashから取得し、元の192 seedや16参照の意味を変えない。
+元最終jobのmetadataと実qstatを再照合した上でentry・environment候補を保存するが、親のscript/resourceと子directoryを未決定のまま正式parent inputへ投入しない。
+
+実C0T1では、WSS監査conditionのreferenceと最終report内のreferenceの相違が `source_sha256` の配置先だけであることを確認した。
+共通reference readerは、既存のsource relocation検査で元配置と現在配置の同一basename集合・全byte hashを照合した場合に限り、最終reportにそのどちらかの完全なsource mapを認める。
+異なるsource map、未検証の第三の配置、source以外の数値・入力・scopeの相違は拒否する。
+元の監査recordと最終reportを変更せず、返り値の `reference` は照合済み最終reportの表現を保持し、元監査recordは `audit_record_reference` として別に保持する。
+後段のreport照合は引き続き最終report全体の完全一致を要求する。
+縮小fixtureでもsource relocation自体は実ファイルのhash検査を用い、raw WSS再監査のmockと区別する。
+
+既存staged経路のC2T0/T1/T2は、保存済みfinal configのentryと14ファイルの回収記録を起点とする。
+既存のsealed snapshot readerを再利用して元report・submission・completion・terminalと実qstatを確認し、元のstaging control pinを保持した候補を作る。
+親environmentは元のPython・core・科学moduleのimport位置を維持し、新しいselector/wrapper部品の置換を明示する。
+最終job、collection、copyの実計時を個別に記録し、要求walltimeやcopyの経過時間を全12条件の確定資源予算へ読み替えない。
+このmetadata準備ではstaged raw readerや数値再計算を実行しない。

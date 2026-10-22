@@ -1,0 +1,29 @@
+# 公開側の履歴更新と継続計算側の整合確認
+
+18:49〜18:52 JSTにGitHub APIでremote main・公開tag・CI・Release一覧とファイル内容を読み取り確認した。
+remote mainは `e7e5239f977fa6162e58570726100e3fcd717afa`、tag `v0.1.0.dev5` の参照先も同commitである。
+tests run39742521637はsuccess、リポジトリはPRIVATE、Releaseは0件だった。
+
+local HEAD `886b44b9fdc56d5b86491302dfb651285bbc4113` とのcompare APIは共通祖先なしを返した。
+remoteの公開手順書には履歴中の識別子置換と他cloneへの旧履歴をmergeしない指示があり、単にremoteが先行した状態として扱えない。
+稼働中controllerがこの作業ツリーの固定sourceを参照しているため、今回の確認ではfetch・merge・reset・commit・pushを行っていない。
+未コミットの計算結果と証跡も保持した。
+
+Git blobを直接比較し、local 981ファイルとremote 984ファイルのうち144 pathに差があった。
+`src/` の33ファイルと `pyproject.toml` はすべて同一blobだった。
+文書・引用情報・証跡・一部のcluster script・テストは更新されており、パッケージsourceの同一性だけで旧source ZIPやwheel metadataを最新公開物として再認定しない。
+[観察記録](data_tile_validation_2026-10-17/remote_publication_audit_20261022_v1/observation.json)のSHA256は `c34377a4bfac0ae30cfcf5ed88e29ea02f176ca0c4f7cf5903f0b901a9916514` である。
+
+公開時はremoteの[現行手順書](https://github.com/junichiharuna/mcmc4qec/blob/e7e5239f977fa6162e58570726100e3fcd717afa/docs/wp/publication_runbook_2026-10-22_ja.md)と新しいtagを基準にする。
+旧 `output/experimental_release_20261019/release_body_final_v2.md` と固定済みの添付候補は過去の記録として保持し、そのまま最新Releaseへ添付しない。
+現行remoteの本文変換scriptと英語ノートのSHA256を確認し、[現行tag用Release本文](data_tile_validation_2026-10-17/remote_publication_audit_20261022_v1/release_body_current_tag.md)を生成した。
+生成物に相対リンクが残っていないことと、7本のリポジトリリンクのpathが当該tagのtreeに存在することを確認した。
+本文SHA256は `7328ce20a0d03cd4505cb0b67f6ac78c3ee6d9aa36df92c1ea314ab22b230cba` であり、[検証記録](data_tile_validation_2026-10-17/remote_publication_audit_20261022_v1/release_body_validation.json)を保存した。
+公開操作・Release作成・Zenodo連携・DOI変更は行っていない。
+
+現行remoteのTODOには、今後の証跡に識別子を再導入しないdriver変更と、公開用に識別子を置換したdataset束を新しいSHA256 manifest付きで作る作業が残っている。
+現在のraw証跡をin-placeで置換すると相互hashが変わるため、この継続計算側では原本を保持する。
+公開用の変換物は原本と別のartifactであることを明示し、未監査のrawログを公開側へpushしない。
+次回の公開向け統合は新履歴の別checkoutで行い、旧履歴や動作中sourceを上書きせず、必要な結果と文書だけを検証して移す。
+
+数値検証の範囲は変わらず、低ノイズは9/12条件、独立計時と最終報告は未完了である。

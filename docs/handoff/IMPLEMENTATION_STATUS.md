@@ -465,7 +465,7 @@ Windowsで10.73秒の照合を実行し、結果・再現script・環境を docs
 ## 2026-10-22 公開前の履歴書き換えと識別子の置換
 
 GitHubでのexperimental版公開に先立ち、全218コミットのauthor・committerメールアドレスを個人アドレスからGitHubのnoreplyアドレス `29061066+junichiharuna@users.noreply.github.com` に書き換えた。
-同時に、追跡ファイルと全履歴のblobで、クラスタのユーザー名を `user`、別利用者のホームパスを `/home/other`、Windowsのユーザー名を `user`、クラスタのホスト名接頭辞 `CPUcluster` を `node` に置換した。
+同時に、追跡ファイルと全履歴のblobで、クラスタのユーザー名を `user`、別利用者のホームパスを `/home/other`、Windowsのユーザー名を `user`、クラスタのホスト名接頭辞 `node` を `node` に置換した。
 この置換で128ファイル・1,572行が変わり、挿入と削除の行数は一致した。
 置換後の追跡ファイルと履歴に、個人メールアドレス・クラスタのユーザー名・ホスト名・Windowsのユーザー名は0件である。
 tile検証とcalibrationの証跡はファイル同士をSHA-256で束ねているため、置換したrepo内コピーは記録された指紋と一致しない。

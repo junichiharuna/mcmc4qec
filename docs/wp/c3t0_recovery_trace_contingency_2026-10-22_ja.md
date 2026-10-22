@@ -1,0 +1,29 @@
+# 条件付き8時間collectorからtrace監査への受理仕様
+
+本仕様は[4時間collectorの時間切れ対策](c3t0_collection_timeout_contingency_2026-10-22_ja.md)に接続する準備であり、現jobの失敗や復旧を仮定しない。
+対象条件のcase 3・target 0、旧4時間jobの確定時間切れ、旧成果物保持は新collector側のread_configとguardで確認する。
+
+既存の `recovery_trace_audit_v1` は新collectorのwalltimeを4時間に固定して検査するため、新しい8時間collectorを受理する別directoryを用意する。
+変更する実行authorityは新collectorの要求walltimeの値だけで、実F・exit 0・run_count 1、script、1 CPU・32 GB、ledger、worker開始・終了、summary、旧失敗guard、source・configの一致は維持する。
+旧4時間の復旧collectorを新8時間authorityへ渡した場合も拒否する。
+監査backend、qsub処理、workerの科学計算を変更せず、明示configから新collector controlsと新authorityを読み込む。
+監査backendが固定するcollector adapterのsource hashも、受入済みの8時間版へ明示的に更新する。
+このhashの一致検査を外したり、任意のadapterを受理したりはしない。
+元の監査root・module・source・実行中driverは変更しない。
+
+受入はまず新8時間receiptに対する旧authorityの拒否を確認し、次に別版で新8時間を受理し旧4時間を拒否することを確認する。
+同時に既存のworker・ledger・source・終端の不一致拒否、capacity/fullの分母保持、計算bytecodeの不変、qsubの共有lock・最大2ノード・曖昧応答保持を合成fixtureで再確認する。
+Linuxの同一fixture確認も行うが、実collectorの正常終端・native preflight・全trace監査の実行とは区別する。
+
+実collector失敗の確定、復旧context、復旧collector完了、監査configと新root、後続driverの引継ぎ、final readerの実接続は、この受入だけでは完了しない。
+
+## 別版の受入結果
+
+`output/recovery_4h_timeout_trace_v1/` に別版を用意し、旧authorityに対する新8時間の受理と旧4時間の拒否の2件が失敗することを先に確認した。
+実装変更はauthorityの要求walltimeと、backendが固定するcollector adapterのsource hashであり、監査・資源計算のbytecodeとqsub/workerの処理は維持した。
+最初の統合試験で旧collector hashが残ることによる2件の拒否を確認し、受入済み8時間collectorのhashへ明示的に更新した。
+Windowsは47 passed・24.34秒だった。
+Linuxの初回はscheduler fixtureの転送漏れによりimport時に停止したため、その記録を保持し、別directoryへ必要なfixtureを含めて転送した。
+修正した転送でLinuxは47 passed・12.49秒だった。
+これらは合成fixtureであり、実265419の終了や新collector・全trace監査の本番成功を意味しない。
+実config・authority作成、監査qsub、元driverの失敗を保持した引継ぎ、最終report/計時への接続は未実施である。

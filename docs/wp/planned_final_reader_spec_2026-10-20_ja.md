@@ -1,0 +1,44 @@
+# 初回4時間collectorの最終BAR reader接続
+
+## 小仕様
+
+対象は初回4時間collectorを使うC1T1・C1T2・C3T0・C3T1・C3T2であり、既存C1T0の復旧経路と公開候補は変更しない。
+最終readerは既存の全192 seed・768群・67,584行の集計関数とreference照合を再利用する。
+planned_collection_authorityを明示して監査backendを選び、旧失敗jobやrecovery_guardを作らない。
+実collector完了・全task index照合を含むauthorityの再検証は、既存の初回collector監査backendへ委譲する。
+authorityが保持する全入力の絶対path・実体・hashを再照合し、最終reportのevidenceに追加する。
+入力とauthorityの変更、別source、既存evidenceとの不一致を拒否する。
+CLIは外部pin付き監査configと4 control、元bundle入力、collector configと3 controlを科学moduleのimport前に照合する。
+CLIはconfigに固定したsampling/full監査rootと元native Pythonを要求し、別配置のmoduleが既にimportされていた場合は拒否する。
+失敗・診断未定義・区間未取得は予定行数に残し、最終reportを名目被覆や母集団RMSEの保証とは扱わない。
+
+## 受入計画
+
+先にsynthetic fixtureで全5条件の分母保持、基盤失敗とcontext失敗、authority入力改変とhash衝突の拒否を確認する。
+既存のnative/PBS/reference/出力先の拒否条件と、reference処理中のauthority入力改変を再検証する。
+CLIは実workerのbootstrapを使い、config・control・bundle不一致を科学処理前に拒否し、実行入口の引数と出力provenanceを確認する。
+fixtureの受入と実配置configのbootstrapは本番raw trace照合や最終report成功の証拠として扱わない。
+qsub wrapper、最終reportの回収、本番実行は別途接続する。
+
+## qsub接続の追加仕様
+
+既存condition schedulerの共有lock・Qを含む最大2ノード検査・一度限りの投入を保持し、reader引数と元venvのentry照合だけを新入口へ接続する。
+configのplanned_auditに監査configのpath/hashを保持し、全192 seedのfull監査plan、正常終端、authority入力とreader sourceをconfigと最終reportの両方へ結び付ける。
+capacity監査、authority不一致、metadata欠落、不正なrelative path、reportの入力証跡欠落を拒否する。
+実PBS応答を置換した結合試験でprepare・qsub・compute・completeを通し、不正reportを封印しないことを確認する。
+この結合試験は本番qsubや科学計算成功を示さない。
+
+## 実装・受入
+
+隔離directoryにplanned_final_join.py、planned_final_cli.py、planned_condition_qsub.pyを実装した。
+reader/CLIの受入はWindows65 passed・26.02秒、Linux65 passed・12.04秒だった。
+全5条件のcontext失敗行と基盤失敗行を保持し、reference処理中のauthority入力変更を拒否した。
+PBS/native/referenceの判定と集計関数は元関数を再利用している。
+qsub接続の受入はWindows30 passed・3 skipped・3.97秒、Linux33 passed・4.19秒だった。
+Windowsで未実施の3件はLinuxの別プロセスでprepare・qsub・compute・completeを結合するfixtureであり、Linuxでは実行した。
+曖昧なqsub応答の予約保持、Q/R/H/Eを含む2ノード上限、投入直前の資源再確認と入力改変の拒否を再確認した。
+
+readerのLinux受入配置で、既に固定済みの5条件の実監査config・collector config・control・元bundle入力をbootstrapで再照合した。
+本番collector完了authorityの検証、full監査の実読取、最終config作成、本番qsub、raw traceとreferenceの結合、本番report回収は未実施である。
+全テスト成功を低ノイズ正式完了条件数へ加算しない。
+source、実装前の不足module検出ログ、受入ログ、実config照合と進行中の計算観測を [保存manifest](data_tile_validation_2026-10-17/planned_bar_final_progress_20261020_v1/manifest.json) に保存する。

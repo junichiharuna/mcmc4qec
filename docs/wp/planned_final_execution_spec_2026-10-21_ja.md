@@ -1,0 +1,39 @@
+# 最終設定からqsub・report回収への接続
+
+## 小仕様
+
+稼働中C1T1・C1T2の最終準備driverを前提に、受入済みC1T0実行driverの制御を再利用する。
+元driverは変更せず、別namespaceでplanned wrapper・条件別path・caseとtarget_indexの明示引数へ接続する。
+最大2要求ノードの観測と投入直前の再確認、共有lock、qsub応答の照合、実PBS正常終端、13成果物の回収を維持する。
+投入されなかったという明示的応答がある場合だけ空き枠待ちに戻り、通信失敗や曖昧なqsub応答は再投入しない。
+設定作成・preflight・投入・終端検査・回収のPython入口で元の1 thread環境を維持する。
+回収時は既存collectorのsourceと検証処理を変更せず、SSHで起動する元venvの環境だけを明示する。
+collectorへcaseとtarget_indexを明示し、別条件のreportを受理しない。
+公開候補、既存C1T0の実行中driver、数値計算workerを変更しない。
+
+## 受入条件
+
+実準備intentと固定sourceを操作なしで照合する。
+空き枠なし・投入直前の競合・曖昧な応答・別scriptや資源・別条件の完了を拒否する。
+元の実行順序と同一操作の排他を再検証する。
+実際に生成するリモートPythonをfixture backendで実行し、qsubへ進む境界を検証する。
+13成果物の回収呼出に条件が渡り、SSH環境以外の引数・snapshot処理・SCP転送が保持されることを確認する。
+fixture成功を本番qsub・最終report・科学的受理の完了として扱わない。
+
+## 実施結果
+
+Windowsで追加12件と元driverの回帰24件、計36件・0.94秒が成功した。
+元driverの変更はwrapper import、元venv起動前の環境、collectorの条件引数の3箇所に限定し、各置換の一致数を検査する。
+commandとcollect以外の元関数・メソッドはAST比較で無変更を確認した。
+条件ごとに独立したnamespaceを作り、稼働中のC1T0 driverは変更していない。
+実際に生成するリモートPythonをfixture backendで実行し、2ノード使用中にはsubmitを呼ばず、1ノード時にexecute=Trueへ進む境界を確認した。
+既存wrapperの共有lockと投入直前の再検査は引き続き既存実装を使用する。
+collectorのSSH環境指定だけを追加する別入口を設け、元source・snapshot・SCP引数を保持した。
+実PBSや科学I/Oを使った新規結合実行は未実施である。
+親driverはWindows上で動作し、親driver単独のLinuxテストは未実施である。
+接続先のplanned wrapper・collectorのLinux受入は既存の実配置記録を参照する。
+source・導出差分・red/greenログは [受入manifest](data_tile_validation_2026-10-17/planned_final_execution_acceptance_v1/manifest.json) に保存した。
+manifest SHA-256は `93caa8d7f9ec0821a78c9ae4e844316d926a19904a2eb6053349a68e640c2f2c` である。
+driver SHA-256は `d5b252e413b2ab471e98b89dc137d121e2069813dec21283f52924c4067afe93` である。
+01:26 JSTにC1T1のPID16360とC1T2のPID39644でlive sessionを確認した。
+いずれも最終設定の完成待ちであり、新しいqsub投入やreport回収はまだ行っていない。
