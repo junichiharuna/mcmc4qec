@@ -1,6 +1,8 @@
 # Experimental版公開の手順書（2026-10-22）
 
-公開前の準備は完了しており、GitHubのリポジトリはprivateのまま、tag `v0.1.0.dev5` が `main` の先頭を指している。
+experimental版の公開候補を準備している。
+公開時にはGitHubのvisibility・Release一覧・tagとmainの実際の参照先を再確認する。
+候補ファイルの存在だけで公開済み、またはtagと最新mainが一致すると判断しない。
 ここに書くのは、所有者が公開を決めてから行う操作と、その後に残る作業である。
 各手順は実行した日時と結果を `docs/handoff/IMPLEMENTATION_STATUS.md` に追記する。
 
@@ -8,7 +10,10 @@
 
 `git status --short` が空で、`git log -1` が tag `v0.1.0.dev5` と同じcommitであることを確認する。
 `gh run list --limit 1` で最新のremote CIが success であることを確認する。
-文書中の公開日は 2026-10-22 と書いてあるので、別の日に公開する場合は README日英・リリースノート日英・`CITATION.cff`・`CONTRIBUTING.md`・`CHANGELOG.md`・`AGENTS.md` の日付を直してcommit・pushし、tagを付け直す。
+未確定の公開日や公開済みという記述をREADME・リリースノート等に書かない。
+公開日が確定したら `CITATION.cff` の `date-released` に実際の日付を記録し、対象commitと配布物を対応させる。
+commit・pushと既存tagの更新は所有者の指示に従い、変更後の対象commitでCIと配布物を確認してから公開する。
+未コミットの候補を既存tagに対応する配布物として扱わない。
 
 GitHubの Settings → Emails で「Keep my email addresses private」と「Block command line pushes that expose my email」をONにする。
 noreplyアドレスの `user.email` は研究室PCの `C:\dev\mcmc4qec` にしか設定していないので、この設定がないと自宅PC・クラスタ・Codex worktreeからのcommitで個人メールアドレスが公開履歴に戻る。

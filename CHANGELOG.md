@@ -2,8 +2,8 @@
 
 ## Unreleased
 
-- Publish the repository on GitHub as the experimental 0.1.0.dev5 release
-  (2026-10-22). The package is not on PyPI.
+- Prepare the experimental 0.1.0.dev5 release for GitHub (2026-10-24).
+  The package is not on PyPI.
 - Rewrite the full history before publication: commit authors use the
   GitHub noreply address, and cluster user names, host names, and local
   Windows user names are replaced in all tracked files. SHA-256 values

@@ -498,3 +498,13 @@ force push後のcommit 6e09463に対するremote CI（run 39734392100）は12 jo
 変換の単体テストと、生成した本文に相対リンクが残らず全リンク先がリポジトリ内に存在することの確認を `tests/test_release_body.py` に加えた。
 GitHubのリポジトリ設定は、descriptionをREADMEの表現に揃えてexperimental・PyPI未公開を明記し、topicsに quantum-error-correction・quantum-computing・mcmc・rare-event-simulation・monte-carlo・python を設定し、Projectsタブを無効にした。
 homepageはMkDocsサイトの公開先が決まるまで空のままとした。
+
+## 2026-10-24 experimental公開に向けた履歴修正
+
+所有者の指示により、直近2コミットの文書へ再導入された既知の利用者名・ローカル利用者パス・クラスタhost接頭辞を置換した。
+隔離したコピーで履歴を更新し、計算中の作業ツリーと固定済み科学計算入力は保持した。
+置換された証跡中のSHA256は非公開で保持する原本を指し、公開用コピーのSHA256とは区別する。
+公開日を2026-10-24としたexperimental版の候補を準備し、対象commitのCIと配布物を確認してからGitHubのpublic化とRelease作成を行う。
+所有者からZenodoのGitHub連携済みとの回答を受けたが、DOIの作成・内容照合はRelease後に別途確認する。
+低ノイズ校正は継続中で、最後のtile288 depolarizing・p=0.001は768群のPC解析・回収を完了し、索引作成と最終集約以降は未完了である。
+全12条件の比較・独立計時・最終報告は未完了であり、公開を精度・混合・95%被覆の保証として扱わない。

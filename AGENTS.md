@@ -82,7 +82,7 @@ installed wheelはcore 271 passed/76 skipped・78.84秒、optional 389 passed/5 
 ## Do not
 
 - 研究リポジトリ RIMC（`C:\dev\RIMC` または `A:\dev\RIMC`）を変更しない。読み取り専用で参照する。研究側の runner の既定（Z+PT）も変えない
-- ライセンスは MIT で確定済み（2026-10-01、`LICENSE`）。変更しない。リポジトリは所有者の判断で 2026-10-22 に public にした（experimental 版 0.1.0.dev5）。PyPI 等に publish しない、引用情報（著者・所属・DOI）を所有者の指示なしに変えない。これらは所有者（春名）が決める。公開後の手順は `docs/wp/publication_runbook_2026-10-22_ja.md`
+- ライセンスは MIT で確定済み（2026-10-01、`LICENSE`）。変更しない。所有者は2026-10-24にexperimental版0.1.0.dev5のGitHub公開、直近2コミットの識別子修正と履歴更新を承認した。Zenodo連携済みとの回答を受け、Release作成まで進める。実際の公開結果はGitHubのvisibilityとReleaseを確認する。PyPI 等に publish しない、引用情報（著者・所属・DOI）を所有者の指示なしに変えない。これらは所有者（春名）が決める。公開後の手順は `docs/wp/publication_runbook_2026-10-22_ja.md`
 - コミットの author / committer に個人メールアドレスを使わない（GitHub の noreply アドレスを使う）。クラスタのユーザー名・ホスト名、Windows のユーザー名を含むパスを新たに追跡ファイルへ書かない。クラスタの証跡はホスト名を記録せず `$HOME` 相対のパスで書くようドライバ側を直してから生成する。識別子を含む証跡をやむを得ず取り込むときは置換し、記録された SHA-256 が置換前の原本を指すことを注記する（2026-10-22 の経緯は `docs/handoff/IMPLEMENTATION_STATUS.md`）
 - `docs/handoff/` の引き継ぎ文書と仕様書を書き換えない（過去時点の記録として保持）。更新は `IMPLEMENTATION_STATUS.md` に追記する
 - 引き継ぎ文書や仕様に書かれた研究上の主張を、独立に検証した事実として扱わない

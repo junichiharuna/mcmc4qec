@@ -1,8 +1,8 @@
 # Experimental版のリリースノート
 
 mcmc4qec 0.1.0.dev5のリリースノートである。
-2026-10-22にGitHubでexperimental版として公開し、PyPI公開は後に行う。
-公開前に実施した確認とその限界は末尾の公開準備記録に記す。
+2026-10-24付のexperimental版の配布先はGitHubとし、PyPI公開は後に行う。
+実施済みの確認とその限界は末尾の公開準備記録に記す。
 
 直接MC、失敗条件付きMCMC、BAR splittingによる論理誤り率推定を提供する。
 今回の版では既存BP-OSD・matching接続に加え、tile符号の構成とBP-LSD・BeliefFind・単独Union-Findを含む。

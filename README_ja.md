@@ -4,7 +4,7 @@ mcmc4qec は、量子誤り訂正の論理誤り率を推定する Python ライ
 直接モンテカルロ法では観測しにくいまれな失敗を、失敗条件付き MCMC と Bennett acceptance ratio（BAR）による splitting で推定します。
 小さな問題の全列挙や直接モンテカルロ法にも対応し、自作の符号・ノイズモデル・デコーダーを使えます。
 
-現在は検証中の **pre-alpha 版**で、GitHub 上で experimental 版（0.1.0.dev5、2026-10-22）として公開しています。
+現在は検証中の **pre-alpha 版**で、experimental 版（0.1.0.dev5、2026-10-24）をGitHubで配布します。
 PyPI には公開していません。
 
 [English](README.md) · [ドキュメント](docs/index_ja.md) · [チュートリアル](docs/tutorial_ja.md) · [API 文書（英語）](docs/api_en.md) · [実行例一覧](examples/README.md)
@@ -12,7 +12,7 @@ PyPI には公開していません。
 ## インストールと実行例
 
 Python 3.11 以上が必要です。
-GitHub の tag から、符号の生成と PyMatching に必要なパッケージをまとめてインストールします。
+GitHub のtagから、符号の生成と PyMatching に必要なパッケージをまとめてインストールします。
 
 ```sh
 python -m pip install "mcmc4qec[codes,matching] @ git+https://github.com/junichiharuna/mcmc4qec.git@v0.1.0.dev5"

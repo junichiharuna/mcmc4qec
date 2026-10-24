@@ -1,8 +1,8 @@
 # Experimental release notes
 
-These are the release notes for mcmc4qec 0.1.0.dev5, published on GitHub on 2026-10-22 as an experimental release.
+These notes describe experimental version 0.1.0.dev5 of mcmc4qec, dated 2026-10-24.
 A PyPI release will follow separately.
-The checks run before publication, and their limits, are recorded in the readiness record linked below.
+Completed validation checks and their limits are recorded in the readiness record linked below.
 
 mcmc4qec provides direct Monte Carlo, failure-conditioned MCMC, and BAR splitting for logical error-rate estimation.
 This release adds tile code construction and BP-LSD, BeliefFind, and standalone Union-Find adapters alongside the existing BP-OSD and matching interfaces.

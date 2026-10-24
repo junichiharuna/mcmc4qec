@@ -1,8 +1,8 @@
 # Contributing
 
 This package is a pre-alpha development prototype released under the MIT
-License (see `LICENSE`). The public repository and release process have not
-been finalized.
+License (see `LICENSE`). Repository visibility and release publication
+require the project owner's instruction.
 
 ## Local checks
 
@@ -92,14 +92,15 @@ Diagnostic quality does not prove correctness. Report the validation actually
 run, including limitations and missing checks; do not describe unrun CI or
 planned experiments as successful.
 
-## Public release record
+## Release preparation
 
-The repository was made public on GitHub on 2026-10-22 as the experimental
-0.1.0.dev5 release. Before publication, dependency licenses were reviewed
+Version 0.1.0.dev5 is prepared for the experimental GitHub release dated 2026-10-24.
+Dependency licenses were reviewed
 (pymatching and stim are Apache-2.0, ldpc and bposd are MIT), the full test
 suite, the strict documentation build, the installed-wheel CI, and a secrets
 scan were run, and the whole history was rewritten so that commit authors use
 the GitHub noreply address and cluster or local user identifiers are replaced.
-`CITATION.cff` still lacks a DOI and affiliation, and the package is not on
+`CITATION.cff` retains the owner-confirmed authorship and affiliation; a DOI
+remains to be recorded after the Zenodo archive is available. The package is not on
 PyPI. Changing the repository visibility, publishing to PyPI, or finalizing
 citation metadata remains the owner's decision.
