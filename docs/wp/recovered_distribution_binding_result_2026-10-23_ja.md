@@ -1,0 +1,22 @@
+# 復旧した転送完了記録への接続確認
+
+2026年10月23日09:00 JST頃、C3T1算術検証のdistribution_doneだけが、復旧前の転送待受を参照していることを確認して修正した。
+前回の制御復旧試験は最終実行とcollectionの参照先を検証していたが、転送完了記録の参照先を対象に含めていなかった。
+結果が到着する前に接続漏れを確認したため、数値計算・算術検証・candidate作成の再実行は発生していない。
+
+旧PID3756のコマンドと生成時刻を照合し、旧出力先がintent.jsonだけであり、最終実行の完了記録も存在しないことを確認して停止した。
+[切替記録](data_tile_validation_2026-10-17/control_newline_downstream_transition_v2/stopped.json) に、PID・生成時刻・元intentのhashを保存した。
+旧sourceと旧intentは保持し、output/control_newline_downstream_v2/driver.pyを新PID40984で起動した。
+新出力先はcontrol_newline_recovery_v1/planned8h_final_c3t1_downstream_handoff_v2である。
+算術検証の参照先のうちdistribution_doneだけを復旧済み転送待受へ向け、転送plan・receipt・remote root・final collection・科学設定は維持した。
+C3T2の転送完了参照先は変更していない。
+
+[受入記録](data_tile_validation_2026-10-17/control_newline_downstream_acceptance_v2/accepted.json) は4 passed・0.84秒である。
+syntheticな完了記録・report・receipt・plan一式を元のreadinessへ渡し、正常な転送hashでreadyとなり、転送hashの不一致を拒否することを確認した。
+これは制御の受入であり、本番の科学結果を用いた検証ではない。
+[両条件の接続照合](data_tile_validation_2026-10-17/control_newline_downstream_acceptance_v2/connections.json) では、実際のpreparationとexecutionのintent、動的な算術検証とcandidateの参照先を照合した。
+両条件で転送完了記録・最終実行・collection・計時候補の参照先が一致した。
+PID40984の実稼働と、collection待機中の観測記録、error記録がないことを確認した。
+
+09:00時点でも残る2条件の計算・解析は継続中であり、全12条件の集約・独立計時・最終報告は未完了である。
+この切替では新しいqsub投入・commit・push・公開操作を行っていない。

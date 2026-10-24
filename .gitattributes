@@ -4,3 +4,5 @@ src/** -text
 cluster_scripts/** -text
 tests/** -text
 docs/wp/data_*/** -text
+# This specification is an exact-byte input of active validation controllers.
+docs/wp/future_pc_export_wait_spec_2026-10-22_ja.md text eol=lf

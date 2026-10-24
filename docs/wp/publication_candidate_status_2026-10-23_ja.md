@@ -1,5 +1,8 @@
 # 公開候補の状態確認とRelease本文の訂正
 
+その後、公開状態の誤記と追加文書への識別子再導入を修正する[隔離したレビュー用snapshot](publication_review_snapshot_2026-10-23_ja.md)を用意した。
+これは未コミットで既存tagとは異なる候補であり、以下のtag対応済み成果物と区別する。
+
 2026年10月23日06:27〜06:29 JSTにGitHubの状態と準備済み配布物を照合した。
 リポジトリはPRIVATEで、GitHub Releaseは0件である。
 remote mainは `55cd5998f48d670d8636c630d397ed2b56b86a1a`、tag `v0.1.0.dev5` の参照先は引き続き `e7e5239f977fa6162e58570726100e3fcd717afa` である。
@@ -35,3 +38,36 @@ p=0.003のDGX batch18は実PIDの終了とcompletionを確認し、serial driver
 これは全33バッチの19番目であり、全解析の完了ではない。
 laboは最後のbatch4のPID6732が実稼働し、completionはまだなかった。
 全12条件の入力inventoryは10/12のままで、残る2条件と独立計時・最終報告は未完了である。
+
+## 09:08 JST頃のremote更新確認
+
+[remote再照会と配布物照合](data_tile_validation_2026-10-17/publication_remote_observation_20261023_v2/observation.json) を保存した。
+remote mainは `98222e1daf80e4387a5fd588729052baee923515` に進んでおり、前回確認したmainから1commit・31ファイルの差分があった。
+差分は報告script1ファイルと文書30ファイルで、src配下のpackage変更はなかった。
+報告scriptのremoteバイト列は現worktreeと一致した。
+[CI run39866529525](https://github.com/junichiharuna/mcmc4qec/actions/runs/39866529525) は12job全てsuccessである。
+tagの参照先は変わらず、準備したwheel・source ZIP・Release本文の3件ともSHA256SUMSと一致した。
+Release本文は主4条件の完了と低ノイズ校正・計時の未完了を区別し、全raw datasetが同梱されないことと新decoderの科学的校正が未完了であることを明示していた。
+今回の確認に伴う配布物の再buildや本文変更は不要だった。
+リポジトリは引き続きPRIVATE・Release0件であり、この再照会でも公開操作・commit・pushは行っていない。
+最初の比較API読取りはUTF-8をcp932として読むローカルdecodeで失敗したため、bytesとして読み直して成功した。
+
+## 14:46 JSTの再確認
+
+[再照会記録](data_tile_validation_2026-10-17/publication_remote_observation_20261023_v3/observation.json)で、remote main・tag objectが09:08の観測から変わらず、mainの最新tests run39866529525もcompleted・successであることを確認した。
+リポジトリはPRIVATE、Releaseは0件のままである。
+package配下のgit statusは空で、配布候補3ファイルの実際のSHA256とサイズは既存manifestと一致した。
+package変更がないため、buildやpackage suiteの再実行は行っていない。
+午後に追加した稼働観測や利用上の日本語メモは現worktreeの記録であり、固定済みsource ZIPへ追加したものではない。
+公開操作・commit・pushは行っていない。
+
+## 16:32 JSTの公開状態と残る所有者判断
+
+GitHub APIの再照会でもリポジトリはPRIVATE、Release一覧は空、最新tests run39866529525はhead `98222e1daf80e4387a5fd588729052baee923515` でcompleted・successだった。
+この再照会では配布物の再buildや再hashはしていない。
+[公開手順書](publication_runbook_2026-10-22_ja.md)はpublic化を所有者の指示時だけ行い、別日の公開では公開日を含む文書・引用情報の更新とtag更新を行うよう定めている。
+また、ZenodoのGitHub連携を所有者側でONにしてからReleaseを作成する順序を指定している。
+このセッションでは公開日・tagの更新、Zenodo連携の確認、public化、Release作成を実施していない。
+したがって「公開候補の成果物が準備済み」と「公開直前の全手順が完了済み」は同一ではない。
+現行AGENTS.mdにある2026-10-22のpublic化済みという記述は、このAPI観測と一致せず、実際の公開状態の根拠にしない。
+既存の配布候補と稼働中の科学計算入力は保持し、公開操作のために計算中のsourceを上書きしない。

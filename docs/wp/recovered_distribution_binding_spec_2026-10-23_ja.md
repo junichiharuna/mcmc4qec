@@ -1,0 +1,9 @@
+# 復旧した転送完了記録と算術検証の接続
+
+C3T1転送待受の復旧先がcontrol_newline_recovery_v1配下へ移った一方、算術検証のdistribution_doneだけが元の停止したディレクトリを参照していた。
+既存の算術検証、snapshot検証、candidate作成、192 seed・352設定・67,584行の全分母は維持し、distribution_doneだけを実際の復旧先へ向ける。
+転送plan・receipt、remote root、final collection、最終実行と準備の参照先は変更しない。
+C3T2の転送先は元のままであり、この修正の対象外とする。
+新しい算術検証待受を起動する前に、元の待受のPID・コマンド・生成時刻と、intent以外の処理記録がないことを確認する。
+停止した待受とそのintentを保持し、新しい出力先で一回だけ接続する。
+受入ではsyntheticな完了記録一式を既存readinessへ渡し、正しい転送完了記録を受理し、転送hashの不一致を拒否することを確認する。

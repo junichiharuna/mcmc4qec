@@ -1,0 +1,15 @@
+# C3T2回収結果の読み取り専用照合待受
+
+対象は固定assignmentのDGX 33バッチとlabo 5バッチ、全768群である。
+既存serialのcollect-completedが作成されたバッチだけ、既存の読み取り専用observerでarchive・割当・終了記録を照合する。
+既に保存された観測は上書きせず、予定batch・件数・入力hashとの対応を確認して再利用する。
+既存観測の再利用はraw archiveを再hashした新たな観測とは扱わない。
+固定assignmentとobserverのsource hashを起動時に保存し、待受中の変更を拒否する。
+各observer実行前に排他的intentを保存し、観測失敗・中断を自動再試行しない。
+観測結果が不正、入力が変更、旧intentだけが存在する場合はerrorを保存して待受を終了する。
+sampling・BAR・bootstrap・decoder・転送・qsubを呼ばず、既存計算driverやそのjournalは変更しない。
+待受自身のjournalと、既存observerが排他作成する新規観測だけを書き込む。
+全38バッチの観測が揃った場合にもscientific_validation_completeはfalseとし、科学的な条件別集約を代替しない。
+
+受入テストでは、assignmentの重複・欠落、未回収バッチの実行拒否、既存観測の件数や入力hashの不一致、実行済みintentの再試行拒否を確認する。
+本番起動前にsourceと受入ログを保存し、hiddenな待受を1個だけ起動する。

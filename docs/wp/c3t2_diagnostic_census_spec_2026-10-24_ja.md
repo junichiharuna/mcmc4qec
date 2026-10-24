@@ -1,0 +1,16 @@
+# C3T2保存済み診断の内訳集計
+
+索引で全67,584行のundefinedが立ったため、保存済み診断の定義上の内訳を追加で集計する。
+これは結果を見た後の記述的集計であり、事前固定した校正計画・推奨gate・科学的分母を変更しない。
+新しいsampling・decoder呼出し・BAR・bootstrap・IAT・ESS・R-hatの計算は行わない。
+重み・syndrome重み・logical bit・Bennett edgeの各族について、保存値からR-hat欠落・chain ESS欠落・診断例外・high R-hat・low ESSの件数と該当group数を集計する。
+同じ反復の多数の診断を独立標本として扱わず、診断件数と768群、設定ごとの192反復を分けて表示する。
+同時に複数の理由が成立し得るため、理由の件数を排他的な分割と解釈しない。
+欠落したESSとchain平均だけから定数traceや支持の非連結を断定しない。
+既存indexのsnapshot・registry・assignment・解析archiveを外部hashに結び、各JSON memberをarchive manifestと照合する。
+全768群・全352設定各192反復・計67,584行、各groupの全予定診断keyを要求し、欠落・重複・条件違い・保存flagとの不一致を拒否する。
+既存の未取得区間・診断flag・未定義の件数と一致させ、失敗や未定義を分母から除外しない。
+保存された診断のflagを再構成し、使用rungと対応するBennett edgeの論理和が全行のflagと一致することを確認する。
+元のgroup検証で既に失敗samplingが0である今回の入力を対象とし、その前提が異なる入力は対象群を削らず全体を拒否する。
+小さい合成入力の受入後に独立PBSジョブへqsub投入し、共有lockと所有者の要求ノード数上限2を守る。
+数値集約・比較・独立計時の既存controllerやsourceは変更しない。
