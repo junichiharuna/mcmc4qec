@@ -4,7 +4,7 @@
   "reference_root": "/home/user/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
   "job": {
     "Job_Name": "m4q_wref_audit",
-    "Job_Owner": "user@cpucluster-prism",
+    "Job_Owner": "user@node-prism",
     "resources_used": {
       "cpupercent": 1077,
       "cput": "00:25:15",
@@ -18,7 +18,7 @@
     "server": "node-PRISM",
     "Checkpoint": "u",
     "ctime": "Sun Oct 18 15:16:27 2026",
-    "Error_Path": "cpucluster-prism:/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit/weight-reference-audit.err",
+    "Error_Path": "node-prism:/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit/weight-reference-audit.err",
     "exec_host": "node011/0*96",
     "exec_vnode": "(node011:ncpus=96:mem=356515840kb)",
     "Hold_Types": "n",
@@ -26,7 +26,7 @@
     "Keep_Files": "n",
     "Mail_Points": "a",
     "mtime": "Sun Oct 18 15:19:23 2026",
-    "Output_Path": "cpucluster-prism:/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit/weight-reference-audit.out",
+    "Output_Path": "node-prism:/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit/weight-reference-audit.out",
     "Priority": 0,
     "qtime": "Sun Oct 18 15:16:27 2026",
     "Rerunable": "True",
@@ -52,7 +52,7 @@
       "PBS_O_WORKDIR": "/home/user",
       "PBS_O_SYSTEM": "Linux",
       "PBS_O_QUEUE": "workq",
-      "PBS_O_HOST": "cpucluster-prism"
+      "PBS_O_HOST": "node-prism"
     },
     "comment": "Job run at Sun Oct 18 at 15:16 on (node011:ncpus=96:mem=356515840kb) and finished",
     "etime": "Sun Oct 18 15:16:27 2026",
@@ -62,7 +62,7 @@
     "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit/weight-reference-audit.sh",
     "history_timestamp": 1792304363,
     "project": "_pbs_project_default",
-    "Submit_Host": "cpucluster-prism"
+    "Submit_Host": "node-prism"
   },
   "summary": {
     "all_conditions_audited": true,

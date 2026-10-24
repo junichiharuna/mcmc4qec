@@ -471,15 +471,15 @@
   "observed_utc": "2026-10-18T06:29:47.566020+00:00",
   "pbs": {
     "Checkpoint": "u",
-    "Error_Path": "cpucluster-prism:/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-0-0/low-noise.err",
+    "Error_Path": "node-prism:/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-0-0/low-noise.err",
     "Exit_status": 0,
     "Hold_Types": "n",
     "Job_Name": "m4q_tilelow",
-    "Job_Owner": "user@cpucluster-prism",
+    "Job_Owner": "user@node-prism",
     "Join_Path": "n",
     "Keep_Files": "n",
     "Mail_Points": "a",
-    "Output_Path": "cpucluster-prism:/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-0-0/low-noise.out",
+    "Output_Path": "node-prism:/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-0-0/low-noise.out",
     "Priority": 0,
     "Rerunable": "True",
     "Resource_List": {
@@ -491,7 +491,7 @@
       "walltime": "24:00:00"
     },
     "Stageout_status": 1,
-    "Submit_Host": "cpucluster-prism",
+    "Submit_Host": "node-prism",
     "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-low-noise-v2/runs/capacity-0-0/low-noise.sh",
     "comment": "Job run at Sun Oct 18 at 15:25 on (node012:ncpus=96:mem=356515840kb) and finished",
     "ctime": "Sun Oct 18 15:25:50 2026",

@@ -3,7 +3,7 @@
   "job_id": "265263.node-PRISM",
   "job": {
     "Job_Name": "m4q_bartime",
-    "Job_Owner": "user@cpucluster-prism",
+    "Job_Owner": "user@node-prism",
     "job_state": "F",
     "Exit_status": 0,
     "run_count": 1,
@@ -31,7 +31,7 @@
     "exec_vnode": "(node012:ncpus=96:mem=33554432kb)",
     "Submit_arguments": "/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0/timing.sh",
     "comment": "Job run at Sun Oct 18 at 16:40 on (node012:ncpus=96:mem=33554432kb) and finished",
-    "Output_Path": "cpucluster-prism:/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0/timing.out",
-    "Error_Path": "cpucluster-prism:/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0/timing.err"
+    "Output_Path": "node-prism:/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0/timing.out",
+    "Error_Path": "node-prism:/home/user/workspace/mcmc4qec/20261018-tile-bar-seed-audit-v1/runs/benchmark-0/timing.err"
   }
 }
