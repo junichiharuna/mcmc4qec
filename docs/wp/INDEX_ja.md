@@ -1,0 +1,626 @@
+# docs/wp の索引
+
+docs/wp の全ファイルを日付ごとに並べた索引である。
+ファイルは移動していないので、既存のリンクはそのまま有効である。
+生成日は 2026-10-26、対象は 572 件（追跡 449 件、未追跡 123 件）である。
+未追跡のものは commit 前に追跡するかどうかを決める。
+種類はファイル名から機械的に判定した語（spec、review、acceptance、audit、result、report、plan、handoff など）である。
+
+## 入口になる文書
+
+- [引き継ぎ文書（2026-10-26）](takeover_2026-10-26_ja.md)
+- [継続状態（2026-10-24 以降、時刻付き履歴）](PROJECT_STATUS_2026-10-24_ja.md)
+- [Goal の完了条件と確認済み範囲](goal_completion_status_2026-10-23_ja.md)
+- [最終報告草稿](final_validation_report_draft_2026-10-24_ja.md)
+- [最終成果物の監査](final_deliverable_audit_2026-10-24_ja.md)
+- [並列化の記録](independent_parallel_execution_2026-10-26_ja.md)
+
+## 日付別
+
+### 2026-10-26（3 件）
+
+- [独立計時の残工程の並列化（縮小版を実装し切替済み）](independent_parallel_execution_2026-10-26_ja.md) — other、未追跡
+- [publication_state_check_2026-10-26.json](publication_state_check_2026-10-26.json) — other、未追跡
+- [独立計時以降の引き継ぎ（2026-10-26）](takeover_2026-10-26_ja.md) — other、未追跡
+
+### 2026-10-25（109 件）
+
+- [finite tail 補助ジョブの動的な2物理ノード admission](dynamic_physical_aux_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [v11復旧差分のprivate追加保存](finite_flow_v11_delta_snapshot_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [v12復旧差分のprivate追加保存](finite_flow_v12_delta_snapshot_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [v13復旧source・controlのprivate差分保存](finite_flow_v13_delta_snapshot_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [flow v9 / finite outer のprivate追加保存](finite_flow_v9_snapshot_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [有限tailのhost間stat比較：修正と受入範囲](finite_tail_cross_host_namespace_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [有限 PBS tail 用 report 環境の受入](finite_tail_effective_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [有限 PBS 後処理の fixture と起動境界の受入](finite_tail_fixture_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [全12条件の後続処理の受入](low_parallel_tail_v2_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [完了済み merge acceptance の観測復旧受入](merge_acceptance_observer_validation_2026-10-25_ja.md) — acceptance、未追跡
+- [Merge hash並列化のfixture受入](parallel_merge_hash_fixture_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [parallel_tail_execution_acceptance_2026-10-25.json](parallel_tail_execution_acceptance_2026-10-25.json) — acceptance、未追跡
+- [並列 merge 後段の接続受入](parallel_tail_execution_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [reproduction_archive_fixture_acceptance_2026-10-25.json](reproduction_archive_fixture_acceptance_2026-10-25.json) — acceptance、未追跡
+- [reproduction_archive_fixture_acceptance_2026-10-25.txt](reproduction_archive_fixture_acceptance_2026-10-25.txt) — acceptance、未追跡
+- [reproduction_snapshot_v2_acceptance_2026-10-25.json](reproduction_snapshot_v2_acceptance_2026-10-25.json) — acceptance、未追跡
+- [reproduction_snapshot_v8_acceptance_2026-10-25.json](reproduction_snapshot_v8_acceptance_2026-10-25.json) — acceptance、未追跡
+- [v8 実行資料の private 保存結果](reproduction_snapshot_v8_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [有限private snapshotの共有候補exporter受入](share_snapshot_v2_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [census後続再開の構成・接続受入](tail_census_resume_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [合流後のterminal受入処理の資源監査](terminal_acceptance_resource_audit_2026-10-25_ja.md) — acceptance、未追跡
+- [tile_example_target_cli_acceptance_2026-10-25.json](tile_example_target_cli_acceptance_2026-10-25.json) — acceptance、未追跡
+- [tile固定prior利用例の明示ladder受入](tile_example_target_cli_acceptance_2026-10-25_ja.md) — acceptance、未追跡
+- [tile符号・decoder利用例の提供範囲監査](code_decoder_examples_audit_2026-10-25_ja.md) — audit、未追跡
+- [有限tail補助ジョブと固定先なし計時ジョブの配置監査](finite_tail_unbound_capacity_audit_2026-10-25_ja.md) — audit、未追跡
+- [独立計時の資源・並列性監査（2026-10-25）](independent_timing_resource_audit_2026-10-25_ja.md) — audit、未追跡
+- [isolated reader の起動階層監査](nested_reader_startup_audit_2026-10-25_ja.md) — audit、未追跡
+- [Raw 保存要件の限定監査](raw_preservation_audit_2026-10-25_ja.md) — audit、未追跡
+- [share_snapshot_v8_candidate_audit_2026-10-25.json](share_snapshot_v8_candidate_audit_2026-10-25.json) — audit、未追跡
+- [merge準備の親source alias照合修正](parallel_merge_parent_alias_fix_2026-10-25_ja.md) — fix、未追跡
+- [元worker受理経路のsource alias修正](parallel_merge_worker_alias_fix_2026-10-25_ja.md) — fix、未追跡
+- [low_twelve_raw_access_inventory_2026-10-25.json](low_twelve_raw_access_inventory_2026-10-25.json) — inventory、未追跡
+- [main_timing_raw_access_inventory_2026-10-25.json](main_timing_raw_access_inventory_2026-10-25.json) — inventory、未追跡
+- [利用者が取得できる再現資料と不足の監査](reproduction_access_inventory_2026-10-25_ja.md) — inventory、未追跡
+- [reproduction_inventory_partial_2026-10-25.json](reproduction_inventory_partial_2026-10-25.json) — inventory、未追跡
+- [portable_zip_stat_observation_2026-10-25.json](portable_zip_stat_observation_2026-10-25.json) — observation、未追跡
+- [reproduction_public_access_observation_2026-10-25.json](reproduction_public_access_observation_2026-10-25.json) — observation、未追跡
+- [census資源計測のPBS投入](census_measurement_submission_2026-10-25_ja.md) — other、未追跡
+- [census復旧の運用受入とPBS順序](census_operational_pbs_staging_2026-10-25_ja.md) — other、未追跡
+- [完了した 3 条件の限定的な事前検査](completed_worker_shape_probe_2026-10-25_ja.md) — other、未追跡
+- [後処理 alias の host 間検証](finite_tail_alias_namespace_2026-10-25_ja.md) — other、未追跡
+- [失敗した merge の保存と後処理設定の移設](finite_tail_merge_relocation_2026-10-25_ja.md) — other、未追跡
+- [publication_state_check_2026-10-25.json](publication_state_check_2026-10-25.json) — other、未追跡
+- [Raw保存先の追記：低ノイズ12条件と主独立計時](raw_access_followup_2026-10-25_ja.md) — other、未追跡
+- [最終成果物の再現用保存計画](reproduction_archive_plan_2026-10-25_ja.md) — plan、未追跡
+- [v11復旧差分のprivate保存準備](finite_flow_v11_delta_snapshot_preparation_2026-10-25_ja.md) — preparation、未追跡
+- [v12復旧差分の追加保存候補](finite_flow_v12_delta_snapshot_preparation_2026-10-25_ja.md) — preparation、未追跡
+- [flow v9 / finite outer の追加保存準備](finite_flow_v9_snapshot_preparation_2026-10-25_ja.md) — preparation、未追跡
+- [finite_flow_v11_delta_snapshot_receipt_2026-10-25.json](finite_flow_v11_delta_snapshot_receipt_2026-10-25.json) — receipt、未追跡
+- [finite_flow_v12_delta_snapshot_receipt_2026-10-25.json](finite_flow_v12_delta_snapshot_receipt_2026-10-25.json) — receipt、未追跡
+- [finite_flow_v13_delta_snapshot_receipt_2026-10-25.json](finite_flow_v13_delta_snapshot_receipt_2026-10-25.json) — receipt、未追跡
+- [finite_flow_v9_snapshot_receipt_2026-10-25.json](finite_flow_v9_snapshot_receipt_2026-10-25.json) — receipt、未追跡
+- [ローカルPC再起動後のクラスタ処理確認](cluster_resident_resume_2026-10-25_ja.md) — resume、未追跡
+- [ホスト間のartifact stat照合に関する独立レビュー](cross_host_artifact_stat_review_2026-10-25_ja.md) — review、未追跡
+- [Dynamic auxiliary gate の独立レビュー](dynamic_aux_review_2026-10-25_ja.md) — review、未追跡
+- [failed merge後のtail再接続に関する独立レビュー](failed_merge_tail_relocation_review_2026-10-25_ja.md) — review、未追跡
+- [有限後処理 controller の独立レビュー](finite_tail_outer_review_2026-10-25_ja.md) — review、未追跡
+- [controller の切替・受理境界の独立レビュー](flow_acceptance_controller_review_2026-10-25_ja.md) — review、未追跡
+- [親source alias修正後のcontroller再開レビュー](flow_parent_alias_recovery_review_2026-10-25_ja.md) — review、未追跡
+- [並列hash候補の独立レビュー](parallel_merge_hash_review_2026-10-25_ja.md) — review、未追跡
+- [親sourceのalias照合修正の独立レビュー](parallel_merge_parent_closure_review_2026-10-25_ja.md) — review、未追跡
+- [worker受入のalias照合に関する独立レビュー](parallel_worker_alias_review_2026-10-25_ja.md) — review、未追跡
+- [snapshot v2の独立レビュー](reproduction_snapshot_v2_review_2026-10-25_ja.md) — review、未追跡
+- [v8有限保存の独立レビュー](reproduction_snapshot_v8_review_2026-10-25_ja.md) — review、未追跡
+- [v8共有候補とbuilder sidecarの独立レビュー](share_snapshot_v8_candidate_review_2026-10-25_ja.md) — review、未追跡
+- [share_snapshot_v8_candidate_review_evidence_2026-10-25.json](share_snapshot_v8_candidate_review_evidence_2026-10-25.json) — review、未追跡
+- [巨大metadataの下流実行境界監査](tail_large_metadata_boundary_review_2026-10-25_ja.md) — review、未追跡
+- [reproduction_snapshot_v2_fixture_2026-10-25.txt](reproduction_snapshot_v2_fixture_2026-10-25.txt) — snapshot、未追跡
+- [完了済みacceptanceの跨host stat照合とv12復旧](acceptance_stat_recovery_flow_spec_2026-10-25_ja.md) — spec、未追跡
+- [Tail 全段階の有限 PBS action と投入引継ぎ](finite_tail_actions_spec_2026-10-25_ja.md) — spec、未追跡
+- [Census の有限 PBS action 仕様](finite_tail_census_spec_2026-10-25_ja.md) — spec、未追跡
+- [有限PBS tailのeffective adapterとreport IPC環境](finite_tail_effective_adapter_spec_2026-10-25_ja.md) — spec、未追跡
+- [有限tailのreport IPC環境を実CLIで受理するPBS worker](finite_tail_effective_environment_spec_2026-10-25_ja.md) — spec、未追跡
+- [独立計時 tail の有限 PBS action](finite_tail_independent_spec_2026-10-25_ja.md) — spec、未追跡
+- [有限 tail PBS envelope](finite_tail_job_spec_2026-10-25_ja.md) — spec、未追跡
+- [report回収を有限PBS actionへ移すsource overlay](finite_tail_report_collection_spec_2026-10-25_ja.md) — spec、未追跡
+- [Report回収actionへ元stable closureを引き継ぐ版](finite_tail_report_collection_v2_spec_2026-10-25_ja.md) — spec、未追跡
+- [有限PBS actionのreport内部IPC overlay](finite_tail_report_ipc_spec_2026-10-25_ja.md) — spec、未追跡
+- [Report familyの有限PBS action](finite_tail_report_spec_2026-10-25_ja.md) — spec、未追跡
+- [巨大メタデータ受入の PBS 隔離](low_parallel_acceptance_flow_spec_2026-10-25_ja.md) — spec、未追跡
+- [全12条件の並列復旧フロー仕様](low_parallel_flow_v2_spec_2026-10-25_ja.md) — spec、未追跡
+- [Reader CLIの固定を含むcontroller仕様](low_parallel_flow_v3_spec_2026-10-25_ja.md) — spec、未追跡
+- [並列hash合流を使う常駐controller仕様](low_parallel_hash_flow_spec_2026-10-25_ja.md) — spec、未追跡
+- [成功候補を保持する混合manifestフロー仕様](low_parallel_mixed_flow_spec_2026-10-25_ja.md) — spec、未追跡
+- [reader CLI配置を反映するnative準備v4](low_parallel_native_preparation_v4_spec_2026-10-25_ja.md) — spec、未追跡
+- [portable reader修正と既存5worker保持のnative準備v5](low_parallel_native_preparation_v5_spec_2026-10-25_ja.md) — spec、未追跡
+- [全12条件の並列再実行と証跡pinの補完](low_parallel_recovery_merge_v2_spec_2026-10-25_ja.md) — spec、未追跡
+- [recovered readerのCLI配置を含む環境契約](low_parallel_recovery_merge_v3_spec_2026-10-25_ja.md) — spec、未追跡
+- [5条件を継続し7条件だけを再実行する合流契約](low_parallel_recovery_merge_v4_spec_2026-10-25_ja.md) — spec、未追跡
+- [並列workerの実行時import解決とruntime移設](low_parallel_runtime_relocation_spec_2026-10-25_ja.md) — spec、未追跡
+- [全12 singleton 比較の後続処理](low_parallel_tail_v2_spec_2026-10-25_ja.md) — spec、未追跡
+- [index 0だけのwalltime延長後の合流](low_parallel_wall_merge_v5_spec_2026-10-25_ja.md) — spec、未追跡
+- [index0の壁時間延長と11件保持のcontroller仕様](low_parallel_wall_recovery_flow_spec_2026-10-25_ja.md) — spec、未追跡
+- [merge 終端受理を PBS 内へ隔離する契約](merge_terminal_acceptance_pbs_spec_2026-10-25_ja.md) — spec、未追跡
+- [2物理ノードへの12ワーカー投入仕様](parallel_dispatch_spec_2026-10-25_ja.md) — spec、未追跡
+- [全hash検査を維持する8 CPU合流](parallel_merge_v6_spec_2026-10-25_ja.md) — spec、未追跡
+- [8 CPU merge証跡を引き継ぐtail bridgeの小仕様](parallel_tail_bridge_overlay_spec_2026-10-25_ja.md) — spec、未追跡
+- [並列 merge 後段の実行検証接続](parallel_tail_execution_binding_spec_2026-10-25_ja.md) — spec、未追跡
+- [portable reader の PBS 終端比較修正](portable_terminal_comparison_spec_2026-10-25_ja.md) — spec、未追跡
+- [sourceとmetadataを分ける保存scopeの小仕様案](reproduction_snapshot_v2_spec_2026-10-25_ja.md) — spec、未追跡
+- [実行中 v8 の有限 private snapshot](reproduction_snapshot_v8_spec_2026-10-25_ja.md) — spec、未追跡
+- [Selector alias照合後のflow v10復旧](selector_alias_recovery_flow_spec_2026-10-25_ja.md) — spec、未追跡
+- [Private snapshot v2の共有候補への変換](share_snapshot_v2_spec_2026-10-25_ja.md) — spec、未追跡
+- [index 0 の walltime 復旧投入契約](single_worker_wall_recovery_dispatch_spec_2026-10-25_ja.md) — spec、未追跡
+- [完了済み比較からのtail専用再開controller](tail_resume_controller_spec_2026-10-25_ja.md) — spec、未追跡
+- [tile固定prior利用例の目標p指定](tile_example_target_cli_spec_2026-10-25_ja.md) — spec、未追跡
+- [Worker verifier alias照合後のv11復旧](worker_alias_recovery_flow_spec_2026-10-25_ja.md) — spec、未追跡
+- [後続ジョブの実起動コンテキスト検証](low_parallel_tail_startup_2026-10-25_ja.md) — startup、未追跡
+- [12条件の並列起動時の失敗と検証範囲](parallel_startup_failure_2026-10-25_ja.md) — startup、未追跡
+
+### 2026-10-24（20 件）
+
+- [最終成果物の監査と残項目](final_deliverable_audit_2026-10-24_ja.md) — audit、未追跡
+- [C3T2索引のクラスタ移設と再起動後の引き継ぎ](cluster_index_relocation_2026-10-24_ja.md) — other
+- [低ノイズ後処理のクラスタ移設記録](cluster_postprocess_pipeline_2026-10-24_ja.md) — other
+- [通常経路で不要になった待受6本の終了](unreachable_waiter_cleanup_2026-10-24_ja.md) — other
+- [DRAFT：tile検証の最終報告と完了監査](final_validation_report_draft_2026-10-24_ja.md) — report、未追跡
+- [tile288 depolarizing p=0.001：保存済み診断の内訳](c3t2_saved_diagnostic_result_2026-10-24_ja.md) — result
+- [最終集約後の後処理復旧結果](cluster_postprocess_recovery_result_2026-10-24_ja.md) — result、未追跡
+- [experimental版のGitHub公開結果](publication_result_2026-10-24_ja.md) — result
+- [C3T2保存済み診断の内訳集計](c3t2_diagnostic_census_spec_2026-10-24_ja.md) — spec
+- [C3T2索引のクラスタ移設](cluster_index_relocation_spec_2026-10-24_ja.md) — spec
+- [低ノイズ後処理のクラスタ内完結](cluster_postprocess_pipeline_spec_2026-10-24_ja.md) — spec
+- [最終集約後の後処理復旧](cluster_postprocess_recovery_spec_2026-10-24_ja.md) — spec、未追跡
+- [並列復旧フローの小仕様](low_parallel_flow_spec_2026-10-24_ja.md) — spec、未追跡
+- [並列比較の版付き合流契約](low_parallel_recovery_merge_spec_2026-10-24_ja.md) — spec、未追跡
+- [並列再開後の報告環境の継承仕様](low_parallel_report_tail_spec_2026-10-24_ja.md) — spec、未追跡
+- [並列比較後のクラスタ内後続処理](low_parallel_tail_spec_2026-10-24_ja.md) — spec、未追跡
+- [条件別並列workerの配置・証跡仕様](low_parallel_worker_binding_spec_2026-10-24_ja.md) — spec、未追跡
+- [2物理ノード・最大192コアの投入制御](physical_node_capacity_spec_2026-10-24_ja.md) — spec、未追跡
+- [recovered readerのPBS照合形式修正](recovered_pbs_projection_spec_2026-10-24_ja.md) — spec、未追跡
+- [mcmc4qec：2026-10-24の継続状態](PROJECT_STATUS_2026-10-24_ja.md) — status
+
+### 2026-10-23（24 件）
+
+- [低ノイズの途中結果をexperimental版でどう扱うか](low_noise_interim_usage_2026-10-23_ja.md) — other
+- [残処理の所要時間の実測基準](runtime_forecast_2026-10-23_ja.md) — other
+- [C3T2 DGXと後続待受の復旧結果](c3t2_dgx_recovery_result_2026-10-23_ja.md) — result
+- [制御仕様書の改行差分からの復旧結果](control_newline_recovery_result_2026-10-23_ja.md) — result
+- [tile288 depolarizing p=0.01の低ノイズ校正結果](low_c3t0_result_2026-10-23_ja.md) — result
+- [tile288 depolarizing p=0.003の条件別結果](low_c3t1_result_2026-10-23_ja.md) — result
+- [分割集約から最終報告までの接続結果](low_partition_report_result_2026-10-23_ja.md) — result
+- [分割経路のseed census待受の接続記録](low_timing_partition_census_wait_result_2026-10-23_ja.md) — result
+- [分割集約後の独立計時待受の接続結果](low_timing_partition_independent_result_2026-10-23_ja.md) — result
+- [通常経路と分割経路の切替待受](low_timing_partition_route_guard_result_2026-10-23_ja.md) — result
+- [復旧した転送完了記録への接続確認](recovered_distribution_binding_result_2026-10-23_ja.md) — result
+- [低ノイズ最終報告の集計規則の追加レビュー](low_report_scientific_contract_review_2026-10-23_ja.md) — review
+- [公開状態の訂正と識別子置換を含むレビュー用snapshot](publication_review_snapshot_2026-10-23_ja.md) — review
+- [C3T2回収結果の読み取り専用照合待受](c3t2_collection_observer_watch_spec_2026-10-23_ja.md) — spec
+- [C3T2 DGX入力確認タイムアウトからの継続](c3t2_dgx_preposition_recovery_spec_2026-10-23_ja.md) — spec
+- [C3T2の復旧後続経路](c3t2_followup_recovery_spec_2026-10-23_ja.md) — spec
+- [制御仕様書の改行差分による停止の復旧](control_newline_recovery_spec_2026-10-23_ja.md) — spec
+- [分割集約の証拠を受け取る最終報告](low_partition_report_spec_2026-10-23_ja.md) — spec
+- [分割経路のseed census準備待受](low_timing_partition_census_wait_spec_2026-10-23_ja.md) — spec
+- [分割集約後の独立計時への接続](low_timing_partition_independent_spec_2026-10-23_ja.md) — spec
+- [復旧した転送完了記録と算術検証の接続](recovered_distribution_binding_spec_2026-10-23_ja.md) — spec
+- [mcmc4qec：2026-10-23の継続状態](PROJECT_STATUS_2026-10-23_ja.md) — status
+- [Goalの完了条件と確認済み範囲](goal_completion_status_2026-10-23_ja.md) — status
+- [公開候補の状態確認とRelease本文の訂正](publication_candidate_status_2026-10-23_ja.md) — status
+
+### 2026-10-22（73 件）
+
+- [C3T2回収・監査の依存先再接続](c3t2_audit_slot_reconnection_2026-10-22_ja.md) — audit
+- [C1T1最終集計の投入競合からの復旧仕様](c1t1_final_capacity_recovery_2026-10-22_ja.md) — final
+- [C3T1/C3T2最終集約の依存先再接続](final_slot_reconnection_2026-10-22_ja.md) — final
+- [C3T0の4時間collectorが時間切れになった場合の復旧仕様](c3t0_collection_timeout_contingency_2026-10-22_ja.md) — other
+- [条件付き8時間collectorからtrace監査への受理仕様](c3t0_recovery_trace_contingency_2026-10-22_ja.md) — other
+- [C3T2 generatorの監査経路再接続](c3t2_generator_slot_reconnection_2026-10-22_ja.md) — other
+- [C3T2 native・PC開始経路の再接続](c3t2_pc_slot_reconnection_2026-10-22_ja.md) — other
+- [低ノイズ計時前処理：資源枠超過時の分割方針案](low_timing_partition_contingency_2026-10-22_ja.md) — other
+- [公開履歴更新後のsource ZIPとwheelの再作成](publication_artifacts_rebuilt_2026-10-22_ja.md) — other
+- [Experimental版公開の手順書（2026-10-22）](publication_runbook_2026-10-22_ja.md) — other
+- [公開側の履歴更新と継続計算側の整合確認](remote_publication_reconciliation_2026-10-22_ja.md) — other
+- [DGX解析と並行する入力準備の初回結果](c3t0_dgx_export_prefetch_result_2026-10-22_ja.md) — result
+- [C3T0 DGX入力回収と後続処理の復旧](c3t0_dgx_recovery_result_2026-10-22_ja.md) — result
+- [C3T0先行入力準備の逐次待受：実行結果](c3t0_prefetch_queue_result_2026-10-22_ja.md) — result
+- [C3T2先行生成と後続処理の接続結果](c3t2_parallel_generation_result_2026-10-22_ja.md) — result
+- [tile288 bit-flip p=0.003の低ノイズ校正結果](low_c1t1_recovered_result_2026-10-22_ja.md) — result
+- [tile288 bit-flip p=0.001の低ノイズ校正結果](low_c1t2_result_2026-10-22_ja.md) — result
+- [低ノイズ完了8条件：長い設定の結果と利用上の限界](low_long_eight_comparison_result_2026-10-22_ja.md) — result
+- [低ノイズ完了9条件：長い設定の比較](low_long_nine_comparison_result_2026-10-22_ja.md) — result
+- [分割結合jobの実行と正常終了受理：実装結果](low_timing_merge_execution_result_2026-10-22_ja.md) — result
+- [結合jobの準備・qsub接続：実装結果](low_timing_merge_submission_result_2026-10-22_ja.md) — result
+- [分割集約からのseed census準備の検証](low_timing_partition_census_bridge_result_2026-10-22_ja.md) — result
+- [分割workerのPBS証跡：検証関数の受入結果](low_timing_partition_execution_evidence_result_2026-10-22_ja.md) — result
+- [分割workerから結合jobまでの待受：実装結果](low_timing_partition_flow_result_2026-10-22_ja.md) — result
+- [全12条件の分割準備と転送の検証](low_timing_partition_front_result_2026-10-22_ja.md) — result
+- [分割workerの証跡・値・設定選択規則の結合：受入結果](low_timing_partition_merge_result_2026-10-22_ja.md) — result
+- [低ノイズ計時前処理：分割資源計画器の受入結果](low_timing_partition_plan_result_2026-10-22_ja.md) — result
+- [分割worker入力準備の受入結果](low_timing_partition_preparation_result_2026-10-22_ja.md) — result
+- [分割workerの実行runner：受入と環境確認](low_timing_partition_runner_result_2026-10-22_ja.md) — result
+- [分割workerの単発qsub投入と台帳待機：受入結果](low_timing_partition_submission_result_2026-10-22_ja.md) — result
+- [分割した低ノイズ設定選択：読み込み・結合中核の受入結果](low_timing_partition_values_result_2026-10-22_ja.md) — result
+- [C3T1 collectorの投入前node gate停止からの再接続](c3t1_collection_slot_resume_2026-10-22_ja.md) — resume
+- [C3T0 DGXの未着手batch入力を先に準備する小仕様](c3t0_dgx_export_prefetch_spec_2026-10-22_ja.md) — spec
+- [C3T0 DGX batch8の完了済み入力exportの回収と継続](c3t0_dgx_export_reconciliation_spec_2026-10-22_ja.md) — spec
+- [C3T0 labo batch0の完了済み入力exportを回収する](c3t0_labo_export_reconciliation_spec_2026-10-22_ja.md) — spec
+- [C3T0のPC続行記録と下流処理の再接続](c3t0_pc_downstream_reconnection_spec_2026-10-22_ja.md) — spec
+- [C3T0 DGX先行入力準備の逐次待受](c3t0_prefetch_queue_spec_2026-10-22_ja.md) — spec
+- [C3T0復旧finalの実行と回収](c3t0_recovery8h_final_execution_spec_2026-10-22_ja.md) — spec
+- [C3T0の8時間復旧監査から最終集計への接続](c3t0_recovery8h_final_preparation_spec_2026-10-22_ja.md) — spec
+- [C3T0の8時間復旧回収と監査の引継ぎ](c3t0_recovery8h_handoff_spec_2026-10-22_ja.md) — spec
+- [C3T0復旧計時readerの実環境準備](c3t0_recovery_timing_environment_spec_2026-10-22_ja.md) — spec
+- [C3T0復旧結果の計時readerへの接続仕様](c3t0_recovery_timing_reader_spec_2026-10-22_ja.md) — spec
+- [C3T1のnative・PC起動係の再接続](c3t1_downstream_recovery_spec_2026-10-22_ja.md) — spec
+- [C3T1の初回回収を8時間枠にする仕様](c3t1_first_collection8h_spec_2026-10-22_ja.md) — spec
+- [C3T1生成の復旧と回収との並行実行](c3t1_parallel_generation_spec_2026-10-22_ja.md) — spec
+- [C3T1のPC待機先の再接続](c3t1_pc_reconnection_spec_2026-10-22_ja.md) — spec
+- [C3T2の初回回収と監査を8時間枠へ接続する仕様](c3t2_first_collection8h_spec_2026-10-22_ja.md) — spec
+- [C3T2 generation・native・PC待機係の再接続](c3t2_generation_reconnection_spec_2026-10-22_ja.md) — spec
+- [C3T2の独立生成を空き枠へ前倒しする小仕様](c3t2_parallel_generation_spec_2026-10-22_ja.md) — spec
+- [未開始C3T1/C3T2のPC入力export待機を修正する](future_pc_export_wait_spec_2026-10-22_ja.md) — spec
+- [低ノイズ完了8条件の長い設定をまとめる小仕様](low_long_eight_comparison_spec_2026-10-22_ja.md) — spec
+- [低ノイズ完了9条件の比較への追加仕様](low_long_nine_comparison_spec_2026-10-22_ja.md) — spec
+- [計時の後段を親環境v4へ接続する](low_timing_execution_v4_reconnection_spec_2026-10-22_ja.md) — spec
+- [分割結果の結合jobと正常終了の受理](low_timing_merge_execution_spec_2026-10-22_ja.md) — spec
+- [結合jobの準備・qsub接続](low_timing_merge_submission_spec_2026-10-22_ja.md) — spec
+- [全12条件の計時親への復旧経路接続](low_timing_parent_reconnection_spec_2026-10-22_ja.md) — spec
+- [全12条件の計時準備を親環境v4へ接続する](low_timing_parent_v4_reconnection_spec_2026-10-22_ja.md) — spec
+- [分割集約結果からのseed census準備](low_timing_partition_census_bridge_spec_2026-10-22_ja.md) — spec
+- [分割workerのPBS証跡：小仕様](low_timing_partition_execution_evidence_spec_2026-10-22_ja.md) — spec
+- [分割workerから結合jobまでの実行順序](low_timing_partition_flow_spec_2026-10-22_ja.md) — spec
+- [全12条件からの分割実行準備](low_timing_partition_front_spec_2026-10-22_ja.md) — spec
+- [全12条件の分割準備への転送](low_timing_partition_front_transfer_spec_2026-10-22_ja.md) — spec
+- [分割workerの結合と計時選択への接続：小仕様](low_timing_partition_merge_spec_2026-10-22_ja.md) — spec
+- [低ノイズ計時前処理の分割資源計画：小仕様](low_timing_partition_plan_spec_2026-10-22_ja.md) — spec
+- [分割worker入力の準備：小仕様](low_timing_partition_preparation_spec_2026-10-22_ja.md) — spec
+- [通常集約から分割集約への切替条件](low_timing_partition_route_guard_spec_2026-10-22_ja.md) — spec
+- [分割workerの実行runner：小仕様](low_timing_partition_runner_spec_2026-10-22_ja.md) — spec
+- [分割workerの単発qsub投入：小仕様](low_timing_partition_submission_spec_2026-10-22_ja.md) — spec
+- [分割した低ノイズ設定選択：読み込みと結合の小仕様](low_timing_partition_values_spec_2026-10-22_ja.md) — spec
+- [C3T1/C3T2の最終結果から計時候補への接続](planned8h_final_downstream_spec_2026-10-22_ja.md) — spec
+- [C3T1・C3T2の8時間監査から最終集計への接続](planned8h_final_reconnection_spec_2026-10-22_ja.md) — spec
+- [C3T1/C3T2の8時間監査に対応する計時reader](planned8h_timing_reader_spec_2026-10-22_ja.md) — spec
+- [mcmc4qec：2026-10-22の継続状態](PROJECT_STATUS_2026-10-22_ja.md) — status
+
+### 2026-10-21（37 件）
+
+- [C1T2回収観察：同時に届いたbatchの確認](c1t2_collection_observer_increment_2026-10-21_ja.md) — other
+- [tile288 depolarizingのanchorを空き枠で先行実行](c3t0_anchor_dispatch_2026-10-21_ja.md) — other
+- [復旧full監査の起動環境修正](recovery_full_thread_environment_2026-10-21_ja.md) — other
+- [2026-10-21朝の残計算と終了見込み](remaining_work_estimate_2026-10-21_ja.md) — other
+- [tile288 bit-flip p=0.01の低ノイズ校正結果](low_c1t0_recovered_result_2026-10-21_ja.md) — result
+- [C1T0最終設定・投入の再接続](c1t0_final_resume_2026-10-21_ja.md) — resume
+- [C1T2生成待機の再接続](c1t2_generation_resume_2026-10-21_ja.md) — resume
+- [C1T1後続処理の環境設定を伴う再接続](planned_c1t1_thread_resume_2026-10-21_ja.md) — resume
+- [C1T2のcollector・trace監査への接続](c1t2_collection_audit_handoff_spec_2026-10-21_ja.md) — spec
+- [C1T2生成後のnative referenceとPC処理への接続](c1t2_downstream_launch_spec_2026-10-21_ja.md) — spec
+- [C3T0生成後のnative・PC・収集・監査への接続](c3t0_downstream_spec_2026-10-21_ja.md) — spec
+- [C3T0最終設定・qsub・report回収への接続](c3t0_final_handoff_spec_2026-10-21_ja.md) — spec
+- [C3T0の既存生成jobから未投入partitionへの引継ぎ](c3t0_generation_handoff_spec_2026-10-21_ja.md) — spec
+- [C3T1の生成後処理](c3t1_downstream_spec_2026-10-21_ja.md) — spec
+- [C3T1の最終準備・集計への接続](c3t1_final_handoff_spec_2026-10-21_ja.md) — spec
+- [C3T1生成への順次引継ぎ](c3t1_generation_handoff_spec_2026-10-21_ja.md) — spec
+- [C3T2の生成後処理](c3t2_downstream_spec_2026-10-21_ja.md) — spec
+- [C3T2の最終準備・集計への接続](c3t2_final_handoff_spec_2026-10-21_ja.md) — spec
+- [C3T2生成への順次引継ぎ](c3t2_generation_handoff_spec_2026-10-21_ja.md) — spec
+- [独立計時capacityの実測から本計算へ](low_independent_capacity_result_spec_2026-10-21_ja.md) — spec
+- [独立計時の投入・監視](low_independent_timing_execution_spec_2026-10-21_ja.md) — spec
+- [低ノイズ独立計時の入力・capacity準備](low_independent_timing_preparation_spec_2026-10-21_ja.md) — spec
+- [独立計時の最終集計への接続](low_independent_timing_report_connection_spec_2026-10-21_ja.md) — spec
+- [設定選択から独立計時seed監査への接続](low_timing_census_connection_spec_2026-10-21_ja.md) — spec
+- [tile288のportable結果を独立計時へ接続する仕様](low_timing_condition_reader_spec_2026-10-21_ja.md) — spec
+- [全12条件からの親入力準備](low_timing_parent_preparation_spec_2026-10-21_ja.md) — spec
+- [全12条件の設定選択ジョブへの接続](low_timing_selection_execution_spec_2026-10-21_ja.md) — spec
+- [最終回収から独立算術レビューへの接続](planned_arithmetic_handoff_spec_2026-10-21_ja.md) — spec
+- [独立算術readerのreference archive接続修正](planned_arithmetic_reference_fix_spec_2026-10-21_ja.md) — spec
+- [残り5条件の全PC回収後index](planned_cohort_index_spec_2026-10-21_ja.md) — spec
+- [明示割当て条件の保存BAR行による独立算術レビュー](planned_condition_arithmetic_review_spec_2026-10-21_ja.md) — spec
+- [残り5条件のshared入力と最終転送context](planned_condition_distribution_spec_2026-10-21_ja.md) — spec
+- [PC初回検証と全件indexから最終転送への引継ぎ](planned_distribution_handoff_spec_2026-10-21_ja.md) — spec
+- [最終設定からqsub・report回収への接続](planned_final_execution_spec_2026-10-21_ja.md) — spec
+- [最終転送・full監査から設定準備への引継ぎ](planned_final_handoff_spec_2026-10-21_ja.md) — spec
+- [残り5条件の最終集計設定の準備](planned_final_preparation_spec_2026-10-21_ja.md) — spec
+- [mcmc4qec：2026-10-21の継続状態](PROJECT_STATUS_2026-10-21_ja.md) — status
+
+### 2026-10-20（81 件）
+
+- [低ノイズ比較report要約の受入結果](low_noise_report_summary_acceptance_2026-10-20_ja.md) — acceptance
+- [再割当て後の途中集計・転送・qsub制御の受入](portable_bar_mixed_controls_acceptance_2026-10-20_ja.md) — acceptance
+- [再割当てarchiveの読み取りと最終providerの受入記録](portable_bar_mixed_provider_acceptance_2026-10-20_ja.md) — acceptance
+- [再割当て結果の回収と旧新混合集計の受入記録](portable_bar_reassigned_collection_acceptance_2026-10-20_ja.md) — acceptance
+- [DGXへの再割当て配置・起動・回収driver](portable_bar_reassigned_lifecycle_acceptance_2026-10-20_ja.md) — acceptance
+- [未予約群をDGXで後処理するrunnerの受入記録](portable_bar_reassigned_runner_acceptance_2026-10-20_ja.md) — acceptance
+- [未予約群の分担planと群数検査の受入記録](portable_bar_remaining_assignment_acceptance_2026-10-20_ja.md) — acceptance
+- [portable最終report回収の受入結果](portable_mixed_final_collection_acceptance_2026-10-20_ja.md) — acceptance
+- [C0T2 portable BARの最終評価手順](portable_bar_c0t2_final_runbook_2026-10-20_ja.md) — final
+- [Portable BAR：最終cohort providerの統合](portable_bar_final_provider_2026-10-20_ja.md) — final
+- [混在portable BAR最終集計の資源設定](portable_bar_mixed_final_resource_2026-10-20_ja.md) — final
+- [DGX再割当てbatch 8後の引継ぎ復旧](portable_bar_dgx_handoff_recovery_2026-10-20_ja.md) — handoff
+- [C0T2 sampling後半分割の事前確認](low_c0t2_sample1_preflight_2026-10-20_ja.md) — other
+- [tile72 bit-flip p=.001の全trace監査](low_c0t2_trace_full_dispatch_2026-10-20_ja.md) — other
+- [tile288 bit-flip p=.01のsampling終端とcollector投入](low_c1t0_collector_dispatch_2026-10-20_ja.md) — other
+- [tile288 bit-flip p=.003の生成開始](low_c1t1_generation_dispatch_2026-10-20_ja.md) — other
+- [低ノイズ5条件比較の再現用補足ZIP](low_long_comparison_export_2026-10-20_ja.md) — other
+- [低ノイズ計時reader拡張：段階的な実装と検証](low_noise_timing_reference_refactor_2026-10-20_ja.md) — other
+- [未完了のtile288低ノイズ生成順](low_remaining_generator_order_2026-10-20_ja.md) — other
+- [Portable BAR archive readerの実装・検証](portable_bar_archive_reader_2026-10-20_ja.md) — other
+- [最終集計用コードのクラスタ配置と80群の回収](portable_bar_cluster_stage_2026-10-20_ja.md) — other
+- [最終contextと転送一覧の作成手順](portable_bar_distribution_2026-10-20_ja.md) — other
+- [Portable BARの100群回収時点](portable_bar_first100_2026-10-20_ja.md) — other
+- [Labo PCの全設定照合の完了](portable_bar_labo_full_parity_2026-10-20_ja.md) — other
+- [Portable BAR最終集計の投入ラッパー](portable_bar_qsub_2026-10-20_ja.md) — other
+- [最終cohortの転送処理](portable_bar_transfer_2026-10-20_ja.md) — other
+- [C0T2 trace capacity受理の接続失敗回復](trace_capacity_transport_recovery_2026-10-20_ja.md) — other
+- [DGX batch 5の準備と引継ぎ](portable_bar_batch5_preparation_2026-10-20_ja.md) — preparation
+- [Portable BAR：全設定照合と最終集計の準備](portable_bar_progress_2026-10-20_ja.md) — progress
+- [C0T1 回復後の独立reference比較の準備](low_bar_recovery_c0t1_report_preparation_2026-10-20_ja.md) — report
+- [tile72 bit-flip p=0.003の低ノイズ比較](low_c0t1_recovered_result_2026-10-20_ja.md) — result
+- [tile72 bit-flip p=0.001の低ノイズ比較](low_c0t2_recovered_result_2026-10-20_ja.md) — result
+- [tile72低ノイズ6条件：長い設定の誤差法比較](low_long_six_comparison_result_2026-10-20_ja.md) — result
+- [完了済み低ノイズ5条件：長い設定の誤差法比較](low_long_uncertainty_comparison_result_2026-10-20_ja.md) — result
+- [C0T2：保存BAR行の独立算術レビュー](low_c0t2_arithmetic_review_result_2026-10-20_ja.md) — review
+- [回復済み低ノイズ2条件の独立算術レビュー](low_recovered_arithmetic_review_result_2026-10-20_ja.md) — review
+- [C1T0の全回収から最終入力転送への引継ぎ](c1t0_collection_finalize_handoff_spec_2026-10-20_ja.md) — spec
+- [C1T0最終設定からqsub・回収への引継ぎ](c1t0_final_execution_handoff_spec_2026-10-20_ja.md) — spec
+- [C1T0最終集計の設定作成](c1t0_final_preparation_spec_2026-10-20_ja.md) — spec
+- [sampling collector時間切れからの復旧](collection_retry_spec_2026-10-20_ja.md) — spec
+- [C0T2の保存BAR行による独立算術レビュー](low_c0t2_arithmetic_review_spec_2026-10-20_ja.md) — spec
+- [tile72低ノイズ6条件の比較追補仕様](low_long_six_comparison_spec_2026-10-20_ja.md) — spec
+- [完了済み低ノイズ5条件の長い設定における区間比較](low_long_uncertainty_comparison_spec_2026-10-20_ja.md) — spec
+- [低ノイズ比較reportの要約](low_noise_report_summary_spec_2026-10-20_ja.md) — spec
+- [低ノイズ独立計時への回復済み・portable結果の接続仕様](low_noise_timing_reader_extension_spec_2026-10-20_ja.md) — spec
+- [回復済みBARの保存rowによる独立算術レビュー](low_recovered_arithmetic_review_spec_2026-10-20_ja.md) — spec
+- [C0T2計時readerの実venv wrapper接続](low_timing_portable_venv_spec_2026-10-20_ja.md) — spec
+- [C1T1生成から初回collector・監査への引継ぎ](planned_c1t1_handoff_spec_2026-10-20_ja.md) — spec
+- [C1T2生成の自動引継ぎ](planned_c1t2_generation_handoff_spec_2026-10-20_ja.md) — spec
+- [未投入tile288条件のcollector資源枠](planned_collection_budget_spec_2026-10-20_ja.md) — spec
+- [残る5条件のPC割当て](planned_condition_assignment_spec_2026-10-20_ja.md) — spec
+- [初回collector条件の最終report回収](planned_final_collection_spec_2026-10-20_ja.md) — spec
+- [初回4時間collectorの最終BAR reader接続](planned_final_reader_spec_2026-10-20_ja.md) — spec
+- [残る5条件の入力export](planned_input_export_spec_2026-10-20_ja.md) — spec
+- [次条件のnative reference自動引継ぎ](planned_native_handoff_spec_2026-10-20_ja.md) — spec
+- [残る5条件のnative parity reference準備](planned_native_reference_spec_2026-10-20_ja.md) — spec
+- [次条件のPC driverへの引継ぎ](planned_pc_handoff_spec_2026-10-20_ja.md) — spec
+- [残る条件のPC配置・実行・回収](planned_pc_lifecycle_spec_2026-10-20_ja.md) — spec
+- [次条件へのPC初回parity引継ぎ](planned_pc_parity_spec_2026-10-20_ja.md) — spec
+- [次条件のPC serial driver](planned_pc_serial_spec_2026-10-20_ja.md) — spec
+- [次条件のnative reference回収](planned_reference_transfer_spec_2026-10-20_ja.md) — spec
+- [初回4時間collectorからtrace監査への接続](planned_trace_audit_spec_2026-10-20_ja.md) — spec
+- [回収archiveからのgroup読取り：小仕様](portable_bar_archive_reader_spec_2026-10-20_ja.md) — spec
+- [新条件のportable BAR全群処理](portable_bar_condition_batch_spec_2026-10-20_ja.md) — spec
+- [新条件のportable parity用native reference](portable_bar_native_reference_spec_2026-10-20_ja.md) — spec
+- [Portable BAR最終集計のPBS実行仕様](portable_bar_qsub_spec_2026-10-20_ja.md) — spec
+- [再割当てbatchの配置・実行・回収の接続](portable_bar_reassigned_deployment_spec_2026-10-20_ja.md) — spec
+- [未予約のportable BAR群をDGXへ割り当てる小仕様](portable_bar_remaining_assignment_spec_2026-10-20_ja.md) — spec
+- [Tile288へ保存配列後処理を広げる前の確認](portable_bar_tile288_readiness_spec_2026-10-20_ja.md) — spec
+- [最終cohortの転送仕様](portable_bar_transfer_spec_2026-10-20_ja.md) — spec
+- [条件別PC結果の最終集計入力](portable_condition_distribution_spec_2026-10-20_ja.md) — spec
+- [C1T0固定batchの逐次実行制御](portable_condition_serial_driver_spec_2026-10-20_ja.md) — spec
+- [portable最終reportの回収](portable_mixed_final_collection_spec_2026-10-20_ja.md) — spec
+- [C0T2最終ジョブから回収への引継ぎ](portable_mixed_final_handoff_spec_2026-10-20_ja.md) — spec
+- [最終readerのvenv起動binding](portable_mixed_venv_binding_spec_2026-10-20_ja.md) — spec
+- [復旧collectorからtrace監査への一度限りの引継ぎ](recovery_audit_handoff_spec_2026-10-20_ja.md) — spec
+- [復旧BAR最終reader用qsub wrapper](recovery_bar_final_qsub_spec_2026-10-20_ja.md) — spec
+- [復旧監査を用いるportable BAR最終reader](recovery_bar_final_reader_spec_2026-10-20_ja.md) — spec
+- [復旧条件の最終report回収](recovery_final_collection_spec_2026-10-20_ja.md) — spec
+- [復旧collectorから元環境trace監査への明示接続](recovery_trace_execution_spec_2026-10-20_ja.md) — spec
+- [mcmc4qec：公開準備と数値検証の状態](PROJECT_STATUS_2026-10-20_ja.md) — status
+
+### 2026-10-19（72 件）
+
+- [Portable BARのgroup単位のtrace監査結合](portable_bar_audit_bridge_2026-10-19_ja.md) — audit
+- [分割sampling条件の最終比較実行手順](low_partition_final_runbook_2026-10-19_ja.md) — final
+- [tile72 depolarizing p=.001の最終比較準備](low_target2_final_adapter_2026-10-19_ja.md) — final
+- [PBS終了メッセージの接頭辞対応](low_bar_pbs_prefix_fix_2026-10-19_ja.md) — fix
+- [次の44 groupの配置と自動引継ぎ](portable_bar_batch1_handoff_2026-10-19_ja.md) — handoff
+- [再開v2の開始時監査](low_bar_recovery_v2_inventory_2026-10-19_ja.md) — inventory
+- [Portable BARのcohort分母と途中結果の照合](portable_bar_cohort_inventory_2026-10-19_ja.md) — inventory
+- [experimental公開候補のcommit・push](experimental_commit_push_2026-10-19_ja.md) — other
+- [公開本文と環境差の追加証拠](experimental_platform_supplement_2026-10-19_ja.md) — other
+- [Experimental公開候補の確認手順](experimental_release_checks_2026-10-19_ja.md) — other
+- [公開候補固定後の確認](experimental_release_followup_2026-10-19_ja.md) — other
+- [Experimental版の公開準備](experimental_release_readiness_2026-10-19_ja.md) — other
+- [experimental候補のremote CI完了](experimental_remote_ci_2026-10-19_ja.md) — other
+- [C0T0 BAR時間切れ時の復旧・最終比較・回収手順](low_bar_recovery_runbook_2026-10-19_ja.md) — other
+- [C0T0 BAR時間切れとv2再開](low_bar_recovery_v2_execution_2026-10-19_ja.md) — other
+- [再開v2の実行後手順](low_bar_recovery_v2_runbook_2026-10-19_ja.md) — other
+- [C0T1の次段解析の資源確認](low_c0t1_analysis_readiness_2026-10-19_ja.md) — other
+- [C0T1集約の受理とBAR解析の投入](low_c0t1_bar_dispatch_2026-10-19_ja.md) — other
+- [C0T1 trace監査の資源計測準備](low_c0t1_trace_capacity_prepared_2026-10-19_ja.md) — other
+- [C0T1 full trace監査の完了受理](low_c0t1_trace_completion_2026-10-19_ja.md) — other
+- [C0T1 trace資源計測の受理と全監査の投入](low_c0t1_trace_dispatch_2026-10-19_ja.md) — other
+- [C0T2のanchor計算](low_c0t2_generator_dispatch_2026-10-19_ja.md) — other
+- [残る9条件のsamplingからBAR解析への接続確認](low_partition_analysis_bridge_2026-10-19_ja.md) — other
+- [C0T1のサンプリング終了と集約投入](low_sampling_c0t1_collection_2026-10-19_ja.md) — other
+- [C0T0 trace予備計測の完了と本監査への移行](low_trace_capacity_followup_2026-10-19_ja.md) — other
+- [sampling partitionに合わせた後続batchの組み方](portable_bar_available_input_scheduling_2026-10-19_ja.md) — other
+- [移植後の最初の全window結果](portable_bar_first_full_group_2026-10-19_ja.md) — other
+- [全設定での後処理移植照合の開始](portable_bar_full_parity_launch_2026-10-19_ja.md) — other
+- [個人計算機を使う追加検証](personal_hosts_validation_plan_2026-10-19_ja.md) — plan
+- [C0T1復旧後の完了受理の準備](low_c0t1_recovery_completion_preparation_2026-10-19_ja.md) — preparation
+- [C0T1の時間上限に備えた準備](low_c0t1_recovery_preparation_2026-10-19_ja.md) — preparation
+- [batch 2の配置と完了入力からの後続処理](portable_bar_batch2_preparation_2026-10-19_ja.md) — preparation
+- [Portable BAR batch 3の準備](portable_bar_batch3_preparation_2026-10-19_ja.md) — preparation
+- [移植BARの回収準備と検証](portable_bar_collection_preparation_2026-10-19_ja.md) — preparation
+- [2026-10-19: C0T0の集約完了とBAR解析投入](low_partition_progress_2026-10-19_1144_ja.md) — progress
+- [BAR再開の完了受理と最終比較の投入](low_bar_recovery_v2_report_dispatch_2026-10-19_ja.md) — report
+- [最終比較の失敗件数辞書の受理仕様](low_report_failure_counts_fix_2026-10-19_ja.md) — report
+- [tile72 bit-flip p=0.01の低ノイズ比較](low_c0t0_recovered_result_2026-10-19_ja.md) — result
+- [DGX SparkとLabo PCのBP-OSD判定比較](paired_platform_mc_result_2026-10-19_ja.md) — result
+- [追加PCでの公開候補検証](personal_hosts_validation_result_2026-10-19_ja.md) — result
+- [DGX batch 0の回収完了とbatch 1の開始](portable_bar_dgx_batch0_result_2026-10-19_ja.md) — result
+- [DGXの全window後処理：batch 1の回収](portable_bar_dgx_batch1_result_2026-10-19_ja.md) — result
+- [追加PCへのBAR後処理の移植と初回投入](portable_bar_postprocessing_result_2026-10-19_ja.md) — result
+- [分割sampling後のBAR解析：親側prepareの受入記録](low_partition_analysis_parent_review_2026-10-19_ja.md) — review
+- [分割BAR集約の親処理・実装レビュー](low_partition_bar_collection_parent_review_2026-10-19_ja.md) — review
+- [分割samplingのcollector transport：入力検証の進捗](low_partition_collection_transport_review_2026-10-19_ja.md) — review
+- [分割sampling対応trace監査の親側接続の検証記録](low_partition_trace_parent_review_2026-10-19_ja.md) — review
+- [保存traceのBAR後処理を追加PCへ分担するための確認](portable_bar_postprocessing_review_2026-10-19_ja.md) — review
+- [低ノイズsampling archive処理の受入](tile_low_noise_archive_review_2026-10-19_ja.md) — review
+- [低ノイズ計時の保存参照・ホスト間検証の修正レビュー](tile_timing_portability_review_2026-10-19_ja.md) — review
+- [再開v2の終了確認・報告経路](low_bar_recovery_v2_handoff_spec_2026-10-19_ja.md) — spec
+- [低ノイズBAR解析の時間切れ復旧仕様案](low_bar_timeout_recovery_spec_2026-10-19_ja.md) — spec
+- [低ノイズ最終reportの独立算術レビュー](low_final_arithmetic_review_spec_2026-10-19_ja.md) — spec
+- [分割sampling後のBAR解析：親側prepareの小仕様](low_partition_analysis_parent_spec_2026-10-19_ja.md) — spec
+- [分割BAR解析のPBS集約](low_partition_bar_collection_parent_spec_2026-10-19_ja.md) — spec
+- [低ノイズ分割samplingのcollector投入](low_partition_collection_transport_spec_2026-10-19_ja.md) — spec
+- [分割samplingから既存final v3への接続](low_partition_final_join_spec_2026-10-19_ja.md) — spec
+- [分割sampling final reportの回収](low_partition_final_recovery_spec_2026-10-19_ja.md) — spec
+- [分割sampling対応trace監査の親側接続](low_partition_trace_parent_spec_2026-10-19_ja.md) — spec
+- [独立算術レビュー用plan・rowsの回収](low_review_input_recovery_spec_2026-10-19_ja.md) — spec
+- [個人機間のBP-OSD判定比較：固定予算仕様](paired_platform_mc_spec_2026-10-19_ja.md) — spec
+- [移植BAR結果の回収仕様](portable_bar_collection_spec_2026-10-19_ja.md) — spec
+- [Portable BARの最終集約：小仕様](portable_bar_final_join_spec_2026-10-19_ja.md) — spec
+- [追加PCの次batchへの引継ぎ仕様](portable_bar_handoff_spec_2026-10-19_ja.md) — spec
+- [追加PCによるBAR後処理：実装仕様](portable_bar_postprocessing_spec_2026-10-19_ja.md) — spec
+- [低ノイズ解析archiveの回収仕様](tile_low_noise_analysis_archive_spec_2026-10-19_ja.md) — spec
+- [正式比較済み低ノイズsamplingのexport投入](tile_low_noise_archive_dispatch_spec_2026-10-19_ja.md) — spec
+- [低ノイズsampling archiveの回収検査](tile_low_noise_archive_spec_2026-10-19_ja.md) — spec
+- [保存済みWSS監査sourceの配置対応](tile_saved_wss_source_binding_spec_2026-10-19_ja.md) — spec
+- [selector親のホスト間ファイル同一性検査](tile_selector_cross_host_identity_spec_2026-10-19_ja.md) — spec
+- [SSH待機timeout後の本trace監査完了受理](trace_timeout_completion_spec_2026-10-19_ja.md) — spec
+- [公開候補固定後の状態：2026-10-19 21:35 JST](POST_FREEZE_STATUS_2026-10-19_ja.md) — status
+
+### 2026-10-18（70 件）
+
+- [全数監査の実行準備](tile_full_audit_execution_2026-10-18_ja.md) — audit
+- [Tile全trace監査の計算資源計測と実行仕様](tile_trace_audit_execution_2026-10-18_ja.md) — audit
+- [独立計時 stage3 の Linux 引継ぎ](tile_low_noise_timing_execution_linux_handoff_2026-10-18_ja.md) — handoff
+- [基本decoderの比較例](basic_decoders_usage_2026-10-18_ja.md) — other
+- [基本decoder追加の実装・検証記録](basic_decoders_validation_2026-10-18_ja.md) — other
+- [基本decoderの調査と追加順](decoder_survey_2026-10-18_ja.md) — other
+- [Tile decoder prior変更のpaired pilot解析](tile_decoder_prior_effect_2026-10-18_ja.md) — other
+- [tile288完了traceの早期混合診断](tile_early_mixing_2026-10-18_ja.md) — other
+- [低ノイズBAR解析・資源計測・seed監査の受入](tile_low_noise_analysis_validation_2026-10-18_ja.md) — other
+- [低ノイズ解析の分割・集計・checkpoint監査とseedジョブ](tile_low_noise_execution_validation_2026-10-18_ja.md) — other
+- [低ノイズBARと重み層別referenceの接続検証](tile_low_noise_reference_validation_2026-10-18_ja.md) — other
+- [低ノイズ sampling 分割の仕様案と受入要件](tile_low_noise_sampling_partitions_proposal_2026-10-18_ja.md) — other
+- [単一PBS移設後の親用投入wrapper案](tile_low_noise_staged_parent_submission_proposal_2026-10-18_ja.md) — other
+- [staged case2 target0のreadiness固定と実行順](tile_low_noise_staged_readiness_runbook_2026-10-18_ja.md) — other
+- [第3段階の独立計時 runner 実装記録](tile_low_noise_timing_execution_implementation_2026-10-18_ja.md) — other
+- [低ノイズ selector 親入口の初版実装記録](tile_low_noise_timing_selector_parent_implementation_2026-10-18_ja.md) — other
+- [完了済みtile288 traceの早期混合診断](tile_early_mixing_plan_2026-10-18_ja.md) — plan
+- [Tile低ノイズ検証の実行準備](tile_low_noise_plan_2026-10-18_ja.md) — plan
+- [低ノイズ独立計時 stage4：Linux 配置と読取費用](tile_low_noise_timing_stage4_deployment_preparation_2026-10-18_ja.md) — preparation
+- [main 独立計時報告の Linux 配置と正式実行手順](tile_timing_report_linux_handoff_2026-10-18_ja.md) — report
+- [主ノイズ正式計時報告の親用実行手順](tile_timing_report_submission_runbook_2026-10-18_ja.md) — report
+- [Tile code-capacity論理エラー率推定：中間報告](tile_validation_report_2026-10-18_ja.md) — report
+- [基本decoder追加の独立sourceレビュー](basic_decoders_review_2026-10-18_ja.md) — review
+- [独立計時比較の科学的範囲と追加仕様案](tile_timing_comparison_scope_review_2026-10-18_ja.md) — review
+- [BAR計時manifestとseed全数監査の接続](bar_timing_seed_connection_spec_2026-10-18_ja.md) — spec
+- [BeliefFind factoryの小仕様](belief_find_factory_spec_2026-10-18_ja.md) — spec
+- [BP-LSD factoryの小仕様と受入](bplsd_factory_spec_2026-10-18_ja.md) — spec
+- [低ノイズ合成解析capacityの投入仕様](submit_tile_low_noise_analysis_capacity_spec_2026-10-18_ja.md) — spec
+- [低ノイズ本番BAR partitionのqsub投入](submit_tile_low_noise_analysis_partitions_spec_2026-10-18_ja.md) — spec
+- [低ノイズtrace監査の専用qsub](submit_tile_low_noise_trace_audit_spec_2026-10-18_ja.md) — spec
+- [拡張seed全数監査の専用qsub](submit_tile_seed_audit_spec_2026-10-18_ja.md) — spec
+- [重み層別reference全条件監査のqsub投入](submit_tile_weight_reference_audit_spec_2026-10-18_ja.md) — spec
+- [主校正の監査済み入力と集計の接続](tile_audited_results_spec_2026-10-18_ja.md) — spec
+- [主校正の最終再集計実行仕様](tile_final_reaggregation_spec_2026-10-18_ja.md) — spec
+- [低ノイズBAR解析の合成資源計測](tile_low_noise_analysis_capacity_spec_2026-10-18_ja.md) — spec
+- [低ノイズ本番BAR解析のpartition実行](tile_low_noise_analysis_partitions_spec_2026-10-18_ja.md) — spec
+- [低ノイズ固定prior BAR解析の小仕様](tile_low_noise_analysis_spec_2026-10-18_ja.md) — spec
+- [低ノイズ解析と全 trace 監査の接続仕様](tile_low_noise_audited_collection_spec_2026-10-18_ja.md) — spec
+- [case2 T1/T2を既存staging/controlへ接続する最小入口仕様案](tile_low_noise_case2_t1_t2_staging_entry_spec_2026-10-18_ja.md) — spec
+- [低ノイズ最終 audited WSS 比較 report：親 PBS 入口の小仕様](tile_low_noise_final_reference_report_parent_spec_2026-10-18_ja.md) — spec
+- [低ノイズ独立計時の最小仕様案](tile_low_noise_independent_timing_spec_2026-10-18_ja.md) — spec
+- [複数 sampling job を入力とする低ノイズ BAR と最終照合](tile_low_noise_partitioned_analysis_spec_2026-10-18_ja.md) — spec
+- [分割 sampling の trace audit 入口](tile_low_noise_partitioned_trace_audit_spec_2026-10-18_ja.md) — spec
+- [低ノイズBARと重み層別referenceの接続](tile_low_noise_reference_comparison_spec_2026-10-18_ja.md) — spec
+- [低ノイズ sampling 分割実装仕様](tile_low_noise_sampling_partitions_spec_2026-10-18_ja.md) — spec
+- [移設後の投入・終了照合の小仕様](tile_low_noise_staging_control_spec_2026-10-18_ja.md) — spec
+- [case2 target0 コピーの一回投入 wrapper](tile_low_noise_staging_copy_submission_spec_2026-10-18_ja.md) — spec
+- [single-PBS低ノイズ結果の検証付きcopy仕様](tile_low_noise_staging_spec_2026-10-18_ja.md) — spec
+- [低ノイズBARの全cohort集計と設定間整合性](tile_low_noise_summary_spec_2026-10-18_ja.md) — spec
+- [低ノイズ独立計時の実全数 seed census 接続案](tile_low_noise_timing_census_bridge_spec_2026-10-18_ja.md) — spec
+- [低ノイズ独立計時の評価・日本語報告案（第4段階）](tile_low_noise_timing_evaluation_report_spec_2026-10-18_ja.md) — spec
+- [低ノイズ独立計時の実行・資源・終端検証案（第3段階）](tile_low_noise_timing_execution_spec_2026-10-18_ja.md) — spec
+- [低ノイズ独立計時の manifest・seed 接続案（第2段階）](tile_low_noise_timing_manifest_seed_spec_2026-10-18_ja.md) — spec
+- [低ノイズ独立計時 selector 第1段階](tile_low_noise_timing_selection_spec_2026-10-18_ja.md) — spec
+- [低ノイズ selector の正式実行に向けた最小親入口案](tile_low_noise_timing_selector_parent_entry_spec_2026-10-18_ja.md) — spec
+- [低ノイズtrace監査の資源外挿](tile_low_noise_trace_audit_resources_spec_2026-10-18_ja.md) — spec
+- [低ノイズtrace監査runner](tile_low_noise_trace_audit_run_spec_2026-10-18_ja.md) — spec
+- [低ノイズtraceの数値監査](tile_low_noise_trace_audit_spec_2026-10-18_ja.md) — spec
+- [主4条件の正式計時報告の監視・回収](tile_main_timing_report_collection_spec_2026-10-18_ja.md) — spec
+- [主4条件の保存済み混合診断比較：集計小仕様](tile_mixing_comparison_report_spec_2026-10-18_ja.md) — spec
+- [保存済み混合診断の計時とクラスタ実行](tile_mixing_execution_spec_2026-10-18_ja.md) — spec
+- [保存済み全cohort混合診断の一覧](tile_mixing_inventory_spec_2026-10-18_ja.md) — spec
+- [拡張seed namespace監査](tile_seed_audit_spec_2026-10-18_ja.md) — spec
+- [main 独立計時の報告 adapter 小仕様案](tile_timing_evaluation_report_spec_2026-10-18_ja.md) — spec
+- [主ノイズ正式計時報告の親用一回投入仕様案](tile_timing_report_submission_spec_2026-10-18_ja.md) — spec
+- [監査済み最終集計から独立BAR計時候補への接続](tile_timing_selection_from_final_spec_2026-10-18_ja.md) — spec
+- [全16条件の重み層別reference監査runner](tile_weight_reference_audit_run_spec_2026-10-18_ja.md) — spec
+- [重み層別referenceの条件別監査](tile_weight_reference_audit_spec_2026-10-18_ja.md) — spec
+- [層別referenceと固定BAR cohortの比較：小仕様](tile_weight_reference_comparison_spec_2026-10-18_ja.md) — spec
+- [単独Union-Find factoryの小仕様](union_find_factory_spec_2026-10-18_ja.md) — spec
+
+### 2026-10-17（12 件）
+
+- [混合・BAR被覆校正のクラスタジョブ設計（2026-10-17）](calibration_cluster_design_2026-10-17_ja.md) — other
+- [固定cohortクラスタ校正の完了報告（2026-10-17）](calibration_results_2026-10-17_ja.md) — other
+- [Tile codeの構成・decoder調査（2026-10-17）](tile_codes_survey_2026-10-17_ja.md) — other
+- [Tile288 BP-OSDの環境間差](tile_decoder_platform_2026-10-17_ja.md) — other
+- [Tileのfailure支持・kernelと混合診断の区別](tile_kernel_support_2026-10-17_ja.md) — other
+- [Tileの同精度・計算時間比較](tile_time_to_accuracy_plan_2026-10-17_ja.md) — plan
+- [Tile code-capacity検証：事前計画](tile_validation_plan_2026-10-17_ja.md) — plan
+- [Tile対応・クラスタ実装と投入記録（2026-10-17）](tile_cluster_report_2026-10-17_ja.md) — report
+- [校正結果の回収・監査仕様](calibration_audit_spec_2026-10-17_ja.md) — spec
+- [Tile factoryとクラスタdriverの実装前仕様](tile_cluster_spec_2026-10-17_ja.md) — spec
+- [Tileのweight-stratified reference：小仕様](tile_weight_stratified_spec_2026-10-17_ja.md) — spec
+- [Tile code-capacity検証の進捗](tile_validation_status_2026-10-17_ja.md) — status
+
+### 2026-10-15（12 件）
+
+- [BAR の省略時設定と自動 anchor](automatic_anchor_2026-10-15_ja.md) — other
+- [実符号のblock長一要因校正（2026-10-15）](calibration_2026-10-15_ja.md) — other
+- [回路効果差分と明示location群のH提案](circuit_2026-10-15_ja.md) — other
+- [標準の統計誤差とオプション診断](diagnostics_2026-10-15_ja.md) — other
+- [2026-10-15 残課題への着手](next_work_2026-10-15_ja.md) — other
+- [非公開ヘルパーを含む strict 型検査（2026-10-15）](typing_2026-10-15_ja.md) — other
+- [残課題への対応報告（2026-10-15）](final_report_2026-10-15_ja.md) — report
+- [回路効果差分・明示群Hの独立レビュー](circuit_review_2026-10-15_ja.md) — review
+- [観測量平均の診断・誤差解析の独立レビュー（2026-10-15）](diagnostic_review_2026-10-15_ja.md) — review
+- [2026-10-15 高速化の独立レビュー](speed_review_2026-10-15_ja.md) — review
+- [オプション付き数値診断の追加仕様](diagnostic_options_spec_2026-10-15_ja.md) — spec
+- [観測量 trace の統計診断と平均の不確かさ（実装前仕様）](trace_stats_spec_2026-10-15_ja.md) — spec
+
+### 日付なし（59 件）
+
+- [dev5 要件と証拠の対応](audit_dev5_ja.md) — audit
+- [WP-A 完了メモ（2026-09-30）](A_ja.md) — other
+- [A_reproduce.py](A_reproduce.py) — other
+- [WP-B 性能実装・検証記録](B_ja.md) — other
+- [WP-C 完了メモ](C_ja.md) — other
+- [D_docstrings.patch](D_docstrings.patch) — other
+- [WP-D 公開準備の実施記録](D_ja.md) — other
+- [WP-E 複数 chain の診断と収束判定](E_ja.md) — other
+- [WP-F 実符号の実行例と既存例のCLI統一](F_ja.md) — other
+- [WP-G 完了メモ](G_ja.md) — other
+- [WP-H 持ち込み用テンプレート完了メモ](H_ja.md) — other
+- [WP-I 完了メモ](I_ja.md) — other
+- [WP-J 完了メモ](J_ja.md) — other
+- [WP-K 担当指示](K_instructions_ja.md) — other
+- [WP-K 静的 phase flip 完了メモ](K_ja.md) — other
+- [WP-L 担当指示](L_instructions_ja.md) — other
+- [WP-L 完了メモ：物理回路 fault 状態での OBF と Zanella](L_ja.md) — other
+- [WP-M 担当指示](M_instructions_ja.md) — other
+- [WP-M 完了メモ：BAR 被覆と感度](M_ja.md) — other
+- [WP-N 担当指示](N_instructions_ja.md) — other
+- [WP-N 小仕様と完了記録](N_ja.md) — other
+- [WP-O 担当指示](O_instructions_ja.md) — other
+- [WP-O 型注釈と PEP 561 マーカー](O_ja.md) — other
+- [P_instructions_ja.md](P_instructions_ja.md) — other
+- [WP-P 完了メモ：BAR 不確かさと論文手順の照合](P_ja.md) — other
+- [Q_instructions_ja.md](Q_instructions_ja.md) — other
+- [WP-Q 小仕様と作業記録](Q_ja.md) — other
+- [dev3 実行例整備の統合記録](examples_integration_ja.md) — other
+- [統合時の仕様と検証](integration_ja.md) — other
+- [Phase 0 共通基盤](phase0_ja.md) — other
+- [dev2 統合・installed wheel 検証](validation_dev2_ja.md) — other
+- [dev4 検証記録](validation_dev4_ja.md) — other
+- [dev5 検証記録](validation_dev5_ja.md) — other
+- [verify_wheel.py](verify_wheel.py) — other
+- [dev5 最終計測の事前固定](measurement_plan_dev5_ja.md) — plan
+- [dev4 進捗](PROGRESS_dev4_ja.md) — progress
+- [dev5 進捗](PROGRESS_dev5_ja.md) — progress
+- [dev4 最終報告](final_report_dev4_ja.md) — report
+- [dev5 最終報告](final_report_dev5_ja.md) — report
+- [dev3 実行例・notebook・README 最終報告](final_report_examples_ja.md) — report
+- [開発依頼書の最終報告](final_report_ja.md) — report
+- [ユーザー指定による中断と再開メモ](RESUME_ja.md) — resume
+- [WP-A 第1回独立レビュー（2026-09-30）](A_review_ja.md) — review
+- [WP-B 第1回独立レビュー](B_review_ja.md) — review
+- [WP-C 第1回独立レビュー](C_review_ja.md) — review
+- [WP-D 第1回独立レビュー](D_review_ja.md) — review
+- [WP-E 第1回敵対レビュー](E_review_ja.md) — review
+- [WP-F 独立レビュー](F_review_ja.md) — review
+- [WP-G 独立レビュー](G_review_ja.md) — review
+- [WP-H 独立レビュー](H_review_ja.md) — review
+- [WP-I 独立レビュー](I_review_ja.md) — review
+- [WP-J 独立レビュー](J_review_ja.md) — review
+- [WP-K 独立レビュー](K_review_ja.md) — review
+- [WP-L 独立レビュー：物理回路 fault の OBF と Zanella](L_review_ja.md) — review
+- [WP-M 独立レビュー](M_review_ja.md) — review
+- [WP-N 独立レビュー](N_review_ja.md) — review
+- [WP-O 独立レビュー](O_review_ja.md) — review
+- [WP-P 独立レビュー：実装と最終科学 CSV](P_review_ja.md) — review
+- [WP-Q 独立レビュー](Q_review_ja.md) — review

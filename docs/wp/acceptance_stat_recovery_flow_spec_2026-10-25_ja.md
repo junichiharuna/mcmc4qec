@@ -1,0 +1,82 @@
+# 完了済みacceptanceの跨host stat照合とv12復旧
+
+merge 265660とacceptance 265661はともにF/0で完了したが、v11 controllerはartifact statのdevice不一致で停止した。
+全4artifactでPBS側deviceは46、controller側は2049であり、inode・size・mtime_ns・ctime_ns・modeは一致している。
+内容hashは元acceptanceがPBS内で確認済みで、診断時に巨大result/selectionは読んでいない。
+deviceはhostのmountに依存する値なので、無条件の同値比較と無条件の無視のどちらも採用しない。
+
+元wrapper、元prepared、completion、4artifactのpath/hash/PBSstat、controller側stat witness、producer PBS snapshot、共有namespaceのmount証拠をpinで固定する。
+元wrapperのobserveを全て実行し、artifact stat callbackだけを新observerへ委譲する。
+canonical shared path・non-symlink・regular file・残る5statの完全一致と、証拠で限定したproducer/controllerのhost・device対応を確認する。
+元のqstat F/0・run 1・owner・script・resource、claim、native preflight、completion、accepted receiptの検査を残す。
+小accepted/terminalのcontent hash witnessも照合し、巨大result/selectionはcontrollerで開かない。
+
+新flow sourceとv12 config/journalを作り、停止したv11のerrorと全12 terminalを採用する。
+既存のmerge request/prepared/submissionとacceptance prepared/submission/completionをread-onlyで採用し、元merge/acceptanceのprepare・submit・runを呼ばない。
+本番のmerge root、request root、acceptance root、結果を上書きしない。
+tailの同種cross-host処理も独立に修正し、許可する新helperとnamespace authorityの差分だけを明示する。
+未使用のtail operational rootsとhandoff path、科学設定、native environment、元worker、resource budgetを保持する。
+
+受入はqsubの小fixtureと実metadata/native probeで実施する。
+実nativeでは元12 valuesと巨大result/selectionのopenを禁止し、元submit/runを禁止した状態で既存終端の採用から小handoff構築まで検証する。
+旧原本と完了jobは保存し、本番再開は統合担当が行う。
+
+## Observerの受入
+
+独立担当によるqsub 265665はF/0で、74 testsと27 subtestsが成功した。
+device以外の5項目、未知host/device、別artifact/completion、symlink、元claim/native preflight/source/pin/PBS identityの異常を拒否し、callbackをfinallyで戻す経路を確認した。
+共有namespace authorityはloginのlocal xfs mountと二つの計算nodeのNFS export、同一sentinelと非device stat、各probeの実PBS F/0・scriptを結びつける。
+元stat全体を無条件に無視する処理にはしていない。
+
+実completed prepared/completionを使ったobserver native probe 265667もF/0となった。
+元merge/acceptanceの再実行、巨大result/selectionの読込、原本の書換を行わず、元wrapperのobserveを限定adapter経由で通した。
+実adapterのSHA-256は`c9d3f95d6d882185438ac4c5a8cf4bd48fcfed6da2fceb148faa368ea608a381`、observer authorityは`dd83c9b81d4aef3059ee2789b15bebf5b9673f13274f934d928a8bd48414a786`である。
+正式ready receiptは`e498798f93748a0a9e07b04c520b04daba4b8c1b78f84b4e91e5f59cfdad5d21`であり、この受入は後続tail本計算の完了を意味しない。
+
+受入済みobserverをcontroller hostでもread-onlyで実行し、全4artifactの実device `46 → 2049`の対応を経て`status=accepted`を得た。
+元completionのSHA-256は`c44b7cddc0b1bbefeab3a629ff932054a5d9c045301415cf41f38ccd7bce5946`のままである。
+resultは5,242,089,210 bytes、selectionは1,757,424,201 bytesだが、両方にopen禁止trapを置き、元run・prepare・submitも禁止した状態で確認した。
+この確認は既存完了jobの小metadataによる受理であり、巨大payloadの再hash、元計算の再実行、controllerやtailの起動はしていない。
+後続の再開には、同じnamespace契約を適用したtailと新flow全体の受入を別途必要とする。
+
+## 新flowによる既存結果採用
+
+qsub 265672はF/0となり、既存rootやworker・science・resourceの変更拒否と、prepare/build/submit/capture/accept_terminal呼出を持たないことを含む15差分fixtureが成功した。
+qsub 265673もF/0、wall time 18秒で、実v12 configから元12 worker、merge 265660、acceptance 265661を採用し、隔離journalへのshadow handoff生成まで通過した。
+constructorの前から元12 valuesとresult/selectionのopenを拒否し、元moduleのprepare/build/submit/run/accept_terminalを例外で禁止した状態で検証した。
+元merge/request/acceptanceの小metadataが不変であり、production tail outputsが未作成であることも確認した。
+
+flow sourceは`output/low_parallel_flow_v11/flow.py`でSHA-256は`c08c21a859fccaaef227ed603f9aaf76a5403d0f7892e1a528dbaedaf27d088b`、実config世代はv12でSHA-256は`083a22ca37fe46eb31f2f1034554f76aeffa77e77c273e33627e14e67318838e`である。
+native accepted receiptのSHA-256は`3a6a0b7ffc96d544d21fb035c6b17c81229459c7d1ec6ee453ed870c3240fbdd`である。
+起動前previewでも元14 jobの実状態、旧v11停止、controller hostでの限定observer受理を再確認した。
+この時点では本番controllerを再開しておらず、tail側の実constructor受入完了を待っている。
+
+その後、tailの最終native 265674はF/0、wall time 7秒でpure 13件・実13 constructorを通過し、login側のscratch alias/lock/carrier roundtripも成功した。
+ready receiptのSHA-256は`9db38edad846a9f1321a4a4f102d7b402662856716611e7505f26e9eb56c54b6`である。
+
+統合担当によるv12起動後、別SSHでもPID `1432966`、start ticks `769736422`、command一致と生存、errorなしを確認した。
+launch receiptのSHA-256は`aab0c28c442b3ae702264d9bba57ad3850a123ab6dfb19154dac0ae73517d932`、process receiptは`74f1fddf3fb257a36d0ac8444ac5fcf5872dc5b1048ffac4d61a8a04fca2d6b9`である。
+全12 workerと既存merge/acceptanceを採用し、comparison-completed `53470c42aa0bc554c0401ccfadebd93866edf55eadd5a3b3eebd623d1b597db2`、handoff `83bc44cf948494283a07b517a65e55f3a0b75e69929ae1d4ff39f7d583ce754b`を生成した。
+handoffの保存先は以前予約したv9配下だが、内容の実config/migrationはv12を指しており、v9成功とは扱わない。
+
+09:15:07 JSTの独立qstatでは最初の有限tail job 265675がRで、wall time 48秒、CPU time 46秒、使用メモリ5,245,200 KiBだった。
+この段階は後続census準備の開始であり、独立計時や最終報告までの完了ではない。
+元265660/265661の再計算、元completionや結果の上書きは行っていない。
+
+## 後続census準備の停止を区別する記録
+
+09:29:23 JSTの独立観測では265675がF/1・run 1で終了しており、wall timeは13分32秒、CPU timeは13分24秒、PBS記録の使用メモリは15,084,044 KiBだった。
+v12のPIDは不在で、09:28:01のflow errorには有限tail CLIの終了コード1と`automatic_retry=false`が記録されている。
+内側stderrはcensus資源見積りの「two-hour / four-GiB ceiling」拒否を示すが、保存された例外だけから時間とメモリの個別超過を断定しない。
+この拒否は実PBS割当の96 GiB・4時間を使い切ったことを意味しない。
+
+outerは元job observerによるF/1拒否を受け、「Finite action failed or unknown; preserve original job and output」で停止した。
+失敗jobではcompletion受理に到達しないため、有限actionの`completion.json`・`terminal.json`・`accepted.json`はなく、これは再投入を許す欠落ではない。
+元comparisonとhandoffのSHA-256は前節と同じで、完了済み12 worker、merge、acceptance、selectionは保持されている。
+census config側にはrequest・configと1,757,600,835 bytesのscientific bundleが残り、census job側にはplanning-failureが残る。
+独立計時とreportの各config/job出力先は未作成だった。
+
+小metadata・qstat・statだけを集めた私的記録は`output/census_tail_incident_v1/inspection.json`で、SHA-256は`1aa10c7641b4dde288aaa84e44e5a1eea5a77206f029b45a9ae3de84d12075e0`である。
+この記録は識別子を含む原本を指し、巨大merge-result・selection・scientific bundleの読込や再hash、productionの変更、再投入は行っていない。
+旧rootは失敗の記録として保存し、復旧時は既存comparison/handoffの明示採用とfreshな失敗role出力先を必要とする。
+この時点では復旧実装と本番再開を行っていない。

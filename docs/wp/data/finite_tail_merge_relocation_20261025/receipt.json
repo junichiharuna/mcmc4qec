@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "purpose": "finite_tail_merge_relocation_acceptance_public_summary",
+  "sha256_scope": "Hashes refer to private original bytes before identifier removal; this summary is not a replacement for those original pins.",
+  "failed_original_merge_job_number": 265651,
+  "preserved_completed_worker_count": 12,
+  "outer_changed_fields": ["effective_config", "effective_loader", "merge_root", "source_pins"],
+  "prior_sources_retained": true,
+  "runner_changed": false,
+  "scientific_configuration_changed": false,
+  "parent_environment_changed": false,
+  "report_environment_changed": false,
+  "resource_budget_changed": false,
+  "new_merge_directory_name": "merge-parallel-v2",
+  "jobs": [
+    {"number": 265655, "state": "F", "exit_status": 0, "fixture_count": 18, "fixture_seconds": 0.100, "wall_seconds": 1},
+    {"number": 265656, "state": "F", "exit_status": 0, "actual_configuration_assembly": true, "wall_seconds": 1},
+    {"number": 265659, "state": "F", "exit_status": 0, "fixture_count": 12, "fixture_seconds": 0.003, "actual_constructor_count": 13, "wall_seconds": 6}
+  ],
+  "original_sha256": {
+    "relocation_fixtures_accepted": "5104aad7ea5e3f0dc6e8b95860c30f28185b83bc0a306f5084564a28bb535440",
+    "configuration": "970850291825f1af351b81a29f652e7c5deba027edeb6dfea32674cf483d90e8",
+    "effective_configuration": "902befd0dd048fa6fa2bd81c78e5f7158e8bb0aa617732dc1a4e89d9d898f23b",
+    "relocation_authority": "72e807a3ea80cbfeb02e0f826f6839384f7bbacb203c61b1b465784cd22f8e1d",
+    "prepared_receipt": "35689e885dacec386bd03078d517417d94def76b7764b8ef325f1f51425beb1e",
+    "native_probe_source": "fc68a2bfb4574a24bb5093a70e1dcc48439e70988e2dd754a6cf559349c7e3d4",
+    "native_accepted": "6bbce18ca06b3d615dbe6c839d1bcbad4e0f08a84ed8d395c28196105ebfcd6f",
+    "native_terminal": "c31fcfa535ed5a6f8bf0cc8cc1425054f52584885266ff7053cad79d4f06f064"
+  },
+  "all_six_roles_both_collection_modes_verified": true,
+  "final_report_constructor_only": true,
+  "old_merge_config_rejected": true,
+  "inherited_future_outputs_unchanged_and_unused_at_native_check": true,
+  "failed_metadata_read_exception_count": 4,
+  "small_read_limit_bytes": 4194304,
+  "scientific_payloads_read": false,
+  "science_main_executed": false,
+  "science_native_bootstrap_claimed": false,
+  "new_merge_accepted_by_this_probe": false,
+  "production_controller_started_by_this_task": false,
+  "local_original_metadata_files_collected": 117,
+  "large_synthetic_files_not_collected": 26
+}

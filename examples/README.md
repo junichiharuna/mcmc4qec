@@ -38,7 +38,22 @@ The tile workflow supports `--size 6` (tile72) or `--size 12` (tile288),
 and the experimental comparison `--kernel ZHS`. Depolarizing sector decoders
 use prior `2*target_p/3` while the sampled noise keeps joint I/X/Y/Z probabilities.
 The default target is .03 for tile72 and .05 for tile288. Every ladder uses one
-fixed decoder object. The quick tile72-depolarizing run at seed 7 gave BAR
+fixed decoder object. Pass `--ladder P0,P1,...` to supply at least two strictly
+decreasing probabilities in `(0,1)`; its last point becomes the physical target
+and determines that single decoder's prior. For example, the following selects
+target .01 (use `--noise depolarizing` for joint depolarizing noise):
+
+```shell
+python examples/workflows/tile_capacity_fixed_prior.py --quick --size 6 --noise bit --initialization logical --ladder .1,.07,.05,.03,.02,.015,.01 --out output/tile72-target001
+```
+
+This is an input example, not a recommended ladder or a validated precision
+setting. Check anchor failure counts, adjacent overlap, initialization, and
+mixing separately; low-noise final selection and independent timing remain
+incomplete. The output `bar.json` records the ladder, while `summary.json`
+records its target and sector decoder prior.
+
+The quick tile72-depolarizing run at seed 7 gave BAR
 [.01563, .02815], which missed the completed independent high-budget MC reference
 interval [.03004, .03030], even though it overlapped the example's small MC interval.
 This one-seed observation is not a bias or coverage calibration; the ongoing

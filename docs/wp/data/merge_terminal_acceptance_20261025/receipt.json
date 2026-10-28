@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "purpose": "sanitized_merge_terminal_acceptance_isolation_evidence",
+  "date": "2026-10-25",
+  "identifier_policy": "User paths, cluster suffixes and node names are omitted. Recorded SHA-256 values identify the original private files before sanitization, not this summary.",
+  "wrapper": {
+    "repository_relative_path": "output/merge_terminal_acceptance_pbs_v1/acceptance.py",
+    "sha256": "c78d56032092142a84f6e3f25e787156535ede9f840a8271d6790899ea70425a"
+  },
+  "fixtures": {
+    "job_number": "265621",
+    "pbs_state": "F",
+    "exit_status": 0,
+    "wall_seconds": 1,
+    "test_count": 27,
+    "test_seconds": 0.147,
+    "original_api_fixture_to_controller_adoption": true,
+    "controller_result_selection_open_traps_passed": true,
+    "partial_failure_and_no_retry_checks_passed": true,
+    "production_accept_terminal_executed": false,
+    "private_evidence": "output/merge_terminal_acceptance_fixture_evidence_v1/receipt.json"
+  },
+  "early_actual_cli": {
+    "job_number": "265623",
+    "pbs_state": "F",
+    "exit_status": 0,
+    "wall_seconds": 4,
+    "original_acceptance_sha256": "4e8dec674570e047e95bfed85005f4e30432b8fd853661c186b72fca4fa72789",
+    "same_wrapper_cli_help_then_native_bootstrap": true,
+    "import_origin_map_verified": true,
+    "engine_manifest_verified": true,
+    "interactive_dunder_file_restored": true,
+    "production_merge_prepared_inspected": false,
+    "production_accept_terminal_executed": false,
+    "result_or_selection_read": false,
+    "future_actual_merge_preflight_required": true,
+    "private_evidence": "output/merge_acceptance_cli_native_evidence_v1/receipt.json"
+  },
+  "production_budget": {
+    "cpus": 1,
+    "memory_gib": 96,
+    "wall_hours": 4,
+    "measured": false,
+    "runtime_prediction": false
+  },
+  "production_acceptance_complete": false,
+  "scientific_precision_or_coverage_certified": false
+}

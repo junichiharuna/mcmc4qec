@@ -1,0 +1,42 @@
+# 8 CPU merge証跡を引き継ぐtail bridgeの小仕様
+
+既存のtailとreport environmentを変更せず、8 CPU mergeが実際に使用したrunnerとcontractを検証する別版bridge/report overlayを作る。
+元bridgeはmergeのPBS証跡にworker用の1 CPU検査を直接使用するため、runnerのpin更新だけでは8 CPU mergeを受け入れられない。
+元bridgeの固定SHA-256は `1127168abb1a2b3049d6e18aba5d1fa1d46f437a002b32740fc81f8a8a190e57` とする。
+元report overlayの固定SHA-256は `affd3ccef29614ac4f79652f5dbb8fc7bac75667c69c099a82f3a8c5d2ce0750` とする。
+新runnerの固定SHA-256は `4419108ed08f0f133659423108a418b5caeaf679db902b5b6d9d2d3e716a6522` とする。
+
+bridgeは元bytes中の2か所の `e.check_pbs(` だけを `c.check_pbs(e,` に置換する。
+これにより、固定済みexecution contractが指定する8 CPU検査をmerge証跡に使用し、workerの元evidenceと検査条件を変更しない。
+script、ledger、実行identity、result、source、native、seal、24行と12条件の整合検査は維持する。
+report overlayは元bytes中のbridgeとrunnerの2つのSHA-256文字列だけを新pinへ置換する。
+新bridgeとreportは元ファイルとは異なる絶対パスを持ち、元pinを新sourceの識別子として扱わない。
+reportのdescriptor schema、行選択、eligibility、seed、WSS、科学計算、120秒のchild検証timeoutは変更しない。
+実規模の検証所要時間は別の確認事項であり、この変更の受入だけではtimeout内の完走を保証しない。
+
+report environmentは呼出元が固定した元environmentから複製する。
+変更可能なfieldはreport moduleの `source_sha256`、`resolved_sources`、`import_origins`、`import_prepend` の4つだけとする。
+新しい `cluster_scripts` ディレクトリにはreport moduleのみを置き、元のreport専用import_prependを置換する。
+parent environment、pythonpath、Python実体、native、runtime、科学moduleのpinは維持する。
+外部JSONのbyte pinと、parsed JSONのcanonical digestを区別してdeltaに記録する。
+呼出元は元environmentの外部byte pinを独立に検証し、新environmentに追加変更がないことをverify APIで確認する。
+
+受入テストは固定原本を使用し、bridgeの両PBS検査呼出先、新reportの2つのpin、environmentの正確な4field差分を確認する。
+原本違い、余分なsource編集、旧pinへの偽装、同一pathの上書き指定、不正path、native変更、他module変更、追加environment fieldを拒否する。
+bridge.verifyから抽出した実際の2つのPBS検査文を小さい証跡fixtureと記録用contractで実行し、terminalとstart/endの3回すべてでcontract経由のPBS検査を呼ぶことを確認する。
+この文単位の受入をbridge全体の実データ検証完了とは扱わず、実際のrunner/contractを含むbootstrapと統合受入は別に行う。
+テスト・native bootstrapはクラスタのqsubで行い、このPCでは実行しない。
+本仕様作成時点で、この版の受入テストは未実施である。
+
+## Native受入のsource closure照合の補正
+
+265613のnative受入は、追加したsource closure照合が実クラスタのwrapperと一致しないため失敗した。
+実クラスタの固定wrapperはreportのsource集合に加え、wrapper自身から `local_imports` を再帰的にたどった親側依存moduleの集合を検証している。
+ローカルの通常wrapperを参照してreportとwrapper自身だけを足した照合式は、この親側の再帰依存を不足させていた。
+既存wrapperのbootstrapとscienceによる検証を変更せず、新しい受入helperで同じ集合構築を再現する。
+helperはreport pathの列、wrapper path、`local_imports`、固定import origins、実spec origin参照関数、hash関数を引数で受け取る。
+各pathは `Path.absolute()` で表し、wrapperからの探索にはvisited集合を使用して循環を終了させる。
+各依存moduleについて固定originの存在と実spec originの一致を確認してから探索する。
+report集合と親側再帰集合の全pathのhashを保持し、どちらも省略しない。
+実科学moduleのsource、source pin、native、行選択、seed、計算を変更しない。
+新helperの受入は推移依存、循環、未定義origin、異なる実originとhash集合の保持を小fixtureで確認し、ローカルでは実行しない。

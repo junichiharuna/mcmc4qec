@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "purpose": "read_only_public_access_inventory",
+  "checked_at_utc": "2026-10-24 18:05:31 UTC",
+  "repository": {
+    "url": "https://github.com/junichiharuna/mcmc4qec",
+    "visibility": "public",
+    "private": false,
+    "main_commit": "837a96b8836ba8c81043fcba15b065eb1a8b5296",
+    "main_tree": "9a026bcb73407fbcc6e6cc4bcf8c8db64475830d",
+    "tree_truncated": false
+  },
+  "release": {
+    "url": "https://github.com/junichiharuna/mcmc4qec/releases/tag/v0.1.0.dev5",
+    "tag": "v0.1.0.dev5",
+    "tag_object": "601f70c1f0b8cb65cb69b9310914be8ce57a71f8",
+    "tag_commit": "c27ca896a1025c74975bc45322798eea2e0409b0",
+    "draft": false,
+    "prerelease": true,
+    "assets": [
+      {
+        "name": "manifest.json",
+        "bytes": 854,
+        "declared_sha256": "cb3abbbd576b1f9907a2a6af8519212868aa55d071172fd294c6d2165c0af290",
+        "download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/manifest.json"
+      },
+      {
+        "name": "mcmc4qec-0.1.0.dev5-py3-none-any.whl",
+        "bytes": 93199,
+        "declared_sha256": "98a70792c8e9a51a131c0ff6117180d7b28eccd7f00ef5f144566f6ca7c093ed",
+        "download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/mcmc4qec-0.1.0.dev5-py3-none-any.whl"
+      },
+      {
+        "name": "mcmc4qec-0.1.0.dev5-source.zip",
+        "bytes": 33750089,
+        "declared_sha256": "ea6b535789f584d138391f209bc8d17ae97d0d84929e1e93e0fd170f53407487",
+        "download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/mcmc4qec-0.1.0.dev5-source.zip"
+      },
+      {
+        "name": "release_body.md",
+        "bytes": 4734,
+        "declared_sha256": "7887695f0ee1dabe09c626b52b6de269273b04cce51610aab1b44fbfee1686d5",
+        "download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/release_body.md"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 366,
+        "declared_sha256": "a2bf0c6b6ce0775d1e237264942251486f21938cb71db4557c0cf24b31114d4f",
+        "download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/SHA256SUMS.txt"
+      }
+    ],
+    "asset_count": 5
+  },
+  "selected_main_paths": [
+    {
+      "path": "docs/wp/data_tile_validation_2026-10-17/reference_summary.json",
+      "present": true,
+      "git_blob_sha": "36a7e144330a1cc23a93c18a0a1991a8d51b3d30",
+      "bytes": 1603
+    },
+    {
+      "path": "docs/wp/data_tile_validation_2026-10-17/reference_audit.json",
+      "present": true,
+      "git_blob_sha": "4a4ce10ac80790be1b4cedd679a57d27087e5e46",
+      "bytes": 1338
+    },
+    {
+      "path": "docs/wp/data_tile_validation_2026-10-17/reference_archive_verification.json",
+      "present": false
+    },
+    {
+      "path": "docs/wp/data_tile_validation_2026-10-17/weight_reference_recovery_terminal_validation_v1.json",
+      "present": false
+    },
+    {
+      "path": "docs/wp/data_tile_validation_2026-10-17/low_sampling_export_case2_target0_inputs_v1/extraction.json",
+      "present": false
+    },
+    {
+      "path": "docs/wp/data_tile_validation_2026-10-17/low_collection_case2_target0_evidence_v1/collection_verification.json",
+      "present": true,
+      "git_blob_sha": "c5f3eef503bb73aa80983498788e79f503d44aad",
+      "bytes": 2897
+    },
+    {
+      "path": "tools/reproducibility/README.md",
+      "present": false
+    },
+    {
+      "path": "examples/tile_bposd.py",
+      "present": true,
+      "git_blob_sha": "f7b7f4111acbc01245edc964d8b575e5b2373dbe",
+      "bytes": 2048
+    },
+    {
+      "path": "examples/workflows/tile_capacity_fixed_prior.py",
+      "present": true,
+      "git_blob_sha": "4ec43bf5cc05df8548a70699ae016068ad4b7b1d",
+      "bytes": 4379
+    },
+    {
+      "path": "examples/decoder_comparison.py",
+      "present": true,
+      "git_blob_sha": "68613dc5ce7e4e4a4418167def0093dae09bc1ff",
+      "bytes": 7573
+    },
+    {
+      "path": "src/mcmc4qec/codes.py",
+      "present": true,
+      "git_blob_sha": "e8098e676988d660248edd82360f47987aba36e3",
+      "bytes": 15675
+    },
+    {
+      "path": "src/mcmc4qec/bplsd_decoders.py",
+      "present": true,
+      "git_blob_sha": "375000e1d2ac979a267eb2c71c157ec0fa91ce04",
+      "bytes": 6004
+    },
+    {
+      "path": "src/mcmc4qec/belief_find_decoders.py",
+      "present": true,
+      "git_blob_sha": "6780f4cafdb128065130173c3b1fab48175d8c1f",
+      "bytes": 7240
+    },
+    {
+      "path": "src/mcmc4qec/union_find_decoders.py",
+      "present": true,
+      "git_blob_sha": "638aeda8348ed5017f21ecd2decef516ebaa9759",
+      "bytes": 4556
+    },
+    {
+      "path": "docs/api_en.md",
+      "present": true,
+      "git_blob_sha": "26e4d766f93948ae402232e4a960010ee48ce511",
+      "bytes": 24459
+    },
+    {
+      "path": "docs/tutorial_en.md",
+      "present": true,
+      "git_blob_sha": "50d004669e4a51e9d03df68a10b22971d6af06fe",
+      "bytes": 33519
+    }
+  ],
+  "source_urls": [
+    "https://api.github.com/repos/junichiharuna/mcmc4qec/branches/main",
+    "https://api.github.com/repos/junichiharuna/mcmc4qec/git/trees/9a026bcb73407fbcc6e6cc4bcf8c8db64475830d?recursive=1",
+    "https://api.github.com/repos/junichiharuna/mcmc4qec/releases/tags/v0.1.0.dev5",
+    "https://api.github.com/repos/junichiharuna/mcmc4qec/git/tags/601f70c1f0b8cb65cb69b9310914be8ce57a71f8"
+  ],
+  "asset_bytes_downloaded_this_audit": false,
+  "raw_data_read_this_audit": false,
+  "scientific_reproduction_performed": false,
+  "repository_modified": false
+}

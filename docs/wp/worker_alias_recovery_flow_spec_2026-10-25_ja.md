@@ -1,0 +1,54 @@
+# Worker verifier alias照合後のv11復旧
+
+v10は既存12 workerのF/0を採用し、本番mergeをqsub 265651で投入した後、worker envelopeのsource alias照合で停止した。
+全12 worker、prepared、terminal、values、科学source、native environment、seed、資源設定を保持する。
+元worker verifierは変更せず、派生validatorの許可変換と統合sourceの修正版だけを明示して受け入れる。
+既に修正・受理済みのparent recovery contractも保持する。
+
+失敗したmerge-parallel-v1とそのrequest、prepared、intent、submission、execution-errorを保存し、旧jobのF/1・run 1をmetadataで固定する。
+新merge rootはmerge-parallel-v2、新request rootはmerge-parallel-request-v3、新controller journalはparallel-flow-v11とする。
+旧controller v10の停止を確認し、全12個の既存finished記録からterminalを採用する。
+terminalの再capture、valuesの再hash、worker再投入を禁止する。
+
+tail自体は未開始のため、実行sourceと報告環境を保持し、新merge rootへの明示的な最小bindingだけを変更する。
+未使用のacceptance rootとtail operational roots、handoff pathは不存在を確認した上で継承し、handoff内には新v11の実config/migration pinを残す。
+旧記録を成功扱いしたり、失敗したmerge rootを上書きしたりしない。
+
+旧84件・18件の受入は履歴として保持し、今回は許可差分の正負、失敗jobのidentity、実12 terminal採用、tail最小変更の検証を追加する。
+テストとactual native検証はqsubで行う。
+actual nativeは元12 valuesのopenを拒否し、submitとcaptureを禁止した状態で、隔離されたmerge/request出力先だけにprepare分岐を実行する。
+native metadata検証の成功と本番deep worker-envelope受理を区別する。
+本番controller起動は統合担当が行う。
+
+## 差分受入
+
+qsub 265657はF/0となり、新しい差分fixture 31件が成功した。
+旧worker、科学input、parent contract、tail runner、資源設定の変更拒否と、旧265651のF/1・run 1・owner・script・resourceの照合を検証した。
+tailはeffective config・loader・merge root・source mapの4項目だけの変更を許し、元source map全件の保持と新effective設定が消費するrelocation authorityとの同一性を要求する。
+元terminalの再capture呼出がないことと、欠落・変化したterminalを拒否することも確認した。
+旧84件・18件を今回再実行したものとは扱わない。
+
+受入済みflow sourceは`output/low_parallel_flow_v10/flow.py`、SHA-256は`1cc96b7bb6688f11471d019b443e7f26f84704036cca1e70a255bd8939e51075`である。
+実controller設定の世代はv11で、config SHA-256は`63b8b4d149fdbb56c043fb053e75bfabc73b0b38ea16b88b7dbbd820734d0f4b`である。
+source世代と実journal世代を区別して追跡する。
+
+qsub 265658はF/0、wall time 21秒で、実v11設定から元12 terminalを採用し、隔離した出力先にprepare_mergeを生成した。
+元valuesのopen、terminalの再capture、worker/mergeの投入を禁止した状態で成功し、production merge/request/journal/acceptance rootの不存在も確認した。
+native accepted receiptのSHA-256は`618617ebb91bd1f07fc4a484079790a2656b10fc1c464d72ad3cb4761d408d9f`である。
+private原本はrelocation bundle内の`pipeline-submissions/parallel-flow-native-v11/`に保存した。
+
+tail担当のqsub 265659もF/0となり、新merge rootを対象に12 fixtureと実13 constructorが成功した。
+旧merge rootの設定2種類を拒否し、未使用future outputsを保持する範囲を検証したもので、科学payloadの受理やtail本計算の完了ではない。
+tail accepted receiptのSHA-256は`6bbce18ca06b3d615dbe6c839d1bcbad4e0f08a84ed8d395c28196105ebfcd6f`である。
+統合担当への引渡し前のread-only previewでも元12 jobのF/0、旧v10停止、失敗265651の固定、tailの明示差分を再確認した。
+
+統合担当による本番v11起動後、06:44:21 JSTの別SSH接続でPID `1145733`、start ticks `768839164`、実commandの一致と生存を確認した。
+errorとstderrは空で、元workerのfinished記録を順次採用中だった。
+launch receiptのSHA-256は`23d1cd1d3a26d727d62c93b135c4d9ee5a64b5a03763d6386e799012e59a2473`、process receiptは`226dfe855a8cf0d4ffad398683db7e0e1a1cb50195d1048f19b7a859d07371e7`である。
+この起動確認は本番merge・acceptance・tailの終了受理ではない。
+
+続く独立観測で元12個のfinished journal採用とmerge prepared/submittedの生成を確認した。
+新本番mergeはqsub `265660`で、独立qstatではR/run 1、8 CPU・32 GiB、wall time 10秒・CPU time 12秒、使用メモリ408620 KiBだった。
+旧265651の6秒停止点は越えたが、deep mergeの終了受理は未確認である。
+統合担当が確認した新preparedのSHA-256は`ccb3fc9dc85fe3c7e9f20a20e15b531615519abf64e7ee9c45ca9414ddb9c03c`、requestは`37e850bb62162f1180336fea056edf8216c4c1605f453d3891a80353f0642c50`、submissionは`ffd43e6cf69e56321abe45935dfa7e0408bc68452345bb2fe83f133481b236d8`である。
+元workerを再投入せず、失敗した265651のrootを上書きしていない。

@@ -1,0 +1,47 @@
+# v11復旧差分のprivate保存準備
+
+この文書は投入前の準備記録である。
+その後、固定readyとsourceを変更せずqsub 265662で8 fixtureと実採取に成功した。
+完了結果・取得先・原本hashは[保存結果](finite_flow_v11_delta_snapshot_acceptance_2026-10-25_ja.md)に記録する。
+
+v9 snapshotはそのまま保持し、v11で追加された運用sourceと小metadataだけを別delta snapshotへ保存する準備を行った。
+現時点では採取qsub・fixture実行・snapshot生成は未実施である。
+原本1336 sourceやv9 ZIP・大索引を再読合集せず、v9 receiptとsource/metadata ZIPの宣言hashをreferenceとして結ぶ。
+
+明示inventoryは106件の小metadataと23件のentrypoint sourceを固定した。
+追加sourceの候補はflow source版v9/v10、alias修正merge v7/v8、tail移設、受入PBS stageのsourceであり、その他の参照を無制限に辿らない。
+実config世代v10/v11、migration、tail移設authorityとeffective config、immutable launch、265647–265659の受入・失敗・投入、265660の投入原本が対象である。
+source版名とactual config世代名を区別する。
+265647–265659の実terminalを小qstatで照合し、265651と265653はF1、それ以外はF0、全件run_count=1として保存した。
+265660の科学的な結果は対象とせず、prepared・script・intent・submission・responseだけを固定した。
+
+実flow source SHAは `1cc96b7bb6688f11471d019b443e7f26f84704036cca1e70a255bd8939e51075`、v11 configは `63b8b4d149fdbb56c043fb053e75bfabc73b0b38ea16b88b7dbbd820734d0f4b`、tail configは `970850291825f1af351b81a29f652e7c5deba027edeb6dfea32674cf483d90e8` に固定した。
+修正版inventory原本は `$HOME/workspace/mcmc4qec/20261024-c3t2-index-relocation-v1/output/reproduction_snapshot_v11_delta_v2/inventory-v1/inventory.json` で、SHA-256は `1c2edc25c6d3b0a8ea41329600af4808d9f67834590d798f6cbfb81b5c9fa837` である。
+初版v1のinventory SHA `09ffa54fa856482a482141ee890f2ab06539e4003ac08289e6db43d71df28c8b` は履歴として保持した。
+hashは識別子を含むprivate原本bytesを指し、この文書のbytesを指さない。
+
+実snapshotは受入済みv9 Scope helperとsnapshot_v2 libraryを再利用し、新source prefixと明示entrypointに範囲を絞る。
+source/metadataは各4 MiB、delta合計は16 MiBを上限とする。
+小さい8fixtureをPBS内で先に実行し、成功後だけ採取へ進む予定であり、現時点では未実行である。
+独立レビューで265647・265652のfixture source mapの相対base指定不足を見つけ、各stage/test-rootへ明示して修正した。
+2mapの.py宣言はそれぞれ203件・217件であり、PBS内で全source参照の絶対先・SHA・scope包含を別に照合する。
+相対baseを推測せず、未指定の場合は外部参照のまま残し、文書を再登録する場合も既存baseを消さない。
+raw/native・巨大proof・values・科学resultや可変journalは読まず、source pinとone-hop referenceの境界を保存する。
+科学再現・完全閉包・公開可能性はfalseを維持する。
+
+確認時点のmerge265660はunbound selectの8 CPU・32 GiBであり、既存dynamic gateが扱うcapacity/benchmark familyには入らない。
+偽のfamilyや書き換えたqstatを使わず、保存専用のsubmission adapterも作らない。
+mergeが終端へ達した後に既存shared physical gateが実ジョブ全体を正規に受理できるまで、保存qsubは待機する。
+merge終了後にも後続の実ジョブをfresh censusで照合し、最大2物理ノード×96 CPUを守る。
+本番controller・固定source・worker・結果・mergeの資源や配置は変更せず、controllerの再起動も行っていない。
+
+修正版の準備sourceは `output/reproduction_snapshot_v11_delta_v2/` にあり、旧v1は変更していない。
+stage.pyのprepareは小requestとPBS scriptを作るだけで、submitとは分離する。
+submitは原mergeのF・run_count・scriptを先に照合した上で、旧accepted auxiliaryのshared gateへ渡す設計である。
+この文書は保存準備と待機理由の記録であり、v11 snapshotの取得完了を示すものではない。
+
+独立レビュー後、PBS stageのprepareだけを実行し、状態 `prepared_waiting_for_merge_terminal` とqsub_executed=falseを保存した。
+stageはworkspace相対 `20261024-c3t2-index-relocation-v1/pipeline-submissions/reproduction-v11-control-delta-v1/`、ready.jsonの原本SHAは `c5fa82913f2a9b1dc4360761c5cafbbcbe0037749b4707539b050ed8378f827f` である。
+この段階ではjob IDはなく、予定資源は1 CPU・2 GiB・10分である。
+固定stage.py SHAは `d8b4cc10f9f60bd2fce18f875811055d99396d9fd4a6cad60a4de99377f80e6b`、collect.pyは `8494c4d8e25d1645e0bc03fdb0401a5211f230c8374804de43c94a08cb736dc6` である。
+submitはready.jsonに固定した実mergeの終端を確認し、後続jobを含む既存fresh physical gateを通すため、merge終了だけで投入が必ず許可されるわけではない。

@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "purpose": "independent_limited_review_of_v8_documentary_candidate",
+  "candidate_build_job": "265624",
+  "candidate_audit_job": "265627",
+  "candidate_audit_terminal": {"state": "F", "exit_status": 0, "run_count": 1, "walltime": "00:00:38"},
+  "candidate_archive_sha256": "aa2369d5d9bd106bc5568936cb6265ad709ebf82142ca97f01e9d52d2708bff8",
+  "builder_sidecar_sha256": "c25db96bb8e8e07397366300a54162c406149acba44bc9b270396f49a1ebba41",
+  "original_snapshot_receipt_sha256": "2e5068ac8385a74f6a281a48f9ec0e288777bf4ba4a2734323d2ea4c81b552ed",
+  "evidence_original_sha256": {
+    "audit-report.json": "478b066f33456b393d4b9d803cf4450c12865fe35fdbea8f0b6de1ef88dac3c2",
+    "redacted-samples.json": "b7b5df500cd76b6e352ff0922fcaed8e4259a7dba629a7bddfad0b384b2e0807",
+    "manifest-summary.json": "838d73465d27c3fdcf83c26cb9ef0312debf0d16ce20ecc7834588c83b332317",
+    "builder-source-manifest.json": "0a164ca6c3f60fd05e58d620db50c267ed3ea550d49a7e8084c6b88c4cc35398",
+    "candidate-summary.json": "bea6d50b5a7475dfeb687a5aaf28304a22ba2ff9253c16771c4e630664d710e2"
+  },
+  "evidence_location": {
+    "workspace_relative_build": "20261024-c3t2-index-relocation-v1/pipeline-submissions/share-snapshot-v8-candidate-v2",
+    "workspace_relative_audit": "20261024-c3t2-index-relocation-v1/pipeline-submissions/share-snapshot-v8-identifier-audit-v1",
+    "local_small_audit_copies": "output/share_snapshot_v2_native_v1/audit-v1-receipts",
+    "local_small_candidate_copies": "output/share_snapshot_v2_native_v1/candidate-v2-receipts"
+  },
+  "reviewed_checks": {
+    "candidate_members_scanned_in_pbs": 1372,
+    "candidate_policy_literal_hits": 0,
+    "builder_sidecar_expected_sources": 7,
+    "builder_sidecar_exact_original_bytes_match_in_pbs": true,
+    "reviewed_local_generic_sources_match_sidecar_manifest": true,
+    "sidecar_actual_identifier_candidate_matching_files": 2,
+    "sidecar_actual_identifier_candidate_occurrences": 3,
+    "sidecar_match_classification": "Generic environment variable name and synthetic SCP/PATH fixtures; policy list indices were reviewed separately.",
+    "source_original_hash_multisets_preserved": 1252,
+    "metadata_numeric_boolean_null_hash_multisets_preserved": 112,
+    "bounded_samples_reviewed": ["README", "source", "metadata", "edge", "external", "envelope"],
+    "sample_maximum_bytes_per_category": 2000,
+    "private_policy_text_included_in_this_evidence": false,
+    "original_and_public_hashes_distinguished": true,
+    "blocking_findings_in_reviewed_scope": 0
+  },
+  "supplemental_operational_sources": {
+    "sha256": "102a4a9a3a943d0aadcedc7c2f6385dabea9b9ea6a3eb4285f02713bb6ce2b13",
+    "sources": 7,
+    "same_full_policy_scan_as_candidate_performed": false,
+    "readme_is_frozen_audit_time_version": true
+  },
+  "scope": "Finite saved v8 snapshot; later controller changes and final production proofs are excluded.",
+  "large_zip_read_or_extracted_locally": false,
+  "raw_native_content_read": false,
+  "local_numerical_calculation_or_tests": false,
+  "unknown_secret_absence_certified": false,
+  "signed_origin_authenticated": false,
+  "execution_ready": false,
+  "scientific_reproduction_verified": false,
+  "full_dependency_closure_complete": false,
+  "final_proofs_complete": false,
+  "uploaded": false,
+  "original_candidate_flags_modified": false
+}

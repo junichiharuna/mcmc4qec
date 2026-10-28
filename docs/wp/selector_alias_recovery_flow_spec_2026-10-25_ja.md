@@ -1,0 +1,66 @@
+# Selector alias照合後のflow v10復旧
+
+実v9は全12 workerのF/0とterminal記録を回収した後、merge request構築中のparent source closure照合で停止した。
+旧error、request.json、recovery-policy.json、worker-finished記録を保存し、部分requestを完成扱いしない。
+科学worker、prepared、native環境、結果、seed、tailの実装・設定は変更しない。
+
+別source namespaceのflowを用い、recovery contractとparallel integrationの2 pinだけを受入済み修正版へ変更する。
+他のhelperとmerge inputを厳密に同一とし、request rootとcontroller journalのみ新規にする。
+既存のmerge root・acceptance root・tail設定は未使用future outputとして継承し、起動前に不存在を確認する。
+tailの予定handoff pathは旧v9配下の未使用pathを引き継ぐが、内容には新v10の実config pinとmigration pinを記録し、旧v9の成功とは表示しない。
+旧v9の既存記録を上書きしない。
+
+migration記録は旧config/error、部分request2件、全12個のworker-finished journal、修正版2 source pin、future output契約を固定する。
+実controllerとPBS shadowの両方で差分契約を検証する。
+実起動は旧PID/start ticksの停止を必要とし、shadowはPBS内でのみtickなしに構成を検証する。
+
+全12 workerは既存ledgerとterminal-descriptorだけを採用する。
+terminalが欠落・変化した場合は停止し、capture_terminalの再実行、valuesの再hash、worker再投入は行わない。
+深い科学的受理は既存PBS mergeに残す。
+
+受入は2 source以外の変更拒否、科学input・tail変更拒否、部分requestの保持、全12終端記録の一致、未使用future path、terminal欠落時の再hash禁止を小fixtureで検証する。
+旧84 fixtureの受入は履歴として保存し、新しい差分fixtureと実metadata/native構成をqsubで検証する。
+本番起動は統合担当が行う。
+
+## 受入記録
+
+2026-10-25のqsub 265649はF/0となり、新しい差分fixture 18件が成功した。
+内訳は変更を許す範囲の正負12件、既存terminal採用と再capture禁止4件、元tailのhandoff関数に追加provenanceを渡す互換確認2件である。
+旧84件の受入を取り消したり、今回再実行したと表示したりしない。
+
+qsub 265650はF/0、wall time 21秒で、実v10設定から全12個の既存terminalを採用し、修正版contractを用いたprepare_merge分岐まで通過した。
+このnative検証はcontroller journalを隔離し、merge/requestの出力先2箇所だけを同PBS stage配下へ明示的に投影した。
+worker投入、merge投入、capture_terminalは例外で禁止し、元12 valuesファイルのopenも拒否した状態で成功した。
+productionのmerge/request/journal/acceptance rootは未作成のままである。
+本計算のmerge・科学的受理・独立計時・最終報告の成功を、このmetadata/native受入から主張しない。
+
+受入済みflow sourceは`output/low_parallel_flow_v9/flow.py`でSHA-256は`0b65f945ff58924dcf621a3a512a2708e4a8943191b20189425779740ebaab8e`、実controllerのjournal世代はv10である。
+実configのSHA-256は`1263c2ed2264a19c69b0a29c692cf9277fb402d1d94f578364b73b94ab1046da`、native accepted receiptは`314132344cbf8be0178297b45d00d728908e680d6045a46ebf6d2adaf2020243`である。
+private原本はクラスタの`$HOME/workspace/mcmc4qec/20261025-low-parallel-controller-v10/`と、relocation bundle内の`pipeline-submissions/parallel-flow-native-v10/`に保存した。
+旧v9の停止error・部分request・terminal記録を変更していない。
+起動直前のread-only previewでも全12個の実F/0、旧controller停止、追加source2件以外の不変、未使用future outputを再確認した。
+
+統合担当によるv10本番起動後、06:28:45 JSTの別SSH接続でもPID `1082214`、start ticks `768745045`、実commandの一致と生存を確認した。
+全12個のfinished journalを新v10へ採用済みで、観測時点のerrorとstderrは空だった。
+launch receiptのSHA-256は`af1638cb8fe2076c770e847095ee0851fdcddfb130f177e84d645fa3acb35144`、process receiptは`81ee295840a0c6c0b4597f987dbd11aaabe5dd3a023694ec3d521e576e72f6c7`である。
+この確認時点は本番merge準備中であり、merge・acceptance・tailの終了確認ではない。
+v10の実configが参照するfuture handoffは旧v9配下の未使用pathを継承しているため、pathの世代名だけで成功したcontrollerの世代を判定しない。
+
+その後の別SSH観測ではv10 journalにmerge-request-prepared、merge-prepared、merge-submittedが生成され、controllerの生存とerrorなしを再確認した。
+本番mergeはqsub `265651`で、8 CPU・32 GiBの要求だった。
+統合担当の初回R観測後、独立qstat照合では06:29:04 JSTにF/1、run 1、wall time 6秒となっており、原因の調査を統合担当へ直ちに依頼した。
+本番preparedのSHA-256は`2bc6fc0f3a19c971e0f31171ff96787bddd08741bb86428ecd9d81d524a3a645`、requestは`23bf1b86b0ef323546265ae07997f82b5c3a14ef5e19d68b80268c4245801175`、submissionは`493e9ed27a7dc58738bc6aeb313567dfce985a268a0f80a8a790fc1b7dc6786c`である。
+これら3個の本番pinは統合担当の照合結果を記録したものであり、実mergeは失敗して終了し、科学的受理は行っていない。
+元worker、失敗merge、旧journalを保存し、自動再投入していない。
+
+実stderrではparent recovery contractを通過した後、worker validatorから元worker evidenceの`accept_worker`を呼ぶ段階で`selector closure differs from environment`となった。
+全12個の実manifestとparent environmentを小metadataだけで確認したところ、各1件の同一alias差分が残っていた。
+manifestの`20261018-tile-low-staging-v1/cluster_scripts/tile_low_noise_staging.py`に対し、environmentでは`20261018-tile-low-staging-control-v2/cluster_scripts/tile_low_noise_staging.py`という宣言を使用し、宣言されたresolved targetは前者と一致した。
+両宣言と実source bytesのSHA-256は`d2595162fb7e9fe02ca2a89d292cece30e86a545f8a06dc8b0d6cb142f9ac9ea`で一致した。
+現parallel validatorは元verifierのproof・bulk hash・source identityの3箇所だけを明示変換しており、worker側closureの文字列key完全一致は元のままだった。
+この失敗箇所はvaluesを読む前であり、診断でも巨大valuesを開いていない。
+受入済みmetadata準備分岐の成功と、本番worker-envelope検証の成功は別の範囲であり、後者の成功を確認できていない。
+
+次の復旧では失敗した本番merge rootを上書きせず、fresh merge/request rootと、元worker verifierを保持する明示的な検証adapterを用いる必要がある。
+全12個の既存workerとterminalは保存し、再実行しない。
+具体的な修正、tailの新merge rootへの最小binding、受入と本番切替は別途統合する。

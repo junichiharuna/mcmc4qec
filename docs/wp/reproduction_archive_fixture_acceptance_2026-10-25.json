@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "purpose": "public_reproduction_archive_fixture_acceptance",
+  "job_number": "265593",
+  "tests_passed": 23,
+  "test_elapsed_seconds": 0.023,
+  "pbs_walltime": "00:00:01",
+  "terminal_verified": true,
+  "physical_node_verified": true,
+  "source_sha256": {
+    "pbs_tests.py": "268bd0f6aecb7667d935239d31f7ef3400b8251c722aa8034c3168874e337498",
+    "test_archive.py": "5b9e14822a8c9a748bdad17ba4f0efd55bfb9124a1beba7574b851e2da9d7458",
+    "archive.py": "18d5fe5e89f173f23210d133cccb342fd1fd321ddbc7b0fdcda6a21b77f6c127"
+  },
+  "original_evidence_sha256": {
+    "accepted.json": "e1556c2e71fdfe200d645fb9a5777abb8c8125876f176664e21f358ed3cbfa8f",
+    "request.json": "b0af64f9d2a956430119745ddcac2bfe2e08eed0553418a84b5663e960cb2096",
+    "terminal.json": "7e05c4bc5fbf9af9fa0b9beb1161ae47dda32a698d2d075985d6d6adec6f8a81",
+    "submission.json": "5cc9fb35afa1d8ef8359b5ed9de9ae01ef14a909f31969d3bdbfd2f29458efee",
+    "job.sh": "48cda910fb745b379fe84240143a3ea862be46ba6552fc1ec89cfe5a2c157f82",
+    "accepted.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "accepted.stderr": "ac5eda9d6cbc8971d3e814ac50c5477297edba4bca826a914c4b02a37dce41af"
+  },
+  "original_evidence_root": "$HOME/workspace/mcmc4qec/20261024-c3t2-index-relocation-v1/pipeline-submissions/reproduction-archive-tests-v1",
+  "identifier_policy": "Hostnames and private absolute paths omitted; original evidence hashes refer to unsanitized originals.",
+  "production_files_read": false,
+  "actual_archive_collected": false,
+  "scientific_reproduction_verified": false
+}

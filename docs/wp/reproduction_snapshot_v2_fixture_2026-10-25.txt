@@ -1,0 +1,30 @@
+test_alias_cycle_and_root_escape_rejected (test_snapshot_v2.SnapshotTests.test_alias_cycle_and_root_escape_rejected) ... ok
+test_alias_retarget_after_capture_rejected (test_snapshot_v2.SnapshotTests.test_alias_retarget_after_capture_rejected) ... ok
+test_alias_unexpected_target_rejected_even_same_bytes (test_snapshot_v2.SnapshotTests.test_alias_unexpected_target_rejected_even_same_bytes) ... ok
+test_basename_hash_map_and_relative_base (test_snapshot_v2.SnapshotTests.test_basename_hash_map_and_relative_base) ... ok
+test_binding_hash_and_resolution_must_match (test_snapshot_v2.SnapshotTests.test_binding_hash_and_resolution_must_match) ... ok
+test_bounded_source_reads_and_total_limit (test_snapshot_v2.SnapshotTests.test_bounded_source_reads_and_total_limit) ... ok
+test_changed_source_pin_rejected (test_snapshot_v2.SnapshotTests.test_changed_source_pin_rejected) ... ok
+test_conflicting_external_pin_rejected (test_snapshot_v2.SnapshotTests.test_conflicting_external_pin_rejected) ... ok
+test_current_metadata_bytes_remain_original (test_snapshot_v2.SnapshotTests.test_current_metadata_bytes_remain_original) ... ok
+test_duplicate_source_and_wrong_denominator_rejected (test_snapshot_v2.SnapshotTests.test_duplicate_source_and_wrong_denominator_rejected) ... ok
+test_envelope_denominator_and_hash_preserved (test_snapshot_v2.SnapshotTests.test_envelope_denominator_and_hash_preserved) ... ok
+test_existing_destination_never_overwritten (test_snapshot_v2.SnapshotTests.test_existing_destination_never_overwritten) ... ok
+test_historical_envelope_cannot_conflict_with_current_source (test_snapshot_v2.SnapshotTests.test_historical_envelope_cannot_conflict_with_current_source) ... ok
+test_malformed_first_edge_does_not_hide_valid_sibling (test_snapshot_v2.SnapshotTests.test_malformed_first_edge_does_not_hide_valid_sibling) ... ok
+test_metadata_internal_edge_wrong_pin_rejected (test_snapshot_v2.SnapshotTests.test_metadata_internal_edge_wrong_pin_rejected) ... ok
+test_missing_historical_file_does_not_claim_preserved (test_snapshot_v2.SnapshotTests.test_missing_historical_file_does_not_claim_preserved) ... ok
+test_missing_import_binding_rejected (test_snapshot_v2.SnapshotTests.test_missing_import_binding_rejected) ... ok
+test_named_path_hash_pair_is_indexed (test_snapshot_v2.SnapshotTests.test_named_path_hash_pair_is_indexed) ... ok
+test_native_and_external_content_never_opened (test_snapshot_v2.SnapshotTests.test_native_and_external_content_never_opened) ... ok
+test_source_alias_preserves_declared_reference (test_snapshot_v2.SnapshotTests.test_source_alias_preserves_declared_reference) ... ok
+test_source_and_metadata_preserved_with_external_edges (test_snapshot_v2.SnapshotTests.test_source_and_metadata_preserved_with_external_edges) ... ok
+test_source_changes_after_capture_rejected (test_snapshot_v2.SnapshotTests.test_source_changes_after_capture_rejected) ... ok
+test_source_envelope_entry_must_be_collected (test_snapshot_v2.SnapshotTests.test_source_envelope_entry_must_be_collected) ... ok
+test_unbound_hash_and_import_origin_are_indexed (test_snapshot_v2.SnapshotTests.test_unbound_hash_and_import_origin_are_indexed) ... ok
+test_unpaired_path_and_malformed_map_preserve_siblings (test_snapshot_v2.SnapshotTests.test_unpaired_path_and_malformed_map_preserve_siblings) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.023s
+
+OK

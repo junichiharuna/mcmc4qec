@@ -1,0 +1,64 @@
+# snapshot v2の独立レビュー
+
+## 仕様レビュー
+
+対象は[小仕様](reproduction_snapshot_v2_spec_2026-10-25_ja.md)と、これから追加する有限scopeの保存処理である。
+稼働中のworker・flow・受入済みarchive.pyを変更しない。
+ローカルのテストや計算は実施していない。
+
+1016件は現行318参照と封印元Python729参照の重複31件を除いた宣言pathの集合として定義されており、実体file数や全動的importの閉包と区別されている。
+source・current metadata・historical evidence・raw/native・future evidenceを別々に扱い、保存範囲内の完了を科学的再現やexact replayの保証としない方針は整合している。
+原本bytesとSHA-256を保存し、公開時に識別子を除いたbytesのSHA-256を別に記録する方針を維持する。
+
+## 実装・受入で確認する点
+
+- 不正pinの検出が同じdocumentの後続edgeの記録を止めないことを確認する。
+- JSON pointer・宣言target・宣言hash・分類・理由を各edgeに残し、scope外の存在を消さないことを確認する。
+- relative baseを推測せず、bare hashや未解釈pathは未分類またはmanual reviewとして記録する。
+- 別名を実体pathへ統合して1016参照の分母を縮めず、同じ宣言pathの相反pinは停止条件とする。
+- source aliasについて、収集時と公開archive作成時の両方で期待resolved target・許可root内・bytes hashを照合する。
+- 同一bytesの別targetへのlink付け替えでも、元の別名対応証拠を満たした扱いにしない。
+- raw/nativeは内容を開かず、stat・link名・resolved target・宣言hashだけを記録し、hash未再検証を明示する。
+- 公開時は本文だけでなくedgeのpointer・target・理由・別名対応も識別子除去の対象とし、変換後のidentity衝突を拒否する。
+- 原本内のpinを公開bytesのhashへ書き換えず、原本hashと公開hashの意味を保持する。
+
+既存archive.pyの参照抽出は不正pinでdocument全体を停止し、buildは全edgeの収集済みtargetを要求するため、新しい一段探索とexternal edgeの処理にそのまま流用できない。
+この相違とsource linkの再検証要件を実装担当へ連絡した。
+## 実装とfixtureの静的レビュー
+
+snapshot_v2.pyと先に作成されたtest_snapshot_v2.pyを読み、別helperとして原本保存と一段探索を行うことを確認した。
+raw/nativeの内容読出しを捕捉するテストをbounded_readだけでなくPath.openにも適用する修正を依頼し、追加を確認した。
+internal sourceとhistorical envelopeで同じpathに異なるhashを宣言した場合、初稿ではexternal同士の比較しか行わないため相反を見逃す問題を指摘した。
+修正版はinternalを初期集合とする全scopeのpin照合を行い、この反例を拒否する受入を追加した。
+不正なpath-keyed hash mapとhash未対のpath宣言を記録せず落とす箇所を指摘し、修正版でedgeとして残す処理と受入を確認した。
+source linkは読出し前後と封印前に期待targetを再確認し、元source・metadataのhashも再確認する。
+この時点の25受入テストは静的に読んだだけであり、レビュー担当は実行していない。
+
+今回の実装範囲はprivate snapshotに限定され、publicly_distributableはfalseである。
+公開用の識別子除去・変換後hash・公開版検証はこのhelperでは未実装であり、既存archive.pyの受入を新形式の公開対応が完了した証拠としない。
+参照抽出は認識するpin・path形式に限られ、任意文字列や動的importの閉包を保証しない。
+上記修正後、private有限scopeライブラリの静的レビューで追加の停止要因は見つからなかった。
+実requestのauthority・1016参照の和集合・current metadataの過不足と本収集結果のレビューは未完了である。
+
+## 実request構築の静的レビュー
+
+collect.pyは固定した初回request・role表から現行318参照を取り出し、固定envelopeの729 Python参照と31参照の重複を照合して1016参照を導出する。
+初回request・role表・envelope・flow-configの原本もmetadata保存対象に含める。
+実controller自身がflow-configのhelper表に含まれないため、native acceptanceと起動記録から同じflow-configに結び付いたcontroller sourceを明示的な補足として追加する。
+したがって1016は基礎集合であり、補足後の保存総数は別に報告する。
+current environmentのsource・resolved target・import originとnativeの対応を確認し、全12workerの実submissionとscriptの対応を記録する。
+
+初稿では各preparedのmanifest・resource-plan・environmentを個別にmetadata表へ追加しておらず、保持workerが参照する旧resource-planが一段探索のexternalに残る可能性を指摘した。
+これらを全12preparedから有限個追加し、同一pathのhash一致を確認する修正を依頼した。
+修正版で各preparedのmanifest・resource-plan・environmentが追加されたことを確認した。
+source補足は実preparationのhelpers・worker_sources、実dispatchのcapacity、現行merge_inputsが検証に使うsource pin、各実preparedのrunner・evidence_readerに限定し、追加理由を保持する構成になった。
+無関係なhistorical metadata全体へ探索範囲を再帰的に広げる実装ではない。
+この追記時点では本収集は未確認であり、保存済みbytes数や保存完了を報告するものではない。
+walltime復旧への担当変更に伴い、この静的レビュー段階を終端として実収集結果の確認を保存担当へ引き継いだ。
+
+## 引継ぎ後の証跡確認
+
+保存担当が作成した[公開用受入記録](reproduction_snapshot_v2_acceptance_2026-10-25.json)を読み、基礎1016参照と補足15参照を別記した1031 source参照、metadata 75文書、envelope 1223参照、19692 edgeの報告を確認した。
+記録は25fixtureを実行したjob 265596と本収集job 265599を識別し、private原本のhashと公開用記録の区別を明示している。
+これはv5固定構成の記録であり、walltime復旧後のv6の保存完了を示さない。
+レビュー担当はprivate ZIP全bytesの独立再hashや本収集の再実行は行っていない。

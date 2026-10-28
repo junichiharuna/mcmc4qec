@@ -1,0 +1,42 @@
+# Private snapshot v2の共有候補への変換
+
+`snapshot_v2.py` が保存した有限範囲のprivate snapshotを入力とし、別モジュール `share_snapshot_v2.py` でレビュー用ZIPを作る。
+既存のsnapshot、collector、archive.py、受入済みsourceは変更しない。
+archive.pyの23 fixture成功をこの新形式の検証済み件数として扱わない。
+
+入力receiptは呼出側が指定した元SHA-256で検証する。
+receiptが指す2個のprivate ZIPと5個のindexをそれぞれ元SHA・bytesで検証し、source/metadataの各memberを元indexのSHA・bytesで検証する。
+source、metadata、edge、external、envelope、receiptの元hashと、redaction後に実際に配布候補へ入れたbytesの公開hashを別のmanifestに記録する。
+metadataやsourceに埋め込まれた既存pinは元bytesを指す記録として保持し、公開bytesのpinへ偽装更新しない。
+原本ZIPのmember名と公開ZIPのmember名の対応は新manifestに明示する。
+
+redaction policyはprivateな絶対path prefix、username/hostnameなどのliteral識別子、追加の残留検査patternを明示する。
+pathは長いprefixから一度だけ置換し、JSONはkeyとvalueを構造的に処理してkey衝突を拒否する。
+sourceはUTF-8テキストとして置換し、JSON/Python文字列内のescapeされたpath表現も対象にする。
+64桁hexの既存hash文字列はredaction対象から除外する。
+既知literalとhome/user pathの残留、置換の連鎖や未適用を検査する。
+宣言外の未知識別子、難読化表現、機密内容全般を完全検出した保証にはせず、公開前の人手レビューを必要とする。
+policyのprivate literal自体を公開ZIPへ同梱しない。
+
+ZIPは展開せずmemberを読み、absolute/traversal/backslash/drive名、symlink、暗号化、未許可compression、重複または正規化衝突、未宣言memberを拒否する。
+圧縮前後のbytes、個別member bytes、member数、総bytesに上限を設ける。
+JSONの重複key、元hash不一致、index数の不一致、内部edgeの不一致を拒否する。
+入力外のpath、external raw、native binaryはopenもstatもしない。
+入力snapshotの固定済みartifactだけを読み、出力は新規pathに限る。
+
+公開候補はdocumentary archiveであり、`execution_ready=false`、`scientific_reproduction_verified=false`、`full_dependency_closure_complete=false`を維持する。
+完全な再配置、依存物の復元、科学計算の再実行、実行時source identityの再検証を達成したとは扱わない。
+公開ZIPのverifyは公開bytesの整合性を検証し、元private bytesやexternal hashを再検証したとは扱わない。
+
+仕様、専用fixture、実装の順で作業する。
+テストと圧縮は共有physical-node gate経由のqsub上でのみ実行し、同時最大2物理ノードを守る。
+本PCではテスト、圧縮、数値計算を実行しない。
+v8 private採取と競合しないよう投入を調整し、公開uploadとcommitは行わない。
+
+## 検出器revision 2
+
+初版exporterの26 fixtureは265618で成功したが、実v8候補の265619は残留検査で失敗した。
+265620の保存source限定診断では、scpのhost:path、POSIX PYTHONPATHの区切り、source文字列のescaped newlineをWindows driveとして誤認した8件を確認した。
+既存の受入済み初版sourceは維持し、`share_snapshot_v2_revision2.py` でdrive検出に単語途中を除外する条件を加える。
+http/https URL、scp指定、POSIX path list、escaped newlineは通過させ、実Windows絶対pathとURL内のprivate literalは引き続き拒否する回帰fixtureを追加する。
+private identifier全体のallowや科学値・seed・元hashの変更で対処しない。

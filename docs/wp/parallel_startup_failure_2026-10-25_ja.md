@@ -1,0 +1,20 @@
+# 12条件の並列起動時の失敗と検証範囲
+
+2026-10-25 00:19:21〜00:19:32 JSTに12workerをqsubで投入した。
+ジョブ番号は265535〜265546で、割当は2ノードに各6workerだった。
+全12件が約3秒で終了コード1となり、`actual import origin differs`で停止した。
+数値結果`values.json`は全件で未生成であり、比較完了や科学的な精度未達として扱わない。
+各ジョブの終端状態と識別子を除いたエラーは[回収記録](data_tile_validation_2026-10-17/parallel_startup_failure_20261025_v2/receipt.json)に保存した。
+元のqstat出力とstderrもクラスタ側の専用記録へ保持している。
+
+本番runnerの所在ディレクトリに、環境のimport元として指定したファイルとは別の`tile_low_noise_timing_isolated.py`が存在した。
+Pythonのスクリプト起動ではrunnerのディレクトリが先に探索され、この別コピーを選んだため、環境のimport元検査に失敗した。
+準備処理のentrypointは別ディレクトリにあり、準備時のbootstrap成功は本番runnerの起動コンテキストを十分に検証していなかった。
+先に成功したnative検証・単体テストを、本番12workerの起動成功の証拠へ読み替えない。
+
+修正はrunner・evidence・valuesの検証済みbytesを、この3ファイルだけが存在する新しいruntimeディレクトリへ配置する方針とする。
+環境で指定したisolated module、科学計算コード、数値データは変更しない。
+新しいmanifest・prepared・policyには移設後の実パスとhashを固定し、失敗した旧workerの証拠を書き換えない。
+実runnerの探索順を使う赤・緑の起動検証をPBSで行い、その検証方法と実際の`run-worker`実行の違いを記録する。
+次の本番投入はまず1条件とし、起動確認と数値計算の完走を区別して確認した上で残りの条件へ進める。
+この文書の時点では修正版の起動検証・再投入は未完了である。

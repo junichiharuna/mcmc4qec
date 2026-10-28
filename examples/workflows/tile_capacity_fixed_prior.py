@@ -5,15 +5,34 @@ precision settings. P_any is failure of any logical observable, not P_any/k.
 Depolarizing noise preserves the joint I/X/Y/Z law; sector decoding is a decoder
 approximation. Changing the physical target rebuilds the decoder, whereas every
 rung of one ladder shares exactly the same decoder object and failure event.
+Use --ladder P0,P1,... to choose an explicit ladder and its final target. The
+ladder is a workflow input, not a calibrated recommendation; anchor failures,
+adjacent overlap, and mixing need separate checks, especially at low noise.
 """
 import argparse
 import csv
 import json
+import math
 from pathlib import Path
 import tempfile
 
 import numpy as np
 import mcmc4qec as qec
+
+
+def _target_ladder(size, explicit):
+    if explicit is None:
+        ladder=[.1,.07,.05,.03] if size==6 else [.1,.085,.07,.06,.05]
+    else:
+        try:
+            ladder=[float(value) for value in explicit.split(",")]
+        except ValueError as exc:
+            raise ValueError("--ladder requires comma-separated probabilities") from exc
+        if len(ladder)<2 or any(not math.isfinite(p) or not 0<p<1 for p in ladder):
+            raise ValueError("--ladder requires at least two finite probabilities in (0, 1)")
+        if any(a<=b for a,b in zip(ladder,ladder[1:])):
+            raise ValueError("--ladder must be strictly decreasing")
+    return ladder[-1],ladder
 
 
 def main():
@@ -23,16 +42,20 @@ def main():
     parser.add_argument("--out",type=Path,default=Path(tempfile.gettempdir())/"mcmc4qec/tile_capacity_fixed_prior")
     parser.add_argument("--size",type=int,choices=[6,12],default=6)
     parser.add_argument("--noise",choices=["bit","depolarizing"],default="bit")
+    parser.add_argument("--ladder",metavar="P0,P1,...",
+                        help="explicit decreasing physical-error ladder; the last point fixes the decoder prior")
     parser.add_argument("--initialization",choices=["rejection","logical"],default="rejection")
     parser.add_argument("--kernel",choices=["ZH","ZHS"],default="ZH")
     parser.add_argument("--uncertainty",choices=["block_bootstrap","cross_chain"],default="block_bootstrap")
     args=parser.parse_args()
+    try:
+        target,ladder=_target_ladder(args.size,args.ladder)
+    except ValueError as exc:
+        parser.error(str(exc))
     out=args.out.expanduser().resolve()
     out.mkdir(parents=True,exist_ok=True)
     print(f"Output: {out}")
     code=qec.make_tile_code(args.size,args.size)
-    target=.03 if args.size==6 else .05
-    ladder=[.1,.07,.05,.03] if args.size==6 else [.1,.085,.07,.06,.05]
     settings=dict(max_iter=100,bp_method="min_sum",ms_scaling_factor=1.,schedule="parallel",osd_method="osd_cs",osd_order=10)
     prior=target if args.noise=="bit" else 2*target/3
     if args.noise=="bit":

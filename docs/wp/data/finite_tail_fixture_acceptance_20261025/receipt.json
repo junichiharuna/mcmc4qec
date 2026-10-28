@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "purpose": "sanitized_finite_tail_fixture_and_cli_evidence",
+  "original_identifiers_omitted": true,
+  "sha256_refers_to_unsanitized_originals": true,
+  "initial_integration": {
+    "terminal": "F/1",
+    "wall_seconds": 2,
+    "successful_other_family_tests": 80,
+    "independent_tests": 16,
+    "independent_errors": 12,
+    "cause": "Request selected submit instead of submit_tile_low_noise_timing_execution",
+    "accepted": false
+  },
+  "corrected_independent": {"terminal": "F/0", "wall_seconds": 1, "passed": 16},
+  "corrected_integration": {
+    "terminal": "F/0",
+    "wall_seconds": 2,
+    "passed": 96,
+    "families": {"census": 8, "independent": 16, "report": 19, "dispatch": 26, "collection": 7, "job": 20},
+    "request_sha256": "cf4e66e4e53e5fe616a9c90fe6e1d1a9892f998f5bae12b9494ed624f015d7e7",
+    "accepted_sha256": "9f712a626eae769fda58f901577bdf2cba6d6e2751cf111d27d7ba54e0f3f6df"
+  },
+  "actual_cli_envelope": {
+    "terminal": "F/0",
+    "outer_observe_accepted": true,
+    "wrapper_sha256": "380fe15d273da4c960e38e3b973ce3011f01045e8d75223449782e6f84cb8c07",
+    "completion_sha256": "6f9af412d8972cd4664f6bee9f4fffb0b412767d215cc170dae538593dd455ac",
+    "adoption_sha256": "d6c80a930d2f905395b8272f5ab135d55c13335554dddb623b895690cefc7c2d",
+    "science_executed": false,
+    "native_scientific_bootstrap_verified": false,
+    "child_qsub_executed": false
+  },
+  "private_evidence_files": 111,
+  "private_receipt_sha256": "48360566d2207d5de1588ea5c142e5d2b433ca16d67b2919c30e89c1df41fbcc",
+  "production_tail_executed": false,
+  "production_controller_replaced": false,
+  "full_pipeline_accepted": false
+}

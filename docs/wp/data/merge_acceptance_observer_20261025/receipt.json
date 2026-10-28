@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "purpose": "sanitized_merge_acceptance_observer_validation_summary",
+  "hash_scope": "SHA-256 values refer to unchanged private originals, not this sanitized summary",
+  "sources": {
+    "original_wrapper": "0e3d3a44092d1cab57c200e73e1041a405d8381485b5c232b7cbaff0003c4823",
+    "observer": "c9d3f95d6d882185438ac4c5a8cf4bd48fcfed6da2fceb148faa368ea608a381",
+    "namespace": "f01c0f3fdb4b58d19564f64bc20c30b5f803a8dcbece174287cd193e0db8bf8b"
+  },
+  "fixture": {
+    "job_number": 265665,
+    "state": "F",
+    "exit_status": 0,
+    "run_count": 1,
+    "tests_passed": 74,
+    "subtests_passed": 27,
+    "elapsed_seconds": 0.96,
+    "wall_seconds": 2,
+    "accepted_sha256": "eb103a36175923db7f1ca42ac3b23ef33c1fc57855b69a99ab97aad8883b15b9",
+    "terminal_sha256": "c6a84ac24f1fbdacb9dd327ab59f8ed21de0122c6cba242abb370509c4508833"
+  },
+  "native": {
+    "job_number": 265667,
+    "state": "F",
+    "exit_status": 0,
+    "run_count": 1,
+    "wall_seconds": 2,
+    "accepted_sha256": "4b67e4a99f3b9b61bf296b56790879bf52488bf43876ebb04570fae97f6f9ec8",
+    "terminal_sha256": "045b11726cc9356d7c54949c9d2a638284bf265899de3d362711cdb3170556d5",
+    "actual_original_observe_completed": true,
+    "original_accepted_payload_equal": true,
+    "artifact_census": 4
+  },
+  "namespace_authority_sha256": "1db641382d82b9f6122a3607d44094771723cb63dd1c2a7ba3801312fd095465",
+  "original_completion_sha256": "c44b7cddc0b1bbefeab3a629ff932054a5d9c045301415cf41f38ccd7bce5946",
+  "observer_authority_sha256": "dd83c9b81d4aef3059ee2789b15bebf5b9673f13274f934d928a8bd48414a786",
+  "production_ready_sha256": "e498798f93748a0a9e07b04c520b04daba4b8c1b78f84b4e91e5f59cfdad5d21",
+  "original_merge_reexecuted": false,
+  "original_acceptance_reexecuted": false,
+  "large_artifact_payload_read": false,
+  "scientific_values_recomputed": false,
+  "production_controller_started_by_this_acceptance": false,
+  "final_tail_completed": false
+}

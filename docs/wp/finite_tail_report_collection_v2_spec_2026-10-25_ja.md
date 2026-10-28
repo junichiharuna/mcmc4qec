@@ -1,0 +1,13 @@
+# Report回収actionへ元stable closureを引き継ぐ版
+
+元仕様は `finite_tail_report_collection_spec_2026-10-25_ja.md` とする。
+固定済みcollection.pyと既存sourceを変更せず、collection_v2.pyを別sourceとして用意する。
+元driverの同じ完全な回収suffixを抽出し、files、copy、hash、descriptor、submission、completed、manifestの検査と保存を変更しない。
+caller側の置換は `FINITE_COLLECT(ctx,ledger,sealed,stable)` とする。
+この引数stableは元mainでsource/envと上流accepted.jsonを固定した実closureを渡す。
+outer loaderが提供するFINITE_COLLECTはstable.__code__.co_freevarsにpinsが存在することを検証し、対応するclosure cellの辞書をdeepcopyしてaction payloadへ固定する。
+PBS側でそのpinを元stableと同じように照合し、PBS開始時のファイル内容を新しい正解pinとして採用しない。
+stable closureの検証・payload署名と元sourceの実行証明は共通outer loaderの責任とする。
+このmoduleは元stableをそのまま引数にする限定source変換を提供し、source/envのpinを独自に再生成しない。
+受入は元suffixのAST同値と全回収検査に加え、実際の置換呼出しが同じstable objectを渡すことを確認する。
+ローカルではcode/testを実行しない。

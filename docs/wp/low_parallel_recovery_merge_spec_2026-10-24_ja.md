@@ -1,0 +1,25 @@
+# 並列比較の版付き合流契約
+
+旧workerの出力を新manifestの出力として読み替えない。
+各workerは、そのworkerを実行したprepared・manifest・環境・PBS記録・値hashへ照合する。
+旧workerと新workerの出力のjob ID、manifest digest、値hashを書き換えない。
+元の科学設定・reference・selectorソースを共通の基準manifestへ照合する。
+許す差分は出力先・親ジョブ配置・worker割当と、明示的に固定したrecovered readerのPBS観測修正である。
+reader環境の変更はネイティブ依存・Python実体・科学計算ソースを保持し、対象readerのimport先とhashのみを版付きで更新する。
+engine・実行証拠・runner・isolated readerの配置監査の対応は外部hashで固定した変換プログラムの出力と一致することを要求する。
+親環境とselectorのソース閉包は、isolated readerの配置監査ソース・import先・PYTHONPATHだけを明示的な変換前後のpinに従って更新し、科学計算関数やネイティブ依存の変更を許さない。
+各workerのrunnerと証拠検証器は、そのworkerのmanifestが旧版か更新版かに対応する正確なpinへ結び付ける。
+全12条件を重複なく覆うworker群だけを受理する。
+各workerの行を元manifestの担当条件に照合し、合流後も24行、352設定、192反復の条件を元の行検証関数と選択方針検証関数で確認する。
+未収束・診断未定義・区間未取得を除外しない。
+値の合流だけではproduction selectionへ昇格せず、合流自身のqsub正常終了と固定hashの確認を別途必要とする。
+新しい検証モジュールは旧ファイルを変更せず別ディレクトリに配置する。
+受入テストと本番計算はリモートのqsub内で行い、ローカルでは実行しない。
+受入対象は、旧新manifestの正常合流、条件欠落・重複・未封印結果・別job・分母変更・無許可の科学設定変更・無許可の環境変更の拒否である。
+テスト未実施の段階を検証済みとは記録しない。
+
+2026-10-24のqsub受入ジョブ265526は23:56:55 JSTにF・終了コード0となり、合成データを用いた27テストが8.01秒で成功した。
+旧新の実証拠検証器と元の科学的行検証・選択方針を通す結合、旧workerの異常終了の拒否、版付きrequest構築を含み、ローカルではテストを実行していない。
+先行ジョブ265525は受入用の隔離ディレクトリへの環境メタデータの同梱不足で失敗し、旧記録を保持したまま新しいv2ディレクトリで再実行した。
+公開用の受入証跡と元データ・保存データのhashは[versioned_merge_acceptance_20261024_v2](data_tile_validation_2026-10-17/versioned_merge_acceptance_20261024_v2/receipt.json)に保存する。
+この成功は実workerの本番値の合流、合流ジョブの封印、下流への接続の完了を意味しない。

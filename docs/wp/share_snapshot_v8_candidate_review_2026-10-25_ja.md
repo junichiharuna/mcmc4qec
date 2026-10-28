@@ -1,0 +1,65 @@
+# v8共有候補とbuilder sidecarの独立レビュー
+
+対象はPBS265624で生成した `finite-v8-sharing-candidate.zip` と `builder-source.zip`、その小さいmanifest・receipt、固定したgeneric builder sourceである。
+候補は265617で保存したv8時点の有限snapshotに固定し、その後の新controllerや新flowの資料を含むとは扱わない。
+このレビューでは大きなZIPをローカルで読込み・展開・検索せず、数値計算・ローカルテスト・公開・commitを行っていない。
+候補全体の検査と限定sample抽出はPBS265627で行い、その小report・manifest・sampleを独立に読み取った。
+
+## sourceの確認
+
+`tools/reproducibility/` の `snapshot_v2.py`、`share_snapshot_v2_revision2.py`、`test_share_snapshot_v2_revision2.py`、`share_policy_v2.py`、`test_share_policy_v2.py`、`build_share_snapshot_v2.py`、`deploy_share_snapshot_v2.py` を対象にした。
+生成wrapperは固定7source、v8 snapshot receipt、29fixtureを通ったrevision2 exporterのpinとPBS正常終端を確認する。
+大きいprivate artifactは固定されたsnapshotの7ファイルに限定して読み、外部raw/nativeの参照先は開かない。
+
+private redaction policy、実request、実行用script、private acceptedはshareable directoryの外に保存する。
+候補manifestに記録するpolicy情報はcanonical hash、規則件数、公開placeholderであり、private literal本文は出力しない。
+source・metadata・各indexの元SHA-256と共有後SHA-256を分け、metadata内の元pinを共有後bytesに偽装更新しない。
+元bytesと元artifact hashを前後で検証するが、公開側のverifyは共有bytesの整合を確認するもので、private原本や外部raw/nativeを再検証する処理ではない。
+
+sidecarは固定7sourceの原bytesだけを保存し、private policy本文を含めない構成である。
+sidecar manifestにはpolicyのhashと元snapshot receipt・実行scriptのhashを残し、実pathや実policy本文を複製しない。
+読取りで見つかったhome・host・accountの具体例はテスト内の明示的なsynthetic fixtureであり、既知の実アカウント・実ホストの固定値は見つからなかった。
+ただし、これだけでsidecarの実bytesがその7sourceと一致することや、未知の識別子がないことは判定しない。
+
+候補側は `execution_ready=false`、`scientific_reproduction_verified=false`、`full_dependency_closure_complete=false`、`final_proofs_complete=false`、`raw_or_native_rehashed=false`、`publicly_distributable=false` を維持する。
+sidecarとsummaryも非実行・非再現・公開前レビュー要の状態を明示し、生成・verify成功だけで配布済みにしない。
+source上は具体的なblocking issueを見つけず、実候補全体についても次の限定した確認を完了した。
+
+## 実候補の確認結果
+
+生成担当者は265624のF/0・run_count 1・walltime2分19秒と、候補生成・内部verifyの成功を確認した。
+候補は9,137,857 bytes・SHA-256 `aa2369d5d9bd106bc5568936cb6265ad709ebf82142ca97f01e9d52d2708bff8`、sidecarは22,184 bytes・SHA-256 `c25db96bb8e8e07397366300a54162c406149acba44bc9b270396f49a1ebba41` と報告されている。
+これらの値は独立レビュー用の固定対象として記録し、ローカルでZIPを再hashした結果とはしない。
+PBS265627はF/0・run_count 1・walltime38秒で、候補全1,372 memberの名前と本文を固定policyのprivate literal・escaped variant・大文字小文字を無視した照合で検査し、残存は0件だった。
+1,372 memberは1,370 artifactsとmanifest・READMEであり、source1252・metadata112など元の有限scopeの分母を保持している。
+7source sidecarはpin済みgeneric sourceと全bytesが一致し、余分なmemberがないことをPBSで確認した。
+独立レビューでも、読み取った7sourceのSHA-256がsidecar manifestと全件一致することを確認した。
+
+sidecarの実識別子候補照合には2ファイル・3一致が残ったが、該当行は一般的な環境変数名とscp/PATHのsynthetic fixtureだった。
+この実識別子候補listとpolicyのidentifier listは別物として確認し、policy側の一致もgenericなpath検出語やsynthetic Windows fixtureに分類した。
+実アカウント・実ホストの混入として扱う具体的な一致は見つからず、private policy本文を本書や公開用証跡へ転載していない。
+
+元snapshotに照合した1252 sourceの既存64hex hashの多重集合と、112 metadataの数値・bool・null・既存hashの多重集合は保持されていた。
+この多重集合検査は位置や科学的意味を完全に検証するものではなく、算術・科学的再現の保証にしない。
+README、source、metadata、edge、external、envelopeの各最大2,000 bytesのsampleを読み、placeholder化された所在と元hash、外部入力の未取得・未検証表示を確認した。
+元snapshot receiptのpinは `2e5068ac8385a74f6a281a48f9ec0e288777bf4ba4a2734323d2ea4c81b552ed` と一致し、候補とsidecarのsummaryは未公開・非実行・非再現のflagsを保持していた。
+
+小さい証拠の所在とhashは[独立レビュー証跡](share_snapshot_v8_candidate_review_evidence_2026-10-25.json)に保存した。
+大ZIPをローカルで開くことなく、source読取り・PBS全候補検査・限定sampleの範囲で、候補と7source sidecarにblockingな指摘は見つからなかった。
+これは公開操作の実施や未知秘密の不存在を認定するものではなく、元candidateの `publicly_distributable=false`・公開前レビュー要のflagsを勝手に変更しない。
+
+## 追加の運用source補助物
+
+265627は別ファイル `operational-source-supplement.zip` にaudit・過去fixture・診断helper・README等の7sourceを保存した。
+元候補と7source sidecarは変更せず、補助物のSHA-256は `102a4a9a3a943d0aadcedc7c2f6385dabea9b9ea6a3eb4285f02713bb6ce2b13` である。
+補助sourceも読取りで確認したが、candidateと同じ全policy literal検査をこの補助ZIPに実施したとは記録しない。
+補助READMEはaudit時点の固定bytesであり、その後に説明を追記した現在のREADMEと同一と扱わない。
+この補助物を配布対象に含める際の確認範囲は、元の2候補のレビューと区別する。
+
+## 判定の限界
+
+literal検査と既知pathの検出器は、未知・難読化・未宣言の秘密情報を全て見つける保証ではない。
+64桁hexなどの元hashは置換対象外であり、hashに見える内容を全て無害と認定するものでもない。
+署名のないhashと内部manifestの自己整合だけでは、独立した出所の真正性や未知秘密の不存在を保証しない。
+source保存・共有候補生成・公開配布・任意環境での実行・科学的完全再現・最終結果の検証を別々に扱う。
+全12条件のmerge・独立計時・最終reportの完了証拠や後続flowの資料は、このv8候補へ追加済みとは扱わない。

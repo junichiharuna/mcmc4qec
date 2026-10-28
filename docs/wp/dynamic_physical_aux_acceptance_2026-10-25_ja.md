@@ -1,0 +1,46 @@
+# finite tail 補助ジョブの動的な2物理ノード admission
+
+ユーザー上限は同時最大2物理ノード×96コアであり、2ジョブという上限ではない。
+元の独立計測childはunbound selectのまま保持し、既知のchildが1件Rの場合には、その実配置1ノードと補助処理1ノードを使う新しいadapterを実装した。
+元science plan・script・資源・科学入力、既存capacity module、旧policy、稼働中flowは変更していない。
+
+known childの元submission/script pinと、保存済み実R observationのjob ID・owner・run_count・stime・Resource_List・exec_vnodeを照合する。
+原qstat/PBS node inventoryの値は変更せず、既存capacity.admitのlegacy_bindingsへ実identityを渡す。
+physical host alias、既存bound helper、foreign割当を含め、同時最大2物理ノード・各96 CPU・自分の宣言memory最大340 GiBを検証する。
+Q等の未配置child、未知unbound job、配置や実行identityの変更、2件以上の全ノード級R child、unsupported資源は待機する。
+R childが消えていても、それだけでterminal成功したとは扱わない。
+
+policy作成と実helper jobstageは別の新規directoryとする。
+実投入では共有lock内で2回のfresh censusを確認し、intent・response・ledgerを保存してqsubを1回だけ行う。
+応答不明やtimeoutの場合はlockを保持し、自動再投入しない。
+source・script・policy・ledger・保存済み観測は4 MiB＋1 byteで読込みを制限し、超過を拒否する。
+実censusは30秒timeout付きの外部コマンド出力を一時ファイルへ捕捉してから最大4 MiB＋1 byteだけ読み、完全なJSONと合成censusが制限内にない場合は待機する。
+この方式はcontroller RAMの上限であり、一時ファイルへの外部出力量の上限保証ではない。
+
+`output/dynamic_physical_aux_v1/` の小仕様、25件のgate fixture、6件の導出wrapper fixtureをqsub 265637で実行した。
+jobはF0・run_count=1・walltime 1秒で、31件が0.362秒で成功した。
+複数helperを含む2ジョブ超の2物理ノード配置、foreign割当、alias、未配置や不明なjob、再実行identity、資源不足、二重census、timeout時lock保持、4 MiB超過をfixtureで確認した。
+元finite wrapperの既知bytesからauxiliary SHA、submission purpose、dynamic policy/resource一致検査だけを変えた新wrapperを生成した。
+他の関数のAST一致、実inputsの正負case、expected_intentとのschema一致を確認した。
+元wrapperの96 fixtureを導出版の実行済み受入として引き継いでいない。
+
+証跡は `$HOME/workspace/mcmc4qec/20261024-c3t2-index-relocation-v1/pipeline-submissions/dynamic-physical-aux-fixtures-v2/` に保存した。
+accepted.jsonのSHA-256は `e8420cf96f4626de66e5e4dd1260f1a06e66812fde4b68933cd9a8a94256b72d`、terminal.jsonは `7961704869c7bcd8cca40a147d809cb8aaaf7a1fd43f8f31c09f94c847c16b1b` で、いずれも識別子を含むprivate原本bytesのhashである。
+gate.pyは `c07ce518f4d3aa6c04a4a7e64990ed5042d6203463fd25012f603bc0199ca94d`、derive_job.pyは `f0e4be9b04071aeca7acc40f40906c86c1739067f8c4bf56ac55312367e85fc8`、実derived-job.pyは `005167d2f289238b67666ddafa241756c4159894e9ca43b1911d8b2c520bafeb` に固定した。
+元finite wrapper SHAは `380fe15d273da4c960e38e3b973ce3011f01045e8d75223449782e6f84cb8c07` のまま保持した。
+
+最初のstageは依存原本の未配置によりqsub前に停止し、空のv1 stageを保持してfresh v2 stageで実行した。
+独立source reviewでは具体的なblockerは報告されなかった。
+科学childの実投入、raw/nativeデータの読込み、active flowへの切替はこの受入では行っていない。
+動的policyを実際のfinite tailへ接続するnative統合検証は別の工程であり、fixture成功だけで完了扱いしない。
+
+追加で、導出wrapperを同一bytesのままfresh `output/finite_tail_job_v2/job.py` へ配置し、科学payloadを持たないactual CLI probeをqsub 265639で実行した。
+新dynamic policyと別のjobstageを使い、prepare・新gateのsubmit・実PBS run・derived wrapper.observeのacceptedまで成功した。
+資源は1 CPU・4 GiB・10分上限で、実terminalはF0・run_count=1・walltime 1秒だった。
+自己と子プロセスのru_maxrssはそれぞれ19,996 KiBであり、加算値ではない。
+元R science childを模擬して投入せず、known_children=[]の枝を実現況で検証したため、unbound science childがRの状態との共存は引き続きfixture検証と区別する。
+native科学bootstrap・科学payload実行・child qsubはすべてfalseである。
+actual CLIのowner・script・Resource_List・実割当node・wrapper source・ledger・completion・terminalは導出wrapper自身の検査で照合した。
+実証跡は同じpipeline-submissions直下の `dynamic-physical-aux-native-v1/` に保存した。
+accepted.jsonは `841ed3082e35d2b6bfe8ca83ab6c79759bfd0452bb26de87efac46e2f499eabf`、native-request.jsonは `6104d653929bf9dac1126608cc83c2cd781db46922ff1661844eb75d66297ae1`、job/completion.jsonは `0cba33e2ba1b2d64b72027cd7db47d65071744d9ac67c83a8421239440d35926`、job/terminal.jsonは `0099d8572eaf0814e52c3b9bf990a205d1d6d9bf3e0739206bf92b3b0d71d7e4` に固定した。
+これらも識別子を含むprivate原本bytesのhashであり、公開用に置換された文書のhashではない。

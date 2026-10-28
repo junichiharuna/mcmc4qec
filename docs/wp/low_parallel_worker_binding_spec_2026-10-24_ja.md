@@ -1,0 +1,22 @@
+# 条件別並列workerの配置・証跡仕様
+
+既存worker1のindices 8〜11は、元のmanifest・ソース・環境・出力を変更せず保持する。
+停止したworker0のindices 0〜7を、新しい出力先の8個の単一条件workerへ分ける。
+新manifestは全12条件を保持し、9番目の割当には既存worker1の4条件を表す未投入の記述を置く。
+全12条件の合流では、既存worker1と新worker群をそれぞれ実際のmanifestへ検証する別仕様を使い、共通manifestを装わない。
+
+数値処理は既存のworker・check_rowsとselectorを維持する。
+変更するのは配置文字列の検証・script生成・実際のPBS配置の照合と、条件ごとの資源・出力先の準備である。
+各新workerは1CPU、最低32GB、最大340GB、最大24時間とし、条件別の既存計測から既存の1.5倍時間係数・600秒余裕・2倍メモリ係数で資源を求める。
+新workerのselectには固定vnodeを明示し、最大2物理ノードの投入制御は別のadmission処理で行う。
+配置先はpreparedから参照される固定manifestに保存し、qsubの外部引数だけで差し替えない。
+script全文、PBS開始・終了・terminalのselect、exec_vnode、exec_hostを照合する。
+別vnode、固定manifestの変更、条件の欠落・重複、科学設定・参照・native環境の無承認変更を拒否する。
+
+旧ソースは変更せず、明示した文字列置換だけを行う変換器から新ソースを生成する。
+変換器は元・生成先のSHA-256を記録し、置換対象の出現数が違えば生成を拒否する。
+既存の科学関数を変更せず、valuesのvalidateとisolated readerのverify_templateが受理するselect形式に固定vnodeだけを追加する。
+isolated moduleは別ディレクトリへ生成し、親環境のsource・resolved path・import origin・PYTHONPATHとselectorのsource closureを新しく固定する。
+既存worker1が使う元の親環境は変更しない。
+受入テストは既存配置と固定vnode配置、別vnode・複数vnode・無効selectの拒否、全12条件の一意割当、既存worker1の不変性、資源計算を対象とする。
+テストと科学計算はローカルPCでは実行せず、qsubによる別環境で確認する。

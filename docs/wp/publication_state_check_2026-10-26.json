@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "purpose": "read_only_publication_state_observation",
+  "observed_at_jst": "2026-10-26T01:07:44+09:00",
+  "source": "GitHub REST API via gh api; selected public metadata only",
+  "repository": {
+    "html_url": "https://github.com/junichiharuna/mcmc4qec",
+    "visibility": "public",
+    "archived": false,
+    "default_branch": "main",
+    "main_sha": "837a96b8836ba8c81043fcba15b065eb1a8b5296"
+  },
+  "tag": {
+    "ref": "refs/tags/v0.1.0.dev5",
+    "object_type": "tag",
+    "object_sha": "601f70c1f0b8cb65cb69b9310914be8ce57a71f8",
+    "target_type": "commit",
+    "target_sha": "c27ca896a1025c74975bc45322798eea2e0409b0"
+  },
+  "release": {
+    "html_url": "https://github.com/junichiharuna/mcmc4qec/releases/tag/v0.1.0.dev5",
+    "tag": "v0.1.0.dev5",
+    "draft": false,
+    "prerelease": true,
+    "published_at": "2026-10-24T00:38:58Z",
+    "assets": [
+      "manifest.json",
+      "mcmc4qec-0.1.0.dev5-py3-none-any.whl",
+      "mcmc4qec-0.1.0.dev5-source.zip",
+      "release_body.md",
+      "SHA256SUMS.txt"
+    ],
+    "asset_count": 5,
+    "asset_metadata": [
+      {
+        "name": "manifest.json",
+        "size": 854,
+        "browser_download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/manifest.json"
+      },
+      {
+        "name": "mcmc4qec-0.1.0.dev5-py3-none-any.whl",
+        "size": 93199,
+        "browser_download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/mcmc4qec-0.1.0.dev5-py3-none-any.whl"
+      },
+      {
+        "name": "mcmc4qec-0.1.0.dev5-source.zip",
+        "size": 33750089,
+        "browser_download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/mcmc4qec-0.1.0.dev5-source.zip"
+      },
+      {
+        "name": "release_body.md",
+        "size": 4734,
+        "browser_download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/release_body.md"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 366,
+        "browser_download_url": "https://github.com/junichiharuna/mcmc4qec/releases/download/v0.1.0.dev5/SHA256SUMS.txt"
+      }
+    ]
+  },
+  "api_endpoints": [
+    "https://api.github.com/repos/junichiharuna/mcmc4qec",
+    "https://api.github.com/repos/junichiharuna/mcmc4qec/git/ref/heads/main",
+    "https://api.github.com/repos/junichiharuna/mcmc4qec/releases/tags/v0.1.0.dev5",
+    "https://api.github.com/repos/junichiharuna/mcmc4qec/git/ref/tags/v0.1.0.dev5",
+    "https://api.github.com/repos/junichiharuna/mcmc4qec/git/tags/601f70c1f0b8cb65cb69b9310914be8ce57a71f8"
+  ],
+  "comparison": {
+    "baseline": "docs/wp/publication_state_check_2026-10-25.json",
+    "baseline_sha256": "ad57161bc09fcd9a86f1c67179afde0959058230279dba341e605e59d04c4069",
+    "repository_fields_unchanged": true,
+    "release_url_tag_flags_publication_time_unchanged": true,
+    "asset_names_and_count_unchanged": true,
+    "differences_in_common_fields": [],
+    "tag_comparison_source": "docs/wp/publication_result_2026-10-24_ja.md and docs/wp/reproduction_access_inventory_2026-10-25_ja.md",
+    "tag_object_and_target_unchanged": true,
+    "comparison_limit": "The preceding publication_state_check JSON did not record tag object/target or asset sizes/URLs. Tag identities were compared with the existing publication and access records. Asset metadata is an API declaration, not downloaded or hashed content."
+  },
+  "asset_bytes_reverified": false,
+  "ci_reverified": false,
+  "zenodo_reverified": false,
+  "remote_mutation_performed": false,
+  "working_tree_publication_assessed": false,
+  "citation_or_doi_modified": false
+}

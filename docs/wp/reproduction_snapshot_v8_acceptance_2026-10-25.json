@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "purpose": "finite_v8_snapshot_public_summary",
+  "original_sha256_scope": "Hashes identify original private cluster bytes; this summary uses $HOME paths and omits server identifiers.",
+  "private_stage": "$HOME/workspace/mcmc4qec/20261024-c3t2-index-relocation-v1/pipeline-submissions/reproduction-v8-finite-snapshot-v2",
+  "job_number": "265617",
+  "job_state": "F",
+  "exit_status": 0,
+  "run_count": 1,
+  "walltime": "00:00:06",
+  "accepted_original_sha256": "7e702412d2fb054b0c351d3be8e971eeb4301cce43c88c8f89dacca39bd536a2",
+  "snapshot_receipt_original_sha256": "2e5068ac8385a74f6a281a48f9ec0e288777bf4ba4a2734323d2ea4c81b552ed",
+  "terminal_original_sha256": "8cbe8bcec24099d98d40579fceaf54f539e61be8f9065c3213978b8d89b28031",
+  "request_original_sha256": "7d0e43b9f1dffe772b92030409a426e9e0683847f95455340f4b231073dbd7e0",
+  "authority_original_sha256": "d598804ab76552f52ddc6e37a57f729384f35b27e6b9541cbee486ccf096207f",
+  "collector_sha256": "fe7e62010630064010029835d166e3e18d88a8b84f2be7b91612f36874d9a88c",
+  "library_sha256": "053265218e64768d48e13871b47d9c6bb33bb659557122344b4c6b3300cdf35a",
+  "flow_config_sha256": "6130af78e5924a299e044195e584b7419affedeecdda393f7842de1bb19c0e43",
+  "source_scope": {
+    "historical_baseline": 1031,
+    "additional_declaration_paths": 221,
+    "current_authority_document_references": 543,
+    "current_references_include_historical_validation_and_unassigned_slots": true,
+    "all_sources_actually_executed_claimed": false
+  },
+  "worker_observation": {
+    "completed_at_collection": 6,
+    "running_at_collection": 6,
+    "point_in_time_only": true
+  },
+  "snapshot": {
+    "artifacts": {
+      "envelope-index.json": {
+        "bytes": 342342,
+        "sha256": "47081f05977b19b3deeed581485eeb8b1b57b4fe0cfa2bcbe0c11aa237807d26"
+      },
+      "external-index.json": {
+        "bytes": 14033364,
+        "sha256": "0939be693821d291d14ecbdc98ef61073e5cd84b125975f771eddcde7440e5ff"
+      },
+      "metadata-members.json": {
+        "bytes": 45794,
+        "sha256": "466ee36dd25a6462f9a2e6d52e919f93b0f4187aa1efcda2bb3a8d88a277cc99"
+      },
+      "one-hop-edges.json": {
+        "bytes": 27984750,
+        "sha256": "a1837eec65cd408e0ddee75d390c1e03fba71eeca7221ae8c584325afd590988"
+      },
+      "private-metadata.zip": {
+        "bytes": 1241260,
+        "sha256": "e607c91a19d5569673320eed04a3045ac89ed3b00c0c23722006ec7623ce12e1"
+      },
+      "private-source.zip": {
+        "bytes": 5265785,
+        "sha256": "4236249124a9ae60da31e3809500d047a28a061d5e66ac6defdfc6900193ca11"
+      },
+      "source-members.json": {
+        "bytes": 655503,
+        "sha256": "8bb73d338f6cc9160e7abea3d5cb9ec00cdbeca67c8f986ee2d96513f511d29e"
+      }
+    },
+    "envelope_references": 1223,
+    "explicit_metadata_bytes_verified": true,
+    "explicit_source_bytes_verified": true,
+    "external_records": 20518,
+    "final_proofs_complete": false,
+    "full_dependency_closure_complete": false,
+    "metadata_documents": 112,
+    "one_hop_edges": 31512,
+    "original_text_bytes": 23371439,
+    "publicly_distributable": false,
+    "purpose": "private_finite_reproduction_snapshot",
+    "raw_or_native_rehashed": false,
+    "schema": 2,
+    "scientific_reproduction_verified": false,
+    "source_references": 1252
+  },
+  "retained_failed_attempt": {
+    "job_number": "265616",
+    "job_state": "F",
+    "exit_status": 1,
+    "reason": "Local reserialized production-ready JSON hash differs from remote original bytes; actual original pin and 265608/265609 provenance were verified before a fresh stage."
+  },
+  "public_archive_created": false,
+  "scientific_reproduction_verified": false,
+  "final_proofs_complete": false
+}

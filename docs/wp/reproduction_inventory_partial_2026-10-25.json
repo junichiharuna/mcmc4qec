@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "purpose": "public_partial_actual_inventory_observation",
+  "job_number": "265594",
+  "pbs_walltime": "00:00:05",
+  "records": 2000,
+  "storage_counts": {
+    "archive": 722,
+    "blocked": 1178,
+    "external": 100
+  },
+  "problems": 1179,
+  "problem_reasons": {
+    "Noncanonical dependency path": 34,
+    "Missing, symlinked, or noncanonical file": 1,
+    "Relative pin requires an explicit per-document base": 64,
+    "Total collection byte limit reached": 1079,
+    "file_limit": 1
+  },
+  "missing_scopes": [
+    "final_proofs",
+    "seeds"
+  ],
+  "verified_text_bytes": 33554406,
+  "private_snapshot_members": 820,
+  "explicit_current_source_references": 318,
+  "verified_explicit_current_source_references": 317,
+  "remaining_current_source_reason": "One existing source symlink needs explicit original-path/realpath/expected-hash alias handling.",
+  "original_evidence_root": "$HOME/workspace/mcmc4qec/20261024-c3t2-index-relocation-v1/pipeline-submissions/reproduction-source-inventory-v1",
+  "original_evidence_sha256": {
+    "receipt.json": "65765b31cd16d58e3be6a9ea45e0906f05c3ed05fa9bf35a1d6e8d1583c64698",
+    "private-request.json": "b88a1e7391b5d3f8110696cbed9c2c191d6a77366c6b49de19b1105a13b3be7a",
+    "private-explicit-roles.json": "b159a0c922a8ce53537e674f3369dab588fb4ced097083380cea5ab7885deff5",
+    "private-inventory.json": "6db30503540a2f8d89e2d168bfc2e914d920cd40257b2da0efe6cc78dbe88cfa",
+    "private-classification.json": "442884e6cea0ac8736fc348d26b5453d26e3b52e427ee5ce395f7534ff27af2a",
+    "private-snapshot-members.json": "04cf93791990e7ed0011053d2007ac98935c4b8d4a80212055f269319d287242",
+    "submission.json": "5bf1501deae3517ee616274cf283d22c6624a5cba84fa1ca0a00830a63e00f10",
+    "terminal.json": "113d93661ff07581441bc643a54667076886cfde63d9687d02bdc9af43e4d6e4",
+    "job.sh": "370def708a2646267e9594541fd75c0ec2819c9d63341a8667f83d3461c5c036",
+    "source/collect.py": "b04737df26a5e5a11a5efc32e4d05575a1917ff52aed3d51a32b83a3037dc05d"
+  },
+  "private_snapshot_sha256": "61a62ac162154e90a1be01bd130c1fc54ea13a445b3c4b1f054fee65799ea8f6",
+  "raw_data_rehashed": false,
+  "source_closure_complete": false,
+  "final_proofs_complete": false,
+  "public_archive_created": false,
+  "scientific_reproduction_verified": false,
+  "limitations": [
+    "Historical references were not intentionally filtered; unresolved documents and limits mean they were not exhaustively discovered or preserved.",
+    "Discovery limits apply to accepted text census, not all bootstrap or snapshot reread I/O.",
+    "Original hashes refer to private originals; no private source snapshot is published by this receipt."
+  ]
+}

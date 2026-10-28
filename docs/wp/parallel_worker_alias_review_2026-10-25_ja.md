@@ -1,0 +1,47 @@
+# worker受入のalias照合に関する独立レビュー
+
+本番merge 265651は、親環境の照合を通過した後、元worker evidence由来の `accept_worker` に残っていた直接キー比較で失敗した。
+本レビューではsourceと小さいmetadataだけを読み、worker values・科学raw・native binaryは読んでいない。
+ローカルテストや本番投入は実施していない。
+
+失敗requestから12件のprepared、各世代manifest、環境、evidence sourceを外部pinと照合した。
+12件すべてでmanifestのsource pathに対する直接キー不一致は1件で、環境の明示 `resolved_sources` に同じtargetとSHA-256を持つ宣言が1件存在した。
+12件の元evidence sourceはすべて `b24e74adcbb1af08b7c691009e4aaf4ef3e8ec0c9c1b4a05c73f557ccadbcf52` であり、該当比較は220行の1箇所である。
+元関数は、この比較より先に環境sourceの宣言path・hash・approved targetを `proof.track` で検査している。
+
+修正は元worker artifactsを変更せず、運用validatorの明示変換として保存する必要がある。
+直接キーが存在する場合のhash不一致をaliasで救済せず、直接キーがない場合だけ明示resolved targetとhashが一致する宣言を受け入れる。
+同じtargetに一致する宣言が複数ある場合はすべてのhash一致を要求し、同じhashだけを持つ別pathの代用は認めない。
+元evidenceのpinと新版validatorのpinを別々に記録し、元のjob ID・manifest世代・assignment・script・科学rowの検査は保持する。
+
+受入には小さい境界fixtureだけでなく、実12件それぞれの `accept_worker` がvalues読込直前まで進む確認を含める。
+加えて、実 `combine` の入口から最初のvalues境界まで進む確認を別に行う。
+values境界で明示停止した確認をworker受入成功・全科学merge成功とは扱わず、成功receiptを代作して後続workerへ進めない。
+親のprepareだけを通す確認では今回の失敗箇所に到達しないため、代用できない。
+
+新版 `output/low_parallel_recovery_merge_v8/worker_validator.py` を独立レビューし、元3変換にclosureのexact AST変換1箇所だけを追加したことを確認した。
+照合helperのASTは受入済み親環境helperと同じであり、元sourceのhash・元evidence identity・承認targetの実体検査は保持される。
+integrationの差分は新validatorを許可するhashだけで、科学merge本体は変更されない。
+validatorのSHA-256は `dc28b10ea5a30c0b581218a40264999c0cb1e4d5e25631544c8d41516275dd87`、integrationは `16897e4fb355cfbe5c8f35f368d8d0212e3d67a13d17e2a327a89e1b79e5ad65` である。
+
+qsub 265652はF0となり、39件が32.34秒で成功した。
+aliasを実symlinkで構成したfixtureは元verifierの失敗、新版full combineの24row一致と元sealの受理を確認している。
+取得済みreceiptに列挙された12ファイルのhashと、受入source map中の新版validator・integrationを独立照合した。
+accepted原本hashは `1c7e7ce9efa0501acce330e3829736251a530560b440e6062bb5dc857e55ce2b` である。
+小証跡は `output/low_parallel_recovery_merge_v8/worker-alias-merge-tests-v1-evidence/` に保存されている。
+
+初回actual native 265653はsource inventoryのencoding名 `utf8-sig` の誤記でF1となり、acceptedは生成されなかった。
+tracebackが全prefix確認の後であっても、このジョブを受理済みとは扱わない。
+誤記だけを `utf-8-sig` に直した別stageで全経路を再実行した265654はF0・run_count 1・walltime 18秒・CPU 17秒となった。
+元エラーの再現、実combine入口から最初のvalues境界、元12件それぞれのderived verifierから各values境界への到達を確認した。
+12件の元job IDとprepared世代が保持され、values読込・科学raw読込・worker受入の返却・full combineの返却・本番科学検証完了はすべてfalseである。
+取得された17ファイルのreceipt hash、acceptedのクラスタ原本hash、実PBS終端と上記scopeを独立照合した。
+accepted原本hashは `08faf448bfdcede1ab46663060928b87aabec159c67dc8545cd4461eb8b78e78`、terminal原本hashは `027afdfc64be0748cddbd59b1038558860820eae1dec59e90bf87301967e33b4` である。
+小証跡は `output/low_parallel_recovery_merge_v8/worker-alias-merge-native-v2-evidence/` にあり、失敗v1の原本も別directoryで保持されている。
+
+71 sourceのAST inventoryには4箇所の `source_sha256` に対するgetが記録された。
+2箇所は保存された元evidenceの `accept_worker` であり、実worker呼出には今回の明示変換が適用される。
+残る2箇所のクラスタsourceをhash付きで再読し、analysisの提出bundle名別source照合とselectorの保存済み比較source照合であることを確認した。
+これらは親環境の宣言aliasをmanifest canonical pathで探す比較ではないため、今回の理由で変更しない。
+この有限source棚卸しと実payload境界までの確認を、後続の全科学処理が成功する保証とは扱わない。
+今回の運用validator修正と実入口の受入について、独立レビューでblockingとなる指摘は残っていない。

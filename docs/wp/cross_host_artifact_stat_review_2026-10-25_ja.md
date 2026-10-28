@@ -1,0 +1,138 @@
+# ホスト間のartifact stat照合に関する独立レビュー
+
+merge 265660と元acceptance 265661はF0となったが、controllerがacceptance completionを採用する際に `Previously PBS-verified artifact stat changed` で停止した。
+本レビューではsourceと小さいmetadataだけを読み、result・selectionの巨大内容は読んでいない。
+ローカルテスト、科学計算、本番再投入は実施していない。
+
+## 観測と元hashの根拠
+
+completion原本のSHA-256 `c44b7cddc0b1bbefeab3a629ff932054a5d9c045301415cf41f38ccd7bce5946` をクラスタ上で独立照合した。
+その4artifactすべてについて、現在のlogin側statとの差はdeviceの46から2049への変化だけであった。
+inode・size・mtime_ns・ctime_ns・modeは一致し、canonical path・通常ファイル・非symlinkを確認した。
+小さいacceptedとterminalの内容hashも、completionに保存された元PBS hashと一致した。
+約5.24GBのresultと約1.76GBのselectionはstatのみ確認し、現在内容の再hashをしたとは主張しない。
+
+元 `merge_terminal_acceptance_pbs_v2/acceptance.py` はPBS内で元 `accept_terminal` を実行した後、4artifactごとに内容hashと前後の全stat一致を確認し、そのpinとstatをcompletionへ保存する。
+したがって内容hashの来歴は元PBS実行にあり、後続statは変更検出の補助である。
+stat一致だけを、現在内容が同じであることの暗号学的な保証とは扱わない。
+
+## namespaceの扱い
+
+Linuxのmountinfoはprocessのmount namespaceの情報であり、major:minor欄はそのfilesystem上のst_devを表す。
+別ホストのst_dev数値を、そのまま共通のfilesystem識別子として扱う根拠にはならない。
+出典は [Linux man-pages: proc_pid_mountinfo(5)](https://man7.org/linux/man-pages/man5/proc_pid_mountinfo.5.html) である。
+
+独立に読んだlogin側の対象pathを含むmountは `/home`、filesystem rootは `/`、typeはxfs、major:minorは8:1であり、device 2049と一致した。
+共有namespaceとしての対応を確認するには、producer PBS側のmount source・export/root・対象pathと、observer側のmountを対応付けた別証跡が必要である。
+inodeなどが一致したという観測だけで、任意のホスト・mount・pathのdevice差を無条件に無視しない。
+
+## 修正のレビュー条件
+
+元completion・source・job・script・ledger・artifact hashは変更せず、cross-host照合の運用adapterとauthorityを別versionで保存する。
+authorityは実producer/observerのmount対応、対象pathとreceipt、元と観測側のdeviceを明示し、未知のmountや別path、残り5statの差を拒否する。
+同一ホスト内のhash前後、lock取得からdefer/sealまでなどの比較では、deviceを含む元fullstat検査を保持する。
+後続dispatchとalias bindingにも同じ問題があるため、それぞれの実cross-host境界に限定して評価する。
+通常の内容hash検査や科学検証を省略したり、元PBS receiptを観測側statで上書きしたりしない。
+
+## 新版の静的確認と受入範囲
+
+observer初稿は元wrapperを原本pinで読み、artifact callbackだけを置き換えてfinallyで復元する。
+exact completion・4artifact・観測側witnessを保持し、小さいaccepted/terminalは実hashを確認する。
+producer snapshotが任意の同job JSONにならないよう指摘し、元acceptance rootの `actual-pbs-end.json` pinとの一致と元ledger・PBS検査を使う修正を再読した。
+
+共通namespace初稿はlogin XFSと明示2計算nodeのNFS exportを、小sentinelのhash・非device stat・実mount・PBS F0/run1/scriptで対応付ける。
+current mountを毎回照合し、同hostではfullstat、cross-hostでは承認device対応と残る5fieldを確認する。
+nofollowではsymlinkのlstatを保ち、aliasのreadlink列や解決先の検査は呼出側が保持する。
+captureはtimestampを含まず同じhost/PBS/mountで決定的なため、同じaliasを複数参照した場合の元dedup検査を壊さない。
+
+alias境界fixtureの265664はF0・run_count 1・walltime 1秒となり、35件が0.104秒で成功した。
+accepted hash `d4b56b72cdc54c0328c8c814e5f60ab3c35de20c81b7579df822e621086a06dc` と4source pinを取得原本と独立照合した。
+元失敗265663はfixtureのspy集計と模擬host resetの誤りであり、別stageでの再受入と区別して保持される。
+この35件はnamespace doubleを用いた境界確認で、実mount対応の受入を示さない。
+
+doubleが実helperより強くproducer jobを固定照合する点を指摘した。
+共通compareだけでは実parent jobを知らず、この保証は元の実行経路にある。
+実 `job.run` がPBS jobとhostnameをparent bindingに照合し、operationはPBS_JOBIDとcontext親の一致を要求し、固定bindingが実PBSのcaptureをrecordに格納する。
+そのresult・candidateをcompletionへ封印し、Coordinatorがprepared・operation・source・payload・parentの完全一致を確認して採用する。
+既存保証の所在を変えず、doubleを実APIに合わせ、統合経路のparent/proof不一致拒否を受入で確認する方針とした。
+保証の言い換えだけを目的としたproduction変更は追加しない。
+
+observer側の265665はF0となり、元wrapperを含む74件と27 subtestsが0.96秒で成功した。
+取得した22原本ファイルのhashを独立照合し、acceptedは `eb103a36175923db7f1ca42ac3b23ef33c1fc57855b69a99ab97aad8883b15b9`、observer sourceは `c9d3f95d6d882185438ac4c5a8cf4bd48fcfed6da2fceb148faa368ea608a381`、共通namespace sourceは `f01c0f3fdb4b58d19564f64bc20c30b5f803a8dcbece174287cd193e0db8bf8b` である。
+同PBSのwitnessにはcompute側 `/home` がNFS exportを利用しdevice 46であることが記録されている。
+これは小sentinel/mountの観測であり、巨大artifactの再hashではない。
+
+dispatch変換はqsub停止境界で実parent job/hostに対応するproducer観測を取り、interceptedとschema2 candidateに同じ値を封印する。
+同hostのlock/carrier比較は元のまま、finalizerとlock releaseのcross-host比較だけを共通helperへ委譲する。
+namespace取得を元lockのpin/readとstatの間へ挿入しないよう指摘し、その前に移す修正を確認した。
+元script/intent/sourceのhash照合、親F0、fresh gate、曖昧qsubでの停止は変更されない。
+
+actual observer probeは元prepare/submit/run/preflightを禁止し、大result/selectionのopen/readをtrapして、元inspect/observeだけを通す設計である。
+小readの成長時上限と実worker source pinの結合を指摘し、投入前の修正を確認した。
+実namespace authorityのSHAは `1db641382d82b9f6122a3607d44094771723cb63dd1c2a7ba3801312fd095465` であり、serverと2clientのwitness・terminal・script・小sentinelをremote原本に対して独立照合した。
+witness jobs 265665・265666はいずれもF0・run_count 1で、loginのdevice 2049と、計算nodeのdevice 49・46を同じ `/home` exportへ対応付ける。
+原本のホスト識別子は公開文書へ転記しない。
+
+actual observer native 265667はF0・run_count 1・walltime 2秒で、accepted SHAは `4b67e4a99f3b9b61bf296b56790879bf52488bf43876ebb04570fae97f6f9ec8`、terminal SHAは `045b11726cc9356d7c54949c9d2a638284bf265899de3d362711cdb3170556d5` である。
+取得した16原本ファイルとremote accepted、observer authorityからnamespace authorityへの結合を独立照合した。
+このnative実行はproducer側device 46で元full observeを通し、元accepted payloadとの一致と4artifactの照合を確認したものである。
+login device 2049側のassembly・別read-only観測とは区別する。
+別途保存されたloginの `repaired-observation.json` も読み、同じobserver authority・元completionに対し4artifactすべてproducer 46からcurrent 2049への対応でstatus acceptedとなることを確認した。
+この確認は保存された小観測のレビューであり、レビュアーが本番acceptanceを再実行したものではない。
+元merge・acceptanceの再実行、大result・selectionの再読込、科学値の再計算は行っていない。
+元completion `c44b7cddc0b1bbefeab3a629ff932054a5d9c045301415cf41f38ccd7bce5946` は変更されていない。
+
+配置境界もsourceで確認した。
+namespace captureとalias構築は有限auxiliary job内のoperation/Hooksで行い、controller側のfinalizer・alias比較へ渡す。
+science childのscriptはこのnamespace helperを呼ばず、元のunbound配置を保持する。
+Coordinatorはdynamic `prepare_policy` の `candidate_vnodes` を指定せず、gateは元policyの2nodeだけをhelper候補にする。
+science childの実配置nodeはcapacity検査のallowed集合へ加えるが、helper候補へ昇格させない。
+したがって未観測のscience child配置先までnamespace authorityを拡張したという主張は不要である。
+
+訂正後のalias fixtureは有効形式の別job IDを単体helperだけでは拒否しないことを明示し、固定Coordinatorと実job wrapperのparent・host・source・payload/proof結合を別fixtureで検査する。
+この修正で、単体doubleに実helper以上の保証を与える問題を解消した。
+265670はF0・run_count 1で、dispatch 31件・alias 36件・receiver 6件・job 4件の計77件成功を原本ログで確認した。
+accepted SHA `ca11d86f8ad00a1fe1f7aff9e22f6901ea6bc30b3a8b71c1e0ad805ee64f3a08`、terminal SHA `f9eb0e9ac865593b3c39f4074ac961ed09d315e3bc844a03249a24213c0546ea` と17source pinを独立照合した。
+これらはnamespace doubleを用いる境界受入であり、実namespace authorityを使うtail全経路のnative確認とは区別する。
+本番再接続と後段tail完了の独立確認はまだ行っていない。
+
+## 完了済み計算を採用するcontroller v12
+
+固定flow sourceは `c08c21a859fccaaef227ed603f9aaf76a5403d0f7892e1a528dbaedaf27d088b`、actual configは `083a22ca37fe46eb31f2f1034554f76aeffa77e77c273e33627e14e67318838e` である。
+remoteの旧v11と新v12設定を小metadataだけで比較し、変更はobserver helper・新journal・predecessor/migration・tail bindingに限られることを確認した。
+元12worker、merge root、request root、acceptance root、科学source、環境、資源は同一である。
+tail config `873a2c5cbde9693e7007b17a5b40ceac028ceb9533f78b428446489e133a6d3b` の変更は `binding`・`dispatch`・`source_pins` の3fieldだけで、50source中2sourceを明示新版へ変更し、transform 2件とnamespace helper/authorityの4pinを追加する。
+tailの元科学設定、runtime、資源、未使用のhandoff/journal/job rootを保持する。
+独立観測時点で旧controller processは存在せず、新journalと3つのtail出力先も未作成だった。
+
+migrationは元completion、元prepared/ledger、実job ID、旧失敗記録、全12workerの既存terminalを束縛し、再prepare・submit・run・accept_terminalの経路を持たない。
+observerのproduction-readyは受入証跡であり、実configにはreview済みsource pinとauthority pinを固定する。
+authorityは元wrapper・prepared・completion・actual producer snapshotとjob identityへ結合するため、別のcompletionを単に現時点で採用し直す構成ではない。
+handoffへ追加するmigration/observationの小pinは、元tailの必要field抽出と両立し、selectionやacceptedの内容を変更しない。
+
+差分受入265672はF0で15件成功し、そのsource pinが固定flowと一致することを保存証跡で確認した。
+actual native265673のaccepted原本SHAは `3a6a0b7ffc96d544d21fb035c6b17c81229459c7d1ec6ee453ed870c3240fbdd` で、実config/source pinと全12workerを結合している。
+constructor前から巨大payloadのopenを禁止し、元submit・run・accept_terminal・worker再captureを禁止した状態で、全12terminal採用、元merge/acceptance採用、shadow handoff生成まで進んだ。
+元completionとmetadataは不変更、worker values・result・selection読込および科学再計算はfalseである。
+本番controller起動、tail実行、独立計時完了はこのnativeの検証範囲外である。
+
+## 完了済みmergeを前提とするtail probeの静的確認
+
+constructor probe v3 `ee863a98769d2aa66c7059908b99dc17e07592fb4cd99ec141b229e4516dfb97` は、旧probeのmerge root未存在条件だけを完了済みproofの明示検証へ置き換える。
+元completionの固定hash、merge 265660・acceptance 265661、observer受入とそのF0終端へ結合し、現merge内のprepared・accepted・terminal・submissionの4小metadataだけをread-only例外として許可する。
+result・selectionはpinを確認するだけで開かず、旧失敗mergeと未使用future tailの条件は維持する。
+actual CLIと13constructorのsource/import origin・環境・大payload拒否を検査する構成であり、科学処理の実行を意味しない。
+
+namespace roundtrip `c76d4385bd7de8c408b1ab0137eaf904904ee4aedb4378a415b8b77d86edba18` は、実binding/dispatchを使って受入stage内にだけalias・lock・carrier・candidateを作る。
+実PBS親のR観測からDeferred候補を作り、親F0後に異なるlogin hostからalias/candidateを検証してscratch lockを解放する。
+qsub応答とcapacity判定だけは明示fixtureで、偽job IDをscratch ledgerへ保存するため実job投入証拠とは扱わない。
+実qsub呼出とcarrier内容のopenを禁止し、本番lock・既存科学結果を使用しない。
+これらの静的レビューでは追加blockerを認めず、実受入結果は別途照合する。
+
+実受入265674はF0・run_count 1・walltime 7秒で、pure fixture 13件とactual constructor 13ケースを完了した。
+ready SHA `9db38edad846a9f1321a4a4f102d7b402662856716611e7505f26e9eb56c54b6`、native accepted SHA `f12fcf6b575a894ad199c52d0b85f86305f9debaf869019da6eee4a7159b0063`、login roundtrip accepted SHA `725562b9ff35dfc510c28db7160db4d75b10228ab1cb5c14da758106dfdbb476` をremote原本に対して独立照合した。
+ready直下の12pinと13constructorの個別accepted pinを確認し、actual config `873a2c5c…`、全future出力未使用、元失敗4件と完了M4件の小metadata例外だけという範囲が一致した。
+実親265674のF0後に、別hostのlogin側でactual binding `81e7e0a9fb121f5b121b432fbc242db632543109ebc04a731a8d19fe6c3f7752` とdispatch `5be8689d8e66f382474356f9ef2779dc88cb5c6bfd713742435eb795de5b04e3` によるalias・lock・carrier照合とscratch lock解放を確認した。
+実qsub、実capacity許可、科学validation、carrier内容読込、本番出力変更はいずれもfalseである。
+最終flow/config/nativeとtail/config/nativeの接続に追加blockerは認めなかった。
+このレビュー完了時点では本番controller起動と後段科学処理完了は確認対象外である。

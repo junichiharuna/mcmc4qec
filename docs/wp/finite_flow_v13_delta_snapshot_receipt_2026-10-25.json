@@ -1,0 +1,47 @@
+{
+  "artifacts": {
+    "envelope-index.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "external-index.json": {
+      "bytes": 1169333,
+      "sha256": "f5bc3bbf89458cc5c33921842eb3342eba1f1803816021e62068a6d097a32dd2"
+    },
+    "metadata-members.json": {
+      "bytes": 103872,
+      "sha256": "6413c22863f6443a9a6146f7730aab81c7d8e7426e9d71829995548543ef4c02"
+    },
+    "one-hop-edges.json": {
+      "bytes": 2366825,
+      "sha256": "6ef80e8284df045c892e2a609af2ee2898aabbb1ea0935c7aa91bcfb90b93997"
+    },
+    "private-metadata.zip": {
+      "bytes": 455725,
+      "sha256": "940140b1bfd7a4ec27fa028011959b71bddcde008e44e80a6b3b5cf00c6033d5"
+    },
+    "private-source.zip": {
+      "bytes": 244679,
+      "sha256": "fa88a8ebf86d90ddaca7a4c3e53cec10103f9d14157d919164199e753126a9ae"
+    },
+    "source-members.json": {
+      "bytes": 51947,
+      "sha256": "89d648add41c5601e982c2776b84ea187eee020e60a7802e9988e913aa681022"
+    }
+  },
+  "envelope_references": 0,
+  "explicit_metadata_bytes_verified": true,
+  "explicit_source_bytes_verified": true,
+  "external_records": 1718,
+  "final_proofs_complete": false,
+  "full_dependency_closure_complete": false,
+  "metadata_documents": 217,
+  "one_hop_edges": 2714,
+  "original_text_bytes": 3541702,
+  "publicly_distributable": false,
+  "purpose": "private_finite_reproduction_snapshot",
+  "raw_or_native_rehashed": false,
+  "schema": 2,
+  "scientific_reproduction_verified": false,
+  "source_references": 92
+}

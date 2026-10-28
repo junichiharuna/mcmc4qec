@@ -1,0 +1,21 @@
+# 5条件を継続し7条件だけを再実行する合流契約
+
+正常に進行中のindices 0・1・6・7・8を保持し、失敗したportable経路のindices 2・3・4・5・9・10・11だけを新しい実行先で再実行する。
+各workerのprepared・manifest・環境・実job ID・値hashは、そのworkerを実際に実行した記録に照合し、古い結果を新manifestの結果として読み替えない。
+基準は現在のv4全12条件manifestとし、既に受け入れたstaged pin補完とrecovered reader環境を変更しない。
+主プロセスのPython環境・selectorソース閉包・engine・runner・実行証拠検証器は旧新で一致させる。
+保持する5条件のentry・親script・資源指定は基準manifestと完全に一致させる。
+再実行する7条件で許す差分は、明示的な運用上のPBS観測修正と同一bytesのCLI移設に対応する子環境、および新しい親scriptと子出力先だけとする。
+運用上の修正は外部pinで固定した検証済み変換に照合し、科学計算関数、入力pin、reference、設定、反復数の変更を許さない。
+合流は全12条件を順序どおり重複なく覆い、24行・352設定・192反復を元の科学的検証関数で確認する。
+途中失敗や未取得の結果を条件集合から除外せず、失敗した7workerの結果を受理しない。
+本番合流自身のqsub正常終了と封印を確認してから下流へ渡す。
+
+## 受入結果
+
+2026年10月25日のqsub job 265579は正常終了し、26テストが7.63秒で成功した。
+元のworker実行証拠検証器・科学的選択検証器を使う統合テストを含み、保持5条件と再実行7条件の実行由来を分離して検証した。
+テストの数値入力は保存形式を模したfixtureであり、本番12条件の計算完了や科学的精度の検証結果ではない。
+PC上でテストは実行せず、既存の2物理ノードの範囲で2 CPU・4 GBの受入ジョブを実行した。
+合格時と同一bytesの4ヘルパーを新しい本番名前空間へ配置し、以前のmanifest・prepared・実行結果を変更していない。
+識別子を除いた記録と原本・保存物のSHA-256は[data_tile_validation_2026-10-17/mixed_portable_merge_acceptance_20261025_v1/receipt.json](data_tile_validation_2026-10-17/mixed_portable_merge_acceptance_20261025_v1/receipt.json)に保存した。

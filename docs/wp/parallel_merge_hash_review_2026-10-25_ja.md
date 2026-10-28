@@ -1,0 +1,55 @@
+# 並列hash候補の独立レビュー
+
+`output/parallel_merge_hash_v1/` の小仕様、先行する受入テスト、`bounded_hash.py`、`worker_validator.py`、`execution_adapter.py` を読み取った。
+元のworker evidence、merge runner、resource contractとの対応も確認した。
+このレビューではローカルテスト、数値計算、qsub、実行中sourceの変更を行っていない。
+候補の実mergeへの統合、全12条件の本番適用、速度改善の実測を完了したとは扱わない。
+
+## 確認した保持性
+
+並列化対象は元snapshotを呼ぶbulk input phaseとfinishで、snapshotのstat・resolve・stream hash・再stat・再resolveは元の実装を使う。
+`Proof.read` は元のままで、前track・JSON bytes hash・後trackを逐次実行する。
+結果の登録はowner threadが元のiterator順で行い、expected hash、resolved target、既登録identityを確認する。
+finishは元の辞書順のiteratorを使い、各phase完了前に次のphaseへ進まない。
+同じpathの重複登録も省略せず、cacheによるhash削減を行わない。
+
+hash threadは最大8、未回収futureは最大16で、path一覧全体を先にfuture化しない。
+追加の並列メモリは主としてstream hash buffer、thread、最大16個のrecord/resultに限られる。
+元の巨大なProof辞書、worker values、acceptanceの保持量は削減しておらず、32GiBで全12条件が完走すると保証する変更ではない。
+
+validatorはworkerが実際に使用した元evidence pinを明示して検査する。
+元sourceのidentity確認も再hashし、新validatorのsource pinやderived-function hashを元workerの実行sourceとして偽装しない。
+元accept_workerに対する許可変換はProof factory、raw input loop、元evidence identityの3箇所である。
+workerごとの元sourceが異なる復旧構成では、最新の共通sourceへ統一せず、各workerの実source pinを渡す必要がある。
+
+## 指摘と修正確認
+
+最初の候補ではfutureをdequeから取り除いた後にresultを待っていたため、待機中の割込みでその実行中futureがcancel/drain対象から漏れ得た。
+deque先頭をconsume成功まで保持する修正と、待機割込みのfixture追加を確認した。
+iteratorの初期化も例外処理内へ移し、初期化失敗時にrunning状態を残さずpoisonする構成になった。
+registration例外、foreign-threadのread/finish、同bytes別source path、元accept_workerのsnapshot/consumed-bytes hash censusの受入も追加された。
+
+PBS checkの取得に用いていたinspectの別読込を廃止し、外部pinで照合した元bytesからASTを取り出す修正を確認した。
+変換後functionのglobalsもその元bytesから作り、ロード済みmoduleと別の未照合sourceを混ぜない。
+merge用の8CPU resourceとPBS checkは別adapterで扱い、worker用1CPU契約は変更しない。
+
+## 統合時に必要な確認
+
+元入力集合のpathごとのphaseとhash回数を旧版と比較し、通常経路の `4*S+U` を保持することを全merge経路で確認する。
+新helper・validator・derived functionを固定する追加の運用hashは別項目に記録し、「全fileのhash回数が完全に同一」とは主張しない。
+受入成功時のworker検査結果と科学24行・selectionを保持し、追加の運用provenanceを混同しない。
+HashSession単体にはfixture用の無allocation経路があるため、本番入口が実PBSの8CPU確認後にしか並列phaseを開始しないことを検証する。
+初版の生成selectは8CPU・32GiBだが固定vnodeを付加しておらず、実投入にはphysical-node gateに適合する明示placementが必要である。
+runner/contract/validatorの実CLI、全phaseのbarrier、失敗後のunaccepted保持、実source pinを結合したqsub受入を終えてから本番へ適用する。
+
+指摘修正後の候補を固定しPBS fixtureへ進めることについて、読み取りレビュー上の追加blockerは見つからなかった。
+fixtureの実行結果、統合版、実運用のメモリ・性能は別の証拠で確認する。
+
+## fixture証拠の独立照合
+
+その後、作者が投入したPBS job 265606について、実qstatのF・exit 0・run_count 1・walltime 2秒を読み取り確認した。
+元fixture evidenceに対する18件は0.750秒、実workerの元evidenceに対する18件は0.733秒で成功し、双方のstderr原本hashとunittestの件数・OKを照合した。
+受入原本は `$HOME/workspace/mcmc4qec/20261024-c3t2-index-relocation-v1/pipeline-submissions/parallel-merge-hash-tests-v1/accepted.json`、SHA-256は `a693966ee443b9aed22c80a2489d9ca11ca843ca3e94d8f99a6accf9a71377b4` である。
+fixture logの原本hashは `2b96519b3e6946c3c79c802f719e516e221f48fc9743670a9aab9b7bf2ce618d`、実worker evidence版は `dcabb5877aac194925b3622dcbeed517ad3a2ec886e7dcf13e58472919247c35` である。
+これらは識別子を含み得る原本のhashであり、この日本語文書のhashではない。
+受入receiptはraw科学入力未読、本番merge未開始、全merge phase count未検証、本番8CPU入口未検証を明示しており、この限定は維持する。

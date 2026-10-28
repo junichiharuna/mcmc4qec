@@ -1,0 +1,24 @@
+# reader CLI配置を反映するnative準備v4
+
+v3の親runnerは本番起動検査を通過したが、子reader CLIの所在ディレクトリにある旧recovered moduleが修正版を隠し、canaryは数値結果を保存せず停止した。
+v4は親環境・親runtime・科学設定を保持し、対象2条件のreader CLIをbyte同一で移設した環境だけを新しいfrontに結び直す。
+元のfront・投入記録・失敗記録・受入記録は変更しない。
+
+新しい環境は元環境から、recovered moduleの既承認修正とCLIのbyte同一移設だけを認めるmerge v3契約で検証する。
+新CLIと修正済みreaderは同じ新ディレクトリに置き、source・resolved source・import元を実際のパスへ更新する。
+同じディレクトリを元環境のPYTHONPATHへ1回だけ追加し、それ以外の環境・native binary・科学設定の変更を拒否する。
+両ノードで全9 isolated reader環境の実CLI探索順とnative bootstrapを検証した受入記録を要求する。
+2つの旧環境の衝突再現と9つの新環境の成功を、条件・環境digest・PBS job・実スクリプト・実sys.pathへ結び付ける。
+対話検査で復元したスクリプト属性と、通常のrun-workerの完走は区別する。
+
+新frontは全12 singleton worker・2ノード各6workerを維持する。
+第2ノードが他利用者に占有されたため、実行前の待機probeを明示的に取り消し、その証跡を保持して空きノードへ切り替える。
+新ノードでは親CLIと全reader CLIの成功を改めて要求し、元の第1ノードの検証済み証拠を再利用する。
+変更する資源指定は第2ノードのvnodeだけとし、CPU数・メモリ・walltimeを維持する。
+元manifestとの差は対象2条件のreader環境と、新しいworkerの親ジョブ・出力先に限定する。
+3つのstaged条件へ追加した歴史的投入証跡はそのまま再検証し、数値入力・分母・選択規則は変更しない。
+既定の環境規則・source規則・資源・script検証を全12workerへ適用する。
+検証はPBS内で行い、ローカルPCでテストや科学計算を実行しない。
+v4準備の成功だけで通常run-workerの起動成功や全条件比較の完了を宣言せず、まず1条件の本番canaryを確認する。
+
+この仕様の作成時点でv4準備・受入・投入は未実施である。

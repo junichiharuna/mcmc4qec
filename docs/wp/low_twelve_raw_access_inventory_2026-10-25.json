@@ -1,0 +1,2539 @@
+{
+  "schema": 1,
+  "purpose": "low_twelve_raw_preservation_access_inventory",
+  "observed_date": "2026-10-25",
+  "front": {
+    "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v6/prepared-receipt.json",
+    "sha256": "22eedcbfb42b9ef6ce3d286b539630491efeb80fd0317287fb31fc6ca8c3e058"
+  },
+  "original_hash_notice": "Paths redacted to $HOME; pins refer to original bytes, not this projected JSON.",
+  "scope": "Bounded controls only; all actual own prepared generations retained. No worker completion claim.",
+  "raw_payload_read": false,
+  "raw_payload_hash_recomputed": false,
+  "directory_tree_scanned": false,
+  "large_index_read": false,
+  "third_party_access_verified": false,
+  "rows": [
+    {
+      "index": 0,
+      "case": 0,
+      "target_index": 0,
+      "code": "tile72",
+      "noise": "bit",
+      "target_p": 0.01,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v6/workers/0/prepared.json",
+        "sha256": "d7d80708a8c844eff44fd7c16c007f5b98960b1e5a78aa778b77e1913e540776"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v6/manifest.json",
+        "sha256": "9e7af7db44defb1634bac4a2daaaba5a40fc1cae950b9dbbf30b4498b8e9c6aa"
+      },
+      "reader": "recovered",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-0-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-0-0-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-0-v1/analysis_manifest.json",
+            "sha256": "060e8ae411c00fcd4028da21493cd6171c6159ead0749ac5c5ee57b52f25051b"
+          },
+          "bytes": 93876,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-0-v1/manifest.json",
+            "sha256": "0af738e501d2f82c761696fe35db5eaf98eaea7864460d136c49181ee1cab95e"
+          },
+          "bytes": 2305,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-0-v1/partition_analysis_manifest.json",
+            "sha256": "999055f9e28fedf23de3232184c14d82fa782ed5feff2e8352dfcdbf14a201b0"
+          },
+          "bytes": 112259,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261019-tile-low-bar-recovery-v2/runs/case0-target0-report-v1/report.json",
+        "sha256": "fb95bd83fc83bcd5a3f4d6c438d5bf9b6065d39869b3d1cad97a9ed2498ab9ab"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "formats": [
+        "JSON task metadata/done marker",
+        "NPZ compact traces and checkpoints",
+        "JSON/JSONL derived analysis; not a complete physical error history"
+      ],
+      "completed_phase_record": {
+        "anchors": {
+          "tasks": 192,
+          "failed": 0
+        },
+        "sample": {
+          "tasks": 122880,
+          "failed": 0
+        }
+      },
+      "existing_index_route": "Actual manifest condition.input_sha256 plus analysis_manifest completed_phase_evidence; no raw index expansion.",
+      "collection_manifest_recorded_digest": "11774cd436c19eb6e0869bb9358fff2b08c081d7380e9a2a3c85bfada43954b9",
+      "collection_manifest_digest_kind": "Recorded identity; not asserted to be a file-byte SHA-256."
+    },
+    {
+      "index": 1,
+      "case": 0,
+      "target_index": 1,
+      "code": "tile72",
+      "noise": "bit",
+      "target_p": 0.003,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v4/workers/1/prepared.json",
+        "sha256": "90efc85a8fa7e86602e1a063de6e62817718ff2f5c5eb3fb1092bf5a2654ee70"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v4/manifest.json",
+        "sha256": "601ce36469dc3b75962dfa38b9c3d6e9c72bbc915068c1fb4b2b2d10ffe773a7"
+      },
+      "reader": "recovered",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-1-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-0-1-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-1-v1/analysis_manifest.json",
+            "sha256": "c7b4a0b29d399211a7ae9ef0464e67e32cec5b396b9c1e85dde47e600a3e2374"
+          },
+          "bytes": 93876,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-1-v1/manifest.json",
+            "sha256": "3cea7d7be4bf047ab1c86e7c229cd53c9c8593632ce38c1f1afe40921908ab75"
+          },
+          "bytes": 2336,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-1-v1/partition_analysis_manifest.json",
+            "sha256": "22247050a51c593a9e55c12eecc2ce1268bdb07265b3462841b8a2c46f5e503d"
+          },
+          "bytes": 112291,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261019-tile-low-bar-recovery-c0t1-v1/runs/case0-target1-report-v1/report.json",
+        "sha256": "db0fbd9ea104bf55c5f5a84d29f5cf291e4312a47061f567fa4de156d537bcb2"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "formats": [
+        "JSON task metadata/done marker",
+        "NPZ compact traces and checkpoints",
+        "JSON/JSONL derived analysis; not a complete physical error history"
+      ],
+      "completed_phase_record": {
+        "anchors": {
+          "tasks": 192,
+          "failed": 0
+        },
+        "sample": {
+          "tasks": 159744,
+          "failed": 0
+        }
+      },
+      "existing_index_route": "Actual manifest condition.input_sha256 plus analysis_manifest completed_phase_evidence; no raw index expansion.",
+      "collection_manifest_recorded_digest": "4d63fc803e18a565cda2ed7e5e6a4a195f5563bdf2b9490877eece023b522a63",
+      "collection_manifest_digest_kind": "Recorded identity; not asserted to be a file-byte SHA-256."
+    },
+    {
+      "index": 2,
+      "case": 0,
+      "target_index": 2,
+      "code": "tile72",
+      "noise": "bit",
+      "target_p": 0.001,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/workers/2/prepared.json",
+        "sha256": "5a61a2a079da44200f2536865353cf92d00cef66edd2228da005752b64e8a089"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/manifest.json",
+        "sha256": "d3386369d998069a428504d828f40d8dacf44b868ee164711ceeabb1f5125c53"
+      },
+      "reader": "portable_mixed",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-2-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-0-2-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-0-2-v1/manifest.json",
+            "sha256": "b604f9fabfd75e542e4797c0176ac118060b958a033b7d42fbb4af70ede8ac67"
+          },
+          "bytes": 2354,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/context.json",
+            "sha256": "79f3aab5862d5bb4f36370140dde73a47317e640c82678414b9d6d204817a557"
+          },
+          "bytes": 124354,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/transfer-complete.json",
+            "sha256": "f8435602902b737bff2f7611e1b8934be2088259e2c3ed3866561b2dcb1377ab"
+          },
+          "bytes": 14667,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-final-v1/final-report.json",
+        "sha256": "111a82133aa6ebdb1f03c4ea32237ca783686b584eaa63912608bf910c53cea5"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "portable_root": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1",
+      "formats": [
+        "JSON control/receipt",
+        "ZIP portable outputs and reference inputs; members not inspected here"
+      ],
+      "portable_archives": [
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch0/outputs.zip",
+          "sha256": "4be7eef5cb9639d3330de1b0b289b96f1c7260f37960156a71466ab1deaac7cd",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch1/outputs.zip",
+          "sha256": "4c0e94f86d41cb9cbac75edc4d6d87ea013de20d061e6d97d85e3c9a6e8a0f7b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch10/outputs.zip",
+          "sha256": "bd307c6a8ae44c11341e2de073dcd543fb98dd1f701da56eafdb77bfde747288",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch11/outputs.zip",
+          "sha256": "c2749968b420b0974c198fff53fe99c041c44bb055139d46dead91141c38eac6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch12/outputs.zip",
+          "sha256": "496e0d9209685357ea58552614183c54014ec6835d3045eb3a1616e3e92b071d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch13/outputs.zip",
+          "sha256": "d8d971b52c41e4aa3b67fa3799b5960aa03aa8cc3a3b89278ff55d6bb858c305",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch14/outputs.zip",
+          "sha256": "727f82375e9bd6733705a02180793769d07b6075c06cb5e24a3f47f99d476ac9",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch15/outputs.zip",
+          "sha256": "43887f2a89e46603c09412cdefcd9479c6ad78dd55f19a8a51701f9ba5978af6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch16/outputs.zip",
+          "sha256": "cc6e55e243e9ed47c464ae05a17d663f8d881b4cee96bf43ca25a5dfa25bb04d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch17/outputs.zip",
+          "sha256": "94ced6774f0bff9976e72ec05e6b3e95b9738c228131984874f5702c98d43f91",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch2/outputs.zip",
+          "sha256": "b13b5d735db9ebfd8a53aa7dff0f583ab063c096bf8a3fda1399277286b66785",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch3/outputs.zip",
+          "sha256": "911798f93e55d6d43ed4b0dea872722f8898f9a0b245b374ac43e397ddaeb0b4",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch4/outputs.zip",
+          "sha256": "8113a0d60a8775abfa08bbbdea6ac257dbfa78956cd44c74cd1f8a8b96b83aef",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch5/outputs.zip",
+          "sha256": "1f9f7ae37d863c70ac724f9c2ee6102df19eeb3d056b1e5e355dc0d790b27e4a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch6/outputs.zip",
+          "sha256": "ea9a8778705255a02d66929a7727be88d2f8c521b95dcfcb476077c5436a061d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch7/outputs.zip",
+          "sha256": "c6f11a2f97998e3a830c7c824d6450ee8c7f50bf8bdc7ee11a7eb41c5e95811f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch8/outputs.zip",
+          "sha256": "628c2b49d854d03d89edfd9bc9ec7f7345786f61639870b23a1451a14ad2e123",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-batch9/outputs.zip",
+          "sha256": "0c3a720e154518434d0f16532a642d35360e9d0208745b15105e11bb12d9d50b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-0/outputs.zip",
+          "sha256": "a8efd7f5bf4a79bd6354a9cb0f43097ce7e54cd930dadd0e133529e781f1d12c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-1/outputs.zip",
+          "sha256": "34fd97e1db44bddd95f21add3a054b420dacb2dc15c0b8e5ac39ab96a82e1b3c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-10/outputs.zip",
+          "sha256": "485dc57e82350c77ce15bcef141ecb164d58395db767402f8d34d2bd500660ec",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-11/outputs.zip",
+          "sha256": "d4b367c734b2cdbd6e607b4edf27872fa90b0b5211248206e15d137a9594f743",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-12/outputs.zip",
+          "sha256": "d41ea1e5912be040ce405c745fe9aef01ed005b787f212f41a99c82c171b6863",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-13/outputs.zip",
+          "sha256": "cbb1f8ef121024195a976c831cfee1984ef9e8c032aa522fa271d896cd6aa36a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-2/outputs.zip",
+          "sha256": "33d5ffcb1e144a5ec4f6d554d9a92ec636b1318fd24984efad8e859201fb6f32",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-3/outputs.zip",
+          "sha256": "a58c9721863d7a40720b93133c86ce0f22954b1a0fea9dbbb82605e7a9cb6c24",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-4/outputs.zip",
+          "sha256": "2c4a3af71c5e811ac3639d187202b59141e8fc79b90116638970205204ee6b58",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-5/outputs.zip",
+          "sha256": "f91e94b521775dedf1aea2a8ab3b9533d47a4d449f7827541940f43cbf403f54",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-6/outputs.zip",
+          "sha256": "139b6416f02978d613cc9b38a4dd1cda33877816a8fd63164b031a48030824b7",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-7/outputs.zip",
+          "sha256": "62b7bcbe0d1cab621e5b2b369ecef731d21cd3adb406c870db1e02d404da0d5e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-8/outputs.zip",
+          "sha256": "fd188bdfe18a941d3552145b6e191bfd855a83547c93f72e8e0b9ea7a72e7ee1",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/dgx-reassigned-9/outputs.zip",
+          "sha256": "8060a50d3501478383177ca7f290a752dd088427dbe60c2cd8ec0cb37f516625",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/labo-batch0/outputs.zip",
+          "sha256": "94377388a0060d8552a01500eaa119423853edf104883ad79f8750d116f9de11",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/labo-batch1/outputs.zip",
+          "sha256": "aa5d2939632a1afd5c31cfba171bdb9d1a7f5b053a63221736d44c48b1d3f03b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/labo-batch2/outputs.zip",
+          "sha256": "1d90697b005c5eb5ce916ec7712c1fd535e68d2c646a45d98fdc65b2777fe3c3",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/labo-batch3/outputs.zip",
+          "sha256": "0563ba4ea4cc9d095fb8e2fe90ff50c766a99fe8e733f4e5be8e5db36fe5fc54",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/labo-batch4/outputs.zip",
+          "sha256": "f4005d822296d4ba035feedb780d860cc58f7bda59fbe8f0da9a691dc9520500",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/batches/labo-batch5/outputs.zip",
+          "sha256": "a40df964f2e41f9ec6ac68e5848446659ec4e335755b041d6143f099ae2bf8d3",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-mixed-c0t2-inputs-v1/reference/inputs.zip",
+          "sha256": "139ae3e80fe394acd89ed6cd1fe64368f7b9bf6b90cbaa31d5c5dada1794b600",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        }
+      ],
+      "transfer_record": {
+        "files": 130,
+        "bytes": 9532490259,
+        "scope": "Historical transferred subset including controls; not all raw data size or current stat.",
+        "scientific_validation": false
+      }
+    },
+    {
+      "index": 3,
+      "case": 1,
+      "target_index": 0,
+      "code": "tile288",
+      "noise": "bit",
+      "target_p": 0.01,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/workers/3/prepared.json",
+        "sha256": "5830697c3d0cc94a0960e398d1f287f8fe0749eaa70ca9f0d45843681f8751d4"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/manifest.json",
+        "sha256": "d3386369d998069a428504d828f40d8dacf44b868ee164711ceeabb1f5125c53"
+      },
+      "reader": "portable_condition",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-1-0-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-1-0-retry-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-1-0-v1/manifest.json",
+            "sha256": "685db122c0b38bc7244affd07cc04203d9721e993c7b51fce7ca76b8e65a3415"
+          },
+          "bytes": 2305,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/context.json",
+            "sha256": "16a2c6bb9154c52de500eda59b8c66321fef5cd1d12d25c842ad5f08140fb381"
+          },
+          "bytes": 36866,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/transfer-complete.json",
+            "sha256": "6b827036800de030382a03c0b6eee06f29c03c95ecfb33bd37c64f6fb265760b"
+          },
+          "bytes": 18745,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261020-recovery-c1t0-final-v1/final-report.json",
+        "sha256": "c7715a02ff0ebec682359a3366137136dfb3e5dca7905f04e155f667d6f82189"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "portable_root": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1",
+      "formats": [
+        "JSON control/receipt",
+        "ZIP portable outputs and reference inputs; members not inspected here"
+      ],
+      "portable_archives": [
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/reference/inputs.zip",
+          "sha256": "9001df2430e8a2603a54fabfc693276e973e9b9d0d00d6b2b32b0fa269de2d41",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch0/outputs.zip",
+          "sha256": "ac548b3e5cccc6960956aac7cce5eb46bf9676b713a573d83ef49bf678653719",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch1/outputs.zip",
+          "sha256": "2ab2fe4d374afdcd3b418b5c25213ff74d694f292636bcde6468cc969d673a52",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch2/outputs.zip",
+          "sha256": "bf3d0e0514049eddae3dceba690d98d920149e6b88abf67407d84eaca33ba69f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch3/outputs.zip",
+          "sha256": "a50d2cef4cf76f37f63d9c5e2ecb5c8602f39a03a7ce6f7f881eed60d4e9dff8",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch4/outputs.zip",
+          "sha256": "9eb210e76184fe04cb6c078085f731853786bedfcfbe72ad26b7ae4fc68ae611",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch5/outputs.zip",
+          "sha256": "6d57a3b7d171a2418ba3131d81faf06a62824b3a8f984d8666270e55b49c35a7",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch6/outputs.zip",
+          "sha256": "fe392599784cc6aab03a2313c6377f71876acd7b947111ad33cafef87c00eff8",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch7/outputs.zip",
+          "sha256": "5e64df909e0eb482da622da0ac77b9744848a5a4efc3a124d9c8b36bf1daf49c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch8/outputs.zip",
+          "sha256": "4282fe1c1ad83f8ecf09d750e21ff7dafe9a7d7fdbc1ac3bc534ad4fd3fc1cb0",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch9/outputs.zip",
+          "sha256": "1240257a6ec720e3ee5fa74f48154d6c77eb9052011caa646b688d60229ba425",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch10/outputs.zip",
+          "sha256": "9ea1b71a33263359e9f145d89e8afcf59d3330880f290f8c7ad6bd47ff91f4b3",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch11/outputs.zip",
+          "sha256": "0217cdb77422eda90e1162dd90df2b7d6d8dd9523360d2249f68890e6e9b9d4f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch12/outputs.zip",
+          "sha256": "efc2362eb899a29670e0c24f1e3baae3f2610602bc9bf1109a3e74a7957dbbba",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch13/outputs.zip",
+          "sha256": "c2362bb8f5e3d0eb375b64df37b56c2e08d472ea22a513c25e4d70126e12535d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch14/outputs.zip",
+          "sha256": "94c993b9f6c16e22f3532ebc624a437a6fa824e6cf3ce1b02c2467cc91934ca9",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch15/outputs.zip",
+          "sha256": "4a45bc23210e1f09fb4db1dae54af9805f74ec83f28a23255f252e5e11bd68eb",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch16/outputs.zip",
+          "sha256": "daa0007257b582ea2ba336ad3a749df3142278e25cfcb49248da0f933038d412",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch17/outputs.zip",
+          "sha256": "09b8c73ef3b46c7b8f66da2991fd98625f6c7b54c744e3a3ec56321a43467a49",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch18/outputs.zip",
+          "sha256": "142f3624db591cc62b45d9b1bb6fb35a0aaf63ed42d200ed4ac518f1d00df155",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch19/outputs.zip",
+          "sha256": "cdb8ae6b28d5d6a0aad2e95aeb4f52e122785c93c09def347564656e3061433a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch20/outputs.zip",
+          "sha256": "11db6e30b05a4922ebe5563e68a881e26e19f4597d53486437ea5735aa9c3f49",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch21/outputs.zip",
+          "sha256": "644ab92a829e4ff571e62f28bc9a870f65c2ac538e2e9abf82a3582b0438f96d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch22/outputs.zip",
+          "sha256": "e02a5c62337a3278457f7a1d0150bd13392a7decdd9ff920556c2218427e7226",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch23/outputs.zip",
+          "sha256": "447de3fadf2d62fe61aade8acb89ea689fbc91de7f3d78899433a0b2f18b22a6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch24/outputs.zip",
+          "sha256": "01a379444c73671b6418054b2729e32ef6e63ac0514e48b9901663216345c047",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch25/outputs.zip",
+          "sha256": "6456c0a47fa0d4d081116770d6f32a1f20fc6772f255e2120baf729d2f86b5ac",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch26/outputs.zip",
+          "sha256": "1e97b578f19e10c0fe5c595fc1c3f603cb9eb9f63fffa7ae1ddad06ee9e08d4c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch27/outputs.zip",
+          "sha256": "153377cfb9f5ee8f1eeb9598d74443f913efae915e5b12f4632341c3076dbbbe",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch28/outputs.zip",
+          "sha256": "01878a23df9cfb9dbb047c581e9498974ab2415a52c3e7a607576d402b788fc2",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch29/outputs.zip",
+          "sha256": "7a278aedae6d7549ab04ac7104a346a8838e3a6cbe68f2915fa4f7e9cfe1e2fe",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch30/outputs.zip",
+          "sha256": "f06375a31467615f046b7dd3d1d610df663f2e76052970957ce921098dfbcc3a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/dgx-batch31/outputs.zip",
+          "sha256": "fad69c7ab742fbf0a33b7b07abe37aac94b00f1dd6d242416816f3eea475b43e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/labo-batch0/outputs.zip",
+          "sha256": "ad4e4a0ed233549f871d310f6d6b6bcdbd1cb1243c6c827d9bed770a48a2789f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/labo-batch1/outputs.zip",
+          "sha256": "685530b1937bb97edbbc964450bb465e130af2bb5177dc075934e12e6a2509bb",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/labo-batch2/outputs.zip",
+          "sha256": "7fb6dcea35431b0c5b0b42182b18078be8860574f1f95eeafa69efa9e472bf3f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/labo-batch3/outputs.zip",
+          "sha256": "c719bc1903c1421b5c3388b21b61f38a0880e071b4fd1268337d655dbcd6651e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/labo-batch4/outputs.zip",
+          "sha256": "5515c7f9cdf2bf23c21e897916f74e981a3b5996221733e777f555dbc9bedcdc",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261020-portable-condition-c1t0-inputs-v1/batches/labo-batch5/outputs.zip",
+          "sha256": "a1a453bb2bfa0a8c06ad5c1b26047543cf60d15071c6a442e88d31027c8a90d7",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        }
+      ],
+      "transfer_record": {
+        "files": 170,
+        "bytes": 3968906245,
+        "scope": "Historical transferred subset including controls; not all raw data size or current stat.",
+        "scientific_validation": false
+      }
+    },
+    {
+      "index": 4,
+      "case": 1,
+      "target_index": 1,
+      "code": "tile288",
+      "noise": "bit",
+      "target_p": 0.003,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/workers/4/prepared.json",
+        "sha256": "b3c34a183bf8818c8585302356a416c13b76c98effde186726a2149fabb0b27d"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/manifest.json",
+        "sha256": "d3386369d998069a428504d828f40d8dacf44b868ee164711ceeabb1f5125c53"
+      },
+      "reader": "portable_condition",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-1-1-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-1-1-budget4h-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-1-1-v1/manifest.json",
+            "sha256": "d35be57b9b323a6f9ab4ebeb3e6fede3a987cb154765b1fc74fb959e2f3de74e"
+          },
+          "bytes": 2336,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/context.json",
+            "sha256": "afd52bc4a617064e1c2860736a2e28a90f011bad8760d4b908921376d2aa5a69"
+          },
+          "bytes": 36852,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/transfer-complete.json",
+            "sha256": "03e299ded4b16157ba23cb40d44bbb19c8bf1936d79f4faa4688bbca709fcacf"
+          },
+          "bytes": 18743,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261022-planned-c1t1-final-recovery-v1/final-report.json",
+        "sha256": "1de516b3facd031855b9c33aa9aaf1f8f229a451eeab3b0868d442ae38819ffb"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "portable_root": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1",
+      "formats": [
+        "JSON control/receipt",
+        "ZIP portable outputs and reference inputs; members not inspected here"
+      ],
+      "portable_archives": [
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/reference/inputs.zip",
+          "sha256": "cbe1774680a79ffcd568d34a47105f01f7144f245704e2a0416cdcae72500f62",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch0/outputs.zip",
+          "sha256": "92e28c4c43b70e9671db35831ad4e104fea617a995f87252e92e2e7e42af9f6b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch1/outputs.zip",
+          "sha256": "7260a669d6954727568bf9acac9b5542f70d48011b2e026359a3210e90f6f10b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch2/outputs.zip",
+          "sha256": "a1e057ed2027cee364ab119c265e50b605e05bbd2b0982c45d3752e4c138ebad",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch3/outputs.zip",
+          "sha256": "4cab650cc74c9934eef057a3769ddf4cf4129b282518f77223688a25426711d8",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch4/outputs.zip",
+          "sha256": "b349d4a1bb95737d01a2d49ca24e8b5dc32311edaf38a8632141039f72070664",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch5/outputs.zip",
+          "sha256": "cd123b42240aa1bfd2933baf668e2ad0405e239913f040c37c5efa28bdc58589",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch6/outputs.zip",
+          "sha256": "1deec09eabb791917884f9eb972c416ee6ad0f9eb7070c5f1a73be399114785d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch7/outputs.zip",
+          "sha256": "30788db3abe4a96138df7d30c037bb691db857a0339e40d50f8067878f9800f4",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch8/outputs.zip",
+          "sha256": "d5d2b067b852cf92de98402c16657da90fa4c8efc1fb2d5bced0d8bd02c4376e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch9/outputs.zip",
+          "sha256": "28c6b48d3ad93102d7b6920b7f7f8ff4fe435e77d272913f82d38418e5746903",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch10/outputs.zip",
+          "sha256": "faa2f63204856fbfbedfb98c766cc85c36f6e911f676ea905269f095729005ff",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch11/outputs.zip",
+          "sha256": "47269210ecc65a4808e19b08ed78232bd115d7c46c500ce3360f508e6028a4a5",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch12/outputs.zip",
+          "sha256": "c7352ee7eb19dfdb896d8bc1ac31a511eab34c1950a56c1033a8054c7fc857de",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch13/outputs.zip",
+          "sha256": "b3b6870db55e0ded1869ce94841db5f1d73376b410856b9ed44544c73278817a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch14/outputs.zip",
+          "sha256": "0dada50feaf44f53f9b4b13549fa114f72f9fedc0440a6d3f0a8e8e9269f4491",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch15/outputs.zip",
+          "sha256": "c6c84f0c81cf769d868acd58a3a332861b1b92ca0543664bfd6f0ff6aadc7f46",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch16/outputs.zip",
+          "sha256": "c812602ed4e835d316afdb7200f5e2c1eb554a89ddd31534ca284d48dfc8c215",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch17/outputs.zip",
+          "sha256": "9091684e3d1a74572023177a139f4cbf7a0bc5c7c6b1af1035a5072e2981e76d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch18/outputs.zip",
+          "sha256": "4612f8e2e8e18cff452d93376e529c7bf7132d00380f57e3e513526ef271bc1a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch19/outputs.zip",
+          "sha256": "a0dca55709034135e45588b02d17fe4b9a5a9044133e002cdf8143e3c5510e3b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch20/outputs.zip",
+          "sha256": "25a0515778b3d00ba69c861e7e645d242572ae12556afd46982183090f7b6447",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch21/outputs.zip",
+          "sha256": "8564a64c35ddcef066122d82f9d616af995c2f63cf319288e603f0a20343ca6f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch22/outputs.zip",
+          "sha256": "1dc8789a59d6afdf6d5e377a36e792f16468a825151eec1b854e1a0f0c73d398",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch23/outputs.zip",
+          "sha256": "641bbf53352e0c25eb36a639e17a60105704045a7e33e2f738a4ea239b808ff4",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch24/outputs.zip",
+          "sha256": "b538959a51f8dd2206cbe563b97dd179fa874aa1c2f35cc14aeff96a082057ad",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch25/outputs.zip",
+          "sha256": "68b2a0eb3b3d28f2ccea545c34b50e791ba7eb6af98f8e1d3581836a4b8e067c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch26/outputs.zip",
+          "sha256": "79a42dd3a60230d2fa1c91073728f9e83aa206b32a8e1b297d7f45bd1d1a2c75",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch27/outputs.zip",
+          "sha256": "c3f61c2a26bd46630c258f037c39ee82547aecace1852db8dc3a956b748aea2a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch28/outputs.zip",
+          "sha256": "c82ea8335524bd67b5c4dff8eb55086e27ff3b4ea4b35e85b050826ea15892da",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch29/outputs.zip",
+          "sha256": "a736eb6a3bcb4b8d4d283f704e27887e611fc2b584d97f8aaced7b25a0f33f04",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch30/outputs.zip",
+          "sha256": "2416d743a8ea09cdf9e9d136b5f83195bcbc9ce74f10b1a05b45860ce18a130e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch31/outputs.zip",
+          "sha256": "6ff5e83bfdbefd444d0d07f8de32170742aff12e3536c815c2cff9d85d7a7152",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/dgx-batch32/outputs.zip",
+          "sha256": "85dda952f270a4a02a94f64ecdb30c0e4cb23b153ee532aecf4542fdfe77a151",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/labo-batch0/outputs.zip",
+          "sha256": "974a74a82776fc7dd31aedf136f52df6ebce3e100b870e85a70b8342cfc2c519",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/labo-batch1/outputs.zip",
+          "sha256": "eecf06bb04c9177ee85860afb956aa84b0666ff1d62303f0874ec72b2c207973",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/labo-batch2/outputs.zip",
+          "sha256": "e89e939ba678c9d95ca3bd4756c23ae24807f464360185c9cc68ba00e6e40369",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/labo-batch3/outputs.zip",
+          "sha256": "f46c87b5f506402cf95b3d5d2ed03d2093fc2cea3d79d097c0f4865a0dcf3537",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t1-inputs-v1/batches/labo-batch4/outputs.zip",
+          "sha256": "2f89a3a6ce88ae6737878fb714757b1e3e73756a686060c0003ad6f13d95f54b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        }
+      ],
+      "transfer_record": {
+        "files": 170,
+        "bytes": 5029753220,
+        "scope": "Historical transferred subset including controls; not all raw data size or current stat.",
+        "scientific_validation": false
+      }
+    },
+    {
+      "index": 5,
+      "case": 1,
+      "target_index": 2,
+      "code": "tile288",
+      "noise": "bit",
+      "target_p": 0.001,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/workers/5/prepared.json",
+        "sha256": "a55ea34d2132fb9c935160bac6815e4994a6749c02091e99e7c74795b0c42045"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/manifest.json",
+        "sha256": "d3386369d998069a428504d828f40d8dacf44b868ee164711ceeabb1f5125c53"
+      },
+      "reader": "portable_condition",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-1-2-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-1-2-budget4h-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-1-2-v1/manifest.json",
+            "sha256": "cb1e859f617ced498453ea55f6fbdfa929fdcc6cb28d08a9789c1c7290a44d8f"
+          },
+          "bytes": 2354,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/context.json",
+            "sha256": "ef2bb0c02e7c678899def480992270a04aa86fb1307d1816c2877f74f9dd12e1"
+          },
+          "bytes": 36852,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/transfer-complete.json",
+            "sha256": "31caced1bb55e17402e8013c8225ad6b466402e5dee3fd98409e237e94094bf5"
+          },
+          "bytes": 18743,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261021-planned-c1t2-final-v1/final-report.json",
+        "sha256": "f620a244ce380d0530f26d8bf4c880daec8fdaba4c3bf0484029f6309661e3d6"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "portable_root": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1",
+      "formats": [
+        "JSON control/receipt",
+        "ZIP portable outputs and reference inputs; members not inspected here"
+      ],
+      "portable_archives": [
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/reference/inputs.zip",
+          "sha256": "b8db8f09865504d3d29c6506f5e4021ed30d93d4be0a21ee13dce026a01076fe",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch0/outputs.zip",
+          "sha256": "f5d62fdc38d68de0c892ae551c8245d8c6560d3ea8138010d2c6d18200b6219d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch1/outputs.zip",
+          "sha256": "fe72ed1b8a8758d810adf7cc2a6063f5e400e5e9152c07a045d7574d821a6ac3",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch2/outputs.zip",
+          "sha256": "43c95f9c32819f0ed737d76874f0b2788d96566f7339434eb01fa9c268dfa8a0",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch3/outputs.zip",
+          "sha256": "d321fc85382d72ed9fb07f7f56929a4fd6aa81a5af1cbac5612d0b3862d5cac7",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch4/outputs.zip",
+          "sha256": "08e6213600ea3d69c42f8c8a4fab9402eaa906bd2bb70436e3634126dfd69877",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch5/outputs.zip",
+          "sha256": "e50d7c03f9a90db041abc1e3821e88ba22f6625700887f621d434ca802d3ab9d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch6/outputs.zip",
+          "sha256": "e12a85a00d8d9daed8b2616f515b2341ade4ebeea0d233d9d4e1e865a0ce1402",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch7/outputs.zip",
+          "sha256": "d8055fd60dae0665fe9af6caca1060ea709cb0d8f51387de839631ab7211d63a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch8/outputs.zip",
+          "sha256": "f270354d88db65bedaf3fd590bf8f9572df467b318ab7992e2c0249e7b25af64",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch9/outputs.zip",
+          "sha256": "b509abe6ad8dbfe243d3bb0c16afd5c2defdd328074c4322e7f9b522884eabf6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch10/outputs.zip",
+          "sha256": "0b791d5155846511af077838df1531a526207214ae95777386ecf349eb616b8f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch11/outputs.zip",
+          "sha256": "86522c1d6d67f0c06f9826bd1aa1b6eb61601a7e4e62cc566fa093b89ebd6349",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch12/outputs.zip",
+          "sha256": "20ac63a6e0bd24f586409138886622cde722622ef4d0ff66284fb06f86e81b8f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch13/outputs.zip",
+          "sha256": "cc0035347ce4fb4f001d806203a9ee07b86f826cf378f93d0a8b089772d7028c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch14/outputs.zip",
+          "sha256": "2daf2f94936951ebfe653a913755576a8c0287b9f90ef3b8d1a37a195395c66e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch15/outputs.zip",
+          "sha256": "92aa39085e05190117e9e657e1faca8be5d215dfc540317e83e453c3f2cadc2a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch16/outputs.zip",
+          "sha256": "e1b69545c7714c3bc14bafa805aa90ca266826232d3bc64e728f44958e08c86a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch17/outputs.zip",
+          "sha256": "2e56011e4daced4315755416d5826470db28ec28f4e32f82ca2400d5f69c70c6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch18/outputs.zip",
+          "sha256": "2ea17109711da9f14e80616a95df60c0bf7e0bcee657242bdc872672cbe2f8b9",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch19/outputs.zip",
+          "sha256": "70538ffdb20d438611867db4db03120402188273eb76b1e8e136e3e4a3c1197f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch20/outputs.zip",
+          "sha256": "463bb2616d08c12e700cc3fd61140af3676150f1d608020895153b0961c1d798",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch21/outputs.zip",
+          "sha256": "680ccfb683fd1ee6b33dc869d1bf63296fa6675ca5a7294f1caa4690c4f97a17",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch22/outputs.zip",
+          "sha256": "955781555c3893f90b846c04c0cc2e1fb73bacfc6a7ab4aa4850cd3298886b92",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch23/outputs.zip",
+          "sha256": "c199b767f01553f03dab87a30db8f96fe0d4a3f8e0016dd27a964af5d740ffdd",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch24/outputs.zip",
+          "sha256": "e60570a6c95eea116364a4f7a7ed624dbead89cf3d37e0ea86c97fa0daf89fec",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch25/outputs.zip",
+          "sha256": "c8cff038b81d64b937a609552177e07e44283a6f91d1096f51406af6c2e885ff",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch26/outputs.zip",
+          "sha256": "e27a6ad9428b83cb86cbd25e2e79d5cac88ad19ad40e54fcccd07c7eb747bd35",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch27/outputs.zip",
+          "sha256": "6986ac72a8c85d93d333b8eeaf7af754f87d7af2e45be1bb20dca23c1e822244",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch28/outputs.zip",
+          "sha256": "13843ea51f4f44132fcc11e7615afa58e919e1da8f88fceca683f476722e4a9a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch29/outputs.zip",
+          "sha256": "823468517612c1d067dc71f494283ccccddc7816dcf600e49751411cba65daa4",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch30/outputs.zip",
+          "sha256": "e33f2be7cb844f0f25b77fa336e1b198df7a44a9d1b45d264817f8520255b4e4",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch31/outputs.zip",
+          "sha256": "76733c64f5738baf9cefb8b8767c9740f3f894b40ef45df89bd5bf7f68545ffe",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/dgx-batch32/outputs.zip",
+          "sha256": "ef549c785c115f52c8bb5880e6c4e0d30579a3ecee63565bb9edd5d968855ce0",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/labo-batch0/outputs.zip",
+          "sha256": "427f5a898b31bdce3c9ddfcb5d81eac21b6449a6829ab697fea7f79b10cf59a7",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/labo-batch1/outputs.zip",
+          "sha256": "3b1a8ed268d4d797983c53e386ad601f3f9110bf5c13cd5e66b7e1cf4394d2eb",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/labo-batch2/outputs.zip",
+          "sha256": "45a30bfd56e19ed1f84e7cacfc38615872d551a136f8c8a9b7599280d68a64bc",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/labo-batch3/outputs.zip",
+          "sha256": "fe11fd1db148b255a463b438766f34fb809aa39efd5a18c48fefa0b34846fbbf",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c1t2-inputs-v1/batches/labo-batch4/outputs.zip",
+          "sha256": "87ede5db8db322594c19a8874d9484e3f8bf14854d514df18257f189bd99f85d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        }
+      ],
+      "transfer_record": {
+        "files": 170,
+        "bytes": 5602897252,
+        "scope": "Historical transferred subset including controls; not all raw data size or current stat.",
+        "scientific_validation": false
+      }
+    },
+    {
+      "index": 6,
+      "case": 2,
+      "target_index": 0,
+      "code": "tile72",
+      "noise": "depolarizing",
+      "target_p": 0.01,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v4/workers/6/prepared.json",
+        "sha256": "0cf0fb4625acefb35eb29f2d721ba88e2a2683630665841b43e098fc49d1954f"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v4/manifest.json",
+        "sha256": "601ce36469dc3b75962dfa38b9c3d6e9c72bbc915068c1fb4b2b2d10ffe773a7"
+      },
+      "reader": "staged",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-0-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-trace-full-2-0-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-0-v1/analysis_manifest.json",
+            "sha256": "c81a7063069fb8a17adcb02008724dd22c789a023caa8fe0c4d25dc4e052bc3b"
+          },
+          "bytes": 80003,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-0-v1/manifest.json",
+            "sha256": "5fbf67491ed338c0b1e72befad88f847185d7a57dacf5f5e6cc99b308692fa91"
+          },
+          "bytes": 2313,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-0-v1/partition_analysis_manifest.json",
+            "sha256": "1b47ee30f31daf1e020b77981436a23d6b972564655d23c3a9f92bae0e9735c0"
+          },
+          "bytes": 94218,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-final-reference-parent-v3/runs/case2-target0-final-v3/final-report.json",
+        "sha256": "af5a324a8aedbdf5d38f56f8f58b5a6ba55311cacf0d81d718d6ac8fb131fa8f"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "terminal_receipt": {
+        "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-final-reference-parent-v3/runs/case2-target0-final-v3/selector-terminal.json",
+        "sha256": "51ae334f80448cdae830a2fea0c14c3664d5698002ed2244009049cb64665eae"
+      },
+      "formats": [
+        "JSON task metadata/done marker",
+        "NPZ compact traces and checkpoints",
+        "JSON/JSONL derived analysis; not a complete physical error history"
+      ],
+      "completed_phase_record": {
+        "anchors": {
+          "tasks": 192,
+          "failed": 0
+        },
+        "sample": {
+          "tasks": 61440,
+          "failed": 0
+        }
+      },
+      "existing_index_route": "Actual manifest condition.input_sha256 plus analysis_manifest completed_phase_evidence; no raw index expansion."
+    },
+    {
+      "index": 7,
+      "case": 2,
+      "target_index": 1,
+      "code": "tile72",
+      "noise": "depolarizing",
+      "target_p": 0.003,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v4/workers/7/prepared.json",
+        "sha256": "3932a509a1b051fa10562110c24c8a5018fe6085b150a797460a5de118cd7834"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v4/manifest.json",
+        "sha256": "601ce36469dc3b75962dfa38b9c3d6e9c72bbc915068c1fb4b2b2d10ffe773a7"
+      },
+      "reader": "staged",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-1-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-trace-full-2-1-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-1-v1/analysis_manifest.json",
+            "sha256": "5cc3e240897081976b9bb957771b946898ae997bcd60315fa45ff1a5707c1db9"
+          },
+          "bytes": 80003,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-1-v1/manifest.json",
+            "sha256": "62e389568beca17332407448f2980504cf69ebd8d6c38b3ebf4a7ef67e63f0cb"
+          },
+          "bytes": 2344,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-1-v1/partition_analysis_manifest.json",
+            "sha256": "0c93e235af3c375c44485758bc25cd85afc548d7b496a94a52bcb7df4d9d7eaf"
+          },
+          "bytes": 94247,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-final-reference-parent-v3/runs/case2-target1-final-v3/final-report.json",
+        "sha256": "20a0b9feda08bc488454ecc03af6b38a554fcf2fc30f433632a4aa4f5b445685"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "terminal_receipt": {
+        "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-final-reference-parent-v3/runs/case2-target1-final-v3/selector-terminal.json",
+        "sha256": "70b01e9c120447994c2e81b2d420fafcb8d6fd67272a00c7b3cbbf491bcc2e78"
+      },
+      "formats": [
+        "JSON task metadata/done marker",
+        "NPZ compact traces and checkpoints",
+        "JSON/JSONL derived analysis; not a complete physical error history"
+      ],
+      "completed_phase_record": {
+        "anchors": {
+          "tasks": 192,
+          "failed": 0
+        },
+        "sample": {
+          "tasks": 79872,
+          "failed": 0
+        }
+      },
+      "existing_index_route": "Actual manifest condition.input_sha256 plus analysis_manifest completed_phase_evidence; no raw index expansion."
+    },
+    {
+      "index": 8,
+      "case": 2,
+      "target_index": 2,
+      "code": "tile72",
+      "noise": "depolarizing",
+      "target_p": 0.001,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v4/workers/8/prepared.json",
+        "sha256": "f1d95a8ca550746a4ccb945d12d2a009e37814e59036d9bc585d315d33589633"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v4/manifest.json",
+        "sha256": "601ce36469dc3b75962dfa38b9c3d6e9c72bbc915068c1fb4b2b2d10ffe773a7"
+      },
+      "reader": "staged",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-2-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-trace-full-2-2-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-2-v1/analysis_manifest.json",
+            "sha256": "ef34b786105c3dc82692ea29cc712aaf9966d7181d9b4888ea9cbc5d6b1b081d"
+          },
+          "bytes": 80003,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-2-v1/manifest.json",
+            "sha256": "b0a78a27b22e879011bba18c39ef67d27a820fe9822506066d71d1271d2994d5"
+          },
+          "bytes": 2362,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/staged-production-2-2-v1/partition_analysis_manifest.json",
+            "sha256": "19b100a5582543d48394f7ce4131489d540726f35f55d40dbf8b9e5e64e3d3e3"
+          },
+          "bytes": 94263,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-final-reference-parent-v3/runs/case2-target2-final-v3/final-report.json",
+        "sha256": "14f6fd9c4b9319c0c372b615d0797b78dc5cf74487f6490e08a80229e5f1d2ab"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "terminal_receipt": {
+        "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-final-reference-parent-v3/runs/case2-target2-final-v3/selector-terminal.json",
+        "sha256": "9b45522211520840aefa56dd86250a60288fcbc0f11e40e42c9714878271e1f9"
+      },
+      "formats": [
+        "JSON task metadata/done marker",
+        "NPZ compact traces and checkpoints",
+        "JSON/JSONL derived analysis; not a complete physical error history"
+      ],
+      "completed_phase_record": {
+        "anchors": {
+          "tasks": 192,
+          "failed": 0
+        },
+        "sample": {
+          "tasks": 92160,
+          "failed": 0
+        }
+      },
+      "existing_index_route": "Actual manifest condition.input_sha256 plus analysis_manifest completed_phase_evidence; no raw index expansion."
+    },
+    {
+      "index": 9,
+      "case": 3,
+      "target_index": 0,
+      "code": "tile288",
+      "noise": "depolarizing",
+      "target_p": 0.01,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/workers/9/prepared.json",
+        "sha256": "a6b5c2b42049e4826b0a2132153cceb7b14067661abc9b4b1a2bec1e222a9fb7"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/manifest.json",
+        "sha256": "d3386369d998069a428504d828f40d8dacf44b868ee164711ceeabb1f5125c53"
+      },
+      "reader": "portable_condition",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-3-0-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-3-0-retry8h-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-3-0-v1/manifest.json",
+            "sha256": "c0f4fc7737315481be8e9c88ee896e5bc96bda63b7651195204bd0658492731a"
+          },
+          "bytes": 2314,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/context.json",
+            "sha256": "670a563d11b164c92e30ccfa0aed0a3b7b11334988913d92ea132aa3f6a39552"
+          },
+          "bytes": 36852,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/transfer-complete.json",
+            "sha256": "6e20e92aecb355d1bd5eca0ca01fe19cf610bce183df8e62db5a830e7f7595fd"
+          },
+          "bytes": 18743,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261022-recovery8h-c3t0-final-v1/final-report.json",
+        "sha256": "a7d0afdeac6c457eacd72fd167f9eb217464e3a4fda1820ca0c1d7d907cd7bec"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "portable_root": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1",
+      "formats": [
+        "JSON control/receipt",
+        "ZIP portable outputs and reference inputs; members not inspected here"
+      ],
+      "portable_archives": [
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/reference/inputs.zip",
+          "sha256": "eefeabf73ebebf4834ad075a42c0ef7caeb9c9a40561a80e01c341eeb8ddd5a4",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch0/outputs.zip",
+          "sha256": "7e73f4d69885005145e46c74b20ed73ef1ac8179d4a70a6681012fd34042bcbb",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch1/outputs.zip",
+          "sha256": "224e8bb47f058146ed5b7a820306eb44db6b14efb29ea874eba0cf0c2dcf43d8",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch2/outputs.zip",
+          "sha256": "67a1e356bf70ddc4a9be7aeb9835ad004052aa1db08da0636b16978379e9053b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch3/outputs.zip",
+          "sha256": "5605eb05fdd4f104394e4108132e410ccc3b1b1a396975da8ccac160a98eda39",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch4/outputs.zip",
+          "sha256": "6ecaaefa41af1882934ddb7aa3ca949519c3b3a4cdd8d5b85d38b8869e458c17",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch5/outputs.zip",
+          "sha256": "528002ccdcde00bd35396114a473f92efde5adeca1227703cf8163da52c37245",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch6/outputs.zip",
+          "sha256": "ce1d0b1d0932f6a39a48f1568874bad26e7445f52812265e446feabbbe79611c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch7/outputs.zip",
+          "sha256": "6d7a05c0e0b0b08139ea18e70f4dbc43baf5376b5213d38122fceef9aff75b42",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch8/outputs.zip",
+          "sha256": "db5a346346cfd76718a096a80644c34617078f52ee785d3052d3e052d02adfe5",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch9/outputs.zip",
+          "sha256": "03787a681f0af4b0f99b381fc406d9a36748ebacf4ab8c53eabb1b395b10dca9",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch10/outputs.zip",
+          "sha256": "2941b7dc224d0d7a81754f4ddcdd8f3e30b307ad2f0d6e921ffa671c70dd200c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch11/outputs.zip",
+          "sha256": "dbca88445c89820154fc1e2b32672008e8b0db3a03f59e49671526e928941c2a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch12/outputs.zip",
+          "sha256": "0dd8f7ee488edc76c14175a2b734147d14a4f99cf051d926da6226e31bfd7487",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch13/outputs.zip",
+          "sha256": "ee300095cf9e6ae353c7ecc5c23f52383d29f21a516126f1054361f424c0d69c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch14/outputs.zip",
+          "sha256": "60f1de6c0fe7b1b0107871979c23dbc23cae794c27819efafcdba06701f81a04",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch15/outputs.zip",
+          "sha256": "2b49149b8a6c4abd957da79fb182f17bbed896d7a6be9882857c76883704433d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch16/outputs.zip",
+          "sha256": "e11cf3bfec43d6c8d080f18e8ce028c19c99345e1a6acc08214b5a0bdee090ba",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch17/outputs.zip",
+          "sha256": "2766772668f2dea2ca98013b2988b58c4b7a794e172ed28c62a2870d8d4ff638",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch18/outputs.zip",
+          "sha256": "23424a73bd42a1675cdb65d45a390764efaec4988ecc08712a03a7473631e666",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch19/outputs.zip",
+          "sha256": "68cf234f29f8ff84c859c90f4135d5b4b5c91878bf4028ba168ae56474e031c6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch20/outputs.zip",
+          "sha256": "ac226794e63218eddcd2a121037afda67f84eeb7fb16a5988408ef8c6907d4f9",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch21/outputs.zip",
+          "sha256": "881bea0b55e21f317168e22e8379a792942bd35666f811df8d63cea0d11d63bc",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch22/outputs.zip",
+          "sha256": "f9848aec3c1652d4a98bba60c179cf0d8abd1bc0b97f75a92a45c9a742c4d966",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch23/outputs.zip",
+          "sha256": "a7b4eaa5b94aadbfc480f989737f0ce858fa9ddb5eb7af6e3d34df485a97f291",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch24/outputs.zip",
+          "sha256": "f0a548c48b14a288bfcd3f57382695b8eace4ee1608f494230e0f9ddd5c52d18",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch25/outputs.zip",
+          "sha256": "2be3b3ed36dac14dc6b521f8d933777b3b9888de1d157785742f8801d9d26976",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch26/outputs.zip",
+          "sha256": "2e3be7808f5916c37781572aa25851f171f8f255d2771a8b7d41e9e77b6a5c70",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch27/outputs.zip",
+          "sha256": "c48244118e1ee4a363a6b67905626b9b6883d64f787029b6b67eea8c0e772815",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch28/outputs.zip",
+          "sha256": "b827feb85cbd287b2ced64750c8d60d867390f3e70bd5f17c58947b6d23ce933",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch29/outputs.zip",
+          "sha256": "3574d03c59f34d53fe31801473f17bc8f0416baa656fcbbe64696f1b03a874f1",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch30/outputs.zip",
+          "sha256": "1f8f61f59e9aad57bb1a0354b4c904563ccd2b6d9b4be1561f81af42e8dba552",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch31/outputs.zip",
+          "sha256": "ffaad82b8bbf6ab4c428ff89df606934003a120934471834e34581ee88efc403",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/dgx-batch32/outputs.zip",
+          "sha256": "c711ded7d95b07c5618d364104c9f4cc8f220268ae49ca6ae2f60d9a1a192913",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/labo-batch0/outputs.zip",
+          "sha256": "63b31cac37a8ed8b75aab38a4d11d0367591a5995d4dd03a1f0f5fc48cacdf84",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/labo-batch1/outputs.zip",
+          "sha256": "0574b5cf16de55e59efd6e93f1bae37edfbf36fd824cd722a7fb9e5c67e188ee",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/labo-batch2/outputs.zip",
+          "sha256": "354be3d4c611caba2acc13a6f5c1b3ed77c87e29c5349a0d0144f587c865986d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/labo-batch3/outputs.zip",
+          "sha256": "3fa4935c4649d7631a54f1591debbfaebaf851652c36c4ec50fbe83be2c08daa",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t0-inputs-v1/batches/labo-batch4/outputs.zip",
+          "sha256": "4f61da4c178c968d750c70b572f2dbe5f54a9563435fd52a7d481b154faf35ab",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        }
+      ],
+      "transfer_record": {
+        "files": 170,
+        "bytes": 5491434941,
+        "scope": "Historical transferred subset including controls; not all raw data size or current stat.",
+        "scientific_validation": false
+      }
+    },
+    {
+      "index": 10,
+      "case": 3,
+      "target_index": 1,
+      "code": "tile288",
+      "noise": "depolarizing",
+      "target_p": 0.003,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/workers/10/prepared.json",
+        "sha256": "6bdc92dccb4d21265550e79e4cf1fdd1cd13421e9d3b41c61adfcaa5eaa511f3"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/manifest.json",
+        "sha256": "d3386369d998069a428504d828f40d8dacf44b868ee164711ceeabb1f5125c53"
+      },
+      "reader": "portable_condition",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-3-1-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-3-1-budget8h-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-3-1-v1/manifest.json",
+            "sha256": "80dc59fda4c2a8e258a3ee14899b417a505d27a3b55bf6bafc24dfb714f88b9b"
+          },
+          "bytes": 2345,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/context.json",
+            "sha256": "40041bcfa64512cb166c2d30bd670dcf2c27267872cb4711e3947dd042a720bf"
+          },
+          "bytes": 36852,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/transfer-complete.json",
+            "sha256": "67295149bbef4e6751a4f5ff8633f5e1ccf91b2186a09fe1a242f7d07936e4d4"
+          },
+          "bytes": 18743,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261022-planned8h-c3t1-final-v1/final-report.json",
+        "sha256": "8962634b14fcc454b23a72e6431fdfa331709bfc09051cad5838a99e6d5a2495"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "portable_root": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1",
+      "formats": [
+        "JSON control/receipt",
+        "ZIP portable outputs and reference inputs; members not inspected here"
+      ],
+      "portable_archives": [
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/reference/inputs.zip",
+          "sha256": "abada7ab9982ce66d7189c1efc08d65d67b9d2b5aa4272c685c9df5c3f35352d",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch0/outputs.zip",
+          "sha256": "ad1c71ea0c0594351d77cebbf6ef011e373cad8a36138ef14c872e7925f7b6db",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch1/outputs.zip",
+          "sha256": "949f6c159fc978c4a9efcdefe728662b8d137e80955810116de66650ec4b5040",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch2/outputs.zip",
+          "sha256": "0389a89d59833285b2e664b95813321bfd922310c31c3eb7d1dbdcdee48375a8",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch3/outputs.zip",
+          "sha256": "d04fe7fb0a97b5986357ce41a0a9d45ae93330c4f5d481a64e63e9c1ac0a8e2e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch4/outputs.zip",
+          "sha256": "1707d2c285a137569eb0f4a51eeba2d1f9ce50dc6e8f5e365480bff7481ae1fd",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch5/outputs.zip",
+          "sha256": "f0a6a5025660fbc5d819226af142c1a713ba694274c3cff3ad38f20359463666",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch6/outputs.zip",
+          "sha256": "b31df1889029aa970af4039eee39ed140643e0e84c0a47fa680f7de3cd84799e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch7/outputs.zip",
+          "sha256": "429dd6f496439629e7df104c89a775ef76e1ee6c726454afc164e474164baa6e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch8/outputs.zip",
+          "sha256": "2f702a4328fab0aacb1abe3d9f94788ba83429649a474c989ba64cd101cdfa57",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch9/outputs.zip",
+          "sha256": "6634caf84142c319e9d256ee1faa1f3e9846ffc2610a18a048f8defb16238c1e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch10/outputs.zip",
+          "sha256": "794ad6d7733ecb0bf927855e83ba5a637b1d894f68bc302ca2a421f900cf6784",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch11/outputs.zip",
+          "sha256": "cbe0507638041dfde736cd6ac849deeccf5b6878e4277348777dffe787655550",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch12/outputs.zip",
+          "sha256": "f6724273579640a5b4ab57cc04591013b902a9620834e83b0de056d5f0b82554",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch13/outputs.zip",
+          "sha256": "f4327e2395b63a1987f49535262576c17680e60b36c3f2e14b99dc563679f33a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch14/outputs.zip",
+          "sha256": "52f2d533d9cd16beb56c8b8b2bead90a09d109de20f154e73d10ce0322f8df70",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch15/outputs.zip",
+          "sha256": "eff12f248b5d2e316732d659188bb80ab68604156e20393ba1d4dc919945f059",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch16/outputs.zip",
+          "sha256": "666dbfcece6bfe604d97d868adcfca08f6e1106ee0727445396802ba6065a6a6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch17/outputs.zip",
+          "sha256": "35f2acdbcec0dab044ca35cacc33e4aff9d220f36796b772bc81a07d40e7e5d0",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch18/outputs.zip",
+          "sha256": "996ddcb92c6cd812c283268b9fee0cb549943168b513881643162783c61d4258",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch19/outputs.zip",
+          "sha256": "4a691612b0cafba7a4b44b347b9e255ab84c1a4be864292eba425d372b890f38",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch20/outputs.zip",
+          "sha256": "98e92f232ec33d7e98610e80520f320b06a74def5cc910d9f6f8c4cc45bedb29",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch21/outputs.zip",
+          "sha256": "1a03a41e174dc990ce81e5634552172b645a544f195cdf2f870714d6a22c1137",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch22/outputs.zip",
+          "sha256": "bd3731a97c64033502c10a7f7bd545a8ea16f21ba721feea18378a0a2df57197",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch23/outputs.zip",
+          "sha256": "efb2c7f41fe8f477125d3803956b87aa2dd728e6365a04c731b13dd13708b4de",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch24/outputs.zip",
+          "sha256": "9295fbfb1ec688e61d96851582c0a4fb88fa24737b8b8d173f7314ce1ce2f9d6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch25/outputs.zip",
+          "sha256": "4d7ff1c5e916cc64bc9744251d6d7cb854fb4503a426abd5575a81270ea3581e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch26/outputs.zip",
+          "sha256": "7c419154cf37f6ff919d26f097853399e20382b2f82b2208fd2aa5ef7954a4e5",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch27/outputs.zip",
+          "sha256": "cd4fb21f2ba93fad6ca19fe1217f2cdb5cc484de98d6f5e4f4dd19278e5e4e12",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch28/outputs.zip",
+          "sha256": "83b07e3c53a128d00310da5f7682244107dc9e2ef94b9dca77c51ee66b6fb8d6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch29/outputs.zip",
+          "sha256": "54a8551511fd32c7bb9ff6580a563af9678eb9b10f26a6bfc468679eb871a3e6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch30/outputs.zip",
+          "sha256": "5bbe8611f40b5f4c0783f532c38d382cce1a82da2f7414bf7584f4660a0e9eff",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch31/outputs.zip",
+          "sha256": "4dfb4a26fa6f00c9488a3281f28a0e32b5cb758fb32c2bb7973bc97ffbd595c1",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/dgx-batch32/outputs.zip",
+          "sha256": "e05f8510826609b0135bd9ff3f5f1eeb0191cf95a20d78d914a3b6b11831d81c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/labo-batch0/outputs.zip",
+          "sha256": "646b026b6a2cb2bdb32ad331aaa7c481eed33b75133b7851f3aa785963983cc3",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/labo-batch1/outputs.zip",
+          "sha256": "efa96d4afca7efb135f6b8879d3b08604dd7225ac030ead871dc5794a9fe7c16",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/labo-batch2/outputs.zip",
+          "sha256": "166352bcf23212d8cfdd4062dfbff6c2d1ecb04e167acaa57a0d7668ab283dbd",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/labo-batch3/outputs.zip",
+          "sha256": "19df4479cb3e947ced8dcbffef2e3d7e68aa2a831c7bf74e4c6bbcb3ffb1f3b0",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t1-inputs-v1/batches/labo-batch4/outputs.zip",
+          "sha256": "bf5bc7ce6316f5e132c78943ca13e156b8ab6731955fc3b48e51d2579301da5c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        }
+      ],
+      "transfer_record": {
+        "files": 170,
+        "bytes": 6535632313,
+        "scope": "Historical transferred subset including controls; not all raw data size or current stat.",
+        "scientific_validation": false
+      }
+    },
+    {
+      "index": 11,
+      "case": 3,
+      "target_index": 2,
+      "code": "tile288",
+      "noise": "depolarizing",
+      "target_p": 0.001,
+      "actual_prepared": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/workers/11/prepared.json",
+        "sha256": "fa5874b1b04eab3137e2c241e8daede9f3b1299b7f3b88385324f0286226dd61"
+      },
+      "actual_manifest": {
+        "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-front-v5/manifest.json",
+        "sha256": "d3386369d998069a428504d828f40d8dacf44b868ee164711ceeabb1f5125c53"
+      },
+      "reader": "portable_condition",
+      "registered_production_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-3-2-v1",
+      "audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-trace-full-3-2-budget8h-v1",
+      "reference_root": "$HOME/workspace/mcmc4qec/20261018-tile-weight-reference-v4/runs/reference",
+      "reference_audit_root": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v7/runs/weight-reference-audit",
+      "controls": [
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261018-tile-low-analysis-v11/runs/partitioned-full-3-2-v1/manifest.json",
+            "sha256": "0e4091e0e9213cedc569e741060abccd18e6520049a774770339c9a69d326a40"
+          },
+          "bytes": 2363,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/context.json",
+            "sha256": "f65967f7df350ad3b790e37ecf4d30dc34b34c79829e006abb11df445545f2e9"
+          },
+          "bytes": 36288,
+          "metadata_hash_checked": true
+        },
+        {
+          "pin": {
+            "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/transfer-complete.json",
+            "sha256": "30316436c215c633c28a23479d8d3f35e70053c1de384e06a4ec5311c35624c5"
+          },
+          "bytes": 18743,
+          "metadata_hash_checked": true
+        }
+      ],
+      "final_report": {
+        "path": "$HOME/workspace/mcmc4qec/20261022-planned8h-c3t2-final-v1/final-report.json",
+        "sha256": "662b7ec70f52a24ab9e66c81c2f5fe9a9e1473817ddbc646f5fc7480eec42468"
+      },
+      "all_raw_bytes": null,
+      "current_raw_availability": "not_rescanned",
+      "public_download_url": null,
+      "retrieval": "Use actual_manifest condition input_sha256 and the pinned control files; authorized workspace access required.",
+      "retention": null,
+      "custodian": null,
+      "independent_backup": null,
+      "portable_root": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1",
+      "formats": [
+        "JSON control/receipt",
+        "ZIP portable outputs and reference inputs; members not inspected here"
+      ],
+      "portable_archives": [
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/reference/inputs.zip",
+          "sha256": "10caf7fd2d03c1ba5743f3cfc97cd5e908c79112d3592c8f5ed683906979526c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch0/outputs.zip",
+          "sha256": "9a84e3947d35099ab3bd768761a174f1bd4fee024008c3aca889c2d70e971101",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch1/outputs.zip",
+          "sha256": "30c8270cf8a2dbd4dc9d4b55839017d932fda98dbddec84288f32d846310ae16",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch2/outputs.zip",
+          "sha256": "d9fd8fb47526c0b0c9c41f25b09cd8c0f684d82682204cb7cc0e8d9b2133094a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch3/outputs.zip",
+          "sha256": "6342341afadf2b57136f0ad44c751d4c946f8866af6ed32ada75733f53173fa3",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch4/outputs.zip",
+          "sha256": "cb049ee68262efa84dc89a6ad939a3f8a455ec488b99df413b049942cd432bb3",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch5/outputs.zip",
+          "sha256": "0ad3d4f2b08a703fda73e0e772b287b5ac1e76c576792184e5977562b57b75ac",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch6/outputs.zip",
+          "sha256": "5398a71f43935ba39e84ab89ac2eb0342ebb7588aa4a037d5ab6929b5e535e21",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch7/outputs.zip",
+          "sha256": "ddf7b6d04bfaadd6654183535587a580aaa6f98e92a322a130d42e2c486b78fd",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch8/outputs.zip",
+          "sha256": "2c4f9d8f9afd3bb23b6118964d050b9718758009f91299e8b5735abf5d1f2e3a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch9/outputs.zip",
+          "sha256": "da36e979ee860fb6425304ad698ee1173d03ab9300785465036d598cbc33f8e3",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch10/outputs.zip",
+          "sha256": "fe26d919b21a3fb62bc96bc611bb873d5545511ed318f3c10d83e9b68b737e8a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch11/outputs.zip",
+          "sha256": "05d11ee56afb59af0741d9ccf50e79ddb237a2582a7005f5faa5e23612eb160f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch12/outputs.zip",
+          "sha256": "8d2f9f98bfc4c1c4636828eaa5daa1005270fa71dd9b6edb4f79841ab2ce3bb1",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch13/outputs.zip",
+          "sha256": "902a3ea0176bf4bd526adaab5034452cae7ad979d33b650daf66ff3a747c555f",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch14/outputs.zip",
+          "sha256": "34d67125583cdc393f8ed30678d14e2922e7c5c1fe5cc533337452afb5038a18",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch15/outputs.zip",
+          "sha256": "48ccc5c18a9634b2c931b053e7c36a5f54f805dd74316b1844f6e177af3c02dd",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch16/outputs.zip",
+          "sha256": "55d75b5ad7c8e5862224f1b26e0b5698eabe56dd5efc6260019800f316cf9dbc",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch17/outputs.zip",
+          "sha256": "6cef4fe10c242fd21c601a41dd4b74af35442294c9a0d98c4a3d9b7f55b5e5af",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch18/outputs.zip",
+          "sha256": "199204c236c7e66fe9326e4f8c9f4ebb5b6f69e1cdcaced18d5526b761c3017c",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch19/outputs.zip",
+          "sha256": "fc2dff351cd20cb27ebd10bfbfe203ecb5fb0df51546c314482006487d521364",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch20/outputs.zip",
+          "sha256": "2c0520c8c0ca424e1626a705a7882b864a4f7d62d5034330c3848794789cabca",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch21/outputs.zip",
+          "sha256": "670259f6a0a24d29145c87d91b99a3b94dcf4f3def2003639d2070ca9889dbe5",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch22/outputs.zip",
+          "sha256": "f7a3c8624a694f20522cc6ce4545423a9af131bbc19d4f729cbb4563a7afd9d4",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch23/outputs.zip",
+          "sha256": "06af4e0d77466df2716b634aaccae3ebbe54ba9e47191b116d00a516588d86cb",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch24/outputs.zip",
+          "sha256": "cc14cd7d6a3ebe3d2e1b5b65444a09e6940126caab8574061fc7b93aa567e998",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch25/outputs.zip",
+          "sha256": "b24ce8dc910a686bb50f292625de6bcd6049b7103500655e6ac0bb75e6afc283",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch26/outputs.zip",
+          "sha256": "56e902863bf94a00d124ca45c929f6ac86b5bd6b9a4f1b0c746bf085a7946e6a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch27/outputs.zip",
+          "sha256": "22a0761af30435f1b2fc1fbae0306a7024f96a51b4f21d9b55afaf03a52dbc2b",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch28/outputs.zip",
+          "sha256": "426be1b848e14cdcb511e47e0edd28867010b34f247065564eaa13cb5fdd1772",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch29/outputs.zip",
+          "sha256": "f1912208cc71e69cbe479286911638d7527e679addcae6642406ebffa84c84af",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch30/outputs.zip",
+          "sha256": "620b285553974c7318ef2b5867bdec00df1ddf05ceb2bb91e8e858fc06196a64",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch31/outputs.zip",
+          "sha256": "4449a5ed413f1019266274496c08c6fdb16d30ee78b0490f82b103b681b01a30",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/dgx-batch32/outputs.zip",
+          "sha256": "0a4ea810c22af5c5fe42db750ce10cbe8310772b4dce6960fe0f5a551c38335a",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/labo-batch0/outputs.zip",
+          "sha256": "66344c15d9e4e04d2dd31b455b1905a5f46f3f9d2adf64632f2ca26bc0139fd6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/labo-batch1/outputs.zip",
+          "sha256": "498c0dea8584c5c4daa351507b8350f26d9347a70862f5a8ab6d667f2fa59bf6",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/labo-batch2/outputs.zip",
+          "sha256": "c407205369158842674745317348e20c3ab1ee8ebc127327c7f167aed3df8a2e",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/labo-batch3/outputs.zip",
+          "sha256": "534527d1ebe88319bb4a48c26f232688e09ec07d78c51f7dce01c34c82adee50",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        },
+        {
+          "path": "$HOME/workspace/mcmc4qec/20261021-portable-planned-c3t2-inputs-v1/batches/labo-batch4/outputs.zip",
+          "sha256": "f90e01c0aed86e74be1895d15902bcb589ff265dd50eca1e953e9609feb540cf",
+          "bytes": null,
+          "payload_hash_rechecked": false
+        }
+      ],
+      "transfer_record": {
+        "files": 170,
+        "bytes": 7107503228,
+        "scope": "Historical transferred subset including controls; not all raw data size or current stat.",
+        "scientific_validation": false
+      }
+    }
+  ]
+}

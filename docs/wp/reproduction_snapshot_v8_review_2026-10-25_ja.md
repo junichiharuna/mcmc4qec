@@ -1,0 +1,24 @@
+# v8有限保存の独立レビュー
+
+対象はcollect_tile_v8_snapshot.py、deploy_tile_v8_snapshot.pyと[小仕様](reproduction_snapshot_v8_spec_2026-10-25_ja.md)である。
+レビューはsourceの読取りだけで行い、ローカルでテスト・本収集・数値計算を実行していない。
+受入済みsnapshot_v2.pyの原本を変更していないことを確認した。
+
+固定したv8 flow、front v6、tail設定、並列mergeの配置記録、実controller起動記録から有限の対象を列挙する構成を確認した。
+全12workerの実preparedが指すmanifest・resource-plan・環境と、元submission・scriptの対応を保存対象に含めている。
+旧1031 source・75 metadataを歴史的な基準として残し、同一bytesの別pathを統合しない。
+元envelopeの1223参照を保持し、相反pinは受入済みライブラリで拒否する。
+current source数は現行authority文書が参照するsource数であり、歴史的な未担当slotの参照も含み得るため、全件を現行workerが実行したsourceとは解釈しない。
+
+sourceと明示JSONだけを内容読出しの対象とし、raw/nativeは宣言hashと所在・statを保存する境界を確認した。
+JSON文書内を歩いてsource pinや別名対応を拾う処理はあるが、外部metadata fileを際限なく再帰読出しする処理ではない。
+mutableなobservations.jsonlを読まず、qstatの採取時点だけを別のimmutable文書へ保存する。
+current manifest内の新しいaliasは、同じ固定JSONにあるresolved_sourcesの宣言を先に集めて検証する。
+異なるdocumentから同じ新aliasを別の順序で追加した場合に相反targetを受理する処理はなく、未対応の順序では保存が停止し得る。
+
+重複metadataを現行区分へ追加する際、既にreviewしたrelative baseを暗黙にNoneへ変えないことと、qstatに30秒のtimeoutを付けることを提案した。
+これらは探索境界を変更する要求ではなく、既存の宣言と採取の上限を維持するための補強である。
+修正版で既存relative baseの保持と両qstat呼出しのtimeout=30を確認した。
+source件数の意味の明記と、production-ready・flow native acceptanceの固定原本hashの追加も確認した。
+この静的レビュー時点では、意図しないraw読出し・原本pinの読み替え・無限metadata探索につながる具体的な停止要因は見つからなかった。
+本収集の成功、件数、保存ZIPの整合性、公開版の識別子除去は、このsourceレビューでは検証していない。

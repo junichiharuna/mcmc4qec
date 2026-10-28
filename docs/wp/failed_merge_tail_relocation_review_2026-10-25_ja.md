@@ -1,0 +1,36 @@
+# failed merge後のtail再接続に関する独立レビュー
+
+merge 265651の失敗rootを保存し、新しい `merge-parallel-v2` を使用するための運用差分をレビューした。
+対象は `output/finite_tail_merge_relocation_v1/relocation.py` と `output/low_parallel_flow_v10/flow.py` である。
+ローカルテスト・科学計算・本番投入は実施していない。
+
+旧effective loaderはmerge_root変更を許可しないため、単にconfigの文字列を書き換える方法では受理されない。
+新版relocation loaderは旧effective configを旧loaderで検証し、旧base/report環境の受入を保持した上で、新merge rootと明示relocation authorityだけを投影する。
+元report・bridge・execution runner・execution contract・parent環境のsourceを別物として扱う変更はない。
+新版outer configの変更はeffective_config・effective_loader・merge_root・source_pinsの4項目で、元source mapを残して新しいpinを追記する。
+
+初稿で不足していた失敗jobのresourceとledger digestの対応を指摘し、exact job 265651・F1・run_count 1・prepared/ledger digest・8CPU/32GB/24時間・実PBSとscriptの一致を確認する修正を再読した。
+新Mと継承先の未使用確認はbuild/nativeの時点で行い、通常validatorでは本番開始後に出力先が存在することを理由に拒否しない。
+未使用だった旧v9名のtail出力先を継承する事実はauthorityに保持される。
+
+flowの変更は承認されたworker validator/integrationの2pin、tailの明示再接続、新しいmerge/request/journal、migration来歴に限定される。
+元12workerのjob・manifest世代・環境・科学設定を変更せず、workerの新規投入は引き続き拒否する。
+初稿でmigrationのtail_authorityを読むだけだった点を指摘し、新effective configの `finite_merge_relocation` と完全一致を要求する修正を確認した。
+旧tail config・旧migration・旧parallel helperも継続するsource安定性確認の対象に登録される。
+
+静的レビューのblocking指摘は解消した。
+
+移設側は265655の18 fixture、265656の実assembly、265659の12 probe fixtureと実13constructorがF0となった。
+265659はrun_count 1・walltime 6秒で、全13caseのpinとscopeを独立照合した。
+新版probeは旧M内のexact 4 metadataだけを読み取り専用で許可し、pin・statを前後照合して、それ以外の旧新operational payload拒否を維持している。
+各constructorで新Mの受理、旧M・旧effectiveの拒否、継承先の未使用、科学処理falseを確認している。
+acceptedのクラスタ原本hashは `6bbce18ca06b3d615dbe6c839d1bcbad4e0f08a84ed8d395c28196105ebfcd6f` である。
+
+flow側は265657の31 fixtureがF0、265658の実migration・全12terminal採用・shadow prepareがF0・run_count 1・walltime 21秒となった。
+4 fixture sourceのhashがレビュー対象sourceと一致し、actual acceptedのクラスタ原本hash `618617ebb91bd1f07fc4a484079790a2656b10fc1c464d72ad3cb4761d408d9f` とscopeを独立照合した。
+flowの最終source hashは `1cc96b7bb6688f11471d019b443e7f26f84704036cca1e70a255bd8939e51075` である。
+
+クラスタ原本configを旧版と比較し、outerの4項目だけ、innerのmerge_rootと明示authorityだけが変わり、元43 source pinを保持して50件となったことを確認した。
+新tail config hashは `970850291825f1af351b81a29f652e7c5deba027edeb6dfea32674cf483d90e8`、relocation authority hashは `72e807a3ea80cbfeb02e0f826f6839384f7bbacb203c61b1b465784cd22f8e1d` である。
+原本証跡は `output/finite_tail_merge_relocation_evidence_v1/` と `output/low_parallel_flow_v10/` に保存され、公開用受入記録は [移設受入記録](finite_tail_merge_relocation_2026-10-25_ja.md) にある。
+今回の移設・実入口受入についてblockingは残っていないが、この文書は本番tail・独立計時・全科学mergeの完了を示さない。

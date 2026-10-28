@@ -1,0 +1,28 @@
+test_archive_deterministic_for_same_public_bytes (test_archive.ArchiveTests.test_archive_deterministic_for_same_public_bytes) ... ok
+test_basename_raw_map_is_included (test_archive.ArchiveTests.test_basename_raw_map_is_included) ... ok
+test_changed_member_and_unlisted_member_rejected (test_archive.ArchiveTests.test_changed_member_and_unlisted_member_rejected) ... ok
+test_conflicting_pins_block (test_archive.ArchiveTests.test_conflicting_pins_block) ... ok
+test_edge_target_hash_mismatch_rejected (test_archive.ArchiveTests.test_edge_target_hash_mismatch_rejected) ... ok
+test_existing_archive_never_overwritten (test_archive.ArchiveTests.test_existing_archive_never_overwritten) ... ok
+test_explicit_recursive_pins_and_raw_index (test_archive.ArchiveTests.test_explicit_recursive_pins_and_raw_index) ... ok
+test_external_access_terms_required (test_archive.ArchiveTests.test_external_access_terms_required) ... ok
+test_json_escaped_windows_path_redacted (test_archive.ArchiveTests.test_json_escaped_windows_path_redacted) ... ok
+test_large_json_is_explicit_unscanned_external (test_archive.ArchiveTests.test_large_json_is_explicit_unscanned_external) ... ok
+test_malformed_explicit_pin_blocks (test_archive.ArchiveTests.test_malformed_explicit_pin_blocks) ... ok
+test_missing_file_block (test_archive.ArchiveTests.test_missing_file_block) ... ok
+test_missing_scope_is_redacted (test_archive.ArchiveTests.test_missing_scope_is_redacted) ... ok
+test_outside_root_block (test_archive.ArchiveTests.test_outside_root_block) ... ok
+test_public_hashes_are_distinct_from_original_pins (test_archive.ArchiveTests.test_public_hashes_are_distinct_from_original_pins) ... ok
+test_redaction_collision_block (test_archive.ArchiveTests.test_redaction_collision_block) ... ok
+test_relative_pin_requires_document_base (test_archive.ArchiveTests.test_relative_pin_requires_document_base) ... ok
+test_safe_archive_member_rejects_traversal (test_archive.ArchiveTests.test_safe_archive_member_rejects_traversal) ... ok
+test_source_change_after_inventory_block (test_archive.ArchiveTests.test_source_change_after_inventory_block) ... ok
+test_source_file_limit_blocks_instead_of_externalizing (test_archive.ArchiveTests.test_source_file_limit_blocks_instead_of_externalizing) ... ok
+test_total_and_file_count_limits_block (test_archive.ArchiveTests.test_total_and_file_count_limits_block) ... ok
+test_unmapped_root_and_forbidden_identifier_block (test_archive.ArchiveTests.test_unmapped_root_and_forbidden_identifier_block) ... ok
+test_wrong_pinned_bytes_block (test_archive.ArchiveTests.test_wrong_pinned_bytes_block) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.023s
+
+OK

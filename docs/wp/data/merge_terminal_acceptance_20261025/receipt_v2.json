@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "purpose": "sanitized_merge_terminal_acceptance_v2_evidence",
+  "date": "2026-10-25",
+  "identifier_policy": "User paths, cluster suffixes and node names are omitted. SHA-256 values identify the original private files before sanitization.",
+  "wrapper": {
+    "repository_relative_path": "output/merge_terminal_acceptance_pbs_v2/acceptance.py",
+    "sha256": "0e3d3a44092d1cab57c200e73e1041a405d8381485b5c232b7cbaff0003c4823"
+  },
+  "fixtures": {
+    "job_number": "265628",
+    "pbs_state": "F",
+    "exit_status": 0,
+    "wall_seconds": 1,
+    "test_count": 31,
+    "test_seconds": 0.184,
+    "same_job_actual_prepared_preflight_before_acceptance": true,
+    "preflight_failure_does_not_claim_or_accept": true,
+    "preflight_result_selection_open_traps_passed": true,
+    "controller_same_prepared_source_job_proof_required": true,
+    "production_accept_terminal_executed": false
+  },
+  "early_actual_cli": {
+    "job_number": "265629",
+    "pbs_state": "F",
+    "exit_status": 0,
+    "wall_seconds": 4,
+    "original_acceptance_sha256": "e1ea0c9e8722eee43b66bac85fc68e9e78c75b543253dbb1b0a0bc0e1c63a43a",
+    "same_wrapper_cli_context_and_native_bootstrap_verified": true,
+    "engine_manifest_verified": true,
+    "production_merge_prepared_inspected": false,
+    "production_accept_terminal_executed": false,
+    "result_or_selection_read": false
+  },
+  "future_actual_prepared_preflight": {
+    "required": true,
+    "automatic_inside_acceptance_pbs_before_claim": true,
+    "actually_performed_on_production_prepared": false
+  },
+  "private_evidence": "output/merge_terminal_acceptance_v2_evidence/receipt.json",
+  "production_acceptance_complete": false,
+  "scientific_precision_or_coverage_certified": false
+}

@@ -1,0 +1,20 @@
+# 全12条件の並列再実行と証跡pinの補完
+
+旧workerは両方とも失敗したため、旧値を受理せず、12条件を新manifestの12個のsingleton workerで再実行する。
+旧版の合流契約と27件の受入証跡は保持し、新版を別ディレクトリに保存する。
+staged条件のindices 6・7・8だけで欠落した上流submission・scriptのpinを追加できる。
+元から存在するpinの削除・変更と、科学設定・値・reference・計算ソースの変更は許さない。
+必要な上流ジョブは元のpin付きmanifest・実行intent・解析summary・最終report・reference情報から再構成し、既存のpin付きterminalの全6ジョブと集合を一致させる。
+各追加pinは、そのジョブのledger・script・manifest digest・PBS終了状態・Submit_argumentsの対応を確認してから採用する。
+さらに元からpinされた最終reportのcontrol・config・completion・acceptedを照合し、configに保存された上流ledger・scriptのSHA-256と一致する5組だけを補完する。
+再構成した上流ジョブ集合はconfigのselector対象とcompletionのselector_jobsにも一致しなければならず、現在のファイルから計算したhashだけでは受理しない。
+追加後のmapは元のmapと不足していたledger・scriptのpinの和だけとする。
+このメタデータ補完は元のselectorによる全値・全反復の再検証を省略しない。
+新合流は12個の実行ごとに新manifest・prepared・実証拠検証器を照合し、全12条件・24行・352設定・192反復を確認する。
+科学的正しさや被覆の保証とは区別して、補完規則の正常系・欠落・重複・別job・別script・別manifest・失敗terminal・既存pin変更を受入テストする。
+受入テストはqsub内で実施し、本番の合流と下流受入は別途完了を確認する。
+
+qsub受入ジョブ265534はF・終了コード0で完了し、合成の保存済み証跡を用いた47テストが8.90秒で成功した。
+元の実行証拠検証器・科学的行検証・選択方針・合流封印契約を利用する12workerの結合と、実際のconstructorによるrequest構築を含む。
+ローカルではテストを実行しておらず、この受入は本番の数値再読込や最終合流の完了を意味しない。
+公開用の受入証跡と元データ・保存データのhashは[all12_merge_acceptance_20261025_v1](data_tile_validation_2026-10-17/all12_merge_acceptance_20261025_v1/receipt.json)に保存する。

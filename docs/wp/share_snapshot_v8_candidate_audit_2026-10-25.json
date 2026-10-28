@@ -1,0 +1,149 @@
+{
+  "archive_sha256": "aa2369d5d9bd106bc5568936cb6265ad709ebf82142ca97f01e9d52d2708bff8",
+  "candidate_acceptance_sha256": "9cf9a16e1c617ae67dc0710032fa1fd83bb4c97bb4651664e76b54ea7644e695",
+  "candidate_members_scanned": 1372,
+  "candidate_policy_literal_hits": [],
+  "external_paths_followed": false,
+  "independent_manual_review_complete": false,
+  "metadata_numeric_boolean_hash_census_preserved": 112,
+  "original_sources_modified": false,
+  "pbs_job_number": "265627",
+  "public_byte_verification": {
+    "artifacts": 1370,
+    "execution_ready": false,
+    "external_hashes_reverified": false,
+    "original_private_bytes_reverified": false,
+    "public_bytes_verified": true,
+    "publication_review_required": true,
+    "scientific_reproduction_verified": false
+  },
+  "purpose": "finite_v8_candidate_identifier_audit",
+  "raw_native_content_read": false,
+  "schema": 1,
+  "sidecar_actual_identifier_hits": [
+    {
+      "count": 1,
+      "identifier_index": 5,
+      "line_numbers": [
+        47
+      ],
+      "member": "tools/reproducibility/deploy_share_snapshot_v2.py"
+    },
+    {
+      "count": 2,
+      "identifier_index": 5,
+      "line_numbers": [
+        221,
+        221
+      ],
+      "member": "tools/reproducibility/test_share_snapshot_v2_revision2.py"
+    }
+  ],
+  "sidecar_pinned_bytes_match": true,
+  "sidecar_policy_hits": [
+    {
+      "member": "tools/reproducibility/share_policy_v2.py",
+      "policy_hits": [
+        {
+          "index": 5,
+          "kind": "identifiers",
+          "matches": 2
+        }
+      ]
+    },
+    {
+      "member": "tools/reproducibility/share_snapshot_v2_revision2.py",
+      "policy_hits": [
+        {
+          "index": 5,
+          "kind": "identifiers",
+          "matches": 1
+        }
+      ]
+    },
+    {
+      "member": "tools/reproducibility/test_share_policy_v2.py",
+      "policy_hits": [
+        {
+          "index": 8,
+          "kind": "path_prefixes",
+          "matches": 3
+        },
+        {
+          "index": 11,
+          "kind": "path_prefixes",
+          "matches": 3
+        },
+        {
+          "index": 5,
+          "kind": "identifiers",
+          "matches": 4
+        }
+      ]
+    },
+    {
+      "member": "tools/reproducibility/test_share_snapshot_v2_revision2.py",
+      "policy_hits": [
+        {
+          "index": 8,
+          "kind": "path_prefixes",
+          "matches": 6
+        },
+        {
+          "index": 11,
+          "kind": "path_prefixes",
+          "matches": 6
+        },
+        {
+          "index": 5,
+          "kind": "identifiers",
+          "matches": 16
+        }
+      ]
+    }
+  ],
+  "sidecar_source_count": 7,
+  "sidecar_synthetic_fixture_review_required": true,
+  "snapshot_scope": "Saved v8 point-in-time; later controller changes are excluded",
+  "source_original_hash_census_preserved": 1252,
+  "supplemental_archive_sha256": "102a4a9a3a943d0aadcedc7c2f6385dabea9b9ea6a3eb4285f02713bb6ce2b13",
+  "supplemental_source_manifest": [
+    {
+      "bytes": 16072,
+      "member": "tools/reproducibility/README.md",
+      "sha256": "c580a324cbb811dd87ec1032b5aa85118444e00bedc088dee5dc05e5301cbca9"
+    },
+    {
+      "bytes": 8854,
+      "member": "tools/reproducibility/audit_share_snapshot_v2.py",
+      "sha256": "0b842b7dc05307384669d9670dd183c33720bbe51caaaad80dcbc0a4a2ad6287"
+    },
+    {
+      "bytes": 2237,
+      "member": "tools/reproducibility/deploy_share_revision2_fixtures.py",
+      "sha256": "6cab807e665a1d965e250334311f4faa78939f85585b57604619ec2f7fab8fd6"
+    },
+    {
+      "bytes": 1904,
+      "member": "tools/reproducibility/diagnose_share_policy.py",
+      "sha256": "05fa3a2e9595993a2917d81fc2c8ce684b7412afa55ea994a6b35ec69d03c1d4"
+    },
+    {
+      "bytes": 1449,
+      "member": "tools/reproducibility/pbs_share_revision2_fixtures.py",
+      "sha256": "70f88f408f5cabf2bcaaa7a59215de6bbde41531a9b3c2f18dc8e7d8a43ea3e1"
+    },
+    {
+      "bytes": 23134,
+      "member": "tools/reproducibility/share_snapshot_v2.py",
+      "sha256": "59ef9288381fbe786f6f1147b85a6d87bf5da6d0c87e86d03b657544fd5ffa29"
+    },
+    {
+      "bytes": 11724,
+      "member": "tools/reproducibility/test_share_snapshot_v2.py",
+      "sha256": "038d053639898a04cc86a33452e62ce9227c0caa27b597b260aa3d0347d5e105"
+    }
+  ],
+  "unknown_identifiers_absence_certified": false,
+  "uploaded": false
+}

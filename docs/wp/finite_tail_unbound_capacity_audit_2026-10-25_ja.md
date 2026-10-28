@@ -1,0 +1,27 @@
+# 有限tail補助ジョブと固定先なし計時ジョブの配置監査
+
+2026年10月25日に固定されたphysical capacity実装と、独立計時の資源契約を読み取り確認した。
+科学入力・大JSON・rawを読み直さず、本番job・既存policyを変更していない。
+
+## 問題と確認した範囲
+
+`physical_node_capacity_v1/capacity.py` の `admit` は、通常のactive jobには明示vnode付きselectを要求し、既存jobのvnodeもpolicyのallowlist内であることを確認する。
+既知のrunning legacy jobだけは、job ID、select、CPU、memory、run_count、stimeと実配置を固定した別bindingで扱える。
+その既存例外はlegacy側が1物理host、新規側が別の1物理hostであることも要求する。
+
+元の独立計時jobはunbound selectを使い、以前の補助job向け固定ノードA・B以外へ配置される可能性がある。
+そのため最初の計時jobがRになった後、旧A・B policyで補助jobを投入すると、配置先なしselectまたはallowlist外として拒否され得る。
+この拒否を無視したり、実qstatを固定配置だったように書き換えたりしてはならない。
+旧policyを維持して全計時jobの終了を待つ方法は安全なfallbackだが、次の計時jobを準備する補助処理も待つため、並列に実行できる計時を直列化する可能性がある。
+
+## 別版で検証する対応
+
+元の計時plan・script・資源・seedを変更せず、補助job側だけの別policyを固定する。
+配置先が確定した既知の計時jobが1件Rなら、その実nodeと補助job候補の1nodeを使い、既存の検証付きlegacy bindingで容量を評価する。
+親である補助jobのF/0と資源解放後に、通常の実gateを再実行して次の計時jobを投入する。
+計時jobがQで配置が不明な場合、2件の計時jobで容量が埋まっている場合、未知jobまたは実割当の不一致がある場合は、投入せず既存jobの実状態を待つ。
+他の利用者の割当、待機予約、CPUとmemory、物理hostのaliasも含め、同時に使用する物理nodeを2以下に保つ。
+許可範囲は2ジョブではなく2物理node×各96 CPUであり、複数の小jobを禁止する規則へ読み替えない。
+
+この文書は監査と対応方針であり、動的policyの実装・受入・本番使用の完了を示さない。
+単純な全child終了待ちを黙って最終構成にするのではなく、安全性と並列実行可能性を別fixtureで確認する。

@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "purpose": "sanitized_finite_tail_outer_constructor_acceptance",
+  "identifiers_omitted": true,
+  "sha256_refers_to_unsanitized_originals": true,
+  "joint_fixtures": {
+    "terminal": "F/0",
+    "passed": 95,
+    "accepted_sha256": "5ce224502426470bbab29eaa2d71275cb6a67caaa9574334fe4c2402184c09b5",
+    "source_map_sha256": "a2051810734f4b8caf9c80335e1f1558593a3033f0c382ab341e925f7efb97bf"
+  },
+  "assembly": {
+    "terminal": "F/0",
+    "wall_seconds": 1,
+    "configuration_sha256": "f4dc8a4b9ff57cbe2c1f6e8867fd2d31b4b1b6c09be57a812c353681a7cbf114",
+    "prepared_receipt_sha256": "fb0be410d0393c42422b84a3cf89f4c5c04de65014517f144f4aed95106bf540",
+    "runner_sha256": "18db7c4201e9a44241abda91b480f8188ed011116f51168cb428580f24b32aa9"
+  },
+  "native_constructor": {
+    "terminal": "F/0",
+    "wall_seconds": 4,
+    "actual_cli_help_verified": true,
+    "all_six_roles_both_transforms_verified": true,
+    "constructor_cases": 13,
+    "final_report_constructor_only": true,
+    "accepted_sha256": "95cf799d681479553f2817f21705df22585d539b68da2c12f03c7f3461c3d990",
+    "terminal_sha256": "9f1bad9bfe3a01de6109401d739456623a40449a2547ddb058b7521ac8ba3515"
+  },
+  "binding_sha256": "c74a14430a2f9d96ebd5c9be5857a91e7d25b2ca43a03687c0c19ef4328e7a19",
+  "bounded_original_files_collected": 109,
+  "bounded_original_bytes_collected": 621860,
+  "large_synthetic_files_not_collected": 26,
+  "scientific_payloads_read": false,
+  "science_native_bootstrap_claimed": false,
+  "production_tail_main_executed": false,
+  "final_report_generated": false,
+  "production_controller_replaced": false,
+  "full_scientific_pipeline_completed": false
+}

@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "purpose": "read_only_publication_state_observation",
+  "observed_date_jst": "2026-10-25",
+  "source": "GitHub REST API via gh api",
+  "repository": {
+    "html_url": "https://github.com/junichiharuna/mcmc4qec",
+    "visibility": "public",
+    "archived": false,
+    "default_branch": "main",
+    "main_sha": "837a96b8836ba8c81043fcba15b065eb1a8b5296"
+  },
+  "release": {
+    "html_url": "https://github.com/junichiharuna/mcmc4qec/releases/tag/v0.1.0.dev5",
+    "tag": "v0.1.0.dev5",
+    "draft": false,
+    "prerelease": true,
+    "published_at": "2026-10-24T00:38:58Z",
+    "assets": [
+      "manifest.json",
+      "mcmc4qec-0.1.0.dev5-py3-none-any.whl",
+      "mcmc4qec-0.1.0.dev5-source.zip",
+      "release_body.md",
+      "SHA256SUMS.txt"
+    ]
+  },
+  "asset_bytes_reverified": false,
+  "ci_reverified": false,
+  "zenodo_reverified": false,
+  "remote_mutation_performed": false,
+  "working_tree_changes_published": false
+}

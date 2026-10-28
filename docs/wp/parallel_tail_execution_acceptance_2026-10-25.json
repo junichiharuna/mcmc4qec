@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "purpose": "parallel_tail_operational_acceptance_public_summary",
+  "original_sha256_scope": "Hashes identify original cluster bytes; paths below use $HOME and server suffixes are omitted.",
+  "pure_tests": {
+    "job_number": "265611",
+    "state": "F",
+    "exit_status": 0,
+    "run_count": 1,
+    "tests_passed": 39,
+    "test_seconds": 0.024,
+    "accepted_original_sha256": "96e703a8f2374cad62e498d94c7fcb00f8f93877f52e30c5ab3d20b2df3bb5ad"
+  },
+  "native_acceptance": {
+    "job_number": "265614",
+    "state": "F",
+    "exit_status": 0,
+    "run_count": 1,
+    "walltime": "00:00:05",
+    "closure_fixture_tests_passed": 4,
+    "closure_test_seconds": 0.001,
+    "actual_report_cli_startup_verified": true,
+    "all_import_origins_verified": true,
+    "complete_report_and_recursive_parent_source_closure_verified": true,
+    "accepted_original_sha256": "4ae87cc33dbb5a7893e79bcaa607b06ada4881f5390e7c3f84dbc98820754433",
+    "prepared_original_sha256": "9adcf5c9ddbb6094af654db24d272fc01b1f093151bc3e0714f5c757a0715771",
+    "request_original_sha256": "276a22c8b604edbbd545ba8a7dffc2e92c4dff04fd0265f3a1ea4b681c4476af",
+    "report_environment_original_sha256": "90f3a8351438f1b470b2d46fe4715ffcc46d01b950ed0049b31266bb72f0db96"
+  },
+  "retained_failed_fixture_attempts": [
+    {"job_number": "265612", "state": "F", "exit_status": 1, "run_count": 1, "walltime": "00:00:05", "reason": "Additional acceptance compared only the report source closure after native bootstrap had passed."},
+    {"job_number": "265613", "state": "F", "exit_status": 1, "run_count": 1, "walltime": "00:00:05", "reason": "Additional acceptance omitted recursive parent local imports after native bootstrap had passed."}
+  ],
+  "tail_config": {
+    "path": "$HOME/workspace/mcmc4qec/20261025-low-parallel-tail-config-v8/tail-config.json",
+    "original_sha256": "e91b41145b18198161bf8f877af176b9512f943ec9ac52d56dcfc08cf553bb5f",
+    "runner_relative_to_relocation_root": "output/low_parallel_tail_v3/run.py",
+    "runner_original_sha256": "7b88b63c21274f1ef32b868de52df7d7ccba6c3ce30a55148405389acd61fc4f"
+  },
+  "parent_environment_unchanged": true,
+  "basis_unchanged": true,
+  "scientific_configuration_changed": false,
+  "local_tests_executed": false,
+  "scientific_jobs_executed_by_this_acceptance": false,
+  "all_twelve_production_merge_completed_claimed": false,
+  "independent_timing_completed_claimed": false,
+  "final_report_completed_claimed": false
+}

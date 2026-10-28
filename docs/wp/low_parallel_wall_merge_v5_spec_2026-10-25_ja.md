@@ -1,0 +1,31 @@
+# index 0だけのwalltime延長後の合流
+
+index 0の旧jobはwalltime超過で失敗したため、その結果を受け入れず、新しい実行先と4時間の上限で同じ条件を再実行する。
+indices 1〜11の実prepared・manifest・resource-plan・runner・job IDを変更せずに保持する。
+保持条件には複数世代のmanifestが混在するため、単一の基準manifestへ結果の由来を読み替えない。
+前段の受入済みpreparation receiptが指す全12件の実preparedを由来の一次情報とする。
+
+## 許す変更
+
+index 0で許す変更は新しい親script・出力先、walltimeを14400秒へ延長する明示的なresource-plan記録、および検証済みwall-budget変換に一致するrunnerだけとする。
+CPU・メモリ・配置、元の科学的cost式、engine、worker実行証拠検証器、親環境、reader環境、科学的入力pin、reference、設定、反復数を変更しない。
+旧index 0のtimeout終端証拠と実submissionの関係を、wall延長契約の外部pinで確認する。
+保持11件は前段receiptにある実preparedそのものとし、各値を実際のmanifest・runner・job ID・hashへ照合する。
+
+## 受入
+
+不正な保持job差替え、保持preparedの世代変更、wall以外の資源変更、無関係なrunner変更、科学的入力変更、旧失敗値の採用を拒否する。
+少なくとも3世代の実manifestに結び付いたfragmentを使い、全12条件・24行・352設定・192反復を元の科学的検証関数で確認する。
+各workerの元の実行証拠検証器を使い、合流自身のqsub正常終了と封印を得るまでproduction selectionへ昇格させない。
+受入テストはqsub・既存physical-node gate・最大2物理ノードで実行し、PC上では実行しない。
+仕様作成時点では新しい実装・受入・本番合流は未完了である。
+
+## 受入結果
+
+2026年10月25日のqsub job 265601は正常終了し、21テストが7.74秒で成功した。
+17件の契約検証と4件の統合検証を含み、3世代のmanifestと元の実行証拠検証器・科学的選択検証器を使った。
+統合検証の保存値は人工データであり、本番workerの完了や推定精度を保証する結果ではない。
+合格時と同一bytesのcontract・merger・builder・controlを新しい本番名前空間へ配置した。
+flow担当の独立した静的レビューでは、8個のmerge入力と実prepared・job IDの引渡しに具体的な不整合は見つからなかった。
+識別子を除いた受入証跡は[data_tile_validation_2026-10-17/wall_only_merge_acceptance_20261025_v1/receipt.json](data_tile_validation_2026-10-17/wall_only_merge_acceptance_20261025_v1/receipt.json)に保存した。
+PC上のテストは未実施であり、この担当から本番workerや本番mergeは投入していない。

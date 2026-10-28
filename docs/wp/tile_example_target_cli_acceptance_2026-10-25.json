@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "purpose": "tile_ladder_cli_connection_acceptance",
+  "pbs_job_id": "265640",
+  "terminal_state": "F",
+  "exit_status": 0,
+  "walltime_seconds": 10,
+  "original_workspace_relative_stage": "20261024-c3t2-index-relocation-v1/pipeline-submissions/tile-ladder-cli-acceptance-v1",
+  "original_accepted_sha256": "fffd74deb1afb34fa4e69e2a2ed7fb5c0f3dc7b28d85022b1790ba20d5c251a5",
+  "original_request_sha256": "7258839817f46298bf312c0b1619a46123dd94c88c407c00a215a86293eddd7a",
+  "hash_scope_note": "Original hashes identify the private unmodified files, not this selected and path-normalized evidence.",
+  "example_sha256": "7c00ef7020dbb212270a9c1efab55bb5421e3a9b5969a9b01cc2f8578a446105",
+  "contract_tests_sha256": "b31782b74ea3768744add6ad7b0c2fc11c39c083bb2cbf71091ed840372cabbb",
+  "contract_tests_passed": 23,
+  "existing_default_test_passed": 1,
+  "package_versions": {
+    "bposd": "2.1",
+    "ldpc": "2.4.1",
+    "numpy": "2.4.6",
+    "pytest": "9.1.1",
+    "scipy": "1.17.1"
+  },
+  "package_source_sha256": {
+    "src/mcmc4qec/__init__.py": "ba1a4a91aea42a3f9e38675ed23e8210218baab0f2590475902fa25e39778bdc",
+    "src/mcmc4qec/adapter_composition.py": "69f1b5bfbd29eca3b0cc04e90a2239f3c983ccf4b6dc5dbd05895f9df68d8b6a",
+    "src/mcmc4qec/adapters.py": "8bd338a581d5520ad475c74c3ceef0b50a7dd8354b9ea709943cfd2340d36ad7",
+    "src/mcmc4qec/circuit/__init__.py": "37c841b1592144e0688c0275e9db9ffc012f5111373e3e40e614e594600beb41",
+    "src/mcmc4qec/circuit/baselines.py": "f8e18d9c255274ce18e92c73ed459229379928d4b8480162b5ecd236dfe1905b",
+    "src/mcmc4qec/circuit/cluster.py": "2d47add827b210abc9758ed277e4672d93eb6bf4f69e5332785320763d37c087",
+    "src/mcmc4qec/circuit/faststep.py": "9213444b51128fc954e22a1ce0e1340e92f3ded3c08145de84d7c9927f929854",
+    "src/mcmc4qec/circuit/model.py": "d5983f8afbb41969ae0692c1d0f4143c002335edd243367641de9c04a09e9684",
+    "src/mcmc4qec/circuit/proposal.py": "803987ef724fa4b5010557baab8a7996aabeca2ded1e9259add8c7bf73c68435",
+    "src/mcmc4qec/codes.py": "2ff9e36fc0b8601b770413e0e4a57e7007a4a9e300e700f7d0672ac5919c81fc",
+    "src/mcmc4qec/convergence.py": "762ebde09542f4b0c5fef59becfcc57bddf10628bfb5912768768ad27994a47d",
+    "src/mcmc4qec/core.py": "17931113f94dda0b15db876a062edca6099eb3aa7af337c105c04a9f6dc206ca",
+    "src/mcmc4qec/decode_cache.py": "807ab712dc69c43417e4a55c4280acc54a38b7a2c1561cbc636909296770e628",
+    "src/mcmc4qec/decoders.py": "94cffd7674e43765bdc7bf64fd54bc9e398ad7b306e647142efd645dc3f0ef2c",
+    "src/mcmc4qec/diagnostics.py": "a7ecb368459a5b278cfb879f11c7f0946bdc045f13dc6ffa87153d91a57817fe",
+    "src/mcmc4qec/estimation.py": "7b02dc0f6c449f0baa997faabbc0bf4c98d2e0a9e2454daa9dc9dc1bdd3940c9",
+    "src/mcmc4qec/fastpath.py": "e1af542a96beffcd2768a68b4e3bdc53559916c22fbbfe83292e815ce5eddf9a",
+    "src/mcmc4qec/faststep.py": "e5c9d8bc39af675675ba3a201df37b039295ab2e02b4f8c8e8b5fff8b919865c",
+    "src/mcmc4qec/initial_states.py": "d9b663a3b9d022b00dba1b17494264a48d83c7f488ed98c56696a6c438a27e59",
+    "src/mcmc4qec/kernels.py": "d2796a45fd39bf2aa02566ed4b369658014ba60e034ed4f13a71c4e5f528b6a6",
+    "src/mcmc4qec/models.py": "34c15684824ebdb49ce16067c2d86c27b77327c9ffc13eb501476e7ed75b645a",
+    "src/mcmc4qec/noise.py": "980f1cf411c46a697d44aa39527b6e2be09e5e0303ca467561b59d991ec02c03",
+    "src/mcmc4qec/noise_categorical.py": "9b77e3e9397175bd5bc79470a0ded3c3a3570910df7a7727769b0ff38e3cb56f",
+    "src/mcmc4qec/reporting.py": "de7deb480ff115f698e6e79dab7153a2d3a18f3d80ab8943a52bcce2565ec16c",
+    "src/mcmc4qec/results.py": "ba00fadc802dadd2624c7da075944d29356c67525c9137c3b58edf36f4e57574",
+    "src/mcmc4qec/sampling.py": "b6002366adcc376e6d681fe6a07c77e77da452355fae81302a1bfc9d65683a40",
+    "src/mcmc4qec/stim_dem.py": "6edb4cf438eaa30cfe4bba504bf5ba5eaaa816c14b12eb0c1dce018c92a511da",
+    "src/mcmc4qec/trace_stats.py": "261ed5263356f4a9355557feb23aad6565c4ea44dd0bfb7b85293c28ab5a3131"
+  },
+  "records": [
+    {
+      "name": "contract",
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.44373202603310347
+    },
+    {
+      "name": "default",
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.982600785791874
+    },
+    {
+      "name": "bit",
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.228814974427223
+    },
+    {
+      "name": "depolarizing",
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_seconds": 3.354162821546197
+    }
+  ],
+  "native_cases": {
+    "bit": {
+      "target_p": 0.025,
+      "sector_decoder_prior": 0.025,
+      "ladder": [
+        0.1,
+        0.07,
+        0.05,
+        0.03,
+        0.025
+      ],
+      "size": 6,
+      "seed": 7,
+      "initialization": "logical",
+      "quick": true,
+      "fixed_failure_mode_verified": true,
+      "all_rung_decoder_metadata_identical": true,
+      "original_summary_sha256": "bc66824843d1a6abced5d1294f317373b96f3e06042dd89edaaa3bf75b46d481",
+      "original_bar_sha256": "cff14f496072c09c64aca7241066e90dc030c0e3ae184d180bf805c31884e8a9"
+    },
+    "depolarizing": {
+      "target_p": 0.025,
+      "sector_decoder_prior": 0.016666666666666666,
+      "ladder": [
+        0.1,
+        0.07,
+        0.05,
+        0.03,
+        0.025
+      ],
+      "size": 6,
+      "seed": 7,
+      "initialization": "logical",
+      "quick": true,
+      "fixed_failure_mode_verified": true,
+      "all_rung_decoder_metadata_identical": true,
+      "original_summary_sha256": "1c5eecb9f39203551a44207c2e1d7edc7f15372b007cd0c3199b321e19a15ed7",
+      "original_bar_sha256": "56e677cbd0ac41c319f677cb81d1285ce45b3d26c333e8eae9bea6fc19572ef1"
+    }
+  },
+  "all_checks_passed": true,
+  "low_noise_calibration_performed": false,
+  "nominal_coverage_certified": false,
+  "full_goal_complete": false,
+  "published": false
+}
