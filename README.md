@@ -5,7 +5,7 @@ It combines failure-conditioned MCMC with Bennett acceptance ratio (BAR) splitti
 It also provides exact enumeration for small problems and direct Monte Carlo, with support for custom codes, noise models, and decoders.
 
 The package is **pre-alpha** and under active validation.
-Experimental version 0.1.0.dev5 (2026-10-24) is distributed through GitHub; it is not on PyPI.
+Experimental version 0.1.0.dev6 (2026-10-29) is distributed through GitHub; it is not on PyPI.
 
 [日本語版](README_ja.md) · [Documentation](docs/index.md) · [Tutorial](docs/tutorial_en.md) · [API reference](docs/api_en.md) · [All examples](examples/README.md)
 
@@ -15,7 +15,7 @@ The package requires Python 3.11 or later.
 Install the tagged version with code factories and PyMatching directly from GitHub:
 
 ```sh
-python -m pip install "mcmc4qec[codes,matching] @ git+https://github.com/junichiharuna/mcmc4qec.git@v0.1.0.dev5"
+python -m pip install "mcmc4qec[codes,matching] @ git+https://github.com/junichiharuna/mcmc4qec.git@v0.1.0.dev6"
 ```
 
 From a local checkout, use an editable install instead:

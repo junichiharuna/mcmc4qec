@@ -9,7 +9,7 @@ import hashlib
 import numpy as np
 from .core import Problem, json_value
 
-VERSION = "0.1.0.dev5"
+VERSION = "0.1.0.dev6"
 REFERENCE_COMMIT = "69efcfcc86af3bf24ca977a098dab0f348601aff"
 
 

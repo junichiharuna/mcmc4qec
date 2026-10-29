@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+## 0.1.0.dev6 — experimental GitHub release (2026-10-29)
+
+- Complete the low-noise independent timing study (48 method rows, 192
+  replicates each) and accept its final report through a separate report
+  route that applies one binding-relocation delta to the frozen report
+  script; summarize the MC/BAR cost crossover (direct MC cheaper at
+  `p=0.01`, BAR cheaper by 2–35× at `p≤0.003` on tile72) and the BAR
+  interval under-coverage in the README, the release notes, and the
+  English validation guidance.
+- Record the precision-normalized MC/BAR comparison, the cluster workspace
+  cleanup, the next-run change proposals, the regeneration setup of the
+  calibration cohorts (whose raw traces are no longer retained), and the
+  retained-data scope (no public dataset record; bundle available on request).
+- Align the CITATION.cff affiliation with the paper.
+- Add reproducibility snapshot tools under `tools/reproducibility/`, the
+  2026-10-25 work-package notes, and a CLI test for the fixed-prior tile
+  example. The package API and defaults are unchanged.
+
+## 0.1.0.dev5 — experimental GitHub release (2026-10-24)
+
 - Prepare the experimental 0.1.0.dev5 release for GitHub (2026-10-24).
   The package is not on PyPI.
 - Rewrite the full history before publication: commit authors use the

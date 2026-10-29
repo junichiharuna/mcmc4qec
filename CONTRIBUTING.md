@@ -94,7 +94,7 @@ planned experiments as successful.
 
 ## Release preparation
 
-Version 0.1.0.dev5 is prepared for the experimental GitHub release dated 2026-10-24.
+Version 0.1.0.dev6 is prepared for the experimental GitHub release dated 2026-10-29; version 0.1.0.dev5 was released on 2026-10-24.
 Dependency licenses were reviewed
 (pymatching and stim are Apache-2.0, ldpc and bposd are MIT), the full test
 suite, the strict documentation build, the installed-wheel CI, and a secrets

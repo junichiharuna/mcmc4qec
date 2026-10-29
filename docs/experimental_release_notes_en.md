@@ -1,6 +1,7 @@
 # Experimental release notes
 
-These notes describe experimental version 0.1.0.dev5 of mcmc4qec, dated 2026-10-24.
+These notes describe experimental version 0.1.0.dev6 of mcmc4qec, dated 2026-10-29; the previous experimental version 0.1.0.dev5 was dated 2026-10-24.
+The changes in 0.1.0.dev6 are documentation and validation records: the completed low-noise independent timing study and its final report ([29 October 2026 update](tile_validation_interim_en.md)), the MC/BAR cost and coverage statements, the retained-data scope, the CITATION.cff affiliation, and the added reproducibility tools (`tools/reproducibility/`) and fixed-prior example test. The package API and defaults are unchanged.
 A PyPI release will follow separately.
 Completed validation checks and their limits are recorded in the readiness record linked below.
 

@@ -1,4 +1,4 @@
-# Citation metadata for experimental version 0.1.0.dev5.
+# Citation metadata for experimental version 0.1.0.dev6.
 # Release date for the owner-authorized experimental publication.
 # A DOI will be added after the Zenodo archive of the GitHub release is created.
 # The associated paper ("Fast and accurate rare-event simulation by Markov chain
@@ -14,8 +14,8 @@ authors:
     family-names: Haruna
     orcid: "https://orcid.org/0000-0002-1828-8183"
     affiliation: "Graduate School of Informatics, Kyoto University; Center for Quantum Information and Quantum Biology, University of Osaka"
-version: "0.1.0.dev5"
-date-released: "2026-10-24"
+version: "0.1.0.dev6"
+date-released: "2026-10-29"
 repository-code: "https://github.com/junichiharuna/mcmc4qec"
 license: MIT
 abstract: >-

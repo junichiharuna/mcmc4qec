@@ -1,6 +1,7 @@
 # Experimental版のリリースノート
 
-mcmc4qec 0.1.0.dev5のリリースノートである。
+mcmc4qec 0.1.0.dev6（2026-10-29）のリリースノートである。前のexperimental版0.1.0.dev5は2026-10-24付であった。
+dev6での変更は文書と検証記録の更新である: 低ノイズ独立計時の完了と最終reportの要約（[2026-10-29の更新](tile_validation_interim_en.md)、英語）、MC/BARの費用比較と被覆の記述、保持するデータの範囲、CITATION.cffの所属、再現ツール（`tools/reproducibility/`）とfixed-prior例のテストの追加である。パッケージのAPIと既定値は変えていない。
 2026-10-24付のexperimental版の配布先はGitHubとし、PyPI公開は後に行う。
 実施済みの確認とその限界は末尾の公開準備記録に記す。
 

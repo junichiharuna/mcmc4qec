@@ -5,7 +5,7 @@ Think in English, interact with the user in Japanese.
 ## Project
 
 `mcmc4qec` は、量子誤り訂正の論理誤り率を希少事象サンプリングで求めるための Python ライブラリ。研究リポジトリ RIMC（`junichiharuna/RIMC`、論文 "Fast and accurate rare-event simulation by Markov chain Monte Carlo for general quantum codes"）から再利用できる中核を切り出し、他の研究者が自分の符号・ノイズ・デコーダーを持ち込めるようにするのが目的。
-状態は 0.1.0.dev5 の pre-alpha（2026-09-30 に旧仮称 `rimc` から改名）。
+状態は 0.1.0.dev6 の pre-alpha（2026-09-30 に旧仮称 `rimc` から改名、experimental 版 dev5 を 2026-10-24、dev6 を 2026-10-29 に GitHub で配布）。
 CSS 符号上の bit-flip、phase-flip、depolarising、phenomenological のノイズ、OBF / Zanella（Z）/ cluster exchange（H）/ stabilizer flip のカーネル、exact 列挙、direct MC、失敗条件付き MCMC、BAR による splitting、PyMatching / BP-OSD / Stim DEM の接続が入っている。
 公開既定は Z 0.7 / H 0.3 / cluster_k=2 / 1 chain / lazy 0.05。
 dev2（2026-09-30 の開発依頼 WP-A〜E、全て main に統合済み）で、実符号ファクトリ（toric / surface / asymmetric toric / Hamming HGP / BB72・108・144 / Steane / 連接 Steane）と MWPM・BP-OSD デコーダー構築、研究コードとの数値照合、product-noise の Zanella 高速化と decode キャッシュ、複数 chain 診断と収束チェック、exact coset 初期化、物理回路 fault baseline、英語の API / チュートリアル文書が入った。公開 API は 65 名。remote CI（Python 3.11 / 3.12 × core / optional の 4 job）は成功済み。
