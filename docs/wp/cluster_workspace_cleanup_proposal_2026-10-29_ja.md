@@ -69,8 +69,9 @@ C を全部消しても約 95 GiB で、全体の 4 分の 1 弱である。
 - portable BAR の 38 batch ディレクトリ（中身は `inputs.zip` と `receipt.json` だけ、合計 10,495 MiB）を削除した。38 個の `receipt.json` は `docs/wp/data_portable_bar_2026-10-19/cluster_batch_receipts_20261029.tgz` に退避し、件数 38 を確認した。
 - 分類 C のうち 23 ディレクトリ（portable 入力束 7、merge 失敗版 v4/v5、10/17 の試行 5、単一 archive 型の recovery 9）を `archive_and_remove.sh` で削除した。各ディレクトリについて全ファイルの size と SHA-256（`<dir>.files.tsv`、`<dir>.sha256`）と、venv・`__pycache__` を除く 20 MiB 以下の記録ファイルの tarball（`<dir>.small.tgz`）を `archive-20261029/`（342 MB、69 ファイル）に残してから削除した。script は削除前に各ディレクトリが最終 report の pin 一覧（86,902 path）に含まれないことを確認し、含まれていれば止まる。削除した合計は 68.9 GiB。
 - 凍結 config・PYTHONPATH が 10/17 のディレクトリを参照していないことを確認した（参照があるのは `20261017-tile-production-v1` だけで、これは残した）。
-- 保留: `20261019-tile-low-bar-recovery-c0t1-v1`（9.4 GiB）と `20261019-tile-low-bar-recovery-v2`（7.2 GiB）は小ファイル 29 万個の raw 実行物そのもので、「小さな記録だけ退避」の方法が使えないため残した。消すなら raw ごと消す判断になる。
-- 結果: workspace は 420 GiB・635 ディレクトリから 360 GiB・576 ディレクトリになった（別途、公開データセットの staging 20 GB を新たに置いた）。
+- `20261019-tile-low-bar-recovery-c0t1-v1`（162,566 ファイル、9.9 GiB）と `20261019-tile-low-bar-recovery-v2`（125,617 ファイル、7.6 GiB）は所有者の「4. 削除」を受けて、size と sha256 の manifest と上位 2 階層の小ファイルの tarball（`<dir>.toplevel.tgz`）を `archive-20261029/` に残してから削除した（19:49〜19:51）。
+- 校正 cohort の raw（`20261018-tile-low-analysis-v11/runs/*/{traces,analysis}/`、約 223 GiB）は所有者の「保管しない」決定を受けて、run・dir ごとの size と path の一覧（`archive-20261029/v11-runs-<run>-<dir>.files.tsv`）を取ってから削除した。再生成に必要なセットアップは[校正 cohort の再生成セットアップ](calibration_rerun_setup_2026-10-29_ja.md)に記録し、公開データセットの group D・E に含めた。
+- 結果: 分類 C の実施後に workspace は 420 GiB・635 ディレクトリから 360 GiB・576 ディレクトリになり、bar-recovery（17.5 GiB）と校正 raw（211.6 GiB）の削除後は 122 GiB・574 ディレクトリになった（公開データセットの staging 20 GB と `archive-20261029/` の manifest 619 MB を含む）。
 
 ## 進め方の案（実施前の記述、履歴）
 

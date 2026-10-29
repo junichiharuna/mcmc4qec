@@ -27,9 +27,10 @@ The core package can be installed with `python -m pip install .` without optiona
 
 The source snapshot contains code, documentation, selected validation tables and reports, and the data fixtures needed by its tests.
 It does not contain the complete raw trace and weight-stratified sampling datasets.
-Those datasets are being preserved separately; a public download location for the complete datasets has not yet been established.
-The plan is a Zenodo dataset record containing a redacted copy of the independent timing raw payloads (49 execution roots, about 6 GB), the weight-stratified reference and its audit, the accepted selection, the final report with its evidence records, the pinned scripts and environment records, and per-run summaries of the calibration cohorts, each with its own SHA-256 manifest.
-The complete calibration raw traces (about 223 GiB) are too large for that record; they stay archived on the author's cluster and local storage and are available on request.
+No public dataset record is planned for those datasets.
+The author retains a redacted, manifested bundle (about 20 GB) of the independent timing raw payloads (49 execution roots), the weight-stratified reference and its audit, the accepted selection payload, the final report with its evidence records and its complete pinned closure, the pinned scripts and environment records, and per-run summaries of the calibration cohorts; it is available on request.
+The complete calibration raw traces and analysis payloads (about 230 GB) were not retained after the study, so trace-level re-aggregation of the calibration cohorts requires regenerating them.
+Everything needed for that regeneration is retained in the same bundle: each run's manifest (master seed, chain counts, burn-in, kernels, decoder, stages, pinned source hashes, runtime), the submission scripts, the `cluster_scripts`, and the environment pins (Python 3.11.9, numpy 2.4.6, scipy 1.17.1, ldpc 2.4.1, PyMatching 2.4.0, the `0.1.0.dev5` wheel).
 The operational runbooks and evidence records come from the author's cluster environment.
 User and host names were redacted before publication, so SHA-256 values recorded inside the evidence refer to the unredacted originals kept outside the repository.
 Some referenced transport archives are not included in this source snapshot.

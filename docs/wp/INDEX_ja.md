@@ -18,7 +18,9 @@ docs/wp の全ファイルを日付ごとに並べた索引である。
 
 ## 日付別
 
-### 2026-10-29（4 件）
+### 2026-10-29（5 件）
+
+- [校正 cohort の再生成に必要なセットアップの記録（2026-10-29）](calibration_rerun_setup_2026-10-29_ja.md) — reference、未追跡
 
 - [低ノイズ独立計時のMC/BAR費用比較（精度正規化、2026-10-29）](low_noise_cost_comparison_2026-10-29_ja.md) — result、未追跡
 - [クラスタ workspace の整理案（2026-10-29、削除は未実施）](cluster_workspace_cleanup_proposal_2026-10-29_ja.md) — plan、未追跡

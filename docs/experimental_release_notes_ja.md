@@ -26,9 +26,11 @@ optional decoderなしのcoreは`python -m pip install .`で導入できる。
 
 ソースsnapshotにはコード、文書、一部の検証表・報告、テストに必要なdata fixtureを含む。
 全raw traceと重み層別samplingの全データは含まない。
-これらは別途保存しており、完全なデータセットの公開download先はまだ確定していない。
-Zenodoのdataset記録には、識別子を置換した独立計時のraw payload（49実行root、約6 GB）、weight-stratified referenceとその監査、受理済みselection、最終reportと証拠記録、pinされたscriptと環境記録、校正cohortの各runの小さなsummaryを、それぞれのSHA-256 manifestとともに収める予定である。
-校正cohortの完全なraw trace（約223 GiB）はこの記録には大きすぎるため、著者のクラスタと手元に保管し、要請に応じて提供する。
+これらは著者が別途保存している。
+これらのデータセットの公開record（Zenodoなど）は作らない。
+著者は、識別子を置換しmanifestを付けたbundle（約20 GB）を保持し、要請に応じて提供する。内容は独立計時のraw payload（49実行root）、weight-stratified referenceとその監査、受理済みselectionのpayload、最終reportと証拠記録と完全なpin閉包、pinされたscriptと環境記録、校正cohortの各runの集計である。
+校正cohortの完全なraw traceと解析payload（約230 GB）はstudy終了後に保持していないため、校正cohortをtraceから再集計するには再生成が必要である。
+再生成に必要なものは同じbundleに保持している。各runのmanifest（master seed、chain数、burn-in、kernel、decoder、stage、pinされたsourceのhash、runtime）、投入script、`cluster_scripts`、環境のpin（Python 3.11.9、numpy 2.4.6、scipy 1.17.1、ldpc 2.4.1、PyMatching 2.4.0、`0.1.0.dev5`のwheel）である。
 運用手順書と証跡記録は著者のcluster環境のものである。
 公開前にユーザー名とホスト名を置換したため、証跡に記録されたSHA-256はリポジトリ外に保管した置換前の原本を指す。
 参照するtransport archiveの一部もこのソースsnapshotには含まれない。
