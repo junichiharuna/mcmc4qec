@@ -1,5 +1,17 @@
 # mcmc4qec：2026-10-24の継続状態
 
+## 2026-10-29 02:21 JSTの独立計時完了と最終report受理
+
+独立計時48手法行は2026-10-28 11:04 JSTに全件terminal・exit 0となり、v13 controllerの代わりに動かした並列driverの記録は[並列化の記録](independent_parallel_execution_2026-10-26_ja.md)にある。
+v13のreport段は最初の役で`selection and evaluation WSS audit differ`により失敗した。
+原因は受理済みselectionの復旧由来9 bindingsが参照audit reportの`source_sha256`のpath接頭辞（v7→v11）だけで凍結scriptの照合に落ちることで、所有者の決定により同じscriptに1箇所のdeltaを当てたreport環境v2を別経路で実行した。
+report job 265940は2026-10-29 01:58 JSTにexit 0・walltime 9時間43分で終了し、seal補助job 265950の受理後に`report.json`（SHA-256 `79d1357d…`）と`report_ja.md`（SHA-256 `3614ab8f…`）を確定した。
+別経路の完了記録・写し検証・受領書は`report-job-v2/{completed,collection,final-receipt}.json`で、v13 configに束ねたfinal-report役は未実行、v13 journalの完了markerは書いていない。
+選択12条件はMC・BARとも192/192がcompletedで、凍結reportの費用比MC/BARは精度gateを両方通った3条件（case 0のp=0.003・0.001）で2.03・3.03・29.7である。
+残り9条件は片方の相対RMSEがεをわずかに上回って比がNoneだが、task費用ではp=0.01でMCが安く、p=0.003以下でBARが安いクロスオーバーがある。
+条件別の表と読み取りは[最終報告草稿の第3節末尾](final_validation_report_draft_2026-10-24_ja.md)、原本の写しは`data_tile_validation_2026-10-17/low_noise_final_report_2026-10-29/`にある。
+残るのは9条件の扱いの判断、最終科学証拠のsnapshot保存、再現資料の照合、クラスタ上の実行rootの整理である。
+
 ## 2026-10-26 09:12 JSTのBAR本計時正常終了
 
 `c0t1e1-bar-main0` の科学job265772はfresh PBSでF/0・run_count=1・38分18秒を確認した。

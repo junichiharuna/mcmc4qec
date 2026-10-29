@@ -14,8 +14,16 @@ docs/wp の全ファイルを日付ごとに並べた索引である。
 - [最終報告草稿](final_validation_report_draft_2026-10-24_ja.md)
 - [最終成果物の監査](final_deliverable_audit_2026-10-24_ja.md)
 - [並列化の記録](independent_parallel_execution_2026-10-26_ja.md)
+- [低ノイズ独立計時の MC/BAR 費用比較（精度正規化、2026-10-29）](low_noise_cost_comparison_2026-10-29_ja.md)
 
 ## 日付別
+
+### 2026-10-29（4 件）
+
+- [低ノイズ独立計時のMC/BAR費用比較（精度正規化、2026-10-29）](low_noise_cost_comparison_2026-10-29_ja.md) — result、未追跡
+- [クラスタ workspace の整理案（2026-10-29、削除は未実施）](cluster_workspace_cleanup_proposal_2026-10-29_ja.md) — plan、未追跡
+- [次回 run 向けの変更案（低ノイズ独立計時の運用から、2026-10-29）](next_run_changes_proposal_2026-10-29_ja.md) — plan、未追跡
+- [公開に向けた残作業（独立計時の完了を受けて、2026-10-29）](publication_followups_2026-10-29_ja.md) — plan、未追跡
 
 ### 2026-10-26（3 件）
 

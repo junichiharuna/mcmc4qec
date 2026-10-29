@@ -588,6 +588,57 @@ report 段を並列化するには、凍結 script の `run`/`load_method` の�
 初回経路の失敗リスクと provenance の説明が複雑になることを考え、所有者は現状維持を選んだ。
 並列版（delta v3、`RESOURCE` の変更を含む）は次回以降の改善候補として残す。
 
+### 10/29 01:58〜02:21 の完了（report job 終了、seal の再投入、final report）
+
+report job 265940 は 10/29 01:58 に exit 0 で終わった（walltime 9 時間 43 分、CPU 1 コア、最大 17.9 GB）。
+見込みの 7.4 時間より長かったのは、後半の c2 条件のほうが root あたりの record 再検証に時間がかかったためである。
+`completion.json` に `report_compute_complete: true` と出力 2 ファイルの pin が書かれ、`result/report.json`（1.85 GB、sha `79d1357d…`）と `result/report_ja.md`（8.9 KB、sha `3614ab8f…`）ができた。
+
+**seal の 1 回目は PBS のメモリ上限で kill された**（補助 job 265949、16 GB 指定、4 分 15 秒で `mem 17810188kb exceeded limit 16777216kb`）。
+原本 `report_job.seal` は入力の再検証に加えて完了記録と出力の検証を行い、prepare・submit の補助 job（16 GB で通過）より多くのメモリを使う。
+kill された時点で job root には何も書かれておらず（`terminal.json`・`descriptor.json` なし）、入力も結果も変わらないので、seal の段だけを 32 GB で再投入した。
+
+- `orchestrate_report_job.py` の `run_step` にメモリ引数を足し、`resume_seal.py` が `error.json` を `error-attempt1.json` に改名して理由を `observations.jsonl` に記録したうえで `04-seal` を投入する。
+- login host の `python3` は 3.6 で `subprocess.run(capture_output=…)` が使えず、最初の起動は qstat の手前で止まった（job root や記録には触れていない）。orchestrator と同じく環境 v2 に pin された venv の python（3.11.9）で起動し直した。
+- 2 回目の補助 job 265950（011、1 CPU・32 GB）は 02:11 に始まり、10 分 12 秒、最大 18.0 GB で exit 0。
+
+**完了記録**: `report-job-v2/completed.json` に `status: report_completed`、report job 265940、seal 補助 job 265950（32 GB）、失敗した 1 回目の記録の pin、環境 v2（sha `18449f85…`）と derivation（sha `3bf7f8aa…`）の pin、出力 2 ファイルの pin を書いた。
+job root には `terminal.json` と `descriptor.json` が 02:21 に書かれた。
+v13 の `parallel-flow-v13/` には `completed.json` を書いていない。
+自分の PBS job は残っていない。
+
+**手元への写し**: `docs/wp/data_tile_validation_2026-10-17/low_noise_final_report_2026-10-29/`（gitignore 済み）に `report_ja.md`、`report.json.gz`（gzip 後 219 MB、展開後の sha が `completion.json` と一致）、`completed.json`、`descriptor.json`、`terminal.json` を置いた。
+
+**final report の要点**（`report_ja.md`）:
+
+- 選択 12 条件（case 0・2 × p ∈ {0.01, 0.003, 0.001} × ε ∈ {0.2, 0.1}）は MC・BAR とも 192/192 replicate が completed。case 1・3 は参照区間の幅が条件を満たさず（`ineligible_reference_width`）、計画どおり未選択。
+- 費用比 MC/BAR（wall・CPU）は、両手法が経験的精度 gate（相対 RMSE ≤ ε）を通った 3 条件だけに出る。
+
+| case | p | ε | wall 比 MC/BAR | CPU 比 MC/BAR |
+|---|---:|---:|---:|---:|
+| 0 | 0.003 | 0.2 | 2.03 | 2.04 |
+| 0 | 0.003 | 0.1 | 3.03 | 3.03 |
+| 0 | 0.001 | 0.1 | 29.7 | 29.7 |
+
+- 残り 9 条件は MC か BAR のどちらかが gate をわずかに外れて `both_empirical_precision_gates_required` になった（例: case 0・p = 0.01・ε = 0.2 で BAR の相対 RMSE 0.206）。予算は相対 RMSE が ε の近傍に来るように決めているので、判定は境界で割れる。
+- 区間の被覆（192 中）は MC が 178〜186、BAR が 151〜176 で、BAR の区間は過小被覆である。
+- report の但し書きどおり、費用比は経験的精度 gate を通った固定設定の記述量であり、母精度や最速設定を保証しない。BAR の混合診断は未取得。
+
+### 10/29 08:19 の補足（v13 の collect・final-report 役との差と、経路側の写し検証）
+
+別経路で実行したのは v13 の report 3 役のうち preparation と report job（prepare → submit → seal）であり、v13 の report_job 役の末尾と final-report 役は実行していなかった。
+outer `run.py` と `low_parallel_tail_v3/adapter.py` を読んで確認した両者の内容は次のとおりで、どちらも新しい科学成果物は作らない。
+
+| v13 の段 | 内容 |
+|---|---|
+| report_job 役の末尾（`low_partition_report_job_v2/driver.py`） | seal 後に sealed descriptor が列挙する 9 artifact（control・submission・report.sh・terminal・descriptor・execution・completion・result の 2 ファイル）を journal の `collected/` へ写し、sha を照合して `completed.json` に `collection_verified: true`、`manifest.json` に journal 全ファイルの sha を書く |
+| final-report 役（PBS action → `adapter.final_report`） | その `completed.json` の `report_completed`・`collection_verified` と `collected/result/` の sha を再照合し、小さな受領書（completion pin・reports pin・job_id）を返す。outer はそれを v13 config の sha と束ねて `finite-final-report.json` に保存する |
+
+経路側では `collect_report_route.py` で同じ byte 検査を login host で行い（両段とも copy と hash だけで PBS 専用の IPC は使わない）、`report-job-v2/collected/`（9 artifact）、`collection.json`（`collection_verified: true`）、`final-receipt.json`、`manifest.json` を 08:19 に書いた。
+`final-receipt.json` には `v13_final_report_role_executed: false` を明記した。
+v13 の受領書は v13 config（原本の report script を pin）に束ねるものなので、環境 v2 を使ったこの経路では作れず、v13 journal には何も書かない。
+したがって「v13 の凍結鎖としての完了」ではなく、「同じ検査を通した別経路の完了」として文書化する。
+
 ### 見込み（19:50 時点）
 
 c2 の main は c0 より短く（c2t0e0 MC で 28 分）、残り 11 本の main の submit 補助 45 分と回収 33 分が実行時間を上回る。

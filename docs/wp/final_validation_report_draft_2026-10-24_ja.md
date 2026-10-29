@@ -3,6 +3,10 @@
 本稿は最終報告の草稿であり、独立計時・最終科学reader・report・証拠保存を含む全検証は未完了である。
 以下は保存済み報告・回収証拠の要約であり、本稿の編集ではraw datasetの再読込や数値再計算を行っていない。
 
+2026-10-29の追記: 独立計時48手法行は全件terminal・exit 0となり、最終report（`report.json`・`report_ja.md`）は10/29 02:21 JSTに別経路で受理した。
+結果は第3節末尾の「独立計時の最終report（2026-10-29 02:21 JST受理）」に記載し、以下の本文と表は追記前の時点（2026-10-26 08:41 JST）の記述を履歴として保持する。
+v13 final-report役の受領書、最終科学証拠のsnapshot保存、再現資料の照合は未完了である。
+
 全12条件の比較とcomparison・handoffは受理済みで、元12worker・merge・acceptanceの計14ジョブを再実行せず引き継いだ。
 [全件seed照合と正式受理](data_tile_validation_2026-10-17/low_timing_full_census_v13_20261025/README_ja.md)では4,208,002件を検査し、予期しない衝突0・意図した共有8,448件・一意seed4,199,554件を確認した。
 これは有限な予定seedの重複検査であり、統計的独立性の証明や実sampling metadata全件の監査ではない。
@@ -212,6 +216,80 @@ MC265721のqsub・manifest・scriptへの結合と、BAR投入前helperと合わ
 PBS walltime全体をsamplingやdecoderの時間に帰属させず、この部分実測から全体総時間・未計測の後続費用・MC/BARの優劣・終了時刻を推定しない。
 同じ精度での効率評価には、後続の独立192反復と最終reportに保存する費用定義・精度gateの照合が必要である。
 
+### 独立計時の最終report（2026-10-29 02:21 JST受理）
+
+独立計時48手法行（12選択条件×MC/BAR×capacity・main、`c2t2e1` MC mainは2分割）は2026-10-28 11:04 JSTに全件terminal・exit 0となった。
+凍結report scriptの`reference_evidence`は、受理済みselectionの12 calibration bindingsのうち復旧・portable readerに由来する9件を、参照audit reportの`source_sha256`のpath接頭辞（v7→v11）の違いだけで拒否した。
+所有者の決定により、v13の凍結鎖は触らず、同じreport scriptに1箇所のdelta（移設後のsource一覧で差し替えたreportのdigestも受理する）を当てたreport環境v2を別経路で実行した。
+経路・delta・job ID・所要時間の記録は[並列化の記録](independent_parallel_execution_2026-10-26_ja.md)にある。
+report job 265940は2026-10-29 01:58 JSTにexit 0・PBS walltime 9時間43分で終了し、seal補助job 265950（最初の補助jobはメモリ上限で失敗）の受理後に`report.json`（1,848,735,353 bytes、SHA-256 `79d1357d…`）と`report_ja.md`（SHA-256 `3614ab8f…`）を確定した。
+手元の写しは[report_ja.md](data_tile_validation_2026-10-17/low_noise_final_report_2026-10-29/report_ja.md)、[report.json.gz](data_tile_validation_2026-10-17/low_noise_final_report_2026-10-29/report.json.gz)、[条件別の抜粋](data_tile_validation_2026-10-17/low_noise_final_report_2026-10-29/condition_summary.json)、[経路の完了記録](data_tile_validation_2026-10-17/low_noise_final_report_2026-10-29/completed.json)にあり、展開後のSHA-256は`completion.json`と一致する。
+v13 journalの`parallel-flow-v13/completed.json`と`finite-final-report.json`は書いていない。
+v13のreport_job役末尾の結果写し検証（`collection_verified`）とfinal-report役の受領書に相当する検査は、別経路の`collection.json`・`final-receipt.json`で同じbyte照合として行ったが、v13 configに束ねたfinal-report役そのものは未実行である。
+
+下表は`report.json`の`records`から転記した選択12条件の値で、数値の再計算は行っていない。
+費用は192反復のtask単位の平均（秒）で、capacity・seed監査・選択・報告処理の費用は含まない。
+相対RMSEは有限WSS reference区間に対する範囲、精度判定は凍結scriptの経験的gate（相対RMSE ≤ ε）、被覆は192反復中にreference区間全体（entire）・可能区間（possible）を含んだ件数である。
+
+| case | p | ε | 手法 | 状態 | task wall 平均（秒） | CPU 平均（秒） | 相対 RMSE 範囲 | 精度判定 | entire 被覆 /192 | possible 被覆 /192 |
+|---|---:|---:|---|---|---:|---:|---|---|---:|---:|
+| 0 | 0.01 | 0.2 | MC | completed | 2.996 | 2.983 | [0.1951, 0.1952] | within_target | 185 | 185 |
+| 0 | 0.01 | 0.2 | BAR | completed | 14.979 | 14.865 | [0.2061, 0.2063] | above_target | 160 | 160 |
+| 0 | 0.01 | 0.1 | MC | completed | 11.594 | 11.555 | [0.1065, 0.1066] | above_target | 181 | 181 |
+| 0 | 0.01 | 0.1 | BAR | completed | 39.140 | 38.768 | [0.0970, 0.0971] | within_target | 168 | 169 |
+| 0 | 0.003 | 0.2 | MC | completed | 47.045 | 46.892 | [0.1951, 0.1951] | within_target | 183 | 183 |
+| 0 | 0.003 | 0.2 | BAR | completed | 23.232 | 23.016 | [0.1896, 0.1896] | within_target | 162 | 162 |
+| 0 | 0.003 | 0.1 | MC | completed | 189.341 | 188.737 | [0.0955, 0.0955] | within_target | 183 | 183 |
+| 0 | 0.003 | 0.1 | BAR | completed | 62.566 | 62.259 | [0.0766, 0.0766] | within_target | 162 | 162 |
+| 0 | 0.001 | 0.2 | MC | completed | 492.476 | 490.864 | [0.2015, 0.2015] | above_target | 183 | 183 |
+| 0 | 0.001 | 0.2 | BAR | completed | 24.506 | 24.270 | [0.2404, 0.2404] | above_target | 158 | 158 |
+| 0 | 0.001 | 0.1 | MC | completed | 1928.440 | 1922.762 | [0.0948, 0.0948] | within_target | 184 | 184 |
+| 0 | 0.001 | 0.1 | BAR | completed | 65.032 | 64.700 | [0.0870, 0.0870] | within_target | 175 | 175 |
+| 2 | 0.01 | 0.2 | MC | completed | 6.493 | 6.468 | [0.1874, 0.1879] | within_target | 183 | 183 |
+| 2 | 0.01 | 0.2 | BAR | completed | 27.493 | 27.311 | [0.2185, 0.2197] | above_target | 166 | 166 |
+| 2 | 0.01 | 0.1 | MC | completed | 25.914 | 25.820 | [0.1048, 0.1056] | above_target | 181 | 181 |
+| 2 | 0.01 | 0.1 | BAR | completed | 104.814 | 104.349 | [0.0688, 0.0696] | within_target | 173 | 176 |
+| 2 | 0.003 | 0.2 | MC | completed | 95.332 | 94.997 | [0.2004, 0.2005] | above_target | 178 | 178 |
+| 2 | 0.003 | 0.2 | BAR | completed | 42.760 | 42.460 | [0.2063, 0.2063] | above_target | 161 | 161 |
+| 2 | 0.003 | 0.1 | MC | completed | 382.497 | 381.284 | [0.1003, 0.1004] | above_target | 184 | 184 |
+| 2 | 0.003 | 0.1 | BAR | completed | 119.599 | 119.047 | [0.0948, 0.0948] | within_target | 161 | 161 |
+| 2 | 0.001 | 0.2 | MC | completed | 963.081 | 960.094 | [0.1809, 0.1809] | within_target | 186 | 186 |
+| 2 | 0.001 | 0.2 | BAR | completed | 76.630 | 76.029 | [0.2057, 0.2058] | above_target | 151 | 151 |
+| 2 | 0.001 | 0.1 | MC | completed | 3848.629 | 3837.132 | [0.1013, 0.1013] | above_target | 183 | 183 |
+| 2 | 0.001 | 0.1 | BAR | completed | 204.073 | 203.143 | [0.0856, 0.0856] | within_target | 164 | 164 |
+
+凍結reportの費用比MC/BARは、両手法が精度gateを通った3条件にだけ出る。
+右2列の「参考」は本稿の編集で計算した精度正規化比（task費用×(相対RMSE範囲中点/ε)²のMC/BAR）であり、凍結reportの値ではなく、BARの費用がεに対してMCと同じ指数で伸びることも未検証である。
+
+| case | p | ε | 凍結reportの比 wall MC/BAR | 同 CPU | 理由 | 参考: 精度正規化比 wall | 参考: 同 CPU |
+|---|---:|---:|---:|---:|---|---:|---:|
+| 0 | 0.01 | 0.2 | — | — | both_empirical_precision_gates_required | 0.18 | 0.18 |
+| 0 | 0.01 | 0.1 | — | — | both_empirical_precision_gates_required | 0.36 | 0.36 |
+| 0 | 0.003 | 0.2 | 2.03 | 2.04 | — | 2.15 | 2.16 |
+| 0 | 0.003 | 0.1 | 3.03 | 3.03 | — | 4.70 | 4.71 |
+| 0 | 0.001 | 0.2 | — | — | both_empirical_precision_gates_required | 14.12 | 14.21 |
+| 0 | 0.001 | 0.1 | 29.65 | 29.72 | — | 35.16 | 35.24 |
+| 2 | 0.01 | 0.2 | — | — | both_empirical_precision_gates_required | 0.17 | 0.17 |
+| 2 | 0.01 | 0.1 | — | — | both_empirical_precision_gates_required | 0.57 | 0.57 |
+| 2 | 0.003 | 0.2 | — | — | both_empirical_precision_gates_required | 2.11 | 2.11 |
+| 2 | 0.003 | 0.1 | — | — | both_empirical_precision_gates_required | 3.58 | 3.59 |
+| 2 | 0.001 | 0.2 | — | — | both_empirical_precision_gates_required | 9.72 | 9.77 |
+| 2 | 0.001 | 0.1 | — | — | both_empirical_precision_gates_required | 26.44 | 26.48 |
+
+読み取れることは次のとおりである。
+
+- 選択12条件はMC・BARとも192/192がcompletedで、failed・unavailableは0である。
+- 凍結reportの費用比が出た3条件（case 0のp=0.003・0.001）はいずれもBARが安く、MC/BARは2.03・3.03・29.7である。
+- 残り9条件は片方または両方の相対RMSEがεを上回り（MCが6条件、BARが5条件、両方が2条件）、比はNoneである。gateは点比較で、192反復から求めたRMSEの相対標準誤差（正規近似で約5%）を考慮しない。超過11件のうち7件は1 SE以内の境界上で、明確に外れているのはcase 0・p=0.001・ε=0.2のBAR（0.240、+20%）とcase 2・p=0.01・ε=0.2のBAR（+9.6%）である。9条件を一括して「精度未達」とは書かない。
+- 比の有無にかかわらず、task費用にはp依存のクロスオーバーがある。p=0.01の4条件ではMCがBARより安く（正規化なしで約5倍、精度正規化で2〜6倍）、p=0.003でBARが2〜5倍、p=0.001でBARが10〜35倍安い。
+- 「BARが2〜30倍速い」という記述はp=0.003以下に限った主張であり、p=0.01では直接MCで足りることを併記する。
+- 被覆はMCが178〜186/192（約93〜97%）、BARが151〜176/192（約79〜92%）で、BARの区間は名目95%に届かない。独立計時ではBARの混合診断を取得していないので、この過小被覆を診断flagと結び付けた説明はできない。
+
+9条件の扱いについて、所有者は2026-10-29に、再実行せず、凍結reportのgate規則と比の定義を変えないまま、論文の「目標精度に達するまでの時間」と同じ趣旨の精度正規化費用C_ε = C×(r/ε)²を別の量として定義し、全12条件を示す方針を選んだ。
+定義・bias分解・条件別の値・適用限界は[精度正規化のMC/BAR費用比較](low_noise_cost_comparison_2026-10-29_ja.md)にある。
+正規化比はp=0.01で0.17〜0.57（MCが安い）、p=0.003で2.1〜4.7、p=0.001で10〜35（BARが安い）であり、凍結reportの比が出た3条件では凍結の比と同じ向きである。
+case 2・p=0.001・ε=0.2のBARは相対bias −0.143がMSEの48%を占め、biasを数えるかどうかで正規化比が9.7と18.8に分かれるので、この条件は個別に注記する。
+
 ## 4. 利用例と再現資料
 
 公開資料、private snapshot、生データの取得起点と未提供項目は[再現資料の取得監査](reproduction_access_inventory_2026-10-25_ja.md)を参照する。
@@ -266,8 +344,8 @@ tile固定prior workflowには `--ladder P0,P1,...` を追加し、末尾の物�
 |---|---|
 | 比較処理の復旧・全件census | 元12terminal、merge265660・acceptance265661とv12のcomparison・handoffを保持してv13へ接続済み。全件census265703とseal265707・collect265708のF/0、全4,208,002件の結果と正式受理・保存を確認した。旧265675などの失敗記録は履歴として保持し、後続計時・最終reportの完了とは区別する。 |
 | 全12条件比較 | 元PBS受理とv12 comparisonの全12条件受理を確認済み。原本入力の12×352設定×192 seed＝811,008基礎行と正式selection24行を区別して後段reportへ結合し、有限reference幅、未達・未定義・未取得を含む分母と保存範囲を確認する。 |
-| 独立計時 | 全48手法行を保持した初期準備とcapacity manifest24件を生成済み。先頭MC/BAR容量計測各2/2とそのfinishは正式受理済み。先頭本計時MC265721・BAR265723はF/0で、小要約はともに192/192・failed/unavailable各0。MCの192個別record・費用・実PBS結合と18:56:40 JSTの正式finish受理・回収は監査済み。BARは投入・終端・小要約の指定pin/run root対応と19:27:29 JSTの正式finish受理・回収を監査済みだが、個別record・費用・full summaryの独立照合は未実施。両receiptはscientific_validation_complete=falseを保持する。全48行・各192分母、精度gate・費用比較と非選択等の理由の最終確認は未完了で、diagnostic_not_collectedを実測警告と混同しない。 |
-| 最終報告 | 元merge・acceptanceとv12 comparisonを引き継ぐ現行v13の有限PBS tailに結合したreport.jsonと日本語reportを回収し、completedと報告hash、推奨の根拠と適用限界、各要件の結論を照合する。現時点では未完了。 |
+| 独立計時 | 2026-10-28 11:04 JSTに48手法行が全件terminal・exit 0（第3節末尾）。以下は2026-10-26時点の記述である。全48手法行を保持した初期準備とcapacity manifest24件を生成済み。先頭MC/BAR容量計測各2/2とそのfinishは正式受理済み。先頭本計時MC265721・BAR265723はF/0で、小要約はともに192/192・failed/unavailable各0。MCの192個別record・費用・実PBS結合と18:56:40 JSTの正式finish受理・回収は監査済み。BARは投入・終端・小要約の指定pin/run root対応と19:27:29 JSTの正式finish受理・回収を監査済みだが、個別record・費用・full summaryの独立照合は未実施。両receiptはscientific_validation_complete=falseを保持する。全48行・各192分母、精度gate・費用比較と非選択等の理由の最終確認は未完了で、diagnostic_not_collectedを実測警告と混同しない。 |
+| 最終報告 | 2026-10-29 02:21 JSTにreport job 265940の`report.json`・`report_ja.md`を別経路（report環境v2、1箇所のdelta）で受理し、報告hash・sealed descriptor・経路の完了記録と写し検証を照合した（第3節末尾）。v13 configに束ねたfinal-report役の受領書は未実行で、推奨の根拠と適用限界、9条件の扱いの最終文面は未確定。 |
 | source・metadata保存 | v5・v8・[v9追加保存](finite_flow_v9_snapshot_acceptance_2026-10-25_ja.md)・[v11差分](finite_flow_v11_delta_snapshot_acceptance_2026-10-25_ja.md)・[v12差分](finite_flow_v12_delta_snapshot_acceptance_2026-10-25_ja.md)を保持し、[v13復旧差分](finite_flow_v13_delta_snapshot_acceptance_2026-10-25_ja.md)のsource参照92件・metadata217件をPBS265701でprivate保存した。v13 snapshot内の265700観測は10:19:22 JSTのR状態であり、その後の準備完了や後続計時・最終科学proofの保存は含まない。最終科学証拠、公開資料化、全rawの保存、科学的な完全再現は別に判定する。 |
 | 再現可能な保存 | 生データ索引・環境・source/native hash・seed・設定・script・ジョブ台帳・回収receipt、原本と公開用コピーの対応、利用例と最終設定表へのリンクを確認する。科学的な完全再現は未達である。 |
 
