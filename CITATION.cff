@@ -13,7 +13,7 @@ authors:
   - given-names: Junichi
     family-names: Haruna
     orcid: "https://orcid.org/0000-0002-1828-8183"
-    affiliation: "Kyoto University; University of Osaka"
+    affiliation: "Graduate School of Informatics, Kyoto University; Center for Quantum Information and Quantum Biology, University of Osaka"
 version: "0.1.0.dev5"
 date-released: "2026-10-24"
 repository-code: "https://github.com/junichiharuna/mcmc4qec"
