@@ -1,12 +1,14 @@
 # Citation metadata for experimental version 0.1.0.dev6.
 # Release date for the owner-authorized experimental publication.
-# A DOI will be added after the Zenodo archive of the GitHub release is created.
+# The doi below is the Zenodo concept DOI, which resolves to the latest archived
+# version; the version DOI of 0.1.0.dev6 is 10.5281/zenodo.23763968.
 # The associated paper ("Fast and accurate rare-event simulation by Markov chain
 # Monte Carlo for general quantum codes") is in preparation and is not yet a citable reference.
 cff-version: 1.2.0
 message: >-
-  Authorship is confirmed by the project owner. Cite the GitHub repository
-  and version until a DOI is assigned.
+  Authorship is confirmed by the project owner. Cite the Zenodo DOI together
+  with the version, or the GitHub repository and tag.
+doi: 10.5281/zenodo.23763967
 type: software
 title: "mcmc4qec"
 authors:

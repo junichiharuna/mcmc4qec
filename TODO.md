@@ -19,13 +19,13 @@
   batch単位の検証済み中間結果と再開機構を設け、全件を再読込せずに済む構成にする。
   クラスタではqsub・最大2ノードの制約を索引・後処理にも適用する。
   2026-10-24のC3T2索引は入力約2.46GiB・解析出力約6.54GiBを参照して稼働中であり、移設済みとは扱わない。
-- [ ] Zenodoの記録作成とDOIを確認し、`CITATION.cff` に `doi` を追記する。
-  2026-10-24にpublic化とtag `v0.1.0.dev5` のpre-release作成は完了し、所有者からZenodoのGitHub連携済みとの回答を受けた。
-  同日の公開直後のAPI検索では該当記録を確認できておらず、DOIはまだ追記していない。
-  手順は `docs/wp/publication_runbook_2026-10-22_ja.md` にある。
-- [ ] 低ノイズ検証の完了後に、tile 検証の生データ（約 19,800 ファイル・13.5 GB）を識別子置換済みの束にして Zenodo の dataset 記録として公開する。
-  置換後に新しい SHA-256 manifest を作り、リポジトリ内の証跡に記録された指紋（置換前の原本）とは別物であることを明記する。
-  公開後にリリースノート日英の「公開download先は未確定」を記録の DOI に置き換える。
+- [x] Zenodoの記録作成とDOIを確認し、`CITATION.cff` に `doi` を追記する。
+  2026-10-24のtag `v0.1.0.dev5` のpre-releaseはZenodoの連携前だったため記録がない。
+  2026-10-29に所有者が連携をONにしてから `v0.1.0.dev6` のpre-releaseを公開し、concept DOI 10.5281/zenodo.23763967（version DOI 10.5281/zenodo.23763968）が付いた。
+  `CITATION.cff` とREADME日英に記載済み。手順は `docs/wp/publication_runbook_2026-10-22_ja.md` にある。
+- [x] 低ノイズ検証の生データの公開は行わない（所有者決定、2026-10-29）。
+  識別子置換済み・manifest付きのbundle（約20 GB、クラスタの `zenodo-dataset-staging-v1/`）を著者が保持し、要請に応じて提供する。
+  校正cohortのraw traceは保持せず、再生成のセットアップを `docs/wp/calibration_rerun_setup_2026-10-29_ja.md` に記録した。リリースノート日英はこの方針に合わせた。
 - [ ] PyPI 公開の準備を進める（公開自体は所有者の指示を待つ）。
   パッケージ名 `mcmc4qec` は 2026-10-22 時点で PyPI・TestPyPI ともに未登録である。
   tag push で `python -m build` と Trusted Publishing による upload を行う `publish.yml` を書き、CI の core-wheel job の wheel 検証を流用する。

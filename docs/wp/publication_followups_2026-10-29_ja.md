@@ -53,10 +53,11 @@
 - raw データの公開範囲は決定済み: 校正 cohort の raw（223 GiB）は非公開で保管、それ以外を公開する。README・release notes の文面（上の 1.2・1.3 の案）は適用した。
 - 公開データセットの staging は完了した。クラスタの `zenodo-dataset-staging-v1/`（20 GB、150,936 ファイル）に、A: 最終 report が pin する全 path（86,902）、B: report job root（16）、C: 経路記録（76）、D: 校正 run の summary 類（traces と analysis を除く 63,942）を置いた。テキスト 1,415 ファイル（512 MiB 超の 5 本は stream 処理）でユーザー名・ホスト名を置換し、置換後の grep は 0 件。`MANIFEST.tsv`（公開物の sha）と `ORIGINALS.tsv`（原本の sha、証拠内の hash と照合用）、`STAGING.json` を同梱した。script は `output/zenodo_dataset_staging_v1/`、manifest の写しは `docs/wp/data_tile_validation_2026-10-17/low_noise_final_report_2026-10-29/`。
 - 所有者は 2026-10-29 に、この dataset の公開 record（Zenodo など）は作らないと決めた。staging は著者が保持する提供用 bundle（要請に応じて提供）とし、release notes（英・日）の文面をそれに合わせた。校正 cohort の raw trace と解析 payload（約 212 GiB）は保持しない決定を受けて削除し、再生成に必要なセットアップは [再生成セットアップの記録](calibration_rerun_setup_2026-10-29_ja.md) と bundle の group E に残した。
-- CITATION.cff の所属は論文と同じ表記（Graduate School of Informatics, Kyoto University; Center for Quantum Information and Quantum Biology, University of Osaka）に確定した。ソフトウェアの DOI（GitHub release の Zenodo archive）は未作成のままで、README と CITATION.cff の「DOI は後で追加」の記述は維持している。
+- CITATION.cff の所属は論文と同じ表記（Graduate School of Informatics, Kyoto University; Center for Quantum Information and Quantum Biology, University of Osaka）に確定した。
+- experimental 版 0.1.0.dev6 を 2026-10-29 20:40 JST に tag `v0.1.0.dev6` の pre-release として公開した（配布物 5 件: wheel、source zip、manifest.json、SHA256SUMS.txt、release_body.md。`output/release_dev6/build_release.py` で tag から作り、source archive と追跡ファイル 1,364 件の一致、wheel 33 ファイルと src の byte 一致、新規 venv での import・例・テストを確認）。所有者が Zenodo の GitHub 連携を ON にした後に公開したので archive が作られ、concept DOI 10.5281/zenodo.23763967、version DOI 10.5281/zenodo.23763968 が付いた。Zenodo の著者・ORCID・所属・MIT は CITATION.cff と一致。concept DOI を CITATION.cff の `doi` と README 日英に記載した。dev5（2026-10-24）は連携前の release で Zenodo 記録はない。
 - クラスタ workspace の削除は実施した（[整理案の実施記録](cluster_workspace_cleanup_proposal_2026-10-29_ja.md)）。bar-recovery 2 本と校正 raw も削除し、workspace は 122 GiB になった。
 - 次回 run の変更は delta G・W・P・R として実装・検証済み（[変更案の実装状況](next_run_changes_proposal_2026-10-29_ja.md)）。次版 authority 層の作り直しの時期は未定。
-- 所属・DOI・Zenodo の作成、experimental 版の更新公開の時期は所有者判断のまま。
+- 所属・ソフトウェア DOI・experimental 版の更新公開は 2026-10-29 に完了した。論文側では精度正規化比の表と bootstrap 標準誤差は載せない（所有者決定、2026-10-29）。
 
 ## 4. 完了していないこと
 

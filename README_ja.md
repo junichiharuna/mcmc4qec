@@ -81,6 +81,6 @@ tile72 符号の低ノイズ計時では、BAR が直接 MC より安かった�
 ## ライセンスと引用
 
 コードのライセンスは [MIT License](LICENSE)、引用情報は [CITATION.cff](CITATION.cff) にあります。
-関連論文は準備中で、DOI はこのリリースの Zenodo 登録後に追記します。
+archive 済みのリリースは Zenodo の concept DOI [10.5281/zenodo.23763967](https://doi.org/10.5281/zenodo.23763967) にあります（0.1.0.dev6 の version DOI は [10.5281/zenodo.23763968](https://doi.org/10.5281/zenodo.23763968)）。関連論文は準備中です。
 開発や貢献の手順は [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
 この日本語版と英語版に相違がある場合は、英語版を優先してください。

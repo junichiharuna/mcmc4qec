@@ -81,5 +81,5 @@ The current validation status, known limitations, and the validation records are
 ## License and citation
 
 The code uses the [MIT License](LICENSE); citation metadata is in [CITATION.cff](CITATION.cff).
-The associated paper is in preparation; a DOI will be added after the Zenodo archive of this release is created.
+Archived releases are on Zenodo under the concept DOI [10.5281/zenodo.23763967](https://doi.org/10.5281/zenodo.23763967) (version 0.1.0.dev6: [10.5281/zenodo.23763968](https://doi.org/10.5281/zenodo.23763968)); the associated paper is in preparation.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development and contribution guidance.
