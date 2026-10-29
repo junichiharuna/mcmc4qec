@@ -28,7 +28,8 @@ The core package can be installed with `python -m pip install .` without optiona
 The source snapshot contains code, documentation, selected validation tables and reports, and the data fixtures needed by its tests.
 It does not contain the complete raw trace and weight-stratified sampling datasets.
 Those datasets are being preserved separately; a public download location for the complete datasets has not yet been established.
-The plan is a Zenodo dataset record after the low-noise validation completes, containing a redacted copy of the raw data with its own SHA-256 manifest.
+The plan is a Zenodo dataset record containing a redacted copy of the independent timing raw payloads (49 execution roots, about 6 GB), the weight-stratified reference and its audit, the accepted selection, the final report with its evidence records, the pinned scripts and environment records, and per-run summaries of the calibration cohorts, each with its own SHA-256 manifest.
+The complete calibration raw traces (about 223 GiB) are too large for that record; they stay archived on the author's cluster and local storage and are available on request.
 The operational runbooks and evidence records come from the author's cluster environment.
 User and host names were redacted before publication, so SHA-256 values recorded inside the evidence refer to the unredacted originals kept outside the repository.
 Some referenced transport archives are not included in this source snapshot.
@@ -41,7 +42,7 @@ Use the runnable examples to check the installation; complete independent reanal
 - Standalone Union-Find is unweighted, accepts only the validated `ldpc==2.4.1` interface, and supports `bits_per_step=1`. Both Union-Find families reject zero columns.
 - Keep the decoder prior, settings, and native environment fixed across every BAR rung and its reference calculation. For depolarizing noise, retain the joint Pauli noise model; a sector decoder prior of `2*p/3` does not make the physical sectors independent.
 - BP-OSD produced a different failure label for one tested tile288 depolarizing state on Windows and Linux. Equal package versions do not establish equal failure sets across environments.
-- The main four tile validation conditions have completed, but low-noise calibration and timing studies remain in progress. Observed mixing problems and interval undercoverage prevent a general claim of nominal 95% coverage or speed improvement.
+- The main four tile validation conditions, the low-noise calibration, and the independent timing study (48 method rows, 192 replicates each) have completed; see the [29 October 2026 update](tile_validation_interim_en.md). BAR interval under-coverage (151–176 of 192 replicates) and the absence of mixing diagnostics in the timing study still prevent a general claim of nominal 95% coverage. A cost advantage of BAR over direct MC is supported only for the tile72 codes at `p ≤ 0.003` (2–35× in precision-normalized cost); at `p = 0.01` direct MC is cheaper.
 - The new decoder interfaces have acceptance tests and small-code checks. Their BAR accuracy, coverage, and speed rankings have not been calibrated.
 
 The [tile report](wp/tile_validation_report_2026-10-18_ja.md), [study status](wp/tile_validation_status_2026-10-17_ja.md), and [decoder validation](wp/basic_decoders_validation_2026-10-18_ja.md) describe the evidence and its limits in Japanese.

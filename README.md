@@ -75,6 +75,7 @@ For an example with only core dependencies, install with `python -m pip install 
 The default settings in the example do not guarantee research-grade accuracy.
 Standard BAR requires a positive anchor, a common decoder and failure definition across noise rates, and observed sample overlap between adjacent distributions; samples from `sample_faulty` alone do not estimate the absolute logical error probability.
 Statistical error estimates and healthy MCMC diagnostics do not guarantee convergence or nominal interval coverage.
+In the low-noise timing study on the tile72 codes, BAR was cheaper than direct MC only below `p ≈ 0.003`, and its intervals under-covered the reference; see the [29 October 2026 update](docs/tile_validation_interim_en.md).
 The current validation status, known limitations, and the validation records are summarized in the [release notes](docs/experimental_release_notes_en.md).
 
 ## License and citation

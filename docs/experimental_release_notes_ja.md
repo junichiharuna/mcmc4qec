@@ -27,7 +27,8 @@ optional decoderなしのcoreは`python -m pip install .`で導入できる。
 ソースsnapshotにはコード、文書、一部の検証表・報告、テストに必要なdata fixtureを含む。
 全raw traceと重み層別samplingの全データは含まない。
 これらは別途保存しており、完全なデータセットの公開download先はまだ確定していない。
-低ノイズ検証の完了後に、識別子を置換した生データと新しいSHA-256 manifestをZenodoのdataset記録として公開する予定である。
+Zenodoのdataset記録には、識別子を置換した独立計時のraw payload（49実行root、約6 GB）、weight-stratified referenceとその監査、受理済みselection、最終reportと証拠記録、pinされたscriptと環境記録、校正cohortの各runの小さなsummaryを、それぞれのSHA-256 manifestとともに収める予定である。
+校正cohortの完全なraw trace（約223 GiB）はこの記録には大きすぎるため、著者のクラスタと手元に保管し、要請に応じて提供する。
 運用手順書と証跡記録は著者のcluster環境のものである。
 公開前にユーザー名とホスト名を置換したため、証跡に記録されたSHA-256はリポジトリ外に保管した置換前の原本を指す。
 参照するtransport archiveの一部もこのソースsnapshotには含まれない。
@@ -45,8 +46,9 @@ optional decoderなしのcoreは`python -m pip install .`で導入できる。
   depolarizingではjoint Pauli noiseを保持し、sector priorを`2*p/3`としても物理ノイズを独立sectorに置き換えない。
 - BP-OSDは試験したtile288 depolarizingの1状態でWindows/Linuxの失敗判定が異なった。
   package版の一致だけでは環境間で同じfailure集合を保証しない。
-- tileの主4条件の検証は完了したが、低ノイズ校正と計時は継続中である。
-  混合診断の問題と区間の被覆不足があり、名目95%被覆や高速化を一般には保証しない。
+- tileの主4条件の検証、低ノイズ校正、独立計時（48手法行、各192反復）は完了した（[2026-10-29の更新](tile_validation_interim_en.md)、英語）。
+  BAR区間の被覆不足（192反復中151〜176）と計時での混合診断の未取得があり、名目95%被覆は一般には保証しない。
+  BARが直接MCより安いことが支持されるのはtile72符号の `p ≤ 0.003` に限られ（精度正規化費用で2〜35倍）、`p = 0.01` では直接MCのほうが安い。
 - 新decoderの接続と小符号の受入は確認済みだが、BARの精度・被覆・速度順位は未校正である。
 
 根拠と適用限界は[tile報告](wp/tile_validation_report_2026-10-18_ja.md)、[検証状況](wp/tile_validation_status_2026-10-17_ja.md)、[decoder検証](wp/basic_decoders_validation_2026-10-18_ja.md)に記録する。

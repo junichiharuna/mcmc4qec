@@ -75,6 +75,7 @@ for p, estimate, interval in zip(ladder, result.estimates, result.intervals):
 実行例の既定設定は、研究に必要な精度を保証するものではありません。
 通常の BAR では、正の基準値、ノイズ強度を通じて共通のデコーダーと失敗条件、隣接する分布のサンプルの重なりが必要で、`sample_faulty` のサンプルだけから論理誤り率そのものは求められません。
 統計誤差や良好な MCMC 診断値だけで、収束や区間の名目被覆率が保証されるわけではありません。
+tile72 符号の低ノイズ計時では、BAR が直接 MC より安かったのは `p ≈ 0.003` 以下に限られ、BAR の区間は参照区間を過小被覆しました（[2026-10-29 の更新](docs/tile_validation_interim_en.md)、英語）。
 現在の検証状況、既知の制約、検証記録の一覧は[リリースノート](docs/experimental_release_notes_ja.md)にまとめています。
 
 ## ライセンスと引用
