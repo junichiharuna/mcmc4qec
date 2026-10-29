@@ -63,7 +63,16 @@ report job の root `20261023-low-partition-report-job-v1/runs/report-all24-relo
 C を全部消しても約 95 GiB で、全体の 4 分の 1 弱である。
 容量圧力はないので、急いで消す理由はない。
 
-## 進め方の案
+## 実施記録（2026-10-29 10:50〜11:10、所有者の「4 はやって」を受けて）
+
+- home 直下の監視・診断用 script 24 本（`cluster_status*.sh`、`cluster_watch*.sh`、`route_watch*.sh`、`*.py`、`ws_du_20261029.txt`）と 2025-09 の PBS 出力 `JH.o185349.*` を削除した。手元の scratchpad に写しがある。
+- portable BAR の 38 batch ディレクトリ（中身は `inputs.zip` と `receipt.json` だけ、合計 10,495 MiB）を削除した。38 個の `receipt.json` は `docs/wp/data_portable_bar_2026-10-19/cluster_batch_receipts_20261029.tgz` に退避し、件数 38 を確認した。
+- 分類 C のうち 23 ディレクトリ（portable 入力束 7、merge 失敗版 v4/v5、10/17 の試行 5、単一 archive 型の recovery 9）を `archive_and_remove.sh` で削除した。各ディレクトリについて全ファイルの size と SHA-256（`<dir>.files.tsv`、`<dir>.sha256`）と、venv・`__pycache__` を除く 20 MiB 以下の記録ファイルの tarball（`<dir>.small.tgz`）を `archive-20261029/`（342 MB、69 ファイル）に残してから削除した。script は削除前に各ディレクトリが最終 report の pin 一覧（86,902 path）に含まれないことを確認し、含まれていれば止まる。削除した合計は 68.9 GiB。
+- 凍結 config・PYTHONPATH が 10/17 のディレクトリを参照していないことを確認した（参照があるのは `20261017-tile-production-v1` だけで、これは残した）。
+- 保留: `20261019-tile-low-bar-recovery-c0t1-v1`（9.4 GiB）と `20261019-tile-low-bar-recovery-v2`（7.2 GiB）は小ファイル 29 万個の raw 実行物そのもので、「小さな記録だけ退避」の方法が使えないため残した。消すなら raw ごと消す判断になる。
+- 結果: workspace は 420 GiB・635 ディレクトリから 360 GiB・576 ディレクトリになった（別途、公開データセットの staging 20 GB を新たに置いた）。
+
+## 進め方の案（実施前の記述、履歴）
 
 1. まず home 直下の補助 script と `JH.o*` を消す（内容はこの session の監視用で、手元に写しがある）。
 2. portable BAR の 38 batch について、手元の写しと照合してから消す。

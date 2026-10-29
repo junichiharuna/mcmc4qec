@@ -79,8 +79,22 @@ science job は 96 CPU を予約するが実使用は平均 1〜15 コアで、c
 - 自宅 PC から大学の gateway に届かない時間帯があり、ラボ PC 経由（Tailscale）の relay が要った。relay では入れ子の ssh が標準入出力を継承すると止まるので、`Start-Process` で切り離す。
 - `qstat -f -u <user>` はこの PBS では何も出ないので、`qstat -u <user>` で id を取ってから `qstat -f <id>` を使う。
 
+## 実装状況（2026-10-29、所有者の「4〜6 もやる」を受けて）
+
+凍結 script は触らず、次版の環境が原本の写しに当てる exact-string の delta として `output/next_run_changes_v1/` に実装した（report 経路の `binding_delta.py` と同じ流儀で、`derive` は置換箇所がちょうど 1 つであることを要求し、`restore` で原本に戻る）。
+
+| delta | 対象 | 内容 | 検証 |
+|---|---|---|---|
+| G（項目 4） | `submit_tile_low_noise_timing_execution.py` の import 行 | `requested_nodes` を「走っている自分の job の exec_host の物理 host 数 ＋ 未配置 job の chunk 数」に置き換える。science job と同居する補助 job は 1 host に数える | 単体テスト 7 件、クラスタ原本で置換 1 箇所・コンパイル可・復元一致 |
+| W（項目 5） | `tile_low_noise_timing_execution.py` の `resource_plan` | `seconds=max(3600, 1800·ceil((2·prediction+600+1900)/1800))`。固定費 1900 秒は実測 1550〜1854 秒から。trial・trace 数は変えない | 単体テスト 5 件、同上 |
+| P（項目 6） | report 環境 v2 の report script | `COMPLETED_CACHE` と `precompute_completed()` を追加し、`run()` の cohort ループの前に全 complete root の `execution.completed` を process pool（既定 12、`MCMC4QEC_REPORT_WORKERS`）で実行。`load_execution` は cache を manifest sha と terminal pin で照合して使い、不一致なら直列と同じ呼び出しに戻る。出力・gate・値は変わらない | 単体テスト 4 件（cache miss・hit・stale の意味論を含む）、同上 |
+| R（項目 6） | `report_job.py` の `RESOURCE` | 1 CPU・32 GB → 12 CPU・96 GB | 同上 |
+
+未実施は、これらを載せた次版 authority 層（effective → relocation → outer → merge-relocation → cross-host → census-recovery）の作り直しと PBS 受理 job、そして P を実データで 1 度走らせて直列結果と `report.json` が一致することの確認である。
+P の worker ごとのメモリは数 GB と見込むが実測していないので、初回は 96 GB で走らせて PBS の `resources_used.mem` を記録する。
+
 ## 所有者の判断待ち
 
 - 1〜3 は次回 run の前に入れることを勧める。
-- 4〜6 は凍結 script の変更を伴うので、変更する版の authority 層（effective → relocation → outer → merge-relocation → cross-host → census-recovery）の作り直し費用（PBS 受理 job 約 10 本）と合わせて判断する。
+- 4〜6 の delta は実装・検証済みで、次版 authority 層の作り直し（PBS 受理 job 約 10 本）の時期を決める。
 - 7〜9 は計測の比較可能性に関わるので、次の計測系列の設計で決める。

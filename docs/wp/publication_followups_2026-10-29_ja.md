@@ -47,14 +47,15 @@
 | 被覆 | 誤差棒は独立 chain 間のばらつき（K = 50）、burn-in 5·IAT | ライブラリの BAR 区間（ladder 固定、独立 192 反復で評価）は 79〜92% 被覆 | 名目被覆は主張しない方針を維持。WP-P の結論（ライブラリ既定の区間法は論文の手順と異なる）と整合 |
 | bias | — | case 2・p = 0.001・ε = 0.2 の BAR に相対 bias −0.14 | 論文の「trapping による bias」の議論と照らし、tile72 depolarizing の低 p で BAR 鎖の混合を疑う材料として記録する |
 
-## 3. 所有者判断の残り
+## 3. 所有者判断と実施状況（2026-10-29 11:10 時点）
 
 - 9 条件の扱いは決定済み（精度正規化で全 12 条件を示す）。
-- raw データ（校正 223 GiB、独立計時 5.7 GiB、WSS 参照）の公開範囲と Zenodo dataset の構成。
-- README・release notes の文面（上の案）。
-- クラスタ workspace の削除候補（[整理案](cluster_workspace_cleanup_proposal_2026-10-29_ja.md)）。
-- 次回 run の変更（[変更案](next_run_changes_proposal_2026-10-29_ja.md)）。
-- 所属・DOI・Zenodo の作成、experimental 版の更新公開の時期。
+- raw データの公開範囲は決定済み: 校正 cohort の raw（223 GiB）は非公開で保管、それ以外を公開する。README・release notes の文面（上の 1.2・1.3 の案）は適用した。
+- 公開データセットの staging は完了した。クラスタの `zenodo-dataset-staging-v1/`（20 GB、150,936 ファイル）に、A: 最終 report が pin する全 path（86,902）、B: report job root（16）、C: 経路記録（76）、D: 校正 run の summary 類（traces と analysis を除く 63,942）を置いた。テキスト 1,415 ファイル（512 MiB 超の 5 本は stream 処理）でユーザー名・ホスト名を置換し、置換後の grep は 0 件。`MANIFEST.tsv`（公開物の sha）と `ORIGINALS.tsv`（原本の sha、証拠内の hash と照合用）、`STAGING.json` を同梱した。script は `output/zenodo_dataset_staging_v1/`、manifest の写しは `docs/wp/data_tile_validation_2026-10-17/low_noise_final_report_2026-10-29/`。
+- 残りは所有者による Zenodo record の作成（tarball 分割・metadata・所属・DOI）と、Zenodo 作成後の README の DOI 追記である。
+- クラスタ workspace の削除は実施した（[整理案の実施記録](cluster_workspace_cleanup_proposal_2026-10-29_ja.md)）。bar-recovery 2 本（17 GiB）だけ保留。
+- 次回 run の変更は delta G・W・P・R として実装・検証済み（[変更案の実装状況](next_run_changes_proposal_2026-10-29_ja.md)）。次版 authority 層の作り直しの時期は未定。
+- 所属・DOI・Zenodo の作成、experimental 版の更新公開の時期は所有者判断のまま。
 
 ## 4. 完了していないこと
 
